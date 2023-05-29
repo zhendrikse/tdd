@@ -1,0 +1,26 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany</groupId>
+  <artifactId>task-list</artifactId>
+  <version>0.2.0</version>
+  <dependencies>
+    <dependency>
+      <groupId>org.specsy</groupId>
+      <artifactId>specsy-junit</artifactId>
+      <version>2.3.3</version>
+      <type>jar</type>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.8.2</version>
+        <configuration>
+          <dynamicDependencies></dynamicDependencies>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
