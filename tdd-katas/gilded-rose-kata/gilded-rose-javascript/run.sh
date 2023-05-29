@@ -1,0 +1,1 @@
+npm test gilded_rose_test.js

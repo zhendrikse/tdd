@@ -7,4 +7,6 @@ pyproject.toml
 replit.nix
 venv/
 target/
+coverage
+.nyc_output
 node_modules
