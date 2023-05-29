@@ -1,0 +1,8 @@
+[run]
+branch = True
+omit =
+    */__init__.py
+    # omit everything in /usr
+    #/usr/*
+    # omit this single file
+    #*Spec.py

@@ -1,0 +1,2 @@
+coverage==7.2.6
+PyHamcrest==2.0.4
