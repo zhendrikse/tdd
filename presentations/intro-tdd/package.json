@@ -1,0 +1,19 @@
+{
+    "name": "Test-Driven-Development-presentations",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+        "reveal": "^0.0.4",
+        "reveal-md": "^5.4.0",
+        "server": "^1.0.36"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "slides": "reveal-md -w --theme solarized slides.md"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

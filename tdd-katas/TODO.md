@@ -1,0 +1,46 @@
+- [ ] audio player
+  - [ ] Javascript
+- [ ] bugs zero
+  - [ ] Python
+- [X] christmas tree
+  - [X] Python
+- [ ] dp-adapter-pattern
+  - [ ] Python
+- [ ] game of life
+  - [ ] Python
+- [ ] gilded rose
+  - [ ] Python
+  - [ ] Javascript
+- [ ] greed
+  - [ ] Clojure
+- [ ] locker room
+  - [ ] Clojure
+  - [ ] Kotlin
+- [ ] manhattan distance
+  - [ ] Python
+- [ ] mars rover
+  - [ ] Python
+  - [ ] Typescript
+- [ ] poker hands
+  - [ ] Python
+  - [ ] Clojure
+- [ ] stack
+  - [X] Python
+  - [ ] Typescript
+  - [ ] Javascript
+  - [ ] Java
+- [ ] sudoku
+  - [ ] Java
+  - [ ] Python
+  - [ ] Clojure
+- [ ] task list
+  - [ ] Python
+  - [ ] Javascript
+- [ ] tell don't ask
+  - [ ] Python
+- [ ] vending machine
+  - [ ] Python
+  - [ ] Typescript
+  - [ ] Javascript
+  - [ ] Java
+
