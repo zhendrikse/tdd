@@ -1,0 +1,10 @@
+__pycache__
+.replit
+.coverage
+package-lock.json
+poetry.lock
+pyproject.toml
+replit.nix
+venv/
+target/
+node_modules
