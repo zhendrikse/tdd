@@ -3,7 +3,6 @@ __pycache__
 .coverage
 package-lock.json
 poetry.lock
-replit.nix
 venv/
 target/
 coverage
