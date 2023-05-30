@@ -1,15 +1,15 @@
 package com.cleancode.martinfowler.videostore;
 
-public class RegularMovie extends Movie {
-  public RegularMovie(String title) {
+public class ChildrensMovie extends Movie {
+  public ChildrensMovie(String title) {
     super(title);
   }
 
   @Override
   public double determineAmount(int daysRented) {
-    double thisAmount = 2;
-    if (daysRented > 2)
-      thisAmount += (daysRented - 2) * 1.5;
+    double thisAmount = 1.5;
+    if (daysRented > 3)
+      thisAmount += (daysRented - 3) * 1.5;
 
     return thisAmount;
   }

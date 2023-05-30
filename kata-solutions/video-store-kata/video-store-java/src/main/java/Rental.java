@@ -1,25 +1,27 @@
 package com.cleancode.martinfowler.videostore;
 
 public class Rental {
+	private final Movie movie;
+	private final int daysRented;
 
-    private Movie movie;
-    private int daysRented;
+  public Rental (final Movie movie, final int daysRented) {
+		this.movie 		= movie;
+		this.daysRented = daysRented;
+	}
+	
+	public int getDaysRented () {
+		return daysRented;
+	}
+	
+	public Movie getMovie () {
+		return movie;
+	}
 
-    public Rental(Movie movie, int daysRented) {
-        this.movie = movie;
-        this.daysRented = daysRented;
-    }
+  public int determineFrequentRenterPoints() {
+    return movie.determineFrequentRenterPoints(daysRented);
+  }
 
-    public String getTitle() {
-        return movie.getTitle();
-    }
-
-    public double determineAmount() {
-        return movie.determineAmount(daysRented);
-    }
-
-    public int determineFrequentRenterPoints() {
-        return movie.determineFrequentRenterPoints(daysRented);
-    }
-
+  public double determineAmount() {
+    return movie.determineAmount(daysRented);
+  }
 }

@@ -1,72 +1,66 @@
 package com.cleancode.martinfowler.videostore;
 
-import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.List;
+import java.util.ArrayList;
 
-public class Statement {
+import com.cleancode.martinfowler.videostore.Customer;
+import com.cleancode.martinfowler.videostore.Movie;
+import com.cleancode.martinfowler.videostore.Rental;
 
-    private String customerName;
-    private List<Rental> rentals = new ArrayList<>();
-    private double totalAmount;
-    private int frequentRenterPoints;
+import static org.junit.Assert.*;
 
-    public Statement(String customerName) {
-        this.customerName = customerName;
+public class VideoStoreTest {
+    private static final String A_CUSTOMER_NAME = "Fred";
+  
+    private Customer aCustomer;
+  
+    @Before
+    public void setUp() {
+        aCustomer = new Customer(A_CUSTOMER_NAME);
     }
 
-    public void addRental(Rental rental) {
-        rentals.add(rental);
+    @Test
+    public void testSingleNewReleaseStatement() {
+      aCustomer.addRental(new Rental(new NewReleaseMovie("The Cell"), 3));
+      Statement statement = new Statement(aCustomer);
+      assertEquals("Rental Record for " + A_CUSTOMER_NAME + "\n\tThe Cell\t9.0\nYou owed 9.0\nYou earned 2 frequent renter points\n", statement.toString());
+      assertEquals("Frequent renter points", 2, statement.getFrequentRenterPoints());
+      assertEquals("Total amount you owed", "9.0", statement.getTotalAmountOwedAsString());
     }
 
-    public double getTotal() {
-        return totalAmount;
+    @Test
+    public void testDualNewReleaseStatement() {
+      aCustomer.addRental(new Rental(new NewReleaseMovie("The Cell"), 3));
+      aCustomer.addRental(new Rental(new NewReleaseMovie("The Tigger Movie"), 3));
+      Statement statement = new Statement(aCustomer);
+      assertEquals("Rental Record for " + A_CUSTOMER_NAME + "\n\tThe Cell\t9.0\n\tThe Tigger Movie\t9.0\nYou owed 18.0\nYou earned 4 frequent renter points\n", statement.toString());
+      assertEquals("Frequent renter points", 4, statement.getFrequentRenterPoints());
+      assertEquals("Total amount you owed", "18.0", statement.getTotalAmountOwedAsString());
     }
 
-    public int getFrequentRenterPoints() {
-        return frequentRenterPoints;
+    @Test
+    public void testSingleChildrensStatement() {
+      aCustomer.addRental(new Rental(new ChildrensMovie("The Tigger Movie"), 3));
+      Statement statement = new Statement(aCustomer);
+      assertEquals("Rental Record for " + A_CUSTOMER_NAME + "\n\tThe Tigger Movie\t1.5\nYou owed 1.5\nYou earned 1 frequent renter points\n", statement.toString());
+      assertEquals("Frequent renter points", 1, statement.getFrequentRenterPoints());
+      assertEquals("Total amount you owed", "1.5", statement.getTotalAmountOwedAsString());
     }
 
-    public String generate() {
-        clearTotals();
-        String statementText = createHeader();
-        statementText += createRentalLines();
-        statementText += createFooter();
-        return statementText;
+    @Test
+    public void testMultipleRegularStatement() {
+        aCustomer.addRental(new Rental(new RegularMovie("Plan 9 from Outer Space"), 1));
+        aCustomer.addRental(new Rental(new RegularMovie("8 1/2"), 2));
+        aCustomer.addRental(new Rental(new RegularMovie("Eraserhead"), 3));
+        Statement statement = new Statement(aCustomer);
+        assertEquals("Rental Record for " + A_CUSTOMER_NAME + "\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n", statement.toString());
+      assertEquals("Frequent renter points", 3, statement.getFrequentRenterPoints());
+      assertEquals("Total amount you owed", "7.5", statement.getTotalAmountOwedAsString());
     }
 
-    private void clearTotals() {
-        totalAmount = 0;
-        frequentRenterPoints = 0;
-    }
-
-    private String createHeader() {
-        return String.format("Rental Record for %s\n", customerName);
-    }
-
-    private String createRentalLines() {
-        String rentalLinesText = "";
-        for (Rental rental : rentals) {
-            rentalLinesText += createRentalLine(rental);
-        }
-        return rentalLinesText;
-    }
-
-    private String createRentalLine(Rental rental) {
-        double rentalAmount = rental.determineAmount();
-        frequentRenterPoints += rental.determineFrequentRenterPoints();
-        totalAmount += rentalAmount;
-
-        return formatRentalLine(rental, rentalAmount);
-    }
-
-    private String formatRentalLine(Rental rental, double rentalAmount) {
-        return String.format("\t%s\t%.1f\n", rental.getTitle(), rentalAmount);
-    }
-
-    private String createFooter() {
-        return String.format(
-                "You owed %.1f\n" +
-                        "You earned %d frequent renter points\n",
-                totalAmount, frequentRenterPoints);
-    }
+    private Customer customer;
 }
