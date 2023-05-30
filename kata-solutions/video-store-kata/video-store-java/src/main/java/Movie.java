@@ -1,25 +1,17 @@
 package com.cleancode.martinfowler.videostore;
 
-public class Movie {
-	
-	private String title;
-	private int priceCode;
+public abstract class Movie {
+	private final String title;
 	
 	public Movie (String title) {
 		this.title 		= title;
 	}
 	
-	
 	public String getTitle () {
 		return title;
 	}
 
-  public double determineAmount(int daysRented) {
-    return 0;
-  }
+  public abstract double determineAmount(int daysRented);
   
-  public int determineFrequentRenterPoints(int daysRented) {
-    return 1;
-  }
-
+  public abstract int determineFrequentRenterPoints(int daysRented);
 }
