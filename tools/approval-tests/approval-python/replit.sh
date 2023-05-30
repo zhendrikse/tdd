@@ -1,0 +1,1 @@
+poetry run pytest && poetry run coverage run --branch --source calculator calculator_test.py && poetry run coverage report -m && poetry run coverage html

@@ -3,10 +3,10 @@ __pycache__
 .coverage
 package-lock.json
 poetry.lock
-pyproject.toml
 replit.nix
 venv/
 target/
 coverage
 .nyc_output
 node_modules
+htmlcov
