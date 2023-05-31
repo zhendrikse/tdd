@@ -1,17 +1,13 @@
 [tool.poetry]
-name = "pokerhandskata"
+name = "videostore"
 version = "0.1.0"
-description = "Poker hands kata"
+description = "Video store kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 pytest = "^6.2.5"
-mamba = "^0.11.2"
-expects = "^0.9.0"
 coverage = "^6.2.0"
-mockito = "^1.2.2"
-
 
 [tool.poetry.dev-dependencies]
 
