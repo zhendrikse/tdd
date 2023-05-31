@@ -1,14 +1,15 @@
 from enum import Enum
+from dataclasses import dataclass
 
 class MovieType(Enum):
   CHILDRENS = 2
   REGULAR = 0
   NEW_RELEASE = 1
 
+@dataclass(frozen = True)
 class Movie:
-  def __init__(self, title, priceCode):
-    self._title = title
-    self._priceCode = priceCode
+  _title: str
+  _priceCode: float
 	
   def get_price_code (self):
     return self._priceCode
