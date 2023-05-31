@@ -23,22 +23,14 @@ public class Rentals {
   }
 
   public double getTotalPrice() {
-    double totalAmount = 0;
-    
-    for (final Rental rental : rentals) {
-			totalAmount += rental.determineAmount();
-		}  
-
-    return totalAmount;
+    return rentals.stream()
+      .mapToDouble(Rental::determineAmount) 
+      .sum();
   }
 
   public int getFrequentRenterPoints() {
-    int frequentRenterPoints = 0;
-    
-    for (final Rental rental : rentals) {
-			frequentRenterPoints += rental.determineFrequentRenterPoints();
-		}  
-
-    return frequentRenterPoints;
+    return rentals.stream()
+      .mapToInt(Rental::determineFrequentRenterPoints) 
+      .sum();
   }
 }
