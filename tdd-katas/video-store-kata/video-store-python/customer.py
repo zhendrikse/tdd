@@ -12,35 +12,35 @@ class Customer:
     return self._name
 	
   def statement (self):
-    totalAmount 			= 0
-    frequentRenterPoints 	= 0
+    total_amount 			= 0
+    frequent_renter_points 	= 0
     result 					= "Rental Record for " + self.get_name () + "\n"
 		
     for rental in self._rentals:
-      thisAmount = 0
+      this_amount = 0
 			
       # determines the amount for each line
-      movieType = rental.get_movie ().get_price_code () 
-      if movieType == MovieType.REGULAR:
-        thisAmount += 2
+      movie_type = rental.get_movie ().get_price_code () 
+      if movie_type == MovieType.REGULAR:
+        this_amount += 2
         if rental.get_days_rented() > 2:
-          thisAmount += (rental.get_days_rented() - 2) * 1.5
-      elif movieType ==	MovieType.NEW_RELEASE:
-        thisAmount += rental.get_days_rented() * 3
-      elif movieType == MovieType.CHILDRENS:
-        thisAmount += 1.5
+          this_amount += (rental.get_days_rented() - 2) * 1.5
+      elif movie_type ==	MovieType.NEW_RELEASE:
+        this_amount += rental.get_days_rented() * 3
+      elif movie_type == MovieType.CHILDRENS:
+        this_amount += 1.5
         if rental.get_days_rented() > 3:
-          thisAmount += (rental.get_days_rented() - 3) * 1.5
+          this_amount += (rental.get_days_rented() - 3) * 1.5
 			
-      frequentRenterPoints += 1
+      frequent_renter_points += 1
 			
       if rental.get_movie ().get_price_code () == MovieType.NEW_RELEASE and rental.get_days_rented() > 1:
-        frequentRenterPoints += 1
+        frequent_renter_points += 1
 				
-      result += "\t" + rental.get_movie ().get_title () + "\t" + "{:.1f}".format(thisAmount) + "\n"
-      totalAmount += thisAmount
+      result += "\t" + rental.get_movie ().get_title () + "\t" + "{:.1f}".format(this_amount) + "\n"
+      total_amount += this_amount
 		
-    result += "You owed " + "{:.1f}".format(totalAmount) + "\n"
-    result += "You earned " + str (frequentRenterPoints) + " frequent renter points\n"		
+    result += "You owed " + "{:.1f}".format(total_amount) + "\n"
+    result += "You earned " + str (frequent_renter_points) + " frequent renter points\n"		
 		
     return result

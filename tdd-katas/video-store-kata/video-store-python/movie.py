@@ -9,13 +9,13 @@ class MovieType(Enum):
 @dataclass(frozen = True)
 class Movie:
   _title: str
-  _priceCode: float
+  _price_code: float
 	
   def get_price_code (self):
-    return self._priceCode
+    return self._price_code
 	
   def set_price_code (self, code):
-    self._priceCode = code;
+    self._price_code = code;
 	
   def get_title (self):
     return self._title
