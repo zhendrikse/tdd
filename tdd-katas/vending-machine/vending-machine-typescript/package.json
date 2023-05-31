@@ -1,0 +1,17 @@
+{
+  "name": "vending-machine-typescript",
+  "version": "1.0.0",
+  "description": "Vending machine kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "build": "tsc"
+  },
+  "author": "Zeger Hendrikse",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^4.3.2",
+    "jasmine": "^5.0.0",
+    "typescript": "^5.0.4"
+  }
+}
