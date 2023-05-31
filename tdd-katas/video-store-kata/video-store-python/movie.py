@@ -10,11 +10,11 @@ class Movie:
     self._title = title
     self._priceCode = priceCode
 	
-  def getPriceCode (self):
+  def get_price_code (self):
     return self._priceCode
 	
-  def setPriceCode (self, code):
+  def set_price_code (self, code):
     self._priceCode = code;
 	
-  def getTitle (self):
+  def get_title (self):
     return self._title

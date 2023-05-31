@@ -1,10 +1,12 @@
+from dataclasses import dataclass
+
+@dataclass(frozen = True)
 class Rental:
-	def __init__(self, movie, daysRented):
-		self._movie 		= movie
-		self._daysRented = daysRented
+  _movie: str
+  _daysRented: int
 	
-	def getDaysRented (self):
-		return self._daysRented
-	
-	def getMovie (self):
-		return self._movie
+  def get_days_rented (self):
+    return self._daysRented
+  
+  def get_movie (self):
+    return self._movie

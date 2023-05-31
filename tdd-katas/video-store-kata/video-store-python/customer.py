@@ -5,39 +5,39 @@ class Customer:
     self._name = name
     self._rentals = []
 
-  def addRental(self, rental): 
+  def add_rental(self, rental): 
     self._rentals.append (rental)
 	
-  def getName (self):
+  def get_name (self):
     return self._name
 	
   def statement (self):
     totalAmount 			= 0
     frequentRenterPoints 	= 0
-    result 					= "Rental Record for " + self.getName () + "\n"
+    result 					= "Rental Record for " + self.get_name () + "\n"
 		
     for rental in self._rentals:
       thisAmount = 0
 			
       # determines the amount for each line
-      movieType = rental.getMovie ().getPriceCode () 
+      movieType = rental.get_movie ().get_price_code () 
       if movieType == MovieType.REGULAR:
         thisAmount += 2
-        if rental.getDaysRented() > 2:
-          thisAmount += (rental.getDaysRented () - 2) * 1.5
+        if rental.get_days_rented() > 2:
+          thisAmount += (rental.get_days_rented() - 2) * 1.5
       elif movieType ==	MovieType.NEW_RELEASE:
-        thisAmount += rental.getDaysRented () * 3
+        thisAmount += rental.get_days_rented() * 3
       elif movieType == MovieType.CHILDRENS:
         thisAmount += 1.5
-        if rental.getDaysRented () > 3:
-          thisAmount += (rental.getDaysRented () - 3) * 1.5
+        if rental.get_days_rented() > 3:
+          thisAmount += (rental.get_days_rented() - 3) * 1.5
 			
       frequentRenterPoints += 1
 			
-      if rental.getMovie ().getPriceCode () == MovieType.NEW_RELEASE and rental.getDaysRented () > 1:
+      if rental.get_movie ().get_price_code () == MovieType.NEW_RELEASE and rental.get_days_rented() > 1:
         frequentRenterPoints += 1
 				
-      result += "\t" + rental.getMovie ().getTitle () + "\t" + "{:.1f}".format(thisAmount) + "\n"
+      result += "\t" + rental.get_movie ().get_title () + "\t" + "{:.1f}".format(thisAmount) + "\n"
       totalAmount += thisAmount
 		
     result += "You owed " + "{:.1f}".format(totalAmount) + "\n"
