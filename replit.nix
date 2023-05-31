@@ -14,10 +14,13 @@
     pkgs.python39Packages.poetry
     pkgs.python39Packages.pytest_6
     pkgs.python39Packages.pytest-watch
-    pkgs.nodejs-14_x
+    pkgs.nodejs-16_x
 		pkgs.nodePackages.typescript-language-server
 		pkgs.yarn
 		pkgs.replitPackages.jest
+    pkgs.esbuild
+    pkgs.nodePackages.typescript
+    pkgs.nodePackages.typescript-language-server
   ];
   PYTHONBIN = "${pkgs.python38Full}/bin/python3.8";
   LANG = "en_US.UTF-8";
