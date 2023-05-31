@@ -12,6 +12,8 @@
     pkgs.replitPackages.prybar-python3
     pkgs.python39Packages.pip
     pkgs.python39Packages.poetry
+    pkgs.python39Packages.pytest_6
+    pkgs.python39Packages.pytest-watch
     pkgs.nodejs-14_x
 		pkgs.nodePackages.typescript-language-server
 		pkgs.yarn
