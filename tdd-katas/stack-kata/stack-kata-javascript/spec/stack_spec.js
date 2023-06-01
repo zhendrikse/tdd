@@ -1,6 +1,8 @@
+import {Stack} from '../src/stack.js';
+
 describe("A new stack", function() {
   it("is empty after initialization", function () {
-    expect(false).toEqual(true);
+    var my_stack = new Stack()
+    expect(my_stack.isEmpty()).toEqual(true);
   })
-
 })

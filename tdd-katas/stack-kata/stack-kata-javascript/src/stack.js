@@ -1,2 +1,2 @@
-class Stack {
+export class Stack {
 }
