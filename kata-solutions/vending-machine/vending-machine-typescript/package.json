@@ -7,6 +7,19 @@
     "test": "jasmine",
     "build": "tsc"
   },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhendrikse/tdd.git"
+  },
+  "keywords": [
+    "tdd",
+    "node",
+    "jasmine",
+    "watch",
+    "nodemon",
+    "test",
+    "unittest"
+  ],
   "author": "Zeger Hendrikse",
   "license": "ISC",
   "devDependencies": {
