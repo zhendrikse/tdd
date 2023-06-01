@@ -43,7 +43,7 @@ describe("Vending machine", () => {
       expect(vendingMachine.deliver(Choice.COLA)).toEqual(Can.COKE)
     })
 
-    it("dispenses Spa Rood when priced water is selected and required coins are inserted", () => {
+    it("dispenses fanta when priced fizzy orange is selected and required coins are inserted", () => {
       vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 150)
       vendingMachine.insertCoins(150)
       expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.FANTA)
