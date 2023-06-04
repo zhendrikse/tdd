@@ -32,19 +32,19 @@ class Direction(Enum):
 
 class Rover:
 
-  def __init__(self, coordinates=Coordinates(0, 0)):
-    self.coordinates = coordinates
+  def __init__(self, _coordinates=Coordinates(0, 0)):
+    self._coordinates = _coordinates
     self._direction = Direction.NORTH
 
   def is_at(self):
-    return self.coordinates
+    return self._coordinates
 
   def move_forward(self):
-    self.coordinates = self.coordinates.add(
+    self._coordinates = self._coordinates.add(
       Coordinates(self._direction.value[0], self._direction.value[1]))
 
   def move_backward(self):
-    self.coordinates = self.coordinates.add(
+    self._coordinates = self._coordinates.add(
       Coordinates(-self._direction.value[0], -self._direction.value[1]))
 
   def turn_right(self):
