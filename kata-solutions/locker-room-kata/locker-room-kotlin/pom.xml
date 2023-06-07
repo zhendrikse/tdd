@@ -6,6 +6,7 @@
 
     <groupId>tdd-katas</groupId>
     <artifactId>locker-room-kotlin</artifactId>
+    <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
