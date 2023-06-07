@@ -6,12 +6,12 @@
 
     <groupId>tdd-katas</groupId>
     <artifactId>locker-room-kotlin</artifactId>
-    <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <kotlin.version>1.8.20</kotlin.version>
         <junit.version>4.12</junit.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
     <dependencies>
