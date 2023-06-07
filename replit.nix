@@ -22,6 +22,6 @@
     pkgs.nodePackages.typescript
     pkgs.nodePackages.typescript-language-server
   ];
-  PYTHONBIN = "${pkgs.python38Full}/bin/python3.8";
+  PYTHONBIN = "${pkgs.python39Full}/bin/python3.9";
   LANG = "en_US.UTF-8";
 }
