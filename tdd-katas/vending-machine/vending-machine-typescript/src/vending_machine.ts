@@ -11,6 +11,9 @@ export enum Can {
 }
 
 class VendingMachine {
+  deliver(choice: Choice): Can {
+    return Can.NOTHING
+  }
 }
 
 export {VendingMachine};

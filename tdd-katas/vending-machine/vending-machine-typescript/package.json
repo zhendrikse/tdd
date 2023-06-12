@@ -4,7 +4,7 @@
   "description": "Vending machine kata",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --ext ts --exec 'jasmine-ts  --config=./spec/support/jasmine.json'",
+    "test": "nodemon --ext ts --exec 'tsc && jasmine-ts  --config=./spec/support/jasmine.json'",
     "build": "tsc"
   },
   "repository": {
