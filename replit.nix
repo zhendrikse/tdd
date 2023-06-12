@@ -8,12 +8,13 @@
 		pkgs.maven
 		pkgs.replitPackages.jdt-language-server
 		pkgs.replitPackages.java-debug
-    pkgs.python39Full
-    pkgs.replitPackages.prybar-python3
-    pkgs.python39Packages.pip
-    pkgs.python39Packages.poetry
-    pkgs.python39Packages.pytest_6
-    pkgs.python39Packages.pytest-watch
+    pkgs.python310Full
+    pkgs.replitPackages.prybar-python310
+    pkgs.replitPackages.stderred
+    pkgs.python310Packages.pip
+    pkgs.python310Packages.poetry
+    pkgs.python310Packages.pytest_6
+    pkgs.python310Packages.pytest-watch
     pkgs.nodejs-16_x
 		pkgs.nodePackages.typescript-language-server
 		pkgs.yarn
@@ -22,6 +23,6 @@
     pkgs.nodePackages.typescript
     pkgs.nodePackages.typescript-language-server
   ];
-  PYTHONBIN = "${pkgs.python39Full}/bin/python3.9";
+  PYTHONBIN = "${pkgs.python39Full}/bin/python3.10";
   LANG = "en_US.UTF-8";
 }

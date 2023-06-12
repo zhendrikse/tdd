@@ -5,7 +5,7 @@ description = "Tell dont ask kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.10.0,<3.11"
 PyHamcrest = "^2.0.4"
 coverage = "^6.2"
 

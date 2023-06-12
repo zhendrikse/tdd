@@ -5,7 +5,7 @@ description = "mars rover python"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.10.0,<3.11"
 replit = "^3.2.4"
 urllib3 = "^1.26.12"
 mamba = "0.11.2"
