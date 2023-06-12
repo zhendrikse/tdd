@@ -3,13 +3,13 @@
  */
 package locker.room.kotlin
 
-import kotlin.test.Test
-import kotlin.test.assertTrue
+import kotlin.test.*
+import org.assertj.core.api.Assertions.*
 
 class LockerTest {
     @Test
     fun anInitialLockerIsUnlocked() {
-      assertTrue(false)
+      assertThat(true).isEqualTo(false)
     }
   
   }
