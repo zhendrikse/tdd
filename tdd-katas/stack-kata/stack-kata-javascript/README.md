@@ -19,7 +19,7 @@ $ poetry run cookiecutter https://github.com/zhendrikse/cookiecutter-kata-javasc
 Answer the questions mutatis mutandum like so
 
 ```
-$ poetry run cookiecutter https://github.com/zhendrikse/cookiecutter-kata-python.git
+$ poetry run cookiecutter https://github.com/zhendrikse/cookiecutter-kata-javascript.git
 
 kata [GameOfLife]: Stack
 description [This kata practices TDD]: Stack kata to practice TDD
