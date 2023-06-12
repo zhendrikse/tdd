@@ -13,6 +13,6 @@ from src.{{ cookiecutter.kata }} import {{ cookiecutter.kata }}
 
 class TestNewStack:
 
-  def test_a_new_stack_should_be_empty(self):
+  def test_a_new_{{ cookiecutter.kata }}(self):
       assert True == False
 {% endif %}
