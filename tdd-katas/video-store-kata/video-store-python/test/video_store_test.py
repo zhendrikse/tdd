@@ -1,7 +1,7 @@
 import pytest
-from customer import Customer
-from rental import Rental
-from movie  import Movie, MovieType
+from src.customer import Customer
+from src.rental import Rental
+from src.movie import Movie, MovieType
 
 @pytest.fixture
 def customer():
