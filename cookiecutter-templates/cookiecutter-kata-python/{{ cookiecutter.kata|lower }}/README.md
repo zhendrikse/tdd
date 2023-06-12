@@ -1,45 +1,42 @@
 # {{ cookiecutter.kata }} Code Kata
 
-Welcome to your new Code Kata.  Test-driven C++ is a lot of fun, and a
+Welcome to your new Code Kata.  Test-driven development is a lot of fun, and a
 great form of "deliberate practice".  You're almost there - there's
 one more step needed to get up and running.
 
-## Generating the build
+## Installing the required packages
 
-You've used a cookiecutter to generate this project, but there's
-another step to get started - this project is based on CMake, so you
-need to use this CMake build to generate a build that will work on
-your system.
-
-This build structure can be done "out of tree" (ie not in this folder
-structure), or use the .build/ folder that's automatically created -
-this is also in the .gitignore by default, if you want
-
-A typical CMake invocation (for Clang and C++14) would be:
-
-```
-$ cd .build
-$ cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug
-  -DCMAKE_CXX_FLAGS="-std=c++14"
-  -DCMAKE_CXX_FLAGS_DEBUG="-fstandalone-debug -ggdb -O0" ..
+```bash
+$ poetry install
 ```
 
-Then run the makefile as (for example):
+## Running the tests
 
-```
-$ make -j8 unit
+If you are using PyTest, use
+
+```bash
+$ ptw
 ```
 
-## The TDD cycle
+If you are using the Mamba framework for the tests, use
+
+```bash
+$ poetry run mamba --format=documentation test/*_test.py
+```
+
+# Introduction TDD
 
 TDD gives you a very fast feedback cycle, and helps you evolve a
-solution incrementally, in very small steps.  TDD gives you feedback
-on your design and lets you make many, small improvements to your
+solution incrementally, in _extremely small_ increments.  TDD gives you feedback
+on your design and lets you make many small improvements to your
 code. You can do this with confidence because the tests will catch any
 accidental regression as you apply these refactorings.
 
-TDD uses a cycle of three phases, always starting with RED : a
-failing test, or failing compilation.
+Doing TDD means you iteratively repeat the following three steps 
+
+1. First we write a _failing_ test. It is important to make the test fail first, as this assures us the test actually works! We are allowed to write just so much test code, that makes test fail. This includes compilation errors!
+2. Next we implement _just enough_ production code to make the test pass.
+3. We ask ourselves if there is anything that we can refactor, by applying e.g. the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
 
 ```                                 
   +--------------------------------+
@@ -64,10 +61,14 @@ failing test, or failing compilation.
      +---------------------------------+
 ```
 
-## The Four Rules of Simple Design
+## Kent Beck's design rules
 
-When you're doing a kata, try to stick to the "four rules" as
-described first by Kent Beck:
+![Kent Beck](./assets/kent_beck.png)
+**Figure 1**: _One of the fouding fathers of test-driven development: [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)._
+
+Kent Beck introduced the [four design rules](https://martinfowler.com/bliki/BeckDesignRules.html). After making the test pass, he (strictly) applies the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and the [reveal intent, hide implementation](https://dev.to/codingunicorn/reveal-intent-hide-implementation-42lc) principles. Last but not least, he also (again strictly) applies the simplest thing that could possibly work. This may actually be one of the trickiest practices to apply properly, as you will see.
+
+Summarizing, Kent Beck applies the following rules in descending order of priority:
 
 - Passes the tests
 - Reveals intention
@@ -82,6 +83,10 @@ Haines wrote an [excellent, small
 book](https://leanpub.com/4rulesofsimpledesign) on the subject based
 on his observations running the Game Of Life Kata over many code
 retreats.
+
+### Conclusion 
+
+Summarizing, we continuously ping back and forth between our production code and our specifications (test code). We do this in the _smallest increments_ that we can possibly think of. We keep ourselves in check by requiring 100% code coverage at all times. If we get below 100%, apparently we "managed" to write code before we had a test for it. Remember that this spoils the whole idea of TDD!
 
 ## Resources
 
