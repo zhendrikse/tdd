@@ -1,0 +1,8 @@
+{
+    "kata": "GameOfLife",
+    "description": "This kata practices TDD", 
+    "rspec_syntax": ["y", "n"],
+    "author": "Your name",
+    "email": "your@email.com",
+    "license": ["GNU General Public License v3", "MIT license", "Apache Software License 2.0"]
+}
