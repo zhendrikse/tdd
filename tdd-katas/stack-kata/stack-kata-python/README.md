@@ -2,6 +2,59 @@
 
 Please read the general [introduction to the stack kata](../README.md) first!
 
+# Getting started
+
+First install [cookiecutter](https://www.cookiecutter.io/) by invoking
+
+```bash
+$ poetry install
+```
+
+Next, create an empty kata project to get yourself started
+
+```bash
+$ poetry run cookiecutter https://github.com/zhendrikse/cookiecutter-kata-python.git
+```
+
+Answer the questions mutatis mutandum like so
+
+```
+$ poetry run cookiecutter https://github.com/zhendrikse/cookiecutter-kata-python.git
+
+kata [GameOfLife]: Stack
+description [This kata practices TDD]: Stack kata to practice TDD
+Select rspec_syntax:
+1 - y
+2 - n
+Choose from 1, 2 [1]: 1
+author [Your name]: Zeger Hendrikse
+email [your@email.com]: zegerh@yahoo.co.uk
+Select license:
+1 - GNU General Public License v3
+2 - MIT license
+3 - Apache Software License 2.0
+Choose from 1, 2, 3 [1]: 
+```
+
+Finally, go the the newly created project directory and make sure
+the required dependencies are installed by invoking
+
+```bash
+$ poetry install
+```
+
+The tests can be run as follows
+
+```bash
+$ poetry run mamba --format=documentation test/*_test.py
+```
+
+In case you opted for plain PyTest, you can just run
+
+```bash
+$ ptw
+```
+
 ## Preparations
 
 When practising TDD, you basically make a mind switch from writing tests to writing (executable) specifications. In other words, we [specify the behaviour](https://www.youtube.com/watch?v=Bq_oz7nCNUA) that we would like our system to exhibit. An [RSpec](https://rspec.info/)-like syntax helps us to do so, and [Mamba](https://mamba-bdd.readthedocs.io/en/latest/) offers us such an equivalent for Python:
