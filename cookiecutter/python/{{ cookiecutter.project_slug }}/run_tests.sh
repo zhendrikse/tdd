@@ -1,0 +1,3 @@
+{% if cookiecutter.rspec_syntax == "y" %}poetry run mamba --format=documentation test/*_test.py {% if cookiecutter.code_coverage == "y" %}--enable-coverage && poetry run coverage html{% endif %}
+{% endif %} 
+{% if cookiecutter.rspec_syntax == "n" %}poetry run {% if cookiecutter.code_coverage == "n" %}ptw{% endif %}{% if cookiecutter.code_coverage == "y" %}coverage run -m pytest && poetry run coverage report && poetry run coverage html{% endif %}{% endif %}

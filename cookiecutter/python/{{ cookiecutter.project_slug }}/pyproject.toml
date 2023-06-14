@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "{{ cookiecutter.kata }}"
+version = "0.1.0"
+description = "{{ cookiecutter.project_short_description }}"
+authors = ["{{ cookiecutter.author }}  <{{ cookiecutter.email}}>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10.0,<3.11"
+pytest-watch = "^4.2.0"
+pytest = "^7.3.2"
+{% if cookiecutter.rspec_syntax == "y" %}mamba = "^0.11.2"{% endif %}
+{% if cookiecutter.rspec_syntax == "y" %}py-expect = "^0.1.2"{% endif %}
+{% if cookiecutter.rspec_syntax == "y" %}expects = "^0.9.0"{% endif %}
+{% if cookiecutter.code_coverage == "y" %}coverage = "^7.2.7"{% endif %}
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,2 @@
+class {{ cookiecutter.kata }}:
+  pass
