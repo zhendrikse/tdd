@@ -1,3 +1,4 @@
+- [ ] Create solution for video store kata Python
 - [ ] Make python cookiecutter work for pip and poetry
 - [ ] Make python cookiecutter work for ptw and coverage
 - [ ] Make python cookiecutter work for ptw and mamba
@@ -9,5 +10,7 @@
 - [ ] Allow for hamcrest assertions when using pytest
 - [ ] Gilded Rose python in cookiecutter formaat gieten
 - [ ] Sudoku kata Clojure readme is een Python readme
+- [ ] Maak sudoku kata Clojure af
 - [ ] .coverage file in cookiecutter Python template
 - [ ] Sudoku characterization tests alleen in Java?
+- [ ] Clean-up poker hands kata dir and solutions
