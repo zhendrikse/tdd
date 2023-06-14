@@ -1,6 +1,6 @@
 # Introduction
 
-Please read the general [introduction to the stack kata](../README.md) first!
+Please read the general [introduction to the mars rover kata](../README.md) first!
 
 # Getting started
 
