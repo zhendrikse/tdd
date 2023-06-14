@@ -1,6 +1,6 @@
 from mamba import description, it, fit, context, before
 from expects import expect, equal, raise_error, be_true, be_false
-from sudoku import Sudoku, SudokuIndex
+from src.sudoku import Sudoku, SudokuIndex
 
 with description(SudokuIndex) as self:
   with context("Determining next row and column"):

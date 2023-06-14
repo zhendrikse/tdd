@@ -1,19 +1,13 @@
-![Sudoku](./assets/sudoku.jpg)
+# Introduction
 
-# Sudoku kata
+Please read the general [introduction to the sudoku kata](../README.md) first!
 
-In this kata we are going to write a Sodoku solver using [back tracking](https://pythonwife.com/backtracking-in-python/) and TDD.
+# Getting started
 
-The rules for Sudoku are:
+First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-- Every square has to contain a single number.
-- Only the numbers from 1 through to 9 can be used.
-- Each 3×3 box can only contain each number from 1 to 9 once.
-- Each vertical column can only contain each number from 1 to 9 once.
-
-The idea is to let the computer solve Sudoku puzzles using a brute force approach. However, by using back tracking, we assure that invalid branches are pruned early. This kata shows how to incrementally develop such a recursive algorithm.
-
-At the end, there is an option to exercise with the [data clumping](https://refactoring.guru/smells/data-clumps) refactoring that is applicable to the pervasive grouping of the row and column parameters.
+Next, go the the newly created project directory and consult
+the provided ``README.md`` in there.
 
 # Instructions
 

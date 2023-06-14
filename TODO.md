@@ -7,3 +7,6 @@
 - [ ] Make clojure cookiecutter
 - [ ] Provisioning for approval test framework?
 - [ ] Allow for hamcrest assertions when using pytest
+- [ ] Gilded Rose python in cookiecutter formaat gieten
+- [ ] Sudoku kata Clojure readme is een Python readme
+- [ ] .coverage file in cookiecutter Python template
