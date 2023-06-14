@@ -10,3 +10,4 @@
 - [ ] Gilded Rose python in cookiecutter formaat gieten
 - [ ] Sudoku kata Clojure readme is een Python readme
 - [ ] .coverage file in cookiecutter Python template
+- [ ] Sudoku characterization tests alleen in Java?
