@@ -1,9 +1,12 @@
-import { {{  cookiecutter.kata }} } from '../src/{{ cookiecutter.kata }}.js';
+'use strict';
 
-describe("A new {{ cookiecutter.kata }}", function() {
+var {{  cookiecutter.kata }} = require('../src/{{  cookiecutter.kata }}.js');
+var expect = require('expect.js');
+
+describe("A new {{  cookiecutter.kata }}", function() {
     it("is successfully created", function () {
         var {{ cookiecutter.kata|lower }}  = new {{  cookiecutter.kata }}()
-        expect(false).toEqual(true);
+        expect(true).not.to.be(true);
     })
 })
 

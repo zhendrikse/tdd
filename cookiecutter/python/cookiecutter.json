@@ -2,8 +2,8 @@
     "kata": "GameOfLife",
     "project_slug": "{{ cookiecutter.kata.lower().replace(' ', '_').replace('-', '_') }}",
     "project_short_description": "This kata practices TDD", 
-    "rspec_syntax": ["y", "n"],
-    "code_coverage": ["y", "n"],
+    "rspec_syntax": ["n", "y"],
+    "code_coverage": ["n", "y"],
     "author": "Your name",
     "email": "your@email.com",
     "license": ["GNU General Public License v3", "MIT license", "Apache Software License 2.0"]

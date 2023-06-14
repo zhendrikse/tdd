@@ -1,2 +1,4 @@
-export class {{ cookiecutter.kata}} {
+'use strict';
+
+module.exports = class {{ cookiecutter.kata}} {
 }
