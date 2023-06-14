@@ -1,0 +1,7 @@
+- [ ] Make python cookiecutter work for pip and poetry
+- [ ] Make python cookiecutter work for ptw and coverage
+- [ ] Make python cookiecutter work for ptw and mamba
+- [ ] Make javascript cookiecutter work for coverage
+- [ ] Make typescript cookiecutter
+- [ ] Make java cookiecutter
+- [ ] Make clojure cookiecutter
