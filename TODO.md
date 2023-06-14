@@ -14,3 +14,4 @@
 - [ ] .coverage file in cookiecutter Python template
 - [ ] Sudoku characterization tests alleen in Java?
 - [ ] Clean-up poker hands kata dir and solutions
+- [ ] Check locker room kotlin with Gradle
