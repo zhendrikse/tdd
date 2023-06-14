@@ -1,42 +1,13 @@
-# The Christmas tree kata
+# Introduction
 
-## Instructions
+Please read the general [introduction to the stack kata](../README.md) first!
 
-### Input
-Given the children of the world have varying screen sizes, Santa has tasked you with printing a Christmas tree to the console for a given argument of the tree’s height to accommodate for all of the children.
+# Getting started
 
-### Output
-For example a tree with a height of 2 looks like this:
-```
- *
-***
- |
-```
+First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-And a tree with a height of 3 looks like this:
-
-```
-  *  
- ***
-*****
-  |
-```
-
-And a tree of height 10:
-
-```
-         *  
-        ***
-       *****
-      *******
-     *********
-    ***********
-   *************
-  ***************
- *****************
-*******************
-         |
-```
+Next, go the the newly created project directory and consult
+the provided ``README.md`` in there.
 
 # Implementation instructions
 
@@ -188,7 +159,3 @@ We are going to start as simple as possible by hard coding the Christmas tree fo
   def pad_with_spaces(space_count, charstring):
     return space_count * " " + charstring + space_count * " "
    ```
-   
-# References
-
-- [Christmas tree kata](https://www.codurance.com/katalyst/build-a-christmas-tree), the original, unmodified kata.
