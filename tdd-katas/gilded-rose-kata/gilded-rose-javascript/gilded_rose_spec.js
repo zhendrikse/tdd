@@ -1,6 +1,6 @@
 require('approvals')
   .mocha();
-var { Shop, Item } = require('./gilded_rose.js');
+var { Shop, Item } = require('../src/gilded_rose.js');
 
 function convert_items_to_string(items) {
     data = ""

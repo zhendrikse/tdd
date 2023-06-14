@@ -18,6 +18,19 @@ You can continuously run the test by using
 $ npm run test
 ```
 
+If you opted for code coverage, you may show 
+the coverage by running
+
+```shell
+$ npx http-server ./coverage/lcov-report/
+```
+
+or alternatively
+
+```shell
+$ npm run report
+```
+
 # Introduction TDD
 
 TDD gives you a very fast feedback cycle, and helps you evolve a
