@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "{{ cookiecutter.kata }}",
+  "version": "1.0.0",
+  "description": "{{ cookiecutter.project_short_description }}",
+  "scripts": {
+    "test": "nodemon --exec jasmine"  
+  },
+  "keywords": [
+    "tdd",
+    "node",
+    "jasmine",
+    "watch",
+    "nodemon",
+    "test",
+    "unittest"
+  ],
+  "author": "{{ cookiecutter.author }}",  
+  "devDependencies": {
+    "jasmine-browser-runner": "^2.0.0",
+    "jasmine-core": "^5.0.1",
+    "jasmine": "^5.0.1",
+    "nodemon": "^2.0.22"
+  }
+}
