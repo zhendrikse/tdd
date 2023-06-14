@@ -6,24 +6,8 @@ Please read the general [introduction to the stack kata](../README.md) first!
 
 First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and make sure
-the required dependencies are installed by invoking
-
-```bash
-$ poetry install
-```
-
-The tests can be run as follows
-
-```bash
-$ poetry run mamba --format=documentation test/*_test.py
-```
-
-In case you opted for plain PyTest, you can just run
-
-```bash
-$ ptw
-```
+Next, go the the newly created project directory and consult
+the provided ``README.md`` in there.
 
 ## Preparations
 
