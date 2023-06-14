@@ -4,39 +4,9 @@ Please read the general [introduction to the stack kata](../README.md) first!
 
 # Getting started
 
-First install [cookiecutter](https://www.cookiecutter.io/) by invoking
+First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-```bash
-$ poetry install
-```
-
-Next, create an empty kata project to get yourself started
-
-```bash
-$ poetry run cookiecutter https://github.com/zhendrikse/cookiecutter-kata-python.git
-```
-
-Answer the questions mutatis mutandum like so
-
-```
-$ poetry run cookiecutter https://github.com/zhendrikse/cookiecutter-kata-python.git
-
-kata [GameOfLife]: Stack
-description [This kata practices TDD]: Stack kata to practice TDD
-Select rspec_syntax:
-1 - y
-2 - n
-Choose from 1, 2 [1]: 1
-author [Your name]: Zeger Hendrikse
-email [your@email.com]: zegerh@yahoo.co.uk
-Select license:
-1 - GNU General Public License v3
-2 - MIT license
-3 - Apache Software License 2.0
-Choose from 1, 2, 3 [1]: 
-```
-
-Finally, go the the newly created project directory and make sure
+Next, go the the newly created project directory and make sure
 the required dependencies are installed by invoking
 
 ```bash
