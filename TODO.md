@@ -5,3 +5,4 @@
 - [ ] Make typescript cookiecutter
 - [ ] Make java cookiecutter
 - [ ] Make clojure cookiecutter
+- [ ] Allow for hamcrest assertions when using pytest
