@@ -9,6 +9,7 @@
 		pkgs.replitPackages.jdt-language-server
 		pkgs.replitPackages.java-debug
     pkgs.pipenv
+    pkgs.cookiecutter
     pkgs.pipreqs
     pkgs.python310Full
     pkgs.replitPackages.prybar-python310
