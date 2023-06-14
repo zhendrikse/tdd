@@ -5,6 +5,5 @@
     "rspec_syntax": ["y", "n"],
     "code_coverage": ["y", "n"],
     "author": "Your name",
-    "email": "your@email.com",
-    "license": ["GNU General Public License v3", "MIT license", "Apache Software License 2.0"]
+    "email": "your@email.com"
 }
