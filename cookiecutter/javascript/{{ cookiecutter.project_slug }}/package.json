@@ -5,7 +5,7 @@
   "scripts": { {% if cookiecutter.code_coverage == "n" %}
     "test": "nodemon --exec mocha spec/*_spec.js"{% endif %}{% if cookiecutter.code_coverage == "y" %}
     "test": "nodemon --exec \"nyc --reporter=text --reporter=lcov mocha spec/*_spec.js\"",
-    "report": "npx http-server coverage/lcov-report/index.html"{% endif %}
+    "report": "npx http-server coverage/lcov-report/"{% endif %}
   },{% if cookiecutter.code_coverage == "y" %}
   "nyc": {
     "exclude": "spec/*_spec.js"
