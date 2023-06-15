@@ -153,4 +153,38 @@ So let's intentionally reverse these configuration statements now, so that
 we are forced to generalize our production code:
 
 ```javascript
+class VendingMachine {
+  constructor() {
+    this.choiceCanMap = new Map();
+  }
+  
+  configure(choice, can) {
+    this.choiceCanMap.set(choice, can);
+  }
+  
+  deliver(choice) {
+    if (this.choiceCanMap.has(choice))
+      return this.choiceCanMap.get(choice)
+
+    return Can.NOTHING
+  }
+}
 ```
+
+Finally, note that we can actually configure the vending machine 
+once for all tests
+
+```javascript
+    beforeEach(function () {
+        vending_machine = new VendingMachine()
+        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
+        vending_machine.configure(Choice.COKE, Can.COLA);
+    })
+```
+
+This makes our first test fail, because it now actually gets 
+delivered a can of Coke. But the idea of the first test was to 
+test for a non-existing choice, so let's replace the ``Choice.COLA`` 
+by ``Choice.BEER``. Now all three tests are green again!
+
+## Delivering cans that cost money
