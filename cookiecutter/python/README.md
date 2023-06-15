@@ -50,6 +50,26 @@ Choose from 1, 2 [1]:
 
 Choose this if you want to have code coverage facilities.
 
+When code coverage is enabled, a file called ``coverage`` will be produced.
+This can be inspected by invoking
+
+```shell
+$ poetry run coverage report
+```
+
+Alternatively, you may generate an HTML report by invoking
+
+```shell
+$ poetry run coverage html
+```
+
+A directory named ``htmlcov`` is then generated, that
+can then be inspected by starting an HTTP server like so
+
+```shell
+python -m http.server 8000 -d htmlcov >/dev/null 2>/dev/null &
+```
+
 ### Author
 
 ```

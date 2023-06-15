@@ -1,4 +1,5 @@
 - [ ] Create solution for video store kata Python
+- [ ] Create solution for vending machine Javascript
 - [ ] Make python cookiecutter work for pip and poetry
 - [ ] Make python cookiecutter work for ptw and coverage
 - [ ] Make python cookiecutter work for ptw and mamba
