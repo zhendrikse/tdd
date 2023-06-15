@@ -1,18 +1,19 @@
 # TTD materials
 
 Test-driven development is a lot of fun, and a
-great form of "deliberate practice".  You have arrived at the right
-place, you'll fin here everything to get you up and running!
+great form of "deliberate practice". You have arrived at the right
+place, you'll find here everything to get you up and running!
 
 ## Features
 
 This repository contains materials to practice TDD
 - TDD katas
   - In various languages such as Python, Java, Javascript, Kotlin, and Clojure
-  - Complete with instructions and solutions
+  - Complete with both instructions _and solutions_
 - Presentations in [reveal-md](https://github.com/webpro/reveal-md)
 - Playgrounds for various tools such as approval testing and rSpec-like frameworks
-- Provided with [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates to get you up-and-running with katas almost instantly
+- All katas are provided with [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates 
+  to get you up-and-running with katas almost instantly
 - Ready to be used "in the Cloud", e.g. on [replit.com](https://replit.com) or [gitpod.io](https://gitpod.io)
 
 # About coding katas
