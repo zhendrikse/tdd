@@ -188,3 +188,159 @@ test for a non-existing choice, so let's replace the ``Choice.COLA``
 by ``Choice.BEER``. Now all three tests are green again!
 
 ## Delivering cans that cost money
+
+Delivering a can should actually cost money! So asking for a can of coke
+should not deliver anything...
+
+```javascript
+    it("delivers a can of fanta when choice is fizzy orange", () => {
+        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
+    })
+```
+
+Again we are facing the riddle: how can we choose a can of coke and have
+a can delivered in the first set of tests, and now with the same test no
+can at all??
+
+Again, we solve this by configuring the machine to deliver drinks that
+cost money, bij adding a parameter to the configure method that specifies
+the price in cents:
+
+```javascript
+    it("delivers no can when choice requires money", () => {
+        vending_machine.configure(Choice.COKE, Can.COLA, 250);
+        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
+    })
+```
+
+We modify the production code accordingly to make the test pass:
+
+```javascript
+  configure(choice, can, priceInCents = 0) {
+    this.priceInCents = priceInCents
+    this.choiceCanMap.set(choice, can)
+  }
+  
+  deliver(choice) {
+    if (this.choiceCanMap.has(choice) && this.priceInCents == 0)
+      return this.choiceCanMap.get(choice)
+
+    return Can.NOTHING
+  }
+```
+
+When we enter the required amount of money, we should get our
+can of choice again
+
+```javascript
+    it("delivers can of choice when required money is inserted", () => {
+        vending_machine.insert(250);
+        vending_machine.configure(Choice.COKE, Can.COLA, 250);
+        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+    })
+```
+
+This forces us to modify the implementation like so
+
+```javascript
+  constructor() {
+    this.choiceCanMap = new Map()
+    this.priceInCents = 0
+    this.balanceInCents = 0
+  }
+  
+  configure(choice, can, priceInCents = 0) {
+    this.priceInCents = priceInCents
+    this.choiceCanMap.set(choice, can)
+  }
+
+  insert(priceInCents) {
+    this.balanceInCents = priceInCents
+  }
+  
+  deliver(choice) {
+    if (this.choiceCanMap.has(choice) && this.priceInCents == this.balanceInCents)
+      return this.choiceCanMap.get(choice)
+```
+
+Again, we observe duplication in the specification file, which leads
+to a nesting of the ``describe`` statements
+
+```javascript
+    describe("that requires drinks to be paid", () =>  {
+  
+      beforeEach(function () {
+          vending_machine = new VendingMachine()
+          vending_machine.configure(Choice.COKE, Can.COLA, 250);
+      })
+      
+      it("delivers no can when choice requires money", () => {
+          expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
+      })
+        
+      it("delivers can of choice when required amount is inserted", () => {
+          vending_machine.insert(250);
+          expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+      })
+```
+
+Of course, the equality sign doesn't make sense, as we also 
+expect a can of choice when we pay too much
+
+```javascript
+    it("delivers can of choice when more than required amount is inserted", () => {
+        vending_machine.insert(300);
+        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+    })
+```
+This test only requires a minor modification in the production code
+
+```javascript
+  deliver(choice) {
+    if (this.choiceCanMap.has(choice) && this.priceInCents <= this.balanceInCents)
+```
+
+Obviously, we also must accommodate for different prices for the different drinks:
+
+```javascript
+    it("delivers can of Fanta when required amount is inserted", () => {
+        vending_machine.insert(300);
+        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 300);
+        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+    })
+```
+
+This test jumps to green immediately, but that's because the most recently
+configured price is used always. As soon as we move the configuration to 
+the ``beforeEach()`` step, the test fails!
+
+So now we need to introduce yet another map, namely a map between choices
+and prices.
+
+Finaly, we expect no more cans after a can has been withdrawn, as our
+balance should have shrunk
+
+```javascript
+    it("delivers no can after a can has been delivered", () => {
+        vending_machine.insert(250);
+        vending_machine.deliver(Choice.COKE);
+        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
+    })
+```
+
+So after withdrawal of a drink, the balance should be adjusted
+accordingly. After some minor refactoring of the deliver method
+we arrive at
+
+```javascript
+  deliver(choice) {
+    var price = this.choicePriceMap.get(choice)
+    if (!this.choiceCanMap.has(choice) || price > this.balanceInCents) 
+      return Can.NOTHING
+
+    this.balanceInCents -= price
+    return this.choiceCanMap.get(choice)
+  }
+```
+
+# Identification of code smells

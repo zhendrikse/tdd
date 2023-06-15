@@ -14,18 +14,28 @@ class Can {
 
 class VendingMachine {
   constructor() {
-    this.choiceCanMap = new Map();
+    this.choiceCanMap = new Map()
+    this.choicePriceMap = new Map()
+    this.balanceInCents = 0
   }
   
-  configure(choice, can) {
-    this.choiceCanMap.set(choice, can);
+  configure(choice, can, priceInCents = 0) {
+    this.priceInCents = priceInCents
+    this.choiceCanMap.set(choice, can)
+    this.choicePriceMap.set(choice, priceInCents)
+  }
+
+  insert(priceInCents) {
+    this.balanceInCents = priceInCents
   }
   
   deliver(choice) {
-    if (this.choiceCanMap.has(choice))
-      return this.choiceCanMap.get(choice)
+    var price = this.choicePriceMap.get(choice)
+    if (!this.choiceCanMap.has(choice) || price > this.balanceInCents) 
+      return Can.NOTHING
 
-    return Can.NOTHING
+    this.balanceInCents -= price
+    return this.choiceCanMap.get(choice)
   }
 }
 

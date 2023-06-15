@@ -1,18 +1,19 @@
+- [ ] Check locker room kotlin with Gradle
 - [ ] Create solution for video store kata Python
-- [ ] Create solution for vending machine Javascript
+- [+] Create solution for vending machine Javascript
+- [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make python cookiecutter work for pip and poetry
-- [ ] Make python cookiecutter work for ptw and coverage
+- [+] Make python cookiecutter work for ptw and coverage
 - [ ] Make python cookiecutter work for ptw and mamba
-- [X] Make javascript cookiecutter work for coverage
 - [ ] Make typescript cookiecutter
 - [ ] Make java cookiecutter
 - [ ] Make clojure cookiecutter
-- [ ] Provisioning for approval test framework?
 - [ ] Allow for hamcrest assertions when using pytest
-- [ ] Gilded Rose python in cookiecutter formaat gieten
 - [ ] Sudoku kata Clojure readme is een Python readme
 - [ ] Maak sudoku kata Clojure af
-- [ ] .coverage file in cookiecutter Python template
 - [ ] Sudoku characterization tests alleen in Java?
 - [ ] Clean-up poker hands kata dir and solutions
-- [ ] Check locker room kotlin with Gradle
+- [-] Provisioning for approval test framework?
+- [-] Gilded Rose python in cookiecutter formaat gieten
+- [X] .coverage file in cookiecutter Python template
+- [X] Make javascript cookiecutter work for coverage
