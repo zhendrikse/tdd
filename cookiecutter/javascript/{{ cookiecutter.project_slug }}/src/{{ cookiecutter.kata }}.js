@@ -1,4 +1,8 @@
 'use strict';
 
-module.exports = class {{ cookiecutter.kata}} {
+class {{ cookiecutter.kata }} {
+}
+
+module.exports = {
+  {{ cookiecutter.kata }}: {{ cookiecutter.kata }}
 }

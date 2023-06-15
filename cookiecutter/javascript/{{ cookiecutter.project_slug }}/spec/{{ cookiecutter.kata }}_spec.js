@@ -1,6 +1,6 @@
 'use strict';
 
-var {{  cookiecutter.kata }} = require('../src/{{  cookiecutter.kata }}.js');
+const { {{ cookiecutter.kata }} } = require('../src/{{ cookiecutter.kata }}.js')
 var expect = require('expect.js');
 
 describe("A new {{  cookiecutter.kata }}", function() {
