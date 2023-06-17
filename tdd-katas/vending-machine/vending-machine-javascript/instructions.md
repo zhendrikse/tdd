@@ -343,4 +343,95 @@ we arrive at
   }
 ```
 
-# Identification of code smells
+# Code smells
+
+## [Data clump](https://refactoring.guru/smells/data-clumps)
+
+It now becomes clear that the ``choiceCanMap`` and ``choicePriceMap`` always
+appear together, so let's assign them their own (data) class ``Drawer``
+
+```javascript
+class Drawer {
+  constructor(can, priceInCents) {
+    this.can = can
+    this.priceInCents = priceInCents
+  }
+}
+```
+
+Since the members are publicly accesible, we can directly use them.
+However, this immediately leads to another code smell, namely
+[feature envy](https://refactoring.guru/smells/feature-envy).
+
+As a first step, we can move the delivery logic into the ``Drawwer`` class
+
+```javascript
+  getCan(vendingMachine) {
+    if (this.priceInCents > vendingMachine.balanceInCents)
+      return Can.NOTHING
+    
+    vendingMachine.balanceInCents -= this.priceInCents
+    return this.can
+  }
+```
+
+with which the ``VendingMachine`` simplifies to
+
+```javascript
+  deliver(choice) {
+    if (!this.choiceDrawerMap.has(choice))
+      return Can.NOTHING
+
+    var drawer = this.choiceDrawerMap.get(choice)
+    return drawer.getCan(this)
+  }
+```
+
+Note that we have now introduced a new code smell, namely
+[inappropriate intimacy](https://refactoring.guru/smells/inappropriate-intimacy), 
+as the drawer depends on the vending machine and vice versa.
+
+So let's introduce a kind of cashier that has the responsibility 
+of dealing with the transaction(s). To do so in small steps, we
+first wrap the balance in the new class ``Cashier``, and gradually
+move the logic that goes with it as well.
+
+```javascript
+class Cashier {
+  constructor() {
+    this.balanceInCents = 0
+  }  
+
+  insert(amountInCents) {
+    this.balanceInCents += amountInCents
+  }
+
+  doesBalanceAllow(priceInCents) {
+    return this.balanceInCents >= priceInCents
+  }
+
+  buy(amountInCents) {
+    this.balanceInCents -= amountInCents
+  }
+}
+```
+
+This means that the ``Drawer`` class is no longer dependent on the
+``VendingMachine`` class, but on the ``Cashier`` instead
+
+```javascript
+class Drawer {
+  constructor(can, priceInCents) {
+    this.can = can
+    this.priceInCents = priceInCents
+  }
+
+  deliver(cashier) {
+    if (!cashier.doesBalanceAllow(this.priceInCents))
+      return Can.NOTHING
+    
+    cashier.buy(this.priceInCents)
+    return this.can    
+  }
+}
+```
