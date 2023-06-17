@@ -1,48 +1,13 @@
 'use strict';
 
+const { Drawer } = require('../src/Drawer.js')
+const { Cashier } = require('../src/Cashier.js')
+const { Can } = require('../src/Can.js')
+
 class Choice {
   static COKE = "Coke"
   static FIZZY_ORANGE = "Fizzy orange"
   static BEER = "Beer"
-}
-
-class Can {
-  static NOTHING = "No can"
-  static FANTA = "Can of Fanta"
-  static COLA = "Can of Cola"
-}
-
-class Cashier {
-  constructor() {
-    this.balanceInCents = 0
-  }  
-
-  insert(amountInCents) {
-    this.balanceInCents += amountInCents
-  }
-
-  doesBalanceAllow(priceInCents) {
-    return this.balanceInCents >= priceInCents
-  }
-
-  buy(amountInCents) {
-    this.balanceInCents -= amountInCents
-  }
-}
-
-class Drawer {
-  constructor(can, priceInCents) {
-    this.can = can
-    this.priceInCents = priceInCents
-  }
-
-  deliver(cashier) {
-    if (!cashier.doesBalanceAllow(this.priceInCents))
-      return Can.NOTHING
-    
-    cashier.buy(this.priceInCents)
-    return this.can    
-  }
 }
 
 class VendingMachine {
@@ -69,8 +34,6 @@ class VendingMachine {
 }
 
 module.exports = {
-  Can: Can,
-  Choice: Choice,
   VendingMachine: VendingMachine
 }
 

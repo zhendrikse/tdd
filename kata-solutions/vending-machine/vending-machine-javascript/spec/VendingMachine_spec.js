@@ -1,7 +1,9 @@
 'use strict';
 
 var expect = require('expect.js');
-const { VendingMachine, Choice, Can } = require('../src/VendingMachine.js')
+const { VendingMachine } = require('../src/VendingMachine.js')
+const { Choice } = require('../src/Choice.js')
+const { Can } = require('../src/Can.js')
 
 describe("A new vending machine", function() {
     var vending_machine;
