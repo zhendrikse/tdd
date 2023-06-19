@@ -1,6 +1,5 @@
 - [ ] Check locker room kotlin with Gradle
 - [ ] Create solution for video store kata Python
-- [+] Create solution for vending machine Python
 - [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make python cookiecutter work for pip and poetry
 - [+] Make python cookiecutter work for ptw and coverage
@@ -8,6 +7,9 @@
 - [ ] Make typescript cookiecutter
 - [ ] Make java cookiecutter
 - [ ] Make clojure cookiecutter
+- [ ] Extend poker hands Python met Deck, shuffle and hands
+  - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
+  - [ ] graphic with replit example
 - [ ] Allow for hamcrest assertions when using pytest
 - [ ] Sudoku kata Clojure readme is een Python readme
 - [ ] Maak sudoku kata Clojure af
@@ -18,3 +20,4 @@
 - [X] .coverage file in cookiecutter Python template
 - [X] Make javascript cookiecutter work for coverage
 - [X] Create solution for vending machine Javascript
+- [X] Create solution for vending machine Python

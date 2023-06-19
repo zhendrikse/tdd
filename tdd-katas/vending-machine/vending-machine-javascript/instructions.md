@@ -363,7 +363,7 @@ Since the members are publicly accesible, we can directly use them.
 However, this immediately leads to another code smell, namely
 [feature envy](https://refactoring.guru/smells/feature-envy).
 
-As a first step, we can move the delivery logic into the ``Drawwer`` class
+As a first step, we can move the delivery logic into the ``Drawer`` class
 
 ```javascript
   getCan(vendingMachine) {
