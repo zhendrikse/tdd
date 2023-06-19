@@ -1,9 +1,15 @@
-class Card:
-  def __init__(self, card: str):
-    self.card = card
+from suit import Suit
 
-  def get_rank(self):
-    return "--23456789TJQKA".index(self.card[0])
+class Card:
+  def __init__(self, card):
+    self._suit = Suit.from_string(card[1])
+    self._rank = "--23456789TJQKA".index(card[0])
+
+  def get_rank(self) -> int:
+    return self._rank
         
-  def get_suit(self) -> str:
-    return self.card[1]
+  def get_suit(self) -> Suit:
+    return self._suit
+
+  def __repr__(self) -> str:
+    return f"{self.rank}{self.suit}"
