@@ -1,1 +1,2 @@
-poetry run mamba --format=documentation *_spec.py --enable-coverage && poetry run coverage html
+poetry run mamba --format=documentation spec/*_spec.py --enable-coverage && poetry run coverage html
+

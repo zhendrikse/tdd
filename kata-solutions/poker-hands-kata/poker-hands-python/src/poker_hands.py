@@ -1,4 +1,4 @@
-from illegal_args_exception import IllegalArgumentsException
+from src.illegal_args_exception import IllegalArgumentsException
 
 def rank_hand(hand):
   return hand.rank().value

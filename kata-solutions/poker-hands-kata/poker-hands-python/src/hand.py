@@ -1,5 +1,5 @@
-from poker_ranks import PokerRanks
-from card import Card
+from src.poker_ranks import PokerRanks
+from src.card import Card
 
 class Hand:
   def __init__(self, cards_string: str) -> None:
