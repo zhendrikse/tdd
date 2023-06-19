@@ -1,2 +1,0 @@
-class Hand:
-  pass
