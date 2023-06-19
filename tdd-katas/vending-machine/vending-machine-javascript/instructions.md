@@ -193,7 +193,7 @@ Delivering a can should actually cost money! So asking for a can of coke
 should not deliver anything...
 
 ```javascript
-    it("delivers a can of fanta when choice is fizzy orange", () => {
+    it("delivers no can when choice requires money", () => {
         expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
     })
 ```
@@ -306,7 +306,7 @@ Obviously, we also must accommodate for different prices for the different drink
     it("delivers can of Fanta when required amount is inserted", () => {
         vending_machine.insert(300);
         vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 300);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+        expect(vending_machine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA);
     })
 ```
 

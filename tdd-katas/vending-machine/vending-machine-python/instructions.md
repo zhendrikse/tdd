@@ -149,10 +149,9 @@ by ``Choice.BEER``. Now all three tests are green again!
 Delivering a can should actually cost money! So asking for a can of coke
 should not deliver anything...
 
-```javascript
-    it("delivers a can of fanta when choice is fizzy orange", () => {
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
-    })
+```python
+    with it("delivers no can when choice requires money"):
+        expect(self.vending_machine.deliver(Choice.COKE)).to(be(Can.NOTHING))
 ```
 
 Again we are facing the riddle: how can we choose a can of coke and have
@@ -163,113 +162,105 @@ Again, we solve this by configuring the machine to deliver drinks that
 cost money, bij adding a parameter to the configure method that specifies
 the price in cents:
 
-```javascript
-    it("delivers no can when choice requires money", () => {
-        vending_machine.configure(Choice.COKE, Can.COLA, 250);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
-    })
+```python
+    with it("delivers no can when choice requires money"):
+        self.vending_machine.configure(Choice.COKE, Can.COLA, 250)
+        expect(self.vending_machine.deliver(Choice.COKE)).to(be(Can.NOTHING))
 ```
 
 We modify the production code accordingly to make the test pass:
 
-```javascript
-  configure(choice, can, priceInCents = 0) {
-    this.priceInCents = priceInCents
-    this.choiceCanMap.set(choice, can)
-  }
-  
-  deliver(choice) {
-    if (this.choiceCanMap.has(choice) && this.priceInCents == 0)
-      return this.choiceCanMap.get(choice)
-
-    return Can.NOTHING
-  }
+```python
+  def configure(self, choice: Choice, can: Can, price_in_cents: int = 0) -> None:
+    self._choice_can_map[choice] = can
+    self._price_in_cents = price_in_cents
+    
+  def deliver(self, choice: Choice) -> Can:
+    if not choice in self._choice_can_map:
+      return Can.NOTHING
+    return self._choice_can_map[choice] if self._price_in_cents == 0 else Can.NOTHING
 ```
 
 When we enter the required amount of money, we should get our
 can of choice again
 
-```javascript
-    it("delivers can of choice when required money is inserted", () => {
-        vending_machine.insert(250);
-        vending_machine.configure(Choice.COKE, Can.COLA, 250);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
-    })
+```python
+    with it("delivers can of choice when required money is inserted"):
+        self.vending_machine.insert(250)
+        self.vending_machine.configure(Choice.COKE, Can.COLA, 250)
+        expect(self.vending_machine.deliver(Choice.COKE)).to(be(Can.COLA))
 ```
 
-This forces us to modify the implementation like so
+This forces us to modify the implementation of the vending machine like so
 
-```javascript
-  constructor() {
-    this.choiceCanMap = new Map()
-    this.priceInCents = 0
-    this.balanceInCents = 0
-  }
-  
-  configure(choice, can, priceInCents = 0) {
-    this.priceInCents = priceInCents
-    this.choiceCanMap.set(choice, can)
-  }
+```python
+  def __init__(self) -> None:
+    self._choice_can_map: dict[Choice, Can] = {}
+    self._price_in_cents = 0
+    self._balance_in_cents = 0
 
-  insert(priceInCents) {
-    this.balanceInCents = priceInCents
-  }
+  def insert(self, amount_in_cents):
+    self._balance_in_cents = amount_in_cents
   
-  deliver(choice) {
-    if (this.choiceCanMap.has(choice) && this.priceInCents == this.balanceInCents)
-      return this.choiceCanMap.get(choice)
+  def configure(self, choice: Choice, can: Can, price_in_cents: int = 0) -> None:
+    self._choice_can_map[choice] = can
+    self._price_in_cents = price_in_cents
+    
+  def deliver(self, choice: Choice) -> Can:
+    if not choice in self._choice_can_map:
+      return Can.NOTHING
+
+    if self._balance_in_cents == self._price_in_cents:
+      return self._choice_can_map[choice] 
+    
+    return Can.NOTHING
 ```
 
 Again, we observe duplication in the specification file, which leads
-to a nesting of the ``describe`` statements
+to a nesting of the ``context`` statements
 
-```javascript
-    describe("that requires drinks to be paid", () =>  {
+```python
+    with context("that requires drinks to be paid"):
+      with before.each:
+          self.vending_machine  = VendingMachine()
+          self.vending_machine.configure(Choice.COKE, Can.COLA, 250)
   
-      beforeEach(function () {
-          vending_machine = new VendingMachine()
-          vending_machine.configure(Choice.COKE, Can.COLA, 250);
-      })
-      
-      it("delivers no can when choice requires money", () => {
-          expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
-      })
-        
-      it("delivers can of choice when required amount is inserted", () => {
-          vending_machine.insert(250);
-          expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
-      })
+      with it("delivers no can when choice requires money"):
+          expect(self.vending_machine.deliver(Choice.COKE)).to(be(Can.NOTHING))
+   
+      with it("delivers can of choice when required money is inserted"):
+          self.vending_machine.insert(250)
+          expect(self.vending_machine.deliver(Choice.COKE)).to(be(Can.COLA))
 ```
 
 Of course, the equality sign doesn't make sense, as we also 
 expect a can of choice when we pay too much
 
-```javascript
-    it("delivers can of choice when more than required amount is inserted", () => {
-        vending_machine.insert(300);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
-    })
+```python
+      with it("delivers can of choice when more than required money is inserted"):
+          self.vending_machine.insert(350)
+          expect(self.vending_machine.deliver(Choice.COKE)).to(be(Can.COLA))
 ```
+
 This test only requires a minor modification in the production code
 
-```javascript
-  deliver(choice) {
-    if (this.choiceCanMap.has(choice) && this.priceInCents <= this.balanceInCents)
+```python
+    if self._balance_in_cents >= self._price_in_cents:
+      return self._choice_can_map[choice] 
 ```
 
 Obviously, we also must accommodate for different prices for the different drinks:
 
-```javascript
-    it("delivers can of Fanta when required amount is inserted", () => {
-        vending_machine.insert(300);
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 300);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
-    })
+```python
+      with it("delivers can of Fanta when required amount is inserted"):
+          self.vending_machine.insert(300)
+          self.vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 300);
+          expect(self.vending_machine.deliver(Choice.FIZZY_ORANGE)).to(be(Can.FANTA))
 ```
 
 This test jumps to green immediately, but that's because the most recently
 configured price is used always. As soon as we move the configuration to 
-the ``beforeEach()`` step, the test fails!
+the ``before.each`` step, the test fails!
 
 So now we need to introduce yet another map, namely a map between choices
 and prices.
@@ -277,28 +268,29 @@ and prices.
 Finaly, we expect no more cans after a can has been withdrawn, as our
 balance should have shrunk
 
-```javascript
-    it("delivers no can after a can has been delivered", () => {
-        vending_machine.insert(250);
-        vending_machine.deliver(Choice.COKE);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
-    })
+```python
+      with it("delivers no can after a can has been delivered"):
+          self.vending_machine.insert(250)
+          self.vending_machine.deliver(Choice.COKE)
+          expect(self.vending_machine.deliver(Choice.COKE)).to(be(Can.NOTHING))
 ```
 
 So after withdrawal of a drink, the balance should be adjusted
 accordingly. After some minor refactoring of the deliver method
 we arrive at
 
-```javascript
-  deliver(choice) {
-    var price = this.choicePriceMap.get(choice)
-    if (!this.choiceCanMap.has(choice) || price > this.balanceInCents) 
+```python
+  def deliver(self, choice: Choice) -> Can:
+    if not choice in self._choice_can_map:
       return Can.NOTHING
 
-    this.balanceInCents -= price
-    return this.choiceCanMap.get(choice)
-  }
-```
+    price = self._choice_price_map[choice]
+    if self._balance_in_cents >= price:
+      self._balance_in_cents -= price
+      return self._choice_can_map[choice] 
+    
+    return Can.NOTHING
+  ```
 
 # Code smells
 
