@@ -1,6 +1,6 @@
 - [ ] Check locker room kotlin with Gradle
 - [ ] Create solution for video store kata Python
-- [+] Create solution for vending machine Javascript
+- [+] Create solution for vending machine Python
 - [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make python cookiecutter work for pip and poetry
 - [+] Make python cookiecutter work for ptw and coverage
@@ -17,3 +17,4 @@
 - [-] Gilded Rose python in cookiecutter formaat gieten
 - [X] .coverage file in cookiecutter Python template
 - [X] Make javascript cookiecutter work for coverage
+- [X] Create solution for vending machine Javascript
