@@ -89,67 +89,54 @@ eliminate it using the ``before.Each:``
 
 Let's configure a different drink
 
-```javascript
-    it("delivers a can of fanta when choice is fizzy orange", () => {
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-        expect(vending_machine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA);
-    })
+```python
+    with it("delivers a can of fanta when choice is fizzy orange"):
+        self.vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA)
+        expect(self.vending_machine.deliver(Choice.FIZZY_ORANGE)).to(be(Can.FANTA))
 ```
 
-After extending the choice and can types, we can easily make this test
-pass by modifying the ``deliver()`` method slightly
+After extending the choice and can types, we notice that the test jumps to 
+green. 
 
-```javascript
-  configure(choice, can) {
-    this.can = can
-  }
-```
 
 In order to make the configuration more similar with the previous test,
 we can add a similar line to our current test and vice versa:
 
-```javascript
-    it("delivers a can of fanta when choice is fizzy orange", () => {
-        vending_machine.configure(Choice.COKE, Can.COLA);
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-        expect(vending_machine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA);
-    })
+```python
+    with it("delivers a can of fanta when choice is fizzy orange"):
+        self.vending_machine.configure(Choice.COKE, Can.COLA)
+        self.vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA)
+        expect(self.vending_machine.deliver(Choice.FIZZY_ORANGE)).to(be(Can.FANTA))
 ```
 
 However, we must _very carefully_ watch the order in which we configure
-the vending machine, as the latest configured can type is returned always.
+the vending machine, as the latest configured can type is returned always!
 
 So let's intentionally reverse these configuration statements now, so that
 we are forced to generalize our production code:
 
-```javascript
-class VendingMachine {
-  constructor() {
-    this.choiceCanMap = new Map();
-  }
-  
-  configure(choice, can) {
-    this.choiceCanMap.set(choice, can);
-  }
-  
-  deliver(choice) {
-    if (this.choiceCanMap.has(choice))
-      return this.choiceCanMap.get(choice)
+```python
+class VendingMachine:
+  def __init__(self) -> None:
+    self._choice_can_map: dict[Choice, Can] = {}
 
-    return Can.NOTHING
-  }
-}
+  def configure(self, choice: Choice, can: Can) -> None:
+    self._choice_can_map[choice] = can
+    
+  def deliver(self, choice: Choice) -> Can:
+    if not choice in self._choice_can_map:
+      return Can.NOTHING
+    return self._choice_can_map[choice]
 ```
 
 Finally, note that we can actually configure the vending machine 
 once for all tests
 
-```javascript
-    beforeEach(function () {
-        vending_machine = new VendingMachine()
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-        vending_machine.configure(Choice.COKE, Can.COLA);
-    })
+```python
+    with before.each:
+        self.vending_machine  = VendingMachine()
+        self.vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA)
+        self.vending_machine.configure(Choice.COKE, Can.COLA)
 ```
 
 This makes our first test fail, because it now actually gets 
