@@ -1,6 +1,6 @@
 from mamba import description, it, context
 from expects import expect, equal, raise_error, be_a
-from src.task import TaskId, Task
+from task import TaskId, Task
 
 with description(TaskId) as self:
   with context("Creating a task ID"):

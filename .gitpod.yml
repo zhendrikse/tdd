@@ -1,5 +1,7 @@
-
 vscode:
   extensions:
     - fwcd.kotlin
-    - MS-vsliveshare.vsliveshare
+    - mathiasfrohlich.kotlin
+    - ms-python.python
+    - genuitecllc.CodeTogether
+    - appulate.filewatcher

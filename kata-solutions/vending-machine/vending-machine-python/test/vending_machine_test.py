@@ -1,7 +1,7 @@
 
 from mamba import description, it, context, before
 from expects import expect, be, raise_error, be_true, be_false
-from src.vending_machine import Choice, Can, VendingMachine
+from vending_machine import Choice, Can, VendingMachine
 
 with description(VendingMachine) as self:
   with context("A new vending machine"):

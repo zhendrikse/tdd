@@ -1,10 +1,10 @@
 from mamba import description, it, context, before
 from expects import expect, be_empty, raise_error, have_length, be, equal
 from datetime import datetime
-from src.task_list import TaskList
-from src.task import Task, TaskId
-from src.command_handler import CommandHandler
-from src.query_handler import QueryHandler
+from task_list import TaskList
+from task import Task, TaskId
+from command_handler import CommandHandler
+from query_handler import QueryHandler
 
 with description(TaskList) as self:
   with context("Given a new empty task list"):

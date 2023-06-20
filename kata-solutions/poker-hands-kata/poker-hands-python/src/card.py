@@ -1,4 +1,4 @@
-from src.suit import Suit
+from suit import Suit
 
 class Card:
   def __init__(self, card):

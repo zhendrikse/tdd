@@ -1,8 +1,8 @@
 from mamba import description, context, it, before
 from expects import expect, equal, have_len, raise_error, be_true, be_false
-from src.hand import Hand
-from src.card import Card
-from src.poker_ranks import PokerRanks
+from hand import Hand
+from card import Card
+from poker_ranks import PokerRanks
 from mockito import when
 
 with description(Hand):

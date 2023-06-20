@@ -1,3 +1,4 @@
+export PYTHONPATH=src:test
 poetry run mamba --format=documentation test/*_test.py  
 
 #
