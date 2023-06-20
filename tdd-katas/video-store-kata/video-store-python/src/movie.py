@@ -9,7 +9,7 @@ class MovieType(Enum):
 @dataclass(frozen = True)
 class Movie:
   _title: str
-  _price_code: float
+  _price_code: MovieType
 	
   def get_price_code (self):
     return self._price_code
