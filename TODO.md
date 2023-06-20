@@ -1,11 +1,11 @@
-- [ ] Create solution for video store kata Python
+- [ ] Make Kotlin cookiecutter
 - [ ] Add option to Javascript cookiecutter to make in browser version
-- [ ] Make python cookiecutter work for pip and poetry
-- [+] Make python cookiecutter work for ptw and coverage
-- [ ] Make python cookiecutter work for ptw and mamba
-- [ ] Make typescript cookiecutter
-- [ ] Make java cookiecutter
-- [ ] Make clojure cookiecutter
+- [ ] Make Python cookiecutter work for pip and poetry
+- [+] Make Python cookiecutter work for ptw and coverage
+- [ ] Make Python cookiecutter work for ptw and mamba
+- [ ] Make Typescript cookiecutter
+- [ ] Make Java cookiecutter
+- [ ] Make Clojure cookiecutter
 - [ ] Extend poker hands Python met Deck, shuffle and hands
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
   - [ ] graphic with replit example
@@ -22,3 +22,4 @@
 - [X] Create solution for vending machine Python
 - [X] Check locker room kotlin with Gradle
 - [X] Gebruik PYTHONPATH om modules zonder src. aan te duiden
+- [X] Create solution for video store kata Python
