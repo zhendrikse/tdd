@@ -1,4 +1,3 @@
-- [ ] Gebruik PYTHONPATH om modules zonder src. aan te duiden
 - [ ] Create solution for video store kata Python
 - [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make python cookiecutter work for pip and poetry
@@ -22,3 +21,4 @@
 - [X] Create solution for vending machine Javascript
 - [X] Create solution for vending machine Python
 - [X] Check locker room kotlin with Gradle
+- [X] Gebruik PYTHONPATH om modules zonder src. aan te duiden

@@ -1,4 +1,4 @@
-from src.movie import MovieType
+from movie import MovieType
 
 class Customer:
   def __init__(self, name):
