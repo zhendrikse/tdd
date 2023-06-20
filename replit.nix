@@ -1,5 +1,6 @@
 { pkgs }: {
   deps = [
+		pkgs.nodePackages.prettier
     pkgs.vim
     pkgs.clojure
     pkgs.clojure-lsp
