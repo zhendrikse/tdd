@@ -3,6 +3,7 @@
 - [ ] Make Python cookiecutter work for pip and poetry
 - [+] Make Python cookiecutter work for ptw and coverage
 - [ ] Make Python cookiecutter work for ptw and mamba
+- [ ] Create instruction for bugs zero kata Python
 - [ ] Make Typescript cookiecutter
 - [ ] Make Java cookiecutter
 - [ ] Make Clojure cookiecutter
