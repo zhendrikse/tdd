@@ -383,6 +383,124 @@ so let's generalize this.
     result += "<p>You owed <em>" + "{:.1f}".format(self.calculate_amount()) + "</em></p>\n"
     result += "<p>You earned <em>" + str (self.calculate_frequent_renter_points()) + "</em> frequent renter points</p>"
     return result
-  ```
+```
 
-  Now note the similarity between the `as_html()` and `as_text()` methods! 
+Now note the similarity between the `as_html()` and `as_text()` methods! 
+
+So let's refactor this:
+
+```python
+  def format(self, html = False):
+    result = "<h1>" if html else "" 
+    result += "Rental Record for " + ("<em>" if html else "") + self._name + ("</em></h1>" if html else "") + "\n"
+    
+    result += "<table>\n" if html else "" 
+    for rental in self._rentals:
+      result += "\t" + ("<tr><td>" if html else "") + rental.get_movie_title() + ("</td><td>" if html else "\t") + "{:.1f}".format(rental.calculate_amount()) + ("</td></tr>" if html else "") + "\n"
+    result += "</table>\n" if html else ""
+    
+    result += "<p>" if html else ""
+    result += "You owed " + ("<em>" if html else "") + "{:.1f}".format(self.calculate_amount()) 
+    result += "</em></p>" if html else ""
+    result += "\n"
+    
+    result += "<p>" if html else ""
+    result += "You earned "+ ("<em>" if html else "") + str (self.calculate_frequent_renter_points()) + ("</em>"  if html else "") + " frequent renter points"
+    result += "</p>" if html else ""
+    return result
+
+  def as_html(self):
+    return self.format(True)
+    
+  def as_text(self):
+    return self.format(False)
+```
+
+Now it _may_ be argued that the printing facilities are not the (single) responsibility
+of the `Statement` class. So we _may_ delegate this to a statement printer.
+
+The printer needs the statement data to do its job:
+
+```python
+@dataclass(frozen = True)
+class StatementData:
+    name: str
+    amount_owed: float
+    frequent_renter_points: int
+    rental_amounts: []
+    movie_titles: []
+```
+
+Using this data class, we can rewrite the formatting methods as
+
+```python  
+class Statement:
+  # ...
+  
+  def export_data(self):
+    return StatementData(
+      name = self._name,
+      amount_owed = self.calculate_amount(),
+      frequent_renter_points = self.calculate_frequent_renter_points(),
+      rental_amounts = [rental.calculate_amount() for rental in self._rentals],
+      movie_titles = [rental.get_movie_title() for rental in self._rentals]
+    )
+
+  def format(self, statement_data, html = False):
+    result = "<h1>" if html else "" 
+    result += "Rental Record for " + ("<em>" if html else "") + statement_data.name + ("</em></h1>" if html else "") + "\n"
+    
+    result += "<table>\n" if html else "" 
+    for i in range(len(self._rentals)):
+      result += "\t" + ("<tr><td>" if html else "") + statement_data.movie_titles[i] + ("</td><td>" if html else "\t") + "{:.1f}".format(statement_data.rental_amounts[i]) + ("</td></tr>" if html else "") + "\n"
+    result += "</table>\n" if html else ""
+    
+    result += "<p>" if html else ""
+    result += "You owed " + ("<em>" if html else "") + "{:.1f}".format(statement_data.amount_owed) 
+    result += "</em></p>" if html else ""
+    result += "\n"
+    
+    result += "<p>" if html else ""
+    result += "You earned "+ ("<em>" if html else "") + str (statement_data.frequent_renter_points) + ("</em>"  if html else "") + " frequent renter points"
+    result += "</p>" if html else ""
+    return result
+
+  def as_html(self):
+    return self.format(self.export_data(), True)
+    
+  def as_text(self):
+    return self.format(self.export_data(), False)
+```
+
+This allows us to outsource the printing to a dedicated `StatementPrinter` class:
+
+```python
+class StatementPrinter:
+  @staticmethod
+  def print(statement_data, html = False):
+    result = "<h1>" if html else "" 
+    result += "Rental Record for " + ("<em>" if html else "") + statement_data.name + ("</em></h1>" if html else "") + "\n"
+    
+    result += "<table>\n" if html else "" 
+    for i in range(len(statement_data.movie_titles)):
+      result += "\t" + ("<tr><td>" if html else "") + statement_data.movie_titles[i] + ("</td><td>" if html else "\t") + "{:.1f}".format(statement_data.rental_amounts[i]) + ("</td></tr>" if html else "") + "\n"
+    result += "</table>\n" if html else ""
+    
+    result += "<p>" if html else ""
+    result += "You owed " + ("<em>" if html else "") + "{:.1f}".format(statement_data.amount_owed) 
+    result += "</em></p>" if html else ""
+    result += "\n"
+    
+    result += "<p>" if html else ""
+    result += "You earned "+ ("<em>" if html else "") + str (statement_data.frequent_renter_points) + ("</em>"  if html else "") + " frequent renter points"
+    result += "</p>" if html else ""
+    return result
+```
+
+Of course, the tests should then be modified accordingly:
+
+```python
+   def test_statement_as_text(self):
+      output = StatementPrinter.print(self._customer.statement().export_data(), False)
+      assert "Rental Record for Fred\n\tThe Cell\t9.0\n\tThe Tigger Movie\t9.0\nYou owed 18.0\nYou earned 4 frequent renter points" == output
+ ```
