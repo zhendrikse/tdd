@@ -290,7 +290,7 @@ class TestSingleNewReleaseRental:
       self._customer = Customer("Fred")
       self._customer.add_rental(Rental(NewReleaseMovie("The Cell"), 3))
   
-  def test_statement(self):
+  def test_statement_as_test(self):
       assert "Rental Record for Fred\n\tThe Cell\t9.0\nYou owed 9.0\nYou earned 2 frequent renter points\n" == str(self._customer.statement())
 
   def test_frequent_renter_points(self):
@@ -299,3 +299,90 @@ class TestSingleNewReleaseRental:
   def test_total_amount(self):
       assert 9.0 == self._customer.statement().calculate_amount()
 ```
+
+## Step 5: preparations for the HTML extension
+
+As we eventually want to create an additional HTML rendering of 
+the rental statement, it makes sense to first transform the 
+`get_movie()` method in the `Rental` class to `get_movie_title()`
+
+```python
+  def get_movie_title(self):
+    return self._movie.get_title()
+```
+
+as this both improves encapsulation as well as simplifies the 
+call to it from within the `Statement` class.
+
+Let's create an `as_text()` method in preparation of the newly required
+`as_html()` method.
+
+```python
+  def __repr__(self):
+    return self.as_text()
+    
+  def as_text(self):
+    result = "Rental Record for " + self._name + "\n"
+    for rental in self._rentals:
+      result += "\t" + rental.get_movie_title () + "\t" + "{:.1f}".format(rental.calculate_amount()) + "\n"
+		
+    result += "You owed " + "{:.1f}".format(self.calculate_amount()) + "\n"
+    result += "You earned " + str (self.calculate_frequent_renter_points()) + " frequent renter points\n"		
+		
+    return result
+```
+
+Now it is time to create an HTML version of the text-based rental statement
+
+```
+Rental Record for Fred
+  The Cell  9.0
+  The Tigger Movie  9.0
+You owed 18.0
+You earned 4 frequent renter points
+```
+&rarr;
+
+```html
+<h1>Rental Record for <em>Fred</em></h1>
+<table>
+  <tr><td>The Cell</td><td>9.0</td></tr>
+  <tr><td>The Tigger Movie</td><td>9.0</td></tr>
+</table>
+<p>You owed <em>18.0</em></p>
+<p>You earned <em>4</em> frequent renter points</p>
+```
+
+So let's create a test first!
+
+```python  
+  def test_statement_as_html(self):
+      assert "<h1>Rental Record for <em>Fred</em></h1>\n<table>\n\t<tr><td>The Cell</td><td>9.0</td></tr>\n\t<tr><td>The Tigger Movie</td><td>9.0</td></tr>\n</table>\n<p>You owed <em>18.0</em></p>\n<p>You earned <em>4</em> frequent renter points</p>" == self._customer.statement().as_html()
+```
+
+and define the `as_html()` accordingly
+
+```python
+
+  def as_html(self):
+    return "<h1>Rental Record for <em>Fred</em></h1>\n<table>\n\t<tr><td>The Cell</td><td>9.0</td></tr>\n\t<tr><td>The Tigger Movie</td><td>9.0</td></tr>\n</table>\n<p>You owed <em>18.0</em></p>\n<p>You earned <em>4</em> frequent renter points</p>"
+```
+
+Now we immediately observe duplication in the test and production code,
+so let's generalize this.
+
+```python
+  def as_html(self):
+    result = "<h1>Rental Record for <em>" + self._name + "</em></h1>\n"
+    
+    result += "<table>\n"
+    for rental in self._rentals:
+      result += "\t<tr><td>" + rental.get_movie_title() + "</td><td>" + "{:.1f}".format(rental.calculate_amount()) + "</td></tr>\n"
+    result += "</table>\n"
+    
+    result += "<p>You owed <em>" + "{:.1f}".format(self.calculate_amount()) + "</em></p>\n"
+    result += "<p>You earned <em>" + str (self.calculate_frequent_renter_points()) + "</em> frequent renter points</p>"
+    return result
+  ```
+
+  Now note the similarity between the `as_html()` and `as_text()` methods! 

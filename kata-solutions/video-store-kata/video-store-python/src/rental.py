@@ -6,8 +6,8 @@ class Rental:
   _movie: Movie
   _days_rented: int
   
-  def get_movie (self):
-    return self._movie
+  def get_movie_title(self):
+    return self._movie.get_title()
 
   def calculate_amount(self):
     return self._movie.calculate_amount(self._days_rented)

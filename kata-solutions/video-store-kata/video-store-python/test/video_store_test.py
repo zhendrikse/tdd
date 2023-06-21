@@ -11,7 +11,7 @@ class TestSingleNewReleaseRental:
       self._customer = Customer("Fred")
       self._customer.add_rental(Rental(NewReleaseMovie("The Cell"), 3))
   
-  def test_statement(self):
+  def test_statement_as_test(self):
       assert "Rental Record for Fred\n\tThe Cell\t9.0\nYou owed 9.0\nYou earned 2 frequent renter points\n" == str(self._customer.statement())
 
   def test_frequent_renter_points(self):
@@ -27,8 +27,11 @@ class TestDualNewReleaseRental:
       self._customer.add_rental(Rental(NewReleaseMovie("The Cell"), 3))
       self._customer.add_rental(Rental(NewReleaseMovie("The Tigger Movie"), 3))
     
-  def test_DualNewReleaseStatement(self):
+  def test_statement_as_test(self):
       assert "Rental Record for Fred\n\tThe Cell\t9.0\n\tThe Tigger Movie\t9.0\nYou owed 18.0\nYou earned 4 frequent renter points\n" == str(self._customer.statement())
+    
+  def test_statement_as_html(self):
+      assert "<h1>Rental Record for <em>Fred</em></h1>\n<table>\n\t<tr><td>The Cell</td><td>9.0</td></tr>\n\t<tr><td>The Tigger Movie</td><td>9.0</td></tr>\n</table>\n<p>You owed <em>18.0</em></p>\n<p>You earned <em>4</em> frequent renter points</p>" == self._customer.statement().as_html()
 
   def test_frequent_renter_points(self):
       assert 4 == self._customer.statement().calculate_frequent_renter_points()
@@ -42,7 +45,7 @@ class TestSingleChildrensRental:
       self._customer = Customer("Fred")
       self._customer.add_rental(Rental(ChildrensMovie("The Tigger Movie"), 3))
     
-  def test_SingleChildrensStatement(self):
+  def test_statement_as_test(self):
       assert "Rental Record for Fred\n\tThe Tigger Movie\t1.5\nYou owed 1.5\nYou earned 1 frequent renter points\n" == str(self._customer.statement())
 
   def test_frequent_renter_points(self):
@@ -59,7 +62,7 @@ class TestMultipleRegularRental:
       self._customer.add_rental(Rental(RegularMovie("8 1/2"), 2))
       self._customer.add_rental(Rental(RegularMovie("Eraserhead"), 3))
   
-  def test_MultipleRegularStatement(self):
+  def test_statement_as_test(self):
       assert "Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n" == str(self._customer.statement())
 
   def test_frequent_renter_points(self):
