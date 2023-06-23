@@ -16,3 +16,10 @@ $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/py
 ```bash
 $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/javascript
 ```
+
+
+## Typescript kata generation
+
+```bash
+$ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/typescript
+```

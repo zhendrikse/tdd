@@ -13,7 +13,7 @@
   "keywords": [
     "tdd",
     "node",
-    "jasmine",
+    "mocha",
     "watch",
     "nodemon",
     "test",

@@ -1,0 +1,33 @@
+{
+   "name": "{{ cookiecutter.kata }}",
+   "version": "1.0.0",
+   "description": "{{ cookiecutter.project_short_description }}",
+   "main": "index.js",
+   "scripts": {
+      "test": "mocha",
+      "build": "tsc",
+      "watch": "npx mocha spec/**/*_spec.ts --require ts-node/register --watch --extension ts"
+   },
+   "keywords": [
+      "tdd",
+      "node",
+      "mocha",
+      "watch",
+      "nodemon",
+      "test",
+      "unittest"
+  ],
+   "author": "{{ cookiecutter.author }}",  
+   "license": "ISC",
+   "devDependencies": {
+      "expect.js": "^0.3.1",
+      "@types/chai": "^4.3.5",
+      "@types/mocha": "^10.0.1",
+      "chai": "^4.3.7",
+      "mocha": "^10.2.0",
+      "typescript": "^5.1.3",
+      "ts-node": "^10.9.1"
+   },
+   "dependencies": {
+   }
+}
