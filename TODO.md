@@ -1,10 +1,10 @@
-- [ ] Make Kotlin cookiecutter
+- [ ] Modify instructions.md vending-machine-typescript from javascript -> typescript
 - [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make Python cookiecutter work for pip and poetry
 - [+] Make Python cookiecutter work for ptw and coverage
 - [ ] Make Python cookiecutter work for ptw and mamba
 - [+] Create instruction for bugs zero kata Python
-- [ ] Make Typescript cookiecutter
+- [ ] Implement code coverage for Typescript cookiecutter
 - [ ] Make Java cookiecutter
 - [ ] Make Clojure cookiecutter
 - [ ] Extend poker hands Python met Deck, shuffle and hands
@@ -15,8 +15,6 @@
 - [ ] Maak sudoku kata Clojure af
 - [ ] Sudoku characterization tests alleen in Java?
 - [ ] Clean-up poker hands kata dir and solutions
-- [-] Provisioning for approval test framework?
-- [-] Gilded Rose python in cookiecutter formaat gieten
 - [X] .coverage file in cookiecutter Python template
 - [X] Make javascript cookiecutter work for coverage
 - [X] Create solution for vending machine Javascript
@@ -24,3 +22,4 @@
 - [X] Check locker room kotlin with Gradle
 - [X] Gebruik PYTHONPATH om modules zonder src. aan te duiden
 - [X] Create solution for video store kata Python
+- [X] Make Kotlin cookiecutter

@@ -12,5 +12,5 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
 }
 
-rootProject.name = "locker-room-kotlin"
+rootProject.name = "{{ cookiecutter.kata }}"
 include("lib")

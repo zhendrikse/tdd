@@ -4,18 +4,12 @@ Welcome to your new Code Kata.  Test-driven development is a lot of fun, and a
 great form of "deliberate practice".  You're almost there - there's
 one more step needed to get up and running.
 
-## Installing the required packages
-
-```bash
-$ npm install
-```
-
 ## Running the tests
 
 You can continuously run the test by using
 
 ```bash
-$ npm run watch
+$ gradle test --continuous
 ```
 
 # Introduction TDD

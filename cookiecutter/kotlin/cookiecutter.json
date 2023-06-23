@@ -1,0 +1,6 @@
+{
+    "kata": "GameOfLife",
+    "project_slug": "{{ cookiecutter.kata.lower().replace(' ', '_').replace('-', '_') }}",
+    "project_short_description": "This kata practices TDD", 
+    "license": ["GNU General Public License v3", "MIT license", "Apache Software License 2.0"]
+}

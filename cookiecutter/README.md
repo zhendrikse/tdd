@@ -23,3 +23,10 @@ $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/ja
 ```bash
 $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/typescript
 ```
+
+
+## Kotlin kata generation
+
+```bash
+$ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/kotlin
+```
