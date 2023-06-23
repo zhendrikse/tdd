@@ -108,31 +108,24 @@ eliminate it using the ``beforeEach()``
 
 Let's configure a different drink
 
-```javascript
-    it("delivers a can of fanta when choice is fizzy orange", () => {
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-        expect(vending_machine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA);
-    })
+```typescript
+  it("delivers Fanta when fizzy orange is selected", () => {
+    vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA)
+    expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA)
+  })
 ```
 
-After extending the choice and can types, we can easily make this test
-pass by modifying the ``deliver()`` method slightly
-
-```javascript
-  configure(choice, can) {
-    this.can = can
-  }
-```
+After extending the choice and can types, the test jumps to green.
 
 In order to make the configuration more similar with the previous test,
 we can add a similar line to our current test and vice versa:
 
-```javascript
-    it("delivers a can of fanta when choice is fizzy orange", () => {
-        vending_machine.configure(Choice.COKE, Can.COLA);
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-        expect(vending_machine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA);
-    })
+```typescript
+  it("delivers Fanta when fizzy orange is selected", () => {
+    vendingMachine.configure(Choice.COLA, Can.COKE)
+    vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA)
+    expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA)
+  })
 ```
 
 However, we must _very carefully_ watch the order in which we configure
@@ -141,34 +134,31 @@ the vending machine, as the latest configured can type is returned always.
 So let's intentionally reverse these configuration statements now, so that
 we are forced to generalize our production code:
 
-```javascript
-class VendingMachine {
-  constructor() {
-    this.choiceCanMap = new Map();
-  }
-  
-  configure(choice, can) {
-    this.choiceCanMap.set(choice, can);
-  }
-  
-  deliver(choice) {
-    if (this.choiceCanMap.has(choice))
-      return this.choiceCanMap.get(choice)
+```typescript
+export class VendingMachine {
+    private choiceCanMap: Map<Choice, Can> = new Map<Choice, Can>();
 
-    return Can.NOTHING
-  }
+    public configure(choice: Choice, can: Can): void {
+      this.choiceCanMap.set(choice, can)
+    }
+  
+    public deliver(choice: Choice): Can {
+      if (!this.choiceCanMap.has(choice)) return Can.NOTHING
+
+      return this.choiceCanMap.get(choice) as Can        
+    }
 }
 ```
 
 Finally, note that we can actually configure the vending machine 
 once for all tests
 
-```javascript
-    beforeEach(function () {
-        vending_machine = new VendingMachine()
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-        vending_machine.configure(Choice.COKE, Can.COLA);
-    })
+```typescript
+  beforeEach(() =>{
+    vendingMachine = new VendingMachine();
+    vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA)
+    vendingMachine.configure(Choice.COLA, Can.COKE)
+  })
 ```
 
 This makes our first test fail, because it now actually gets 
