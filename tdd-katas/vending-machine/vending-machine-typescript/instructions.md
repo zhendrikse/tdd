@@ -16,64 +16,49 @@ the provided ``README.md`` in there.
 Let's first write a specification for a vending machine that delivers
 nothing, whatever we ask it to deliver:
 
-```javascript
-describe("A new vending machine", function() {
-    it("does not deliver anything", function () {
-        let vending_machine  = new VendingMachine();
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
-    })
-})
+```typescript
+  it("delivers nothing when choice does not exist", () => {
+    let vendingMachine = new VendingMachine()
+    expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.NOTHING)
+  })
 ```
 
 Obviously, this fails miserably, as the both the deliver method and the
 enumerations are not defined. So let's introduce them both in the 
 production code
 
-```javascript
-class Choice {
-  static COKE = "Coke"
+```typescript
+export enum Choice {
+  COLA = "Cola choice"
 }
 
-class Can {
-  static NOTHING = "No can"
+export enum Can {
+  NOTHING = "No can"
 }
 
-class VendingMachine {  
-  deliver(choice) {
-    return Can.NOTHING
-  }
+export class VendingMachine {
+    deliver(choice: Choice): Can {
+      return Can.NOTHING
+    }  
 }
 ```
 
 We must make these definitions available to the logic in the specification
 file(s), so we add 
 
-```javascript
-
-module.exports = {
-  Can: Can,
-  Choice: Choice,
-  VendingMachine: VendingMachine
-}
+```typescript
+import { VendingMachine, Can, Choice } from "../src/VendingMachine"
 ```
 
-to the production code and add
-
-```javascript
-const { VendingMachine, Choice, Can } = require('../src/VendingMachine.js')
-```
-
-to our specifications file. 
-
-We should have our first passing test now.
+to our specifications file. We should have our first passing test now!
 
 Let's try to get some coke though:
 
-```javascript
-    it("delivers Cola when coke is selected", function () {
-        let vending_machine  = new VendingMachine();
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
-    })
+```typescript
+  it("delivers Cola when coke is selected", () => {
+    let vendingMachine = new VendingMachine()
+    expect(vendingMachine.deliver(Choice.COKE)).to.equal(Can.COLA)
+  })
 ```
 
 Before we continue, notice that we have two tests now that are 
@@ -82,39 +67,43 @@ completely identical, but expect different results. How do we solve this?
 We solve this by configuring the vending machine with a choice, so
 that we can expect a different outcome.
 
-```javascript
+```typescript
     it("delivers Cola when coke is selected", function () {
         let vending_machine  = new VendingMachine();
-        vending_machine.configure(Choice.COKE, Can.COLA);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+        vendingMachine.configure(Choice.COLA, Can.COKE)
+        expect(vending_machine.deliver(Choice.COLA)).to.equal(Can.COKE)
     })
 ```
 
 Now the vending machine must be extended just a little bit
 
-```javascript
-class VendingMachine {
-  constructor() {
-    this.can = Can.NOTHING
-  }
+```typescript
+export class VendingMachine {
+    private canToDeliver: Can
   
-  configure(choice, can) {
-    this.can = Can.COLA
-  }
+    constructor() {
+      this.canToDeliver = Can.NOTHING
+    }
   
-  deliver(choice) {
-    return this.can
-  }
+    configure(choice: Choice, can: Can) {
+      this.canToDeliver = can
+    }
+  
+    deliver(choice: Choice): Can {
+      return this.canToDeliver
+    }  
 }
+
 ```
 
 Next, identify the duplicate code (hint: in the spec file), and
 eliminate it using the ``beforeEach()``
 
-```javascript
-    beforeEach(function () {
-      // ...
-    })
+```typescript
+  let vendingMachine: VendingMachine;
+  beforeEach(() =>{
+    vendingMachine = new VendingMachine();
+  })
 ```
 
 Let's configure a different drink
