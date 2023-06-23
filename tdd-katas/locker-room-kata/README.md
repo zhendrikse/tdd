@@ -1,5 +1,7 @@
 # Locker room kata
 
+![Lockers](./assets/lockers.png)
+
 ## Description
 
 Imagine a wall with lockers in a locker room. All lockers are centrally opened and closed by a controller, where you can enter a PIN. When a locker is open, it is available and can be locked by entering a PIN. When a locker is closed, it can be opened with the PIN used to lock it. 
