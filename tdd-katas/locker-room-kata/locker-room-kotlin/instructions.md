@@ -314,3 +314,57 @@ data class Locker(private val pin:Pin = "") {
   }
 }
 ```
+
+# Materials from previous dojos
+
+One of the participants came up with an implementation using an array
+instead of a map:
+
+```kotlin
+package locker.room.kotlin
+
+typealias Pin = String
+
+data class Locker(val pin: Pin = LockerMuur.nullPin) {
+  fun getState(): LockerState {
+    return if (this.pin === LockerMuur.nullPin) LockerState.UNLOCKED else LockerState.LOCKED
+  }
+
+  fun enterPin(input: Pin): Locker {
+    if (input === pin) {
+      return Locker()
+    }
+
+    return Locker(input)
+  }
+}
+
+class LockerMuur(val lockers: Array<Locker>) {
+  companion object {
+    val nullPin = "0000"
+
+    fun withCapacity(capacity: Int): LockerMuur {
+      return LockerMuur(Array<Locker>(capacity) { _ -> Locker() })
+    }
+  }
+
+  fun getState(lockerNr: Int): LockerState = getLocker(lockerNr).getState()
+
+  fun isLocked(lockerNr: Int): Boolean = getState(lockerNr) === LockerState.LOCKED
+
+  fun enterPin(lockerNr: Int, input: Pin): LockerMuur {
+    return withLocker(lockerNr, getLocker(lockerNr).enterPin(input))
+  }
+
+  private fun withLocker(lockerNr: Int, locker: Locker): LockerMuur {
+    val newLockers = Array<Locker>(lockers.size) { 
+      i -> if (i == lockerNr - 1) locker else lockers[i] 
+    }
+    return LockerMuur(newLockers)
+  }
+
+  private fun getLocker(lockerNr: Int): Locker {
+    return lockers[lockerNr - 1]
+  }
+}
+```
