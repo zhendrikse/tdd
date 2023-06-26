@@ -1,6 +1,7 @@
 { pkgs }: {
   deps = [
-		pkgs.nodePackages.prettier
+		pkgs.gradle_6
+  pkgs.nodePackages.prettier
     pkgs.vim
     pkgs.clojure
     pkgs.clojure-lsp

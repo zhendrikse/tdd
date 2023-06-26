@@ -171,9 +171,9 @@ by ``Choice.BEER``. Now all three tests are green again!
 Delivering a can should actually cost money! So asking for a can of coke
 should not deliver anything...
 
-```javascript
+```typescript
     it("delivers no can when choice requires money", () => {
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
+        expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.NOTHING);
     })
 ```
 
@@ -185,107 +185,109 @@ Again, we solve this by configuring the machine to deliver drinks that
 cost money, bij adding a parameter to the configure method that specifies
 the price in cents:
 
-```javascript
+```typescript
     it("delivers no can when choice requires money", () => {
-        vending_machine.configure(Choice.COKE, Can.COLA, 250);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
+        vendingMachine.configure(Choice.COLA, Can.COKE, 250);
+        expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.NOTHING);
     })
 ```
 
 We modify the production code accordingly to make the test pass:
 
-```javascript
-  configure(choice, can, priceInCents = 0) {
-    this.priceInCents = priceInCents
-    this.choiceCanMap.set(choice, can)
-  }
-  
-  deliver(choice) {
-    if (this.choiceCanMap.has(choice) && this.priceInCents == 0)
-      return this.choiceCanMap.get(choice)
+```typescript
+export class VendingMachine {
+    private choiceCanMap: Map<Choice, Can> = new Map<Choice, Can>()
+    private priceInCents: number = 0
 
-    return Can.NOTHING
-  }
+    public configure(choice: Choice, can: Can, priceInCents = 0): void {
+      this.choiceCanMap.set(choice, can)
+      this.priceInCents = priceInCents
+    }
+  
+    public deliver(choice: Choice): Can {
+      if (this.choiceCanMap.has(choice) && this.priceInCents == 0) 
+        return this.choiceCanMap.get(choice) as Can
+
+      return Can.NOTHING        
+    }
+}
 ```
 
 When we enter the required amount of money, we should get our
 can of choice again
 
-```javascript
+```typescript
     it("delivers can of choice when required money is inserted", () => {
-        vending_machine.insert(250);
-        vending_machine.configure(Choice.COKE, Can.COLA, 250);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+        vendingMachine.insert(250);
+        vendingMachine.configure(Choice.COLA, Can.COKE, 250);
+        expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.COKE);
     })
 ```
 
 This forces us to modify the implementation like so
 
-```javascript
-  constructor() {
-    this.choiceCanMap = new Map()
-    this.priceInCents = 0
-    this.balanceInCents = 0
-  }
-  
-  configure(choice, can, priceInCents = 0) {
-    this.priceInCents = priceInCents
-    this.choiceCanMap.set(choice, can)
-  }
+```typescript
+    private balanceInCents: number = 0
 
-  insert(priceInCents) {
-    this.balanceInCents = priceInCents
-  }
+    // ...
+    
+    public insert(amountInCents: number): void  {
+      this.balanceInCents = amountInCents
+    }
   
-  deliver(choice) {
-    if (this.choiceCanMap.has(choice) && this.priceInCents == this.balanceInCents)
-      return this.choiceCanMap.get(choice)
+    public deliver(choice: Choice): Can {
+      if (this.choiceCanMap.has(choice) && this.priceInCents == this.balanceInCents) 
+        return this.choiceCanMap.get(choice) as Can
+
+      return Can.NOTHING        
+    }
 ```
 
 Again, we observe duplication in the specification file, which leads
 to a nesting of the ``describe`` statements
 
-```javascript
-    describe("that requires drinks to be paid", () =>  {
-  
-      beforeEach(function () {
-          vending_machine = new VendingMachine()
-          vending_machine.configure(Choice.COKE, Can.COLA, 250);
-      })
-      
-      it("delivers no can when choice requires money", () => {
-          expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
-      })
-        
-      it("delivers can of choice when required amount is inserted", () => {
-          vending_machine.insert(250);
-          expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
-      })
+```typescript
+  describe("that requires drinks to be paid", () => {
+    beforeEach(() =>{
+      vendingMachine = new VendingMachine();
+      vendingMachine.configure(Choice.COLA, Can.COKE, 250);
+    })
+    
+    it("delivers no can when choice requires money", () => {
+        expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.NOTHING);
+    })
+    
+    it("delivers can of choice when required money is inserted", () => {
+        vendingMachine.insert(250);
+        expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.COKE);
+    })
+  })
 ```
 
 Of course, the equality sign doesn't make sense, as we also 
 expect a can of choice when we pay too much
 
-```javascript
+```typescript
     it("delivers can of choice when more than required amount is inserted", () => {
-        vending_machine.insert(300);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.COLA);
+        vendingMachine.insert(300);
+        expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.COKE);
     })
 ```
 This test only requires a minor modification in the production code
 
-```javascript
+```typescript
   deliver(choice) {
-    if (this.choiceCanMap.has(choice) && this.priceInCents <= this.balanceInCents)
+      if (this.choiceCanMap.has(choice) && this.priceInCents <= this.balanceInCents) 
+        return this.choiceCanMap.get(choice) as Can
 ```
 
 Obviously, we also must accommodate for different prices for the different drinks:
 
-```javascript
+```typescript
     it("delivers can of Fanta when required amount is inserted", () => {
-        vending_machine.insert(300);
-        vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 300);
-        expect(vending_machine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA);
+        vendingMachine.insert(300);
+        vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 300);
+        expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).to.equal(Can.FANTA);
     })
 ```
 
@@ -296,14 +298,42 @@ the ``beforeEach()`` step, the test fails!
 So now we need to introduce yet another map, namely a map between choices
 and prices.
 
+```typescript
+export class VendingMachine {
+    private choiceCanMap: Map<Choice, Can> = new Map<Choice, Can>()
+    private choicePriceMap: Map<Choice, number> = new Map<Choice, number>()
+    private balanceInCents: number = 0
+
+    public configure(choice: Choice, can: Can, priceInCents = 0): void {
+      this.choiceCanMap.set(choice, can)
+      this.choicePriceMap.set(choice, priceInCents)
+    }
+
+    public insert(amountInCents: number): void  {
+      this.balanceInCents = amountInCents
+    }
+  
+    public deliver(choice: Choice): Can {
+      if (!this.choiceCanMap.has(choice))
+          return Can.NOTHING
+
+      let price = this.choicePriceMap.get(choice) as number
+      if (price <= this.balanceInCents) 
+        return this.choiceCanMap.get(choice) as Can
+
+      return Can.NOTHING        
+    }
+}
+```
+
 Finaly, we expect no more cans after a can has been withdrawn, as our
 balance should have shrunk
 
-```javascript
+```typescript
     it("delivers no can after a can has been delivered", () => {
-        vending_machine.insert(250);
-        vending_machine.deliver(Choice.COKE);
-        expect(vending_machine.deliver(Choice.COKE)).to.equal(Can.NOTHING);
+        vendingMachine.insert(250);
+        vendingMachine.deliver(Choice.COLA);
+        expect(vendingMachine.deliver(Choice.COLA)).to.equal(Can.NOTHING);
     })
 ```
 
@@ -311,15 +341,18 @@ So after withdrawal of a drink, the balance should be adjusted
 accordingly. After some minor refactoring of the deliver method
 we arrive at
 
-```javascript
-  deliver(choice) {
-    var price = this.choicePriceMap.get(choice)
-    if (!this.choiceCanMap.has(choice) || price > this.balanceInCents) 
-      return Can.NOTHING
+```typescript
+    public deliver(choice: Choice): Can {
+      if (!this.choiceCanMap.has(choice))
+          return Can.NOTHING
 
-    this.balanceInCents -= price
-    return this.choiceCanMap.get(choice)
-  }
+      let price = this.choicePriceMap.get(choice) as number
+      if (price > this.balanceInCents) 
+        return Can.NOTHING        
+
+      this.balanceInCents -= price
+      return this.choiceCanMap.get(choice) as Can
+    }
 ```
 
 # Code smells
@@ -329,12 +362,9 @@ we arrive at
 It now becomes clear that the ``choiceCanMap`` and ``choicePriceMap`` always
 appear together, so let's assign them their own (data) class ``Drawer``
 
-```javascript
+```typescript
 class Drawer {
-  constructor(can, priceInCents) {
-    this.can = can
-    this.priceInCents = priceInCents
-  }
+  constructor(public can: Can, public priceInCents: number) {}
 }
 ```
 
@@ -344,8 +374,8 @@ However, this immediately leads to another code smell, namely
 
 As a first step, we can move the delivery logic into the ``Drawer`` class
 
-```javascript
-  getCan(vendingMachine) {
+```typescript
+  public getCan(vendingMachine: VendingMachine) {
     if (this.priceInCents > vendingMachine.balanceInCents)
       return Can.NOTHING
     
@@ -356,14 +386,14 @@ As a first step, we can move the delivery logic into the ``Drawer`` class
 
 with which the ``VendingMachine`` simplifies to
 
-```javascript
-  deliver(choice) {
-    if (!this.choiceDrawerMap.has(choice))
-      return Can.NOTHING
+```typescript
+    public deliver(choice: Choice): Can {
+      if (!this.choiceDrawerMap.has(choice))
+          return Can.NOTHING
 
-    var drawer = this.choiceDrawerMap.get(choice)
-    return drawer.getCan(this)
-  }
+      let drawer = this.choiceDrawerMap.get(choice) as Drawer
+      return drawer.getCan(this)
+    }
 ```
 
 Note that we have now introduced a new code smell, namely
@@ -375,21 +405,19 @@ of dealing with the transaction(s). To do so in small steps, we
 first wrap the balance in the new class ``Cashier``, and gradually
 move the logic that goes with it as well.
 
-```javascript
+```typescript
 class Cashier {
-  constructor() {
-    this.balanceInCents = 0
-  }  
+  constructor(private balanceInCents: number) {}  
 
-  insert(amountInCents) {
+  public insert(amountInCents: number) {
     this.balanceInCents += amountInCents
   }
 
-  doesBalanceAllow(priceInCents) {
+  public doesBalanceAllow(priceInCents: number) {
     return this.balanceInCents >= priceInCents
   }
 
-  buy(amountInCents) {
+  public buy(amountInCents: number) {
     this.balanceInCents -= amountInCents
   }
 }
@@ -398,12 +426,9 @@ class Cashier {
 This means that the ``Drawer`` class is no longer dependent on the
 ``VendingMachine`` class, but on the ``Cashier`` instead
 
-```javascript
+```typescript
 class Drawer {
-  constructor(can, priceInCents) {
-    this.can = can
-    this.priceInCents = priceInCents
-  }
+  // ...
 
   deliver(cashier) {
     if (!cashier.doesBalanceAllow(this.priceInCents))
@@ -412,5 +437,42 @@ class Drawer {
     cashier.buy(this.priceInCents)
     return this.can    
   }
+}
+```
+
+with which the code simplifies to
+
+```typescript
+class Drawer {
+  constructor(public can: Can, public priceInCents: number) {}
+
+  deliver(cashier: Cashier) {
+    if (!cashier.doesBalanceAllow(this.priceInCents))
+      return Can.NOTHING
+    
+    cashier.buy(this.priceInCents)
+    return this.can    
+  }
+}
+
+export class VendingMachine {
+    private choiceDrawerMap: Map<Choice, Drawer> = new Map<Choice, Drawer>()
+    private cashier: Cashier = new Cashier()
+
+    public configure(choice: Choice, can: Can, priceInCents = 0): void {
+      this.choiceDrawerMap.set(choice, new Drawer(can, priceInCents))
+    }
+
+    public insert(amountInCents: number): void  {
+      this.cashier.insert(amountInCents)
+    }
+  
+    public deliver(choice: Choice): Can {
+      if (!this.choiceDrawerMap.has(choice))
+          return Can.NOTHING
+
+      let drawer = this.choiceDrawerMap.get(choice) as Drawer
+      return drawer.deliver(this.cashier)
+    }
 }
 ```
