@@ -9,7 +9,7 @@ with description({{ cookiecutter.kata }}) as self:
       expect(True).to(be_false)
 {% endif %} {% if cookiecutter.rspec_syntax == "n" %}
 import pytest
-from src.{{ cookiecutter.kata }} import {{ cookiecutter.kata }}
+from {{ cookiecutter.kata }} import {{ cookiecutter.kata }}
 
 class Test{{ cookiecutter.kata }}:
 

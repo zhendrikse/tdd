@@ -1,4 +1,3 @@
-- [ ] Modify instructions.md vending-machine-typescript from javascript -> typescript
 - [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make Python cookiecutter work for pip and poetry
 - [+] Make Python cookiecutter work for ptw and coverage
@@ -23,3 +22,4 @@
 - [X] Gebruik PYTHONPATH om modules zonder src. aan te duiden
 - [X] Create solution for video store kata Python
 - [X] Make Kotlin cookiecutter
+- [X] Modify instructions.md vending-machine-typescript from javascript -> typescript
