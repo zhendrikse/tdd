@@ -6,14 +6,14 @@ My name is [Zeger Hendrikse](https://www.linkedin.com/in/zegerhendrikse/). I am 
 
 This means my heroes are [Dave Farley](https://www.davefarley.net/), [Robert C. Martin](http://blog.cleancoder.com/) (aka Uncle Bob), [Martin Fowler](https://martinfowler.com/), [Kent Beck](https://www.kentbeck.com/)... just to name a few.
 
-As I am a huge fan of [Replit](https://replt.com), I decided to share one of my passions with all of you here: TDD (test driven development)!
+I decided to share one of my passions with all of you here: TDD (test driven development)!
 
 ### Contact
 
 Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ **gmail** _&lt;dot&gt;_ **com** for e.g.:
 - Feedback and suggestions
-- Offering this course in other languages than Python
-- Facilitating this course and/or [coding dojos](https://codingdojo.org/WhatIsCodingDojo/), where apprentices can practice [katas](http://codekata.com/) together (with me as sensei 😉).
+- Offering any of the katas in other languages than offered here
+- Facilitating a course and/or [coding dojos](https://codingdojo.org/WhatIsCodingDojo/), where apprentices can practice [katas](http://codekata.com/) together (with me as sensei 😉).
 
 
 # About coding katas
