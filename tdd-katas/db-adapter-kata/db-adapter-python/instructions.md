@@ -1,37 +1,40 @@
-# How to deal with external systems
+# Introduction
 
-In this module we are going to build a very basic REST API that fetches employee data from a database and stores these data into a database.
+Please read the general [introduction to the DB adapter kata](../README.md) first!
 
-![REST API](./assets/RestAPI.draw)
-<p align="center" ><b>Figure 1</b>: <i>A schematic representation of the application that we are going to build.</i></p>
+# Getting started
 
-Note that the above lay-out can be seen as a simplification of the aforementioned hexagonal architecture:
+Carry out the following steps in order:
 
-![Hexagonal architecture](./assets/hex_arch.draw)
-<p align="center" ><b>Figure 2</b>: <i>A schematic representation of the hexagonal architecture.</i></p>
-
-As the domain logic will (almost) be absent in this kata, this implies we can simplify the picture of the hexagonal architecture as shown in the first picture. Note that normally this will almost never be the case, but the purpose of this exercise is to learn how to implement an adapter, not (even some simple form of) a [domain model](https://matfrs2.github.io/RS2/predavanja/literatura/Avram%20A,%20Marinescu%20F.%20-%20Domain%20Driven%20Design%20Quickly.pdf). 
-
-So summarizing, we are going to focus on how to deal with test doubles and external systems, in this case a database. 
-
-# The kata
-
-In this kata, we are going to implement the following endpoints:
-
-![Endpoints](./assets/endpoints.png)
-<p align="center" ><b>Figure 3</b>: <i>The endpoints that we are going to realize in this lesson.</i></p>
-
-## Getting acquainted
+1. Create an intial Python kata set-up as described
+   [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+   Choose 'y' when prompted for the rSpec syntax but enter 'n' for
+   the code coverage.
+2. Remove the `.py` files in the `src` and `test` directories, but leave the
+   `__init__.py` files untouched!
+4. Copy the `employee.py`, `endpoint.py`, and `main.py` files into the `src` directory 
+5. Copy the `endpoint_spec.py` file into the `test` directory
+6. Replace the `pyproject.toml` file in the cookier cutter generated project by
+   the `pyproject.toml` in this directory. 
+7. Invoke
+   ```
+   $ poetry install
+   $ ./run_tests.sh
+   ``` 
 
 ### Running the tests
-First make sure you can execute the provided scenario for the ping endpoint. The project is configured in such a way, that by pressing the "Run" button, the unit tests are executed.
+First make sure you can execute the provided scenario/test for the ping endpoint:
+
+```bash
+$ ./run_tests.sh
+```
 
 ### Running the application
 Second, make sure the application itself can also be started by going to the shell tab and execute the following two commands:
 
 ```bash
 $ cd src
-$ python main.py
+$ poetry run python main.py
 ```
 
 To further test the application in the remainder of this kata, first push on the pop-out button in the top-right corner of the browser pane that got visible after running the above commands. After that, you can append `/docs` in the URL-bar to the existing URL, which then takes you to the (executable) API docs (based on [Swagger OpenAPI docs](https://swagger.io/specification/)).

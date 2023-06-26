@@ -9,11 +9,11 @@ Carry out the following steps in order:
 1. Create an intial Python kata set-up as described
    [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
    Choose 'n' when prompted for the rSpec syntax and as well as the code coverage.
-3. Remove the `.py` files in the `src` and `test` directories, but leave the
+2. Remove the `.py` files in the `src` and `test` directories, but leave the
    `__init__.py` files untouched!
-4. Copy the `alarm.py` and `sensor.py` files into the `src` directory 
-5. Copy the `alarm_test.py` file into the `test` directory
-6. Invoke
+3. Copy the `alarm.py` and `sensor.py` files into the `src` directory 
+4. Copy the `alarm_test.py` file into the `test` directory
+5. Invoke
    ```
    $ poetry install
    $ ./run_tests.sh
