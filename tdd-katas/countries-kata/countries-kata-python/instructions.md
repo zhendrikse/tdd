@@ -48,7 +48,7 @@ with open('countries.csv', 'w', encoding='UTF8', newline='') as f:
     writer.writerows(data)
 ```
 
-Bearing this in mind, tt makes sense to define a `CountriesRestRepository` 
+Bearing this in mind, it makes sense to define a `CountriesRestRepository` 
 that retrieves a list of all countries from the countries API. It will be
 the responsibility of this repository to hand us a list of countries with
 the required data fields.

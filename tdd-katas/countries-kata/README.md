@@ -28,3 +28,10 @@ The goal is not to get this done as quickly as possible, but to follow the rules
 - For each external system there is an adapter that converts the API definition to the format 
   needed by that system and vice versa
 
+## Possible extensions
+
+- Add a possibility to update a reference table in a database with these
+  country data. Optionally according to a certain time schedule, e.g. weekly.
+- Add a possibility to filter, e.g. only export those countries to CSV that
+  are a UN member, or only export those countries that have more than 10 million
+  inhabitants.
