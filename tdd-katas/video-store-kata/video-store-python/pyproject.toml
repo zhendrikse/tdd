@@ -8,6 +8,7 @@ authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 python = ">=3.10.0,<3.11"
 pytest = "^7.3.2"
 coverage = "^7.2.7"
+pytest-watch = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 
