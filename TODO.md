@@ -1,5 +1,6 @@
 - [ ] Add option to Javascript cookiecutter to make in browser version
-- [ ] Make Python cookiecutter work for pip and poetry
+- [ ] Make DB adapter kata work with other than ReplitDB
+- [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [+] Make Python cookiecutter work for ptw and coverage
 - [ ] Make Python cookiecutter work for ptw and mamba
 - [+] Create instruction for bugs zero kata Python
@@ -9,7 +10,6 @@
 - [ ] Extend poker hands Python met Deck, shuffle and hands
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
   - [ ] graphic with replit example
-- [ ] Allow for hamcrest assertions when using pytest
 - [ ] Sudoku kata Clojure readme is een Python readme
 - [ ] Maak sudoku kata Clojure af
 - [ ] Sudoku characterization tests alleen in Java?
@@ -23,3 +23,4 @@
 - [X] Create solution for video store kata Python
 - [X] Make Kotlin cookiecutter
 - [X] Modify instructions.md vending-machine-typescript from javascript -> typescript
+- [X] Allow for hamcrest assertions when using pytest
