@@ -1,5 +1,7 @@
 - [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make DB adapter kata work with other than ReplitDB
+- [ ] Monkey patching in tire pressure kata
+- [ ] Create solution for countries kata
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [+] Make Python cookiecutter work for ptw and coverage
 - [ ] Make Python cookiecutter work for ptw and mamba

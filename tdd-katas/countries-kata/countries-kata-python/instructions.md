@@ -25,3 +25,40 @@ Carry out the following steps in order:
 ```bash
 $ ./run_tests.sh
 ```
+
+# Implementation
+
+## Design considerations
+
+We can use a nested array [to create a CSV file](https://www.pythontutorial.net/python-basics/python-write-csv-file/):
+
+```python
+import csv
+
+header = ['name', 'capital', 'region', 'subregion', 'population', 'cca3', 'cca2', 'ccn3', 'unMember']
+data = [
+    ['Jordan', 'Amman', 'Asia', 'Western Asia', '10203140', 'JOR', 'JO', '400', 'true' 
+],
+    #  ...
+]
+
+with open('countries.csv', 'w', encoding='UTF8', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+    writer.writerows(data)
+```
+
+Bearing this in mind, tt makes sense to define a `CountriesRestRepository` 
+that retrieves a list of all countries from the countries API. It will be
+the responsibility of this repository to hand us a list of countries with
+the required data fields.
+
+To make the dependency inversion principle explicit, we could opt for an
+additional `CountriesRepository` interface, that belongs to our domain. 
+This way, our domain really dictates the outside world what it wants 
+to receive.
+
+Analogously, we can also define a `CsvWriter` that receives this list of 
+countries, converts it into a nested array of data fields, and feeds it
+to the Python `csv.writer()`.
+
