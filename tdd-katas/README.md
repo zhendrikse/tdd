@@ -5,7 +5,8 @@
 | -------------------- | ------------- | --------------------------------------------- |
 | `bugs-zero-kata`     | Medium / high | Legacy code / refactoring / bugs              |
 | `christmas-tree`     | Medium        | Implement an algorithm in small steps         |
-| `db-adapter-kata`    | Medium        | Ports &amp; adapters / hexagonal architecture |
+| `countries-kata`     | Low / medium  | Ports &amp; adapters / REST / hexagonal arch  |
+| `db-adapter-kata`    | Medium        | Ports &amp; adapters / DB / hexagonal arch    |
 | `game-of-life`       | High          | Generic TDD skills                            |
 | `gilded-rose`        | High          | Legacy code / refactoring / approval tests    |
 | `greed-kata`         | Medium        | Implement complex rules                       |

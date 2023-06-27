@@ -13,7 +13,7 @@ Carry out the following steps in order:
 2. Remove the `.py` files in the `src` and `test` directories, but leave the
    `__init__.py` files untouched!
 4. Copy the `employee.py`, `endpoint.py`, and `main.py` files into the `src` directory 
-5. Copy the `endpoint_spec.py` file into the `test` directory
+5. Copy the `endpoint_test.py` file into the `test` directory
 6. Replace the `pyproject.toml` file in the cookier cutter generated project by
    the `pyproject.toml` in this directory. 
 7. Invoke
