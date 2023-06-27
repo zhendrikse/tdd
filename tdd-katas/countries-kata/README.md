@@ -1,14 +1,25 @@
 # Introduction
 
 This is a kata on ports and adapters architecture. 
-The task is to retrieve a list of 
-[name, capital, population, cioc, and region information](https://restcountries.com/v3.1/all?fields=name,capital,population,cioc,region) from the [REST countries API](https://restcountries.com/) and output the result into a CSV file of the following format:
+The task is to retrieve a list with
+[country information](https://restcountries.com/v3.1/all?fields=name,capital,population,cioc,region) from the [REST countries API](https://restcountries.com/) and output the result into a CSV file of the following format:
 
-name, capital, population, cioc, region
+```
+name, capital, region, subregion, population, cca3, cca2, ccn3, unMember
+```
 
-where the cioc field represents the [three-letter country code](https://en.wikipedia.org/wiki/List_of_IOC_country_codes).
+for example
 
-Optionally you may want to add a header field to the generated CSV file.
+```
+Jordan, Amman, Asia, Western Asia, 10203140, JOR, JO, 400, true 
+```
+
+Optionally you may want to add the header field to the generated CSV file.
+
+```
+name, capital, region, subregion, population, cca3, cca2, ccn3, unMember
+Jordan, Amman, Asia, Western Asia, 10203140, JOR, JO, 400, true 
+```
 
 The goal is not to get this done as quickly as possible, but to follow the rules of ports and adapters architecture:
 
