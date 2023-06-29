@@ -11,20 +11,33 @@ Carry out the following steps in order:
    Choose 'n' when prompted for the rSpec syntax. The code coverage is optional.
 2. Remove the `.py` files in the `src` and `test` directories, but leave the
    `__init__.py` files untouched!
-4. Copy the `country.py` file into the `src` directory 
-5. Copy the `countries_test.py` file into the `test` directory
-6. Run the test and veriffy all assertions are still valid: 
-   it is testing the real API after all, which may have changed!
+
+   Depending on whether you would like to start this kata as a
+   refactoring exercise or start it more or less from scratch:
+
+   **Refactoring scenario**:
+
+   - Copy the `main.py` file into the `src` directory
+
+   **Greenfield scenario**:
+
+   - Copy the `country.py` file into the `src` directory
+   - Copy the `countries_test.py` file into the `test` directory
+3. Install dependencies
    ```
    $ poetry install
-   $ ./run_tests.sh
    ``` 
+4. Depending on the approach chosen
 
-## Running the tests
+   **Refactoring scenario**:
 
-```bash
-$ ./run_tests.sh
-```
+   - Run `$ python main.py` to run the program and generate a CSV file.
+
+   **Greenfield scenario**:
+
+   - Run `$ ./run_tests.sh` to run the test and veriffy that all
+     assertions are still valid: we are testing a real production API,
+     which may well have changed by the time you are reading this!
 
 # Implementation
 
@@ -37,8 +50,9 @@ import csv
 
 header = ['name', 'capital', 'region', 'subregion', 'population', 'cca3', 'cca2', 'ccn3', 'unMember']
 data = [
-    ['Jordan', 'Amman', 'Asia', 'Western Asia', '10203140', 'JOR', 'JO', '400', 'true' 
+    ['Jordan', 'Amman', 'Asia', 'Western Asia', 10203140, 'JOR', 'JO', 400, true 
 ],
+    ['Northern Mariana Islands', 'Saipan' , 'Oceania', 'Micronesia', 57557, 'MNP', 'MP', 580, False],
     #  ...
 ]
 

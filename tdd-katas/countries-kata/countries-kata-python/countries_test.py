@@ -1,4 +1,3 @@
- 
 import pytest
 from hamcrest import *
 from country import Country
