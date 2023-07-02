@@ -1,6 +1,6 @@
 # TTD materials
 
-Test-driven development is a lot of fun, and a
+Test-driven development is a lot of fun and a
 great form of "deliberate practice". You have arrived at the right
 place, you'll find here everything to get you up and running!
 
@@ -13,20 +13,20 @@ This repository contains materials to practice TDD
 - **`kata-solutions/`** &rarr; solutions for almost all katas 
 - **`presentations/`** &rarr; [reveal-md](https://github.com/webpro/reveal-md) presentations
 - **`tdd-katas/`** &rarr; TDD katas
-  - **`README.md`** outlining which aspects are addressed in which katas
+  - **`README.md`** &rarr; outlining which aspects are addressed in which katas
   - **`a-kata-name/`** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both introduction and detailed instructions
-- **`tools/`** &rarr; playgrounds for getting aquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
+- **`tools/`** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
 
 All materials are ready to be used in the Cloud, e.g. on [replit.com](https://replit.com) or [gitpod.io](https://gitpod.io)
 
 # About coding katas
 
-> Japanese culture influenced a lot software and project management fields. 
+> Japanese culture influenced a lot of software and project management fields. 
 > Concepts like [Lean](https://apiumhub.com/?p=55302), [Kata](https://apiumhub.com/?p=4044), etc 
 > has come from Japan. And we should admit, that they have improved the existing processes, 
 > increasing efficiency and satisfaction overall &#8212; [apiumhub.com](https://apiumhub.com/tech-blog-barcelona/code-kata/)
 
-With the materials in this repository you'll learn TDD by practicing 
+With the materials in this repository, you'll learn TDD by practicing 
 so-called [coding katas](https://apiumhub.com/tech-blog-barcelona/code-kata/):
 
 ![Kata](./assets/kata.png)
@@ -52,15 +52,15 @@ further improve your code and your skill(s). Likewise with TDD, your TDD journey
 definitely won't stop after completing this course. There are always new ways to 
 become more proficient and faster. Luckily, it turns out that mastery 
 (from [Daniel Pink's Autonomy Mastery Purpose](https://www.youtube.com/watch?v=u6XAPnuFjJc)) 
-is one of the three primary drivers that keeps us motivated. Moreover, the pay-off of
+is one of the three primary drivers that keep us motivated. Moreover, the payoff of
 mastering TDD is much higher than the investments that you'll put in. 
 
 After spending a certain time with TDD, people claim that there is no 
-other way to develop a software. It is almost a learning to type with ten 
+other way to develop software. It is almost a learning to type with ten 
 fingers: once you master the skill, you wonder how you ever managed without it.
 
 The primary focus of all katas in this repository will be on TDD, but 
-obviously many other programming ascpects will be practiced along the way! 
+obviously, many other programming aspects will be practiced along the way! 
 Among these are [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)), 
 [single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle), 
 [clean architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), 
@@ -73,10 +73,10 @@ Among these are [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(com
 
 ![Skills](./assets/skillz.png)
 
-By practising these katas, you will:
+By practicing these katas, you will:
 
-- be confident to apply both TDD and BDD (behaviour driven development) in day-to-day work by writing executable specifications as opposed to unit tests that are tightly coupled to implementation.
-- know how to explain why TDD and BDD are such a pivotal skills to have as a software engineer
+- be confident to apply both TDD and BDD (behavior-driven development) in day-to-day work by writing executable specifications as opposed to unit tests that are tightly coupled to implementation.
+- know how to explain why TDD and BDD are such pivotal skills to have as a software engineer
 - be able to confidently refactor any piece of code (as you will always have 100% coverage), and you will be able to do so in extremely small increments.
 - be able to not only refactor but also extend/modify legacy code that initially did not have any unit tests at all!
 - know how to cope with external dependencies to the system under test by applying the [adapter pattern](https://refactoring.guru/design-patterns/adapter)
@@ -90,18 +90,19 @@ By practising these katas, you will:
 
 ### What general programming skills are required?
 
-These katas are intended for people who want to learn TDD. Some basic programming experience is required, such as knowning what a `class` is, what an `object` is, what a `primitive` is, what `exception handling` entails, and how to write `conditionals` and `loops`. 
+These katas are intended for people who want to learn TDD. Some basic programming experience is required, such as knowing what a `class` is, what an `object` is, what a `primitive` is, what `exception handling` entails, and how to write `conditionals` and `loops`. 
 
-Although not scritly required, it will also definitely help if you are already familiar with concepts such as [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) and the [single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).
+Although not strictly required, it will also definitely help if you are already familiar with concepts such as [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) and the [single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).
 
 ---
 
 ### Is there a preferred programming language?
 
-No, there isn't. There are cookie cutter templates for many languages available,
-but even if there isn't any for your favourite programming language, you can still
+No, there isn't. There are cookie-cutter templates for many languages available,
+but even if there aren't any for your favorite programming language, you can still
 do many of the katas. Moreover, the programming language is kind of irrelevant for
-practising the various aspects that are being addressed. I have facilitated many [coding dojos](https://codingdojo.org/WhatIsCodingDojo/) where multiple participants were exposed to 
+practicing the various aspects that are being addressed. I have facilitated 
+many [coding dojos](https://codingdojo.org/WhatIsCodingDojo/) where multiple participants were exposed to 
 e.g. Python for the first time, and they managed pretty soon pretty well.
 
 ---
@@ -115,7 +116,7 @@ My name is [Zeger Hendrikse](https://www.linkedin.com/in/zegerhendrikse/). I am 
 
 This means my heroes are [Dave Farley](https://www.davefarley.net/), [Robert C. Martin](http://blog.cleancoder.com/) (aka Uncle Bob), [Martin Fowler](https://martinfowler.com/), [Kent Beck](https://www.kentbeck.com/)... just to name a few.
 
-I decided to share one of my passions with all of you here: TDD (test driven development)!
+I decided to share one of my passions with all of you here: TDD (test-driven development)!
 
 ### Contact
 
