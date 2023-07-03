@@ -23,7 +23,11 @@ The difficulty is ranked as low, medium, and high.
 | 17 | `vending-machine`    | M          | Generic TDD skills / Code smells and refactoring    |
 | 18 | `video-store-kata`   | M          | Legacy code / Refactoring / Code smells             |
 
-# Relation with [24 Key Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/)
+# Relation with 24 Key Capabilities
+
+The relation to the 
+[24 Key Capabilities to Drive Improvement in Software Delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/)
+is outlined next.
 
 ## [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
 
