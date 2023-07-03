@@ -2,26 +2,26 @@
 
 The difficulty is ranked as low, medium, and high.
 
-| ID | Kata                 | Difficulty | Aspects                                             |
-| -- | -------------------- | ---------- | --------------------------------------------------- |
-|  1 | `bugs-zero-kata`     | M &harr; H | Legacy code / refactoring / bugs                    |
-|  2 | `christmas-tree`     | M          | Implement an algorithm in small steps               |
-|  3 | `countries-kata`     | L &harr; M | Ports &amp; adapters / REST / Ports &amp; adapters  |
-|  4 | `db-adapter-kata`    | M          | Ports &amp; adapters / DB / Ports &amp; adapters    |
-|  5 | `game-of-life`       | H          | Generic TDD skills                                  |
-|  6 | `gilded-rose`        | H          | Legacy code / refactoring / approval tests          |
-|  7 | `greed-kata`         | M          | Implement complex rules                             |
-|  8 | `locker-room-kata`   | M &harr; H | Stateless / functional programming                  |
-|  9 | `manhattan-distance` | L &harr; M | 1, 2, N / encapsulation                             |
-| 10 | `mars-rover`         | M &harr; H | Generic TDD / Design decisions                      |
-| 11 | `poker-hands-kata`   | H          | Outside-in / Mocks / Design decisions               |
-| 12 | `stack-kata`         | L          | Getting started with TDD                            |
-| 13 | `sudoku-kata`        | M &harr; H | Recursion &amp; TDD / Backtracking algorithms       |
-| 14 | `task-list-kata`     | M &harr; H | Command-Query / Strong typing / Realistic app       |
-| 15 | `tell-dont-ask`      | M &harr; H | Refactoring / Anemic domain model / DDD             |
-| 16 | `tire-pressure-kata` | L          | Ports &amp; adapters / Testability                  |
-| 17 | `vending-machine`    | M          | Generic TDD skills / Code smells and refactoring    |
-| 18 | `video-store-kata`   | M          | Legacy code / Refactoring / Code smells             |
+| ID | Kata                                       | Difficulty | Aspects                                             |
+| -- | ------------------------------------------ | ---------- | --------------------------------------------------- |
+|  1 | [bugs-zero-kata](./bugs-zero-kata)         | M &harr; H | Legacy code / refactoring / bugs                    |
+|  2 | [christmas-tree](./christmas-tree)         | M          | Implement an algorithm in small steps               |
+|  3 | [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / REST / Ports &amp; adapters  |
+|  4 | [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / DB / Ports &amp; adapters    |
+|  5 | [game-of-life](./game-of-life)             | H          | Generic TDD skills                                  |
+|  6 | [gilded-rose-kata](./gilded-rose-kata)     | H          | Legacy code / refactoring / approval tests          |
+|  7 | [greed-kata](./greed-kata)                 | M          | Implement complex rules                             |
+|  8 | [locker-room-kata](./locker-room-kata)     | M &harr; H | Stateless / functional programming                  |
+|  9 | [manhattan-distance](./manhattan-distance) | L &harr; M | 1, 2, N / encapsulation                             |
+| 10 | [mars-rover](./mars-rover)                 | M &harr; H | Generic TDD / Design decisions                      |
+| 11 | [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions               |
+| 12 | [stack-kata](./stack-kata)                 | L          | Getting started with TDD                            |
+| 13 | [sudoku-kata](./sudoku-kata)               | M &harr; H | Recursion &amp; TDD / Backtracking algorithms       |
+| 14 | [task-list-kata](./task-list-kata)         | M &harr; H | Command-Query / Strong typing / Realistic app       |
+| 15 | [tell-dont-ask](./tell-dont-ask)           | M &harr; H | Refactoring / Anemic domain model / DDD             |
+| 16 | [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / Testability                  |
+| 17 | [vending-machine](./vending-machine)       | M          | Generic TDD skills / Code smells and refactoring    |
+| 18 | [video-store-kata](./video-store-kata)     | M          | Legacy code / Refactoring / Code smells             |
 
 # Relation with 24 Key Capabilities
 
