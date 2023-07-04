@@ -7,21 +7,22 @@ The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 |  1. [bugs-zero-kata](./bugs-zero-kata)         | M &harr; H | Legacy code / refactoring / bugs                 |
 |  2. [christmas-tree](./christmas-tree)         | M          | Implement an algorithm in small steps            |
 |  3. [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / REST / Refactoring / DI   |
-|  4. [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI             |
-|  5. [game-of-life](./game-of-life)             | H          | Generic TDD skills                               |
-|  6. [gilded-rose-kata](./gilded-rose-kata)     | H          | Legacy code / refactoring / approval tests       |
-|  7. [greed-kata](./greed-kata)                 | M          | Implement complex rules                          |
-|  8. [locker-room-kata](./locker-room-kata)     | M &harr; H | Stateless / functional programming               |
-|  9. [manhattan-distance](./manhattan-distance) | L &harr; M | 1, 2, N / encapsulation                          |
-| 10. [mars-rover](./mars-rover)                 | M &harr; H | Generic TDD / Design decisions                   |
-| 11. [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions            |
-| 12. [stack-kata](./stack-kata)                 | L          | Getting started with TDD                         |
-| 13. [sudoku-kata](./sudoku-kata)               | M &harr; H | Recursion &amp; TDD / Backtracking algorithms    |
-| 14. [task-list-kata](./task-list-kata)         | M &harr; H | Command-Query / Strong typing / Realistic app    |
-| 15. [tell-dont-ask](./tell-dont-ask)           | M &harr; H | Refactoring / Anemic domain model / DDD          |
-| 16. [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / Testability / DI          |
-| 17. [vending-machine](./vending-machine)       | M          | Generic TDD skills / Code smells and refactoring |
-| 18. [video-store-kata](./video-store-kata)     | M          | Legacy code / Refactoring / Code smells          |
+|  4. [cqrs-booking](./cqrs-booking)             | H          | CQRS                                             |
+|  5. [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI             |
+|  6. [game-of-life](./game-of-life)             | H          | Generic TDD skills                               |
+|  7. [gilded-rose-kata](./gilded-rose-kata)     | H          | Legacy code / refactoring / approval tests       |
+|  8. [greed-kata](./greed-kata)                 | M          | Implement complex rules                          |
+|  9. [locker-room-kata](./locker-room-kata)     | M &harr; H | Stateless / functional programming               |
+| 10. [manhattan-distance](./manhattan-distance) | L &harr; M | 1, 2, N / encapsulation                          |
+| 11. [mars-rover](./mars-rover)                 | M &harr; H | Generic TDD / Design decisions                   |
+| 12. [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions            |
+| 13. [stack-kata](./stack-kata)                 | L          | Getting started with TDD                         |
+| 14. [sudoku-kata](./sudoku-kata)               | M &harr; H | Recursion &amp; TDD / Backtracking algorithms    |
+| 15. [task-list-kata](./task-list-kata)         | M &harr; H | Command-Query / Strong typing / Realistic app    |
+| 16. [tell-dont-ask](./tell-dont-ask)           | M &harr; H | Refactoring / Anemic domain model / DDD          |
+| 17. [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / Testability / DI          |
+| 18. [vending-machine](./vending-machine)       | M          | Generic TDD skills / Code smells and refactoring |
+| 19. [video-store-kata](./video-store-kata)     | M          | Legacy code / Refactoring / Code smells          |
 
 # Relation with 24 Key Capabilities
 

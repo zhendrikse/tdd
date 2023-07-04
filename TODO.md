@@ -1,4 +1,5 @@
 - [ ] Add option to Javascript cookiecutter to make in browser version
+- [ ] [CQRS booking](https://codingdojo.org/kata/CQRS_Booking/) using [Axon](https://www.baeldung.com/axon-cqrs-event-sourcing)
 - [ ] Make DB adapter kata work with other than ReplitDB
 - [ ] Monkey patching in tire pressure kata
 - [ ] Create solution for countries kata
