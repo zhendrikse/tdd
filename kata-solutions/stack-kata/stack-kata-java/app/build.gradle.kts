@@ -25,7 +25,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("{{ cookiecutter.kata }}")
+    mainClass.set("Stack")
 }
 
 tasks.test {

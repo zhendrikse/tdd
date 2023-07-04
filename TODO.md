@@ -7,7 +7,6 @@
 - [ ] Make Python cookiecutter work for ptw and mamba
 - [+] Create instruction for bugs zero kata Python
 - [ ] Implement code coverage for Typescript cookiecutter
-- [ ] Make Java cookiecutter
 - [ ] Make Clojure cookiecutter
 - [ ] Extend poker hands Python met Deck, shuffle and hands
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
@@ -27,3 +26,4 @@
 - [X] Make Kotlin cookiecutter
 - [X] Modify instructions.md vending-machine-typescript from javascript -> typescript
 - [X] Allow for hamcrest assertions when using pytest
+- [X] Make Java cookiecutter

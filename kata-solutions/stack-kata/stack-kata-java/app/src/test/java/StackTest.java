@@ -4,7 +4,7 @@ import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static com.mscharhag.oleaster.matcher.Matchers.*;
 
 @RunWith(OleasterRunner.class)
-public class StackSpec {
+public class StackTest {
   private Stack myStack;
   private Plate myPlate;
   {
