@@ -9,7 +9,7 @@ one more step needed to get up and running.
 You can continuously run the test by using
 
 ```bash
-$ gradlew test --continuous
+$ gradle test --continuous
 ```
 
 # Introduction TDD

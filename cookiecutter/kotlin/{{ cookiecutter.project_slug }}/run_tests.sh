@@ -1,1 +1,1 @@
-./gradlew test --continuous
+./gradle test --continuous

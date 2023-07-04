@@ -31,4 +31,8 @@ application {
 tasks.test {
     // Use junit platform for unit tests.
     useJUnitPlatform()
+    testLogging {
+        events("PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR")
+        showStandardStreams = true
+    }  
 }

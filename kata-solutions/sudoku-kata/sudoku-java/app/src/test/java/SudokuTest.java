@@ -13,7 +13,7 @@ public class SudokuTest {
         for (final String puzzle : puzzles()) {
           final Sudoku sudoku = Sudoku.fromString(puzzle);
           assertThat(sudoku.solve(new Sudoku.SudokuIndex(0, 0)), equalTo(true));
-          // System.out.println(sudoku.toString());
+          System.out.println(sudoku.toString());
         }
     }
 
