@@ -30,3 +30,11 @@ $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/ty
 ```bash
 $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/kotlin
 ```
+
+
+## Java kata generation
+
+```bash
+$ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/java
+```
+

@@ -6,8 +6,8 @@ The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 | ---------------------------------------------- | ---------- | ------------------------------------------------ |
 |  1. [bugs-zero-kata](./bugs-zero-kata)         | M &harr; H | Legacy code / refactoring / bugs                 |
 |  2. [christmas-tree](./christmas-tree)         | M          | Implement an algorithm in small steps            |
-|  3. [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / REST / Refactoring        |
-|  4. [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database                  |
+|  3. [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / REST / Refactoring / DI   |
+|  4. [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI             |
 |  5. [game-of-life](./game-of-life)             | H          | Generic TDD skills                               |
 |  6. [gilded-rose-kata](./gilded-rose-kata)     | H          | Legacy code / refactoring / approval tests       |
 |  7. [greed-kata](./greed-kata)                 | M          | Implement complex rules                          |
@@ -19,7 +19,7 @@ The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 | 13. [sudoku-kata](./sudoku-kata)               | M &harr; H | Recursion &amp; TDD / Backtracking algorithms    |
 | 14. [task-list-kata](./task-list-kata)         | M &harr; H | Command-Query / Strong typing / Realistic app    |
 | 15. [tell-dont-ask](./tell-dont-ask)           | M &harr; H | Refactoring / Anemic domain model / DDD          |
-| 16. [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / Testability               |
+| 16. [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / Testability / DI          |
 | 17. [vending-machine](./vending-machine)       | M          | Generic TDD skills / Code smells and refactoring |
 | 18. [video-store-kata](./video-store-kata)     | M          | Legacy code / Refactoring / Code smells          |
 
@@ -80,7 +80,8 @@ This is not covered (yet).
 
 This capability is touched upon when the katas
 involve working with 
-[ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/).
+[ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/)
+and [dependency inversion](https://www.sammancoaching.org/learning_hours/testable_design/dependency_inversion_principle.html).
 
 ### 10. Architect for Empowered Teams
 

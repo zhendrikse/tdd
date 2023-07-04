@@ -16,6 +16,7 @@
 - [ ] Maak sudoku kata Clojure af
 - [ ] Sudoku characterization tests alleen in Java?
 - [ ] Clean-up poker hands kata dir and solutions
+- [ ] [Game of life in Clojure](https://medium.com/@pelensky/clojure-conways-game-of-life-289f19b10598), see also [this post](http://clj-me.cgrand.net/)
 - [X] .coverage file in cookiecutter Python template
 - [X] Make javascript cookiecutter work for coverage
 - [X] Create solution for vending machine Javascript

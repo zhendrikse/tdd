@@ -5,7 +5,7 @@ class {{ cookiecutter.kata }}Test {
 
   @Test
   fun anInitialTest() {
-      val bla = {{ cookiecutter.kata }}()
+      val myInstance = {{ cookiecutter.kata }}()
       assertEquals(true, false)
   }
 }
