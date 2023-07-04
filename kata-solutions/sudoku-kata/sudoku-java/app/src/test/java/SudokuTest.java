@@ -1,29 +1,22 @@
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@RunWith(Parameterized.class)
-public class SudokuCharacterizationTests {
-    private String puzzleString;
-
-    public SudokuCharacterizationTests(String puzzleString) {
-        this.puzzleString = puzzleString;
-    }
+public class SudokuTest {
 
     @Test
     public void solvingAPuzzleReturnsTrue() {
-        Sudoku sudoku = Sudoku.fromString(puzzleString);
-        assertThat(sudoku.solve(new Sudoku.SudokuIndex(0,0)), equalTo(true));
-        // Enable to see solved puzzles!!!
-        // System.out.println(sudoku.toString());
+        for (final String puzzle : puzzles()) {
+          final Sudoku sudoku = Sudoku.fromString(puzzle);
+          assertThat(sudoku.solve(new Sudoku.SudokuIndex(0, 0)), equalTo(true));
+          // System.out.println(sudoku.toString());
+        }
     }
 
-    @Parameterized.Parameters(name = "{index}: Solves: {0}")
     public static Iterable<String> puzzles() {
         var s = ".5..83.17...1..4..3.4..56.8....3...9.9.8245....6....7...9....5...729..861.36.72.4\n" +
                 "2.6.3......1.65.7..471.8.5.5......29..8.194.6...42...1....428..6.93....5.7.....13\n" +
