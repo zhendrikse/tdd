@@ -56,10 +56,10 @@ class HotelTest {
         assertTrue(hotel.persist().get(0) instanceof BookingCreatedEvent);
 
         BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(0);
-        assertTrue(event.clientId == A_UUID);
-        assertTrue(event.roomName == BLUE_ROOM_NAME);
-        assertTrue(event.arrivalDate == AN_ARRIVAL_DATE);
-        assertTrue(event.departureDate == A_DEPARTURE_DATE);
+        assertEquals(event.clientId, A_UUID);
+        assertEquals(event.roomName, BLUE_ROOM_NAME);
+        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
+        assertEquals(event.departureDate, A_DEPARTURE_DATE);
     }
 }
 ``` 
@@ -204,10 +204,10 @@ a second booking-failed event):
         assertTrue(hotel.persist().get(1) instanceof BookingFailedEvent);
 
         BookingFailedEvent event = (BookingFailedEvent) hotel.persist().get(1);
-        assertTrue(event.clientId == A_UUID);
-        assertTrue(event.roomName == BLUE_ROOM_NAME);
-        assertTrue(event.arrivalDate == AN_ARRIVAL_DATE);
-        assertTrue(event.departureDate == A_DEPARTURE_DATE);
+        assertEquals(event.clientId, A_UUID);
+        assertEquals(event.roomName, BLUE_ROOM_NAME);
+        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
+        assertEquals(event.departureDate, A_DEPARTURE_DATE);
     }
 ```
 
@@ -324,10 +324,10 @@ Let's introduce a red room in our tests:
         assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
 
         BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
-        assertTrue(event.clientId == A_UUID);
-        assertTrue(event.roomName == RED_ROOM_NAME);
-        assertTrue(event.arrivalDate == AN_ARRIVAL_DATE);
-        assertTrue(event.departureDate == A_DEPARTURE_DATE);
+        assertEquals(event.clientId, A_UUID);
+        assertEquals(event.roomName, RED_ROOM_NAME);
+        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
+        assertEquals(event.departureDate, A_DEPARTURE_DATE);
     }
 ```
 
@@ -345,9 +345,191 @@ We can make this test pass easily by modifying the `onCommand()` method slightly
 Let's grab our refactor opportunity now to reorganize our classes a bit into packages,
 by introducing separate folders for the aggregate root(s), commands, and events.
 
-### Step 4: booking a room on a different date
+### Step 4: booking identical room on an available date
 
 We are going to make the business logic a bit more explicit by demanding that
 we can reserve the same room, as long as we reserve it on a different date!
+
+```java
+    @Test 
+    void bookingIdenticalRoomForAvailableDateShouldSucceed() {
+        BookingCommand command = new BookingCommand(
+          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(4), A_DEPARTURE_DATE.plusDays(4)
+        );
+        hotel.onCommand(command);
+      
+        assertTrue(hotel.persist().size() == 2);
+        assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
+
+        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
+        assertEquals(event.clientId, A_UUID);
+        assertEquals(event.roomName, BLUE_ROOM_NAME);
+        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.plusDays(4));
+        assertEquals(event.departureDate, A_DEPARTURE_DATE.plusDays(4));
+    }
+```
+
+We now have to extend the business logic that approves the booking 
+
+```java
+  public void onCommand(final BookingCommand command) {
+      if (bookingCanBeMade(command.roomName, command.arrivalDate, command.departureDate))
+        bookingSucceeds(command);
+      else
+        bookingFails(command);
+  }
+
+  private boolean bookingCanBeMade(final String roomName, final LocalDate arrivalDate, final LocalDate departureDate) {
+    if (this.bookings.isEmpty())
+      return true;
+
+    Booking existingBooking = this.bookings.get(0);
+    if (!existingBooking.roomName.equals(roomName))
+      return true;
+
+    if (arrivalDate.isAfter(existingBooking.departureDate))
+      return true;
+
+    return false;
+  }  
+```
+
+Likewise, if the departure date is before the arrival of the existing booking
+
+```java
+    @Test 
+    void bookingIdenticalRoomWithDepartureBeforeArrivalOfExistingBookingShouldSucceed() {
+        BookingCommand command = new BookingCommand(
+          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.minusDays(4), A_DEPARTURE_DATE.minusDays(4)
+        );
+        hotel.onCommand(command);
+      
+        assertTrue(hotel.persist().size() == 2);
+        assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
+
+        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
+        assertEquals(event.clientId, A_UUID);
+        assertEquals(event.roomName, BLUE_ROOM_NAME);
+        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.minusDays(4));
+        assertEquals(event.departureDate, A_DEPARTURE_DATE.minusDays(4));
+    }
+```
+
+These checks can easily be generalized for all bookings in the hotel:
+
+```java
+  private boolean bookingCanBeMade(final Booking requestedBooking, final Booking existingBooking) {
+      if (!existingBooking.roomName.equals(requestedBooking.roomName) ||
+          requestedBooking.arrivalDate.isAfter(existingBooking.departureDate) ||
+          requestedBooking.departureDate.isBefore(existingBooking.arrivalDate))
+        return true;
+  
+      return false;
+  }
+
+  private boolean bookingCanBeMade(final Booking requestedBooking) {
+    for (final Booking existingBooking : this.bookings) {
+      if (!bookingCanBeMade(requestedBooking, existingBooking))
+        return false;
+    }
+    
+    return true;
+  }
+  
+  public void onCommand(final BookingCommand command) {
+      final Booking requestedBooking = new Booking(
+        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
+      if (bookingCanBeMade(requestedBooking))
+        bookingSucceeds(command);
+      else
+        bookingFails(command);
+  }
+```
+
+### Step 5: overlapping dates
+
+We still lack a test for a reservation where the reservation periods are not 
+identical but do (partially) overlap
+
+```java
+    @Test 
+    void bookingTheSameRoomForOverlappingDatesShouldFail() {
+        BookingCommand command = new BookingCommand(
+          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(1), A_DEPARTURE_DATE.plusDays(1)
+        );
+        hotel.onCommand(command);
+      
+        assertTrue(hotel.persist().size() == 2);
+        assertTrue(hotel.persist().get(1) instanceof BookingFailedEvent);
+
+        BookingFailedEvent event = (BookingFailedEvent) hotel.persist().get(1);
+        assertEquals(event.clientId, A_UUID);
+        assertEquals(event.roomName, BLUE_ROOM_NAME);
+        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.minusDays(1));
+        assertEquals(event.departureDate, A_DEPARTURE_DATE.minusDays(1));
+    }
+``` 
+
+which leads us to
+
+```java
+  private boolean canBookingBeMade(final Booking requestedBooking, final Booking existingBooking) {
+      if (!existingBooking.roomName.equals(requestedBooking.roomName)) 
+          return true;
+
+      if (requestedBooking.arrivalDate.compareTo(existingBooking.arrivalDate) >= 0 &&
+          requestedBooking.arrivalDate.compareTo(existingBooking.departureDate) <=0)
+          return false;
+  
+      return true;
+  }
+
+  private boolean canBookingBeMade(final Booking requestedBooking) {
+    for (final Booking existingBooking : this.bookings) {
+      if (!canBookingBeMade(requestedBooking, existingBooking))
+        return false;
+    }
+    
+    return true;
+  }
+  
+  public void onCommand(final BookingCommand command) {
+      final Booking requestedBooking = new Booking(
+        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
+      if (canBookingBeMade(requestedBooking))
+        bookingSucceeds(command);
+      else
+        bookingFails(command);
+  }
+  ```
+
+Finally, let's get rid of the [feature envy]() in the comparison of booking dates 
+by moving the decision logic into the `Booking` class:
+
+```java
+  private boolean canBookingBeMade(final Booking requestedBooking, final Booking existingBooking) {
+      if (!existingBooking.roomName.equals(requestedBooking.roomName)) 
+          return true;
+
+      if (existingBooking.isDateBetweenArrivalAndDepartureDates(requestedBooking.arrivalDate))
+          return false;
+  
+      return true;
+  }
+  
+  // ...
+
+    class Booking implements Event {
+
+      // ...
+      
+      public boolean isDateBetweenArrivalAndDepartureDates(final LocalDate aDate) {
+          return aDate.compareTo(this.arrivalDate) >= 0 && aDate.compareTo(this.departureDate) <=0;
+      }
+
+```
+
+
+
 
 ## Overview of the reservations

@@ -13,12 +13,33 @@ public class Hotel implements AggregateRoot {
       apply(event);
     this.changes = new ArrayList<Event>();
   }
+
+  private boolean canBookingBeMade(final Booking requestedBooking, final Booking existingBooking) {
+      if (!existingBooking.roomName.equals(requestedBooking.roomName)) 
+          return true;
+
+      if (existingBooking.isDateBetweenArrivalAndDepartureDates(requestedBooking.arrivalDate))
+          return false;
+  
+      return true;
+  }
+
+  private boolean canBookingBeMade(final Booking requestedBooking) {
+    for (final Booking existingBooking : this.bookings) {
+      if (!canBookingBeMade(requestedBooking, existingBooking))
+        return false;
+    }
+    
+    return true;
+  }
   
   public void onCommand(final BookingCommand command) {
-      if (this.bookings.size() == 1 && this.bookings.get(0).roomName.equals(command.roomName))
-        bookingFails(command);
-      else
+      final Booking requestedBooking = new Booking(
+        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
+      if (canBookingBeMade(requestedBooking))
         bookingSucceeds(command);
+      else
+        bookingFails(command);
   }
 
   private void bookingFails(final BookingCommand command) {
@@ -61,6 +82,10 @@ command.departureDate);
           this.roomName = roomName;
           this.arrivalDate = arrivalDate;
           this.departureDate = departureDate;
+      }
+
+      public boolean isDateBetweenArrivalAndDepartureDates(final LocalDate aDate) {
+          return aDate.compareTo(this.arrivalDate) >= 0 && aDate.compareTo(this.departureDate) <=0;
       }
   }
 }
