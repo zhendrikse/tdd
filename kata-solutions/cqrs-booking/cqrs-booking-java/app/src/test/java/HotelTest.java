@@ -41,7 +41,7 @@ class HotelTest {
     }
 
     @Test 
-    void sameBookingForSameRoomFails() {
+    void bookingTheSameRoomForTheSameDateShouldFail() {
         hotel.onCommand(blueRoomBookingCommand);
       
         assertTrue(hotel.persist().size() == 2);
@@ -55,7 +55,7 @@ class HotelTest {
     }
 
     @Test 
-    void sameBookingForDifferentRoomSucceeds() {
+    void bookingDifferentRoomForTheSameDateShouldSucceed() {
         hotel.onCommand(redRoomBookingCommand);
       
         assertTrue(hotel.persist().size() == 2);

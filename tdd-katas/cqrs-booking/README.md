@@ -39,7 +39,7 @@ To do that we will have :
 
 ## Command bus
 
-For the sake of simplicity, start without an command bus first.
+For the sake of simplicity, start without a command bus first.
 Eventually, you may opt to implement a command bus as well, e.g. as has been 
 described in [this post](https://breadcrumbscollector.tech/how-to-implement-and-use-command-bus-in-python-with-injector/) for Python.
 
