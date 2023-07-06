@@ -4,10 +4,10 @@ Please read the general [introduction to the booking kata](../README.md) first!
 
 # Getting started
 
-First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
-We suggest to name your kata "Hotel" when prompted.
+First, create an initial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+We suggest naming your kata "Hotel" when prompted.
 
-Next, you may want to go the the newly created project directory and consult
+Next, you may want to go to the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # The implementation
@@ -21,14 +21,14 @@ We start with the user story to create a booking.
 Let's create a first test. Since the hotel is empty, we may safely 
 assume that every first booking succeeds.
 
-How do we assert that booking has successfully been completed?
+How do we assert that the booking has successfully been completed?
 By verifying a `BookingCreatedEvent` has been "sent", of course!
-We have put the word sent between quotes, since we don't have 
+We have put the word sent between quotes since we don't have 
 an event bus yet. So what can we do instead?
 
-A first step towards a possible approach is to realize that 
-all the change emitted created by the aggregate root `Hotel` need to 
-be collected somehow shomewhere. By the way, note that this also
+The first step toward a possible approach is to realize that 
+all the events created by the aggregate root `Hotel` need to 
+be collected somehow somewhere. By the way, note that this also
 explains the word "aggregate", as the `Hotel` aggregates
 all change events.
 
@@ -36,14 +36,15 @@ Events emitted by the `Hotel` aggregate are typically stored in
 a database that is usually coined accordingly: the event store.
 
 As this database is external to our domain (model), 
-this in turn calls for yet another application of ports &amp; adapters:
+this in turn calls for yet another application of 
+[ports &amp; adapters](https://alistair.cockburn.us/hexagonal-architecture/):
 we are going to ask an event source repository to load and store the
 events emitted by the `Hotel` aggregate. Formulated more precisely,
 we ask the repository to load and store the `Hotel` aggregate itself, 
 as its state is uniquely determined (rehydrated) by 
 the events stored in the event store (using the `apply()` method).
 
-We can already make use of this fact, by pluggin in a stub event
+We can already make use of this fact, by plugging in a stub event
 source repository for now. We can query this stub repository 
 for the events that have (or haven't) been sent! 
 So let's start with a stub event source
@@ -171,7 +172,7 @@ Any realistic implementation of the repository interface characterizing
 the event store will eventually use this `getId()` method.
 
 ```java
-ublic interface EventSourceRepository<Hotel> {
+public interface EventSourceRepository<Hotel> {
   void save(UUID aggregateRootId, Event event);
 }
 ```
@@ -325,7 +326,7 @@ public class Hotel implements AggregateRoot {
 
 ``` 
 
-Let's analyse this code in a bit more detail:
+Let's analyze this code in a bit more detail:
 
 - We have introduced an inner class `Booking`. We made it an inner class, as it belongs
   to the `Hotel` aggregate root.
@@ -341,7 +342,7 @@ Let's analyse this code in a bit more detail:
   statements in an `if`-statement, we write a (private) method that explains what we
   want to achieve.
 
-Let's finally clean-up the duplication in the tests by applying the DRY principle,
+Let's finally clean up the duplication in the tests by applying the DRY principle,
 and hence using the `BeforeEach` construct to set up an initial hotel with one
 booking
 
@@ -437,7 +438,7 @@ We can make this test pass easily by modifying the `onCommand()` method slightly
 Let's grab our refactor opportunity now to reorganize our classes a bit into packages,
 by introducing separate folders for the aggregate root(s), commands, and events.
 
-### Step 4: booking identical room on an available date
+### Step 4: booking an identical room on an available date
 
 We are going to make the business logic a bit more explicit by demanding that
 we can reserve the same room, as long as we reserve it on a different date!
@@ -635,7 +636,7 @@ a `load()` operation
   // ...
 ``` 
 
-Also, we need to implemet the `apply()` method of the aggregate in both
+Also, we need to implement the `apply()` method of the aggregate in both
 the `AggregateRoot` interface and `Hotel` aggregate:
 
 ```java  
