@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import java.util.UUID;
 import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalDate;
 
 class HotelTest {
@@ -21,51 +22,57 @@ class HotelTest {
       );
 
     private Hotel hotel;
+    private StubEventSourceRepository repository = new StubEventSourceRepository();
 
     @BeforeEach
     void setUpHotelWithBlueRoomBooking() {
-        this.hotel = new Hotel(new ArrayList<Event>());
+        this.hotel = new Hotel(repository);
         hotel.onCommand(blueRoomBookingCommand);
+    }
+
+    private void verifyBookingFailedEvent(final BookingFailedEvent event, final BookingCommand bookingCommand) {
+        assertEquals(event.clientId, bookingCommand.clientId);
+        assertEquals(event.roomName, bookingCommand.roomName);
+        assertEquals(event.arrivalDate, bookingCommand.arrivalDate);
+        assertEquals(event.departureDate, bookingCommand.departureDate);
+    }
+
+    private void verifyBookingCreatedEvent(final BookingCreatedEvent event, final BookingCommand bookingCommand) {
+        assertEquals(event.clientId, bookingCommand.clientId);
+        assertEquals(event.roomName, bookingCommand.roomName);
+        assertEquals(event.arrivalDate, bookingCommand.arrivalDate);
+        assertEquals(event.departureDate, bookingCommand.departureDate);
     }
 
     @Test 
     void firstBookingCanAlwaysBeMade() {
-        assertTrue(hotel.persist().size() == 1);
-        assertTrue(hotel.persist().get(0) instanceof BookingCreatedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 1);
+        assertTrue(storedEvents.get(0) instanceof BookingCreatedEvent);
 
-        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(0);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
-        assertEquals(event.departureDate, A_DEPARTURE_DATE);
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(0), blueRoomBookingCommand);
     }
 
     @Test 
     void bookingTheSameRoomForTheSameDateShouldFail() {
         hotel.onCommand(blueRoomBookingCommand);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingFailedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingFailedEvent);
 
-        BookingFailedEvent event = (BookingFailedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
-        assertEquals(event.departureDate, A_DEPARTURE_DATE);
+        verifyBookingFailedEvent((BookingFailedEvent) storedEvents.get(1), blueRoomBookingCommand);
     }
 
     @Test 
     void bookingDifferentRoomForTheSameDateShouldSucceed() {
         hotel.onCommand(redRoomBookingCommand);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingCreatedEvent);
 
-        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, RED_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
-        assertEquals(event.departureDate, A_DEPARTURE_DATE);
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), redRoomBookingCommand);
     }
 
     @Test 
@@ -75,14 +82,11 @@ class HotelTest {
         );
         hotel.onCommand(command);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingCreatedEvent);
 
-        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.plusDays(4));
-        assertEquals(event.departureDate, A_DEPARTURE_DATE.plusDays(4));
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), command);
     }
   
     @Test 
@@ -92,14 +96,11 @@ class HotelTest {
         );
         hotel.onCommand(command);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingCreatedEvent);
 
-        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.minusDays(4));
-        assertEquals(event.departureDate, A_DEPARTURE_DATE.minusDays(4));
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), command);
     }
   
     @Test 
@@ -109,13 +110,28 @@ class HotelTest {
         );
         hotel.onCommand(command);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingFailedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingFailedEvent);
 
-        BookingFailedEvent event = (BookingFailedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.plusDays(1));
-        assertEquals(event.departureDate, A_DEPARTURE_DATE.plusDays(1));
+        verifyBookingFailedEvent((BookingFailedEvent) storedEvents.get(1), command);
+    }
+
+    @Test
+    void rehydratedHotelAggregateShouldNotAllowDoubleReservations() {
+        List<Event> events = new ArrayList<Event>();
+        events.add(new BookingCreatedEvent(
+            A_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+        ));
+        StubEventSourceRepository repository = new StubEventSourceRepository(events);
+        Hotel rehydratedHotel = new Hotel(repository);
+      
+        rehydratedHotel.onCommand(redRoomBookingCommand);
+      
+        List<Event> storedEvents = repository.getEventsFor(rehydratedHotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingFailedEvent);
+
+        verifyBookingFailedEvent((BookingFailedEvent) storedEvents.get(1), redRoomBookingCommand);
     }
 }

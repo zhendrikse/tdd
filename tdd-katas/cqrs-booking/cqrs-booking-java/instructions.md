@@ -529,6 +529,10 @@ by moving the decision logic into the `Booking` class:
 
 ```
 
+### Rehydrating the aggregate root by replaying all events
+
+It is now time to see if we can resurrect a `Hotel` aggregate by replaying events.
+
 
 
 

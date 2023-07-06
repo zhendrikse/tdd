@@ -1,5 +1,7 @@
 import java.util.List;
+import java.util.UUID;
 
 public interface AggregateRoot {
-   List<Event> persist();
+   void apply(final Event event);
+   UUID getId();
 }

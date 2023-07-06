@@ -5,13 +5,18 @@ import java.util.Collections;
 import java.time.LocalDate;
 
 public class Hotel implements AggregateRoot {
+  private final UUID id = UUID.randomUUID();
   private final List<Booking> bookings = new ArrayList<>();
-  private final List<Event> changes;
+  private final EventSourceRepository eventSourceRepository;
 
-  public Hotel(final List<Event> events) {
-    for (final Event event : events)
-      apply(event);
-    this.changes = new ArrayList<Event>();
+  public Hotel(final EventSourceRepository repository) {
+    repository.load(this);
+    this.eventSourceRepository = repository;
+  }
+
+  @Override 
+  public UUID getId() {
+    return id;
   }
 
   private boolean canBookingBeMade(final Booking requestedBooking, final Booking existingBooking) {
@@ -46,13 +51,13 @@ public class Hotel implements AggregateRoot {
       BookingFailedEvent event = new BookingFailedEvent(
         command.clientId, command.roomName, command.arrivalDate, 
 command.departureDate);
-      this.changes.add(event);
+      this.eventSourceRepository.save(this.id, event);
   }
 
   private void bookingSucceeds(final BookingCommand command) {
       BookingCreatedEvent event = new BookingCreatedEvent(
         command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-      this.changes.add(event);
+      this.eventSourceRepository.save(this.id, event);
       onEvent(event);
   }
     
@@ -61,14 +66,10 @@ command.departureDate);
         event.clientId, event.roomName, event.arrivalDate, event.departureDate));
   }
 
-  private void apply(final Event event) {
+  @Override
+  public void apply(final Event event) {
     if (event instanceof BookingCreatedEvent) 
       onEvent((BookingCreatedEvent) event);
-  }
-
-  @Override
-  public List<Event> persist() {
-    return Collections.unmodifiableList(this.changes);
   }
   
   class Booking implements Event {
