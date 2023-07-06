@@ -12,7 +12,6 @@ class HotelTest {
     private static final LocalDate AN_ARRIVAL_DATE = LocalDate.of(2020, 1, 20);
     private static final LocalDate A_DEPARTURE_DATE = LocalDate.of(2020, 1, 22);
     private static final UUID A_CLIENT_UUID = UUID.randomUUID();
-    private static final UUID HOTEL_UUID = UUID.randomUUID();
 
     private final BookingCommand blueRoomBookingCommand = new BookingCommand(
         A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
@@ -27,7 +26,7 @@ class HotelTest {
 
     @BeforeEach
     void setUpHotelWithBlueRoomBooking() {
-        this.hotel = repository.load(HOTEL_UUID);
+        this.hotel = new Hotel(repository);
         hotel.onCommand(blueRoomBookingCommand);
     }
 
@@ -125,7 +124,7 @@ class HotelTest {
             A_CLIENT_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
         ));
         StubEventSourceRepository repository = new StubEventSourceRepository(events);
-        Hotel rehydratedHotel = repository.load(HOTEL_UUID);
+        Hotel rehydratedHotel = repository.load(UUID.randomUUID());
       
         rehydratedHotel.onCommand(redRoomBookingCommand);
       

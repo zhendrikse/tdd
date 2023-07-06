@@ -5,13 +5,12 @@ import java.util.Collections;
 import java.time.LocalDate;
 
 public class Hotel implements AggregateRoot {
-  private final UUID id;
+  private final UUID id = UUID.randomUUID();
   private final List<Booking> bookings = new ArrayList<>();
   private final EventSourceRepository eventSourceRepository;
 
-  public Hotel(final UUID id, final EventSourceRepository repository) {
+  public Hotel(final EventSourceRepository repository) {
     this.eventSourceRepository = repository;
-    this.id = id;
   }
 
   @Override 

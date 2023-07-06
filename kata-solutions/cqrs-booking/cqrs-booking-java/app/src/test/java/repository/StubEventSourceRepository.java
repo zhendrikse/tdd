@@ -16,15 +16,15 @@ public class StubEventSourceRepository implements EventSourceRepository {
 
   @Override
   public Hotel load(final UUID aggregateRootId) {
-      Hotel hotel = new Hotel(aggregateRootId, this);
+      Hotel hotel = new Hotel(this);
       for (final Event event : this.eventList)
           hotel.apply(event);
       return hotel;
   }
   
   @Override
-  public void save(final UUID aggregateRootId, final Event event) {
-      this.eventList.add(event);
+  public void save(final UUID aggregateRootId, final Event newEvent) {
+      this.eventList.add(newEvent);
   }
 
   public List<Event> getEventsFor(final UUID aggregateRootId) {
