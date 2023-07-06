@@ -1,36 +1,47 @@
-import java.util.List;
-import java.util.ArrayList;
 import java.util.UUID;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalDate;
 
 public class Hotel implements AggregateRoot {
-  private final UUID id = UUID.randomUUID();
-  private final List<Booking> bookings = new ArrayList<>();
-  private final EventSourceRepository eventSourceRepository;
+    private final UUID id = UUID.randomUUID();
+    private final EventSourceRepository eventSourceRepository;
+    private final List<Booking> bookings = new ArrayList<>();
 
-  public Hotel(final EventSourceRepository repository) {
-    this.eventSourceRepository = repository;
-  }
+    public Hotel(final EventSourceRepository repository) {
+        this.eventSourceRepository = repository;
+    }
 
-  @Override 
-  public UUID getId() {
-    return id;
-  }
+    @Override 
+    public UUID getId() {
+        return id;
+   }
 
-  private boolean canBookingBeMade(final Booking requestedBooking, final Booking existingBooking) {
-      if (!existingBooking.roomName.equals(requestedBooking.roomName)) 
-          return true;
-
-      if (existingBooking.isDateBetweenArrivalAndDepartureDates(requestedBooking.arrivalDate))
-          return false;
+   private void bookingFails(final BookingCommand command) {
+        BookingFailedEvent event = new BookingFailedEvent(
+          command.clientId, command.roomName, command.arrivalDate, 
+  command.departureDate);
+        onEvent(event);
+        this.eventSourceRepository.save(this.id, event);
+    }
   
-      return true;
-  }
+    private void bookingSucceeds(final BookingCommand command) {
+        BookingCreatedEvent event = new BookingCreatedEvent(
+          command.clientId, command.roomName, command.arrivalDate, command.departureDate);
+        onEvent(event);
+        this.eventSourceRepository.save(this.id, event);
+    }    
+      
+    private void onEvent(final BookingFailedEvent event) {}
+      
+    private void onEvent(final BookingCreatedEvent event) {
+        this.bookings.add(new Booking(
+          event.clientId, event.roomName, event.arrivalDate, event.departureDate));
+    }
 
-  private boolean canBookingBeMade(final Booking requestedBooking) {
+  private boolean bookingCanBeMade(final Booking requestedBooking) {
     for (final Booking existingBooking : this.bookings) {
-      if (!canBookingBeMade(requestedBooking, existingBooking))
+      if (existingBooking.doesConflictWith(requestedBooking))
         return false;
     }
     
@@ -40,37 +51,20 @@ public class Hotel implements AggregateRoot {
   public void onCommand(final BookingCommand command) {
       final Booking requestedBooking = new Booking(
         command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-      if (canBookingBeMade(requestedBooking))
+      if (bookingCanBeMade(requestedBooking))
         bookingSucceeds(command);
       else
         bookingFails(command);
   }
-
-  private void bookingFails(final BookingCommand command) {
-      BookingFailedEvent event = new BookingFailedEvent(
-        command.clientId, command.roomName, command.arrivalDate, 
-command.departureDate);
-      this.eventSourceRepository.save(this.id, event);
-  }
-
-  private void bookingSucceeds(final BookingCommand command) {
-      BookingCreatedEvent event = new BookingCreatedEvent(
-        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-      this.eventSourceRepository.save(this.id, event);
-      onEvent(event);
-  }
-    
-  private void onEvent(final BookingCreatedEvent event) {
-      this.bookings.add(new Booking(
-        event.clientId, event.roomName, event.arrivalDate, event.departureDate));
-  }
-
+  
   @Override
   public void apply(final Event event) {
     if (event instanceof BookingCreatedEvent) 
       onEvent((BookingCreatedEvent) event);
+    else if (event instanceof BookingFailedEvent)
+      onEvent((BookingFailedEvent) event);
   }
-  
+
   class Booking implements Event {
       public final UUID clientId; 
       public final String roomName;
@@ -84,8 +78,10 @@ command.departureDate);
           this.departureDate = departureDate;
       }
 
-      public boolean isDateBetweenArrivalAndDepartureDates(final LocalDate aDate) {
-          return aDate.compareTo(this.arrivalDate) >= 0 && aDate.compareTo(this.departureDate) <=0;
+      public boolean doesConflictWith(final Booking anotherBooking) {
+          return anotherBooking.roomName.equals(this.roomName) && 
+            !(anotherBooking.arrivalDate.isAfter(this.departureDate) ||
+            anotherBooking.departureDate.isBefore(this.arrivalDate));
       }
   }
 }

@@ -54,10 +54,10 @@ class HotelTest {
     private static final String BLUE_ROOM_NAME = "The Blue Room";
     private static final LocalDate AN_ARRIVAL_DATE = LocalDate.of(2020, 1, 20);
     private static final LocalDate A_DEPARTURE_DATE = LocalDate.of(2020, 1, 22);
-    private static final UUID A_UUID = UUID.randomUUID();
+    private static final UUID A_CLIENT_UUID = UUID.randomUUID();
 
     private final BookingCommand blueRoomBookingCommand = new BookingCommand(
-        A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+        A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
       );
 
     @Test 
@@ -65,11 +65,12 @@ class HotelTest {
         StubEventSourceRepository repository = new StubEventSourceRepository();
         Hotel hotel = new Hotel(repository);
         hotel.onCommand(blueRoomBookingCommand);
-      
-        assertTrue(hotel.persist().size() == 1);
-        assertTrue(hotel.persist().get(0) instanceof BookingCreatedEvent);
 
-        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(0);
+        List<Event> events = repository.getEventsFor(hotel.getId());
+        assertTrue(events.size() == 1);
+        assertTrue(events.get(0) instanceof BookingCreatedEvent);
+
+        BookingCreatedEvent event = (BookingCreatedEvent) events.get(0);
         assertEquals(event.clientId, A_UUID);
         assertEquals(event.roomName, BLUE_ROOM_NAME);
         assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
@@ -79,7 +80,8 @@ class HotelTest {
 ``` 
 
 Note that we already require the constructor of `Hotel` to receive a reference
-to the event store repository, so that we can query the events stored in there. 
+to the event store repository, so that we can query the events stored in that repository
+after the command has been handled. 
 
 So let's first define the `BookingCommand`:
 
@@ -169,7 +171,30 @@ Any realistic implementation of the repository interface characterizing
 the event store will eventually use this `getId()` method.
 
 ```java
-public interface EventSourceRepository<Hotel> {}
+ublic interface EventSourceRepository<Hotel> {
+  void save(UUID aggregateRootId, Event event);
+}
+```
+
+together with its implementation
+
+```java
+public class StubEventSourceRepository implements EventSourceRepository {
+  private final List<Event> eventList;
+
+  public StubEventSourceRepository() {
+    this.eventList = new ArrayList<Event>();
+  }
+
+  @Override
+  public void save(final UUID aggregateRootId, final Event event) {
+    this.eventList.add(event);
+  }
+  
+  public List<Event> getEventsFor(final UUID aggregateRootId) {
+      return Collections.unmodifiableList(this.eventList);
+  }
+}
 ```
 
 The test still fails though, as no events are created yet. So let's add a
@@ -179,7 +204,7 @@ The test still fails though, as no events are created yet. So let's add a
     public void onCommand(final BookingCommand command) {
       BookingCreatedEvent event = new BookingCreatedEvent(
         command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-      this.changes.add(event);
+      this.eventSourceRepository.save(this.id, event);
     }
 ```
 
@@ -217,19 +242,22 @@ a second booking-failed event):
 ```java
     @Test 
     void bookingTheSameRoomForTheSameDateShouldFail() {
-        Hotel hotel = new Hotel(new ArrayList<Event>());
+        StubEventSourceRepository repository = new StubEventSourceRepository();
+        Hotel hotel = new Hotel(repository);
         hotel.onCommand(blueRoomBookingCommand);
         hotel.onCommand(blueRoomBookingCommand);
-      
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingFailedEvent);
 
-        BookingFailedEvent event = (BookingFailedEvent) hotel.persist().get(1);
+        List<Event> events = repository.getEventsFor(hotel.getId());
+        assertTrue(events.size() == 2);
+        assertTrue(events.get(1) instanceof BookingFailedEvent);
+
+        BookingFailedEvent event = (BookingFailedEvent) events.get(1);
         assertEquals(event.clientId, A_UUID);
         assertEquals(event.roomName, BLUE_ROOM_NAME);
         assertEquals(event.arrivalDate, AN_ARRIVAL_DATE);
         assertEquals(event.departureDate, A_DEPARTURE_DATE);
     }
+
 ```
 
 The most simple solution is to maintain a list of bookings in the hotel, and
@@ -238,26 +266,35 @@ reservation:
 
 ```java
 public class Hotel implements AggregateRoot {
-    private final List<Event> changes;
+    private final UUID id = UUID.randomUUID();
+    private final EventSourceRepository eventSourceRepository;
     private final List<Booking> bookings = new ArrayList<>();
-  
-    public Hotel(final List<Event> events) {
-        this.changes = new ArrayList<Event>();
+
+    public Hotel(final EventSourceRepository repository) {
+        this.eventSourceRepository = repository;
     }
 
-    private void bookingFails(final BookingCommand command) {
+    @Override 
+    public UUID getId() {
+        return id;
+   }
+
+   private void bookingFails(final BookingCommand command) {
         BookingFailedEvent event = new BookingFailedEvent(
           command.clientId, command.roomName, command.arrivalDate, 
   command.departureDate);
-        this.changes.add(event);
+        onEvent(event);
+        this.eventSourceRepository.save(this.id, event);
     }
   
     private void bookingSucceeds(final BookingCommand command) {
         BookingCreatedEvent event = new BookingCreatedEvent(
           command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-        this.changes.add(event);
         onEvent(event);
+        this.eventSourceRepository.save(this.id, event);
     }    
+      
+    private void onEvent(final BookingFailedEvent event) {}
       
     private void onEvent(final BookingCreatedEvent event) {
         this.bookings.add(new Booking(
@@ -271,11 +308,6 @@ public class Hotel implements AggregateRoot {
         bookingFails(command);
     }
 
-    @Override
-    public List<Event> persist() {
-        return Collections.unmodifiableList(this.changes);
-    }
-  
     class Booking implements Event {
         public final UUID clientId; 
         public final String roomName;
@@ -290,6 +322,7 @@ public class Hotel implements AggregateRoot {
         }
     }
 }
+
 ``` 
 
 Let's analyse this code in a bit more detail:
@@ -298,11 +331,12 @@ Let's analyse this code in a bit more detail:
   to the `Hotel` aggregate root.
 - We maintain a list of bookings in the hotel. As explained, to make the test succeed,
   we can just refuse any additional booking.
-- When the booking fails, we just append a `BookingFailedEvent` to the list of changes.
 - When a booking succeeds, we delegate the creation of a new booking to a dedicated
   `onEvent(BookingCreatedEvent event)` method, as we want to be able to process this
   event also when rehydrating the aggregate root from the event store. In addition,
   this way the code nicely expresses intent.
+- When the booking fails, we just sent a `BookingFailedEvent` to the event store.
+  The handling is delegated to a method that does nothing for now.
 - Notice that we never use parenthesis in `if`-statements. A soon as we need multiple
   statements in an `if`-statement, we write a (private) method that explains what we
   want to achieve.
@@ -316,12 +350,47 @@ class HotelTest {
     // ...
   
     private Hotel hotel;
+    private StubEventSourceRepository repository = new StubEventSourceRepository();
 
     @BeforeEach
     void setUpHotelWithBlueRoomBooking() {
-        this.hotel = new Hotel(new ArrayList<Event>());
+        this.hotel = new Hotel(repository);
         hotel.onCommand(blueRoomBookingCommand);
     }
+  
+```
+
+In order to reduce the complexity of the two tests we currently have, we also
+apply extract method for the verification of the event fields. 
+
+```java
+class HotelTest {
+    // ...
+    
+    private void verifyBookingFailedEvent(final BookingFailedEvent event, final BookingCommand bookingCommand) {
+        assertEquals(event.clientId, bookingCommand.clientId);
+        assertEquals(event.roomName, bookingCommand.roomName);
+        assertEquals(event.arrivalDate, bookingCommand.arrivalDate);
+        assertEquals(event.departureDate, bookingCommand.departureDate);
+    }
+
+    private void verifyBookingCreatedEvent(final BookingCreatedEvent event, final BookingCommand bookingCommand) {
+        assertEquals(event.clientId, bookingCommand.clientId);
+        assertEquals(event.roomName, bookingCommand.roomName);
+        assertEquals(event.arrivalDate, bookingCommand.arrivalDate);
+        assertEquals(event.departureDate, bookingCommand.departureDate);
+    }
+
+    @Test 
+    void firstBookingCanAlwaysBeMade() {
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 1);
+        assertTrue(storedEvents.get(0) instanceof BookingCreatedEvent);
+
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(0), blueRoomBookingCommand);
+    }
+
+    // ...
 ```
 
 ### Step 3: make a booking at the same date but a different room
@@ -329,6 +398,8 @@ class HotelTest {
 Let's introduce a red room in our tests:
 
 ```java
+    private static final String RED_ROOM_NAME = "The Red Room";
+    
     // ...
     
     private final BookingCommand redRoomBookingCommand = new BookingCommand(
@@ -372,21 +443,18 @@ We are going to make the business logic a bit more explicit by demanding that
 we can reserve the same room, as long as we reserve it on a different date!
 
 ```java
-    @Test 
+   @Test 
     void bookingIdenticalRoomForAvailableDateShouldSucceed() {
         BookingCommand command = new BookingCommand(
-          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(4), A_DEPARTURE_DATE.plusDays(4)
+          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(4), A_DEPARTURE_DATE.plusDays(4)
         );
         hotel.onCommand(command);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingCreatedEvent);
 
-        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.plusDays(4));
-        assertEquals(event.departureDate, A_DEPARTURE_DATE.plusDays(4));
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), command);
     }
 ```
 
@@ -421,20 +489,23 @@ Likewise, if the departure date is before the arrival of the existing booking
     @Test 
     void bookingIdenticalRoomWithDepartureBeforeArrivalOfExistingBookingShouldSucceed() {
         BookingCommand command = new BookingCommand(
-          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.minusDays(4), A_DEPARTURE_DATE.minusDays(4)
+          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.minusDays(4), A_DEPARTURE_DATE.minusDays(4)
         );
         hotel.onCommand(command);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingCreatedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingCreatedEvent);
 
-        BookingCreatedEvent event = (BookingCreatedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.minusDays(4));
-        assertEquals(event.departureDate, A_DEPARTURE_DATE.minusDays(4));
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), command);
     }
 ```
+We can make the test pass by adding yet another `if`-clause:
+
+```java
+    if (departureDate.isBefore(existingBooking.arrivalDate))
+      return true;
+``` 
 
 These checks can easily be generalized for all bookings in the hotel:
 
@@ -469,73 +540,40 @@ These checks can easily be generalized for all bookings in the hotel:
 
 ### Step 5: overlapping dates
 
-We still lack a test for a reservation where the reservation periods are not 
+We may think we still lack a test for a reservation where the reservation periods are not 
 identical but do (partially) overlap
 
 ```java
     @Test 
-    void bookingTheSameRoomForOverlappingDatesShouldFail() {
+    void bookingTheSameRoomForOverlappingArrivalDatesShouldFail() {
         BookingCommand command = new BookingCommand(
-          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(1), A_DEPARTURE_DATE.plusDays(1)
+          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(1), A_DEPARTURE_DATE.plusDays(1)
         );
         hotel.onCommand(command);
       
-        assertTrue(hotel.persist().size() == 2);
-        assertTrue(hotel.persist().get(1) instanceof BookingFailedEvent);
+        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingFailedEvent);
 
-        BookingFailedEvent event = (BookingFailedEvent) hotel.persist().get(1);
-        assertEquals(event.clientId, A_UUID);
-        assertEquals(event.roomName, BLUE_ROOM_NAME);
-        assertEquals(event.arrivalDate, AN_ARRIVAL_DATE.minusDays(1));
-        assertEquals(event.departureDate, A_DEPARTURE_DATE.minusDays(1));
+        verifyBookingFailedEvent((BookingFailedEvent) storedEvents.get(1), command);
     }
 ``` 
 
-which leads us to
+However, this test jumps to green immediately, so our assumption is wrong. Whatever we
+try, all cases are apparently covered already. What a pleasant surprise!
+
+Finally, let's get rid of the [feature envy]() in the comparison of booking dates 
+by moving the decision logic into the `Booking` class and playing a bit with the
+boolean decision logic:
 
 ```java
-  private boolean canBookingBeMade(final Booking requestedBooking, final Booking existingBooking) {
-      if (!existingBooking.roomName.equals(requestedBooking.roomName)) 
-          return true;
-
-      if (requestedBooking.arrivalDate.compareTo(existingBooking.arrivalDate) >= 0 &&
-          requestedBooking.arrivalDate.compareTo(existingBooking.departureDate) <=0)
-          return false;
-  
-      return true;
-  }
-
-  private boolean canBookingBeMade(final Booking requestedBooking) {
+  private boolean bookingCanBeMade(final Booking requestedBooking) {
     for (final Booking existingBooking : this.bookings) {
-      if (!canBookingBeMade(requestedBooking, existingBooking))
+      if (existingBooking.doesConflictWith(requestedBooking))
         return false;
     }
     
     return true;
-  }
-  
-  public void onCommand(final BookingCommand command) {
-      final Booking requestedBooking = new Booking(
-        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-      if (canBookingBeMade(requestedBooking))
-        bookingSucceeds(command);
-      else
-        bookingFails(command);
-  }
-  ```
-
-Finally, let's get rid of the [feature envy]() in the comparison of booking dates 
-by moving the decision logic into the `Booking` class:
-
-```java
-  private boolean canBookingBeMade(final Booking requestedBooking, final Booking existingBooking) {
-      if (!existingBooking.roomName.equals(requestedBooking.roomName)) 
-          return true;
-
-      if (existingBooking.isDateBetweenArrivalAndDepartureDates(requestedBooking.arrivalDate))
-          return false;
-  
-      return true;
   }
   
   // ...
@@ -544,16 +582,76 @@ by moving the decision logic into the `Booking` class:
 
       // ...
       
-      public boolean isDateBetweenArrivalAndDepartureDates(final LocalDate aDate) {
-          return aDate.compareTo(this.arrivalDate) >= 0 && aDate.compareTo(this.departureDate) <=0;
-      }
-
+        public boolean doesConflictWith(final Booking anotherBooking) {
+            return anotherBooking.roomName.equals(this.roomName) && 
+              !(anotherBooking.arrivalDate.isAfter(this.departureDate) ||
+              anotherBooking.departureDate.isBefore(this.arrivalDate));
+        }
 ```
 
 ### Rehydrating the aggregate root by replaying all events
 
 It is now time to see if we can resurrect a `Hotel` aggregate by replaying events.
 
+```java
+    @Test
+    void rehydratedHotelAggregateShouldNotAllowDoubleReservations() {
+        List<Event> events = new ArrayList<Event>();
+        events.add(new BookingCreatedEvent(
+            A_CLIENT_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+        ));
+        StubEventSourceRepository repository = new StubEventSourceRepository(events);
+        Hotel rehydratedHotel = repository.load(UUID.randomUUID());
+      
+        rehydratedHotel.onCommand(redRoomBookingCommand);
+      
+        List<Event> storedEvents = repository.getEventsFor(rehydratedHotel.getId());
+        assertTrue(storedEvents.size() == 2);
+        assertTrue(storedEvents.get(1) instanceof BookingFailedEvent);
+
+        verifyBookingFailedEvent((BookingFailedEvent) storedEvents.get(1), redRoomBookingCommand);
+    }
+  ```
+
+Let's first extend the `EventSourceRepository`  and its stub implementation with
+a `load()` operation
+
+```java
+ public StubEventSourceRepository() {
+    this(new ArrayList<Event>());
+  }
+  
+  public StubEventSourceRepository(final List<Event> events) {
+      this.eventList = events;
+  }
+
+  @Override
+  public Hotel load(final UUID aggregateRootId) {
+      Hotel hotel = new Hotel(this);
+      this.eventList.stream().forEach(event -> hotel.apply(event));
+      return hotel;
+  }
+
+  // ...
+``` 
+
+Also, we need to implemet the `apply()` method of the aggregate in both
+the `AggregateRoot` interface and `Hotel` aggregate:
+
+```java  
+  @Override
+  public void apply(final Event event) {
+    if (event instanceof BookingCreatedEvent) 
+      onEvent((BookingCreatedEvent) event);
+    else if (event instanceof BookingFailedEvent)
+      onEvent((BookingFailedEvent) event);
+  }
+```
+
+This makes our test pass.
+
+Isn't there anything we can come up with to improve the conditionals based on the
+`instanceof` checks?
 
 
 

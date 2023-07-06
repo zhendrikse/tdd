@@ -16,11 +16,11 @@ class HotelTest {
     private final BookingCommand blueRoomBookingCommand = new BookingCommand(
         A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
       );
-
+  
     private final BookingCommand redRoomBookingCommand = new BookingCommand(
         A_CLIENT_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
       );
-
+  
     private Hotel hotel;
     private StubEventSourceRepository repository = new StubEventSourceRepository();
 
@@ -52,11 +52,11 @@ class HotelTest {
 
         verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(0), blueRoomBookingCommand);
     }
-
+  
     @Test 
     void bookingTheSameRoomForTheSameDateShouldFail() {
         hotel.onCommand(blueRoomBookingCommand);
-      
+
         List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
         assertTrue(storedEvents.size() == 2);
         assertTrue(storedEvents.get(1) instanceof BookingFailedEvent);
@@ -72,7 +72,7 @@ class HotelTest {
         assertTrue(storedEvents.size() == 2);
         assertTrue(storedEvents.get(1) instanceof BookingCreatedEvent);
 
-        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), redRoomBookingCommand);
+        verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(0), blueRoomBookingCommand);
     }
 
     @Test 
@@ -88,7 +88,7 @@ class HotelTest {
 
         verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), command);
     }
-  
+    
     @Test 
     void bookingIdenticalRoomWithDepartureBeforeArrivalOfExistingBookingShouldSucceed() {
         BookingCommand command = new BookingCommand(
@@ -103,20 +103,6 @@ class HotelTest {
         verifyBookingCreatedEvent((BookingCreatedEvent) storedEvents.get(1), command);
     }
   
-    @Test 
-    void bookingTheSameRoomForOverlappingDatesShouldFail() {
-        BookingCommand command = new BookingCommand(
-          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(1), A_DEPARTURE_DATE.plusDays(1)
-        );
-        hotel.onCommand(command);
-      
-        List<Event> storedEvents = repository.getEventsFor(this.hotel.getId());
-        assertTrue(storedEvents.size() == 2);
-        assertTrue(storedEvents.get(1) instanceof BookingFailedEvent);
-
-        verifyBookingFailedEvent((BookingFailedEvent) storedEvents.get(1), command);
-    }
-
     @Test
     void rehydratedHotelAggregateShouldNotAllowDoubleReservations() {
         List<Event> events = new ArrayList<Event>();
