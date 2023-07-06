@@ -2,6 +2,7 @@ import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import static java.util.stream.Collectors.toList;
 
 public class Hotel implements AggregateRoot {
     private final UUID id = UUID.randomUUID();
@@ -40,12 +41,11 @@ public class Hotel implements AggregateRoot {
     }
 
   private boolean bookingCanBeMade(final Booking requestedBooking) {
-    for (final Booking existingBooking : this.bookings) {
-      if (existingBooking.doesConflictWith(requestedBooking))
-        return false;
-    }
-    
-    return true;
+    return this.bookings
+      .stream()
+      .filter(booking -> booking.doesConflictWith(requestedBooking))
+      .collect(toList())
+      .isEmpty();
   }
   
   public void onCommand(final BookingCommand command) {

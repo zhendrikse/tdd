@@ -569,12 +569,11 @@ boolean decision logic:
 
 ```java
   private boolean bookingCanBeMade(final Booking requestedBooking) {
-    for (final Booking existingBooking : this.bookings) {
-      if (existingBooking.doesConflictWith(requestedBooking))
-        return false;
-    }
-    
-    return true;
+    return this.bookings
+      .stream()
+      .filter(booking -> booking.doesConflictWith(requestedBooking))
+      .collect(toList())
+      .isEmpty();  
   }
   
   // ...
