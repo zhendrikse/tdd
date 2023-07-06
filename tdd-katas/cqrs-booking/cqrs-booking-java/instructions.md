@@ -651,8 +651,29 @@ the `AggregateRoot` interface and `Hotel` aggregate:
 This makes our test pass.
 
 Isn't there anything we can come up with to improve the conditionals based on the
-`instanceof` checks?
+`instanceof` checks? Yes we can!
 
+```java
+  @Override
+  public void apply(final Event event) {
+    this.onEventDispatcher.get(event.getClass()).accept(event);
+  }
+``` 
+
+where
+
+```java
+public class Hotel implements AggregateRoot {
+    // ...
+  
+    private final Map<Class, Consumer<Event>> onEventDispatcher = new HashMap<>();
+
+    public Hotel(final EventSourceRepository repository) {
+        this.eventSourceRepository = repository;
+        this.onEventDispatcher.put(BookingCreatedEvent.class, event -> onEvent((BookingCreatedEvent) event));
+        this.onEventDispatcher.put(BookingFailedEvent.class, event -> onEvent((BookingFailedEvent) event));
+    }
+```
 
 
 ## Overview of the reservations

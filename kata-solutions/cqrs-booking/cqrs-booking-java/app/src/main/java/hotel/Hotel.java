@@ -1,6 +1,9 @@
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.function.Consumer;
 import java.time.LocalDate;
 import static java.util.stream.Collectors.toList;
 
@@ -8,9 +11,12 @@ public class Hotel implements AggregateRoot {
     private final UUID id = UUID.randomUUID();
     private final EventSourceRepository eventSourceRepository;
     private final List<Booking> bookings = new ArrayList<>();
+    private final Map<Class, Consumer<Event>> onEventDispatcher = new HashMap<>();
 
     public Hotel(final EventSourceRepository repository) {
         this.eventSourceRepository = repository;
+        this.onEventDispatcher.put(BookingCreatedEvent.class, event -> onEvent((BookingCreatedEvent) event));
+        this.onEventDispatcher.put(BookingFailedEvent.class, event -> onEvent((BookingFailedEvent) event));
     }
 
     @Override 
@@ -59,10 +65,7 @@ public class Hotel implements AggregateRoot {
   
   @Override
   public void apply(final Event event) {
-    if (event instanceof BookingCreatedEvent) 
-      onEvent((BookingCreatedEvent) event);
-    else if (event instanceof BookingFailedEvent)
-      onEvent((BookingFailedEvent) event);
+    this.onEventDispatcher.get(event.getClass()).accept(event);
   }
 
   class Booking implements Event {
