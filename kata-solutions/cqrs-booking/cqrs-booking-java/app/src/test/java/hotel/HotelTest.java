@@ -11,14 +11,15 @@ class HotelTest {
     private static final String RED_ROOM_NAME = "The Red Room";
     private static final LocalDate AN_ARRIVAL_DATE = LocalDate.of(2020, 1, 20);
     private static final LocalDate A_DEPARTURE_DATE = LocalDate.of(2020, 1, 22);
-    private static final UUID A_UUID = UUID.randomUUID();
+    private static final UUID A_CLIENT_UUID = UUID.randomUUID();
+    private static final UUID HOTEL_UUID = UUID.randomUUID();
 
     private final BookingCommand blueRoomBookingCommand = new BookingCommand(
-        A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+        A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
       );
 
     private final BookingCommand redRoomBookingCommand = new BookingCommand(
-        A_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+        A_CLIENT_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
       );
 
     private Hotel hotel;
@@ -26,7 +27,7 @@ class HotelTest {
 
     @BeforeEach
     void setUpHotelWithBlueRoomBooking() {
-        this.hotel = new Hotel(repository);
+        this.hotel = repository.load(HOTEL_UUID);
         hotel.onCommand(blueRoomBookingCommand);
     }
 
@@ -78,7 +79,7 @@ class HotelTest {
     @Test 
     void bookingIdenticalRoomForAvailableDateShouldSucceed() {
         BookingCommand command = new BookingCommand(
-          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(4), A_DEPARTURE_DATE.plusDays(4)
+          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(4), A_DEPARTURE_DATE.plusDays(4)
         );
         hotel.onCommand(command);
       
@@ -92,7 +93,7 @@ class HotelTest {
     @Test 
     void bookingIdenticalRoomWithDepartureBeforeArrivalOfExistingBookingShouldSucceed() {
         BookingCommand command = new BookingCommand(
-          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.minusDays(4), A_DEPARTURE_DATE.minusDays(4)
+          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.minusDays(4), A_DEPARTURE_DATE.minusDays(4)
         );
         hotel.onCommand(command);
       
@@ -106,7 +107,7 @@ class HotelTest {
     @Test 
     void bookingTheSameRoomForOverlappingDatesShouldFail() {
         BookingCommand command = new BookingCommand(
-          A_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(1), A_DEPARTURE_DATE.plusDays(1)
+          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(1), A_DEPARTURE_DATE.plusDays(1)
         );
         hotel.onCommand(command);
       
@@ -121,10 +122,10 @@ class HotelTest {
     void rehydratedHotelAggregateShouldNotAllowDoubleReservations() {
         List<Event> events = new ArrayList<Event>();
         events.add(new BookingCreatedEvent(
-            A_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+            A_CLIENT_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
         ));
         StubEventSourceRepository repository = new StubEventSourceRepository(events);
-        Hotel rehydratedHotel = new Hotel(repository);
+        Hotel rehydratedHotel = repository.load(HOTEL_UUID);
       
         rehydratedHotel.onCommand(redRoomBookingCommand);
       
