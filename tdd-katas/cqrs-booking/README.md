@@ -10,8 +10,9 @@ The aim is to be able to create a booking solution for one hotel.
 
 The first 2 users stories are:
 
-- As a user I whant to see all free rooms.
-- As a user I whant to book a room.
+1. As a user I whant to book a room.
+2. As a user I want to see all free rooms.
+3. As a user I want to remove a booking
 
 As stated in the introduction, the constraint is that we have to use the CQRS pattern
 

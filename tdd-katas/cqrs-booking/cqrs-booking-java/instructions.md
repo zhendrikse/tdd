@@ -12,8 +12,7 @@ the provided ``README.md`` in there.
 
 # The implementation
 
-We start with the user story to create a booking. We could equally well have
-started with the user story to view all bookings, of course.
+We start with the user story to create a booking. 
 
 ## Making a booking
 
@@ -24,17 +23,31 @@ assume that every first booking succeeds.
 
 How do we assert that booking has successfully been completed?
 By verifying a `BookingCreatedEvent` has been "sent", of course!
+We have put the word sent between quotes, since we don't have 
+an event bus yet. So what can we do instead?
 
-However, since we don't have an event bus yet, we decide to store
-all the change events in the aggregate root `Hotel` itself. Note
-that this explains the word "aggregate", as the `Hotel` aggregates
+A first step towards a possible approach is to realize that 
+all the change emitted created by the aggregate root `Hotel` need to 
+be collected somehow shomewhere. By the way, note that this also
+explains the word "aggregate", as the `Hotel` aggregates
 all change events.
 
-Obviously, it would be evil to just expose all these events to the
-outside world. As in the (near) future we have to be able to store the
-events in an event store (via a Repository), let's assume there will be
-a method `persist()` in the `Hotel` aggregate, that returns an immutable
-set of change events that need to be persisted.
+Events emitted by the `Hotel` aggregate are typically stored in
+a database that is usually coined accordingly: the event store.
+
+As this database is external to our domain (model), 
+this in turn calls for yet another application of ports &amp; adapters:
+we are going to ask an event source repository to load and store the
+events emitted by the `Hotel` aggregate. Formulated more precisely,
+we ask the repository to load and store the `Hotel` aggregate itself, 
+as its state is uniquely determined (rehydrated) by 
+the events stored in the event store (using the `apply()` method).
+
+We can already make use of this fact, by pluggin in a stub event
+source repository for now. We can query this stub repository 
+for the events that have (or haven't) been sent! 
+So let's start with a stub event source
+repository right from the start and use in our tests.
 
 ```java
 class HotelTest {
@@ -49,7 +62,8 @@ class HotelTest {
 
     @Test 
     void firstBookingCanAlwaysBeMade() {
-        Hotel hotel = new Hotel(new ArrayList<Event>());
+        StubEventSourceRepository repository = new StubEventSourceRepository();
+        Hotel hotel = new Hotel(repository);
         hotel.onCommand(blueRoomBookingCommand);
       
         assertTrue(hotel.persist().size() == 1);
@@ -64,9 +78,8 @@ class HotelTest {
 }
 ``` 
 
-Note that we already require the constructor of `Hotel` to receive a list
-of events, so that the `Hotel` aggregate can be re-hydrated in the future. 
-For now we will leave this list empty though.
+Note that we already require the constructor of `Hotel` to receive a reference
+to the event store repository, so that we can query the events stored in there. 
 
 So let's first define the `BookingCommand`:
 
@@ -126,29 +139,37 @@ that makes the compilation succeed:
 
 ```java
 public class Hotel implements AggregateRoot {
-    private final List<Event> changes;
-  
-    public Hotel(final List<Event> events) {
-        this.changes = new ArrayList<Event>();
+    private final UUID id = UUID.randomUUID();
+    private final EventSourceRepository eventSourceRepository;
+
+    public Hotel(final EventSourceRepository repository) {
+        this.eventSourceRepository = repository;
     }
+
+    @Override 
+    public UUID getId() {
+        return id;
+   }
 
     public void onCommand(final BookingCommand command) {
-    }
-
-    @Override
-    public List<Event> persist() {
-        return Collections.unmodifiableList(this.changes);
     }
 }
 ```
 
 where we introduced the `AggregateRoot` interface, as we eventually aim to
-be able to persist all aggregate roots (not just the `Hotel` aggregate, of course).
+be able to persist more than one particular hotel.
 
 ```java
 public interface AggregateRoot {
-   List<Event> persist();
+   UUID getId();
 }
+```
+
+Any realistic implementation of the repository interface characterizing
+the event store will eventually use this `getId()` method.
+
+```java
+public interface EventSourceRepository<Hotel> {}
 ```
 
 The test still fails though, as no events are created yet. So let's add a
