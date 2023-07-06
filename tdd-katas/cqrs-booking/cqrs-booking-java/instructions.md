@@ -670,6 +670,10 @@ public class Hotel implements AggregateRoot {
 
     public Hotel(final EventSourceRepository repository) {
         this.eventSourceRepository = repository;
+        initOnEventDispatcherMap();
+    }
+
+    private void initOnEventDispatcherMap() {
         this.onEventDispatcher.put(BookingCreatedEvent.class, event -> onEvent((BookingCreatedEvent) event));
         this.onEventDispatcher.put(BookingFailedEvent.class, event -> onEvent((BookingFailedEvent) event));
     }

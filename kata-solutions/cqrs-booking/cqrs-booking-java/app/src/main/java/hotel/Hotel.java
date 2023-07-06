@@ -15,6 +15,10 @@ public class Hotel implements AggregateRoot {
 
     public Hotel(final EventSourceRepository repository) {
         this.eventSourceRepository = repository;
+        initOnEventDispatcherMap();
+    }
+
+    private void initOnEventDispatcherMap() {
         this.onEventDispatcher.put(BookingCreatedEvent.class, event -> onEvent((BookingCreatedEvent) event));
         this.onEventDispatcher.put(BookingFailedEvent.class, event -> onEvent((BookingFailedEvent) event));
     }
@@ -22,7 +26,7 @@ public class Hotel implements AggregateRoot {
     @Override 
     public UUID getId() {
         return id;
-   }
+    }
 
    private void bookingFails(final BookingCommand command) {
         BookingFailedEvent event = new BookingFailedEvent(
