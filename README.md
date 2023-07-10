@@ -4,7 +4,14 @@ Test-driven development is a lot of fun and a
 great form of "deliberate practice". You have arrived at the right
 place, you'll find here everything to get you up and running!
 
-For coaches: these materials may seamlessly be incorporated into 
+Please consult the [readme in the tdd-katas folder](./tdd-katas/README.md)
+to learn more about which katas address which aspects at which difficulty 
+level and how they relate to the 
+[24 key capabilities to drive improvement in software delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/).
+
+#### Coaching purposes
+
+These materials may seamlessly be incorporated into 
 [the Samman coaching method](https://www.sammancoaching.org/).
 
 ## Features
@@ -38,7 +45,7 @@ so-called [coding katas](https://apiumhub.com/tech-blog-barcelona/code-kata/):
 > The intent behind code kata is similar &#8212; [codekata.com](http://codekata.com/) 
 
 Generally speaking, each kata tries to target one or more skills, 
-and this curriculum is no exception to that general rule. As the saying goes, 
+and this collection is no exception to that general rule. As the saying goes, 
 practice makes perfect, and the same holds for (coding) katas: preferably 
 you make them your own by repeating them _time and again_.
 
