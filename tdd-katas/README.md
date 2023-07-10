@@ -34,11 +34,9 @@ is outlined next.
 
 ## Continuous Delivery Capabilities
 
-#### [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
-
 The column with the checkmarks and crosses indicates which practices are covered with the coding katas. A plus-minus sign indicates partial coverage.
 
-|     | Capability                                       | Covered | Explanation |
+|     | [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1) | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
 |  1. | Use Version Control for all Production Artifacts | ✔      | You may always opt to use a version control system when practicing your katas. When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
 |  2. | Automate Your Deployment Process                 | ✔      | This capability is covered by the Fibonacci kata. |
@@ -74,18 +72,14 @@ kind of second line of defense, as it should.
 
 ## Architecture Capabilities
 
-#### [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
-
-|     | Capability                                       | Covered | Explanation |
+|     | [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2) | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
 |  9. | Use a Loosely Coupled Architecture               | ✔      | This capability is touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/), [CQRS](https://martinfowler.com/bliki/CQRS.html), and [dependency inversion](https://www.sammancoaching.org/learning_hours/testable_design/dependency_inversion_principle.html). |
 | 10. | Architect for Empowered Teams                    | ✗      | This capability is not covered by any of the katas yet. |
 
 ## Product and Process Capabilities
 
-#### [Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3)
-
-|     | Capability                                             | Covered | Explanation |
+|     | [Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3) | Covered | Explanation |
 | --- | ------------------------------------------------------ | ------- | ----------- |
 | 11. | Gather and Implement Customer Feedback                 | ±       | This may partially be covered e.g. in the video store kata, by asking the participants to produce a PDF statement printer after they have finished with the HTML variant. After finishing the PDF statement printer, ask them to write a CSV variant, etc. Continue to the point where they will start to complain "What do you actually need this statement format for", and grab that opportunity to teach the participants to ask that question for each and every single feature now and in the future! |
 | 12. | Make the Flow of Work Visible through the Value Stream | ±       | This may partially be addressed by showing the participants the TODO list that they are encouraged to maintain while practicing the katas. In addition, you may consider using [Scrumblr](https://github.com/aliasaria/scrumblr), an instance of which you can easily start yourself [here](https://replit.com/@zwh/Scrumblr). |
@@ -94,9 +88,7 @@ kind of second line of defense, as it should.
 
 ## Lean Management and Monitoring Capabilities
 
-#### [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4)
-
-|     | Capability                                                                  | Covered | Explanation |
+|     | [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4) | Covered | Explanation |
 | --- | --------------------------------------------------------------------------- | ------- | ----------- |
 | 15. | Have Lightweight Change Approval Processes                                  | ✔       | [Pair programming](https://martinfowler.com/articles/on-pair-programming.html) and/or intrateam code reviews are continuously being addressed when practicing katas in coding dojos.   |
 | 16. | Monitor across Applications and Infrastructure to Inform Business Decisions | ✗       | This capability is not covered by any of the katas yet.   |
@@ -106,9 +98,7 @@ kind of second line of defense, as it should.
 
 ## Cultural Capabilities
 
-#### [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5)
-
-|     | Capability                                                      | Covered | Explanation |
+|     | [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5) | Covered | Explanation |
 | --- | --------------------------------------------------------------- | ------- | ----------- |
 | 20. | Support a Generative Culture                          | ✔       | Almost all hallmarks of this measure such as good information flow, high cooperation, and trust, bridging between teams, and conscious inquiry are continually practiced during coding dojos, albeit only within the team (so obviously _not_ including leadership itself)   |
 | 21. | Encourage and Support Learning                        | ✔       | The whole purpose of a coding dojo and its katas is to support learning!  |
