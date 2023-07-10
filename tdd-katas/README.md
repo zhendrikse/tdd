@@ -9,20 +9,21 @@ The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 |  3. |  [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI |
 |  4. |  [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture              |
 |  5. |  [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI               |
-|  6. |  [game-of-life](./game-of-life)             | M          | Generic TDD skills (**small steps**)               |
-|  7. |  [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests |
-|  8. |  [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**         |
-|  9. |  [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                 |
-| 10. |  [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                            |
-| 11. |  [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                     |
-| 12. |  [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions              |
-| 13. |  [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
-| 14. |  [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
-| 15. |  [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
-| 16. |  [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
-| 17. |  [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
-| 18. |  [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
-| 19. |  [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
+|  6. |  [fibonacci-kata](./db-adapter-kata)        | M          | Pipelines / Automated deployments / IaC            |
+|  7. |  [game-of-life](./game-of-life)             | M          | Generic TDD skills (**small steps**)               |
+|  8. |  [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests |
+|  9. |  [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**         |
+| 10. |  [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                 |
+| 11. |  [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                            |
+| 12. |  [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                     |
+| 13. |  [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions              |
+| 14. |  [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
+| 15. |  [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
+| 16. |  [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
+| 17. |  [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
+| 18. |  [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
+| 19. |  [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
+| 20. |  [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
 
 # Relation with 24 Key Capabilities
 
@@ -37,13 +38,13 @@ The column with the checkmarks and crosses indicates which practices are covered
 |     | Capability                                       | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
 |  1. | Use Version Control for all Production Artifacts | ✔      | You may always opt to use a version control system when practicing your katas. When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
-|  2. | Automate Your Deployment Process                 | ✗      | This capability is not covered by any of the katas yet |
+|  2. | Automate Your Deployment Process                 | ✔      | This capability is covered by the Fibonacci kata. |
 |  3. | Implement Continuous Integration                 | ±       | Continuous integration is elaborated on directly below this table |
 |  4. | Use Trunk-Based Development Methods              | ✔      | Trunk-based development can easily be simulated when katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
 |  5. | Implement Test Automation                        | ✔      | Obviously, this is what lies at the heart of TDD. Note that integration testing is also touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/). Even more so, many katas address the subject of creating a testable design, and/or address techniques for making legacy code testable. |
 |  6. | Support Test Data Management                     | ✗      | This capability is not covered by any of the katas yet ||
 |  7. | Shift Left on Security                           | ✗      | This capability is not covered by any of the katas yet ||
-|  8. | Implement Continuous Delivery                    | ±       | When the skills and heuristics of TDD are correctly and properly applied all of the time, it should be no problem for a team to go to production at any given time. This is one of the hallmarks of continuous delivery! So TDD is a necessary but not sufficient condition for continuous delivery. |
+|  8. | Implement Continuous Delivery                    | ✔       | When the skills and heuristics of TDD are correctly and properly applied all of the time, it should be no problem for a team to go to production at any given time. This is one of the hallmarks of continuous delivery! So TDD is a necessary but not sufficient condition for continuous delivery. |
 
 According to Martin Fowler, **continuous integration** is 
 [characterized by the following practices](https://martinfowler.com/articles/continuousIntegration.html):
@@ -51,16 +52,16 @@ According to Martin Fowler, **continuous integration** is
 | CI practice                                                       | Covered | 
 | ----------------------------------------------------------------- | ------- | 
 | Maintain a Single Source Repository                               | ✔      |
-| Automate the Build                                                | ✗      |
+| Automate the Build                                                | ✔      |
 | Make Your Build Self-Testing                                      | ✔      |
 | Everyone Commits To the Mainline Every Day                        | ✔      |
-| Every Commit Should Build the Mainline on an Integration Machine  | ✗      |
-| Fix Broken Builds Immediately                                     | ✗      |
+| Every Commit Should Build the Mainline on an Integration Machine  | ✔      |
+| Fix Broken Builds Immediately                                     | ±      |
 | Keep the Build Fast                                               | ✔      |
 | Test in a Clone of the Production Environment                     | ✗      |
 | Make it Easy for Anyone to Get the Latest Executable              | ✗      |
 | Everyone can see what's happening                                 | ±       |
-| Automate Deployment                                               | ✗      | 
+| Automate Deployment                                               | ✔      | 
 
 Note that when practicing katas in a dojo format, you are effectively continuously integrating 
 all changes of all participants. The main difference compared to working on regular user stories 
