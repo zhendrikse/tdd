@@ -1,14 +1,15 @@
-- [ ] Add option to Javascript cookiecutter to make in browser version
-- [ ] Finish CQRS booking kata
+- [+] Finish CQRS booking kata
    - Series [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/) 
    - [CQRS event sourcing with Lagom](https://nljug.org/java-magazine/cqrs-a-event-sourcing-met-lagom/)
+- [+] Make Python cookiecutter work for ptw and coverage
+- [+] Create instruction for bugs zero kata Python
 - [ ] Make DB adapter kata work with other than ReplitDB
+- [ ] Resurrect Fibonacci kata (also create preparation instructions)
 - [ ] Create solution for countries kata
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
-- [+] Make Python cookiecutter work for ptw and coverage
 - [ ] Make Python cookiecutter work for ptw and mamba
-- [+] Create instruction for bugs zero kata Python
 - [ ] Implement code coverage for Typescript cookiecutter
+- [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make Clojure cookiecutter
 - [ ] Extend poker hands Python met Deck, shuffle and hands
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
