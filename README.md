@@ -4,6 +4,9 @@ Test-driven development is a lot of fun and a
 great form of "deliberate practice". You have arrived at the right
 place, you'll find here everything to get you up and running!
 
+For coaches: these materials may seamlessly be incorporated into 
+[the Samman coaching method](https://www.sammancoaching.org/).
+
 ## Features
 
 This repository contains materials to practice TDD
