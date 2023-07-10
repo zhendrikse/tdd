@@ -2,27 +2,27 @@
 
 The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 
-| Kata                                           | Difficulty | Aspects                                            |
-| ---------------------------------------------- | ---------- | -------------------------------------------------- |
-|  1. [bugs-zero-kata](./bugs-zero-kata)         | M          | **Legacy code** / **Refactoring** / Approval tests |
-|  2. [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**          |
-|  3. [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI |
-|  4. [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture              |
-|  5. [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI               |
-|  6. [game-of-life](./game-of-life)             | M          | Generic TDD skills (**small steps**)               |
-|  7. [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests |
-|  8. [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**         |
-|  9. [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                 |
-| 10. [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                            |
-| 11. [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                     |
-| 12. [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions              |
-| 13. [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
-| 14. [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
-| 15. [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
-| 16. [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
-| 17. [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
-| 18. [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
-| 19. [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
+|     | Kata                                        | Difficulty | Aspects                                            |
+| --- | ------------------------------------------- | ---------- | -------------------------------------------------- |
+|  1. | [bugs-zero-kata](./bugs-zero-kata)          | M          | **Legacy code** / **Refactoring** / Approval tests |
+|  2. |  [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**          |
+|  3. |  [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI |
+|  4. |  [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture              |
+|  5. |  [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI               |
+|  6. |  [game-of-life](./game-of-life)             | M          | Generic TDD skills (**small steps**)               |
+|  7. |  [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests |
+|  8. |  [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**         |
+|  9. |  [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                 |
+| 10. |  [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                            |
+| 11. |  [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                     |
+| 12. |  [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions              |
+| 13. |  [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
+| 14. |  [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
+| 15. |  [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
+| 16. |  [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
+| 17. |  [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
+| 18. |  [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
+| 19. |  [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
 
 # Relation with 24 Key Capabilities
 
@@ -31,6 +31,17 @@ The relation to the
 is outlined next.
 
 ## [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
+
+|     | Capability                                       | Covered |
+| --- | ------------------------------------------------ | ------- |
+|  1. | Use Version Control for all Production Artifacts | ✔      | 
+|  2. | Automate Your Deployment Process                 | ✗      |
+|  3. | Implement Continuous Integration                 | ±       |
+|  4. | Use Trunk-Based Development Methods              | ✔      |
+|  5. | Implement Test Automation                        | ✔      |
+|  6. | Support Test Data Management                     | ✗      |
+|  7. | Shift Left on Security                           | ✗      |
+|  8. | Implement Continuous Delivery                    | ±       |
 
 ### 1. Use Version Control for all Production Artifacts
 
@@ -60,7 +71,7 @@ According to Martin Fowler, continuous integration is
 | Keep the Build Fast                                               | ✔      |
 | Test in a Clone of the Production Environment                     | ✗      |
 | Make it Easy for Anyone to Get the Latest Executable              | ✗      |
-| Everyone can see what's happening                                 | ✔      |
+| Everyone can see what's happening                                 | ±       |
 | Automate Deployment                                               | ✗      | 
 
 The column with the checkmarks and crosses indicates which practices are covered with the coding katas.
@@ -70,8 +81,6 @@ all changes of all participants. The main difference compared to working on regu
 is the lack of a build server, that performs all the checks and balances that all developers 
 should actually execute already before committing any code. This way the build server acts as a 
 kind of second line of defense, as it should.
-
-
 
 ### 4. Use Trunk-Based Development Methods
 
@@ -99,6 +108,12 @@ This is not covered (yet).
 This is not covered (yet).
 
 ### 8. Implement Continuous Delivery (CD)
+
+When the skills and heuristics of TDD are correctly and properly applied all of the time,
+it should be no problem for a team to go to production at any given time. This is one of the
+hallmarks of continuous delivery!
+
+So TDD is a necessary but not sufficient condition for continuous delivery.
 
 ## [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
 
