@@ -32,32 +32,20 @@ is outlined next.
 
 ## [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
 
+The column with the checkmarks and crosses indicates which practices are covered with the coding katas. A plus-minus sign indicates partial coverage.
+
 |     | Capability                                       | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
 |  1. | Use Version Control for all Production Artifacts | ✔      | You may always opt to use a version control system when practicing your katas. When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
-|  2. | Automate Your Deployment Process                 | ✗      |  |
-|  3. | Implement Continuous Integration                 | ±       | |
-|  4. | Use Trunk-Based Development Methods              | ✔      | |
-|  5. | Implement Test Automation                        | ✔      | |
-|  6. | Support Test Data Management                     | ✗      | |
-|  7. | Shift Left on Security                           | ✗      | |
-|  8. | Implement Continuous Delivery                    | ±       | |
+|  2. | Automate Your Deployment Process                 | ✗      | This capability is not covered by any of the katas yet |
+|  3. | Implement Continuous Integration                 | ±       | Continuous integration is elaborated on directly below this table |
+|  4. | Use Trunk-Based Development Methods              | ✔      | Trunk-based development can easily be simulated when katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
+|  5. | Implement Test Automation                        | ✔      | Obviously, this is what lies at the heart of TDD. Note that integration testing is also touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/). Even more so, many katas address the subject of creating a testable design, and/or address techniques for making legacy code testable. |
+|  6. | Support Test Data Management                     | ✗      | This capability is not covered by any of the katas yet ||
+|  7. | Shift Left on Security                           | ✗      | This capability is not covered by any of the katas yet ||
+|  8. | Implement Continuous Delivery                    | ±       | When the skills and heuristics of TDD are correctly and properly applied all of the time, it should be no problem for a team to go to production at any given time. This is one of the hallmarks of continuous delivery! So TDD is a necessary but not sufficient condition for continuous delivery. |
 
-### 1. Use Version Control for all Production Artifacts
-
-You may always opt to use a version control system when practicing your katas. 
-
-When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), 
-a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to
-pass the code on.
-
-### 2. Automate Your Deployment Process
-
-For this capability, a dedicated kata still needs to be added.
-
-### 3. Implement Continuous Integration
-
-According to Martin Fowler, continuous integration is 
+According to Martin Fowler, **continuous integration** is 
 [characterized by the following practices](https://martinfowler.com/articles/continuousIntegration.html):
 
 | CI practice                                                       | Covered | 
@@ -74,46 +62,12 @@ According to Martin Fowler, continuous integration is
 | Everyone can see what's happening                                 | ±       |
 | Automate Deployment                                               | ✗      | 
 
-The column with the checkmarks and crosses indicates which practices are covered with the coding katas.
-
 Note that when practicing katas in a dojo format, you are effectively continuously integrating 
 all changes of all participants. The main difference compared to working on regular user stories 
 is the lack of a build server, that performs all the checks and balances that all developers 
 should actually execute already before committing any code. This way the build server acts as a 
 kind of second line of defense, as it should.
 
-### 4. Use Trunk-Based Development Methods
-
-Trunk-based development can easily be simulated when katas are done 
-in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), 
-a commit by the person(s) ending his/her/their turn and a subsequent pull 
-by the next may be used to pass the code on.
-
-### 5. Implement Test Automation
-
-Obviously, this is what lies at the heart of TDD. 
-Note that integration testing is also touched upon when the katas
-involve working with 
-[ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/).
-
-Even more so, many katas address the subject of creating a testable design,
-and/or address techniques for making legacy code testable.
-
-### 6. Support Test Data Management
-
-This is not covered (yet).
-
-### 7. Shift Left on Security
-
-This is not covered (yet).
-
-### 8. Implement Continuous Delivery (CD)
-
-When the skills and heuristics of TDD are correctly and properly applied all of the time,
-it should be no problem for a team to go to production at any given time. This is one of the
-hallmarks of continuous delivery!
-
-So TDD is a necessary but not sufficient condition for continuous delivery.
 
 ## [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
 
