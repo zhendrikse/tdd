@@ -32,16 +32,16 @@ is outlined next.
 
 ## [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
 
-|     | Capability                                       | Covered |
-| --- | ------------------------------------------------ | ------- |
-|  1. | Use Version Control for all Production Artifacts | ✔      | 
-|  2. | Automate Your Deployment Process                 | ✗      |
-|  3. | Implement Continuous Integration                 | ±       |
-|  4. | Use Trunk-Based Development Methods              | ✔      |
-|  5. | Implement Test Automation                        | ✔      |
-|  6. | Support Test Data Management                     | ✗      |
-|  7. | Shift Left on Security                           | ✗      |
-|  8. | Implement Continuous Delivery                    | ±       |
+|     | Capability                                       | Covered | Explanation |
+| --- | ------------------------------------------------ | ------- | ----------- |
+|  1. | Use Version Control for all Production Artifacts | ✔      | You may always opt to use a version control system when practicing your katas. When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
+|  2. | Automate Your Deployment Process                 | ✗      |  |
+|  3. | Implement Continuous Integration                 | ±       | |
+|  4. | Use Trunk-Based Development Methods              | ✔      | |
+|  5. | Implement Test Automation                        | ✔      | |
+|  6. | Support Test Data Management                     | ✗      | |
+|  7. | Shift Left on Security                           | ✗      | |
+|  8. | Implement Continuous Delivery                    | ±       | |
 
 ### 1. Use Version Control for all Production Artifacts
 
