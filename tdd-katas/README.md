@@ -68,7 +68,6 @@ is the lack of a build server, that performs all the checks and balances that al
 should actually execute already before committing any code. This way the build server acts as a 
 kind of second line of defense, as it should.
 
-
 ## [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
 
 |     | Capability                                       | Covered | Explanation |
@@ -78,78 +77,35 @@ kind of second line of defense, as it should.
 
 ## [Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3)
 
-### 11. Gather and Implement Customer Feedback
-
-This can be covered e.g. with the video store kata, by asking the participants
-to produce a PDF statement printer after they have finished with the HTML variant.
-After finishing the PDF statement printer, ask them to write a CSV variant, etc.
-Continue to the point where they will start to complain "What do you actually need
-this statement format for", and grab that opportunity to teach the participants to
-ask that question for each and every single feature now and in the future!
-
-### 12. Make the Flow of Work Visible through the Value Stream
-
-This is addressed by showing the participants the TODO list that they are encouraged
-to maintain while practicing the katas. In addition, you may consider using 
-[Scrumblr](https://github.com/aliasaria/scrumblr), an instance of which you can 
-easily start yourself [here](https://replit.com/@zwh/Scrumblr).
-
-### 13. Work in Small Batches
-
-This aspect is addressed in _all_ katas.
-
-### 14. Foster and Enable Team Experimentation 
-
-Although this aspect isn't addressed _specifically_ by any of the katas, it is
-addressed _implicitly_, as the way of working practiced here contributes to
-the capability of a team to carry out experiments.
+|     | Capability                                             | Covered | Explanation |
+| --- | ------------------------------------------------------ | ------- | ----------- |
+| 11. | Gather and Implement Customer Feedback                 | ±       | This may partially be covered e.g. in the video store kata, by asking the participants to produce a PDF statement printer after they have finished with the HTML variant. After finishing the PDF statement printer, ask them to write a CSV variant, etc. Continue to the point where they will start to complain "What do you actually need this statement format for", and grab that opportunity to teach the participants to ask that question for each and every single feature now and in the future! |
+| 12. | Make the Flow of Work Visible through the Value Stream | ±       | This may partially be addressed by showing the participants the TODO list that they are encouraged to maintain while practicing the katas. In addition, you may consider using [Scrumblr](https://github.com/aliasaria/scrumblr), an instance of which you can easily start yourself [here](https://replit.com/@zwh/Scrumblr). |
+| 13. | Work in Small Batches                                  | ✔      | This aspect is addressed in _all_ katas as it lies at the heart of TDD! |
+| 14. | Foster and Enable Team Experimentation                 | ±       | Although this aspect isn't addressed _specifically_ by any of the katas, it is addressed _implicitly_, as the way of working practiced here contributes to the capability of a team to carry out experiments. |
 
 ## [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4)
 
-## 15. Have Lightweight Change Approval Processes
-
-[Pair programming](https://martinfowler.com/articles/on-pair-programming.html) and/or 
-intrateam code reviews are continuously being addressed when practicing katas in coding dojos. 
-
-### 16. Monitor across Applications and Infrastructure to Inform Business Decisions
-
-This is not covered (yet).
-
-### 17. Check System Health Proactively
-
-This is not covered (yet).
-
-### 18. Improve Processes and Manage Work with Work-In-Process (WIP) Limits
-
-In each and every kata, it is always emphasized to focus on one change at a time,
-and one change at a time only!
-
-### 19. Visualize Work to Monitor Quality and Communicate throughout the Team
-
-This is not covered (yet).
+|     | Capability                                                                  | Covered | Explanation |
+| --- | --------------------------------------------------------------------------- | ------- | ----------- |
+| 15. | Have Lightweight Change Approval Processes                                  | ✔       | [Pair programming](https://martinfowler.com/articles/on-pair-programming.html) and/or intrateam code reviews are continuously being addressed when practicing katas in coding dojos.   |
+| 16. | Monitor across Applications and Infrastructure to Inform Business Decisions | ✗       | This capability is not covered by any of the katas yet.   |
+| 17. | Check System Health Proactively                                             | ✗       | This capability is not covered by any of the katas yet.   |
+| 18. | Improve Processes and Manage Work with Work-In-Process (WIP) Limits         | ±        | In each and every kata, it is always emphasized to focus on one change at a time, and one change at a time only!   |
+| 19. | Visualize Work to Monitor Quality and Communicate throughout the Team       | ✗       | This capability is not covered by any of the katas yet.   |
 
 ## [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5)
 
-### 20. Support a Generative Culture
+### 20. 
 
-Almost all hallmarks of this measure such as good information flow, high cooperation, and trust, 
-bridging between teams, and conscious inquiry are continually practiced during coding dojos.
+|     | Capability                                                                  | Covered | Explanation |
+| --- | --------------------------------------------------------------------------- | ------- | ----------- |
+| 20. | Support a Generative Culture                          | ✔       | Almost all hallmarks of this measure such as good information flow, high cooperation, and trust, bridging between teams, and conscious inquiry are continually practiced during coding dojos, albeit only within the team (so obviously _not_ including leadership itself)   |
+| 21. | Encourage and Support Learning                        | ✔       | The whole purpose of a coding dojo and its katas is to support learning!
+   |
+| 22. | Support and Facilitate Collaboration among Teams      | ✗       | This capability is not covered by any of the katas yet.   |
+| 23. | Provide Resources and Tools that Make Work Meaningful | ✔       | As this measure is about being given the tools and resources needed to do your job well, it is obviously continually being addressed by these katas.   |
+| 24. | Support or Embody Transformational Leadership         | ±        | As participants need regular time to practice these katas, management needs to be informed about these activities. Viewed this way, at least one of the aspects of transformational leadership (intellectual stimulation) is a prerequisite for making coding dojos a reality.   |
 
-### 21. Encourage and Support Learning
 
-The whole purpose of a coding dojo and its katas is to support learning!
 
-### 22. Support and Facilitate Collaboration among Teams
-
-This is not covered (yet).
-
-### 23. Provide Resources and Tools that Make Work Meaningful.
-
-As this measure is about being given the tools and resources needed to do your job well,
-it is obviously continually being addressed by these katas.
-
-### 24. Support or Embody Transformational Leadership
-
-As participants need regular time to practice these katas, management needs to be
-informed about these activities. In this way, at least one of the aspects of transformational
-leadership (intellectual stimulation) is a prerequisite for making coding dojos a reality. 
