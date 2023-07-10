@@ -679,5 +679,35 @@ public class Hotel implements AggregateRoot {
     }
 ```
 
+## CSV event store
+
+According to [Implementing Event Sourcing in Python – part 2, robust event store atop PostgreSQL](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-2-robust-event-store-atop-postgresql/),
+an event store should accommodate all types of events by storing them as follows:
+
+```
+Events
+---------------------------------------
+| uuid | aggregate_uuid | name | data |
+---------------------------------------
+```
+
+To retrieve a stream of events from the event store (see
+[Returning Stream vs. Collection](https://www.baeldung.com/java-return-stream-collection)), 
+let's extend the `EventStoreRepository` interface accordingly
+
+```java
+public interface EventSourceRepository<Hotel> {
+  void save(UUID aggregateRootId, Event newEvent);
+  
+  Hotel load(UUID aggregateRootId);
+  
+  Stream<Event> loadStream(UUID aggregateRootId);
+}
+```
+
+We are going to test this functionality in the next section.
 
 ## Overview of the reservations
+
+Let's create a test that verifies our list with bookings after
+one (or optionally more) booking(s) have been made.

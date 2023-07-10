@@ -2,6 +2,7 @@ import java.util.UUID;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Stream;
 
 public class StubEventSourceRepository implements EventSourceRepository {
   private final List<Event> eventList;
@@ -28,5 +29,10 @@ public class StubEventSourceRepository implements EventSourceRepository {
 
   public List<Event> getEventsFor(final UUID aggregateRootId) {
       return Collections.unmodifiableList(this.eventList);
+  }
+
+  @Override
+  public Stream<Event> loadStream(final UUID aggregateRootId) {
+    return null;
   }
 }

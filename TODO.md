@@ -2,9 +2,7 @@
 - [ ] Finish CQRS booking kata
    - Series [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/) 
    - [CQRS event sourcing with Lagom](https://nljug.org/java-magazine/cqrs-a-event-sourcing-met-lagom/)
-   - See [this post](https://stackoverflow.com/questions/4685563/how-to-pass-a-function-as-a-parameter-in-java) and [this post](https://stackoverflow.com/questions/4480334/how-to-call-a-method-stored-in-a-hashmap-java) for dispatching events to the appropriate methods
 - [ ] Make DB adapter kata work with other than ReplitDB
-- [ ] Monkey patching in tire pressure kata
 - [ ] Create solution for countries kata
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [+] Make Python cookiecutter work for ptw and coverage
@@ -31,3 +29,4 @@
 - [X] Modify instructions.md vending-machine-typescript from javascript -> typescript
 - [X] Allow for hamcrest assertions when using pytest
 - [X] Make Java cookiecutter
+- [X] Monkey patching in tire pressure kata

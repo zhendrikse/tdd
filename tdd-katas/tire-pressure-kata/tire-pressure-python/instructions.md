@@ -61,7 +61,7 @@ Now we can write tests for this function like so:
       assert alarm.is_alarm_on
 ```
 
-  # Option 2: [slice](https://www.sammancoaching.org/learning_hours/testable_design/slice.html)
+# Option 2: [slice](https://www.sammancoaching.org/learning_hours/testable_design/slice.html)
 
 We extend the `check()` function with one paramter:
 
@@ -77,6 +77,31 @@ We extend the `check()` function with one paramter:
 
 As described in option 1, we can now start writing our tests.
 
-  # Option 3: [monkey patching](https://betterprogramming.pub/what-are-duck-typing-and-monkey-patching-in-python-2f8e3d6b864f)
+# Option 3: [monkey patching](https://betterprogramming.pub/what-are-duck-typing-and-monkey-patching-in-python-2f8e3d6b864f)
 
-  
+Since Python is a dynamically dynamic (scripting) language, it is
+not only possible to dynamically type your variables, but also modify
+its behavior at run time, e.g. redefine a function by declaring new
+functionality in a function with the same name. The latter definition 
+then overrules the behavior of the former. This is effectively what
+monkey patching is all about.
+
+Let's apply that to our tire pressure case by defining a new
+function in our test that always returns a tire pressure that 
+is too high:
+
+```python
+def get_too_high_tire_pressure(self):
+  return 23
+``` 
+
+Next we assign this function to the `Sensor` class:
+
+```python
+Sensor.pop_next_pressure_psi_value = get_too_high_tire_pressure
+``` 
+
+We can now consistently check that the alarm is on when the tire
+pressure is too high. Likewise we can test when it is too low.
+
+
