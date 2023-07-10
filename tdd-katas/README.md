@@ -32,7 +32,9 @@ The relation to the
 [24 Key Capabilities to Drive Improvement in Software Delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/)
 is outlined next.
 
-## [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
+## Continuous Delivery Capabilities
+
+### The category [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
 
 The column with the checkmarks and crosses indicates which practices are covered with the coding katas. A plus-minus sign indicates partial coverage.
 
@@ -70,7 +72,9 @@ is the lack of a build server, that performs all the checks and balances that al
 should actually execute already before committing any code. This way the build server acts as a 
 kind of second line of defense, as it should.
 
-## [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
+## Architecture Capabilities
+
+### The category [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
 
 |     | Capability                                       | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
@@ -86,7 +90,9 @@ kind of second line of defense, as it should.
 | 13. | Work in Small Batches                                  | ✔      | This aspect is addressed in _all_ katas as it lies at the heart of TDD! |
 | 14. | Foster and Enable Team Experimentation                 | ±       | Although this aspect isn't addressed _specifically_ by any of the katas, it is addressed _implicitly_, as the way of working practiced here contributes to the capability of a team to carry out experiments. |
 
-## [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4)
+## Lean Management and Monitoring Capabilities
+
+### The category [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4)
 
 |     | Capability                                                                  | Covered | Explanation |
 | --- | --------------------------------------------------------------------------- | ------- | ----------- |
@@ -96,7 +102,9 @@ kind of second line of defense, as it should.
 | 18. | Improve Processes and Manage Work with Work-In-Process (WIP) Limits         | ±        | In each and every kata, it is always emphasized to focus on one change at a time, and one change at a time only!   |
 | 19. | Visualize Work to Monitor Quality and Communicate throughout the Team       | ✗       | This capability is not covered by any of the katas yet.   |
 
-## [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5)
+## Cultural Capabilities
+
+### The category [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5)
 
 |     | Capability                                                      | Covered | Explanation |
 | --- | --------------------------------------------------------------- | ------- | ----------- |
