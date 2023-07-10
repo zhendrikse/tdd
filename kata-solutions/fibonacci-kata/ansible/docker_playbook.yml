@@ -1,0 +1,25 @@
+---
+- hosts: all:!localhost
+  gather_facts: no
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: install pip3
+      become: true
+      command: apt install python3-pip -y
+
+    - name: install docker-py
+      command: pip3 install docker-py
+
+    - name: pull docker image
+      command: docker pull zhendrikse/harvest-masterclass:latest
+
+    - name: start docker container
+      docker_container:
+        state: started
+        restart_policy: always
+        name: fibonacci-api
+        image: zhendrikse/harvest-masterclass:latest
+        ports:
+          - 80:80
