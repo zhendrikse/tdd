@@ -2,28 +2,29 @@
 
 The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 
-|     | Kata                                        | Difficulty | Aspects                                            |
-| --- | ------------------------------------------- | ---------- | -------------------------------------------------- |
-|  1. | [bugs-zero-kata](./bugs-zero-kata)          | M          | **Legacy code** / **Refactoring** / Approval tests |
-|  2. |  [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**          |
-|  3. |  [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI |
-|  4. |  [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture              |
-|  5. |  [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI               |
-|  6. |  [fibonacci-kata](./db-adapter-kata)        | M          | Pipelines / Automated deployments / IaC            |
-|  7. |  [game-of-life](./game-of-life)             | M          | Generic TDD skills (**small steps**)               |
-|  8. |  [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests |
-|  9. |  [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**         |
-| 10. |  [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                 |
-| 11. |  [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                            |
-| 12. |  [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                     |
-| 13. |  [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions              |
-| 14. |  [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
-| 15. |  [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
-| 16. |  [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
-| 17. |  [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
-| 18. |  [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
-| 19. |  [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
-| 20. |  [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
+|     | Kata                                       | Difficulty | Aspects                                            |
+| --- | ------------------------------------------ | ---------- | -------------------------------------------------- |
+|  1. | [bugs-zero-kata](./bugs-zero-kata)         | M          | **Legacy code** / **Refactoring** / Approval tests |
+|  2. | [audio-player-kata](./audio-player-kata)   | M          | Outside-in / Mocks / London school of TDD          |
+|  3. | [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**          |
+|  4. | [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI |
+|  5. | [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture              |
+|  6. | [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI               |
+|  7. | [fibonacci-kata](./db-adapter-kata)        | M          | Pipelines / Automated deployments / IaC            |
+|  8. | [game-of-life](./game-of-life)             | M          | Generic TDD skills (**small steps**)               |
+|  9. | [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests |
+| 10. | [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**         |
+| 11. | [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                 |
+| 12. | [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                            |
+| 13. | [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                     |
+| 14. | [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions              |
+| 15. | [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
+| 16. | [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
+| 17. | [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
+| 18. | [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
+| 19. | [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
+| 20. | [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
+| 21. | [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
 
 # Relation with 24 Key Capabilities
 

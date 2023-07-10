@@ -4,6 +4,8 @@
 - [+] Make Python cookiecutter work for ptw and coverage
 - [+] Create instruction for bugs zero kata Python
 - [ ] Make DB adapter kata work with other than ReplitDB
+- [ ] Resurrect audio player kata from london school presentation
+  - [ ] Make london school presentation more generic
 - [ ] Resurrect Fibonacci kata (also create preparation instructions)
 - [ ] Create solution for countries kata
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
