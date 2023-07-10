@@ -71,16 +71,10 @@ kind of second line of defense, as it should.
 
 ## [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
 
-### 9. Use a Loosely Coupled Architecture
-
-This capability is touched upon when the katas
-involve working with 
-[ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/)
-and [dependency inversion](https://www.sammancoaching.org/learning_hours/testable_design/dependency_inversion_principle.html).
-
-### 10. Architect for Empowered Teams
-
-This is not covered (yet).
+|     | Capability                                       | Covered | Explanation |
+| --- | ------------------------------------------------ | ------- | ----------- |
+|  9. | Use a Loosely Coupled Architecture               | ✔      | This capability is touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/), [CQRS](https://martinfowler.com/bliki/CQRS.html), and [dependency inversion](https://www.sammancoaching.org/learning_hours/testable_design/dependency_inversion_principle.html). |
+| 10. | Architect for Empowered Teams                    | ✗      | This capability is not covered by any of the katas yet. |
 
 ## [Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3)
 
