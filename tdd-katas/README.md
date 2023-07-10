@@ -96,13 +96,10 @@ kind of second line of defense, as it should.
 
 ## [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5)
 
-### 20. 
-
-|     | Capability                                                                  | Covered | Explanation |
-| --- | --------------------------------------------------------------------------- | ------- | ----------- |
+|     | Capability                                                      | Covered | Explanation |
+| --- | --------------------------------------------------------------- | ------- | ----------- |
 | 20. | Support a Generative Culture                          | ✔       | Almost all hallmarks of this measure such as good information flow, high cooperation, and trust, bridging between teams, and conscious inquiry are continually practiced during coding dojos, albeit only within the team (so obviously _not_ including leadership itself)   |
-| 21. | Encourage and Support Learning                        | ✔       | The whole purpose of a coding dojo and its katas is to support learning!
-   |
+| 21. | Encourage and Support Learning                        | ✔       | The whole purpose of a coding dojo and its katas is to support learning!  |
 | 22. | Support and Facilitate Collaboration among Teams      | ✗       | This capability is not covered by any of the katas yet.   |
 | 23. | Provide Resources and Tools that Make Work Meaningful | ✔       | As this measure is about being given the tools and resources needed to do your job well, it is obviously continually being addressed by these katas.   |
 | 24. | Support or Embody Transformational Leadership         | ±        | As participants need regular time to practice these katas, management needs to be informed about these activities. Viewed this way, at least one of the aspects of transformational leadership (intellectual stimulation) is a prerequisite for making coding dojos a reality.   |
