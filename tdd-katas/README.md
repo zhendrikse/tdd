@@ -34,7 +34,7 @@ is outlined next.
 
 ## Continuous Delivery Capabilities
 
-### The category [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
+#### [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1)
 
 The column with the checkmarks and crosses indicates which practices are covered with the coding katas. A plus-minus sign indicates partial coverage.
 
@@ -74,7 +74,7 @@ kind of second line of defense, as it should.
 
 ## Architecture Capabilities
 
-[Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
+#### [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2)
 
 |     | Capability                                       | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
@@ -83,7 +83,7 @@ kind of second line of defense, as it should.
 
 ## Product and Process Capabilities
 
-[Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3)
+#### [Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3)
 
 |     | Capability                                             | Covered | Explanation |
 | --- | ------------------------------------------------------ | ------- | ----------- |
@@ -94,7 +94,7 @@ kind of second line of defense, as it should.
 
 ## Lean Management and Monitoring Capabilities
 
-[Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4)
+#### [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4)
 
 |     | Capability                                                                  | Covered | Explanation |
 | --- | --------------------------------------------------------------------------- | ------- | ----------- |
@@ -106,7 +106,7 @@ kind of second line of defense, as it should.
 
 ## Cultural Capabilities
 
-[Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5)
+#### [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5)
 
 |     | Capability                                                      | Covered | Explanation |
 | --- | --------------------------------------------------------------- | ------- | ----------- |
@@ -115,6 +115,3 @@ kind of second line of defense, as it should.
 | 22. | Support and Facilitate Collaboration among Teams      | ✗       | This capability is not covered by any of the katas yet.   |
 | 23. | Provide Resources and Tools that Make Work Meaningful | ✔       | As this measure is about being given the tools and resources needed to do your job well, it is obviously continually being addressed by these katas.   |
 | 24. | Support or Embody Transformational Leadership         | ±        | As participants need regular time to practice these katas, management needs to be informed about these activities. Viewed this way, at least one of the aspects of transformational leadership (intellectual stimulation) is a prerequisite for making coding dojos a reality.   |
-
-
-
