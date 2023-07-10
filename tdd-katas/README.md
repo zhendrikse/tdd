@@ -46,7 +46,32 @@ For this capability, a dedicated kata still needs to be added.
 
 ### 3. Implement Continuous Integration
 
-For this capability, a dedicated kata still needs to be added.
+According to Martin Fowler, continuous integration is 
+[characterized by the following practices](https://martinfowler.com/articles/continuousIntegration.html):
+
+| CI practice                                                       | Covered | 
+| ----------------------------------------------------------------- | ------- | 
+| Maintain a Single Source Repository                               | ✔      |
+| Automate the Build                                                | ✗      |
+| Make Your Build Self-Testing                                      | ✔      |
+| Everyone Commits To the Mainline Every Day                        | ✔      |
+| Every Commit Should Build the Mainline on an Integration Machine  | ✗      |
+| Fix Broken Builds Immediately                                     | ✗      |
+| Keep the Build Fast                                               | ✔      |
+| Test in a Clone of the Production Environment                     | ✗      |
+| Make it Easy for Anyone to Get the Latest Executable              | ✗      |
+| Everyone can see what's happening                                 | ✔      |
+| Automate Deployment                                               | ✗      | 
+
+The column with the checkmarks and crosses indicates which practices are covered with the coding katas.
+
+Note that when practicing katas in a dojo format, you are effectively continuously integrating 
+all changes of all participants. The main difference compared to working on regular user stories 
+is the lack of a build server, that performs all the checks and balances that all developers 
+should actually execute already before committing any code. This way the build server acts as a 
+kind of second line of defense, as it should.
+
+
 
 ### 4. Use Trunk-Based Development Methods
 
