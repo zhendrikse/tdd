@@ -1,11 +1,19 @@
+package hotel;
+
 import java.util.UUID;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.function.Consumer;
-import java.time.LocalDate;
 import static java.util.stream.Collectors.toList;
+
+import command.BookingCommand;
+import event.BookingCreatedEvent;
+import event.BookingFailedEvent;
+import event.Event;
+import repository.EventSourceRepository;
 
 public class Hotel implements AggregateRoot {
     private final UUID id = UUID.randomUUID();
@@ -72,23 +80,4 @@ public class Hotel implements AggregateRoot {
     this.onEventDispatcher.get(event.getClass()).accept(event);
   }
 
-  class Booking implements Event {
-      public final UUID clientId; 
-      public final String roomName;
-      public final LocalDate arrivalDate;
-      public final LocalDate departureDate;
-      
-      public Booking(final UUID clientId, final String roomName, final LocalDate arrivalDate, final LocalDate departureDate) {
-          this.clientId = clientId;
-          this.roomName = roomName;
-          this.arrivalDate = arrivalDate;
-          this.departureDate = departureDate;
-      }
-
-      public boolean doesConflictWith(final Booking anotherBooking) {
-          return anotherBooking.roomName.equals(this.roomName) && 
-            !(anotherBooking.arrivalDate.isAfter(this.departureDate) ||
-            anotherBooking.departureDate.isBefore(this.arrivalDate));
-      }
-  }
 }

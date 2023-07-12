@@ -1,8 +1,13 @@
+package repository;
+
 import java.util.UUID;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Stream;
+
+import event.Event;
+import hotel.Hotel;
 
 public class StubEventSourceRepository implements EventSourceRepository {
   private final List<Event> eventList;

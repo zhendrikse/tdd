@@ -1,3 +1,5 @@
+package event;
+
 import java.util.UUID;
 import java.time.LocalDate;
 

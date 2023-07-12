@@ -309,7 +309,7 @@ public class Hotel implements AggregateRoot {
         bookingFails(command);
     }
 
-    class Booking implements Event {
+    class Booking {
         public final UUID clientId; 
         public final String roomName;
         public final LocalDate arrivalDate;
@@ -721,14 +721,17 @@ class CsvEventSourceRepositoryTest {
     void repositoryContainsBookingCreatedEventAfterSuccessfulBookings() {
         EventSourceRepository repository = new InMemoryEventSourceRepository();
         Hotel hotel = new Hotel(repository);
-        hotel.onCommand(blueRoomBookingCommand);
-        hotel.onCommand(redRoomBookingCommand);
+        hotel.onCommand(HotelTest.BLUE_ROOM_BOOKING_COMMAND);
+        hotel.onCommand(HotelTest.RED_ROOM_BOOKING_COMMAND);
         
         Stream eventStream = repository.loadStream(hotel.getId());
         assertEquals(eventStream.count(), 2);
     }
 }
 ```
+
+where we have made both the `HotelTest` class as well as the booking commands
+in their public (and the latter also final static, of course);
 
 A minimal implementation would thus become
 
@@ -762,9 +765,9 @@ in-memory event store, we have to force a per-aggregate ID:
         EventSourceRepository repository = new InMemoryEventSourceRepository();
         
         Hotel hotel1 = new Hotel(repository);
-        hotel1.onCommand(blueRoomBookingCommand);
+        hotel1.onCommand(HotelTest.BLUE_ROOM_BOOKING_COMMAND);
         Hotel hotel2 = new Hotel(repository);
-        hotel2.onCommand(redRoomBookingCommand);
+        hotel2.onCommand(HotelTest.RED_ROOM_BOOKING_COMMAND);
         
         Stream eventStream = repository.loadStream(hotel1.getId());
         assertEquals(eventStream.count(), 1);

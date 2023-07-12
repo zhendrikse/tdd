@@ -1,3 +1,5 @@
+package repository;
+
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -5,6 +7,9 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+
+import event.Event;
+import hotel.Hotel;
 
 public class InMemoryEventSourceRepository implements EventSourceRepository<Hotel> {
   private final Map<UUID, List<Event>> eventStore = new HashMap<>();
