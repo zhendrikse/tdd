@@ -1,0 +1,26 @@
+{
+  "name": "AudioPlayer",
+  "version": "1.0.0",
+  "description": "This kata practices TDD",
+  "scripts": {  
+    "test": "npx http-server -c-1 -p 8888"
+    
+  }, 
+  "keywords": [
+    "tdd",
+    "node",
+    "mocha",
+    "watch",
+    "nodemon",
+    "test",
+    "unittest"
+  ],
+  "author": "Your name",  
+  "devDependencies": {
+     
+    "jasmine-core": "^5.0.1",
+    "http-server": "^14.1.1"
+    
+  }
+}
+
