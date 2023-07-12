@@ -679,7 +679,9 @@ public class Hotel implements AggregateRoot {
     }
 ```
 
-## CSV event store
+## Implementation of the event store
+
+### Introduction
 
 According to [Implementing Event Sourcing in Python – part 2, robust event store atop PostgreSQL](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-2-robust-event-store-atop-postgresql/),
 an event store should accommodate all types of events by storing them as follows:
@@ -705,7 +707,96 @@ public interface EventSourceRepository<Hotel> {
 }
 ```
 
-We are going to test this functionality in the next section.
+### In-memory event store
+
+In order to be able to connect our projections to the event store, we need
+a minimalistic implementation of the `EventStoreRepository` interface.
+Obviously, we are going to do that in a test-driven development manner as well!
+
+Our first test could very well look like this:
+
+```java
+class CsvEventSourceRepositoryTest {
+    @Test
+    void repositoryContainsBookingCreatedEventAfterSuccessfulBookings() {
+        EventSourceRepository repository = new InMemoryEventSourceRepository();
+        Hotel hotel = new Hotel(repository);
+        hotel.onCommand(blueRoomBookingCommand);
+        hotel.onCommand(redRoomBookingCommand);
+        
+        Stream eventStream = repository.loadStream(hotel.getId());
+        assertEquals(eventStream.count(), 2);
+    }
+}
+```
+
+A minimal implementation would thus become
+
+```java
+public class InMemoryEventSourceRepository implements EventSourceRepository<Hotel> {
+  private final List<Event> eventStore = new ArrayList<>();
+
+  @Override
+  public void save(final UUID aggregateRootId, final Event newEvent) {
+      this.eventStore.add(newEvent);
+  }
+  
+  @Override
+  public Hotel load(final UUID aggregateRootId) {
+    return null;
+  }
+
+  @Override
+  public Stream<Event> loadStream(final UUID aggregateRootId) {
+    return eventStore.stream();
+  }
+}
+```
+
+If we insist on being able to support different aggregate roots in our
+in-memory event store, we have to force a per-aggregate ID:
+
+```java
+    @Test
+    void repositoryDistinguishesBetweenDifferentAggregateRoots() {
+        EventSourceRepository repository = new InMemoryEventSourceRepository();
+        
+        Hotel hotel1 = new Hotel(repository);
+        hotel1.onCommand(blueRoomBookingCommand);
+        Hotel hotel2 = new Hotel(repository);
+        hotel2.onCommand(redRoomBookingCommand);
+        
+        Stream eventStream = repository.loadStream(hotel1.getId());
+        assertEquals(eventStream.count(), 1);
+    }
+```
+
+Of course, this test immediately fails, so we have to generalize our
+implementation like so
+
+```java
+  private final Map<UUID, List<Event>> eventStore = new HashMap<>();
+
+  @Override
+  public void save(final UUID aggregateRootId, final Event newEvent) {
+      if (!eventStore.containsKey(aggregateRootId))
+        eventStore.put(aggregateRootId, new ArrayList<>());
+
+      this.eventStore.get(aggregateRootId).add(newEvent);
+  }
+  
+  @Override
+  public Hotel load(final UUID aggregateRootId) {
+    return null;
+  }
+
+  @Override
+  public Stream<Event> loadStream(final UUID aggregateRootId) {
+    return eventStore.get(aggregateRootId).stream();
+  }
+```
+
+This implementation will suffice for testing our projections.
 
 ## Overview of the reservations
 
