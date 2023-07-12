@@ -803,6 +803,8 @@ This implementation will suffice for testing our projections.
 
 ## Overview of the reservations
 
+### Towards a query model: a list with bookings
+
 Let's create a test that verifies our list with bookings after
 one (or optionally more) booking(s) have been made.
 
@@ -925,3 +927,9 @@ public interface AggregateRoot extends EventHandler {
    UUID getId();
 }
 ```
+
+### Implementing the query
+
+Finally we can implement the required query `Room[] freeRooms(arrival: Date, departure: Date)`. 
+Let's write a test first.
+
