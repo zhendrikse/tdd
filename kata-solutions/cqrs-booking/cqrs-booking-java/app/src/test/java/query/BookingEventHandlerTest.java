@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import event.BookingCreatedEvent;
 import event.Event;
 import hotel.Booking;
-import query.eventhandler.EventHandler;
+import event.EventHandler;
 import query.eventhandler.BookingEventHandler;
 
 class BookingEventHandlerTest {

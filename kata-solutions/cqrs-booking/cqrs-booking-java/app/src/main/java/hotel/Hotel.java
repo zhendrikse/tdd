@@ -13,71 +13,68 @@ import command.BookingCommand;
 import event.BookingCreatedEvent;
 import event.BookingFailedEvent;
 import event.Event;
+import event.EventDispatcher;
 import repository.EventSourceRepository;
 
 public class Hotel implements AggregateRoot {
-    private final UUID id = UUID.randomUUID();
-    private final EventSourceRepository eventSourceRepository;
-    private final List<Booking> bookings = new ArrayList<>();
-    private final Map<Class, Consumer<Event>> onEventDispatcher = new HashMap<>();
+  private final UUID id = UUID.randomUUID();
+  private final EventSourceRepository eventSourceRepository;
+  private final List<Booking> bookings = new ArrayList<>();
+  private final EventDispatcher eventDispatcher = new EventDispatcher(this);
 
-    public Hotel(final EventSourceRepository repository) {
-        this.eventSourceRepository = repository;
-        initOnEventDispatcherMap();
-    }
+  public Hotel(final EventSourceRepository repository) {
+    this.eventSourceRepository = repository;
+  }
 
-    private void initOnEventDispatcherMap() {
-        this.onEventDispatcher.put(BookingCreatedEvent.class, event -> onEvent((BookingCreatedEvent) event));
-        this.onEventDispatcher.put(BookingFailedEvent.class, event -> onEvent((BookingFailedEvent) event));
-    }
+  @Override
+  public UUID getId() {
+    return id;
+  }
 
-    @Override 
-    public UUID getId() {
-        return id;
-    }
+  private void bookingFails(final BookingCommand command) {
+    BookingFailedEvent event = new BookingFailedEvent(command.clientId, command.roomName, command.arrivalDate,
+        command.departureDate);
+    onEvent(event);
+    this.eventSourceRepository.save(this.id, event);
+  }
 
-   private void bookingFails(final BookingCommand command) {
-        BookingFailedEvent event = new BookingFailedEvent(
-          command.clientId, command.roomName, command.arrivalDate, 
-  command.departureDate);
-        onEvent(event);
-        this.eventSourceRepository.save(this.id, event);
-    }
-  
-    private void bookingSucceeds(final BookingCommand command) {
-        BookingCreatedEvent event = new BookingCreatedEvent(
-          command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-        onEvent(event);
-        this.eventSourceRepository.save(this.id, event);
-    }    
-      
-    private void onEvent(final BookingFailedEvent event) {}
-      
-    private void onEvent(final BookingCreatedEvent event) {
-        this.bookings.add(new Booking(
-          event.clientId, event.roomName, event.arrivalDate, event.departureDate));
-    }
+  private void bookingSucceeds(final BookingCommand command) {
+    BookingCreatedEvent event = new BookingCreatedEvent(
+        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
+    onEvent(event);
+    this.eventSourceRepository.save(this.id, event);
+  }
+
+  @Override
+  public void onEvent(final BookingFailedEvent event) {
+  }
+
+  @Override
+  public void onEvent(final BookingCreatedEvent event) {
+    this.bookings.add(new Booking(
+        event.clientId, event.roomName, event.arrivalDate, event.departureDate));
+  }
 
   private boolean bookingCanBeMade(final Booking requestedBooking) {
     return this.bookings
-      .stream()
-      .filter(booking -> booking.doesConflictWith(requestedBooking))
-      .collect(toList())
-      .isEmpty();
+        .stream()
+        .filter(requestedBooking::doesConflictWith)
+        .collect(toList())
+        .isEmpty();
   }
-  
+
   public void onCommand(final BookingCommand command) {
-      final Booking requestedBooking = new Booking(
+    final Booking requestedBooking = new Booking(
         command.clientId, command.roomName, command.arrivalDate, command.departureDate);
-      if (bookingCanBeMade(requestedBooking))
-        bookingSucceeds(command);
-      else
-        bookingFails(command);
+    if (bookingCanBeMade(requestedBooking))
+      bookingSucceeds(command);
+    else
+      bookingFails(command);
   }
-  
+
   @Override
-  public void apply(final Event event) {
-    this.onEventDispatcher.get(event.getClass()).accept(event);
+  public void onEvent(final Event event) {
+    eventDispatcher.dispatch(event);
   }
 
 }

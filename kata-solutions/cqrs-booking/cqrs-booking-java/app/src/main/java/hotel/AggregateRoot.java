@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import event.Event;
+import event.EventHandler;
 
-public interface AggregateRoot {
-   void apply(final Event event);
+public interface AggregateRoot extends EventHandler {
    UUID getId();
 }

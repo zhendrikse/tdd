@@ -805,3 +805,119 @@ This implementation will suffice for testing our projections.
 
 Let's create a test that verifies our list with bookings after
 one (or optionally more) booking(s) have been made.
+
+```java
+class BookingEventHandlerTest {
+    @Test
+    void createsListWithBookingsFromBookingsEventStream() {
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(new BookingCreatedEvent(UUID.randomUUID(), "room one", LocalDate.of(2001, 1, 1), LocalDate.of(2001, 1, 11)));
+        Stream<Event> eventStream = eventList.stream();
+
+        final EventHandler bookingEventHandler = new BookingEventHandler();
+        eventStream.forEach(bookingEventHandler::onEvent);
+        assertEquals(((BookingEventHandler) bookingEventHandler).getBookings().size(), 1);
+    }
+}
+```
+
+We mock the stream of events that we eventually are going to get from the event respository.
+We apply the `onEvent(Event)` method from the event handler to each event:
+
+```java
+public class BookingEventHandler implements EventHandler {
+    private final List<Booking> bookings = new ArrayList<>();
+
+    @Override
+    public void onEvent(final Event event) {
+        if (event instanceof BookingCreatedEvent) {
+            BookingCreatedEvent bookingEvent = (BookingCreatedEvent) event;
+            bookings.add(new Booking(bookingEvent.clientId, bookingEvent.roomName, bookingEvent.arrivalDate, bookingEvent.departureDate));
+        }
+    }
+
+    public List<Booking> getBookings() {
+        return Collections.unmodifiableList(bookings);
+    }
+}
+```
+
+This makes our test pass. At the same time, we recognize something we have seen before.
+The `BookingEventHandler` is in need of the same event dispatcher that we implemented in 
+the `Hotel` class! So let's apply the DRY principle and share this code.
+
+After a series of small steps, we eventually arrive at a dedicated event dispatcher:
+
+```java
+public class EventDispatcher {
+    private final Map<Class, Consumer<Event>> onEventDispatcher = new HashMap<>();
+    private final EventHandler eventHandler;
+
+    public EventDispatcher(final EventHandler eventHandler) {
+        initOnEventDispatcherMap();
+        this.eventHandler = eventHandler;
+    }
+
+    private void initOnEventDispatcherMap() {
+        onEventDispatcher.put(BookingCreatedEvent.class, event -> eventHandler.onEvent((BookingCreatedEvent) event));
+        onEventDispatcher.put(BookingFailedEvent.class, event -> eventHandler.onEvent((BookingFailedEvent) event));
+    }
+
+    public void dispatch(final Event event) {
+        onEventDispatcher.get(event.getClass()).accept(event);
+    }
+}
+```
+
+The event handler interface is defined as
+
+```java
+public interface EventHandler {
+    void onEvent(BookingFailedEvent event);
+
+    void onEvent(BookingCreatedEvent event);
+
+    void onEvent(Event event);
+}
+```
+
+Both the aggregate root and query-side event handlers should implement this interface.
+For the aggregate root interface we opted to rename the `apply(Event)` method to
+`onEvent(Event)`. We could equallly well have chosen for naming the `onEvent(Event)`
+method in the `EventHandler` interface `apply(Event)`.
+
+The booking event handler now becomes
+
+```java
+public class BookingEventHandler implements EventHandler {
+    private final List<Booking> bookings = new ArrayList<>();
+    private final EventDispatcher eventDispatcher = new EventDispatcher(this);
+
+    @Override
+    public void onEvent(final BookingCreatedEvent event) {
+        BookingCreatedEvent bookingEvent = (BookingCreatedEvent) event;
+        bookings.add(new Booking(bookingEvent.clientId, bookingEvent.roomName, bookingEvent.arrivalDate, bookingEvent.departureDate));
+    }
+
+    @Override 
+    public void onEvent(final BookingFailedEvent event) {}
+
+    @Override
+    public void onEvent(final Event event) {
+        eventDispatcher.dispatch(event);
+    }
+
+    public List<Booking> getBookings() {
+        return Collections.unmodifiableList(bookings);
+    }
+}
+```
+
+Analogously we can do the same in the `Hotel` class, that now should implement
+the `EventHandler` interface via the `AggregateRoot` interface as well.
+
+```java
+public interface AggregateRoot extends EventHandler {
+   UUID getId();
+}
+```

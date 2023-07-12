@@ -23,7 +23,7 @@ public class StubEventSourceRepository implements EventSourceRepository {
   @Override
   public Hotel load(final UUID aggregateRootId) {
       Hotel hotel = new Hotel(this);
-      this.eventList.stream().forEach(event -> hotel.apply(event));
+      this.eventList.stream().forEach(hotel::onEvent);
       return hotel;
   }
   
