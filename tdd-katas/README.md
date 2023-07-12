@@ -4,7 +4,7 @@ The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 
 |     | Kata                                       | Difficulty | Aspects                                            |
 | --- | ------------------------------------------ | ---------- | -------------------------------------------------- |
-|  1. | [audio-player-kata](./audio-player-kata)   | M          | Outside-in / Mocks / London school of TDD          |
+|  1. | [audio-player-kata](./audio-player-kata)   | M          | London vs. Detroit schools of TDD / Mocks, spies   |
 |  2. | [bugs-zero-kata](./bugs-zero-kata)         | M          | **Legacy code** / **Refactoring** / Approval tests |
 |  3. | [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**          |
 |  4. | [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI |

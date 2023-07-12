@@ -89,16 +89,18 @@ Our preliminary TODO list looks as follows:
 - [ ] Pressing next and previous
 
 
-## London school
-  
-### Step 1: Player in initial state
+# London school
+
+## The playlist user story
+
+### Step 1: Audio player in initial state
 
 Assume that when we switch on the audio player, it displayes the first song in
 the playlist by default.
 
 ```javascript
 describe('Given a just switched on audioplayer', function () {
-  it('should show the first song in the playlist on display', function() {
+  it('shows the first song in the playlist on display', function() {
     audioplayer = new AudioPlayer()
     expect(
       audioplayer.getCurrentSong()).toEqual("play: MyGreatSong.mp3")
@@ -119,7 +121,7 @@ class AudioPlayer {
 ### Step 2: Is the song playing?
 
 ```javascript
-it('should have the play/pause button in state play', function() {
+it('shows the play/pause button in state play', function() {
   var audioplayer = new AudioPlayer()
 
   expect(
@@ -156,12 +158,12 @@ describe('Given a just switched on audioplayer', function () {
     audioplayer = new AudioPlayer()
   })
 
-  it('should show the first song in the playlist on display', function() {
+  it('shows the first song in the playlist on display', function() {
     expect(
       audioplayer.getCurrentSong()).toEqual("play: MyGreatSong.mp3")   
     })
 
-  it('should have the play/pause button in state play', function(){
+  it('shows the play/pause button in state play', function(){
     expect(audioplayer.getPlayPauseButtonStatus()).toEqual(PlayPauseButton.PLAY)
   })
 })
@@ -182,7 +184,7 @@ a press on the previous track button should not have any effects (yet).
 
 ```javascript
 describe('When the previous track button is pressed', function() {
-  it('should do nothing', function() {
+  it('simply ignores the press', function() {
       spyOn(audioplayer, "previousTrack")
       audioplayer.previousTrack()
       expect(audioplayer.previousTrack).toHaveBeenCalled();
@@ -209,7 +211,7 @@ This means we may remove one more item from our TODO list.
 
 ```javascript
 describe('When the next track button is pressed', function () {
-  it('should show the next song in the playlist on display', function () {
+  it('shows the next song in the playlist on display', function () {
     audioplayer.nextTrack()
     expect(audioplayer.getCurrentSong()).toEqual("play: MyUpbeatSong.mp3")
   })
@@ -252,7 +254,7 @@ and our TODO becomes:
 
 ```javascript
 describe('When the next track button is pressed twice', function () {
-  it('should show the third song in the playlist on display', function () {
+  it('shows the third song in the playlist on display', function () {
     audioplayer.nextTrack()
     audioplayer.nextTrack()
     expect(audioplayer.getCurrentSong()).toEqual("play: MyWorkoutSong.mp3")
@@ -260,9 +262,7 @@ describe('When the next track button is pressed twice', function () {
 })
 ```
 
-----
-
-### Make the test pass!
+Let's first make this test pass in the most clumsy way we can think of:
 
 ```javascript
 class AudioPlayer {
@@ -284,143 +284,121 @@ class AudioPlayer {
 }
 ```
 
----
+But obviously this immediately makes some serious refactoring inevitable!
 
-### Refactor...
+### Step 6: Introduction of a playlist collaborator
 
-#### Playlist collaborator inevitable
+1. We first introduce a mock in small increments:
+   ```javascript
+     beforeEach(function () {
+       playlist = jasmine.createSpyObj('playlist',
+         ['getCurrentTrack', 'nextTrack', 'previousTrack'])
+       playlist.getCurrentSong.and.returnValues("MyFavouriteSong.mp3", "MyUpbeatSong.mp3", "MyWorkoutSong.mp3")  
+       audioplayer = new AudioPlayer(playlist)
+     })
+   ```
+   and modify the `AudioPlayer` class accordingly:
 
-Introduce mock in small increments!
+    ```javascript
+    class AudioPlayer {
+      constructor(myPlaylist) {
+        this.playlist = myPlaylist
+        this.currentTrack = this.playlist.getCurrentTrack()
+        this.songCounter = 0
+      }
+    ```
 
-```javascript
-playlist = jasmine.createSpyObj('playlist', ['getCurrentTrack', 'nextTrack'])
-playlist.getCurrentTrack.and.returnValue("MyGreatSong.mp3")
+2. Use the playlist in the `nextTrack()` method:
 
-audioplayer = new AudioPlayer(playlist)
-```
+   First we set up our mock
+   ```javascript
+   playlist.nextTrack.and.returnValues("MyUpbeatSong.mp3", "MyWorkoutSong.mp3")
+   ```
+   which can then be used in our implementation of `nextTrack()`:
+    ```javascript
+      nextTrack() {
+        this.songCounter++
+    
+        if (this.songCounter == 1)
+          this.currentTrack = this.playlist.getNextTrack()
+        else
+          this.currentTrack = this.playlist.getNextTrack()
+      }
+    ```
+    which simplifies to
+    
+    ```javascript
+      nextTrack() {
+         this.currentTrack = this.playlist.getNextTrack()
+      }
+    ```
+    
+3. Grouping the double button presses
 
-----
+    1. Promote the `playlist` to a global `var playlist` 
+    2. Move the `playlist.nextTrack.and.returnValues` to the double-press tests
+    3. Introduce a new `beforeEach` for the double press tests
 
-### Step 1
-
-```javascript
-class AudioPlayer {
-  constructor(myPlaylist) {
-    this.playlist = myPlaylist
-    this.currentTrack = this.playlist.getCurrentTrack()
-    this.songCounter = 0
-  }
-```
-Run unit tests ...
-----
-
-### Step 2
-
-```javascript
-  nextTrack() {
-    this.songCounter++
-
-    if (this.songCounter == 1)
-      this.currentTrack = this.playlist.getNextTrack()
-    else
-      this.currentTrack = this.playlist.getNextTrack()
-  }
-```
-Run unit tests ...
-
-----
-
-### Step 3
-
-```javascript
-  nextTrack() {
-     this.currentTrack = this.playlist.getNextTrack()
-  }
-```
-Run unit test ...
-
-----
-
-### Step 4
-
-#### Grouping the double button presses
-
-1. Promote the `playlist` to a global `var playlist` 
-2. Move the `playlist.getNextTrack.and.returnValues` to the double-press tests
-3. Introduce a new `beforeEach` for the double press tests
-
-To become ... (next slide)
-
-----
-
-```javascript
-describe('Given a next track button command', function () {
-  beforeEach(function () {
-    playlist.getNextTrack.and.returnValues("MyUpbeatSong.mp3", "MyWorkoutSong.mp3")
-    audioplayer.nextTrack()
-  })
-
-  it('should show the next song in the playlist on display', function () {
-    expect(audioplayer.getCurrentSong()).toEqual("play: MyUpbeatSong.mp3")
-  })
-
-  describe('When the next track button is pressed again', function () {
-    it('should show the third song in the playlist on display', function () {
-      audioplayer.nextTrack()
-      expect(audioplayer.getCurrentSong()).toEqual("play: MyWorkoutSong.mp3")
+    ```javascript
+    describe('Given a next track button command', function () {
+      beforeEach(function () {
+        playlist.nextTrack.and.returnValues("MyUpbeatSong.mp3", "MyWorkoutSong.mp3")
+        audioplayer.nextTrack()
+      })
+    
+      it('shows the next song in the playlist on display', function () {
+        expect(audioplayer.getCurrentSong()).toEqual("play: MyUpbeatSong.mp3")
+      })
+    
+      describe('When the next track button is pressed again', function () {
+        it('shows the third song in the playlist on display', function () {
+          audioplayer.nextTrack()
+          expect(audioplayer.getCurrentSong()).toEqual("play: MyWorkoutSong.mp3")
+        })
+      })
     })
-  })
-})
-```
+    ```
+    
+4. Make the test(s) use the playlist too!
 
-----
-### Step 5
+    ```javascript
+    it('shows the first song in the playlist on display', function () {
+      expect(
+        audioplayer.getCurrentSong()).toEqual("play: " + playlist.getCurrentTrack())
+    })
+    ```
 
-#### Make the test(s) use the playlist too!
+5. Updated our plan
+    
+    - ~~Audio player in initial state~~ &#10003;
+    - ~~Previous track button~~ &#10003;
+    - ~~Next track button~~ &#10003;
+    - ~~Next track button twice~~ &#10003;
+    - Pressing next and previous
+    
 
-```javascript
-it('should show the first song in the playlist on display', function () {
-  expect(
-    audioplayer.getCurrentSong()).toEqual("play: " + playlist.getCurrentTrack())
-})
-```
-
----
-
-### Our updated plan
-
-- ~~Audio player in initial state~~ &#10003;
-- ~~Previous track button~~ &#10003;
-- ~~Next track button~~ &#10003;
-- ~~Next track button twice~~ &#10003;
-- Pressing next and previous
-
----
-
-### Pressing next and then previous
+### Step 7: Pressing next and then previous
 
 ```javascript
-describe('When the previous buttons is pressed', function () {
-  it('should show the first song in the playlist on display', function () {
-    playlist.getPreviousTrack.and.returnValue("MyGreatSong.mp3")
+describe('When the previous button is pressed', function () {
+  it('shows the first song in the playlist on display', function () {
+    playlist.previousTrack.and.returnValue("MyGreatSong.mp3")
     audioplayer.previousTrack()
     expect(audioplayer.getCurrentSong()).toEqual("play: MyGreatSong.mp3")
   })
 })
 ```
-(Update `playlist` spy obj method array too!)
+Don't forget to update `playlist` spy obj method array too!
 
-----
+Let's extend our production code accordingly
 
 ```javascript
 previousTrack() {
-  this.currentTrack = this.playlist.getPreviousTrack()
+  this.currentTrack = this.playlist.previousTrack()
 }
 ```
 
----
-
-### Our updated plan
+This also means we have completed our TODO list!
 
 - ~~Audio player in initial state~~ &#10003;
 - ~~Previous track button~~ &#10003;
@@ -428,12 +406,11 @@ previousTrack() {
 - ~~Next track button twice~~ &#10003;
 - ~~Pressing next and previous~~ &#10003;
 
----
 
-### Possible next steps
+## Next steps
 
-- Walk through complete playlist
-- Make the play button work
-- Make the progress bar do its work (difficult!)
+- [ ] Walk through complete playlist
+- [ ] Make the play button work
+- [ ] Make the progress bar do its work (difficult!)
 - ...
 

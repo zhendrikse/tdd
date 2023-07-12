@@ -1,25 +1,30 @@
+'use strict';
+
 const PlayPauseButton = {
 	PLAY: "play",
 	PAUSE: "pause",
 }
 
 class AudioPlayer {
-  constructor(playlist) {
-    this.currentTrack = "MyGreatSong.mp3"
-    this.playlist = playlist
+  constructor(myPlaylist) {
+    this.playlist = myPlaylist
+    this.currentTrack = this.playlist.getCurrentTrack()
+    this.songCounter = 0
   }
 
   getCurrentSong() {
-    return "play: " + this.playlist.getCurrentTrack()
+    return "play: " + this.currentTrack
   }
 
   getPlayPauseButtonStatus() {
     return PlayPauseButton.PLAY
   }
 
-  previousTrack() {}
-
+  previousTrack() {
+    this.currentTrack = this.playlist.previousTrack()
+  }
+  
   nextTrack() {
-    this.playlist.nextTrack()
+      this.currentTrack = this.playlist.nextTrack()
   }
 }
