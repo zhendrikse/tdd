@@ -18,7 +18,8 @@ You can continuously run the test by using
 $ npm run test
 ```
 
-If you opted for code coverage, you may show 
+Code coverage only works in stand-alone mode, so it does _not_ apply
+when running tests in the browser. If you opted for code coverage, you may show 
 the coverage by running
 
 ```shell

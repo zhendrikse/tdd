@@ -2,10 +2,13 @@
   "name": "{{ cookiecutter.kata }}",
   "version": "1.0.0",
   "description": "{{ cookiecutter.project_short_description }}",
-  "scripts": { {% if cookiecutter.code_coverage == "n" %}
+  "scripts": { {% if cookiecutter.tests_in_browser == "y" %} 
+    "test": "npx http-server -c-1 -p 8888"
+    {% elif cookiecutter.tests_in_browser == "n" %}
+    {% if cookiecutter.code_coverage == "n" %}
     "test": "nodemon --exec mocha spec/*_spec.js"{% endif %}{% if cookiecutter.code_coverage == "y" %}
     "test": "nodemon --exec \"nyc --reporter=text --reporter=lcov mocha spec/*_spec.js\"",
-    "report": "npx http-server coverage/lcov-report/"{% endif %}
+    "report": "npx http-server coverage/lcov-report/"{% endif %}{% endif %}
   },{% if cookiecutter.code_coverage == "y" %}
   "nyc": {
     "exclude": "spec/*_spec.js"
@@ -21,11 +24,16 @@
   ],
   "author": "{{ cookiecutter.author }}",  
   "devDependencies": {
+    {% if cookiecutter.tests_in_browser == "y" %} 
+    "jasmine-core": "^5.0.1",
+    "http-server": "^14.1.1"
+    {% elif cookiecutter.tests_in_browser == "n" %}
     "expect.js": "^0.3.1",
     "mocha": "^10.2.0",{% if cookiecutter.code_coverage == "y" %}
     "http-server": "^14.1.1",
     "nyc": "^15.1.0",{% endif %}   
     "nodemon": "^2.0.22"
+    {% endif %}
   }
 }
 

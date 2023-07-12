@@ -11,7 +11,6 @@
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [ ] Make Python cookiecutter work for ptw and mamba
 - [ ] Implement code coverage for Typescript cookiecutter
-- [ ] Add option to Javascript cookiecutter to make in browser version
 - [ ] Make Clojure cookiecutter
 - [ ] Extend poker hands Python met Deck, shuffle and hands
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
@@ -33,3 +32,4 @@
 - [X] Allow for hamcrest assertions when using pytest
 - [X] Make Java cookiecutter
 - [X] Monkey patching in tire pressure kata
+- [X] Add option to Javascript cookiecutter to make in browser version
