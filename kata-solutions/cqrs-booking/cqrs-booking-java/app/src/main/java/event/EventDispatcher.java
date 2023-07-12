@@ -19,6 +19,8 @@ public class EventDispatcher {
     }
 
     public void dispatch(final Event event) {
+        if (!onEventDispatcher.containsKey(event.getClass()))
+            throw new UnsupportedOperationException("Event of type " + event.getClass() + " not supported");
         onEventDispatcher.get(event.getClass()).accept(event);
     }
 }

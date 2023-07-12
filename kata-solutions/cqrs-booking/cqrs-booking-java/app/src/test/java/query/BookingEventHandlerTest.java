@@ -19,14 +19,23 @@ import event.EventHandler;
 import query.eventhandler.BookingEventHandler;
 
 class BookingEventHandlerTest {
+    private final EventHandler bookingEventHandler = new BookingEventHandler();
+
     @Test
     void createsListWithBookingsFromBookingsEventStream() {
         List<Event> eventList = new ArrayList<>();
         eventList.add(new BookingCreatedEvent(UUID.randomUUID(), "room one", LocalDate.of(2001, 1, 1), LocalDate.of(2001, 1, 11)));
         Stream<Event> eventStream = eventList.stream();
 
-        final EventHandler bookingEventHandler = new BookingEventHandler();
         eventStream.forEach(bookingEventHandler::onEvent);
         assertEquals(((BookingEventHandler) bookingEventHandler).getBookings().size(), 1);
+    }
+
+    @Test
+    void throwsAnUnimplementedErrorExceptionWhenDealingWithUnknownEvent() {
+        UnsupportedOperationException thrown = assertThrows(UnsupportedOperationException.class, () -> {
+            bookingEventHandler.onEvent(new Event() { });
+        });
+        assertEquals(thrown.getMessage(), "Event of type class query.BookingEventHandlerTest$1 not supported");
     }
 }
