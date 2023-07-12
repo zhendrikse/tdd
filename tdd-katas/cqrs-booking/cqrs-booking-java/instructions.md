@@ -842,6 +842,10 @@ public class BookingEventHandler implements EventHandler {
 }
 ```
 
+We notice that the `Booking` class is actually a value object, that we need on both
+the command and query sides of the application, hence we promote this class from
+within `Hotel` to its own file.
+
 This makes our test pass. At the same time, we recognize something we have seen before.
 The `BookingEventHandler` is in need of the same event dispatcher that we implemented in 
 the `Hotel` class! So let's apply the DRY principle and share this code.
