@@ -27,7 +27,8 @@ This repository contains materials to practice TDD
   - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language
 - **[tools](./tools/)** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
 
-All materials are ready to be used in the Cloud, e.g. on [replit.com](https://replit.com) or [gitpod.io](https://gitpod.io)
+All materials are ready to be used in the Cloud, e.g. on [replit.com](https://replit.com), 
+[GitHub Codespaces](https://github.com/features/codespaces), or [gitpod.io](https://gitpod.io)
 
 # About coding katas
 
