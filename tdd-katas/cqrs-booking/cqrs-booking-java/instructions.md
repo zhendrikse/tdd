@@ -933,3 +933,8 @@ public interface AggregateRoot extends EventHandler {
 Finally we can implement the required query `Room[] freeRooms(arrival: Date, departure: Date)`. 
 Let's write a test first.
 
+To tie everything together, we implement the [BASE](https://www.techopedia.com/definition/29164/basically-available-soft-state-eventual-consistency-base)
+principle by requesting the event stream from the event store everytime we do the query. We then build up our up-to-date list with available rooms.
+
+
+
