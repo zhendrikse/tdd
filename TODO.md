@@ -1,6 +1,3 @@
-- [+] Finish CQRS booking kata
-   - Series [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/) 
-   - [CQRS event sourcing with Lagom](https://nljug.org/java-magazine/cqrs-a-event-sourcing-met-lagom/)
 - [+] Make Python cookiecutter work for ptw and coverage
 - [+] Create instruction for bugs zero kata Python
 - [ ] Make DB adapter kata work with other than ReplitDB
@@ -20,6 +17,9 @@
 - [ ] Sudoku characterization tests alleen in Java?
 - [ ] Clean-up poker hands kata dir and solutions
 - [ ] [Game of life in Clojure](https://medium.com/@pelensky/clojure-conways-game-of-life-289f19b10598), see also [this post](http://clj-me.cgrand.net/)
+- [X] Finish CQRS booking kata
+   - Series [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/) 
+   - [CQRS event sourcing with Lagom](https://nljug.org/java-magazine/cqrs-a-event-sourcing-met-lagom/)
 - [X] .coverage file in cookiecutter Python template
 - [X] Make javascript cookiecutter work for coverage
 - [X] Create solution for vending machine Javascript

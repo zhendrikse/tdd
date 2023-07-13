@@ -1,1 +1,1 @@
-./gradlew test --continuous --info
+./gradlew test jacocoTestReport --continuous --info
