@@ -16,9 +16,9 @@ import repository.StubEventSourceRepository;
 import hotel.Room;
 
 public class HotelTest {
-    private static final LocalDate AN_ARRIVAL_DATE = LocalDate.of(2020, 1, 20);
-    private static final LocalDate A_DEPARTURE_DATE = LocalDate.of(2020, 1, 22);
-    private static final UUID A_CLIENT_UUID = UUID.randomUUID();
+    public static final LocalDate AN_ARRIVAL_DATE = LocalDate.of(2020, 1, 20);
+    public static final LocalDate A_DEPARTURE_DATE = LocalDate.of(2020, 1, 22);
+    public static final UUID A_CLIENT_UUID = UUID.randomUUID();
 
     public static final BookingCommand BLUE_ROOM_BOOKING_COMMAND = new BookingCommand(
         A_CLIENT_UUID, Room.BLUE_ROOM, AN_ARRIVAL_DATE, A_DEPARTURE_DATE

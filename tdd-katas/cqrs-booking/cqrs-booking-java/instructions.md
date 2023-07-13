@@ -928,7 +928,7 @@ public interface AggregateRoot extends EventHandler {
 }
 ```
 
-### Implementing the query
+## Implementing the query
 
 Are we now ready to implement the required query 
 `Room[] freeRooms(arrival: Date, departure: Date)`. 
@@ -967,13 +967,128 @@ public enum Room {
 }
 ```
 
+Finally we can write a test that ties everything together. Our approach will be:
+- Tie everything together, i.e. implement the 
+  [BASE](https://www.techopedia.com/definition/29164/basically-available-soft-state-eventual-consistency-base)
+  principle by requesting the event stream from the event store everytime
+  we issue our query.
+- We set up a test where two rooms are booked at the dates that we will query on,
+  hence we should end up with a list containing the other three free rooms.
+- The event handler just builds up a list with all reservations. Later on, this
+  may further be optimized to skip reservations in the past, as those aren't
+  relevant for our query. Alternatively, we may want to keep those as well, as
+  future/additional queries may need these old reservation data too.
 
+```java
+class RoomsQueryHandlerTest {
 
+    @Test
+    void listOfFreeRoomsForGivenTimePeriod() {
+        EventSourceRepository repository = new InMemoryEventSourceRepository();
+        Hotel hotel = new Hotel(repository);
+        hotel.onCommand(HotelTest.BLUE_ROOM_BOOKING_COMMAND);
+        hotel.onCommand(HotelTest.RED_ROOM_BOOKING_COMMAND);
 
-Let's write a test first.
+        RoomsQueryHandler queryHandler = new RoomsQueryHandler(repository);
+        AvailableRoomsQuery query = new AvailableRoomsQuery(
+          hotel.getId(), HotelTest.AN_ARRIVAL_DATE, HotelTest.A_DEPARTURE_DATE);
+        List<Room> availableRooms = queryHandler.onQuery(query);
+        
+        assertEquals(availableRooms.size(), 3);
+        assertAll("Available rooms",
+            () -> assertEquals("Green room", availableRooms.get(0).toString()),
+            () -> assertEquals("Yellow room", availableRooms.get(1).toString()),
+            () -> assertEquals("Brown room", availableRooms.get(2).toString())
+        );
+    }
+}
+```
 
-To tie everything together, we implement the [BASE](https://www.techopedia.com/definition/29164/basically-available-soft-state-eventual-consistency-base)
-principle by requesting the event stream from the event store everytime we do the query. We then build up our up-to-date list with available rooms.
+We can make this test pass by hardcoding this list:
 
+```java
+public class RoomsQueryHandler {
+  private final EventSourceRepository eventRepository;
 
+  public RoomsQueryHandler(final EventSourceRepository eventRepository) {
+    this.eventRepository = eventRepository;
+  }
+
+  public List<Room> onQuery(final AvailableRoomsQuery query) {
+    final List<Room> availableRooms = new java.util.ArrayList<Room>();
+    availableRooms.add(Room.GREEN_ROOM);
+    availableRooms.add(Room.YELLOW_ROOM);
+    availableRooms.add(Room.BROWN_ROOM);
+    return availableRooms;
+  }
+}
+```
+
+with an available rooms query 
+
+```java
+public class AvailableRoomsQuery {
+  public final LocalDate arrivalDate;
+  public final LocalDate departureDate;
+  public final UUID hotelId;
+  
+  public AvailableRoomsQuery(final UUID hotelId, final LocalDate arrivalDate, final LocalDate departureDate) {
+    this.arrivalDate = arrivalDate;
+    this.departureDate = departureDate;
+    this.hotelId = hotelId;
+  }
+}
+```
+
+This hard coded list can then be generalized to
+
+```java
+public class RoomsQueryHandler {
+  private final EventSourceRepository eventRepository;
+  private List<Booking> allBookings = new ArrayList<>();
+
+  public RoomsQueryHandler(final EventSourceRepository eventRepository) {
+    this.eventRepository = eventRepository;
+  }
+
+  private void updateListWithAllBookings(final UUID hotelId) {
+    final BookingEventHandler bookingEventHandler = new BookingEventHandler();            
+    final Stream<Event> eventStream = eventRepository.loadStream(hotelId);
+    eventStream.forEach(bookingEventHandler::onEvent);
+    allBookings = bookingEventHandler.getBookings();    
+  }
+
+  private boolean roomAvailable(final Booking queryBooking) {
+      return allBookings
+        .stream()
+        .filter(queryBooking::doesConflictWith)
+        .map(booking -> booking.room)
+        .collect(toList())
+        .isEmpty();
+  }
+
+  private List<Room> filterAvailableRoomsFromAllRooms(final AvailableRoomsQuery query) {
+    updateListWithAllBookings(query.hotelId);
+    return Stream
+      .of(Room.values())
+      .filter(room -> roomAvailable(
+        new Booking(UUID.randomUUID(), room, query.arrivalDate, query.departureDate)))
+      .collect(toList());
+  }
+
+  public List<Room> onQuery(final AvailableRoomsQuery query) {
+    return filterAvailableRoomsFromAllRooms(query);
+  }
+}
+```
+
+## Furher steps
+
+We can further extend this code by:
+
+- Adding a command to cancel a booked room
+- Introducing a command bus
+- Introducing an event bus
+- Adding a REST endpoint
+- Etc. 
 

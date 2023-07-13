@@ -1,4 +1,4 @@
-package query;
+package query.eventhandler;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,6 +37,6 @@ class BookingEventHandlerTest {
           assertThrows(UnsupportedOperationException.class, () -> {
             bookingEventHandler.onEvent(new Event() { });
         });
-        assertEquals(thrown.getMessage(), "Event of type class query.BookingEventHandlerTest$1 not supported");
+        assertEquals(thrown.getMessage(), "Event of type class query.eventhandler.BookingEventHandlerTest$1 not supported");
     }
 }
