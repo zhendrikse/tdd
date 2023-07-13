@@ -32,7 +32,6 @@ public class RoomsQueryHandler {
     return allBookings
         .stream()
         .filter(queryBooking::doesConflictWith)
-        .map(booking -> booking.room)
         .collect(toList())
         .isEmpty();
   }

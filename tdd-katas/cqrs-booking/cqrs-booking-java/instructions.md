@@ -931,7 +931,7 @@ public interface AggregateRoot extends EventHandler {
 ## Implementing the query
 
 Are we now ready to implement the required query 
-`Room[] freeRooms(arrival: Date, departure: Date)`. 
+`Room[] freeRooms(arrival: Date, departure: Date)`?
 
 Note that the question is to list those rooms that are _not_ 
 booked. So we should somehow have a notion of all available rooms in
@@ -1062,7 +1062,6 @@ public class RoomsQueryHandler {
       return allBookings
         .stream()
         .filter(queryBooking::doesConflictWith)
-        .map(booking -> booking.room)
         .collect(toList())
         .isEmpty();
   }
