@@ -40,6 +40,9 @@ in the form of courses, workshops, and/or coding dojos.
   - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language
 - **[tools](./tools/)** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
 
+# License
+
+License: [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). Attribution: [https://github.com/zhendrikse/tdd](https://github.com/zhendrikse/tdd).
 
 # About coding katas
 
