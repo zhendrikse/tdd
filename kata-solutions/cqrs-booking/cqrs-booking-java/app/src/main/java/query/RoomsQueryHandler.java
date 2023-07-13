@@ -22,14 +22,14 @@ public class RoomsQueryHandler {
   }
 
   private void updateListWithAllBookings(final UUID hotelId) {
-    final BookingEventHandler bookingEventHandler = new BookingEventHandler();            
+    final BookingEventHandler bookingEventHandler = new BookingEventHandler();
     final Stream<Event> eventStream = eventRepository.loadStream(hotelId);
     eventStream.forEach(bookingEventHandler::onEvent);
-    allBookings = bookingEventHandler.getBookings();    
+    allBookings = bookingEventHandler.getBookings();
   }
 
   private boolean roomAvailable(final Booking queryBooking) {
-      return allBookings
+    return allBookings
         .stream()
         .filter(queryBooking::doesConflictWith)
         .map(booking -> booking.room)
@@ -40,10 +40,10 @@ public class RoomsQueryHandler {
   private List<Room> filterAvailableRoomsFromAllRooms(final AvailableRoomsQuery query) {
     updateListWithAllBookings(query.hotelId);
     return Stream
-      .of(Room.values())
-      .filter(room -> roomAvailable(
-        new Booking(UUID.randomUUID(), room, query.arrivalDate, query.departureDate)))
-      .collect(toList());
+        .of(Room.values())
+        .filter(room -> roomAvailable(
+            new Booking(UUID.randomUUID(), room, query.arrivalDate, query.departureDate)))
+        .collect(toList());
   }
 
   public List<Room> onQuery(final AvailableRoomsQuery query) {

@@ -16,12 +16,12 @@ public class InMemoryEventSourceRepository implements EventSourceRepository<Hote
 
   @Override
   public void save(final UUID aggregateRootId, final Event newEvent) {
-      if (!eventStore.containsKey(aggregateRootId))
-        eventStore.put(aggregateRootId, new ArrayList<>());
+    if (!eventStore.containsKey(aggregateRootId))
+      eventStore.put(aggregateRootId, new ArrayList<>());
 
-      this.eventStore.get(aggregateRootId).add(newEvent);
+    this.eventStore.get(aggregateRootId).add(newEvent);
   }
-  
+
   @Override
   public Hotel load(final UUID aggregateRootId) {
     return null;

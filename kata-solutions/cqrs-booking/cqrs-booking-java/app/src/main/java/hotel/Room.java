@@ -8,13 +8,13 @@ public enum Room {
   BROWN_ROOM("Brown room");
 
   private String name;
- 
+
   Room(final String name) {
-      this.name = name;
+    this.name = name;
   }
 
   @Override
   public String toString() {
-      return name;
+    return name;
   }
 }

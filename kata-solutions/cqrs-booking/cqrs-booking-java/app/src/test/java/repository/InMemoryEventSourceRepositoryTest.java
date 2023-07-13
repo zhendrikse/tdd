@@ -21,7 +21,7 @@ class InMemoryEventSourceRepositoryTest {
         Hotel hotel = new Hotel(repository);
         hotel.onCommand(HotelTest.BLUE_ROOM_BOOKING_COMMAND);
         hotel.onCommand(HotelTest.RED_ROOM_BOOKING_COMMAND);
-        
+
         Stream eventStream = repository.loadStream(hotel.getId());
         assertEquals(eventStream.count(), 2);
     }
@@ -29,12 +29,12 @@ class InMemoryEventSourceRepositoryTest {
     @Test
     void repositoryDistinguishesBetweenDifferentAggregateRoots() {
         EventSourceRepository repository = new InMemoryEventSourceRepository();
-        
+
         Hotel hotel1 = new Hotel(repository);
         hotel1.onCommand(HotelTest.BLUE_ROOM_BOOKING_COMMAND);
         Hotel hotel2 = new Hotel(repository);
         hotel2.onCommand(HotelTest.RED_ROOM_BOOKING_COMMAND);
-        
+
         Stream eventStream = repository.loadStream(hotel1.getId());
         assertEquals(eventStream.count(), 1);
     }

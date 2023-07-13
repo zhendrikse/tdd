@@ -25,14 +25,13 @@ class RoomsQueryHandlerTest {
 
         RoomsQueryHandler queryHandler = new RoomsQueryHandler(repository);
         AvailableRoomsQuery query = new AvailableRoomsQuery(
-          hotel.getId(), HotelTest.AN_ARRIVAL_DATE, HotelTest.A_DEPARTURE_DATE);
+                hotel.getId(), HotelTest.AN_ARRIVAL_DATE, HotelTest.A_DEPARTURE_DATE);
         List<Room> availableRooms = queryHandler.onQuery(query);
-        
+
         assertEquals(availableRooms.size(), 3);
         assertAll("Available rooms",
-            () -> assertEquals("Green room", availableRooms.get(0).toString()),
-            () -> assertEquals("Yellow room", availableRooms.get(1).toString()),
-            () -> assertEquals("Brown room", availableRooms.get(2).toString())
-        );
+                () -> assertEquals("Green room", availableRooms.get(0).toString()),
+                () -> assertEquals("Yellow room", availableRooms.get(1).toString()),
+                () -> assertEquals("Brown room", availableRooms.get(2).toString()));
     }
 }
