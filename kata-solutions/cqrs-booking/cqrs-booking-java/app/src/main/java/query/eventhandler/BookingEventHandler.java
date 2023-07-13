@@ -25,7 +25,7 @@ public class BookingEventHandler implements EventHandler {
     @Override
     public void onEvent(final BookingCreatedEvent event) {
         BookingCreatedEvent bookingEvent = (BookingCreatedEvent) event;
-        bookings.add(new Booking(bookingEvent.clientId, bookingEvent.roomName, bookingEvent.arrivalDate, bookingEvent.departureDate));
+        bookings.add(new Booking(bookingEvent.clientId, bookingEvent.room, bookingEvent.arrivalDate, bookingEvent.departureDate));
     }
 
     @Override 

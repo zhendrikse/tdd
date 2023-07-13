@@ -32,7 +32,7 @@ public class Hotel implements AggregateRoot {
   }
 
   private void bookingFails(final BookingCommand command) {
-    BookingFailedEvent event = new BookingFailedEvent(command.clientId, command.roomName, command.arrivalDate,
+    BookingFailedEvent event = new BookingFailedEvent(command.clientId, command.room, command.arrivalDate,
         command.departureDate);
     onEvent(event);
     this.eventSourceRepository.save(this.id, event);
@@ -40,7 +40,7 @@ public class Hotel implements AggregateRoot {
 
   private void bookingSucceeds(final BookingCommand command) {
     BookingCreatedEvent event = new BookingCreatedEvent(
-        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
+        command.clientId, command.room, command.arrivalDate, command.departureDate);
     onEvent(event);
     this.eventSourceRepository.save(this.id, event);
   }
@@ -52,7 +52,7 @@ public class Hotel implements AggregateRoot {
   @Override
   public void onEvent(final BookingCreatedEvent event) {
     this.bookings.add(new Booking(
-        event.clientId, event.roomName, event.arrivalDate, event.departureDate));
+        event.clientId, event.room, event.arrivalDate, event.departureDate));
   }
 
   private boolean bookingCanBeMade(final Booking requestedBooking) {
@@ -65,7 +65,7 @@ public class Hotel implements AggregateRoot {
 
   public void onCommand(final BookingCommand command) {
     final Booking requestedBooking = new Booking(
-        command.clientId, command.roomName, command.arrivalDate, command.departureDate);
+        command.clientId, command.room, command.arrivalDate, command.departureDate);
     if (bookingCanBeMade(requestedBooking))
       bookingSucceeds(command);
     else

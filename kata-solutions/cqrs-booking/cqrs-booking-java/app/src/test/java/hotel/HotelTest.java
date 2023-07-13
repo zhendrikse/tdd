@@ -13,20 +13,19 @@ import event.BookingCreatedEvent;
 import event.BookingFailedEvent;
 import event.Event;
 import repository.StubEventSourceRepository;
+import hotel.Room;
 
 public class HotelTest {
-    private static final String BLUE_ROOM_NAME = "The Blue Room";
-    private static final String RED_ROOM_NAME = "The Red Room";
     private static final LocalDate AN_ARRIVAL_DATE = LocalDate.of(2020, 1, 20);
     private static final LocalDate A_DEPARTURE_DATE = LocalDate.of(2020, 1, 22);
     private static final UUID A_CLIENT_UUID = UUID.randomUUID();
 
     public static final BookingCommand BLUE_ROOM_BOOKING_COMMAND = new BookingCommand(
-        A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+        A_CLIENT_UUID, Room.BLUE_ROOM, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
       );
   
     public static final BookingCommand RED_ROOM_BOOKING_COMMAND = new BookingCommand(
-        A_CLIENT_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+        A_CLIENT_UUID, Room.RED_ROOM, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
       );
   
     private Hotel hotel;
@@ -40,14 +39,14 @@ public class HotelTest {
 
     private void verifyBookingFailedEvent(final BookingFailedEvent event, final BookingCommand bookingCommand) {
         assertEquals(event.clientId, bookingCommand.clientId);
-        assertEquals(event.roomName, bookingCommand.roomName);
+        assertEquals(event.room, bookingCommand.room);
         assertEquals(event.arrivalDate, bookingCommand.arrivalDate);
         assertEquals(event.departureDate, bookingCommand.departureDate);
     }
 
     private void verifyBookingCreatedEvent(final BookingCreatedEvent event, final BookingCommand bookingCommand) {
         assertEquals(event.clientId, bookingCommand.clientId);
-        assertEquals(event.roomName, bookingCommand.roomName);
+        assertEquals(event.room, bookingCommand.room);
         assertEquals(event.arrivalDate, bookingCommand.arrivalDate);
         assertEquals(event.departureDate, bookingCommand.departureDate);
     }
@@ -86,7 +85,7 @@ public class HotelTest {
     @Test 
     void bookingIdenticalRoomForAvailableDateShouldSucceed() {
         BookingCommand command = new BookingCommand(
-          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.plusDays(4), A_DEPARTURE_DATE.plusDays(4)
+          A_CLIENT_UUID, Room.BLUE_ROOM, AN_ARRIVAL_DATE.plusDays(4), A_DEPARTURE_DATE.plusDays(4)
         );
         hotel.onCommand(command);
       
@@ -100,7 +99,7 @@ public class HotelTest {
     @Test 
     void bookingIdenticalRoomWithDepartureBeforeArrivalOfExistingBookingShouldSucceed() {
         BookingCommand command = new BookingCommand(
-          A_CLIENT_UUID, BLUE_ROOM_NAME, AN_ARRIVAL_DATE.minusDays(4), A_DEPARTURE_DATE.minusDays(4)
+          A_CLIENT_UUID, Room.BLUE_ROOM, AN_ARRIVAL_DATE.minusDays(4), A_DEPARTURE_DATE.minusDays(4)
         );
         hotel.onCommand(command);
       
@@ -115,7 +114,7 @@ public class HotelTest {
     void rehydratedHotelAggregateShouldNotAllowDoubleReservations() {
         List<Event> events = new ArrayList<Event>();
         events.add(new BookingCreatedEvent(
-            A_CLIENT_UUID, RED_ROOM_NAME, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
+            A_CLIENT_UUID, Room.RED_ROOM, AN_ARRIVAL_DATE, A_DEPARTURE_DATE
         ));
         StubEventSourceRepository repository = new StubEventSourceRepository(events);
         Hotel rehydratedHotel = repository.load(UUID.randomUUID());

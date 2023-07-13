@@ -930,7 +930,46 @@ public interface AggregateRoot extends EventHandler {
 
 ### Implementing the query
 
-Finally we can implement the required query `Room[] freeRooms(arrival: Date, departure: Date)`. 
+Are we now ready to implement the required query 
+`Room[] freeRooms(arrival: Date, departure: Date)`. 
+
+Note that the question is to list those rooms that are _not_ 
+booked. So we should somehow have a notion of all available rooms in
+our hotel. 
+
+The simplest thing that could possibly work is add a fixed number 
+of predefined rooms to our hotel. Obviously, this is going to be a 
+fatal limition once we want to support multiple different hotels.
+
+Assuming we have to support just one hotel yet, we introduce an 
+enumeration of rooms in our hotel and refactor the stringly typed 
+([primitive obsession](https://refactoring.guru/smells/primitive-obsession)) 
+room parameters.
+
+```java
+public enum Room {
+  BLUE_ROOM("Blue room"),
+  RED_ROOM("Red room"),
+  GREEN_ROOM("Green room"),
+  YELLOW_ROOM("Yellow room"),
+  BROWN_ROOM("Brown room");
+
+  private String name;
+ 
+  Room(final String name) {
+      this.name = name;
+  }
+
+  @Override
+  public String toString() {
+      return name;
+  }
+}
+```
+
+
+
+
 Let's write a test first.
 
 To tie everything together, we implement the [BASE](https://www.techopedia.com/definition/29164/basically-available-soft-state-eventual-consistency-base)

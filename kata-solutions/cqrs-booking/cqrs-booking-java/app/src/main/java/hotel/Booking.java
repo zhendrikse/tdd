@@ -9,20 +9,20 @@ import java.time.LocalDate;
  */
 public class Booking {
     public final UUID clientId; 
-    public final String roomName;
+    public final Room room;
     public final LocalDate arrivalDate;
     public final LocalDate departureDate;
     
-    public Booking(final UUID clientId, final String roomName, final LocalDate arrivalDate, final LocalDate departureDate) {
+    public Booking(final UUID clientId, final Room room, final LocalDate arrivalDate, final LocalDate departureDate) {
         this.clientId = clientId;
-        this.roomName = roomName;
+        this.room = room;
         this.arrivalDate = arrivalDate;
         this.departureDate = departureDate;
     }
 
     public boolean doesConflictWith(final Booking anotherBooking) {
-        return anotherBooking.roomName.equals(this.roomName) && 
-          !(anotherBooking.arrivalDate.isAfter(this.departureDate) ||
-          anotherBooking.departureDate.isBefore(this.arrivalDate));
+        return anotherBooking.room.equals(room) && 
+          !(anotherBooking.arrivalDate.isAfter(departureDate) ||
+          anotherBooking.departureDate.isBefore(arrivalDate));
     }
 }
