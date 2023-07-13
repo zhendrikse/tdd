@@ -1,18 +1,20 @@
 # Introduction
 
 This kata is based on the [CQRS Booking kata](https://codingdojo.org/kata/CQRS_Booking/).
-The aim is to write a simple booking soluiton using 
+The aim is to write a simple booking solution using 
 the [CQRS architectural pattern](https://martinfowler.com/bliki/CQRS.html).
+It offers plenty of optional and possible extensions, both on a feature
+as well as infrastructural level, such as an event and command bus.
 
 # Features
 
 The aim is to be able to create a booking solution for one hotel.
 
-The first 2 users stories are:
+The user stories are:
 
-1. As a user I whant to book a room.
-2. As a user I want to see all free rooms.
-3. As a user I want to remove a booking
+1. As a user I want to book a room. This is a command.
+2. As a user I want to see all free rooms. This is a query.
+3. As a user I want to remove a booking. This is one more command.
 
 As stated in the introduction, the constraint is that we have to use the CQRS pattern
 
@@ -50,7 +52,7 @@ According to [implementing event sourcing with Python](https://breadcrumbscollec
 
 - Keeping your business objects (called aggregates) as a series
   of replayable events. This is often called an event stream.
-- Never deleting any events from a system, only appending new ones.
+- Never delete any events from a system, only appending new ones.
 - Using events as the only reliable way of telling in what state a given
   aggregate is.
 - If you need to query data or present them in a table-like format,
@@ -59,9 +61,10 @@ According to [implementing event sourcing with Python](https://breadcrumbscollec
   such as Order encapsulates costs summary. A good rule of thumb is to
   keep aggregates as small as possible.
 
-You may want to start the kata without event sourcing at first.
-Alternatively, you could start with event sourcing right from the start,
-using TDD by testing the aggregates as described in [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/).
+Although you can start the kata without event sourcing at first, we strongly suggest
+you go with event sourcing right from the start. A way in which to test your
+aggregates in a TDD manner is very well explained in 
+[implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/).
 
 ## Event bus
 
