@@ -40,10 +40,6 @@ in the form of courses, workshops, and/or coding dojos.
   - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language
 - **[tools](./tools/)** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
 
-# License
-
-License: [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). Attribution: [https://github.com/zhendrikse/tdd](https://github.com/zhendrikse/tdd).
-
 # About coding katas
 
 > Japanese culture influenced a lot of software and project management fields. 
@@ -143,7 +139,7 @@ This means my heroes are [Dave Farley](https://www.davefarley.net/), [Robert C. 
 
 I decided to share one of my passions with all of you here: TDD (test-driven development)!
 
-### Contact
+## Contact
 
 Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ **gmail** _&lt;dot&gt;_ **com** for e.g.:
 - Feedback and suggestions
@@ -151,7 +147,10 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 - Facilitating a course and/or [coding dojos](https://codingdojo.org/WhatIsCodingDojo/), where apprentices can practice [katas](http://codekata.com/) together (with me as sensei 😉).
 
 
+## License
+
+License: [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). Attribution: [https://github.com/zhendrikse/tdd](https://github.com/zhendrikse/tdd).
   
-# Credits
+## Credits
 
 Pictures in this course are legally taken from [pixabay.com](https://pixabay.com). Many of the original unadapted code katas can be found at [kata-log.rocks](https://kata-log.rocks/) and/or at [codingdojo.org](http://codingdojo.org/) and [katas](http://codingdojo.org/) contained therein.
