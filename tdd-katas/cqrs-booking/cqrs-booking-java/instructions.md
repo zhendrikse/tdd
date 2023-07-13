@@ -160,7 +160,7 @@ public class Hotel implements AggregateRoot {
 ```
 
 where we introduced the `AggregateRoot` interface, as we eventually aim to
-be able to persist more than one particular hotel.
+be able to persist more hotels than one particular hotel only.
 
 ```java
 public interface AggregateRoot {
@@ -338,7 +338,7 @@ Let's analyze this code in a bit more detail:
   this way the code nicely expresses intent.
 - When the booking fails, we just sent a `BookingFailedEvent` to the event store.
   The handling is delegated to a method that does nothing for now.
-- Notice that we never use parenthesis in `if`-statements. A soon as we need multiple
+- Notice that we never use parenthesis in `if`-statements. As soon as we need multiple
   statements in an `if`-statement, we write a (private) method that explains what we
   want to achieve.
 
@@ -394,7 +394,7 @@ class HotelTest {
     // ...
 ```
 
-### Step 3: make a booking at the same date but a different room
+### Step 3: make a booking on the same date but for a different room
 
 Let's introduce a red room in our tests:
 
@@ -651,7 +651,7 @@ the `AggregateRoot` interface and `Hotel` aggregate:
 This makes our test pass.
 
 Isn't there anything we can come up with to improve the conditionals based on the
-`instanceof` checks? Yes we can!
+`instanceof` checks? Yes, we can!
 
 ```java
   @Override
@@ -823,7 +823,7 @@ class BookingEventHandlerTest {
 }
 ```
 
-We mock the stream of events that we eventually are going to get from the event respository.
+We mock the stream of events that we eventually are going to get from the event repository.
 We apply the `onEvent(Event)` method from the event handler to each event:
 
 ```java
@@ -888,8 +888,8 @@ public interface EventHandler {
 ```
 
 Both the aggregate root and query-side event handlers should implement this interface.
-For the aggregate root interface we opted to rename the `apply(Event)` method to
-`onEvent(Event)`. We could equallly well have chosen for naming the `onEvent(Event)`
+For the aggregate root interface, we opted to rename the `apply(Event)` method to
+`onEvent(Event)`. We could equally well have chosen for naming the `onEvent(Event)`
 method in the `EventHandler` interface `apply(Event)`.
 
 The booking event handler now becomes
@@ -937,9 +937,9 @@ Note that the question is to list those rooms that are _not_
 booked. So we should somehow have a notion of all available rooms in
 our hotel. 
 
-The simplest thing that could possibly work is add a fixed number 
+The simplest thing that could possibly work is to add a fixed number 
 of predefined rooms to our hotel. Obviously, this is going to be a 
-fatal limition once we want to support multiple different hotels.
+fatal limitation once we want to support multiple different hotels.
 
 Assuming we have to support just one hotel yet, we introduce an 
 enumeration of rooms in our hotel and refactor the stringly typed 
@@ -967,16 +967,16 @@ public enum Room {
 }
 ```
 
-Finally we can write a test that ties everything together. Our approach will be:
+Finally, we can write a test that ties everything together. Our approach will be:
 - Tie everything together, i.e. implement the 
   [BASE](https://www.techopedia.com/definition/29164/basically-available-soft-state-eventual-consistency-base)
-  principle by requesting the event stream from the event store everytime
+  principle by requesting the event stream from the event store every time
   we issue our query.
-- We set up a test where two rooms are booked at the dates that we will query on,
+- We set up a test where two rooms are booked on the dates that we will query on,
   hence we should end up with a list containing the other three free rooms.
 - The event handler just builds up a list with all reservations. Later on, this
   may further be optimized to skip reservations in the past, as those aren't
-  relevant for our query. Alternatively, we may want to keep those as well, as
+  relevant to our query. Alternatively, we may want to keep those as well, as
   future/additional queries may need these old reservation data too.
 
 ```java
@@ -1040,7 +1040,7 @@ public class AvailableRoomsQuery {
 }
 ```
 
-This hard coded list can then be generalized to
+This hard-coded list can then be generalized to
 
 ```java
 public class RoomsQueryHandler {
@@ -1082,7 +1082,7 @@ public class RoomsQueryHandler {
 }
 ```
 
-## Furher steps
+## Further steps
 
 We can further extend this code by:
 
