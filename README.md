@@ -1,22 +1,34 @@
-# TTD materials
+# Test-driven development materials
 
-Test-driven development is a lot of fun and a
-great form of "deliberate practice". You have arrived at the right
-place, you'll find here everything to get you up and running!
+TDD entails so much more than the well-known but trite red-green-refactor phrase.
+More accurately, it is a great form of _deliberate practice_, in which a set of
+**skills, principles, and heuristics** are continually combined to build quality in.
+
+![Heuristics](./assets/heuristics.png)
+
+Last but not least, TDD is a lot of fun. You have arrived at the right
+place to learn everything about it and to get you up and running
+in the wink of an eye!
+
+###  Level up your TDD skills
 
 Please consult the [readme in the tdd-katas folder](./tdd-katas/README.md)
-to learn more about which katas address which aspects at which difficulty 
+to learn more about which katas address which topics at which difficulty 
 level and how they relate to the 
 [24 key capabilities to drive improvement in software delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/).
 
-#### Coaching purposes
+### Coaching
 
 These materials may seamlessly be incorporated into 
-[the Samman coaching method](https://www.sammancoaching.org/).
+[the Samman coaching method](https://www.sammancoaching.org/) and
+are ready to be used in the Cloud, e.g. on [replit.com](https://replit.com), 
+[GitHub Codespaces](https://github.com/features/codespaces), 
+or [gitpod.io](https://gitpod.io)
 
-## Features
+# Contents
 
-This repository contains materials to practice TDD
+This repository contains materials to both practice TDD as well as to teach TDD
+in the form of trainings, workshop, and/or coding dojos.
 
 - **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for starting a kata in various languages
 - **[docs](./docs/)** &rarr; additional free books
@@ -27,8 +39,6 @@ This repository contains materials to practice TDD
   - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language
 - **[tools](./tools/)** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
 
-All materials are ready to be used in the Cloud, e.g. on [replit.com](https://replit.com), 
-[GitHub Codespaces](https://github.com/features/codespaces), or [gitpod.io](https://gitpod.io)
 
 # About coding katas
 
