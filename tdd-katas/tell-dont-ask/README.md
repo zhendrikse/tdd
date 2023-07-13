@@ -1,4 +1,5 @@
-This is a fork of the original Tell Don't Ask Kata of [@rachelcarmena](https://github.com/rachelcarmena/tell-dont-ask-kata). I've only added Python3 and Typescript versions. Probably I will pull request after a time.
+This is a fork of the original Tell Don't Ask Kata of [@rachelcarmena](https://github.com/rachelcarmena/tell-dont-ask-kata) in Java. 
+Here you'll find a Python version. A Typescript version is planned as well. 
 
 # Tell Don't Ask Kata
 A legacy refactor kata, focused on the violation of the [tell don't ask](https://pragprog.com/articles/tell-dont-ask) principle and the [anemic domain model](https://martinfowler.com/bliki/AnemicDomainModel.html).
