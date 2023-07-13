@@ -21,14 +21,15 @@ level and how they relate to the
 
 These materials may seamlessly be incorporated into 
 [the Samman coaching method](https://www.sammancoaching.org/) and
-are ready to be used in the Cloud, e.g. on [replit.com](https://replit.com), 
+are ready to be used in cloud development environments (CDEs) such
+as [replit.com](https://replit.com), 
 [GitHub Codespaces](https://github.com/features/codespaces), 
 or [gitpod.io](https://gitpod.io)
 
 # Contents
 
-This repository contains materials to both practice TDD as well as to teach TDD
-in the form of trainings, workshop, and/or coding dojos.
+This repository contains materials to both practice as well as to teach TDD
+in the form of courses, workshops, and/or coding dojos.
 
 - **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for starting a kata in various languages
 - **[docs](./docs/)** &rarr; additional free books
