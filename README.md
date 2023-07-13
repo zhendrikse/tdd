@@ -153,4 +153,7 @@ License: [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). Attrib
   
 ## Credits
 
-Pictures in this course are legally taken from [pixabay.com](https://pixabay.com). Many of the original unadapted code katas can be found at [kata-log.rocks](https://kata-log.rocks/) and/or at [codingdojo.org](http://codingdojo.org/) and [katas](http://codingdojo.org/) contained therein.
+Pictures in this repo are legally taken from [pixabay.com](https://pixabay.com). 
+Many of the original unadapted code katas can be found at [kata-log.rocks](https://kata-log.rocks/) 
+and/or [codingdojo.org](http://codingdojo.org/) and [katas](http://codingdojo.org/) contained therein.
+Otherwise, links to the original source(s) and/or authors have been incorporated.
