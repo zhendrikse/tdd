@@ -149,7 +149,7 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 
 ## License
 
-License: [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). Attribution: [https://github.com/zhendrikse/tdd](https://github.com/zhendrikse/tdd).
+License: [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). Attribution: [[github.com/zhendrikse/tdd](https://github.com/zhendrikse/tdd)].
   
 ## Credits
 
