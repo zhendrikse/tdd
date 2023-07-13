@@ -15,13 +15,13 @@ Some possibilities are mentioned below.
 
 The [peel strategy](https://www.sammancoaching.org/learning_hours/testable_design/peel.html)
 is explained by [Emily Bache](https://github.com/emilybache) 
-([www.sammancoaching.org/](https://www.sammancoaching.org/)).
+([www.sammancoaching.org/](https://www.sammancoaching.org)).
 
 ## Option 2: slice strategy
 
 The [slice strategy](https://www.sammancoaching.org/learning_hours/testable_design/slice.html)
 is explained by [Emily Bache](https://github.com/emilybache) 
-([www.sammancoaching.org/](https://www.sammancoaching.org/)).
+([www.sammancoaching.org/](https://www.sammancoaching.org)).
 
 ## Option 3: ports &amp; adapters
 
