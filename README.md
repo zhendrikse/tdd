@@ -88,34 +88,34 @@ Among these are [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(com
 [approval testing](https://approvaltests.com/), [mutation testing](https://en.wikipedia.org/wiki/Mutation_testing), 
 [lift-up conditional refactoring](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2), to name but a few.  
 
- 
+# Coding dojo
 
-# Learning Goals
+A coding dojo is the place for immersive learning, in this case learning to
+thoroughly master TDD. During the coding dojos, the participants get
+to know, apply, and practice new skills, principles, and concepts.
+Moreover, during the dojos participants will get acquainted with various
+forms of pair-programming as well as mob-programming (randori, driver-navigator, etc).
 
-![Skills](./assets/skillz.png)
+We may envision participants roughly speaking going through 
+the phases outlined below. Each of the phases (departing from an
+initial skilled practitioner &rarr; conscious practitioner &rarr; 
+reflective practitioner phase) is represented by 
+a corresponding oval containing the topics, learning goals, and conditions.
+As such, the phases are quite comparable to the well-known 
+[shu-ha-ri-kokoro](https://heartofagile.com/wp-content/uploads/2019/08/kokoro-extends-shu-ha-ri.pdf) 
+learning phases.
 
-By practicing these katas, you will:
-
-- be confident to apply both TDD and BDD (behavior-driven development) in day-to-day work by writing executable specifications as opposed to unit tests that are tightly coupled to implementation.
-- know how to explain why TDD and BDD are such pivotal skills to have as a software engineer
-- be able to confidently refactor any piece of code (as you will always have 100% coverage), and you will be able to do so in extremely small increments.
-- be able to not only refactor but also extend/modify legacy code that initially did not have any unit tests at all!
-- know how to cope with external dependencies to the system under test by applying the [adapter pattern](https://refactoring.guru/design-patterns/adapter)
-- be able to work according to the [Detroit and London schools of TDD](https://github.com/testdouble/contributing-tests/wiki/Test-Driven-Development) and know when and how to properly apply mocks, stubs, fakes, spies, etc.
+![Roadmap](./assets/dojo-roadmap.png)
 
 # Expected  Background
 
-![Student](./assets/black-belt.png)
-
----
+![Skills](./assets/skillz.png)
 
 ### What general programming skills are required?
 
 These katas are intended for people who want to learn TDD. Some basic programming experience is required, such as knowing what a `class` is, what an `object` is, what a `primitive` is, what `exception handling` entails, and how to write `conditionals` and `loops`. 
 
 Although not strictly required, it will also definitely help if you are already familiar with concepts such as [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) and the [single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).
-
----
 
 ### Is there a preferred programming language?
 
@@ -125,8 +125,6 @@ do many of the katas. Moreover, the programming language is kind of irrelevant f
 practicing the various aspects that are being addressed. I have facilitated 
 many [coding dojos](https://codingdojo.org/WhatIsCodingDojo/) where multiple participants were exposed to 
 e.g. Python for the first time, and they managed pretty soon pretty well.
-
----
 
 
 # About the author
