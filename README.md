@@ -62,11 +62,10 @@ you make them your own by repeating them _time and again_.
 
 And although the saying goes that practice makes perfect, the reality is 
 that code almost never reaches a perfect state: you can always find ways to 
-further improve your code and your skill(s). There are always new ways to 
-become more proficient and faster. Luckily, it turns out that mastery 
-(from [Daniel Pink's Autonomy Mastery Purpose](https://www.youtube.com/watch?v=u6XAPnuFjJc)) 
-is one of the three primary drivers that keep us motivated. Moreover, the payoff of
-mastering TDD is much higher than the investments that you'll put in. 
+further improve your code and your skill(s). There are always new ways to become 
+more proficient and faster. Luckily, it turns out that mastery is one of
+[the three primary drivers that keep us motivated](https://www.youtube.com/watch?v=u6XAPnuFjJc). 
+Moreover, the payoff of mastering TDD is much higher than the investments that you'll put in. 
 
 After spending a certain time with TDD, people claim that there is no 
 other way to develop software. It is almost a learning to type with ten 
