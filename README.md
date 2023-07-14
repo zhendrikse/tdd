@@ -60,17 +60,9 @@ and this collection is no exception to that general rule. As the saying goes,
 practice makes perfect, and the same holds for (coding) katas: preferably 
 you make them your own by repeating them _time and again_.
 
-## Katas to practice TDD
-
-Although the basic rules of TDD are relatively straightforward, 
-TDD turns out to be a skill and as such, has to be acquired. 
-Like playing piano. Like practicing martial arts in a dojo by executing 
-katas time and again!
-
 And although the saying goes that practice makes perfect, the reality is 
 that code almost never reaches a perfect state: you can always find ways to 
-further improve your code and your skill(s). Likewise with TDD, your TDD journey 
-definitely won't stop after completing this course. There are always new ways to 
+further improve your code and your skill(s). There are always new ways to 
 become more proficient and faster. Luckily, it turns out that mastery 
 (from [Daniel Pink's Autonomy Mastery Purpose](https://www.youtube.com/watch?v=u6XAPnuFjJc)) 
 is one of the three primary drivers that keep us motivated. Moreover, the payoff of
@@ -80,18 +72,11 @@ After spending a certain time with TDD, people claim that there is no
 other way to develop software. It is almost a learning to type with ten 
 fingers: once you master the skill, you wonder how you ever managed without it.
 
-The primary focus of all katas in this repository will be on TDD, but 
-obviously, many other programming aspects will be practiced along the way! 
-Among these are [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)), 
-[single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle), 
-[clean architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), 
-[approval testing](https://approvaltests.com/), [mutation testing](https://en.wikipedia.org/wiki/Mutation_testing), 
-[lift-up conditional refactoring](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2), to name but a few.  
-
 # Coding dojo
 
 A coding dojo is a place for immersive learning, in this case learning to
-thoroughly master TDD. During the coding dojos, the participants get
+thoroughly master TDD using coding katas as a means. 
+During the coding dojos, the participants get
 to know, apply, and practice new skills, principles, and concepts.
 Moreover, during the dojos participants will get acquainted with various
 forms of 
