@@ -94,7 +94,12 @@ A coding dojo is the place for immersive learning, in this case learning to
 thoroughly master TDD. During the coding dojos, the participants get
 to know, apply, and practice new skills, principles, and concepts.
 Moreover, during the dojos participants will get acquainted with various
-forms of pair-programming as well as mob-programming (randori, driver-navigator, etc).
+forms of 
+[pair-programming](https://martinfowler.com/articles/on-pair-programming.html) 
+as well as 
+[mob-programming](https://mobprogramming.org/mob-programming-basics/) 
+concepts such as
+[randori](https://codingdojo.org/practices/RandoriKata/), driver-navigator, etc.
 
 We may envision participants roughly speaking going through 
 the phases outlined below. Each of the phases (departing from an
@@ -103,7 +108,7 @@ reflective practitioner phase) is represented by
 a corresponding oval containing the topics, learning goals, and conditions.
 As such, the phases are quite comparable to the well-known 
 [shu-ha-ri-kokoro](https://heartofagile.com/wp-content/uploads/2019/08/kokoro-extends-shu-ha-ri.pdf) 
-learning phases.
+stages of learning.
 
 ![Roadmap](./assets/dojo-roadmap.png)
 
