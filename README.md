@@ -90,7 +90,7 @@ Among these are [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(com
 
 # Coding dojo
 
-A coding dojo is the place for immersive learning, in this case learning to
+A coding dojo is a place for immersive learning, in this case learning to
 thoroughly master TDD. During the coding dojos, the participants get
 to know, apply, and practice new skills, principles, and concepts.
 Moreover, during the dojos participants will get acquainted with various
@@ -114,9 +114,12 @@ stages of learning.
 
 # Expected background
 
-So which background do we expect from the participants to such dojo sessions.
-To this extent, some of the most obvious questions that may come to mind 
-have been answered.
+So which background do we expect from participants in a dojo? First
+and foremost a mindset to always want to improve and learn is the most
+the valuable thing any participant can bring to the table!
+
+Also, some of the most obvious questions that may come to mind 
+are answered below.
 
 ![Skills](./assets/skillz.png)
 
