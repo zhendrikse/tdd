@@ -1,6 +1,7 @@
 # Test-driven development materials
 
-TDD entails so much more than the well-known but trite red-green-refactor phrase.
+[TDD](https://semaphoreci.com/blog/test-driven-development)
+entails so much more than the well-known but trite red-green-refactor phrase.
 More accurately, it is a great form of _deliberate practice_, in which a set of
 **skills, principles, and [heuristics](https://www.qwan.eu/2021/10/13/what-is-a-heuristic.html)** 
 are continually combined [to build quality in](https://confluxbooks.com/books/build-quality-in).
