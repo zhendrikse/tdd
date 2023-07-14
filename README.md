@@ -105,9 +105,15 @@ As such, the phases are quite comparable to the well-known
 [shu-ha-ri-kokoro](https://heartofagile.com/wp-content/uploads/2019/08/kokoro-extends-shu-ha-ri.pdf) 
 learning phases.
 
-![Roadmap](./assets/dojo-roadmap.png)
+![Roadmap](./assets/dojo-roadmap-1.png)
+![Roadmap](./assets/dojo-roadmap-2.png)
+![Roadmap](./assets/dojo-roadmap-3.png)
 
-# Expected  Background
+# Expected background
+
+So which background do we expect from the participants to such dojo sessions.
+To this extent, some of the most obvious questions that may come to mind 
+have been answered.
 
 ![Skills](./assets/skillz.png)
 
