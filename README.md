@@ -105,9 +105,7 @@ As such, the phases are quite comparable to the well-known
 [shu-ha-ri-kokoro](https://heartofagile.com/wp-content/uploads/2019/08/kokoro-extends-shu-ha-ri.pdf) 
 learning phases.
 
-![Roadmap](./assets/dojo-roadmap-1.png)
-![Roadmap](./assets/dojo-roadmap-2.png)
-![Roadmap](./assets/dojo-roadmap-3.png)
+![Roadmap](./assets/dojo-roadmap.png)
 
 # Expected background
 
