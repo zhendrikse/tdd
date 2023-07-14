@@ -2,7 +2,8 @@
 
 TDD entails so much more than the well-known but trite red-green-refactor phrase.
 More accurately, it is a great form of _deliberate practice_, in which a set of
-**skills, principles, and heuristics** are continually combined to build quality in.
+**skills, principles, and [heuristics](https://www.qwan.eu/2021/10/13/what-is-a-heuristic.html)** 
+are continually combined [to build quality in](https://confluxbooks.com/books/build-quality-in).
 
 ![Heuristics](./assets/heuristics.png)
 
@@ -109,9 +110,13 @@ are answered below.
 
 ### What general programming skills are required?
 
-These katas are intended for people who want to learn TDD. Some basic programming experience is required, such as knowing what a `class` is, what an `object` is, what a `primitive` is, what `exception handling` entails, and how to write `conditionals` and `loops`. 
+These katas are intended for people who want to learn TDD. Some basic programming experience is required, 
+such as knowing what a `class` is, what an `object` is, what a `primitive` is, what `exception handling 
+entails, and how to write `conditionals` and `loops`. 
 
-Although not strictly required, it will also definitely help if you are already familiar with concepts such as [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) and the [single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).
+Although not strictly required, it will also definitely help if you are already familiar with concepts such as 
+[encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) and the 
+[single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).
 
 ### Is there a preferred programming language?
 
