@@ -27,30 +27,6 @@ project_short_description [This kata practices TDD]:
 
 Optional, will be used in packaging files such as the ```package.json```.
 
-### Code coverage
-
-Code coverage only works in stand-alone mode, so it does _not_ apply
-when running tests in the browser. In this case just press return.
-
-```
-Select code_coverage:
-1 - y
-2 - n
-Choose from 1, 2 [1]: 
-```
-
-Choose this if you want to have code coverage facilities.
-
-### Tests in browser
-
-```
-Select tests_in_browser:
-1 - n
-2 - y
-```
-
-Select yes here if you want to run your specifications (test) in a browser 
-served by nodejs http-server.
 
 ### Author
 
@@ -60,3 +36,12 @@ author [Your name]:
 
 Optional, will be used in packaging files such as the ```package.json```.
 
+# Running the project
+
+The following options are available to run the tests
+
+- `npm run test` &rarr; run the test(s) only once
+- `npm run watch` &rarr; run the test(s) continuously
+- `npm run coverage` &rarr; run test(s) continuously _with_ code coverage reports 
+   in both HTML and text
+- `npm run report` &rarr; start a HTTP server that serves the HTML coverage reports 
