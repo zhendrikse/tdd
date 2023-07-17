@@ -26,4 +26,33 @@ You are now ready to start this kata!
 
 # Detailed instructions
 
+So let's first focus on the validation of the last name field.
 
+```javascript
+it('should validate good last name', function () {
+    const lastName = validateLastName('Solomon');
+    expect(lastName).toEqual(true);
+});
+```
+
+To make this test pass, we first make the newly invoked function known
+in the `helper_spec.js`
+
+```javascript
+const { fibonacci, validateLastName } = require('../src/helpers');
+```
+
+Next, we define it in the `helpers.js` file:
+
+```javascript
+function validateLastName(lastName) {
+  return true
+}
+
+module.exports = {
+  fibonacci: fibonacci,
+  validateLastName: validateLastName
+}
+```
+
+This makes our test green!
