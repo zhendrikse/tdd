@@ -18,13 +18,14 @@ The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 | 12. | [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                            |
 | 13. | [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                     |
 | 14. | [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions              |
-| 15. | [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
-| 16. | [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
-| 17. | [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
-| 18. | [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
-| 19. | [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
-| 20. | [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
-| 21. | [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
+| 15. | [registration-form](./registration-form)   | L          | Generic TDD / Front-end development                |
+| 16. | [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)         |
+| 17. | [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD, and **small steps**                |
+| 18. | [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app      |
+| 19. | [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD        |
+| 20. | [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
+| 21. | [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
+| 22. | [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
 
 # Relation with 24 Key Capabilities
 
