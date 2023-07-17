@@ -77,17 +77,16 @@ fingers: once you master the skill, you wonder how you ever managed without it.
 
 A coding dojo is a place for immersive learning, in this case learning to
 thoroughly master TDD using coding katas as a means. 
-During the coding dojos, the participants get
-to know, apply, and practice new skills, principles, and concepts.
-Moreover, during the dojos participants will get acquainted with various
-forms of 
+During the coding dojos, TDD practitioners get to know, apply, and practice 
+new skills, principles, and concepts. Moreover, during the dojos practitioners 
+are made acquainted with various forms of 
 [pair-programming](https://martinfowler.com/articles/on-pair-programming.html) 
 as well as 
 [mob-programming](https://mobprogramming.org/mob-programming-basics/) 
 concepts such as
 [randori](https://codingdojo.org/practices/RandoriKata/), driver-navigator, etc.
 
-We may envision participants roughly speaking going through 
+We may envision practitioners roughly speaking going through 
 the phases outlined below. Each of the phases (departing from an
 initial skilled practitioner &rarr; conscious practitioner &rarr; 
 reflective practitioner phase) is represented by 
@@ -100,7 +99,7 @@ stages of learning.
 
 # Expected background
 
-So which background do we expect from participants in a dojo? First
+So which background do we expect from practitioners in a dojo? First
 and foremost a mindset to always want to improve and learn is the most
 the valuable thing any participant can bring to the table!
 
