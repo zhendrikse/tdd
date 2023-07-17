@@ -1,0 +1,75 @@
+body {
+    color: grey;
+    font-family: 'Lato';
+    text-align: center;
+    background: #66cc99;
+    margin: 30px;
+  }
+  
+  h1 {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .form-container {
+    text-align: left;
+    background: white;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  label {
+    color:  #66cc99;
+    text-transform: uppercase;
+  }
+  
+  input {
+    background: transparent;
+    font-size: 14px;
+    display: block;
+    padding: 10px 30px 10px 5px;
+    margin: 10px 0 40px;
+    border: 2px solid white;
+    border-bottom: 2px solid grey;
+  }
+  
+  input:focus {
+    outline: none;
+    border-bottom: 2px solid #66cc99;;
+  }
+  
+  .radio-question input {
+    margin: 10px;
+    padding: 0;
+  }
+  
+  .radio-input {
+    display: inline;
+  }
+  
+  .button {
+    background: #66cc99;
+    border: 0;
+    padding: 15px 30px;
+    margin-top: 20px;
+    color: white;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  
+  .button:hover {
+    background: #5ec190;
+  }
+  .password-rules {
+    font-size: 10px;
+    margin-top: -20px;
+    margin-bottom: 40px;
+  }
+  .error-message {
+    color: red;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }

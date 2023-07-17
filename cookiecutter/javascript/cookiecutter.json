@@ -4,6 +4,5 @@
     "project_short_description": "This kata practices TDD", 
     "author": "Your name",
     "code_coverage": ["n", "y"],
-    "tests_in_browser": ["n", "y"],
     "license": ["GNU General Public License v3", "MIT license", "Apache Software License 2.0"]
 }

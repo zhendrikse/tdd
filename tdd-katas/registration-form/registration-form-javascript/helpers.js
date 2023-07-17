@@ -1,5 +1,3 @@
-'use strict';
-
 function fibonacci(num, memo) {
   memo = memo || {};
 
