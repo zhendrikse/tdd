@@ -33,6 +33,8 @@ or [gitpod.io](https://gitpod.io)
 This repository contains materials to both practice as well as to teach TDD
 in the form of courses, workshops, and/or coding dojos.
 
+<details>
+
 - **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for starting a kata in various languages
 - **[docs](./docs/)** &rarr; additional free books
 - **[kata-solutions](./kata-solutions/)** &rarr; solutions for almost all katas 
@@ -41,6 +43,7 @@ in the form of courses, workshops, and/or coding dojos.
   - **[README.md](./tdd-katas/README.md)** &rarr; with a table that lists per kata both a course-grained difficulty as well as a list of aspects that are addressed
   - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language
 - **[tools](./tools/)** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
+</details>
 
 # About coding katas
 

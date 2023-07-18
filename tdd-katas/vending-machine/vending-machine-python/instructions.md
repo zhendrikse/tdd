@@ -14,7 +14,9 @@ the provided ``README.md`` in there.
 ## Delivering cans without cost
 
 Let's first write a specification for a vending machine that delivers
-nothing, whatever we ask it to deliver:
+nothing, whatever we ask it to deliver.
+
+<details>
 
 ```python
 with description(VendingMachine) as self:
@@ -23,6 +25,7 @@ with description(VendingMachine) as self:
         vending_machine  = VendingMachine()
         expect(vending_machine.deliver(Choice.COKE)).to(be(Can.NOTHING))
 ```
+</details>
 
 Obviously, this fails miserably, as the both the deliver method and the
 enumerations are not defined. So let's introduce them both in the 

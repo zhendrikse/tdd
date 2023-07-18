@@ -1,9 +1,12 @@
-const express = require('express');
+var express = require('express'),
+    app     = express(),
+    port    = parseInt(process.env.PORT, 10) || 8080;
 const path = require('path');
 const { validator } = require('./src/helpers');
 
-const app = express();
-const PORT = 3000;
+// app.configure(function(){
+//   app.use(express.bodyParser());
+// });
 
 app.use(express.static(__dirname));
 
@@ -11,7 +14,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.post('/', (req, res) => {
+app.post('/submitform', (req, res) => {
+  console.log("Hier");
+  console.log(req);
+  console.log(req.body);
   const messages = validator(req.body);
 
   if (Object.keys(messages).length > 0)

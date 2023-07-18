@@ -1,7 +1,11 @@
 # Kata overview
 
-The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
+Please click on the below details to reveal the difficulty of all katas.
 
+Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
+
+<details>
+  
 |     | Kata                                       | Difficulty | Aspects                                            |
 | --- | ------------------------------------------ | ---------- | -------------------------------------------------- |
 |  1. | [audio-player-kata](./audio-player-kata)   | M          | London vs. Detroit schools of TDD / Mocks, spies   |
@@ -26,17 +30,21 @@ The difficulty is ranked as **L** (low), **M** (medium), and **H** (high).
 | 20. | [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI    |
 | 21. | [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**  |
 | 22. | [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**  |
+</details>
+
 
 # Relation with 24 Key Capabilities
 
-The relation to the 
-[24 Key Capabilities to Drive Improvement in Software Delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/)
-is outlined next.
-
-## Continuous Delivery Capabilities
+Please click on the details to learn more about the 
+relation between the topics that are practiced in the katas and the 
+[24 Key Capabilities to Drive Improvement in Software Delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/).
 
 The column with the checkmarks and crosses indicates which practices are covered with the coding katas. A plus-minus sign indicates partial coverage.
 
+## Continuous Delivery Capabilities
+
+<details>
+  
 |     | [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1) | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
 |  1. | Use Version Control for all Production Artifacts | ✔      | You may always opt to use a version control system when practicing your katas. When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
@@ -47,10 +55,13 @@ The column with the checkmarks and crosses indicates which practices are covered
 |  6. | Support Test Data Management                     | ✗      | This capability is not covered by any of the katas yet ||
 |  7. | Shift Left on Security                           | ✗      | This capability is not covered by any of the katas yet ||
 |  8. | Implement Continuous Delivery                    | ✔       | When the skills and heuristics of TDD are correctly and properly applied all of the time, it should be no problem for a team to go to production at any given time. This is one of the hallmarks of continuous delivery! So TDD is a necessary but not sufficient condition for continuous delivery. |
+</details>
 
-According to Martin Fowler, **continuous integration** is 
-[characterized by the following practices](https://martinfowler.com/articles/continuousIntegration.html):
+All [aspects belonging to the "Implement Continuous Integration" capability](https://martinfowler.com/articles/continuousIntegration.html) are oulined
+separately in the table below.
 
+<details>
+  
 | CI practice                                                       | Covered | 
 | ----------------------------------------------------------------- | ------- | 
 | Maintain a Single Source Repository                               | ✔      |
@@ -64,6 +75,7 @@ According to Martin Fowler, **continuous integration** is
 | Make it Easy for Anyone to Get the Latest Executable              | ✗      |
 | Everyone can see what's happening                                 | ±       |
 | Automate Deployment                                               | ✔      | 
+</details>
 
 Note that when practicing katas in a dojo format, you are effectively continuously integrating 
 all changes of all participants. The main difference compared to working on regular user stories 
@@ -73,12 +85,17 @@ kind of second line of defense, as it should.
 
 ## Architecture Capabilities
 
+<details>
+  
 |     | [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2) | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
 |  9. | Use a Loosely Coupled Architecture               | ✔      | This capability is touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/), [CQRS](https://martinfowler.com/bliki/CQRS.html), and [dependency inversion](https://www.sammancoaching.org/learning_hours/testable_design/dependency_inversion_principle.html). |
 | 10. | Architect for Empowered Teams                    | ✗      | This capability is not covered by any of the katas yet. |
+</details>
 
 ## Product and Process Capabilities
+
+<details>
 
 |     | [Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3) | Covered | Explanation |
 | --- | ------------------------------------------------------ | ------- | ----------- |
@@ -86,8 +103,11 @@ kind of second line of defense, as it should.
 | 12. | Make the Flow of Work Visible through the Value Stream | ±       | This may partially be addressed by showing the participants the TODO list that they are encouraged to maintain while practicing the katas. In addition, you may consider using [Scrumblr](https://github.com/aliasaria/scrumblr), an instance of which you can easily start yourself [here](https://replit.com/@zwh/Scrumblr). |
 | 13. | Work in Small Batches                                  | ✔      | This aspect is addressed in _all_ katas as it lies at the heart of TDD! |
 | 14. | Foster and Enable Team Experimentation                 | ±       | Although this aspect isn't addressed _specifically_ by any of the katas, it is addressed _implicitly_, as the way of working practiced here contributes to the capability of a team to carry out experiments. |
+</details>
 
 ## Lean Management and Monitoring Capabilities
+
+<details>
 
 |     | [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4) | Covered | Explanation |
 | --- | --------------------------------------------------------------------------- | ------- | ----------- |
@@ -96,8 +116,11 @@ kind of second line of defense, as it should.
 | 17. | Check System Health Proactively                                             | ✗       | This capability is not covered by any of the katas yet.   |
 | 18. | Improve Processes and Manage Work with Work-In-Process (WIP) Limits         | ±        | In each and every kata, it is always emphasized to focus on one change at a time, and one change at a time only!   |
 | 19. | Visualize Work to Monitor Quality and Communicate throughout the Team       | ✗       | This capability is not covered by any of the katas yet.   |
+</details>
 
 ## Cultural Capabilities
+
+<details>
 
 |     | [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5) | Covered | Explanation |
 | --- | --------------------------------------------------------------- | ------- | ----------- |
@@ -106,6 +129,7 @@ kind of second line of defense, as it should.
 | 22. | Support and Facilitate Collaboration among Teams      | ✗       | This capability is not covered by any of the katas yet.   |
 | 23. | Provide Resources and Tools that Make Work Meaningful | ✔       | As this measure is about being given the tools and resources needed to do your job well, it is obviously continually being addressed by these katas.   |
 | 24. | Support or Embody Transformational Leadership         | ±        | As participants need regular time to practice these katas, management needs to be informed about these activities. Viewed this way, at least one of the aspects of transformational leadership (intellectual stimulation) is a prerequisite for making coding dojos a reality.   |
+</details>
 
 ## License
 

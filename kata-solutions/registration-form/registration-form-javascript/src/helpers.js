@@ -13,9 +13,13 @@ function validateLastName(lastname) {
 }
 
 function formValidation(data) {
+  console.log("daar");
+  console.log(data);
   const messages = [];
-  var contentsLastNameField = data['lastName'];
-
+  //var contentsLastNameField = data['lastName'];
+  //var contentsLastNameField = document.getElementById('lastName').value;
+  var contentsLastNameField = data.lastName;
+  
   if (!validateLastName(contentsLastNameField)) 
     messages['lastName'] = 'Last name should contain only letters';
   

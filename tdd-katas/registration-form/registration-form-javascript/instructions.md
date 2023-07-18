@@ -30,12 +30,15 @@ You are now ready to start this kata!
 
 So let's first focus on the validation of the last name field.
 
+<details>
+  
 ```javascript
 it('should validate a valid last name', function () {
     const lastName = validateLastName('Solomon');
     expect(lastName).toEqual(true);
 });
 ```
+</details>
 
 To make this test pass, we first make the newly invoked function known
 in the `helper_spec.js`
