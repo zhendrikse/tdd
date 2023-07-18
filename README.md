@@ -78,25 +78,27 @@ fingers: once you master the skill, you wonder how you ever managed without it.
 
 # Coding dojo
 
-A coding dojo is a place for immersive learning, in this case learning to
-thoroughly master TDD using coding katas as a means. 
-During the coding dojos, TDD practitioners get to know, apply, and practice 
-new skills, principles, and concepts. Moreover, during the dojos practitioners 
-are made acquainted with various forms of 
-[pair-programming](https://martinfowler.com/articles/on-pair-programming.html) 
-as well as 
-[mob-programming](https://mobprogramming.org/mob-programming-basics/) 
-concepts such as
-[randori](https://codingdojo.org/practices/RandoriKata/), driver-navigator, etc.
+A dojo is a place for immersive learning. Needless to say, coding dojos are meant to 
+eventually thoroughly master TDD using coding katas as a means. During the coding dojos, 
+TDD practitioners get to know, apply, and practice all TDD skills, heuristics, and principles. 
 
-We may envision practitioners roughly speaking going through 
-the phases outlined below. Each of the phases (departing from an
-initial skilled practitioner &rarr; conscious practitioner &rarr; 
-reflective practitioner phase) is represented by 
-a corresponding oval containing the topics, learning goals, and conditions.
-As such, the phases are quite comparable to the well-known 
-[shu-ha-ri-kokoro](https://heartofagile.com/wp-content/uploads/2019/08/kokoro-extends-shu-ha-ri.pdf) 
+Moreover, during the dojos practitioners are made acquainted with various aspects of 
+[pair-programming](https://martinfowler.com/articles/on-pair-programming.html) 
+as well as various 
+[mob-programming](https://mobprogramming.org/mob-programming-basics/) 
+concepts such as randori, driver-navigator, etc.
+
+During these sessions, we may envision practitioners going roughly speaking through a set of 
+learning phases. Departing from an initial skilled practitioner, they gradually move up to a 
+conscious practitioner and may finally eventually reach the skills of a so-called reflective 
+practitioner. As such, the phases are quite comparable to the well-known 
+[randori](https://codingdojo.org/practices/RandoriKata/), driver-navigator, etc.
 stages of learning.
+
+During each of these learning stages, more or less the same set of topics are practiced, 
+but gradually more and more in-depth. For example, such topics include TDD in unfriendly 
+environments, decoupling code from surroundings, deliberately improving code in small steps, etc.
+This concept is elaborated in the pictures below.
 
 ![Roadmap](./assets/dojo-roadmap.png)
 
