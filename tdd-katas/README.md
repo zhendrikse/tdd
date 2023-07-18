@@ -17,7 +17,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 |  5. | [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture                 |
 |  6. | [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI                  |
 |  7. | [fibonacci-kata](./db-adapter-kata)        | M          | Pipelines / Automated deployments / IaC               |
-|  8. | [game-of-life](./game-of-life)             | M          | Generic TDD skills (**small steps**)                  |
+|  8. | [game-of-life](./game-of-life)             | M          | **Generic TDD** / **Small steps**                     |
 |  9. | [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests    |
 | 10. | [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**            |
 | 11. | [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                    |
