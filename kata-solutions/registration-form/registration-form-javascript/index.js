@@ -1,12 +1,17 @@
 var express = require('express'),
-    app     = express(),
-    port    = parseInt(process.env.PORT, 10) || 8080;
+    bodyParser = require('body-parser'),
+    app     = express();
 const path = require('path');
+const PORT = 3000;
 const { validator } = require('./src/helpers');
 
-// app.configure(function(){
-//   app.use(express.bodyParser());
-// });
+var app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.use(express.static(__dirname));
 
@@ -15,14 +20,11 @@ app.get('/', (req, res) => {
 });
 
 app.post('/submitform', (req, res) => {
-  console.log("Hier");
-  console.log(req);
-  console.log(req.body);
   const messages = validator(req.body);
 
   if (Object.keys(messages).length > 0)
-    return res.send('Thank you for subscribing');
-  return res.statusCode(433).json(messages);
+    return res.status(433).send(messages);
+  return res.send('Thank you for subscribing');
 });
 
 app.listen(PORT, (error) => {

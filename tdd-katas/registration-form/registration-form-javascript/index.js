@@ -1,9 +1,17 @@
-const express = require('express');
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    app     = express();
 const path = require('path');
+const PORT = 3000;
 const { validator } = require('./src/helpers');
 
-const app = express();
-const PORT = 3000;
+var app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.use(express.static(__dirname));
 
@@ -11,12 +19,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.post('/', (req, res) => {
+app.post('/submitform', (req, res) => {
   const messages = validator(req.body);
 
   if (Object.keys(messages).length > 0)
-    return res.send('Thank you for subscribing');
-  return res.statusCode(433).json(messages);
+    return res.status(433).send(messages);
+  return res.send('Thank you for subscribing');
 });
 
 app.listen(PORT, (error) => {

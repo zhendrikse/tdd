@@ -9,20 +9,20 @@ function fibonacci(num, memo) {
 
 function validateLastName(lastname) {
   var allowed_letters = /^[A-Za-z]+$/;
-  return lastname.match(letters);
+  
+  if (lastname.match(allowed_letters))
+    return true
+  
+  return false
 }
 
 function formValidation(data) {
-  console.log("daar");
-  console.log(data);
-  const messages = [];
-  //var contentsLastNameField = data['lastName'];
-  //var contentsLastNameField = document.getElementById('lastName').value;
+  const messages = {};
   var contentsLastNameField = data.lastName;
   
   if (!validateLastName(contentsLastNameField)) 
     messages['lastName'] = 'Last name should contain only letters';
-  
+
   return messages;
 }
 
