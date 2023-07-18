@@ -26,10 +26,12 @@ You are now ready to start this kata!
 
 # Detailed instructions
 
+## Last name field
+
 So let's first focus on the validation of the last name field.
 
 ```javascript
-it('should validate good last name', function () {
+it('should validate a valid last name', function () {
     const lastName = validateLastName('Solomon');
     expect(lastName).toEqual(true);
 });
@@ -56,3 +58,13 @@ module.exports = {
 ```
 
 This makes our test green!
+
+We only want to allow characters in the name, so a check
+on the regular expression `^[A-Za-z]+$` is logical.
+
+```javascript
+  it('should invalidate an invalid last name', function () {
+    const lastName = validateLastName('P5k');
+    expect(lastName).toEqual(false);
+  });
+```

@@ -5,8 +5,14 @@ describe('Test Helpers', function () {
     const fib = fibonacci(4);
     expect(fib).toEqual(5);
   });
-  it('should validate good last name', function () {
-    const lastName = validateLastName('Solomon');
-    expect(lastName).toEqual(true);
+  
+  it('should validate a valid last name', function () {
+    const lastname = validateLastName('Puk');
+    expect(lastname).toEqual(true);
+  });
+  
+  it('should invalidate an invalid last name', function () {
+    const lastname = validateLastName('P5k');
+    expect(lastname).toEqual(false);
   });
 });

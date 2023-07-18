@@ -6,7 +6,13 @@ function fibonacci(num, memo) {
 
   return (memo[num] = fibonacci(num - 1, memo) + fibonacci(num - 2, memo));
 }
+function formValidation(data) {
+  const messages = [];
+  
+  return messages;
+}
 
 module.exports = {
-  fibonacci: fibonacci
+  fibonacci: fibonacci,
+  validator: formValidation
 }
