@@ -8,8 +8,8 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 <details>
 <summary>Table containing a summary of all katas</summary>
   
-|     | Kata                                       | Difficulty | Aspects                                            |
-| --- | ------------------------------------------ | ---------- | -------------------------------------------------- |
+|     | Kata                                       | Difficulty | Aspects                                               |
+| --- | ------------------------------------------ | ---------- | ----------------------------------------------------- |
 |  1. | [audio-player-kata](./audio-player-kata)   | M          | London vs. Detroit schools of TDD / Mocks, spies      |
 |  2. | [bugs-zero-kata](./bugs-zero-kata)         | M          | **Legacy code** / **Refactoring** / Approval tests    |
 |  3. | [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**             |
@@ -22,9 +22,9 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | 10. | [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**            |
 | 11. | [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                    |
 | 12. | [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                               |
-| 13. | [mars-rover](./mars-rover)                 | M          | Generic TDD / Design decisions                        |
+| 13. | [mars-rover](./mars-rover)                 | M          | **Generic TDD** / Design decisions                    |
 | 14. | [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions                 |
-| 15. | [registration-form](./registration-form)   | L &harr; M | Generic TDD / Front-end development / Custom matchers |
+| 15. | [registration-form](./registration-form)   | L &harr; M | **Generic TDD** / Front-end TDD / Custom matchers     |
 | 16. | [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)            |
 | 17. | [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD and **small steps**                    |
 | 18. | [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app         |
