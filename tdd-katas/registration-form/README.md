@@ -6,7 +6,7 @@ This kata is based on a combination of resources:
 
 - The section [How to test Node.js applications with Jasmine](https://www.lambdatest.com/learning-hub/jasmine-unit-testing#how-to-test-nodejs-applications-with-jasmine)
 - The HTML page is inspired by the [Aliens' Registration Form with validation](https://codepen.io/absalan/pen/WNbwbXB?editors=1111)
-- The project lay-out is inspired by [this Jasmine example](https://github.com/Kaperskyguru/jasmine-example/) available on GitHub.
+- The project lay-out is inspired by [this Jasmine example](https://github.com/Kaperskyguru/jasmine-example/) available on GitHub. Warning, this project contains many bugs though!
 
 The idea is to learn how to apply TDD to code that is meant to be used/executed in a front-end.
 
@@ -18,4 +18,5 @@ using TDD. This way practitioners should get an idea of how the same principles 
 ### Possible extensions
 
 - The app can be made more interesting by persisting the user
-  data into a database
+  data into a database, see for example
+  [this post](https://medium.com/swlh/read-html-form-data-using-get-and-post-method-in-node-js-8d2c7880adbf)!

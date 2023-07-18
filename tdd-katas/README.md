@@ -1,10 +1,12 @@
 # Kata overview
 
-Please click on the below details to reveal the difficulty of all katas.
-
+This section summarizes details off all katas contained in this repository.
+It includes both a difficulty level as well as a list of topics (per kata) 
+that are being targeted.
 Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 
 <details>
+<summary>Table containing a summary of all katas</summary>
   
 |     | Kata                                       | Difficulty | Aspects                                            |
 | --- | ------------------------------------------ | ---------- | -------------------------------------------------- |
@@ -44,6 +46,7 @@ The column with the checkmarks and crosses indicates which practices are covered
 ## Continuous Delivery Capabilities
 
 <details>
+<summary>Coverage of continuous delivery capabilities</summary>
   
 |     | [Continuous Delivery Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1) | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
@@ -61,6 +64,7 @@ All [aspects belonging to the "Implement Continuous Integration" capability](htt
 separately in the table below.
 
 <details>
+<summary>Coverage of all aspects of the continuous integration capability</summary>
   
 | CI practice                                                       | Covered | 
 | ----------------------------------------------------------------- | ------- | 
@@ -86,6 +90,7 @@ kind of second line of defense, as it should.
 ## Architecture Capabilities
 
 <details>
+<summary>Coverage of architecture capabilities</summary>
   
 |     | [Architecture Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2) | Covered | Explanation |
 | --- | ------------------------------------------------ | ------- | ----------- |
@@ -96,6 +101,7 @@ kind of second line of defense, as it should.
 ## Product and Process Capabilities
 
 <details>
+<summary>Coverage of product and process capabilities</summary>
 
 |     | [Product and Process Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3) | Covered | Explanation |
 | --- | ------------------------------------------------------ | ------- | ----------- |
@@ -108,6 +114,7 @@ kind of second line of defense, as it should.
 ## Lean Management and Monitoring Capabilities
 
 <details>
+<summary>Coverage of lean management and monitoring capabilities</summary>
 
 |     | [Lean Management and Monitoring Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4) | Covered | Explanation |
 | --- | --------------------------------------------------------------------------- | ------- | ----------- |
@@ -121,6 +128,7 @@ kind of second line of defense, as it should.
 ## Cultural Capabilities
 
 <details>
+<summary>Coverage of cultural capabilities</summary>
 
 |     | [Cultural Capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5) | Covered | Explanation |
 | --- | --------------------------------------------------------------- | ------- | ----------- |

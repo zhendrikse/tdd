@@ -13,11 +13,12 @@ the provided ``README.md`` in there.
 
 ## Delivering cans without cost
 
-Let's first write a specification for a vending machine that delivers
+First write a specification for a vending machine that delivers
 nothing, whatever we ask it to deliver.
 
 <details>
-
+<summary>First specification for the vending machine</summary>
+  
 ```python
 with description(VendingMachine) as self:
   with context("A new vending machine"):
@@ -27,9 +28,12 @@ with description(VendingMachine) as self:
 ```
 </details>
 
-Obviously, this fails miserably, as the both the deliver method and the
+Obviously, this test fails miserably, as both the deliver method and the
 enumerations are not defined. So let's introduce them both in the 
 production code
+
+<details>
+<summary>Definition of <code>deliver()</code>, <code>Choice</code> and <code>Can</code> </summary>
 
 ```python
 from enum import Enum
@@ -44,16 +48,21 @@ class VendingMachine:
   def deliver(self, choice: Choice) -> Can:
     return Can.NOTHING
 ```
+</details>
 
 We should have our first passing test already!
 
-Let's try to get some coke though:
+Next, let's try to get some can of coke:
+
+<details>
+<summary>Test for a can of coke</summary>
 
 ```python
-    with it("delivers Cola when coke is selected"):
-        vending_machine  = VendingMachine()
-        expect(vending_machine.deliver(Choice.COKE)).to(be(Can.COLA))
+with it("delivers Cola when coke is selected"):
+    vending_machine  = VendingMachine()
+    expect(vending_machine.deliver(Choice.COKE)).to(be(Can.COLA))
 ```
+</details>
 
 Before we continue, notice that we have two tests now that are 
 completely identical, but expect different results. How do we solve this?
