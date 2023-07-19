@@ -5,6 +5,7 @@
   - [ ] Make london school presentation more generic
 - [ ] Resurrect Fibonacci kata (also create preparation instructions)
 - [ ] Create solution for countries kata
+- [ ] Fix code coverage gilded rose python
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [ ] Make Python cookiecutter work for ptw and mamba
 - [ ] Implement code coverage for Typescript cookiecutter

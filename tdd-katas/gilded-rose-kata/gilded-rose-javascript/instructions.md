@@ -1,6 +1,6 @@
 # Introduction
 
-Please read the general [introduction to the stack kata](../README.md) first!
+Please read the general [introduction to the gilded rose kata](../README.md) first!
 
 # Getting started
 
@@ -44,3 +44,22 @@ Finally, you should be able to start working by invoking
 ```shell
 npm run test
 ```
+
+# Improving the coverage
+
+## Inspecting the code coverage
+
+Let's see what the current coverage is by running
+
+```bash
+$ npm run report
+```
+
+A web window should now open, displaying the code coverage. 
+You can click on the `gilded_rose.js` file in the table.
+
+## Getting acquainted with approval testing
+
+Looking at the coverage report, we see that quite a lot of code is still left uncovered. Let's first improve this.
+
+
