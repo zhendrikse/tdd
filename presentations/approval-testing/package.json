@@ -1,7 +1,7 @@
 {
-    "name": "Test-Driven-Development-presentations",
+    "name": "Approval testing presentation",
     "version": "1.0.0",
-    "description": "",
+    "description": "Introduction into approval testing",
     "main": "index.js",
     "dependencies": {
         "reveal": "^0.0.4",
@@ -11,9 +11,9 @@
     "devDependencies": {},
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "slides": "reveal-md -w --theme solarized slides.md"
+        "slides": "reveal-md -w --theme black slides.md"
     },
-    "keywords": [],
-    "author": "",
+    "keywords": ["TDD", "Approval Testing"],
+    "author": "Zeger Hendrikse",
     "license": "ISC"
 }
