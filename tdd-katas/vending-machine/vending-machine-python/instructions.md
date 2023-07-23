@@ -52,7 +52,7 @@ class VendingMachine:
 
 We should have our first passing test already!
 
-Next, let's try to get some can of coke:
+Next, let's write a test to get a can of coke.
 
 <details>
 <summary>Test for a can of coke</summary>
@@ -67,6 +67,10 @@ with it("delivers Cola when coke is selected"):
 Before we continue, notice that we have two tests now that are 
 completely identical, but expect different results. How do we solve this?
 
+
+<details>
+<summary>Solving identical test but expecting different results</summary>
+
 We solve this by configuring the vending machine with a choice, so
 that we can expect a different outcome.
 
@@ -76,8 +80,13 @@ that we can expect a different outcome.
         vending_machine.configure(Choice.COKE, Can.COLA)
         expect(vending_machine.deliver(Choice.COKE)).to(be(Can.COLA))
 ```
+</details>
 
-Now the vending machine must be extended just a little bit
+Now the vending machine must be modified just a little bit
+to make the test pass.
+
+<details>
+  <summary>Modification to the production code to make the test pass</summary>
 
 ```python
 class VendingMachine:
@@ -90,22 +99,33 @@ class VendingMachine:
   def deliver(self, choice: Choice) -> Can:
     return self._can_of_choice
 ```
+</details>
 
 Next, identify the duplicate code (hint: in the spec file), and
 eliminate it using the ``before.Each:``
+
+<details>
+  <summary>Applying the DRY principle</summary>
 
 ```python
     with beforeEach:
         self.vending_machine  = VendingMachine()
 ```
+</details>
 
-Let's configure a different drink
+Configuring a different drink will force us to further
+generlize the production code!
+
+<details>
+  <summary>Adding a test for yet another type of can</summary>
 
 ```python
     with it("delivers a can of fanta when choice is fizzy orange"):
         self.vending_machine.configure(Choice.FIZZY_ORANGE, Can.FANTA)
         expect(self.vending_machine.deliver(Choice.FIZZY_ORANGE)).to(be(Can.FANTA))
-```
+```  
+</details>
+
 
 After extending the choice and can types, we notice that the test jumps to 
 green. 
