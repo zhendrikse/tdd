@@ -1,11 +1,13 @@
+- [ ] Maak sudoku kata Clojure af
 - [+] Make Python cookiecutter work for ptw and coverage
 - [+] Create instruction for bugs zero kata Python
 - [ ] Make DB adapter kata work with other than ReplitDB
 - [X] Resurrect audio player kata from london school presentation
   - [ ] Make london school presentation more generic
-- [ ] Resurrect Fibonacci kata (also create preparation instructions)
+- [ ] Resurrect pipeline kata (also create preparation instructions)
 - [ ] Create solution for countries kata
 - [ ] Fix code coverage gilded rose python
+- [ ] Finish adding details tags to vending machine python instructions
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [ ] Make Python cookiecutter work for ptw and mamba
 - [ ] Implement code coverage for Typescript cookiecutter
@@ -14,7 +16,6 @@
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
   - [ ] graphic with replit example
 - [ ] Sudoku kata Clojure readme is een Python readme
-- [ ] Maak sudoku kata Clojure af
 - [ ] Sudoku characterization tests alleen in Java?
 - [ ] Clean-up poker hands kata dir and solutions
 - [ ] [Game of life in Clojure](https://medium.com/@pelensky/clojure-conways-game-of-life-289f19b10598), see also [this post](http://clj-me.cgrand.net/)

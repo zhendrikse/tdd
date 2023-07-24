@@ -1,3 +1,12 @@
+| Pulsar | Glider | Spaceship |
+| ------ | ------ | --------- |
+| ![Pulsar](./assets/Game_of_life_pulsar.gif) | ![Glider](./assets/Game_of_life_animated_glider.gif) | ![Spaceship](./assets/Animated_Mwss.gif) | 
+
 # Game of Life
 
-Conway's game of life.
+This kata is meant to experiment with different implementations
+of [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
+
+# References
+
+- [Functional solutions](http://programmablelife.blogspot.com/search/label/conways-game-of-life) to Game of Life
