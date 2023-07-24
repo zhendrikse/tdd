@@ -1,0 +1,1 @@
+./gradlew test #jacocoTestReport --continuous
