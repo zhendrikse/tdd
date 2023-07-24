@@ -161,4 +161,65 @@ And the code that makes this test pass
   ```
 </details>
 
- Analogously we implement the `toLivingCell(Predicate<Cell> isCellViable)`.
+Analogously we implement the `toLivingCell(Predicate<Cell> isCellViable)`.
+
+## Introduction of coordinates
+
+As we need to be able to determine the neighbours of a cell, we need  
+to introduce coordinates in the cell.
+
+<details>
+  <summary>Introduction of coordinates in a cell</summary>
+
+  ```java
+  public class Cell {
+    private final boolean alive;
+    private final int x;
+    private final int y;
+    
+    private Cell(final int x, final int y, final boolean alive) {
+      this.alive = alive;
+      this.x = x;
+      this.y = y;
+    }
+  
+    private boolean isAlive() {
+      return alive;
+    }
+    
+    public static final Cell newLivingCell(final int x, final int y) {
+      return new Cell(x, y, true);
+    }
+    
+    public static final Cell newDeadCell(final int x, final int y) {
+      return new Cell(x, y, false);
+    }
+  
+    public static Predicate<Cell> isLiving = Cell::isAlive;
+    
+    public static Predicate<Cell> isDead = isLiving.negate();
+  
+    public static Function<Cell, Cell> toDeadCell(Predicate<Cell> isCellKillable) {
+      return cell -> Optional
+        .of(cell)
+        .filter(isCellKillable.negate())
+  			.orElse(newDeadCell(cell.x, cell.y));  
+    }
+  
+    public static Function<Cell, Cell> toLivingCell(Predicate<Cell> isCellViable) {
+      return cell -> Optional
+        .of(cell)
+        .filter(isCellViable.negate())
+  			.orElse(newLivingCell(cell.x, cell.y));  
+    }
+  }
+  ```
+</details>
+
+The tests need to be modified accordingly as well, of course!
+
+## Determining the living neighbours
+
+The rules of the game depend on the number of living neighbours.
+Consequently, we need to define a predicate that for a given field
+determines the number of living neighbours in a game.
