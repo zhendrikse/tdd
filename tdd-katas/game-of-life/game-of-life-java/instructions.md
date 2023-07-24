@@ -2,6 +2,24 @@
 
 Please read the general [introduction to the game of life kata](../README.md) first!
 
+# Teaser
+
+We are going to build the following code, which is a showcase of _code should
+express intent_, Kent Beck's design rule number 2!
+
+```java
+private static List<Field> iterateGameboard(List<Field> gameboard) {
+  return gameboard
+    .stream()
+      .map(toDeadField(which(isAlive(), and(), 
+          which(hasLessThanTwo(livingNeighboursIn(gameboard)),
+                or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
+      .map(toAliveField(which(isDead(), and(),
+          hasExactThree(livingNeighboursIn(gameboard)))))
+      .collect(Collectors.toList());
+}
+```
+
 # Getting started
 
 First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).

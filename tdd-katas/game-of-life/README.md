@@ -14,6 +14,13 @@ of [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 | `game-of-life-python`| A straight forward object oriented solution in Python |
 | `game-of-life-java`  | A strictly functional solution in Java                |
 
+
+In addition, one may play with the boundary conditions:
+
+- Implement a game with finite boundaries
+- Implement a game where both the left and right as well as the top and bottom boundaries are glued together
+- Implement a game without boundaries, i.e. an infinite playfield
+
 # References
 
 - [Functional solutions](http://programmablelife.blogspot.com/search/label/conways-game-of-life) to Game of Life
