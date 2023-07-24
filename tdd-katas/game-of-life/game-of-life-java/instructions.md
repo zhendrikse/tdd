@@ -133,15 +133,13 @@ dead cells.
     @Test
     void toDeadCellMapping() {
       Predicate<Cell> ifCellKillable = isLiving;
-      List<Cell> mappedList = 
-        List
-        .of(newLivingCell())
-        .stream()
-        .map(toDeadCell(ifCellKillable))
-        .collect(Collectors.toList());
+      Optional<Cell> mappedList = 
+        Optional
+        .of(livingCell(0, 0))
+        .map(toDeadCell(ifCellKillable));
       
       assertFalse(mappedList.isEmpty());
-      assertTrue(isDead(mappedList.get(0)));
+      assertTrue(isDead(mappedList.get()));
     }
   ```
 </details>

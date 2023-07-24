@@ -48,29 +48,25 @@ class CellTest {
   @Test
   void toDeadCellMapping() {
     Predicate<Cell> ifCellKillable = isLiving;
-    List<Cell> mappedList = 
-      List
+    Optional<Cell> mappedList = 
+      Optional
       .of(livingCell(0, 0))
-      .stream()
-      .map(toDeadCell(ifCellKillable))
-      .collect(Collectors.toList());
+      .map(toDeadCell(ifCellKillable));
     
     assertFalse(mappedList.isEmpty());
-    assertTrue(isDead(mappedList.get(0)));
+    assertTrue(isDead(mappedList.get()));
   }
 
   @Test
   void toLivingCellMapping() {
     Predicate<Cell> ifCellViable = isDead;
-    List<Cell> mappedList = 
-      List
+    Optional<Cell> mappedList = 
+      Optional
       .of(deadCell(0, 0))
-      .stream()
-      .map(toDeadCell(ifCellViable))
-      .collect(Collectors.toList());
+      .map(toDeadCell(ifCellViable));
     
     assertFalse(mappedList.isEmpty());
-    assertTrue(isDead(mappedList.get(0)));
+    assertTrue(isDead(mappedList.get()));
   }
 
   @Test
