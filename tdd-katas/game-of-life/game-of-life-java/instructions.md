@@ -631,3 +631,69 @@ private static List<Cell> iterateGameboard(List<Cell> gameboard) {
       .collect(Collectors.toList());
 }
 ```
+
+## Putting it all together
+
+### Setting up and displaying a game
+
+First we need to be able to create a game of life world. And equally important,
+we need to be able to check (and watch/inspect) it. For example, a blinker 
+oscillator should be something like
+
+``` 
+-----
+--#--
+--#--
+--#--
+-----
+```
+
+So first of all, a cell should be mapped to either `-` or `#`, depening on
+whether it is alive or not.
+
+<details>
+  <summary>Testing the mapping of a cell to a character</summary>
+
+  ```java
+  @Test
+  void mapLivingCellToCharacter() {
+    Optional<String> cellCharacter =
+      Optional
+      .of(livingCell(0, 0))
+      .map(mapToCharacter());
+
+    assertEquals("#", cellCharacter.get());
+  }
+
+  @Test
+  void mapDeadCellToCharacter() {
+    Optional<String> cellCharacter =
+      Optional
+      .of(deadCell(0, 0))
+      .map(mapToCharacter());
+
+    assertEquals("-", cellCharacter.get());
+  }  
+  ```
+
+  The implementation that makes these tests pass is give below.
+  
+<details>
+  <summary>Mapping a cell to a character depending on its state</summary>
+
+  ```java	
+  public static Function<Cell, String> mapToCharacter() {
+		return cell -> cell.isAlive() ? "#" : "-";
+	}
+  ```
+
+  
+</details>
+  
+</details>
+
+The next challenge is that we are stuck with a list of cells,
+which is one-dimensional by defition. We somehow need to convert
+that into a two-dimensional representation.
+
+

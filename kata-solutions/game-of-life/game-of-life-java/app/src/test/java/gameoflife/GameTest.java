@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import java.util.function.Function;
+
+import gameoflife.Cell;
 import static gameoflife.Cell.*;
 import static gameoflife.Game.*;
 
@@ -63,5 +67,42 @@ class GameTest {
       .collect(Collectors.toList())
       .size()
     );
+  }
+
+
+  @Test
+  void createWorldWithBlinkerOscillator() {
+    List<Cell> game = initGame(5, 5, List.of(livingCell(1, 2), livingCell(2, 2), livingCell(3, 2)));
+
+    game = Game.iterateGameboard(game);
+    
+    Map<Integer, List<String>> rowMap = 
+      game
+      .stream()
+      .collect(groupBy(Cell::getY, mapToCharacter()));
+
+    List<String> out = rowMap
+      .entrySet()
+      .stream()
+      .sorted(byYCoordinate())
+      .map(toSingleLine())
+      .map(createTextLine())
+      .peek(System.out::println)
+			.collect(Collectors.toList());
+      
+
+    // String expectedRepresentation = 
+    //   "-----\n" +
+    //   "--#--\n" + 
+    //   "--#--\n" + 
+    //   "--#--\n" +
+    //   "-----\n";
+    //List<String> actualRepresentation =
+      // game
+      //   .stream()
+    //     .sorted(byYCoord())
+    //     .map(mapToCharacter())
+    // assertEquals(expectedRepresentation,
+    //     );
   }
 }
