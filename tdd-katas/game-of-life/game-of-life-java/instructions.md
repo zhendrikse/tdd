@@ -8,15 +8,13 @@ We are going to build the following code, which is a showcase of _code should
 express intent_, Kent Beck's design rule number 2!
 
 ```java
-private static List<Cell> iterateGameboard(List<Cell> gameboard) {
+public static List<Cell> iterateGameboard(final List<Cell> gameboard) {
   return gameboard
-    .stream()
-      .map(toDeadCell(which(isAlive(), and(), 
-          which(hasLessThanTwo(livingNeighboursIn(gameboard)),
-                or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
-      .map(toAliveCell(which(isDead(), and(),
-          hasExactThree(livingNeighboursIn(gameboard)))))
-      .collect(Collectors.toList());
+      .stream()
+        .map(toDeadCell(which(isLiving, and(), 
+            which(hasLessThanTwo(livingNeighboursIn(gameboard)), or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
+        .map(toLivingCell(which(isDead, and(), hasExactlyThree(livingNeighboursIn(gameboard)))))
+        .collect(Collectors.toList());
 }
 ```
 
@@ -563,8 +561,9 @@ So we need a means to combine predicates with _and_ and _or_.
 
   
   ```java
-  public static BiFunction<Predicate<String>, Predicate<String>, Predicate<String>> or = 
-    (leftPredicate, rightPredicate) -> leftPredicate.or(rightPredicate);
+	public static <T> BiFunction<Predicate<T>, Predicate<T>, Predicate<T>> or() {
+		return (predicateLeft, predicateRight) -> predicateLeft.or(predicateRight);
+	}
   ```
 </details>
 
@@ -604,8 +603,9 @@ Analogously we implement the `and()` and `which()` predicates.
   <summary>Definition of the <code>or()</code> predicate</summary>
   
   ```java
-	public static BiFunction<Predicate<String>, Predicate<String>, Predicate<String>> and = 
-      (leftPredicate, rightPredicate) -> leftPredicate.and(rightPredicate);
+	public static <T> BiFunction<Predicate<T>, Predicate<T>, Predicate<T>> and() {
+		return (predicateLeft, predicateRight) -> predicateLeft.and(predicateRight);
+	}
 
   public static <T> Predicate<T> which(Predicate<T> leftPredicate,
 			BiFunction<Predicate<T>, Predicate<T>, Predicate<T>> combiner, Predicate<T> rightPredicate) {
@@ -619,16 +619,15 @@ We have now constructed a domain specific language with which we
 can realise the snippet from the teaser listed in the beginning of 
 these instructions!
 
+
 ```java
-private static List<Cell> iterateGameboard(List<Cell> gameboard) {
+public static List<Cell> iterateGameboard(final List<Cell> gameboard) {
   return gameboard
-    .stream()
-      .map(toDeadCell(which(isAlive(), and(), 
-          which(hasLessThanTwo(livingNeighboursIn(gameboard)),
-                or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
-      .map(toAliveCell(which(isDead(), and(),
-          hasExactThree(livingNeighboursIn(gameboard)))))
-      .collect(Collectors.toList());
+      .stream()
+        .map(toDeadCell(which(isLiving, and(), 
+            which(hasLessThanTwo(livingNeighboursIn(gameboard)), or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
+        .map(toLivingCell(which(isDead, and(), hasExactlyThree(livingNeighboursIn(gameboard)))))
+        .collect(Collectors.toList());
 }
 ```
 
