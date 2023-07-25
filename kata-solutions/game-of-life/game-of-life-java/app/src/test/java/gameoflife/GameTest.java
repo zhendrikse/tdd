@@ -83,22 +83,6 @@ class GameTest {
     );
   }
 
-  private List<String> boardRepresentation(List<Cell> board) {
-    Map<Integer, List<String>> rowMap = 
-      board
-      .stream()
-      .collect(groupBy(Cell::getX, mapToCharacter()));
-
-    return rowMap
-      .entrySet()
-      .stream()
-      .sorted(byYCoordinate())
-      .map(toSingleLine())
-      .map(createTextLine())
-      //.peek(System.out::println)
-			.collect(Collectors.toList());
-  }
-
   @Test
   void createWorldWithBlinkerOscillator() {
     List<Cell> gameboard = initGame(BLINKER_START_POSITION);

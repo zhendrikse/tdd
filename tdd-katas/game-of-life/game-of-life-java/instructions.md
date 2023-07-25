@@ -656,8 +656,10 @@ Roughly speaking, we may distinguish the following steps:
    as output to represent a game board, so we need a mapping from `List<Cell>`
    &rarr; `List<String>`.
 
-4. As a consequence, it would also be convenient to have a method
+3. As a consequence, it would also be convenient to have a method
    that initializes a game board by using the same list of strings, `initGame(List<String>)`.
+
+4. Finally, we can test your next iteration logic!
 
 ### 1. Mapping a cell to a string
 
@@ -696,10 +698,8 @@ Roughly speaking, we may distinguish the following steps:
 		return cell -> cell.isAlive() ? "#" : "-";
 	}
   ```
-
   
 </details>
-  
 </details>
 
 ### 2. Mapping the list of cells to a list of strings
@@ -708,4 +708,132 @@ The next challenge is that we are stuck with a list of cells,
 which is one-dimensional by defition. We somehow need to convert
 that into a two-dimensional representation.
 
+We'll do so by first creating a map where the keys are the values
+of the x-coordinates (i.e. the rows), and the values a list of
+cells that have been mapped to their character representation that
+we implemented in step 1.
 
+<details>
+  <summary>Creating a hash map with rows as key and a list of cells mapped to chars</summary>
+
+  ```java
+  Map<Integer, List<String>> rowMap = 
+  board
+  .stream()
+  .collect(groupBy(Cell::getX, mapToCharacter()));
+  ```
+</details>
+
+Next, we sort the entries of the hashmap by key value (i.e. the
+x-coordinate), so that the game rows are listed in order.
+Finally, we convert the list of chars to strings.
+
+<details>
+  <summary>Finalizing the board representation</summary>
+
+  ```java
+  public static List<String> boardRepresentation(final List<Cell> board) {
+    return board
+      .stream()
+      .collect(groupBy(Cell::getX, mapToCharacter()))
+      .entrySet()
+      .stream()
+      .sorted(byYCoordinate())
+      .map(toSingleLine())
+      .map(createTextLine())
+      //.peek(System.out::println)
+			.collect(Collectors.toList());
+  }  
+  ```
+</details>
+
+Note that the line containing the `peek()` statement 
+may be activated to inspect the output at run-time!
+
+### 3. Initializing a board
+
+Finally, let's address the initialization of a game board.
+
+<details>
+  <summary>Specification for the initialization of a new board</summary>
+
+  ```java
+  class GameTest {
+    private static final List<String> BLINKER_START_POSITION = List.of(
+        "-----",
+        "--#--", 
+        "--#--", 
+        "--#--",
+        "-----");
+  
+    // ...
+  
+    @Test
+    void createWorldWithBlinkerOscillator() {
+      List<Cell> gameboard = initGame(BLINKER_START_POSITION);
+      assertEquals(BLINKER_START_POSITION, boardRepresentation(gameboard));
+    }
+  ```
+
+<details>
+    <summary>The implementation of the <code>initGame(List&lt;String&gt;)</code> method</summary>
+
+  ```java
+    public static List<Cell> initGame(final List<String> initialState) {
+  		List<Cell> game = new LinkedList<Cell>();
+  		for (int x = 0; x < initialState.size(); x++) 
+  			for (int y = 0; y < initialState.get(x).length(); y++) 
+          game.add( initialState.get(x).charAt(y) == '#' ? livingCell(x, y) : deadCell(x,y));
+  
+  		return game;
+    }
+  ```
+
+</details>
+
+</details>
+
+### 4. The iteration logic
+
+<details>
+  <summary>Specification for the initialization of a new board</summary>
+
+  ```java
+  class GameTest {
+    
+    // ...
+    
+    private static final List<String> BLINKER_END_POSITION = List.of(
+        "-----",
+        "--#--", 
+        "--#--", 
+        "--#--",
+        "-----");
+  
+    // ...
+  
+    @Test
+    void iterateWorldWithBlinkerOscillator() {
+      List<Cell> gameboard = initGame(BLINKER_START_POSITION);
+      gameboard = iterateGameboard(gameboard);
+      assertEquals(BLINKER_END_POSITION, boardRepresentation(gameboard));
+    }
+  ```
+
+<details>
+    <summary>Finally testing the iteration logic from the teaser!</summary>
+
+  ```java
+	public static List<Cell> iterateGameboard(final List<Cell> gameboard) {
+		return gameboard
+				.stream()
+	    		.map(toDeadCell(which(isLiving, and(), 
+		    			which(hasLessThanTwo(livingNeighboursIn(gameboard)), or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
+	    		.map(toLivingCell(which(isDead, and(), hasExactlyThree(livingNeighboursIn(gameboard)))))
+	    		.collect(Collectors.toList());
+	}
+  ```
+
+</details>
+
+</details>

@@ -24,16 +24,24 @@ public class Game {
 
   public static List<Cell> initGame(final List<String> initialState) {
 		List<Cell> game = new LinkedList<Cell>();
-		for (int x = 0; x < initialState.size(); x++) {
-			for (int y = 0; y < initialState.get(x).length(); y++) {
-        if (initialState.get(x).charAt(y) == '#') 
-  				game.add(livingCell(x, y));
-        else
-          game.add(deadCell(x, y));
-			}
-		}
+		for (int x = 0; x < initialState.size(); x++) 
+			for (int y = 0; y < initialState.get(x).length(); y++) 
+        game.add( initialState.get(x).charAt(y) == '#' ? livingCell(x, y) : deadCell(x,y));
 
 		return game;
+  }
+
+  public static List<String> boardRepresentation(final List<Cell> board) {
+    return board
+      .stream()
+      .collect(groupBy(Cell::getX, mapToCharacter()))
+      .entrySet()
+      .stream()
+      .sorted(byYCoordinate())
+      .map(toSingleLine())
+      .map(createTextLine())
+      //.peek(System.out::println)
+			.collect(Collectors.toList());
   }
   
 	public static List<Cell> iterateGameboard(final List<Cell> gameboard) {

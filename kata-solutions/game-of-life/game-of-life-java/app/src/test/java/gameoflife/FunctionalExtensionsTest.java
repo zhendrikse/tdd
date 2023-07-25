@@ -20,8 +20,8 @@ class FunctionalExtensionsTest {
 	private static final String JET = "Jet";
 	private static final String FILTER_VALUE = WIM;
   
-
 	private static final List<String> READING_SHELF = List.of(AAP, NOOT, MIES, WIM, ZUS, JET);
+  
   private static final Predicate<String> isWim = word -> word.equals(WIM);
   private static final Predicate<String> isMies = word -> word.equals(MIES);
   
@@ -29,7 +29,7 @@ class FunctionalExtensionsTest {
   void orBiFunctionCombinesPredicates() {
     List<String> filteredList = READING_SHELF
       .stream()
-      .filter(isMies.or(isWim))
+      .filter(or().apply(word -> word.equals(WIM), word -> word.equals(MIES)))
       .collect(Collectors.toList());
 
     assertEquals(2, filteredList.size());
@@ -41,7 +41,7 @@ class FunctionalExtensionsTest {
   void andBiFunctionCombinesPredicates() {
     List<String> filteredList = READING_SHELF
       .stream()
-      .filter(isMies.and(isWim))
+      .filter(and().apply(word -> word.equals(WIM), word -> word.equals(MIES)))
       .collect(Collectors.toList());
 
     assertTrue(filteredList.isEmpty());
