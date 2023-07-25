@@ -647,8 +647,19 @@ oscillator should be something like
 -----
 ```
 
-So first of all, a cell should be mapped to either `-` or `#`, depening on
-whether it is alive or not.
+Roughly speaking, we may distinguish the following steps:
+
+1. So first of all, a cell should be mapped to
+   either `-` or `#`, depening on whether it is alive or not.
+
+2. Secondly, this strongly suggests to generate a list of strings (`List<String>`)
+   as output to represent a game board, so we need a mapping from `List<Cell>`
+   &rarr; `List<String>`.
+
+4. As a consequence, it would also be convenient to have a method
+   that initializes a game board by using the same list of strings, `initGame(List<String>)`.
+
+### 1. Mapping a cell to a string
 
 <details>
   <summary>Testing the mapping of a cell to a character</summary>
@@ -690,6 +701,8 @@ whether it is alive or not.
 </details>
   
 </details>
+
+### 2. Mapping the list of cells to a list of strings
 
 The next challenge is that we are stuck with a list of cells,
 which is one-dimensional by defition. We somehow need to convert
