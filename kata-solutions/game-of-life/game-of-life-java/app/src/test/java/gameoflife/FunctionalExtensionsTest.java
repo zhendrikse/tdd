@@ -48,7 +48,7 @@ class FunctionalExtensionsTest {
   }
  
   @Test
-  void whichFunctionCombinesPredicates() {
+  void whichFunctionCombinesOrPredicates() {
     List<String> filteredList = READING_SHELF
       .stream()
       .filter(which(isMies, or(), isWim))
@@ -57,5 +57,15 @@ class FunctionalExtensionsTest {
     assertEquals(2, filteredList.size());
     assertTrue(filteredList.contains(WIM));
     assertTrue(filteredList.contains(MIES));
+  }
+ 
+  @Test
+  void whichFunctionCombinesAndPredicates() {
+    List<String> filteredList = READING_SHELF
+      .stream()
+      .filter(which(isMies, and(), isWim))
+      .collect(Collectors.toList());
+
+    assertTrue(filteredList.isEmpty());
   }
 }
