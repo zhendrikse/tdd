@@ -37,5 +37,25 @@ class FunctionalExtensionsTest {
     assertTrue(filteredList.contains(MIES));
   }
   
-v
+  @Test
+  void andBiFunctionCombinesPredicates() {
+    List<String> filteredList = READING_SHELF
+      .stream()
+      .filter(and.apply(isMies, isWim))
+      .collect(Collectors.toList());
+
+    assertTrue(filteredList.isEmpty());
+  }
+ 
+  @Test
+  void whichFunctionCombinesPredicates() {
+    List<String> filteredList = READING_SHELF
+      .stream()
+      .filter(which(isMies, or, isWim))
+      .collect(Collectors.toList());
+
+    assertEquals(2, filteredList.size());
+    assertTrue(filteredList.contains(WIM));
+    assertTrue(filteredList.contains(MIES));
+  }
  }
