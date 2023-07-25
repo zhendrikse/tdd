@@ -19,30 +19,8 @@ public class Cell {
     return alive;
   }
 
-  public int getY() {
-    return y;
-  }
-
-  @Override
-  public boolean equals(Object other) {
-      if (other == null) 
-          return false;
-
-      if (this == other) 
-          return true;
-
-      if (!(other instanceof Cell)) 
-          return false; 
-
-      Cell otherCell = (Cell) other;
-      return x == otherCell.x && y == otherCell.y && alive == otherCell.alive;
-  }
-
-  @Override
-  public int hashCode() {
-    final int PRIME = 31;
-
-    return PRIME * x + PRIME * y + (alive ? 0 : PRIME);
+  public int getX() {
+    return x;
   }
   
   public static final Cell livingCell(final int x, final int y) {

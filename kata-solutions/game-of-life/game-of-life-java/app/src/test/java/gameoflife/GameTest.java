@@ -15,6 +15,20 @@ import static gameoflife.Cell.*;
 import static gameoflife.Game.*;
 
 class GameTest {
+  private static final List<String> BLINKER_START_POSITION = List.of(
+      "-----",
+      "--#--", 
+      "--#--", 
+      "--#--",
+      "-----");
+
+  private static final List<String> BLINKER_END_POSITION = List.of(
+      "-----",
+      "-----", 
+      "-###-", 
+      "-----",
+      "-----");
+
   private List<Cell> game;
 
   @BeforeEach
@@ -69,40 +83,32 @@ class GameTest {
     );
   }
 
-
-  @Test
-  void createWorldWithBlinkerOscillator() {
-    List<Cell> game = initGame(5, 5, List.of(livingCell(1, 2), livingCell(2, 2), livingCell(3, 2)));
-
-    game = Game.iterateGameboard(game);
-    
+  private List<String> boardRepresentation(List<Cell> board) {
     Map<Integer, List<String>> rowMap = 
-      game
+      board
       .stream()
-      .collect(groupBy(Cell::getY, mapToCharacter()));
+      .collect(groupBy(Cell::getX, mapToCharacter()));
 
-    List<String> out = rowMap
+    return rowMap
       .entrySet()
       .stream()
       .sorted(byYCoordinate())
       .map(toSingleLine())
       .map(createTextLine())
-      .peek(System.out::println)
+      //.peek(System.out::println)
 			.collect(Collectors.toList());
-      
+  }
 
-    // String expectedRepresentation = 
-    //   "-----\n" +
-    //   "--#--\n" + 
-    //   "--#--\n" + 
-    //   "--#--\n" +
-    //   "-----\n";
-    //List<String> actualRepresentation =
-      // game
-      //   .stream()
-    //     .sorted(byYCoord())
-    //     .map(mapToCharacter())
-    // assertEquals(expectedRepresentation,
-    //     );
+  @Test
+  void createWorldWithBlinkerOscillator() {
+    List<Cell> gameboard = initGame(BLINKER_START_POSITION);
+    assertEquals(BLINKER_START_POSITION, boardRepresentation(gameboard));
+  }
+
+  @Test
+  void iterateWorldWithBlinkerOscillator() {
+    List<Cell> gameboard = initGame(BLINKER_START_POSITION);
+    gameboard = iterateGameboard(gameboard);
+    assertEquals(BLINKER_END_POSITION, boardRepresentation(gameboard));
   }
 }

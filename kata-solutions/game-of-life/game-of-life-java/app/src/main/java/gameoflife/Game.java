@@ -22,11 +22,11 @@ public class Game {
 			.collect(Collectors.toList());      
   }  
 
-  public static List<Cell> initGame(int xSize, int ySize, List<Cell> livingCells) {
+  public static List<Cell> initGame(final List<String> initialState) {
 		List<Cell> game = new LinkedList<Cell>();
-		for (int x = 0; x < xSize; x++) {
-			for (int y = 0; y < ySize; y++) {
-        if (livingCells.contains(livingCell(x, y))) 
+		for (int x = 0; x < initialState.size(); x++) {
+			for (int y = 0; y < initialState.get(x).length(); y++) {
+        if (initialState.get(x).charAt(y) == '#') 
   				game.add(livingCell(x, y));
         else
           game.add(deadCell(x, y));
