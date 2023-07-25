@@ -14,17 +14,6 @@ import gameoflife.Cell;
 import static gameoflife.Cell.*;
 
 class CellTest {
-  private List<Cell> game;
-
-  @BeforeEach
-  private void setUpGame() {
-    game = List.of(
-      livingCell(0, 0), livingCell(0, 1), livingCell(0, 2),
-      livingCell(1, 0), livingCell(1, 1), livingCell(1, 2),
-      livingCell(2, 0), livingCell(2, 1), livingCell(2, 2)
-    );    
-  }
-
   private boolean isDead(final Cell cell) {
     return !Optional.of(cell).filter(isDead).isEmpty();
   }
@@ -68,40 +57,53 @@ class CellTest {
     assertFalse(mappedList.isEmpty());
     assertTrue(isDead(mappedList.get()));
   }
+}
 
+class NeighboursTest {
+  private List<Cell> game;
+
+  @BeforeEach
+  private void setUpGame() {
+    game = List.of(
+      livingCell(0, 0), livingCell(0, 1), livingCell(0, 2),
+      livingCell(1, 0), livingCell(1, 1), livingCell(1, 2),
+      livingCell(2, 0), livingCell(2, 1), livingCell(2, 2)
+    );    
+  }
+  
   @Test
   void filterNeighboursForGivenCenterCell() {
-    assertEquals(
+    assertEquals(8,
       game.stream()
       .filter(isNeighbourOf(game.get(4)))
       .collect(Collectors.toList())
-      .size(), 8);
+      .size());
   }
 
   @Test
   void filterNeighboursForGivenLeftEdgeCell() {
-    assertEquals(
+    assertEquals(5,
       game.stream()
       .filter(isNeighbourOf(game.get(3)))
       .collect(Collectors.toList())
-      .size(), 5);
+      .size());
   }
 
   @Test
   void filterNeighboursForGivenRightEdgeCell() {
-    assertEquals(
+    assertEquals(5, 
       game.stream()
       .filter(isNeighbourOf(game.get(5)))
       .collect(Collectors.toList())
-      .size(), 5);
+      .size());
   }
 
   @Test
   void filterNeighboursForGivenTopEdgeCell() {
-    assertEquals(
+    assertEquals(5,
       game.stream()
       .filter(isNeighbourOf(game.get(1)))
       .collect(Collectors.toList())
-      .size(), 5);
+      .size());
   }
 }

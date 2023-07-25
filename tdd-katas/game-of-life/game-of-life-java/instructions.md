@@ -20,6 +20,13 @@ private static List<Field> iterateGameboard(List<Field> gameboard) {
 }
 ```
 
+The approach here is an almost literral TDD version of the 
+excellent functional solution proposed in 
+[this excellent post](https://medium.com/@davidibl/functional-java-9e95a647af3c)
+and the associated 
+[code repository](https://github.com/davidibl/GameOfLifeFunctional/tree/master) 
+mentioned therein.
+
 # Getting started
 
 First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
@@ -28,14 +35,6 @@ Next, go the the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # Functional implementation
-
-## Source
-
-This kata is a TDD version of the excellent functional solution proposed in 
-[this excellent post](https://medium.com/@davidibl/functional-java-9e95a647af3c)
-and the associated 
-[code repository](https://github.com/davidibl/GameOfLifeFunctional/tree/master) 
-mentioned therein.
 
 ## Living and dead cells
 
@@ -239,3 +238,336 @@ The tests need to be modified accordingly as well, of course!
 The rules of the game depend on the number of living neighbours.
 Consequently, we need to define a predicate that for a given field
 determines the number of living neighbours in a game.
+
+### Determining the neigbours of a cell
+
+Let's create a separate test class containing the specifications
+for the neighbours and tackle the most generic case first, namely
+a non-edge cell should have eight neighbours.
+
+<details>
+  <summary>A non-edge cell should have eight neighbours</summary>
+
+  ```java
+  class NeighboursTest {
+    @Test
+    void filterNeighboursForGivenCenterCell() {
+      List<Cell> game = List.of(
+        livingCell(0, 0), livingCell(0, 1), livingCell(0, 2),
+        livingCell(1, 0), livingCell(1, 1), livingCell(1, 2),
+        livingCell(2, 0), livingCell(2, 1), livingCell(2, 2)
+      );    
+      
+      assertEquals(8, 
+        game.stream()
+          .filter(isNeighbourOf(game.get(4)))
+          .collect(Collectors.toList())
+          .size());
+    }
+  }
+  ```
+</details>
+
+and the simplest thing/solution that could possibly work to make this test pass
+
+<details>
+  <summary>Making the test pass</summary>
+
+  ```java
+   public static Predicate<Cell> isNeighbourOf(final Cell givenCell) {
+    return cell -> !cell.equals(givenCell);
+   }
+  ```
+  
+</details>
+
+Next we test for a left-edge cell.
+
+<details>
+  <summary>A left-edge cell should have five neighbours</summary>
+
+  ```java
+  class NeighboursTest {
+    @Test
+    void filterNeighboursForGivenLeftEdgeCell() {
+      List<Cell> game = List.of(
+        livingCell(0, 0), livingCell(0, 1), livingCell(0, 2),
+        livingCell(1, 0), livingCell(1, 1), livingCell(1, 2),
+        livingCell(2, 0), livingCell(2, 1), livingCell(2, 2)
+      );    
+      
+      assertEquals(5, 
+        game.stream()
+          .filter(isNeighbourOf(game.get(3)))
+          .collect(Collectors.toList())
+          .size());
+    }
+  }
+  ```
+</details>
+
+and the simplest thing/solution that could possibly work to make this test pass
+
+<details>
+  <summary>Making the test pass</summary>
+
+  ```java
+  public static Predicate<Cell> isNeighbourOf(final Cell givenCell) {
+    return cell -> 
+      !cell.equals(givenCell) &&
+      (cell.x - givenCell.x < 2) && 
+      (cell.y - givenCell.y < 2); 
+  }
+  ```
+  
+</details>
+
+Obviously, we have to apply the DRY principle in the tests:
+
+<details>
+  <summary>Applying the DRY principle to the tests</summary>
+
+  ```java
+  class NeighboursTest {
+    private List<Cell> game;
+  
+    @BeforeEach
+    private void setUpGame() {
+      game = List.of(
+        livingCell(0, 0), livingCell(0, 1), livingCell(0, 2),
+        livingCell(1, 0), livingCell(1, 1), livingCell(1, 2),
+        livingCell(2, 0), livingCell(2, 1), livingCell(2, 2)
+      );    
+    }
+    
+    @Test
+    void filterNeighboursForGivenCenterCell() {
+      assertEquals(
+        game.stream()
+        .filter(isNeighbourOf(game.get(4)))
+        .collect(Collectors.toList())
+        .size(), 8);
+    }  
+    // ...
+  ```
+  
+</details>
+
+Now see what happens if we test a right-edge cell.
+
+<details>
+  <summary>A right-edge cell should have five neighbours</summary>
+
+  ```java
+  class NeighboursTest {
+    @Test
+    void filterNeighboursForGivenRightEdgeCell() {
+      List<Cell> game = List.of(
+        livingCell(0, 0), livingCell(0, 1), livingCell(0, 2),
+        livingCell(1, 0), livingCell(1, 1), livingCell(1, 2),
+        livingCell(2, 0), livingCell(2, 1), livingCell(2, 2)
+      );    
+      
+      assertEquals(5, 
+        game.stream()
+          .filter(isNeighbourOf(game.get(5)))
+          .collect(Collectors.toList())
+          .size());
+    }
+  }
+  ```
+</details>
+
+We note that this test fails, as the subtraction of the indices 
+may become negative. Note that we only have to apply a fix to
+the subtraction of the y-coordinates to make the test pass!
+
+<details>
+  <summary>Making the test pass</summary>
+
+  ```java
+  public static Predicate<Cell> isNeighbourOf(final Cell givenCell) {
+    return cell -> 
+      !cell.equals(givenCell) &&
+      (cell.x - givenCell.x < 2) && 
+      (Math.abs(cell.y - givenCell.y) < 2); 
+  }
+  ```
+  
+</details>
+
+We can force a similar generalization for the x-coordinate by writing
+a test for the top-edge cell. As the test and solution are almost identical
+to the code snippets listed above, this is left as an exercise to the reader.
+
+### Living neighbours
+
+Ultimately, we are interested in the living neighbours of a cell, given a board.
+So let's write a specification that defines precisely this feature, namely a function
+that returns a list of living neighbours of a given cell in a game.
+
+<details>
+  <summary>Defining the <code>Function<Cell, List<Cell>> livingNeighboursIn(game)</code> function</summary>
+
+  ```java
+  class GameTest {
+    @Test
+    void assertNumberOfLivingNeighboursInAGameForAGivenCell() {
+      List<Cell> game = List.of(
+        deadCell(0, 0), livingCell(0, 1), livingCell(0, 2),
+        livingCell(1, 0), livingCell(1, 1), deadCell(1, 2),
+        deadCell(2, 0), livingCell(2, 1), deadCell(2, 2)
+      );
+  
+      assertEquals(livingNeighboursIn(game).apply(game.get(0)).size(), 3);
+      assertEquals(livingNeighboursIn(game).apply(game.get(1)).size(), 3);
+      assertEquals(livingNeighboursIn(game).apply(game.get(2)).size(), 2);
+      assertEquals(livingNeighboursIn(game).apply(game.get(3)).size(), 3);
+      assertEquals(livingNeighboursIn(game).apply(game.get(4)).size(), 4);
+      assertEquals(livingNeighboursIn(game).apply(game.get(5)).size(), 4);
+      assertEquals(livingNeighboursIn(game).apply(game.get(6)).size(), 3);
+      assertEquals(livingNeighboursIn(game).apply(game.get(7)).size(), 2);
+      assertEquals(livingNeighboursIn(game).apply(game.get(8)).size(), 2);
+    } 
+  }
+  ```
+  
+</details>
+
+Note that we define this function in a dedicated `Game` class with an 
+associated class containing the tests.
+
+We can easily make this test pass.
+
+<details>
+  <summary>Making the test pass</summary>
+
+  ```java
+  public class Game {
+    public static Function<Cell, List<Cell>> livingNeighboursIn(final List<Cell> game) {
+      return cell -> game
+        .stream()
+  			.filter(isNeighbourOf(cell))
+        .filter(isLiving)
+  			.collect(Collectors.toList());      
+    }  
+  }
+  ```
+  
+</details>
+
+## Implementation of the rules of the game of life
+
+### The predicates
+
+Remember that the rules of the game of life are based on the number of living neighbours:
+
+- A dead cell resurrects if it _has exactly three_ living neighbours
+- A living cell dies if it _has less than two_ living neighbours
+- A living cell dies if it _has more than three_ living neighbours
+
+The predicates are easily destilled from these game rules: they are
+written in italics!
+
+
+<details>
+  <summary>Defining the tests for the predicates</summary>
+
+  ```java
+  @Test
+  void assertExactlyThreeLivingNeighboursForAGivenCellInAGame() {
+    List<Cell> game = List.of(
+      deadCell(0, 0), livingCell(0, 1), livingCell(0, 2),
+      livingCell(1, 0), livingCell(1, 1), deadCell(1, 2),
+      deadCell(2, 0), livingCell(2, 1), deadCell(2, 2)
+    );
+
+    assertEquals(4, 
+      game.stream()
+      .filter(hasExactlyThree(livingNeighboursIn(game)))
+      .collect(Collectors.toList())
+      .size()
+    );
+  }
+  ```
+
+The implementation of this predicate is relatively straight foward.
+
+<details>
+  <summary>Implementation of the predicate</summary>
+
+  ```java
+	public static Predicate<Cell> hasExactlyThree(Function<Cell, List<Cell>> findNeighbours) {
+		return cell -> findNeighbours.apply(cell).size() == 3;
+	}
+  ```
+</details>
+  
+</details>
+
+Obviously, we should apply the DRY principle once more in the test class,
+as we have duplicated the set-up of a game.
+
+Finally, the other predicates are implemented analogously, so we don't
+include them here for the sake of brevity.
+
+### Applying the rules in a game by combining predicates
+
+Eeventually we want to apply these rules to each cell in a game when
+going to the next iteration:
+
+- if a cell is dead _and_ has exactly three living neighbours, it should be
+  mapped to a living cell
+- if a cell is alive _and_ has less than two living neightbours _or_
+  more than three living neighbours, it should be mapped to a dead cell
+- All other cells should be left unchanged
+
+So we need a means to combine predicates with _and_ and _or_.
+
+<details>
+  <summary>Specification for the <code>or()</code> predicate</summary>
+
+  ```java
+  class FunctionalExtensionsTest {
+  
+    private static final String AAP = "Aap";
+    private static final String NOOT = "Noot";
+    private static final String MIES = "Mies";
+    private static final String WIM = "Wim";
+    private static final String ZUS = "Zus";
+    private static final String JET = "Jet";
+    private static final String FILTER_VALUE = WIM;
+    
+    
+    private static final List<String> READING_SHELF = List.of(AAP, NOOT, MIES, WIM, ZUS, JET);
+    private static final Predicate<String> isWim = word -> word.equals(WIM);
+    private static final Predicate<String> isMies = word -> word.equals(MIES);
+    
+    @Test
+    void orBiFunctionCombinesPredicates() {
+      List<String> filteredList = READING_SHELF
+        .stream()
+        .filter(or.apply(isMies, isWim))
+        .collect(Collectors.toList());
+    
+      assertEquals(2, filteredList.size());
+      assertTrue(filteredList.contains(WIM));
+      assertTrue(filteredList.contains(MIES));
+    }
+  ```
+  And the code that makes the test pass:
+
+<details>
+  <summary>Definition of the <code>or()</code> predicate</summary>
+
+  
+  ```java
+  public static BiFunction<Predicate<String>, Predicate<String>, Predicate<String>> or = 
+    (leftPredicate, rightPredicate) -> leftPredicate.or(rightPredicate);
+  ```
+</details>
+
+</details>
+
+Analogously we implement the `and()` predicate.
+
