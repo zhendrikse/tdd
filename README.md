@@ -34,11 +34,11 @@ This repository contains materials to both practice as well as to teach TDD
 in the form of courses, workshops, and/or coding dojos.
 
 <details>
-<summary>Click for detailed description of the contents of this repository</summary>
+<summary>Click for a detailed description of the contents of this repository</summary>
   
 - **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for starting a kata in various languages
 - **[docs](./docs/)** &rarr; additional free books
-- **[kata-solutions](./kata-solutions/)** &rarr; solutions for almost all katas 
+- **[kata-solutions](./kata-solutions/)** &rarr; (multiple) solutions in multiple languages for almost all katas, with recently an emphasis on functional programming
 - **[presentations](./presentations/)** &rarr; [reveal-md](https://github.com/webpro/reveal-md) TDD presentations
 - **[tdd-katas](./tdd-katas/)** &rarr; TDD katas
   - **[README.md](./tdd-katas/README.md)** &rarr; with a table that lists per kata both a course-grained difficulty as well as a list of aspects that are addressed
