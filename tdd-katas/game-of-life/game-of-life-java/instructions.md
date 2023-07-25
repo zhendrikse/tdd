@@ -570,5 +570,56 @@ So we need a means to combine predicates with _and_ and _or_.
 
 </details>
 
-Analogously we implement the `and()` predicate.
+Analogously we implement the `and()` and `which()` predicates.
+
+<details>
+  <summary>Specification for the <code>and()</code> and <code>which()</code>code> predicates</summary>
+
+  ```java
+  @Test
+  void andBiFunctionCombinesPredicates() {
+    List<String> filteredList = READING_SHELF
+      .stream()
+      .filter(and.apply(isMies, isWim))
+      .collect(Collectors.toList());
+
+    assertTrue(filteredList.isEmpty());
+  }
+ 
+  @Test
+  void whichFunctionCombinesPredicates() {
+    List<String> filteredList = READING_SHELF
+      .stream()
+      .filter(which(isMies, or, isWim))
+      .collect(Collectors.toList());
+
+    assertEquals(2, filteredList.size());
+    assertTrue(filteredList.contains(WIM));
+    assertTrue(filteredList.contains(MIES));
+  }
+  ```
+  And the code that makes the test pass:
+
+<details>
+  <summary>Definition of the <code>or()</code> predicate</summary>
+  
+  ```java
+	public static BiFunction<Predicate<String>, Predicate<String>, Predicate<String>> and = 
+      (leftPredicate, rightPredicate) -> leftPredicate.and(rightPredicate);
+
+  public static <T> Predicate<T> which(Predicate<T> leftPredicate,
+			BiFunction<Predicate<T>, Predicate<T>, Predicate<T>> combiner, Predicate<T> rightPredicate) {
+		return combiner.apply(leftPredicate, rightPredicate);  
+  ```
+</details>
+
+</details>
+
+Note how nicely this enables us to write code that expresses intent!
+
+```java
+List<String> filteredList = READING_SHELF
+  .stream()
+  .filter(which(isMies, or, isWim))
+```
 
