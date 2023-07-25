@@ -8,13 +8,13 @@ We are going to build the following code, which is a showcase of _code should
 express intent_, Kent Beck's design rule number 2!
 
 ```java
-private static List<Field> iterateGameboard(List<Field> gameboard) {
+private static List<Cell> iterateGameboard(List<Cell> gameboard) {
   return gameboard
     .stream()
-      .map(toDeadField(which(isAlive(), and(), 
+      .map(toDeadCell(which(isAlive(), and(), 
           which(hasLessThanTwo(livingNeighboursIn(gameboard)),
                 or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
-      .map(toAliveField(which(isDead(), and(),
+      .map(toAliveCell(which(isDead(), and(),
           hasExactThree(livingNeighboursIn(gameboard)))))
       .collect(Collectors.toList());
 }
@@ -615,11 +615,19 @@ Analogously we implement the `and()` and `which()` predicates.
 
 </details>
 
-Note how nicely this enables us to write code that expresses intent!
+We have now constructed a domain specific language with which we
+can realise the snippet from the teaser listed in the beginning of 
+these instructions!
 
 ```java
-List<String> filteredList = READING_SHELF
-  .stream()
-  .filter(which(isMies, or, isWim))
+private static List<Cell> iterateGameboard(List<Cell> gameboard) {
+  return gameboard
+    .stream()
+      .map(toDeadCell(which(isAlive(), and(), 
+          which(hasLessThanTwo(livingNeighboursIn(gameboard)),
+                or(), hasMoreThanThree(livingNeighboursIn(gameboard))))))
+      .map(toAliveCell(which(isDead(), and(),
+          hasExactThree(livingNeighboursIn(gameboard)))))
+      .collect(Collectors.toList());
+}
 ```
-
