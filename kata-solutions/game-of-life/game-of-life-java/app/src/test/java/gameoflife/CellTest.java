@@ -57,6 +57,26 @@ class CellTest {
     assertFalse(mappedList.isEmpty());
     assertTrue(isDead(mappedList.get()));
   }
+
+  @Test
+  void mapLivingCellToCharacter() {
+    Optional<String> cellCharacter =
+      Optional
+      .of(livingCell(0, 0))
+      .map(mapToCharacter());
+
+    assertEquals("#", cellCharacter.get());
+  }
+
+  @Test
+  void mapDeadCellToCharacter() {
+    Optional<String> cellCharacter =
+      Optional
+      .of(deadCell(0, 0))
+      .map(mapToCharacter());
+
+    assertEquals("-", cellCharacter.get());
+  }
 }
 
 class NeighboursTest {

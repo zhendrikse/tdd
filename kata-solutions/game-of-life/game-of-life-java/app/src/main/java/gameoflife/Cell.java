@@ -37,6 +37,10 @@ public class Cell {
       (Math.abs(cell.x - givenCell.x) < 2) && 
       (Math.abs(cell.y - givenCell.y) < 2); 
   }
+	
+  public static Function<Cell, String> mapToCharacter() {
+		return cell -> cell.isAlive() ? "#" : "-";
+	}
   
   public static Function<Cell, Cell> toDeadCell(Predicate<Cell> isCellKillable) {
     return cell -> Optional
