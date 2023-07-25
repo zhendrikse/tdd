@@ -159,7 +159,6 @@ dead cells.
       assertTrue(isDead(mappedList.get()));
     }
   ```
-</details>
 
 And the code that makes this test pass
 
@@ -175,6 +174,8 @@ And the code that makes this test pass
   }
   ```
 </details>
+</details>
+
 
 Analogously we implement the `toLivingCell(Predicate<Cell> isCellViable)`.
 
@@ -266,7 +267,6 @@ a non-edge cell should have eight neighbours.
     }
   }
   ```
-</details>
 
 and the simplest thing/solution that could possibly work to make this test pass
 
@@ -279,6 +279,7 @@ and the simplest thing/solution that could possibly work to make this test pass
    }
   ```
   
+</details>
 </details>
 
 Next we test for a left-edge cell.
@@ -304,7 +305,6 @@ Next we test for a left-edge cell.
     }
   }
   ```
-</details>
 
 and the simplest thing/solution that could possibly work to make this test pass
 
@@ -352,6 +352,7 @@ Obviously, we have to apply the DRY principle in the tests:
   ```
   
 </details>
+</details>
 
 Now see what happens if we test a right-edge cell.
 
@@ -376,7 +377,6 @@ Now see what happens if we test a right-edge cell.
     }
   }
   ```
-</details>
 
 We note that this test fails, as the subtraction of the indices 
 may become negative. Note that we only have to apply a fix to
@@ -395,6 +395,7 @@ the subtraction of the y-coordinates to make the test pass!
   ```
   
 </details>
+</details>
 
 We can force a similar generalization for the x-coordinate by writing
 a test for the top-edge cell. As the test and solution are almost identical
@@ -407,7 +408,7 @@ So let's write a specification that defines precisely this feature, namely a fun
 that returns a list of living neighbours of a given cell in a game.
 
 <details>
-  <summary>Defining the <code>Function<Cell, List<Cell>> livingNeighboursIn(game)</code> function</summary>
+  <summary>Defining the <code>Function&lt;Cell, List&lt;Cell&gt;&gt; livingNeighboursIn(game)</code> function</summary>
 
   ```java
   class GameTest {
@@ -431,11 +432,6 @@ that returns a list of living neighbours of a given cell in a game.
     } 
   }
   ```
-  
-</details>
-
-Note that we define this function in a dedicated `Game` class with an 
-associated class containing the tests.
 
 We can easily make this test pass.
 
@@ -455,6 +451,11 @@ We can easily make this test pass.
   ```
   
 </details>
+  
+</details>
+
+Note that we define this function in a dedicated `Game` class with an 
+associated class containing the tests.
 
 ## Implementation of the rules of the game of life
 
