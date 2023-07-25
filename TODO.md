@@ -1,6 +1,7 @@
 - [ ] Maak sudoku kata Clojure af
 - [+] Make Python cookiecutter work for ptw and coverage
 - [+] Create instruction for bugs zero kata Python
+- [ ] [Functional Mars Rover in Java](https://github.com/davidibl/MarsRover/tree/master/src/main/java/de/lv1871/dms/MarsRover)
 - [ ] Make DB adapter kata work with other than ReplitDB
 - [X] Resurrect audio player kata from london school presentation
   - [ ] Make london school presentation more generic
