@@ -8,3 +8,4 @@ find . -name __pycache__ | xargs rm -rf
 find . -name .pytest_cache | xargs rm -rf
 find . -name poetry.lock | xargs rm -rf
 find . -name package-lock.json | xargs rm -rf
+find . -name .lein-failures | xargs rm -rf
