@@ -18,8 +18,8 @@ public static List<Cell> iterateGameboard(final List<Cell> gameboard) {
 }
 ```
 
-The approach here is an almost literral TDD version of the 
-excellent functional solution proposed in 
+The approach here is an almost literal TDD version of
+the marvelous functional solution proposed in 
 [this excellent post](https://medium.com/@davidibl/functional-java-9e95a647af3c)
 and the associated 
 [code repository](https://github.com/davidibl/GameOfLifeFunctional/tree/master) 
@@ -29,7 +29,7 @@ mentioned therein.
 
 First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
+Next, go to the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # Functional implementation
@@ -129,13 +129,13 @@ dead cells.
   ## Killing and resurrecting cells
 
   We should be able to change cells from living to dead and vice versa.
-  In functional programming this means creating new cells, as we cannot
+  In functional programming, this means creating new cells, as we cannot
   change state (because of immutability!).
 
   Note that we would like to conditionally transition from a living to 
   a dead cell, e.g. depending on the status of the cell itself (we 
   cannot kill an already dead cell). More importantly, eventually we 
-  woudld like to conditionally kill a cell, depending on the conditions 
+  would like to conditionally kill a cell, depending on the conditions 
   and rules imposed by its neighbours.
 
   Summarizing, we want to map a list of cells to dead cells, given 
@@ -280,7 +280,7 @@ and the simplest thing/solution that could possibly work to make this test pass
 </details>
 </details>
 
-Next we test for a left-edge cell.
+Next, we test for a left-edge cell.
 
 <details>
   <summary>A left-edge cell should have five neighbours</summary>
@@ -397,7 +397,7 @@ the subtraction of the y-coordinates to make the test pass!
 
 We can force a similar generalization for the x-coordinate by writing
 a test for the top-edge cell. As the test and solution are almost identical
-to the code snippets listed above, this is left as an exercise to the reader.
+to the code snippets listed above, this is left as an exercise for the reader.
 
 ### Living neighbours
 
@@ -441,9 +441,9 @@ We can easily make this test pass.
     public static Function<Cell, List<Cell>> livingNeighboursIn(final List<Cell> game) {
       return cell -> game
         .stream()
-  			.filter(isNeighbourOf(cell))
+        .filter(isNeighbourOf(cell))
         .filter(isLiving)
-  			.collect(Collectors.toList());      
+        .collect(Collectors.toList());      
     }  
   }
   ```
@@ -465,7 +465,7 @@ Remember that the rules of the game of life are based on the number of living ne
 - A living cell dies if it _has less than two_ living neighbours
 - A living cell dies if it _has more than three_ living neighbours
 
-The predicates are easily destilled from these game rules: they are
+The predicates are easily distilled from these game rules: they are
 written in italics!
 
 
@@ -490,15 +490,15 @@ written in italics!
   }
   ```
 
-The implementation of this predicate is relatively straight foward.
+The implementation of this predicate is relatively straightforward.
 
 <details>
   <summary>Implementation of the predicate</summary>
 
   ```java
-	public static Predicate<Cell> hasExactlyThree(Function<Cell, List<Cell>> findNeighbours) {
-		return cell -> findNeighbours.apply(cell).size() == 3;
-	}
+  public static Predicate<Cell> hasExactlyThree(Function<Cell, List<Cell>> findNeighbours) {
+    return cell -> findNeighbours.apply(cell).size() == 3;
+  }
   ```
 </details>
   
@@ -512,7 +512,7 @@ include them here for the sake of brevity.
 
 ### Applying the rules in a game by combining predicates
 
-Eeventually we want to apply these rules to each cell in a game when
+Eventually, we want to apply these rules to each cell in a game when
 going to the next iteration:
 
 - if a cell is dead _and_ has exactly three living neighbours, it should be
@@ -572,7 +572,7 @@ So we need a means to combine predicates with _and_ and _or_.
 Analogously we implement the `and()` and `which()` predicates.
 
 <details>
-  <summary>Specification for the <code>and()</code> and <code>which()</code>code> predicates</summary>
+  <summary>Specification for the <code>and()</code> and <code>which()</code> predicates</summary>
 
   ```java
   @Test
@@ -615,8 +615,8 @@ Analogously we implement the `and()` and `which()` predicates.
 
 </details>
 
-We have now constructed a domain specific language with which we
-can realise the snippet from the teaser listed in the beginning of 
+We have now constructed a domain-specific language with which we
+can realize the snippet from the teaser listed at the beginning of 
 these instructions!
 
 
@@ -635,7 +635,7 @@ public static List<Cell> iterateGameboard(final List<Cell> gameboard) {
 
 ### Setting up and displaying a game
 
-First we need to be able to create a game of life world. And equally important,
+First, we need to be able to create a game-of-life world. And equally important,
 we need to be able to check (and watch/inspect) it. For example, a blinker 
 oscillator should be something like
 
@@ -650,7 +650,7 @@ oscillator should be something like
 Roughly speaking, we may distinguish the following steps:
 
 1. So first of all, a cell should be mapped to
-   either `-` or `#`, depening on whether it is alive or not.
+   either `-` or `#`, depending on whether it is alive or not.
 
 2. Secondly, this strongly suggests to generate a list of strings (`List<String>`)
    as output to represent a game board, so we need a mapping from `List<Cell>`
@@ -688,7 +688,7 @@ Roughly speaking, we may distinguish the following steps:
   }  
   ```
 
-  The implementation that makes these tests pass is give below.
+  The implementation that makes these tests pass is given below.
   
 <details>
   <summary>Mapping a cell to a character depending on its state</summary>
@@ -705,7 +705,7 @@ Roughly speaking, we may distinguish the following steps:
 ### 2. Mapping the list of cells to a list of strings
 
 The next challenge is that we are stuck with a list of cells,
-which is one-dimensional by defition. We somehow need to convert
+which is one-dimensional by definition. We somehow need to convert
 that into a two-dimensional representation.
 
 We'll do so by first creating a map where the keys are the values
@@ -714,7 +714,7 @@ cells that have been mapped to their character representation that
 we implemented in step 1.
 
 <details>
-  <summary>Creating a hash map with rows as key and a list of cells mapped to chars</summary>
+  <summary>Creating a hash map with rows as keys and a list of cells mapped to chars</summary>
 
   ```java
   Map<Integer, List<String>> rowMap = 
