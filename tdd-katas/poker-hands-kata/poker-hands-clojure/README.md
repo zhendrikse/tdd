@@ -1,24 +1,14 @@
-![poker](./assets/poker.png)
-# Poker hands kata
+# Introduction
 
-The goal of this kata is to determine the best hand out of a set of hands
-containing a set of poker cards (i.e. 5 cards).
+Please read the general [introduction to the poker hands kata](../README.md) first!
 
-This kata is based on the [P-P-P-Pokerface exercise](http://iloveponies.github.io/120-hour-epic-sax-marathon/p-p-p-pokerface.html) from course [Functional Programming in Clojure](http://iloveponies.github.io/120-hour-epic-sax-marathon/index.html).
+# Getting started
 
-## Rules
+You can simply start coding by invoking
 
-A poker deck contains 52 cards - each card has a suit which is one of clubs, diamonds, hearts, or spades (denoted C, D, H, and S in the input data).
-
-Each card also has a value which is one of 2, 3, 4, 5, 6, 7, 8, 9, 10, jack, queen, king, ace (denoted 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K, A).
-
-For scoring purposes, the suits are unordered while the values are ordered as given above, with 2 being the lowest and ace the highest value.
-
-A poker hand consists of 5 cards dealt from the deck. Poker hands are ranked by the following partial order from highest to lowest.
-
-![Rules](./assets/Poker-Hands.svg.png)
-
-Source: [Door Sissyneck op de Engelstalige Wikipedia, CC BY-SA 3.0](https://commons.wikimedia.org/w/index.php?curid=12387417)
+```bash
+$ lein new app kata/poker-hands
+```
 
 # Implementation
 

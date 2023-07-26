@@ -1,21 +1,16 @@
-![Sudoku](./assets/sudoku.jpg)
+# Introduction
 
-# Sudoku kata
+Please read the general [introduction to the sudoku kata](../README.md) first!
 
-In this kata we are going to write a Sodoku solver based on [this exercise](http://iloveponies.github.io/120-hour-epic-sax-marathon/sudoku.html) from [this course](http://iloveponies.github.io/120-hour-epic-sax-marathon/index.html).
+# Getting started
 
+To get started, simply invoke the following command:
 
-The rules for Sudoku are:
+```bash
+lein new app kata/sudoku
+```
 
-- Every square has to contain a single number.
-- Only the numbers from 1 through to 9 can be used.
-- Each 3×3 box can only contain each number from 1 to 9 once.
-- Each vertical column can only contain each number from 1 to 9 once.
-
-The idea is to let the computer solve Sudoku puzzles using a brute force approach. However, by using back tracking, we assure that invalid branches are pruned early. This kata shows how to incrementally develop such a recursive algorithm.
-
-
-# Instructions
+# Implementation
 
 ## 1. Initialization
 
