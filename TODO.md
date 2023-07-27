@@ -1,4 +1,5 @@
-- [ ] Maak sudoku kata Clojure af
+- [ ] Fix code coverage gilded rose python
+- [ ] Maak sudoku kata Clojure af (and the readme with instructions!)
 - [+] Make Python cookiecutter work for ptw and coverage
 - [+] Create instruction for bugs zero kata Python
 - [ ] [Functional Mars Rover in Java](https://github.com/davidibl/MarsRover/tree/master/src/main/java/de/lv1871/dms/MarsRover)
@@ -13,13 +14,11 @@
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [ ] Make Python cookiecutter work for ptw and mamba
 - [ ] Implement code coverage for Typescript cookiecutter
-- [ ] Make Clojure cookiecutter
 - [ ] Extend poker hands Python met Deck, shuffle and hands
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
   - [ ] graphic with replit example
-- [ ] Sudoku kata Clojure readme is een Python readme
 - [ ] Sudoku characterization tests alleen in Java?
-- [ ] Clean-up poker hands kata dir and solutions
+- [ ] Finish poker-hands-clojure instructions
 - [ ] [Game of life in Clojure](https://medium.com/@pelensky/clojure-conways-game-of-life-289f19b10598), see also [this post](http://clj-me.cgrand.net/)
 - [X] Finish CQRS booking kata
    - Series [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/) 
