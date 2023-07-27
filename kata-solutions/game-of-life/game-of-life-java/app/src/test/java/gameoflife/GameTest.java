@@ -1,18 +1,21 @@
 package gameoflife;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import static gameoflife.Cell.deadCell;
+import static gameoflife.Cell.livingCell;
+import static gameoflife.Game.boardRepresentation;
+import static gameoflife.Game.hasExactlyThree;
+import static gameoflife.Game.hasLessThanTwo;
+import static gameoflife.Game.hasMoreThanThree;
+import static gameoflife.Game.initGame;
+import static gameoflife.Game.iterateGameboard;
+import static gameoflife.Game.livingNeighboursIn;
+import static java.util.stream.Collectors.toList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import java.util.function.Function;
-
-import gameoflife.Cell;
-import static gameoflife.Cell.*;
-import static gameoflife.Game.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class GameTest {
   private static final List<String> BLINKER_START_POSITION = List.of(
@@ -58,7 +61,7 @@ class GameTest {
     assertEquals(4, 
       game.stream()
       .filter(hasExactlyThree(livingNeighboursIn(game)))
-      .collect(Collectors.toList())
+      .collect(toList())
       .size()
     );
   }
@@ -68,7 +71,7 @@ class GameTest {
     assertEquals(2, 
       game.stream()
       .filter(hasMoreThanThree(livingNeighboursIn(game)))
-      .collect(Collectors.toList())
+      .collect(toList())
       .size()
     );
   }
@@ -78,7 +81,7 @@ class GameTest {
     assertEquals(0, 
       game.stream()
       .filter(hasLessThanTwo(livingNeighboursIn(game)))
-      .collect(Collectors.toList())
+      .collect(toList())
       .size()
     );
   }

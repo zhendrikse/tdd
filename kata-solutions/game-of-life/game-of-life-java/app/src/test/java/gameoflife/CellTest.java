@@ -1,17 +1,23 @@
 package gameoflife;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import static gameoflife.Cell.deadCell;
+import static gameoflife.Cell.isDead;
+import static gameoflife.Cell.isLiving;
+import static gameoflife.Cell.isNeighbourOf;
+import static gameoflife.Cell.livingCell;
+import static gameoflife.Cell.mapToCharacter;
+import static gameoflife.Cell.toDeadCell;
+import static java.util.stream.Collectors.toList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-// import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
-import gameoflife.Cell;
-import static gameoflife.Cell.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class CellTest {
   private boolean isDead(final Cell cell) {
@@ -96,7 +102,7 @@ class NeighboursTest {
     assertEquals(8,
       game.stream()
       .filter(isNeighbourOf(game.get(4)))
-      .collect(Collectors.toList())
+      .collect(toList())
       .size());
   }
 
@@ -105,7 +111,7 @@ class NeighboursTest {
     assertEquals(5,
       game.stream()
       .filter(isNeighbourOf(game.get(3)))
-      .collect(Collectors.toList())
+      .collect(toList())
       .size());
   }
 
@@ -114,7 +120,7 @@ class NeighboursTest {
     assertEquals(5, 
       game.stream()
       .filter(isNeighbourOf(game.get(5)))
-      .collect(Collectors.toList())
+      .collect(toList())
       .size());
   }
 
@@ -123,7 +129,7 @@ class NeighboursTest {
     assertEquals(5,
       game.stream()
       .filter(isNeighbourOf(game.get(1)))
-      .collect(Collectors.toList())
+      .collect(toList())
       .size());
   }
 }

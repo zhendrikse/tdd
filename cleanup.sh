@@ -1,6 +1,7 @@
 find . -name node_modules | xargs rm -rf
 find . -name target | xargs rm -rf
 find . -name build | xargs rm -rf
+find . -name bin | xargs rm -rf
 find . -name htmlcov | xargs rm -rf
 find . -name .coverage | xargs rm -rf
 find . -name coverage | xargs rm -rf

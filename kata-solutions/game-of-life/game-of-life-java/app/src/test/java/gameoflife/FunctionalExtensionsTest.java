@@ -1,14 +1,16 @@
 package gameoflife;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static gameoflife.FunctionalExtensions.and;
+import static gameoflife.FunctionalExtensions.or;
+import static gameoflife.FunctionalExtensions.which;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.function.BiFunction;
 
-import static gameoflife.FunctionalExtensions.*;
+import org.junit.jupiter.api.Test;
 
 class FunctionalExtensionsTest {
 

@@ -1,17 +1,26 @@
 package gameoflife;
 
+import static gameoflife.Cell.deadCell;
+import static gameoflife.Cell.isDead;
+import static gameoflife.Cell.isLiving;
+import static gameoflife.Cell.isNeighbourOf;
+import static gameoflife.Cell.livingCell;
+import static gameoflife.Cell.mapToCharacter;
+import static gameoflife.Cell.toDeadCell;
+import static gameoflife.Cell.toLivingCell;
+import static gameoflife.FunctionalExtensions.and;
+import static gameoflife.FunctionalExtensions.or;
+import static gameoflife.FunctionalExtensions.which;
+
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.LinkedList;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import static gameoflife.Cell.*;
-import static gameoflife.FunctionalExtensions.*;
 
 public class Game {
   public static Function<Cell, List<Cell>> livingNeighboursIn(final List<Cell> game) {
