@@ -6,10 +6,9 @@ authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
-coverage = "^7.2.7"
 pytest-watch = "^4.2.0"
-pytest = "^7.3.2"
 approvaltests = "^8.4.1"
+pytest-cov = "4.1.0"
 
 [tool.poetry.dev-dependencies]
 
