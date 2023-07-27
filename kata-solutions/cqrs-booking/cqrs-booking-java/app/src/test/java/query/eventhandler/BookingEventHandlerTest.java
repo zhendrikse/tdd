@@ -1,21 +1,18 @@
 package query.eventhandler;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
-import java.util.UUID;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
-import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
 
 import event.BookingCreatedEvent;
 import event.Event;
 import event.EventHandler;
-import query.eventhandler.BookingEventHandler;
 import hotel.Room;
 
 class BookingEventHandlerTest {

@@ -1,14 +1,9 @@
-package com.cleancode.martinfowler.videostore;
+package videostore;
 
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.cleancode.martinfowler.videostore.Customer;
-import com.cleancode.martinfowler.videostore.Movie;
-import com.cleancode.martinfowler.videostore.Rental;
-
-import static org.junit.Assert.*;
 
 public class VideoStoreTest {
 

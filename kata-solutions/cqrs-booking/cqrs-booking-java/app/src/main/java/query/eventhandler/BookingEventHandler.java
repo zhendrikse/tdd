@@ -1,22 +1,15 @@
 package query.eventhandler;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.function.Consumer;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.List;
 
-import event.BookingCreatedEvent;
-import event.Event;
-import event.EventHandler;
-import event.EventDispatcher;
-
-import hotel.Booking;
-
-import event.EventDispatcher;
 import event.BookingCreatedEvent;
 import event.BookingFailedEvent;
+import event.Event;
+import event.EventDispatcher;
+import event.EventHandler;
+import hotel.Booking;
 
 public class BookingEventHandler implements EventHandler {
     private final List<Booking> bookings = new ArrayList<>();

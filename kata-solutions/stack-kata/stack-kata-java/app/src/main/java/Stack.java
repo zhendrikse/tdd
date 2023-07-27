@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public class Stack {
   private Plate[] plates = new Plate[2];
   int size = 0;

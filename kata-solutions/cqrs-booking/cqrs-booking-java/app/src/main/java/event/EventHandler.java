@@ -1,7 +1,5 @@
 package event;
 
-import event.Event;
-
 public interface EventHandler {
     void onEvent(BookingFailedEvent event);
 

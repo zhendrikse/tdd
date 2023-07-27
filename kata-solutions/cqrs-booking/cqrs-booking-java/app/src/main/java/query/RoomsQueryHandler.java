@@ -1,23 +1,24 @@
 package query;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.UUID;
-import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Stream;
+
 import event.Event;
-import repository.EventSourceRepository;
-import hotel.Room;
 import hotel.Booking;
+import hotel.Hotel;
+import hotel.Room;
 import query.eventhandler.BookingEventHandler;
+import repository.EventSourceRepository;
 
 public class RoomsQueryHandler {
-  private final EventSourceRepository eventRepository;
+  private final EventSourceRepository<Hotel> eventRepository;
   private List<Booking> allBookings = new ArrayList<>();
 
-  public RoomsQueryHandler(final EventSourceRepository eventRepository) {
+  public RoomsQueryHandler(final EventSourceRepository<Hotel> eventRepository) {
     this.eventRepository = eventRepository;
   }
 

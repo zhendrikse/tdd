@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import event.Event;
 import hotel.Hotel;
 
-public class StubEventSourceRepository implements EventSourceRepository {
+public class StubEventSourceRepository implements EventSourceRepository<Hotel> {
   private final List<Event> eventList;
 
   public StubEventSourceRepository() {

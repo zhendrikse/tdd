@@ -1,24 +1,23 @@
 package query;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import query.AvailableRoomsQuery;
-import query.RoomsQueryHandler;
-import hotel.Room;
-import hotel.HotelTest;
+import org.junit.jupiter.api.Test;
+
 import hotel.Hotel;
-import repository.InMemoryEventSourceRepository;
+import hotel.HotelTest;
+import hotel.Room;
 import repository.EventSourceRepository;
+import repository.InMemoryEventSourceRepository;
 
 class RoomsQueryHandlerTest {
 
     @Test
     void listOfFreeRoomsForGivenTimePeriod() {
-        EventSourceRepository repository = new InMemoryEventSourceRepository();
+        EventSourceRepository<Hotel> repository = new InMemoryEventSourceRepository();
         Hotel hotel = new Hotel(repository);
         hotel.onCommand(HotelTest.BLUE_ROOM_BOOKING_COMMAND);
         hotel.onCommand(HotelTest.RED_ROOM_BOOKING_COMMAND);

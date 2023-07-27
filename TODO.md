@@ -8,6 +8,7 @@
 - [ ] Resurrect pipeline kata (also create preparation instructions)
 - [ ] Create solution for countries kata
 - [ ] Fix code coverage gilded rose python
+- [ ] Move video store solution in java to gradle
 - [ ] Finish adding details tags to vending machine python instructions
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [ ] Make Python cookiecutter work for ptw and mamba

@@ -4,11 +4,12 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import event.Event;
+import hotel.AggregateRoot;
 
-public interface EventSourceRepository<Hotel> {
+public interface EventSourceRepository<T extends AggregateRoot> {
   void save(UUID aggregateRootId, Event newEvent);
 
-  Hotel load(UUID aggregateRootId);
+  T load(UUID aggregateRootId);
 
   Stream<Event> loadStream(UUID aggregateRootId);
 }

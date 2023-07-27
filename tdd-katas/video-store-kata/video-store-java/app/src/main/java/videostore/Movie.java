@@ -1,4 +1,4 @@
-package com.cleancode.martinfowler.videostore;
+package videostore;
 
 public class Movie
 {

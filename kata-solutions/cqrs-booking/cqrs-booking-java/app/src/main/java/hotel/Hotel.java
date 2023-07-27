@@ -1,13 +1,10 @@
 package hotel;
 
-import java.util.UUID;
-import java.time.LocalDate;
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.function.Consumer;
-import static java.util.stream.Collectors.toList;
+import java.util.UUID;
 
 import command.BookingCommand;
 import event.BookingCreatedEvent;
@@ -18,11 +15,11 @@ import repository.EventSourceRepository;
 
 public class Hotel implements AggregateRoot {
   private final UUID id = UUID.randomUUID();
-  private final EventSourceRepository eventSourceRepository;
+  private final EventSourceRepository<Hotel> eventSourceRepository;
   private final List<Booking> bookings = new ArrayList<>();
   private final EventDispatcher eventDispatcher = new EventDispatcher(this);
 
-  public Hotel(final EventSourceRepository repository) {
+  public Hotel(final EventSourceRepository<Hotel> repository) {
     this.eventSourceRepository = repository;
   }
 

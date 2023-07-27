@@ -1,19 +1,21 @@
 package hotel;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import java.util.UUID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
+import java.util.UUID;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import command.BookingCommand;
 import event.BookingCreatedEvent;
 import event.BookingFailedEvent;
 import event.Event;
 import repository.StubEventSourceRepository;
-import hotel.Room;
 
 public class HotelTest {
     public static final LocalDate AN_ARRIVAL_DATE = LocalDate.of(2020, 1, 20);

@@ -20,7 +20,6 @@ class FunctionalExtensionsTest {
 	private static final String WIM = "Wim";
 	private static final String ZUS = "Zus";
 	private static final String JET = "Jet";
-	private static final String FILTER_VALUE = WIM;
   
 	private static final List<String> READING_SHELF = List.of(AAP, NOOT, MIES, WIM, ZUS, JET);
   
