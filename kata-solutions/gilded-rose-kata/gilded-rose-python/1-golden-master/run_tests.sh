@@ -1,1 +1,1 @@
-poetry run pytest --cov=. --cov-report html --cov-branch
+poetry run ptw --runner="poetry run pytest --cov=. --cov-branch --cov-report html"
