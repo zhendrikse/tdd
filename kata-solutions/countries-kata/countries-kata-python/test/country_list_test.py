@@ -1,4 +1,3 @@
- 
 import pytest
 from hamcrest import *
 from country_list import CountryList, Country
@@ -8,10 +7,10 @@ class Testcountry_list:
   @pytest.fixture(autouse = True)
   def country_list(self):
       return CountryList(
-         [Country("Netherlands", 4), 
-          Country("Belgium", 3), 
-          Country("Portugal", 7), 
-          Country("United kingdom", 10)])
+         [Country("Netherlands", "Amsterdam", 4), 
+          Country("Belgium", "Brussels", 3), 
+          Country("Portugal", "Lissabon", 7), 
+          Country("United kingdom", "London", 10)])
 
   def test_given_an_empty_country_list_it_calculates_the_average_population(self):
       assert_that(CountryList().average_population(), equal_to(0))
