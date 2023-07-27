@@ -1,2 +1,1 @@
-echo "Running pytest with coverage..."
-pytest && coverage run --branch --source gilded_rose gilded_rose_test.py && coverage report -m && coverage html
+poetry run ptw --runner="poetry run pytest --cov=. --cov-branch --cov-report html"
