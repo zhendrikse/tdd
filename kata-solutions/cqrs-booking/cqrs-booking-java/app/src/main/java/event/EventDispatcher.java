@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class EventDispatcher {
-    private final Map<Class, Consumer<Event>> onEventDispatcher = new HashMap<>();
+    private final Map<Class<? extends Event>, Consumer<Event>> onEventDispatcher = new HashMap<>();
     private final EventHandler eventHandler;
 
     public EventDispatcher(final EventHandler eventHandler) {
