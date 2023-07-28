@@ -12,7 +12,7 @@ pyhamcrest = "^2.0.4"
 {% if cookiecutter.rspec_syntax == "y" %}mamba = "^0.11.2"{% endif %}
 {% if cookiecutter.rspec_syntax == "y" %}py-expect = "^0.1.2"{% endif %}
 {% if cookiecutter.rspec_syntax == "y" %}expects = "^0.9.0"{% endif %}
-{% if cookiecutter.code_coverage == "y" %}coverage = "^7.2.7"{% endif %}
+{% if cookiecutter.code_coverage == "y" %}pytest-cov = "^4.1.0"{% endif %}
 
 [tool.poetry.dev-dependencies]
 
