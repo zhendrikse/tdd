@@ -12,6 +12,9 @@ $ lein new app kata/poker-hands
 
 # Implementation
 
+This implementation is based on the instructions found in the
+[Functional Programming in Clojure](http://iloveponies.github.io/120-hour-epic-sax-marathon/p-p-p-pokerface.html) course.
+
 Before we start with the implementation, let's first consider a couple of design decisions that we would otherwise would have to make along the way.
 
 ## Design

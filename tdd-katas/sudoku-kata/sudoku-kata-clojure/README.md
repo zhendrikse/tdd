@@ -12,6 +12,9 @@ $ lein new app kata/sudoku
 
 # Implementation
 
+This implementation is based on the instructions found in the
+[Functional Programming in Clojure](http://iloveponies.github.io/120-hour-epic-sax-marathon/sudoku.html) course.
+
 ## 1. Initialization
 
 Let's first initialize a Sudoku puzzle from a string.
