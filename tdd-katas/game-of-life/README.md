@@ -9,10 +9,11 @@ of [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 ## Available variants
 
-| Directory | Description |
-| --------- | ----------- |
-| [game-of-life-python](./game-of-life-python) | A straight forward object oriented solution in Python |
-| [game-of-life-java](./game-of-life-java)     | A strictly _functional_ solution in Java              |
+| Directory                                      | Description |
+| ---------------------------------------------- | ----------- |
+| [game-of-life-python](./game-of-life-python)   | A straight forward object oriented solution in Python |
+| [game-of-life-java](./game-of-life-java)       | A strictly _functional_ solution in Java                     |
+| [game-of-life-clojure](./game-of-life-clojure) | A strictly _functional_ solution in Clojure            |
 
 In addition, one may play with the boundary conditions:
 
