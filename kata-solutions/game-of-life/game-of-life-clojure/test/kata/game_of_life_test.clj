@@ -40,7 +40,7 @@
 (def GAME (list 
            (dead-cell 0 0)   (living-cell 0 1) (living-cell 0 2)
            (living-cell 1 0) (living-cell 1 1) (dead-cell 1 2)
-           (living-cell 2 0) (dead-cell 2 1)   (living-cell 2 2)))
+           (dead-cell 2 0)   (living-cell 2 1) (dead-cell 2 2)))
 
 (deftest neighbours-of-center-cell 
   (testing "Neighbours of center cell.") 
@@ -60,8 +60,18 @@
 
 (deftest living-neighbours-of-center-cell
   (testing "Living neighbours of center cell.")
-    (is (= 5 (count ((living-neighbours-in GAME) (living-cell 1 1))))))
+    (is (= 4 (count ((living-neighbours-in GAME) (living-cell 1 1))))))
 
-;; (deftest has-exactly-three-living-neighbours
-;;   (testing "Filter out all cells that have exactly 3 living neighbours")
-;;     (is (= 4 (count (exactly-three (living-neighbours-in GAME))))))
+(deftest has-exactly-three-living-neighbours
+  (testing "Filter out all cells that have exactly 3 living neighbours")
+    (is (= 4 (count (filter (exactly-three? (living-neighbours-in GAME)) GAME)))))
+
+(deftest has-more-than-three-living-neighbours
+  (testing "Filter out all cells that have more than 3 living neighbours")
+    (is (= 2 (count (filter (more-than-three? (living-neighbours-in GAME)) GAME)))))
+
+(deftest has-less-than-two-living-neighbours
+  (testing "Filter out all cells that have less than 2 living neighbours")
+    (is (= 0 (count (filter (less-than-two? (living-neighbours-in GAME)) GAME)))))
+
+
