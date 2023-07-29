@@ -74,8 +74,28 @@
   [find-neighbours-for]
   (fn [cell] (< (count (find-neighbours-for cell)) 2)))
 
+; --------------------------------------------------------+
+; Filtering with multiple predicates:                     |
+; https://groups.google.com/g/clojure/c/O977jrXU-Cg?pli=1 |
+(defmacro which-either [& predicates]                    ;| 
+  (let [x# (gensym)]                                     ;|
+  `(fn [~x#] (or ~@(map #(list % x#) predicates)))))     ;|
+                                                         ;|
+(defmacro which-both [& predicates]                      ;|   
+  (let [x# (gensym)]                                     ;|
+  `(fn [~x#] (and ~@(map #(list % x#) predicates)))))    ;|
+; --------------------------------------------------------+
+
 (defn next-generation-of
   [game]
-  (map #(to-living-cell (and is-dead? (has-exactly-three? (living-neighbours-in game))) %) 
-  (map #(to-dead-cell (and is-alive? (or (has-less-than-two? (living-neighbours-in game)) (has-more-than-three? (living-neighbours-in game))) ) %) game)   )
+  (map #(to-living-cell 
+         (which-both 
+          is-dead? 
+          (has-exactly-three? (living-neighbours-in game))) %) 
+  (map #(to-dead-cell 
+         (which-both 
+          is-alive? 
+          (which-either 
+           (has-less-than-two? (living-neighbours-in game)) 
+           (has-more-than-three? (living-neighbours-in game))) ) %) game)   )
 )
