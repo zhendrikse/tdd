@@ -50,13 +50,13 @@
   (testing "Neighbours of top center cell.") 
     (is 5 (count (filter (is-neighbour-of? (living-cell 0 1)) GAME))))
 
-(deftest neighbours-of-bottom-center-cell 
-  (testing "Neighbours of bottom center cell.") 
-    (is 5 (count (filter (is-neighbour-of? (living-cell 2 1)) GAME))))
-
 (deftest neighbours-of-right-edge-center-cell 
   (testing "Neighbours of right edge center cell.") 
     (is 5 (count (filter (is-neighbour-of? (living-cell 1 2)) GAME))))
+
+(deftest neighbours-of-left-edge-center-cell 
+  (testing "Neighbours of left edge center cell.") 
+    (is 5 (count (filter (is-neighbour-of? (living-cell 1 0)) GAME))))
 
 (deftest living-neighbours-of-center-cell
   (testing "Living neighbours of center cell.")

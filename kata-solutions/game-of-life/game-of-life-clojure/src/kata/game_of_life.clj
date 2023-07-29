@@ -54,10 +54,6 @@
     (and (not(= cell given-cell)) (distance-less-than-two-between? cell given-cell))
   ))
 
-(defn which 
-  [left-predicate combiner right-predicate]
-  (fn [cell] (combiner left-predicate right-predicate)))
-
 (defn living-neighbours-in
   [game]
   (fn [cell] (filter is-alive? (filter (is-neighbour-of? cell) game) )))
