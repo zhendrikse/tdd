@@ -4,9 +4,9 @@ Please read the general [introduction to the sudoku kata](../README.md) first!
 
 # Getting started
 
-First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First, create an initial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
+Next, go the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # Instructions
@@ -25,13 +25,13 @@ with context("Given a string"):
 ---
 
 #### Exercise I
-The first exercise is to finish up the implementation for this specification. Note that a value of zero is used to indicate that a value still needs to be found, i.e. represents an empty cell in the initial puzzle.
+The first exercise is to finish up the implementation of this specification. Note that a value of zero is used to indicate that a value still needs to be found, i.e. represents an empty cell in the initial puzzle.
 
 ---
 
 ## 2. Validation
 
-Next we need to be able to check whether trying a value in at a certain location is allowed or not:
+Next, we need to be able to check whether trying a value at a certain location is allowed or not:
 
 ```python
 with it("identifies a given cell value is present in a row"):
@@ -49,7 +49,7 @@ Write the implementation and repeat the above for the column check.
 
 ---
 
-Finally, we have to check for the uniqueness in the 3x3 box.
+Finally, we have to check for the uniqueness of the 3x3 box.
 
 ---
 
@@ -88,7 +88,7 @@ with it("solves the puzzle"):
     expect(self.sudoku.puzzle[i // 9][i % 9]).to(equal(solved_puzzle.puzzle[i // 9][i % 9]))
 ```
 
-In case this challenge is still too daunting at this point, please continue follow the instructions a bit further. You'll be given a couple of additional hints.
+In case this challenge is still too daunting at this point, please continue to follow the instructions a bit further. You'll be given a couple of additional hints.
 
 
 ## 4. Additional preparations
@@ -102,7 +102,7 @@ Specify/test the behavior of a function returning a boolean that checks whether 
 
 ---
 
-Last but not least, we need functions to determine the next values for our row and column paraters if we want to advance one cell in the Sudoku puzzle.
+Last but not least, we need functions to determine the next values for our row and column parameters if we want to advance one cell in the Sudoku puzzle.
 
 ---
 
@@ -124,18 +124,18 @@ def next_column(cls, row:int, column:int) -> int:
 
 All preparations have been done for now. Perhaps you may want to do some additional refactoring at this point before we continue. 
 
-If not, we can now implement the actual solver using back tracking. 
+If not, we can now implement the actual solver using backtracking. 
 
 ## 5. Solving the puzzle
 
-At this point we have to write a recursive function to solve the puzzle. This function consists of the following steps:
+At this point, we have to write a recursive function to solve the puzzle. This function consists of the following steps:
 
 1. Check if we have already reached the last cell, in which case we end the recursion and return a value of `True` to indicate that a solution has been found.
 2. If the current cell is given/filled already, invoke `solve` for the next cell.
-3. Now in all other cases (so we haven't reached the last cell, nor is the cell already given in the puzzle), we have to start building a tree of possibilities and back track whenever we stumble upon an invalid configuration:
+3. Now in all other cases (so we haven't reached the last cell, nor is the cell already given in the puzzle), we have to start building a tree of possibilities and backtrack whenever we stumble upon an invalid configuration:
    - try all values 1...9 by creating a loop for these values
    - check for each value if this value is allowed. If not, continue with the next value. If it is, invoke `solve` for the next cell.
-   - after the loop, we are apparently in a situation that all values 1...9 failed. In this case we reset the cell value back to its original value of zero and return false, as a signal that we need to back track.
+   - after the loop, we are apparently in a situation where all values 1...9 failed. In this case, we reset the cell value back to its original value of zero and return false, as a signal that we need to backtrack.
 
 ---
 
@@ -144,7 +144,7 @@ Solve the puzzle by recursively invoking a function `solve(self, row, column)`. 
 
 ---
 
-![Spoiler](./assets/spoiler.png)
+![Spoiler](../assets/spoiler.png)
 <p align="center" ><b>Figure 1</b>: <i>In case you are stuck, you can find some code snippets below.</i></p>
 
 At this point, you can use the following code snippets. They correspond to the steps in the algorithm listed above:
@@ -174,7 +174,7 @@ At this point, you can use the following code snippets. They correspond to the s
       return True
    ```
 
-4. Back track if all values in for-loop have failed
+4. Backtrack if all values in the for-loop have failed
 
    ```python
     # backtrack because at this point all values failed
@@ -186,11 +186,11 @@ At this point, you can use the following code snippets. They correspond to the s
 
 By inspecting the code the [data clumping](https://refactoring.guru/smells/data-clumps) of the row and column parameters immediately pops to the eye. 
 
-This strongly suggests that both paramters form a unit. Let's call this unit a `SudokuIndex` and let's assign this value object its own class. This class then automatically becomes a behavior attractor:
+This strongly suggests that both parameters form a unit. Let's call this unit a `SudokuIndex` and let's assign this value object its own class. This class then automatically becomes a behavior attractor:
 
 > Think about behaviour attraction. Quite often, you can reduce the amount of behaviour that relies upon primitives from the outside world (as opposed to internal primitives stored as private fields or locals) simply by moving the behaviour to a value object which holds the primitives. If you don’t have a value object, create one. These value objects are known as behaviour attractors because once they’re created, they make it far more obvious where behaviour should live &#8212; [kata-log.rocks](https://kata-log.rocks/task-list-kata)
 
-In our case, the logic to determine the next value for the row and column parameters when advancing to the next cell are now kind of naturally "attracted" towards this `SudokuIndex` value object:
+In our case, the logic to determine the next value for the row and column parameters when advancing to the next cell is now kind of naturally "attracted" towards this `SudokuIndex` value object:
 
 ```python
 from dataclasses import dataclass
