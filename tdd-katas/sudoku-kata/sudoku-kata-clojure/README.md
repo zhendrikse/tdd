@@ -7,28 +7,37 @@ Please read the general [introduction to the sudoku kata](../README.md) first!
 To get started, simply invoke the following command:
 
 ```bash
-lein new app kata/sudoku
+$ lein new app kata/sudoku
 ```
 
 # Implementation
 
 ## 1. Initialization
 
-Let's first initialize a Sudoku puzzle from a string:
+Let's first initialize a Sudoku puzzle from a string.
 
-```python
-with context("Given a string"):
-  with it("initializes the puzzle"):
-    puzzle = ".5..83.17...1..4..3.4..56.8....3...9.9.8245....6....7...9....5...729..861.36.72.4"
-    expect(Sudoku(puzzle).puzzle[0][0]).to(equal(0))
-    expect(Sudoku(puzzle).puzzle[8][8]).to(equal(4))
+<details>
+  <summary>Test to read a Sudoku puzzle from string</summary>
+  
+```clojure
+(def board-1 ".5..83.17...1..4..3.4..56.8....3...9.9.8245....6....7...9....5...729..861.36.72.4")
+
+(deftest a-board-from-string 
+         (is (= [
+                 [0 5 0 0 8 3 0 1 7] 
+                 [0 0 0 1 0 0 4 0 0] 
+                 [3 0 4 0 0 5 6 0 8] 
+                 [0 0 0 0 3 0 0 0 9] 
+                 [0 9 0 8 2 4 5 0 0] 
+                 [0 0 6 0 0 0 0 7 0] 
+                 [0 0 9 0 0 0 0 5 0] 
+                 [0 0 7 2 9 0 0 8 6] 
+                 [1 0 3 6 0 7 2 0 4]] (board-from-string board-1))))
 ```
----
+</details>
 
 #### Exercise I
 The first exercise is to finish up the implementation for this specification. Note that a value of zero is used to indicate that a value still needs to be found, i.e. represents an empty cell in the initial puzzle.
-
----
 
 ## 2. Validation
 

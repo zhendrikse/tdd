@@ -1,4 +1,3 @@
-- [ ] Fix code coverage gilded rose python
 - [ ] Maak sudoku kata Clojure af (and the readme with instructions!)
 - [+] Make Python cookiecutter work for ptw and coverage
 - [+] Create instruction for bugs zero kata Python
@@ -8,7 +7,6 @@
   - [ ] Make london school presentation more generic
 - [ ] Resurrect pipeline kata (also create preparation instructions)
 - [ ] Create solution for countries kata
-- [ ] Fix code coverage gilded rose python
 - [ ] Move video store solution in java to gradle
 - [ ] Finish adding details tags to vending machine python instructions
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
@@ -19,6 +17,7 @@
   - [ ] graphic with replit example
 - [ ] Sudoku characterization tests alleen in Java?
 - [ ] Finish poker-hands-clojure instructions
+- [ ] [Gilded Rose in Clojure](https://github.com/omartell/gilded-rose/tree/master)
 - [ ] [Game of life in Clojure](https://medium.com/@pelensky/clojure-conways-game-of-life-289f19b10598), see also [this post](http://clj-me.cgrand.net/)
 - [X] Finish CQRS booking kata
    - Series [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/) 
@@ -36,3 +35,4 @@
 - [X] Make Java cookiecutter
 - [X] Monkey patching in tire pressure kata
 - [X] Add option to Javascript cookiecutter to make in browser version
+- [X] Fix code coverage gilded rose python
