@@ -36,3 +36,32 @@
 (deftest map-living-cell-to-living-cell
   (testing "Map living cell to living cell.")
     (is (alive? (to-living-cell dead? LIVING-CELL))))
+
+(def GAME (list 
+           (dead-cell 0 0)   (living-cell 0 1) (living-cell 0 2)
+           (living-cell 1 0) (living-cell 1 1) (dead-cell 1 2)
+           (living-cell 2 0) (dead-cell 2 1)   (living-cell 2 2)))
+
+(deftest neighbours-of-center-cell 
+  (testing "Neighbours of center cell.") 
+    (is 8 (count (filter (neighbour-of? (living-cell 1 1)) GAME))))
+
+(deftest neighbours-of-top-center-cell 
+  (testing "Neighbours of top center cell.") 
+    (is 5 (count (filter (neighbour-of? (living-cell 0 1)) GAME))))
+
+(deftest neighbours-of-bottom-center-cell 
+  (testing "Neighbours of bottom center cell.") 
+    (is 5 (count (filter (neighbour-of? (living-cell 2 1)) GAME))))
+
+(deftest neighbours-of-right-edge-center-cell 
+  (testing "Neighbours of right edge center cell.") 
+    (is 5 (count (filter (neighbour-of? (living-cell 1 2)) GAME))))
+
+(deftest living-neighbours-of-center-cell
+  (testing "Living neighbours of center cell.")
+    (is (= 5 (count ((living-neighbours-in GAME) (living-cell 1 1))))))
+
+;; (deftest has-exactly-three-living-neighbours
+;;   (testing "Filter out all cells that have exactly 3 living neighbours")
+;;     (is (= 4 (count (exactly-three (living-neighbours-in GAME))))))
