@@ -55,8 +55,8 @@
   ))
 
 (defn which 
-  [& preds]
-  (fn [& args] (every? #(apply % args) preds)))
+  [left-predicate combiner right-predicate]
+  (fn [cell] (combiner left-predicate right-predicate)))
 
 (defn living-neighbours-in
   [game]
