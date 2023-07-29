@@ -1,4 +1,7 @@
+- [ ] Create solution for countries kata
+- [ ] Improve Python code coverage facilities using [this post](https://breadcrumbscollector.tech/how-to-use-code-coverage-in-python-with-pytest/)
 - [ ] Maak sudoku kata Clojure af (and the readme with instructions!)
+- [ ] Finish poker-hands-clojure instructions
 - [+] Make Python cookiecutter work for ptw and coverage
 - [+] Create instruction for bugs zero kata Python
 - [ ] [Functional Mars Rover in Java](https://github.com/davidibl/MarsRover/tree/master/src/main/java/de/lv1871/dms/MarsRover)
@@ -6,8 +9,6 @@
 - [X] Resurrect audio player kata from london school presentation
   - [ ] Make london school presentation more generic
 - [ ] Resurrect pipeline kata (also create preparation instructions)
-- [ ] Create solution for countries kata
-- [ ] Move video store solution in java to gradle
 - [ ] Finish adding details tags to vending machine python instructions
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [ ] Make Python cookiecutter work for ptw and mamba
@@ -16,12 +17,12 @@
   - [ ] in [Deck of cards](https://realpython.com/python-type-checking/)
   - [ ] graphic with replit example
 - [ ] Sudoku characterization tests alleen in Java?
-- [ ] Finish poker-hands-clojure instructions
 - [ ] [Gilded Rose in Clojure](https://github.com/omartell/gilded-rose/tree/master)
 - [ ] [Game of life in Clojure](https://medium.com/@pelensky/clojure-conways-game-of-life-289f19b10598), see also [this post](http://clj-me.cgrand.net/)
 - [X] Finish CQRS booking kata
    - Series [implementing event sourcing with Python](https://breadcrumbscollector.tech/implementing-event-sourcing-in-python-part-1-aggregates/) 
    - [CQRS event sourcing with Lagom](https://nljug.org/java-magazine/cqrs-a-event-sourcing-met-lagom/)
+- [X] Move video store solution in java to gradle
 - [X] .coverage file in cookiecutter Python template
 - [X] Make javascript cookiecutter work for coverage
 - [X] Create solution for vending machine Javascript
