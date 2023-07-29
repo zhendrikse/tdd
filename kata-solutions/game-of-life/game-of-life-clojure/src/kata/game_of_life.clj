@@ -9,11 +9,11 @@
   [x y]
   [x y false])
 
-(defn dead?
+(defn is-dead?
   [cell]
   (= (last cell) false))
 
-(defn alive?
+(defn is-alive?
   [cell]
   (= (last cell) true))
 
@@ -47,25 +47,35 @@
   [cell other-cell]
   (< (reduce max (distance-between cell other-cell)) 2))
 
-(defn neighbour-of?
+(defn is-neighbour-of?
   [given-cell]
   (fn 
     [cell] 
     (and (not(= cell given-cell)) (distance-less-than-two-between? cell given-cell))
   ))
 
+(defn which 
+  [& preds]
+  (fn [& args] (every? #(apply % args) preds)))
+
 (defn living-neighbours-in
   [game]
-  (fn [cell] (filter alive? (filter (neighbour-of? cell) game) )))
+  (fn [cell] (filter is-alive? (filter (is-neighbour-of? cell) game) )))
 
-(defn exactly-three?
+(defn has-exactly-three?
   [find-neighbours-for]
   (fn [cell] (= 3 (count (find-neighbours-for cell)))))
 
-(defn more-than-three?
+(defn has-more-than-three?
   [find-neighbours-for]
   (fn [cell] (> (count (find-neighbours-for cell)) 3)))
 
-(defn less-than-two?
+(defn has-less-than-two?
   [find-neighbours-for]
   (fn [cell] (< (count (find-neighbours-for cell)) 2)))
+
+(defn next-generation-of
+  [game]
+  (map #(to-living-cell (and is-dead? (has-exactly-three? (living-neighbours-in game))) %) 
+  (map #(to-dead-cell (and is-alive? (or (has-less-than-two? (living-neighbours-in game)) (has-more-than-three? (living-neighbours-in game))) ) %) game)   )
+)
