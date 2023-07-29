@@ -8,62 +8,31 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 <details>
 <summary>Table containing a summary of all katas</summary>
   
-| Kata                                       | Difficulty | Aspects                                               |
-| ------------------------------------------ | ---------- | ----------------------------------------------------- |
-| [audio-player-kata](./audio-player-kata)   | M          | London vs. Detroit schools of TDD / Mocks, spies      |
-| [bugs-zero-kata](./bugs-zero-kata)         | M          | **Legacy code** / **Refactoring** / Approval tests    | 
-| [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**             |
-| [connect-four](./connect-four)             | H          | Implement a game in **small steps**                   |
-| [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI    |
-| [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture                 |
-| [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI                  |
-| [fibonacci-kata](./db-adapter-kata)        | M          | Pipelines / Automated deployments / IaC               |
-| [game-of-life](./game-of-life)             | M          | **Generic TDD** / **Small steps**                     |
-| [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests    |
-| [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**            |
-| [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                    |
-| [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                               |
-| [mars-rover](./mars-rover)                 | M          | **Generic TDD** / Design decisions                    |
-| [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions                 |
-| [registration-form](./registration-form)   | L &harr; M | **Generic TDD** / Front-end TDD / Custom matchers     |
-| [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)            |
-| [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD and **small steps**                    |
-| [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app         |
-| [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD           |
-| [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI       |
-| [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**     |
-| [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**     |
-</details>
-
-
-<details>
-<summary>Table containing language availability of all katas</summary>
-  
-| Kata                                       | Py | Java | JS | Clj | Kt | TS |
-| ------------------------------------------ |:--:|:----:|:--:|:---:|:--:|:--:| 
-| [audio-player-kata](./audio-player-kata)   | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ |
-| [bugs-zero-kata](./bugs-zero-kata)         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [christmas-tree](./christmas-tree)         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [connect-four](./connect-four)             | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [countries-kata](./countries-kata)         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [cqrs-booking](./cqrs-booking)             | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [db-adapter-kata](./db-adapter-kata)       | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [fibonacci-kata](./db-adapter-kata)        | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [game-of-life](./game-of-life)             | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ |
-| [gilded-rose-kata](./gilded-rose-kata)     | ✔  | ✗   | ✔  | ✗   | ✗  | ✗ |
-| [greed-kata](./greed-kata)                 | ✗  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [locker-room-kata](./locker-room-kata)     | ✗  | ✗   | ✗  | ✔   | ✔  | ✗ |
-| [manhattan-distance](./manhattan-distance) | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [mars-rover](./mars-rover)                 | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [poker-hands-kata](./poker-hands-kata)     | ✔  | ✗   | ✗  | ✔   | ✗  | ✗ |
-| [registration-form](./registration-form)   | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ |
-| [stack-kata](./stack-kata)                 | ✔  | ✔   | ✔  | ✗   | ✗  | ✗ |
-| [sudoku-kata](./sudoku-kata)               | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ |
-| [task-list-kata](./task-list-kata)         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [tell-dont-ask](./tell-dont-ask)           | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [tire-pressure-kata](./tire-pressure-kata) | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
-| [vending-machine](./vending-machine)       | ✔  | ✔   | ✔  | ✗   | ✗  | ✔ |
-| [video-store-kata](./video-store-kata)     | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ |
+| Kata                                       | Difficulty | Aspects                                               | Py | Java | JS | Clj | Kt | TS |
+| ------------------------------------------ | ---------- | ----------------------------------------------------- |:--:|:----:|:--:|:---:|:--:|:--:| 
+| [audio-player-kata](./audio-player-kata)   | M          | London vs. Detroit schools of TDD / Mocks, spies      | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ |
+| [bugs-zero-kata](./bugs-zero-kata)         | M          | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [christmas-tree](./christmas-tree)         | L          | Implement an algorithm in **small steps**             | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [connect-four](./connect-four)             | H          | Implement a game in **small steps**                   | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [countries-kata](./countries-kata)         | L &harr; M | Ports &amp; adapters / **Refactoring** / REST / DI    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [cqrs-booking](./cqrs-booking)             | H          | CQRS / DDD / Event-based architecture                 | ✗  | ✔   | ✗  | ✗   | ✗  | ✗ |
+| [db-adapter-kata](./db-adapter-kata)       | M          | Ports &amp; adapters / Database / DI                  | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [fibonacci-kata](./db-adapter-kata)        | M          | Pipelines / Automated deployments / IaC               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [game-of-life](./game-of-life)             | M          | **Generic TDD** / **Small steps**                     | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ |
+| [gilded-rose-kata](./gilded-rose-kata)     | M &harr; H | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✔  | ✗   | ✗  | ✗ |
+| [greed-kata](./greed-kata)                 | M          | Implement complex rules in **small steps**            | ✗  | ✗   | ✗  | ✔   | ✗  | ✗ |
+| [locker-room-kata](./locker-room-kata)     | M          | Stateless / Functional programming                    | ✗  | ✗   | ✗  | ✔   | ✔  | ✗ |
+| [manhattan-distance](./manhattan-distance) | L          | 1, 2, N / Encapsulation                               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [mars-rover](./mars-rover)                 | M          | **Generic TDD** / Design decisions                    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ |
+| [poker-hands-kata](./poker-hands-kata)     | H          | Outside-in / Mocks / Design decisions                 | ✔  | ✗   | ✗  | ✔   | ✗  | ✗ |
+| [registration-form](./registration-form)   | L &harr; M | **Generic TDD** / Front-end TDD / Custom matchers     | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ |
+| [stack-kata](./stack-kata)                 | L          | Getting started with TDD (**small steps**)            | ✔  | ✔   | ✔  | ✗   | ✗  | ✗ |
+| [sudoku-kata](./sudoku-kata)               | M          | Recursion, TDD and **small steps**                    | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ |
+| [task-list-kata](./task-list-kata)         | M          | Command-Query / Strong typing / Realistic app         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ 
+| [tell-dont-ask](./tell-dont-ask)           | M          | **Refactoring** / Anemic domain model / DDD           | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ 
+| [tire-pressure-kata](./tire-pressure-kata) | L          | Ports &amp; adapters / **Testable design** / DI       | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ 
+| [vending-machine](./vending-machine)       | L &harr; M | **Small steps** / Code smells and **refactoring**     | ✔  | ✔   | ✔  | ✗   | ✗  | ✔ |
+| [video-store-kata](./video-store-kata)     | L          | **Legacy code** / Code smells and **refactoring**     | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ |
 </details>
 
 # Relation with 24 Key Capabilities
