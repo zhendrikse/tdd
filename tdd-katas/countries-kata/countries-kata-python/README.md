@@ -70,20 +70,15 @@ with open('countries.csv', 'w', encoding='UTF8', newline='') as f:
 ```
 </details>
 
-Bearing this in mind, it makes sense to define a `CountriesRestRepository` 
+Bearing this in mind, it makes sense to define a `RestCountriesRepository` 
 that retrieves a list of all countries from the countries API. It will be
 the responsibility of this repository to hand us a list of countries with
 the required data fields.
 
 To make the dependency inversion principle explicit, we could opt for an
-additional `CountriesRepository` interface, that belongs to our domain. 
+additional `CountriesRepository` interface/protocol, that belongs to our domain. 
 This way, our domain really dictates the outside world what it wants 
-to receive.
-
-Analogously, we can also define a `CsvWriter` that receives this list of 
-countries, converts it into a nested array of data fields, and feeds it
-to the Python `csv.writer()`.
-
+to receive, as the interface is written as part of our domain.
 
 # Instructions for the greenfield approach
 
