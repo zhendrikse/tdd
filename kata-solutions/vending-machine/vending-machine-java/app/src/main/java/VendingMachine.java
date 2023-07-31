@@ -2,30 +2,32 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class VendingMachine {
-  // private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
-  // private Map<Choice, Integer> choicePriceMap = new HashMap<Choice, Integer>();
-  // private int balanceInCents = 0;
-
-  // public void provision(Choice choice, Can can, int priceInCents) {
-  //   this.choiceCanMap.put(choice, can);
-  //   this.choicePriceMap.put(choice, priceInCents);
-  // }
+    // private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
+    // private Map<Choice, Integer> choicePriceMap = new HashMap<Choice, Integer>();
+    // private int balanceInCents = 0;
   
-  // public void provision(Choice choice, Can can) {
-  //   this.provision(choice, can, 0);
-  // }
-
-  // public void insertMoney(int priceInCents) {
-  //   this.balanceInCents = priceInCents;
-  // }
+    // public void configure(final Choice choice, final Can can, final int priceInCents) {
+    //   this.choiceCanMap.put(choice, can);
+    //   this.choicePriceMap.put(choice, priceInCents);
+    // }
   
-  // public Can deliver(final Choice choice) {
-  //   if (!this.choiceCanMap.containsKey(choice)) return Can.NOTHING;
-  //   if (this.choicePriceMap.get(choice) > this.balanceInCents) return Can.NOTHING;
+    // public void configure(final Choice choice, final Can can) {
+    //   configure(choice, can, 0);
+    // }
 
-  //   this.balanceInCents -= this.choicePriceMap.get(choice);
-  //   return this.choiceCanMap.get(choice);
-  // }
+    // public void insert(final int amountInCents) {
+    //   this.balanceInCents = amountInCents;
+    // }
+
+    // public Can deliver(final Choice choice) {
+    //   if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
+
+    //   final int canPrice = choicePriceMap.get(choice);
+    //   if (canPrice > balanceInCents ) return Can.NOTHING;
+      
+    //   balanceInCents -= canPrice;
+    //   return choiceCanMap.get(choice);
+    // }
 
   private Map<Choice, Drawer> choiceDrawerMap = new HashMap<Choice, Drawer>();
   private int balanceInCents = 0;

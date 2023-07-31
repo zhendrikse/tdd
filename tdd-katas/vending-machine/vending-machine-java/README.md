@@ -1,0 +1,586 @@
+# Introduction
+
+Please read the general [introduction to the stack kata](../README.md) first!
+
+# Getting started
+
+First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+In this exercise, we _are_ going to use the rSpec syntax, so
+you should enable that option if you are planning to follow the 
+instructions to the letter.
+
+Next, go the the newly created project directory and consult
+the provided ``README.md`` in there.
+
+# Implementation instructions
+
+## Delivering cans without cost
+
+Let's first write a specification for a vending machine that delivers
+nothing, whatever we ask it to deliver.
+
+<details>
+  <summary>Specifying an initial vending machine</summary>
+
+```java
+describe("A new vending machine", () -> {
+  it("delivers nothing when asked for a can of Coke", () -> {
+    vendingMachine = new VendingMachine();
+    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
+  });
+});
+```
+
+Obviously, this fails miserably, as the both the deliver method and the
+enumerations are not defined. So let's introduce them both in the 
+production code.
+
+<details>
+  <summary>Faking and cheating to get the test green</summary>
+
+```java
+public class VendingMachine {
+
+    public Can deliver(final Choice choice) {
+      return Can.NOTHING;
+    }
+}
+```
+
+and creating enumerations for the cans
+
+```java
+public enum Can {
+  NOTHING ("No can");
+
+  private final String description;
+
+  Can(String description) {
+    this.description = description;
+  }
+
+  @Override
+  public String toString() {
+    return this.description;
+  }
+}
+```
+
+and choices:
+
+```java
+public enum Choice {
+  COKE ("Coke choice");
+
+  private final String description;
+
+  Choice(String description) {
+    this.description = description;
+  }
+
+  @Override
+  public String toString() {
+    return this.description;
+  }
+}
+```
+
+</details>
+</details>
+
+
+We should have our first passing test now.
+
+Let's try to get some coke though!
+
+
+<details>
+  <summary>Specifying an initial vending machine</summary>
+
+```java
+  it("delivers Cola when coke is selected", () -> {
+    vendingMachine = new VendingMachine();
+    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
+  });
+```
+</details>
+
+Before we continue, notice that we have two tests now that are 
+completely identical, but expect different results. How do we solve this?
+
+<details>
+  <summary>Making the vending machine deliver Cola</summary>
+  
+We solve this by configuring the vending machine with a choice, so
+that we can expect a different outcome.
+
+```java
+    it("delivers Cola when coke is selected", () -> {
+      vendingMachine = new VendingMachine();
+      vendingMachine.configure(Choice.COKE, Can.COLA);
+      expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
+    });
+```
+
+Now the vending machine must be extended just a little bit.
+
+<details>
+  <summary>Making the test pass</summary>
+
+```java
+public class VendingMachine {
+    private Can canToDeliver = Can.NOTHING;
+
+    public void configure(final Choice choice, final Can can) {
+      this.canToDeliver = can;
+    }
+
+    public Can deliver(final Choice choice) {
+      return canToDeliver;
+    }
+}
+```
+
+Next, identify the duplicate code (hint: in the spec/test file), and
+eliminate it using the ``beforeEach()``
+
+```java
+    beforeEach(() -> {
+      vendingMachine = new VendingMachine();
+    });
+```
+</details>
+</details>
+
+
+Let's configure a different drink.
+
+<details>
+  <summary>Specifying another drink</summary>
+  
+```java
+    it("delivers Fanta when fizzy orange is selected", () -> {
+      vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
+      expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.FANTA);
+    });
+```
+
+After extending the choice and can types, we can notice that this test
+already passes! That is cause by the fact we always deliver the most
+recently configured choice. So by extending the configuration in our
+test, the test will fail and will force us to generalize the production 
+code.
+
+```java
+    it("delivers Fanta when fizzy orange is selected", () -> {
+      vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
+      vendingMachine.configure(Choice.COKE, Can.COLA);
+      expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.FANTA);
+    });
+```
+
+So now we are forced to update the production code.
+
+<details>
+  <summary>Making the test pass</summary>
+  
+```java
+public class VendingMachine {
+    private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
+
+    public void configure(final Choice choice, final Can can) {
+      this.choiceCanMap.put(choice, can);
+    }
+
+    public Can deliver(final Choice choice) {
+      if (!this.choiceCanMap.containsKey(choice)) return Can.NOTHING;
+      
+      return this.choiceCanMap.get(choice);
+    }
+}
+```
+</details>
+
+<details>
+  <summary>Applying the DRY principle</summary>
+
+Finally, note that we can actually configure the vending machine 
+once for all tests
+
+```java
+  {
+    beforeEach(() -> {
+      vendingMachine = new VendingMachine();
+      vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
+      vendingMachine.configure(Choice.COKE, Can.COLA);
+    });    
+
+    // ...
+```
+
+This makes our first test fail, because it now actually gets 
+delivered a can of Coke. But the idea of the first test was to 
+test for a non-existing choice, so let's replace the ``Choice.COLA`` 
+by ``Choice.BEER``. Now all three tests are green again!
+</details>
+</details>
+
+## Delivering cans that cost money
+
+Delivering a can should actually cost money! So asking for a can of coke
+should not deliver anything.
+
+<details>
+  <summary>Paid machine does not deliver can of choice</summary>
+  
+```java
+  it("delivers nothing when priced choice is coke", () -> {
+    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
+  });
+```
+
+Again we are facing the riddle: how can we choose a can of coke and have
+a can delivered in the first set of tests, and now with the same test no
+can at all??
+
+<details>
+  <summary>Solving the riddle once more</summary>
+
+Again, we solve this by configuring the machine to deliver drinks that
+cost money, bij adding a parameter to the configure method that specifies
+the price in cents:
+
+```java
+    it("delivers nothing when priced choice is coke", () -> {
+      vendingMachine.configure(Choice.COKE, Can.COLA, 250);
+      expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
+    });
+```
+
+We modify the production code accordingly to make the test pass:
+
+```java
+public class VendingMachine {
+    private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
+    private int priceInCents;
+  
+    public void configure(final Choice choice, final Can can, final int priceInCents) {
+      this.choiceCanMap.put(choice, can);
+      this.priceInCents = priceInCents;
+    }
+  
+    public void configure(final Choice choice, final Can can) {
+      configure(choice, can, 0);
+    }
+
+    public Can deliver(final Choice choice) {
+      if (!this.choiceCanMap.containsKey(choice)) return Can.NOTHING;
+      
+      if (this.priceInCents !=0 ) return Can.NOTHING;
+      
+      return this.choiceCanMap.get(choice);
+    }
+}
+```
+  
+</details>
+  
+</details>
+
+
+When we enter the required amount of money, we should get our
+can of choice again.
+
+<details>
+  <summary>Specification when money is inserted.</summary>
+    
+```java
+    it("delivers can of choice when required money is inserted", () -> {
+      vendingMachine.configure(Choice.COKE, Can.COLA, 250);
+      vendingMachine.insert(250);
+      expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
+    });
+
+```
+This forces us to modify the implementation.
+
+<details>
+  <summary>Making the test pass</summary>
+
+```java
+    public void insert(final int amountInCents) {
+      this.balanceInCents = amountInCents;
+    }
+
+    public Can deliver(final Choice choice) {
+      if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
+      
+      if (priceInCents != balanceInCents ) return Can.NOTHING;
+      
+      return choiceCanMap.get(choice);
+    }
+```
+</details>
+
+Again, we observe duplication in the specification file, which leads
+to a nesting of the ``describe`` statements.
+
+<details>
+  <summary>Applying the DRY principle once more</summary>
+
+```java
+    describe("that requires drinks to be paid", () -> {
+      beforeEach(() -> {
+        vendingMachine = new VendingMachine();
+        vendingMachine.configure(Choice.COKE, Can.COLA, 250);
+      });    
+      
+      it("delivers nothing when priced choice is coke", () -> {
+        expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
+      });
+
+      //...
+```
+    
+</details>
+</details>
+
+Of course, the equality sign doesn't make sense, as we also 
+expect a can of choice when we pay too much.
+
+<details>
+  <summary>Paying too much</summary>
+
+```java
+  it("delivers can of choice when more than required money is inserted", () -> {
+    vendingMachine.insert(300);
+    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
+  });
+```
+
+This test only requires a minor modification in the production code.
+
+<details>
+  <summary>Modification to the production code.</summary>
+
+```java
+    public Can deliver(final Choice choice) {
+      if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
+      
+      if (priceInCents > balanceInCents ) return Can.NOTHING;
+```
+        
+</details>
+  
+</details>
+
+Obviously, we also must accommodate for different prices for the different drinks:
+
+<details>
+  <summary>Accommodating different prices for different drinks</summary>
+  
+```java
+      it("delivers can of Fanta when required amount is inserted", () -> {
+        vendingMachine.insert(200);
+        vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 200);
+        expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.FANTA);
+      });
+```
+
+This test jumps to green immediately, but that's because the most recently
+configured price is used always. As soon as we move the configuration to 
+the ``beforeEach()`` step, the test fails!
+
+<details>
+  <summary>Making the test pass</summary>
+
+  We need to introduce yet another map, namely a map between choices
+and prices.
+
+```java
+public class VendingMachine {
+    private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
+    private Map<Choice, Integer> choicePriceMap = new HashMap<Choice, Integer>();
+    private int balanceInCents = 0;
+  
+    public void configure(final Choice choice, final Can can, final int priceInCents) {
+      this.choiceCanMap.put(choice, can);
+      this.choicePriceMap.put(choice, priceInCents);
+    }
+  
+    public void configure(final Choice choice, final Can can) {
+      configure(choice, can, 0);
+    }
+
+    public void insert(final int amountInCents) {
+      this.balanceInCents = amountInCents;
+    }
+
+    public Can deliver(final Choice choice) {
+      if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
+
+      final int canPrice = choicePriceMap.get(choice);
+      if (canPrice > balanceInCents ) return Can.NOTHING;
+      
+      return choiceCanMap.get(choice);
+    }
+}
+```
+  
+</details>
+</details>
+
+Finaly, we expect no more cans after a can has been withdrawn, as our
+balance should have shrunk.
+
+<details>
+  <summary>Forcing the balance to shrink.</summary>
+
+```java
+  it("delivers no can after a can has been delivered", () -> {
+    vendingMachine.insert(200);
+    vendingMachine.deliver(Choice.FIZZY_ORANGE);
+    expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.NOTHING);
+  });
+```
+
+<details>
+  <summary>Adjusting the balance</summary>
+  
+So after withdrawal of a drink, the balance should be adjusted
+accordingly. After some minor refactoring of the deliver method
+we arrive at.
+
+```java
+public Can deliver(final Choice choice) {
+  if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
+
+  final int canPrice = choicePriceMap.get(choice);
+  if (canPrice > balanceInCents ) return Can.NOTHING;
+  
+  balanceInCents -= canPrice;
+  return choiceCanMap.get(choice);
+}
+```
+</details>
+    
+</details>
+
+# Code smells
+
+## [Data clump](https://refactoring.guru/smells/data-clumps)
+
+It now becomes clear that the ``choiceCanMap`` and ``choicePriceMap`` always
+appear together, so let's assign them their own (data) class ``Drawer``.
+
+<details>
+  <summary>Refactoring the data clump code smell</summary>
+
+```java
+  public class Drawer {
+    public final Can can;
+    public final int priceInCents;
+
+    public Drawer(Can can) {
+      this(can, 0);
+    }
+
+    public Drawer(Can can, int priceInCents) {
+      this.can = can;
+      this.priceInCents = priceInCents;
+    }
+  }
+```
+
+Obviously, the tests now need to be modified slightly too:
+
+```java
+    beforeEach(() -> {
+      vendingMachine = new VendingMachine();
+      vendingMachine.configure(Choice.FIZZY_ORANGE, vendingMachine.new Drawer(Can.FANTA));
+      vendingMachine.configure(Choice.COKE, vendingMachine.new Drawer(Can.COLA));
+    });    
+```
+</details>
+
+Since the members are publicly accesible, we can directly use them.
+However, this immediately leads to another code smell, namely
+[feature envy](https://refactoring.guru/smells/feature-envy).
+
+<details>
+  <summary>Resolving the feature envy code smell</summary>
+  
+</details>
+
+As a first step, we can move the delivery logic into the ``Drawer`` class
+
+```javascript
+  getCan(vendingMachine) {
+    if (this.priceInCents > vendingMachine.balanceInCents)
+      return Can.NOTHING
+    
+    vendingMachine.balanceInCents -= this.priceInCents
+    return this.can
+  }
+```
+
+with which the ``VendingMachine`` simplifies to
+
+```javascript
+  deliver(choice) {
+    if (!this.choiceDrawerMap.has(choice))
+      return Can.NOTHING
+
+    var drawer = this.choiceDrawerMap.get(choice)
+    return drawer.getCan(this)
+  }
+```
+
+Note that we have now introduced a new code smell, namely
+[inappropriate intimacy](https://refactoring.guru/smells/inappropriate-intimacy), 
+as the drawer depends on the vending machine and vice versa.
+
+So let's introduce a kind of cashier that has the responsibility 
+of dealing with the transaction(s). To do so in small steps, we
+first wrap the balance in the new class ``Cashier``, and gradually
+move the logic that goes with it as well.
+
+```javascript
+class Cashier {
+  constructor() {
+    this.balanceInCents = 0
+  }  
+
+  insert(amountInCents) {
+    this.balanceInCents += amountInCents
+  }
+
+  doesBalanceAllow(priceInCents) {
+    return this.balanceInCents >= priceInCents
+  }
+
+  buy(amountInCents) {
+    this.balanceInCents -= amountInCents
+  }
+}
+```
+
+This means that the ``Drawer`` class is no longer dependent on the
+``VendingMachine`` class, but on the ``Cashier`` instead
+
+```javascript
+class Drawer {
+  constructor(can, priceInCents) {
+    this.can = can
+    this.priceInCents = priceInCents
+  }
+
+  deliver(cashier) {
+    if (!cashier.doesBalanceAllow(this.priceInCents))
+      return Can.NOTHING
+    
+    cashier.buy(this.priceInCents)
+    return this.can    
+  }
+}
+```

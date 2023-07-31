@@ -10,10 +10,13 @@ repositories {
 }
 
 dependencies {
+{% if cookiecutter.rspec_syntax == "y" %}  
     // For rSpec-like syntax
     testImplementation("com.mscharhag.oleaster:oleaster-runner:0.2.0")
     testImplementation("com.mscharhag.oleaster:oleaster-matcher:0.2.0")
-    
+    testImplementation("junit:junit:4.12")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.2.0")
+{% endif %}    
     // Use JUnit Jupiter API for testing.
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
 

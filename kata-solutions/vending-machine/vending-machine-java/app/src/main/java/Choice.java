@@ -1,7 +1,7 @@
 public enum Choice {
-  FIZZY_ORANGE ("FIZZY_ORANGE"),
-  BEER ("Beer"),
-  COLA ("Cola");
+  FIZZY_ORANGE ("Fizzy orange choice"),
+  BEER ("Beer choice"),
+  COLA ("Cola choice");
 
   private final String description;
 
