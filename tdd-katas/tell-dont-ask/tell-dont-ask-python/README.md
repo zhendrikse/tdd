@@ -1,6 +1,9 @@
 ## Make [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) a [value object](https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6)
 
-Make [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) a value object and modify [OrderCreationUseCase.py](TellDontAskKata#src/useCase/OrderCreationUseCase.py) accordingly:
+Make [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) a value object and modify [OrderCreationUseCase.py](TellDontAskKata#src/useCase/OrderCreationUseCase.py) accordingly.
+
+<details>
+<summary>Making <code>OrderItem.py</code> a value object</summary>
 
 ```python
 class OrderItem(object):
@@ -22,11 +25,14 @@ class OrderItem(object):
   def get_tax(self):
     return self.tax
 ```
-
+</details>
 
 ## Make [Category.py](TellDontAskKata#src/domain/Category.py) a [value object](https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6)
 
-Make [Product.py](TellDontAskKata#src/domain/Product.py) a value object and modify [test_OrderCreationUseCase.py](TellDontAskKata#test/useCase/test_OrderCreationUseCase.py) accordingly:
+Make [Category.py](TellDontAskKata#src/domain/Category.py) a value object and modify [test_OrderCreationUseCase.py](TellDontAskKata#test/useCase/test_OrderCreationUseCase.py) accordingly.
+
+<details>
+<summary>Making <code>Category.py</code> a value object</summary>
 
 ```python
 class Category(object):
@@ -40,10 +46,15 @@ class Category(object):
   def get_tax_percentage(self):
     return self.tax_percentage
 ```
+</details>
 
 ## Make [Product.py](TellDontAskKata#src/domain/Product.py) a [value object](https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6)
 
-Make [Product.py](TellDontAskKata#src/domain/Product.py) a value object and modify [test_OrderCreationUseCase.py](TellDontAskKata#test/useCase/test_OrderCreationUseCase.py) accordingly:
+Make [Product.py](TellDontAskKata#src/domain/Product.py) a value object and modify [test_OrderCreationUseCase.py](TellDontAskKata#test/useCase/test_OrderCreationUseCase.py) accordingly.
+
+
+<details>
+<summary>Making <code>Product.py</code> a value object</summary>
 
 ```python
 class Product(object):
@@ -61,29 +72,37 @@ class Product(object):
   def get_category(self):
     return self.category
 ```
-
+</details>
 
 ## Remove setters from [Order.py](TellDontAskKata#src/domain/Order.py)
 
-1. Move the approve logic from [OrderApprovalUseCase.py](TellDontAskKata#src/useCase/OrderApprovalUseCase.py) to [Order.py](TellDontAskKata#src/domain/Order.py) by first extracting the `request.is_approved()` into a separate variable and then using the extract-method refactoring:
-  ```python
-  def approve(self, isOrderApproved: bool):
-        if self.status is OrderStatus.SHIPPED:
-            raise ShippedOrdersCannotBeChangedError()
+1. Move the approve logic from [OrderApprovalUseCase.py](TellDontAskKata#src/useCase/OrderApprovalUseCase.py) 
+   to [Order.py](TellDontAskKata#src/domain/Order.py) by first extracting the `request.is_approved()` 
+   into a separate variable and then using the extract-method refactoring.
+   <details>
+   <summary>Moving the approval logic to <code>Order.py</code></summary>
 
-        if isOrderApproved and self.status is OrderStatus.REJECTED:
-            raise RejectedOrderCannotBeApprovedError()
+   ```python
+     def approve(self, isOrderApproved: bool):
+          if self.status is OrderStatus.SHIPPED:
+              raise ShippedOrdersCannotBeChangedError()
 
-        if not isOrderApproved and self.status is OrderStatus.APPROVED:
-            raise ApprovedOrderCannotBeRejectedError()
+          if isOrderApproved and self.status is OrderStatus.REJECTED:
+              raise RejectedOrderCannotBeApprovedError()
 
-        self.status = OrderStatus.APPROVED if isOrderApproved else OrderStatus.REJECTED  
-  ```
+          if not isOrderApproved and self.status is OrderStatus.APPROVED:
+              raise ApprovedOrderCannotBeRejectedError()
+
+          self.status = OrderStatus.APPROVED if isOrderApproved else OrderStatus.REJECTED  
+   ```
+   </details>
 
 2. Extract reject logic from approve method in [Order.py](TellDontAskKata#src/domain/Order.py)
+   <details>
+   <summary>Moving the rejection logic to <code>Order.py</code></summary>
 
-  ```python
-  def approve(self):
+   ```python
+   def approve(self):
       if self.status is OrderStatus.SHIPPED:
           raise ShippedOrdersCannotBeChangedError()
 
@@ -92,7 +111,7 @@ class Product(object):
 
       self.status = OrderStatus.APPROVED
 
-  def reject(self):
+   def reject(self):
       if self.status is OrderStatus.SHIPPED:
           raise ShippedOrdersCannotBeChangedError()
           
@@ -100,55 +119,78 @@ class Product(object):
           raise ApprovedOrderCannotBeRejectedError()
 
       self.status = OrderStatus.REJECTED
-  ```
+   ```
+   </details>
 
-3. Create order constructor in [Order.py](TellDontAskKata#src/domain/Order.py):
-  ```python
-  def __init__(self, order_id:int = 1, currency:str = "EUR"):
+3. Create order constructor in [Order.py](TellDontAskKata#src/domain/Order.py).
+   <details>
+   <summary>Create an order constructor in <code>Order.py</code></summary>
+
+   ```python
+   def __init__(self, order_id:int = 1, currency:str = "EUR"):
       self.status = OrderStatus.CREATED
       self.items= []
       self.currency= "EUR"
       self.total = Decimal("0.00")
       self.tax = Decimal("0.00")
       self.id = order_id  
-  ```
-  and use it in [OrderCreationUseCase.py](TellDontAskKata#src/useCase/OrderCreationUseCase.py) and _all_ test cases. The `set_id()` can now be removed from [Order.py](TellDontAskKata#src/domain/Order.py).
+   ```
+   </details>
 
-  Finally, the constructor argument `order_id:int = 1` can be changed to `order_id:int`.
+   and use it in [OrderCreationUseCase.py](TellDontAskKata#src/useCase/OrderCreationUseCase.py) and _all_ test cases. The `set_id()` can now be removed from [Order.py](TellDontAskKata#src/domain/Order.py).
 
-4. Create shipping methods in [Order.py](TellDontAskKata#src/domain/Order.py)
-  ```python
-  def check_shipment(self):
-    if self.status is OrderStatus.CREATED or self.status is OrderStatus.REJECTED:
-      raise OrderCannotBeShippedError()
+   Finally, the constructor argument `order_id:int = 1` can be changed to `order_id:int`.
 
-    if self.status is OrderStatus.SHIPPED:
-      raise OrderCannotBeShippedTwiceError()
+4. Create shipping methods in [Order.py](TellDontAskKata#src/domain/Order.py).
+   <details>
+   <summary>Creation of shipping methods <code>Order.py</code></summary>
 
-  def shipped(self):
-    self.status = OrderStatus.SHIPPED
-  ```
-  so that [OrderShipmentUseCase.py](TellDontAskKata#src/useCase/OrderShipmentUseCase.py) becomes:
-  ```python
-order.check_shipment()
-  self.shipment_service.ship(order)
-  order.shipped()
-  self.order_repository.save(order)
-  ```
+   ```python
+   def check_shipment(self):
+     if self.status is OrderStatus.CREATED or self.status is OrderStatus.REJECTED:
+       raise OrderCannotBeShippedError()
 
-5. Remove all the `set_status()` calls from [test_OrderApprovalUseCase.py](TellDontAskKata#test/useCase/test_OrderApprovalUseCase.py). The `OrderStatus.CREATED` can be removed, the rejected and shipped orders have to be created by mimicing the workflow from approved to shipped like so:
-  ```python
-  shipped_order = Order()
-  shipped_order.set_id(1)
-  shipped_order.approve()
-  shipped_order.shipped() 
-  ```
-  Do the same with [test_OrderShipmentUseCase.py](TellDontAskKata#test/useCase/test_OrderShipmentUseCase.py). Finally, remove the `set_status()` from [Order.py](TellDontAskKata#src/domain/Order.py).
+     if self.status is OrderStatus.SHIPPED:
+       raise OrderCannotBeShippedTwiceError()
 
+   def shipped(self):
+     self.status = OrderStatus.SHIPPED
+   ```
+
+   so that [OrderShipmentUseCase.py](TellDontAskKata#src/useCase/OrderShipmentUseCase.py) becomes:
+  
+   ```python
+   order.check_shipment()
+     self.shipment_service.ship(order)
+     order.shipped()
+     self.order_repository.save(order)
+   ```
+   </details>
+
+5. Remove all the `set_status()` calls from 
+   [test_OrderApprovalUseCase.py](TellDontAskKata#test/useCase/test_OrderApprovalUseCase.py). 
+   The `OrderStatus.CREATED` can be removed, the rejected and shipped orders have to be 
+   created by mimicing the workflow from approved to shipped.
+
+   <details>
+   <summary>Removing the <code>set_status()</code> calls</summary>
+
+   ```python
+   shipped_order = Order()
+   shipped_order.set_id(1)
+   shipped_order.approve()
+   shipped_order.shipped() 
+   ```
+   Do the same with [test_OrderShipmentUseCase.py](TellDontAskKata#test/useCase/test_OrderShipmentUseCase.py). Finally, remove the `set_status()` from [Order.py](TellDontAskKata#src/domain/Order.py).
+   </details>
 
 6. Remove `set_items()` in [Order.py](TellDontAskKata#src/domain/Order.py)
-  
-  - Create an `add_order_item()` method in [Order.py](TellDontAskKata#src/domain/Order.py):
+
+   <details>
+   <summary>Steps to remove the <code>set_items()</code> in <code>Order.py</code></summary>
+
+
+   - Create an `add_order_item()` method in [Order.py](TellDontAskKata#src/domain/Order.py):
 
     ```python
     def add_order_item(self, item: OrderItem):
@@ -158,7 +200,7 @@ order.check_shipment()
     ```  
     and use it in the [OrderCreationUseCase](TellDontAskKata#src/useCase/OrderCreationUseCase.py).
 
-  - Create the following methods in [Product.py](TellDontAskKata#src/domain/Product.py):
+   - Create the following methods in [Product.py](TellDontAskKata#src/domain/Product.py):
 
     ```python
     def unitary_tax(self):
@@ -168,7 +210,7 @@ order.check_shipment()
       return Decimal(self.price + self.unitary_tax()).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
     ```
 
-  - Next, in [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) modify the constructor like so:
+   - Next, in [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) modify the constructor like so:
 
     ```python
     def __init__(self, product: Product, quantity: int):
@@ -193,16 +235,21 @@ order.check_shipment()
     ``` 
     The tax arguments can now be removed from the `OrderItem` constructor.
 
-  - Finally, the `set_items()`, `set_currency()`, `set_total()`, and `set_tax()` can be removed from [Order.py](TellDontAskKata#src/domain/Order.py).
+   - Finally, the `set_items()`, `set_currency()`, `set_total()`, and `set_tax()` can be removed from [Order.py](TellDontAskKata#src/domain/Order.py).
+</details>
 
-  7. Use Python [data classes](https://towardsdatascience.com/9-reasons-why-you-should-start-using-python-dataclasses-98271adadc66) for the implementation of the value objects such as the [Category](TellDontAskKata#src/domain/Category.py):
+7. Use Python [data classes](https://towardsdatascience.com/9-reasons-why-you-should-start-using-python-dataclasses-98271adadc66) 
+   for the implementation of the value objects such as the [Category](TellDontAskKata#src/domain/Category.py).
+   <details>
+   <summary>Using Python data classes</summary>
 
-  ```python
-  import decimal
-  from dataclasses import dataclass
+   ```python
+   import decimal
+   from dataclasses import dataclass
 
-  @dataclass(frozen = True)
-  class Category(object):
-    name: str
-    tax_percentage: decimal.Decimal
-  ``` 
+   @dataclass(frozen = True)
+   class Category(object):
+     name: str
+     tax_percentage: decimal.Decimal
+   ``` 
+   </details>
