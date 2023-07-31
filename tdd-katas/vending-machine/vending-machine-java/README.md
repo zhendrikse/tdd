@@ -509,32 +509,30 @@ However, this immediately leads to another code smell, namely
 
 <details>
   <summary>Resolving the feature envy code smell</summary>
-  
-</details>
 
-As a first step, we can move the delivery logic into the ``Drawer`` class
-
-```javascript
-  getCan(vendingMachine) {
-    if (this.priceInCents > vendingMachine.balanceInCents)
-      return Can.NOTHING
+```java
+  public Can getCan(VendingMachine vendingMachine) {
+    if (priceInCents > vendingMachine.balanceInCents)
+      return Can.NOTHING;
     
-    vendingMachine.balanceInCents -= this.priceInCents
-    return this.can
+      vendingMachine.balanceInCents -= this.priceInCents;
+    return can;
   }
 ```
 
 with which the ``VendingMachine`` simplifies to
 
-```javascript
-  deliver(choice) {
-    if (!this.choiceDrawerMap.has(choice))
-      return Can.NOTHING
+```java
+  public Can deliver(final Choice choice) {
+    if (!this.choiceDrawerMap.containsKey(choice)) return Can.NOTHING;
 
-    var drawer = this.choiceDrawerMap.get(choice)
-    return drawer.getCan(this)
+    return this.choiceDrawerMap.get(choice).getCan(this);
   }
 ```
+  
+</details>
+
+As a first step, we can move the delivery logic into the ``Drawer`` class
 
 Note that we have now introduced a new code smell, namely
 [inappropriate intimacy](https://refactoring.guru/smells/inappropriate-intimacy), 
@@ -545,42 +543,72 @@ of dealing with the transaction(s). To do so in small steps, we
 first wrap the balance in the new class ``Cashier``, and gradually
 move the logic that goes with it as well.
 
-```javascript
-class Cashier {
-  constructor() {
-    this.balanceInCents = 0
-  }  
+<details>
+  <summary>Resolving the inappropriate intemacy code smell</summary>
 
-  insert(amountInCents) {
-    this.balanceInCents += amountInCents
-  }
-
-  doesBalanceAllow(priceInCents) {
-    return this.balanceInCents >= priceInCents
-  }
-
-  buy(amountInCents) {
-    this.balanceInCents -= amountInCents
-  }
-}
+```java
+  public class Cashier {
+    private int balanceInCents = 0;
+  
+    public void insert(final int amountInCents) {
+      balanceInCents += amountInCents;
+    }
+  
+    public boolean doesBalanceAllow(final int priceInCents) {
+      return balanceInCents >= priceInCents;
+    }
+  
+    public void buy(final int amountInCents) {
+      balanceInCents -= amountInCents;
+    }
 ```
 
 This means that the ``Drawer`` class is no longer dependent on the
 ``VendingMachine`` class, but on the ``Cashier`` instead
 
-```javascript
-class Drawer {
-  constructor(can, priceInCents) {
-    this.can = can
-    this.priceInCents = priceInCents
+```java
+  public class Drawer {
+    public final Can can;
+    public final int priceInCents;
+
+    public Drawer(Can can) {
+      this(can, 0);
+    }
+
+    public Drawer(Can can, int priceInCents) {
+      this.can = can;
+      this.priceInCents = priceInCents;
+    }
+
+    public Can deliver(final Cashier cashier) {
+      if (!cashier.doesBalanceAllow(priceInCents))
+        return Can.NOTHING;
+    
+      cashier.buy(priceInCents);
+      return can;
+    }
+```
+
+with which the final production code becomes:
+
+```java
+public class VendingMachine {
+  private Map<Choice, Drawer> choiceDrawerMap = new HashMap<Choice, Drawer>();
+  private final Cashier cashier = new Cashier();
+
+  public void configure(Choice choice, Drawer drawer) {
+    this.choiceDrawerMap.put(choice, drawer);
   }
 
-  deliver(cashier) {
-    if (!cashier.doesBalanceAllow(this.priceInCents))
-      return Can.NOTHING
-    
-    cashier.buy(this.priceInCents)
-    return this.can    
+  public void insert(int priceInCents) {
+    cashier.insert(priceInCents);
   }
-}
+  
+  public Can deliver(final Choice choice) {
+    if (!this.choiceDrawerMap.containsKey(choice)) return Can.NOTHING;
+
+    return this.choiceDrawerMap.get(choice).deliver(cashier);
+  }
 ```
+
+</details>

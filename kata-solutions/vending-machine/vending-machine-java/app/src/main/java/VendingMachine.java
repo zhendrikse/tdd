@@ -30,27 +30,38 @@ public class VendingMachine {
     // }
 
   private Map<Choice, Drawer> choiceDrawerMap = new HashMap<Choice, Drawer>();
-  private int balanceInCents = 0;
+  private final Cashier cashier = new Cashier();
 
-  public void provision(Choice choice, Drawer drawer) {
+  public void configure(Choice choice, Drawer drawer) {
     this.choiceDrawerMap.put(choice, drawer);
   }
 
-  public void insertMoney(int priceInCents) {
-    this.balanceInCents = priceInCents;
+  public void insert(int priceInCents) {
+    cashier.insert(priceInCents);
   }
   
   public Can deliver(final Choice choice) {
     if (!this.choiceDrawerMap.containsKey(choice)) return Can.NOTHING;
 
-    final int canPrice = this.choiceDrawerMap.get(choice).priceInCents;
-
-    if (canPrice > this.balanceInCents) return Can.NOTHING;
-
-    this.balanceInCents -= canPrice;
-    return this.choiceDrawerMap.get(choice).can;
+    return this.choiceDrawerMap.get(choice).deliver(cashier);
   }
-
+  
+  public class Cashier {
+    private int balanceInCents = 0;
+  
+    public void insert(final int amountInCents) {
+      balanceInCents += amountInCents;
+    }
+  
+    public boolean doesBalanceAllow(final int priceInCents) {
+      return balanceInCents >= priceInCents;
+    }
+  
+    public void buy(final int amountInCents) {
+      balanceInCents -= amountInCents;
+    }
+  }
+  
   public class Drawer {
     public final Can can;
     public final int priceInCents;
@@ -62,6 +73,14 @@ public class VendingMachine {
     public Drawer(Can can, int priceInCents) {
       this.can = can;
       this.priceInCents = priceInCents;
+    }
+
+    public Can deliver(final Cashier cashier) {
+      if (!cashier.doesBalanceAllow(priceInCents))
+        return Can.NOTHING;
+    
+      cashier.buy(priceInCents);
+      return can;
     }
   }
 }
