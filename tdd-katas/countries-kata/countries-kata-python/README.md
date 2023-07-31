@@ -87,6 +87,39 @@ to the Python `csv.writer()`.
 
 # Instructions for the greenfield approach
 
+Below you'll find detailed instructions in case you can't/won't implement
+this kata yourself.
+
+## Sorting the list
+
+Let's first sort a given list by population size.
+
+<details>
+  <summary>Test sorting by population size</summary>
+
+  ```python
+    def test_sorted_list_by_population_size(self, country_list):
+      assert_that(country_list.sorted_by_population()[0].name, equal_to("Belgium"))
+      assert_that(country_list.sorted_by_population()[1].name, equal_to("Netherlands"))
+      assert_that(country_list.sorted_by_population()[2].name, equal_to("Portugal"))
+      assert_that(country_list.sorted_by_population()[3].name, equal_to("United Kingdom"))
+  ```
+
+<details>
+  <summary>Code to make the test pass</summary>
+
+  ```python
+    def sorted_by_population(self):
+    return sorted(self._countries, key=lambda x: getattr(x, 'population'))
+  ```
+</details>
+
+</details>
+
+## Calcuation of the statistics
+
+### Average population
+
 Let's first build some logic that calculates the average population
 size given a list of countries.
 
@@ -115,7 +148,6 @@ implementation.
   <summary>A test for the calculation of average population size</summary>
 
   ```python
-
   def test_given_a_country_list_it_calculates_the_average_population(self, country_list):
     country_list = CountryList(
          [Country("Netherlands", 4), 
@@ -143,4 +175,134 @@ implementation.
 </details>
 </details>
 
+### Standard deviation
 
+Let's now calculate the standard deviation.
+
+<details>
+  <summary>A test for the calculation of the standard deviation of an empty list</summary>
+
+  ```python
+  def test_given_an_empty_country_list_it_calculates_the_standard_deviation(self):
+      assert_that(CountryList().standard_deviation(), equal_to(0))
+  ```
+
+<details>
+  <summary>Implementation</summary>
+
+  ```python
+  def standard_deviation(self):
+    return 0
+  ```
+</details>
+</details>
+
+Obvisouly, we need to introduce a non-empty list to force a more generic
+implementation.
+
+<details>
+  <summary>A test for the calculation of the standard deviation for population size</summary>
+
+  ```python
+  def test_given_a_country_list_it_calculates_the_standard_deviation(self, country_list):
+      assert_that(country_list.standard_deviation(), close_to(2.7386, 0.0001))
+  ```
+where we have moved the set-up of the list with countries in a before-each method:
+
+  ```python
+  @pytest.fixture(autouse = True)
+  def country_list(self):
+      return CountryList(
+         [Country("Netherlands", "Amsterdam", 4), 
+          Country("Portugal", "Lissabon", 7), 
+          Country("Belgium", "Brussels", 3), 
+          Country("United Kingdom", "London", 10)])
+  ```
+
+<details>
+  <summary>Implementation</summary>
+
+  ```python
+  class CountryList:
+    def __init__(self, country_list = []):
+      self._countries = country_list
+
+    # ...
+
+    def standard_deviation(self):
+      return standard_deviation_of([country.population for country in self._countries])
+
+  def standard_deviation_of(a_collection):
+    if not a_collection: return 0
+    return sqrt(sum([(item - average_of(a_collection)) ** 2 for item in a_collection]) / len(a_collection))
+  ```
+</details>
+</details>
+
+### Standard deviation per country
+
+As we eventually need to deliver a list of countries sorted by population size,
+it would be convenient if the list with calculated standard deviations from the
+main was/is sorted by population size by default. 
+
+<details>
+  <summary>A test for the calculation of the standard deviation for population size</summary>
+
+  ```python
+  def test_standard_deviations_per_country(self, country_list):
+      assert_that(country_list.standard_deviations_per_country(), equal_to([1.10, 0.73, 0.37, 1.46]))
+  ```
+
+<details>
+  <summary>Implementation that makes the test pass</summary>
+
+  ```python
+  def standard_deviations_per_country(self):
+    return [
+      round(abs(self.average_population() - country.population) / self.standard_deviation(), 2) 
+      for country in self.sorted_by_population()]
+  ```
+</details>
+</details>
+
+## Exporting to CSV
+
+### Preparation: list of countries as nested array
+
+As explained in the beginning, it would be very convenient to
+have the list that is going to be exported availabe as nested array.
+
+<details>
+<summary>The list of countries "knows" how to present itself as nested array</summary>
+
+```python
+  def test_country_list_as_nested_array(self, country_list):
+      expected_output = [
+         ["Belgium", "Brussels", 3, 1.10], 
+         ["Netherlands", "Amsterdam", 4, 0.73], 
+         ["Portugal", "Lissabon", 7, 0.37], 
+         ["United Kingdom", "London", 10, 1.46]]
+      assert_that(country_list.as_nested_array(), equal_to(expected_output))
+```
+
+<details>
+  <summary>Implementation that makes the test pass</summary>
+
+  ```python
+  def as_nested_array(self):
+    sorted_countries = self.sorted_by_population()
+    return[[sorted_countries[i].name, 
+            sorted_countries[i].capital, 
+            sorted_countries[i].population, 
+            self.standard_deviations_per_country()[i]] for i in range(len(self._countries))]
+  ```
+</details>
+
+</details>
+
+### A repository to export/import country data to the outside world
+
+Let's define a repository interface/protocol that allows us to load
+and save lists of country data. Next, we can realize concrete implementations
+such as as a `CsvCountryRepository`, or a `RestCountryRepository`, or, for
+testing purposes, an `InMemoryCountryRepository`.
