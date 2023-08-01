@@ -75,3 +75,7 @@ but to follow the rules of ports &amp; adapters architecture:
   inhabitants.
 - Add a possibility to update a reference table in a database with these
   country data. Optionally according to a certain time schedule, e.g. weekly.
+
+## References
+
+- [Ports and adapters as they should be](https://medium.com/wearewaes/ports-and-adapters-as-they-should-be-6aa5da8893b)
