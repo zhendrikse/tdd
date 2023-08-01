@@ -151,14 +151,20 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 - Offering any of the katas in other languages than offered here
 - Facilitating a course and/or [coding dojos](https://codingdojo.org/WhatIsCodingDojo/), where apprentices can practice [katas](http://codekata.com/) together (with me as sensei 😉).
 
-
-## License
-
-License: [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). Attribution: [github.com/zhendrikse/tdd](https://github.com/zhendrikse/tdd).
-  
 ## Credits
 
 Pictures in this repo are legally taken from [pixabay.com](https://pixabay.com). 
-Many of the original unadapted code katas can be found at [kata-log.rocks](https://kata-log.rocks/) 
-and/or [codingdojo.org](http://codingdojo.org/) and [katas](http://codingdojo.org/) contained therein.
-Otherwise, links to the original source(s) and/or authors have been incorporated.
+
+## License
+
+  
+Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+
+This work is licensed under a
+[CC-BY-SA-4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). Attribution: [github.com/zhendrikse/tdd](https://github.com/zhendrikse/tdd).
+
+[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
