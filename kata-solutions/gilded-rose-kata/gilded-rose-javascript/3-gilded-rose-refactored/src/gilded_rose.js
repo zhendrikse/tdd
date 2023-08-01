@@ -5,9 +5,14 @@ class Item {
     this.quality = quality;
   }
 
-  decrementQuality() {
+  updateQualityAfterSellIn() {
     if (this.quality > 0)
-      this.quality = this.quality - 2;
+      this.quality = this.quality - 1;
+  }
+
+  updateQualityBeforeSellIn() {
+    if (this.quality > 0)
+      this.quality = this.quality - 1;
   }
 
   incrementQuality() {
@@ -16,8 +21,9 @@ class Item {
   }
 
   updateProduct() {
+    this.updateQualityBeforeSellIn();
     this.sellIn = this.sellIn - 1;
-    this.decrementQuality();
+    this.updateQualityAfterSellIn();
   }
 
   toString() {
@@ -30,7 +36,7 @@ class BackstagePass extends Item {
     super('Backstage passes to a TAFKAL80ETC concert', sellIn, quality);
   }
 
-  updateProduct() {
+  updateQualityBeforeSellIn() {
     if (this.quality < 50) {
       this.quality = this.quality + 1;
       if (this.sellIn < 11) 
@@ -38,7 +44,9 @@ class BackstagePass extends Item {
       if (this.sellIn < 6) 
         super.incrementQuality();
     }
-    this.sellIn = this.sellIn - 1;
+  }
+
+  updateQualityAfterSellIn() {
     if (this.sellIn < 0) 
       this.quality = 0;
   }
@@ -49,9 +57,11 @@ class AgedBrie extends Item {
     super('Aged Brie', sellIn, quality);
   }
 
-  updateProduct() {
-    this.sellIn = this.sellIn - 1;
+  updateQualityBeforeSellIn() {
     super.incrementQuality();
+  }
+
+  updateQualityAfterSellIn() {
     super.incrementQuality();
   }
 }
