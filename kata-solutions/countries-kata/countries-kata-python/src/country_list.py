@@ -4,13 +4,11 @@ from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter
 
 class CountryList:
   def __init__(self, 
-               country_list = [], 
-               output_port = CsvCountriesOutputAdapter(), 
-               input_port = RestCountriesInputAdapter()):
-    self._countries = country_list
+               input_port = RestCountriesInputAdapter(),
+               output_port = CsvCountriesOutputAdapter()):
+    self._countries = input_port.load_all()
     self._output_port = output_port
-    self._input_port = input_port
-
+  
   def sorted_by_population(self):
     return sorted(self._countries, key=lambda x: getattr(x, 'population'))
 

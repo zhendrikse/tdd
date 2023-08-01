@@ -13,12 +13,26 @@ UNITED_KINGDOM = Country("United Kingdom", "London", 10)
 
 COUNTRY_LIST_FOR_TESTING = [NETHERLANDS, PORTUGAL, BELGIUM, UNITED_KINGDOM]
 
-class MockCountriesInputAdapter:
-  def __init__(self, adapter_under_test):
-    self._adapter_under_test = adapter_under_test
-    
+class EmptyMockCountriesInputAdapter:
   def load_all(self) -> List[Country]:
-      pass
+      return []
+
+class TestEmptyCountryList:
+  @pytest.fixture(autouse = True)
+  def country_list(self):
+      return CountryList(input_port = EmptyMockCountriesInputAdapter())
+  
+  def test_given_an_empty_country_list_it_calculates_the_average_population(self, country_list):
+      assert_that(country_list.average_population(), equal_to(0))
+
+  def test_given_an_empty_country_list_it_calculates_the_standard_deviation(self, country_list):
+      assert_that(country_list.standard_deviation(), equal_to(0))
+
+
+
+class MockCountriesInputAdapter:
+  def load_all(self) -> List[Country]:
+      return COUNTRY_LIST_FOR_TESTING
 
 class MockCountriesOutputAdapter:
   def __init__(self, adapter_under_test):
@@ -35,27 +49,19 @@ class MockCountriesOutputAdapter:
       call(NETHERLANDS.as_string() + ',0.73\r\n'),
       call(PORTUGAL.as_string() + ',0.37\r\n'),
       call(UNITED_KINGDOM.as_string() + ',1.46\r\n')])   
-      
-class Testcountry_list:
-
+  
+class TestFilledCountryList:
   @pytest.fixture(autouse = True)
   def country_list(self):
       return CountryList(
-        COUNTRY_LIST_FOR_TESTING, 
-        MockCountriesOutputAdapter(CsvCountriesOutputAdapter()),
-        MockCountriesInputAdapter(RestCountriesInputAdapter()))
+        MockCountriesInputAdapter(),
+        MockCountriesOutputAdapter(CsvCountriesOutputAdapter()))
   
   def test_sorted_list_by_population_size(self, country_list):
       assert_that(country_list.sorted_by_population()[0], equal_to(BELGIUM))
       assert_that(country_list.sorted_by_population()[1], equal_to(NETHERLANDS))
       assert_that(country_list.sorted_by_population()[2], equal_to(PORTUGAL))
       assert_that(country_list.sorted_by_population()[3], equal_to(UNITED_KINGDOM))
-
-  def test_given_an_empty_country_list_it_calculates_the_average_population(self):
-      assert_that(CountryList().average_population(), equal_to(0))
-
-  def test_given_an_empty_country_list_it_calculates_the_standard_deviation(self):
-      assert_that(CountryList().standard_deviation(), equal_to(0))
 
   def test_given_a_country_list_it_calculates_the_average_population(self, country_list):
       assert_that(country_list.average_population(), equal_to(6))
