@@ -93,11 +93,19 @@ Let's first sort a given list by population size.
   <summary>Test sorting by population size</summary>
 
   ```python
-    def test_sorted_list_by_population_size(self, country_list):
-      assert_that(country_list.sorted_by_population()[0].name, equal_to("Belgium"))
-      assert_that(country_list.sorted_by_population()[1].name, equal_to("Netherlands"))
-      assert_that(country_list.sorted_by_population()[2].name, equal_to("Portugal"))
-      assert_that(country_list.sorted_by_population()[3].name, equal_to("United Kingdom"))
+    NETHERLANDS = Country("Netherlands", "Amsterdam", 4)
+    PORTUGAL = Country("Portugal", "Lissabon", 7)
+    BELGIUM = Country("Belgium", "Brussels", 3)
+    UNITED_KINGDOM = Country("United Kingdom", "London", 10)
+
+    COUNTRY_LIST_FOR_TESTING = [NETHERLANDS, PORTUGAL, BELGIUM, UNITED_KINGDOM]
+    
+    def test_sorted_list_by_population_size(self):
+      country_list = CountryList(COUNTRY_LIST_FOR_TESTING)
+      assert_that(country_list.sorted_by_population()[0], equal_to(BELGIUM))
+      assert_that(country_list.sorted_by_population()[1], equal_to(NETHERLANDS))
+      assert_that(country_list.sorted_by_population()[2], equal_to(PORTUGAL))
+      assert_that(country_list.sorted_by_population()[3], equal_to(UNITED_KINGDOM))
   ```
 
 <details>
