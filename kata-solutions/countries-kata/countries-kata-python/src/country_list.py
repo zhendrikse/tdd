@@ -1,11 +1,15 @@
 from country import Country
 from math import sqrt
-from country_repository import CsvCountriesOutputAdapter
+from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter
 
 class CountryList:
-  def __init__(self, country_list = [], repository = CsvCountriesOutputAdapter()):
+  def __init__(self, 
+               country_list = [], 
+               output_port = CsvCountriesOutputAdapter(), 
+               input_port = RestCountriesInputAdapter()):
     self._countries = country_list
-    self._repository = repository
+    self._output_port = output_port
+    self._input_port = input_port
 
   def sorted_by_population(self):
     return sorted(self._countries, key=lambda x: getattr(x, 'population'))
@@ -29,7 +33,7 @@ class CountryList:
             self.standard_deviations_per_country()[i]] for i in range(len(self._countries))]
 
   def export(self):
-    self._repository.write_to_file(self)
+    self._output_port.write(self)
     
 def average_of(a_collection):
   if not a_collection: return 0

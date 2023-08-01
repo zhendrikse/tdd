@@ -1,7 +1,8 @@
 import pytest
+from typing import List
 from hamcrest import close_to, equal_to, assert_that
 from country_list import CountryList, Country
-from country_repository import CsvCountriesOutputAdapter
+from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter
 
 from unittest.mock import patch, mock_open, call
 
@@ -12,13 +13,20 @@ UNITED_KINGDOM = Country("United Kingdom", "London", 10)
 
 COUNTRY_LIST_FOR_TESTING = [NETHERLANDS, PORTUGAL, BELGIUM, UNITED_KINGDOM]
 
-class MockCountryAdapter:
+class MockCountriesInputAdapter:
   def __init__(self, adapter_under_test):
     self._adapter_under_test = adapter_under_test
     
-  def write_to_file(self, country_list) -> None:
+  def load_all(self) -> List[Country]:
+      pass
+
+class MockCountriesOutputAdapter:
+  def __init__(self, adapter_under_test):
+    self._adapter_under_test = adapter_under_test
+    
+  def write(self, country_list) -> None:
     open_mock = mock_open()
-    with patch("country_repository.open", open_mock, create=True):
+    with patch("ports_adapters.open", open_mock, create=True):
         self._adapter_under_test.write(country_list)
   
     open_mock.assert_called_with("countries.csv", "w")
@@ -32,7 +40,10 @@ class Testcountry_list:
 
   @pytest.fixture(autouse = True)
   def country_list(self):
-      return CountryList(COUNTRY_LIST_FOR_TESTING, MockCountryAdapter(CsvCountriesOutputAdapter()))
+      return CountryList(
+        COUNTRY_LIST_FOR_TESTING, 
+        MockCountriesOutputAdapter(CsvCountriesOutputAdapter()),
+        MockCountriesInputAdapter(RestCountriesInputAdapter()))
   
   def test_sorted_list_by_population_size(self, country_list):
       assert_that(country_list.sorted_by_population()[0], equal_to(BELGIUM))
