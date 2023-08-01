@@ -117,8 +117,8 @@ are answered below.
 ### What general programming skills are required?
 
 These katas are intended for people who want to learn TDD. Some basic programming experience is required, 
-such as knowing what a `class` is, what an `object` is, what a `primitive` is, what `exception handling 
-entails, and how to write `conditionals` and `loops`. 
+such as knowing what a class is, what an object is, what a primitive is, what exception handling 
+entails, and how to write conditionals and loops. 
 
 Although not strictly required, it will also definitely help if you are already familiar with concepts such as 
 [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) and the 
