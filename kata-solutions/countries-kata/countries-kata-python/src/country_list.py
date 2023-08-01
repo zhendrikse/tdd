@@ -1,9 +1,9 @@
 from country import Country
 from math import sqrt
-from country_repository import CsvCountryAdapter
+from country_repository import CsvCountriesOutputAdapter
 
 class CountryList:
-  def __init__(self, country_list = [], repository = CsvCountryAdapter()):
+  def __init__(self, country_list = [], repository = CsvCountriesOutputAdapter()):
     self._countries = country_list
     self._repository = repository
 
