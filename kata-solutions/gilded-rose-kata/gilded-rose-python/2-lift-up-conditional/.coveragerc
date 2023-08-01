@@ -1,0 +1,11 @@
+[run]
+branch = True
+omit =
+    # omit anything in a .local directory anywhere
+    #*/.local/*
+    # omit everything in /nix
+    /nix/*
+    # omit this single file
+    *_test.py
+    */__init__.py
+
