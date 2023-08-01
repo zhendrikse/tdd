@@ -14,7 +14,7 @@
   "scripts": {
     "test": "jasmine",
     "watch": "nodemon --exec jasmine",
-    "report": "npx http-server coverage/lcov-report",    
-    "coverage": "nodemon --exec \"nyc --reporter=text --reporter=lcov jasmine spec/*_spec.js\""
+    "report": "npx http-server -c-1 coverage/lcov-report",
+    "coverage": "nodemon --exec \"nyc --exclude=**/spec/** --reporter=text --reporter=html --reporter=lcov jasmine spec/*_spec.js\""
   }
 }
