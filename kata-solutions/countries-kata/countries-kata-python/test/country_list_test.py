@@ -1,7 +1,26 @@
 import pytest
 from hamcrest import close_to, equal_to, assert_that
 from country_list import CountryList, Country
+from country_repository import CsvCountryAdapter
 
+from unittest.mock import patch, mock_open, call
+
+class MockCountryAdapter:
+  def __init__(self, adapter_under_test):
+    self._adapter_under_test = adapter_under_test
+    
+  def write_to_file(self, country_list) -> None:
+    open_mock = mock_open()
+    with patch("country_repository.open", open_mock, create=True):
+        self._adapter_under_test.write_to_file(country_list)
+  
+    open_mock.assert_called_with("countries.csv", "w")
+    open_mock.return_value.write.assert_has_calls([
+      call('Belgium,Brussels,3,1.1\r\n'),             
+      call('Netherlands,Amsterdam,4,0.73\r\n'),
+      call('Portugal,Lissabon,7,0.37\r\n'),
+      call('United Kingdom,London,10,1.46\r\n')])   
+      
 class Testcountry_list:
 
   @pytest.fixture(autouse = True)
@@ -10,7 +29,7 @@ class Testcountry_list:
          [Country("Netherlands", "Amsterdam", 4), 
           Country("Portugal", "Lissabon", 7), 
           Country("Belgium", "Brussels", 3), 
-          Country("United Kingdom", "London", 10)])
+          Country("United Kingdom", "London", 10)], MockCountryAdapter(CsvCountryAdapter()))
   
   def test_sorted_list_by_population_size(self, country_list):
       assert_that(country_list.sorted_by_population()[0].name, equal_to("Belgium"))
@@ -41,3 +60,5 @@ class Testcountry_list:
          ["United Kingdom", "London", 10, 1.46]]
       assert_that(country_list.as_nested_array(), equal_to(expected_output))
 
+  def test_write_to_csv(self, country_list):
+    country_list.export()

@@ -63,8 +63,8 @@ data = [
     #  ...
 ]
 
-with open('countries.csv', 'w', encoding='UTF8', newline='') as f:
-    writer = csv.writer(f)
+with open('countries.csv', 'w') as file:
+    writer = csv.writer(file)
     writer.writerow(header)
     writer.writerows(data)
 ```

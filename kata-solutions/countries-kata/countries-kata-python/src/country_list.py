@@ -1,15 +1,11 @@
-from dataclasses import dataclass
+from country import Country
 from math import sqrt
-
-@dataclass
-class Country:
-  name: str
-  capital: str
-  population: int
+from country_repository import CsvCountryAdapter
 
 class CountryList:
-  def __init__(self, country_list = []):
+  def __init__(self, country_list = [], repository = CsvCountryAdapter()):
     self._countries = country_list
+    self._repository = repository
 
   def sorted_by_population(self):
     return sorted(self._countries, key=lambda x: getattr(x, 'population'))
@@ -31,6 +27,9 @@ class CountryList:
             sorted_countries[i].capital, 
             sorted_countries[i].population, 
             self.standard_deviations_per_country()[i]] for i in range(len(self._countries))]
+
+  def export(self):
+    self._repository.write_to_file(self)
     
 def average_of(a_collection):
   if not a_collection: return 0
