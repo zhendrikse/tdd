@@ -47,7 +47,7 @@ Carry out the following steps in order:
 
 ## Design considerations
 
-We can use a nested array [to create a CSV file](https://www.pythontutorial.net/python-basics/python-write-csv-file/):
+We can use a nested array [to easily create a CSV file](https://www.pythontutorial.net/python-basics/python-write-csv-file/):
 
 <details>
   <summary>Tip on how to write to CSV</summary>
@@ -70,24 +70,68 @@ with open('countries.csv', 'w') as file:
 ```
 </details>
 
-Bearing this in mind, it makes sense to define a `RestCountriesRepository` 
-that retrieves a list of all countries from the countries API. It will be
-the responsibility of this repository to hand us a list of countries with
-the required data fields.
+The domain object containing these country data may then hand over these data
+to an output port.
 
-To make the dependency inversion principle explicit, we could opt for an
-additional `CountriesRepository` interface/protocol, that belongs to our domain. 
+Bearing this in mind, it makes sense to define both a `CountriesInputPort` 
+and `CountriesOutputPort` that retrieve and export the required country data
+from and to "the outside world" respectively.
+
+<details>
+  <summary>Possible definition of the input and output ports</summary>
+
+```python
+class CountriesOutputPort(Protocol):
+  def write(self, country_list) -> None:
+      pass
+
+class CountriesInputPort(Protocol):
+  def load_all(self) -> List[Country]:
+      pass
+```
+  
+</details>
+
+To make the dependency inversion principle explicit, we include the 
+ports into our domain, so that it becomes explicit that they are 
+defined by and belong to our domain. 
 This way, our domain really dictates the outside world what it wants 
 to receive, as the interface is written as part of our domain.
+
+Next, we can then define adapters that plug into these ports.
+
+<details>
+  <summary>Possible definition of the input and output adapters</summary>
+
+```python
+class CsvCountriesOutputAdapter:
+  def write(self, country_list) -> None:
+    #
+    # Your implementation goes here
+    #
+
+class RestCountriesInputAdapter:
+  def load_all(self) -> List[Country]:
+    #
+    # Your implementation goes here
+    #
+
+```
+</details>
+
+Analogously, we can plug in stub adapters in our tests.
+
 
 # Instructions for the greenfield approach
 
 Below you'll find detailed instructions in case you can't/won't implement
 this kata yourself.
 
+Let's start by writing the specifications for our domain model.
+
 ## Sorting the list
 
-Let's first sort a given list by population size.
+First, we are going to sort a given list of countries by the size of its population.
 
 <details>
   <summary>Test sorting by population size</summary>
@@ -112,7 +156,7 @@ Let's first sort a given list by population size.
   <summary>Code to make the test pass</summary>
 
   ```python
-    def sorted_by_population(self):
+  def sorted_by_population(self):
     return sorted(self._countries, key=lambda x: getattr(x, 'population'))
   ```
 </details>
@@ -305,7 +349,5 @@ have the list that is going to be exported availabe as nested array.
 
 ### A repository to export/import country data to the outside world
 
-Let's define a repository interface/protocol that allows us to load
-and save lists of country data. Next, we can realize concrete implementations
-such as as a `CsvCountryRepository`, or a `RestCountryRepository`, or, for
-testing purposes, an `InMemoryCountryRepository`.
+As outlined in the introduction, let's now define the ports (and adapters)
+that take care of the communication with "the outside world".
