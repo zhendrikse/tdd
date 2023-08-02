@@ -9,6 +9,7 @@
 - [X] Resurrect audio player kata from london school presentation
   - [ ] Make london school presentation more generic
 - [ ] Resurrect pipeline kata (also create preparation instructions)
+- [ ] Research if we need to replace Poetry by Anaconda
 - [ ] Finish adding details tags to vending machine python instructions
 - [ ] Make Python cookiecutter work for pip and poetry (and Conda?)
 - [ ] Make Python cookiecutter work for ptw and mamba

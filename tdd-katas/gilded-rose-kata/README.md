@@ -24,11 +24,15 @@ Quality drops to 0 after the concert
 
 The eventual goal of this kata is to add a new category of items, namely "Conjured" items that degrade in `Quality` twice as fast as normal items.
 
-# Creating a golden master
+## Creating a golden master
 
 Before we can touch/modify/refactor an existing code base, we first have to make sure we keep the current behaviour unaltered. To this extent, we first have to create a snapshot or so-called golden master.
 
 ![Snapshot](./assets/snapshot.png)
 
 This is exactly what we will do in this excercise using [approval testing](https://approvaltests.com/).
+
+## References
+
+- Refactoring the Gilded Rose [manually versus using Sourcery](https://sourcery.ai/blog/refactoring-gilded-rose/)
 

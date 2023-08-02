@@ -1,1 +1,0 @@
-pytest && coverage run --branch --source calculator calculator_test.py && coverage report -m && coverage html

@@ -19,7 +19,3 @@ class GildedRoseTest(unittest.TestCase):
         app = GildedRose(items)
         app.update_quality()
         return app.items[0]
-
-
-if __name__ == "__main__":
-    unittest.main()
