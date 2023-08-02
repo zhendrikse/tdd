@@ -3,6 +3,22 @@
 This is a kata that is meant to get acquainted with the ports and 
 adapters architecture and dependency inversion.
 
+You are going to implement a converter that consumes country data
+from a REST API on the web, enrich those data (a bit), and then export 
+it to CSV.
+
+![Ports and adapters](./assets/hex-arch.png)
+
+This kata demonstrates how drive the realization of this application
+by focussing on the domain logic first. Next we are going to define 
+the ports and adapters. 
+
+As the adapters are polymorphic by definition, we can plug in stubs
+when we are writing our test!
+
+![Ports and adapters](./assets/hex-arch-unit.png)
+
+
 ## The domain logic that is requested
 
 Given a list of countries (with some data per country such 
