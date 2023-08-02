@@ -207,10 +207,11 @@ should not deliver anything.
 <details>
   <summary>Paid machine does not deliver can of choice</summary>
   
-```java
-  it("delivers nothing when priced choice is coke", () -> {
-    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
-  });
+```kotlin
+  @Test
+  fun aPaidVendingMachineDoesNotDeliversCokeWhenColaIsChosen() {
+      assertEquals(vendingMachine.deliver(Choice.COLA), Can.NOTHING)
+  }
 ```
 
 Again we are facing the riddle: how can we choose a can of coke and have
@@ -224,36 +225,31 @@ Again, we solve this by configuring the machine to deliver drinks that
 cost money, bij adding a parameter to the configure method that specifies
 the price in cents:
 
-```java
-    it("delivers nothing when priced choice is coke", () -> {
-      vendingMachine.configure(Choice.COKE, Can.COLA, 250);
-      expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
-    });
+```kotlin
+  @Test
+  fun aPaidVendingMachineDoesNotDeliversCokeWhenColaIsChosen() {
+    vendingMachine.configure(Choice.COLA, Can.COKE, 250)
+    assertEquals(vendingMachine.deliver(Choice.COLA), Can.NOTHING)
+  }
 ```
 
 We modify the production code accordingly to make the test pass:
 
-```java
-public class VendingMachine {
-    private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
-    private int priceInCents;
-  
-    public void configure(final Choice choice, final Can can, final int priceInCents) {
-      this.choiceCanMap.put(choice, can);
-      this.priceInCents = priceInCents;
-    }
-  
-    public void configure(final Choice choice, final Can can) {
-      configure(choice, can, 0);
-    }
+```kotlin
+class VendingMachine(private var choiceCanMap: HashMap<Choice, Can> = HashMap(), private var canPriceInCents: Int = 0) {
+  fun deliver(choice: Choice): Can {
+    if (!choiceCanMap.containsKey(choice)) return Can.NOTHING
 
-    public Can deliver(final Choice choice) {
-      if (!this.choiceCanMap.containsKey(choice)) return Can.NOTHING;
-      
-      if (this.priceInCents !=0 ) return Can.NOTHING;
-      
-      return this.choiceCanMap.get(choice);
-    }
+    if (canPriceInCents != 0) return Can.NOTHING
+
+    return choiceCanMap[choice]!!
+  } 
+  
+
+  fun configure(choice: Choice, can: Can, priceInCents: Int = 0): Unit {
+    choiceCanMap.put(choice, can)
+    canPriceInCents = priceInCents
+  }
 }
 ```
   
@@ -268,31 +264,31 @@ can of choice again.
 <details>
   <summary>Specification when money is inserted.</summary>
     
-```java
-    it("delivers can of choice when required money is inserted", () -> {
-      vendingMachine.configure(Choice.COKE, Can.COLA, 250);
-      vendingMachine.insert(250);
-      expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
-    });
-
+```kotlin
+  @Test
+  fun aPaidVendingMachineDeliversCokeWhenColaIsPaid() {
+    vendingMachine.configure(Choice.COLA, Can.COKE, 250)
+    vendingMachine.insertMoney(250)
+    assertEquals(vendingMachine.deliver(Choice.COLA), Can.COKE)
+  }
 ```
 This forces us to modify the implementation.
 
 <details>
   <summary>Making the test pass</summary>
 
-```java
-    public void insert(final int amountInCents) {
-      this.balanceInCents = amountInCents;
-    }
+```kotlin
+  fun deliver(choice: Choice): Can {
+    if (!choiceCanMap.containsKey(choice)) return Can.NOTHING
 
-    public Can deliver(final Choice choice) {
-      if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
-      
-      if (priceInCents != balanceInCents ) return Can.NOTHING;
-      
-      return choiceCanMap.get(choice);
-    }
+    if (canPriceInCents != balanceInCents) return Can.NOTHING
+
+    return choiceCanMap[choice]!!
+  } 
+  
+  fun insertMoney(amountInCents:Int): Unit {
+    balanceInCents = amountInCents
+  }
 ```
 </details>
 
@@ -302,18 +298,27 @@ to a nesting of the ``describe`` statements.
 <details>
   <summary>Applying the DRY principle once more</summary>
 
-```java
-    describe("that requires drinks to be paid", () -> {
-      beforeEach(() -> {
-        vendingMachine = new VendingMachine();
-        vendingMachine.configure(Choice.COKE, Can.COLA, 250);
-      });    
-      
-      it("delivers nothing when priced choice is coke", () -> {
-        expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
-      });
+```kotlin
+class PaidDrinksVendingMachineTest() {
+    private var vendingMachine: VendingMachine = VendingMachine()
+    
+    @BeforeEach
+    internal fun initVendingMachine() {
+        vendingMachine = VendingMachine()
+        vendingMachine.configure(Choice.COLA, Can.COKE, 250)
+    }
 
-      //...
+    @Test
+    fun aPaidVendingMachineDoesNotDeliversCokeWhenColaIsChosen() {
+      assertEquals(vendingMachine.deliver(Choice.COLA), Can.NOTHING)
+    }
+  
+    @Test
+    fun aPaidVendingMachineDeliversCokeWhenColaIsPaid() {
+      vendingMachine.insertMoney(250)
+      assertEquals(vendingMachine.deliver(Choice.COLA), Can.COKE)
+    }
+  }  
 ```
     
 </details>
@@ -325,11 +330,12 @@ expect a can of choice when we pay too much.
 <details>
   <summary>Paying too much</summary>
 
-```java
-  it("delivers can of choice when more than required money is inserted", () -> {
-    vendingMachine.insert(300);
-    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
-  });
+```kotlin
+    @Test
+    fun aPaidVendingMachineDeliversCokeWhenColaIsOverPaid() {
+      vendingMachine.insertMoney(300)
+      assertEquals(vendingMachine.deliver(Choice.COLA), Can.COKE)
+    }
 ```
 
 This test only requires a minor modification in the production code.
@@ -337,11 +343,11 @@ This test only requires a minor modification in the production code.
 <details>
   <summary>Modification to the production code.</summary>
 
-```java
-    public Can deliver(final Choice choice) {
-      if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
-      
-      if (priceInCents > balanceInCents ) return Can.NOTHING;
+```kotlin
+  fun deliver(choice: Choice): Can {
+    if (!choiceCanMap.containsKey(choice)) return Can.NOTHING
+
+    if (canPriceInCents > balanceInCents) return Can.NOTHING
 ```
         
 </details>
@@ -353,12 +359,13 @@ Obviously, we also must accommodate for different prices for the different drink
 <details>
   <summary>Accommodating different prices for different drinks</summary>
   
-```java
-      it("delivers can of Fanta when required amount is inserted", () -> {
-        vendingMachine.insert(200);
-        vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 200);
-        expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.FANTA);
-      });
+```kotlin
+    @Test
+    fun aPaidVendingMachineDeliversFantaWhenFizzyOrangeIsPaid() {
+      vendingMachine.insertMoney(200)
+      vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA, 200)
+      assertEquals(vendingMachine.deliver(Choice.FIZZY_ORANGE), Can.FANTA)
+    }
 ```
 
 This test jumps to green immediately, but that's because the most recently
@@ -371,33 +378,28 @@ the ``beforeEach()`` step, the test fails!
   We need to introduce yet another map, namely a map between choices
 and prices.
 
-```java
-public class VendingMachine {
-    private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
-    private Map<Choice, Integer> choicePriceMap = new HashMap<Choice, Integer>();
-    private int balanceInCents = 0;
+```kotlin
+class VendingMachine(
+  private var choiceCanMap: HashMap<Choice, Can> = HashMap(), 
+  private var choicePriceMap: HashMap<Choice, Int> = HashMap(),
+  private var balanceInCents: Int = 0) {
   
-    public void configure(final Choice choice, final Can can, final int priceInCents) {
-      this.choiceCanMap.put(choice, can);
-      this.choicePriceMap.put(choice, priceInCents);
-    }
+  fun deliver(choice: Choice): Can {
+    if (!choiceCanMap.containsKey(choice)) return Can.NOTHING
+
+    if (choicePriceMap[choice]!! > balanceInCents) return Can.NOTHING
+
+    return choiceCanMap[choice]!!
+  } 
   
-    public void configure(final Choice choice, final Can can) {
-      configure(choice, can, 0);
-    }
+  fun insertMoney(amountInCents:Int): Unit {
+    balanceInCents = amountInCents
+  }
 
-    public void insert(final int amountInCents) {
-      this.balanceInCents = amountInCents;
-    }
-
-    public Can deliver(final Choice choice) {
-      if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
-
-      final int canPrice = choicePriceMap.get(choice);
-      if (canPrice > balanceInCents ) return Can.NOTHING;
-      
-      return choiceCanMap.get(choice);
-    }
+  fun configure(choice: Choice, can: Can, priceInCents: Int = 0): Unit {
+    choiceCanMap.put(choice, can)
+    choicePriceMap.put(choice, priceInCents)
+  }
 }
 ```
   
@@ -410,12 +412,13 @@ balance should have shrunk.
 <details>
   <summary>Forcing the balance to shrink.</summary>
 
-```java
-  it("delivers no can after a can has been delivered", () -> {
-    vendingMachine.insert(200);
-    vendingMachine.deliver(Choice.FIZZY_ORANGE);
-    expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.NOTHING);
-  });
+```kotlin
+    @Test
+    fun aPaidVendingMachineDoesNotDeliverFantaTwiceWhenOneIsPaid() {
+      vendingMachine.insertMoney(200)
+      vendingMachine.deliver(Choice.FIZZY_ORANGE)
+      assertEquals(vendingMachine.deliver(Choice.FIZZY_ORANGE), Can.NOTHING)
+    }
 ```
 
 <details>
@@ -425,16 +428,15 @@ So after withdrawal of a drink, the balance should be adjusted
 accordingly. After some minor refactoring of the deliver method
 we arrive at.
 
-```java
-public Can deliver(final Choice choice) {
-  if (!choiceCanMap.containsKey(choice)) return Can.NOTHING;
+```kotlin
+  fun deliver(choice: Choice): Can {
+    if (!choiceCanMap.containsKey(choice)) return Can.NOTHING
 
-  final int canPrice = choicePriceMap.get(choice);
-  if (canPrice > balanceInCents ) return Can.NOTHING;
-  
-  balanceInCents -= canPrice;
-  return choiceCanMap.get(choice);
-}
+    if (choicePriceMap[choice]!! > balanceInCents) return Can.NOTHING
+
+    balanceInCents -= choicePriceMap[choice]!!
+    return choiceCanMap[choice]!!
+  } 
 ```
 </details>
     
