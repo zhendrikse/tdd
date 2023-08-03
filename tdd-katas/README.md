@@ -54,16 +54,16 @@ capabilities will result in the greatest return on investment.
 
 The table below lists the coverage of the [Continuous Delivery capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-1).
   
-|  Capability                                          | Covered | Explanation |
-| ---------------------------------------------------- | ------- | ----------- |
-|  1. Use Version Control for all Production Artifacts | ✔      | You may always opt to use a version control system when practicing your katas. When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
-|  2. Automate Your Deployment Process                 | ✔      | This capability is covered by the Fibonacci kata. |
-|  3. Implement Continuous Integration                 | ±       | Continuous integration is elaborated on directly below this table |
-|  4. Use Trunk-Based Development Methods              | ✔      | Trunk-based development can easily be simulated when katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
-|  5. Implement Test Automation                        | ✔      | Obviously, this is what lies at the heart of TDD. Note that integration testing is also touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/). Even more so, many katas address the subject of creating a testable design, and/or address techniques for making legacy code testable. |
-|  6. Support Test Data Management                     | ✗      | This capability is not covered by any of the katas yet ||
-|  7. Shift Left on Security                           | ✗      | This capability is not covered by any of the katas yet ||
-|  8. Implement Continuous Delivery                    | ✔       | When the skills and heuristics of TDD are correctly and properly applied all of the time, it should be no problem for a team to go to production at any given time. This is one of the hallmarks of continuous delivery! So TDD is a necessary but not sufficient condition for continuous delivery. |
+| Capability                                       | Covered | Explanation |
+| ------------------------------------------------ | ------- | ----------- |
+| Use Version Control for all Production Artifacts | ✔      | You may always opt to use a version control system when practicing your katas. When katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
+| Automate Your Deployment Process                 | ✔      | This capability is covered by the Fibonacci kata. |
+| Implement Continuous Integration                 | ±       | Continuous integration is elaborated on directly below this table |
+| Use Trunk-Based Development Methods              | ✔      | Trunk-based development can easily be simulated when katas are done in a group in a [randori style](https://codingdojo.org/practices/RandoriKata/), a commit by the person(s) ending his/her/their turn and a subsequent pull by the next may be used to pass the code on. |
+| Implement Test Automation                        | ✔      | Obviously, this is what lies at the heart of TDD. Note that integration testing is also touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/). Even more so, many katas address the subject of creating a testable design, and/or address techniques for making legacy code testable. |
+| Support Test Data Management                     | ✗      | This capability is not covered by any of the katas yet |
+| Shift Left on Security                           | ✗      | This capability is not covered by any of the katas yet |
+| Implement Continuous Delivery                    | ✔       | When the skills and heuristics of TDD are correctly and properly applied all of the time, it should be no problem for a team to go to production at any given time. This is one of the hallmarks of continuous delivery! So TDD is a necessary but not sufficient condition for continuous delivery. |
 
 All [aspects belonging to the "Implement Continuous Integration" capability](https://martinfowler.com/articles/continuousIntegration.html) are outlined
 separately in the table below.
@@ -92,44 +92,44 @@ kind of second line of defense, as it should.
 
 The table below lists the coverage of the [architecture capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-2).
   
-| Capability                                           | Covered | Explanation |
-| ---------------------------------------------------- | ------- | ----------- |
-|  9. Use a Loosely Coupled Architecture               | ✔      | This capability is touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/), [CQRS](https://martinfowler.com/bliki/CQRS.html), and [dependency inversion](https://www.sammancoaching.org/learning_hours/testable_design/dependency_inversion_principle.html). |
-| 10. Architect for Empowered Teams                    | ✗      | This capability is not covered by any of the katas yet. |
+| Capability                                       | Covered | Explanation |
+| ------------------------------------------------ | ------- | ----------- |
+| Use a Loosely Coupled Architecture               | ✔      | This capability is touched upon when the katas involve working with [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/), [CQRS](https://martinfowler.com/bliki/CQRS.html), and [dependency inversion](https://www.sammancoaching.org/learning_hours/testable_design/dependency_inversion_principle.html). |
+| Architect for Empowered Teams                    | ✗      | This capability is not covered by any of the katas yet. |
 
 ## Product and Process Capabilities
 
 The table below lists the coverage of the [product and process capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-3).
 
-|  Capability                                                | Covered | Explanation |
-| ---------------------------------------------------------- | ------- | ----------- |
-| 11. Gather and Implement Customer Feedback                 | ±       | This may partially be covered e.g. in the video store kata, by asking the participants to produce a PDF statement printer after they have finished with the HTML variant. After finishing the PDF statement printer, ask them to write a CSV variant, etc. Continue to the point where they will start to complain "What do you actually need this statement format for", and grab that opportunity to teach the participants to ask that question for each and every single feature now and in the future! |
-| 12. Make the Flow of Work Visible through the Value Stream | ±       | This may partially be addressed by showing the participants the TODO list that they are encouraged to maintain while practicing the katas. In addition, you may consider using [Scrumblr](https://github.com/aliasaria/scrumblr), an instance of which you can easily start yourself [here](https://replit.com/@zwh/Scrumblr). |
-| 13. Work in Small Batches                                  | ✔      | This aspect is addressed in _all_ katas as it lies at the heart of TDD! |
-| 14. Foster and Enable Team Experimentation                 | ±       | Although this aspect isn't addressed _specifically_ by any of the katas, it is addressed _implicitly_, as the way of working practiced here contributes to the capability of a team to carry out experiments. |
+| Capability                                             | Covered | Explanation |
+| ------------------------------------------------------ | ------- | ----------- |
+| Gather and Implement Customer Feedback                 | ±       | This may partially be covered e.g. in the video store kata, by asking the participants to produce a PDF statement printer after they have finished with the HTML variant. After finishing the PDF statement printer, ask them to write a CSV variant, etc. Continue to the point where they will start to complain "What do you actually need this statement format for", and grab that opportunity to teach the participants to ask that question for each and every single feature now and in the future! |
+| Make the Flow of Work Visible through the Value Stream | ±       | This may partially be addressed by showing the participants the TODO list that they are encouraged to maintain while practicing the katas. In addition, you may consider using [Scrumblr](https://github.com/aliasaria/scrumblr), an instance of which you can easily start yourself [here](https://replit.com/@zwh/Scrumblr). |
+| Work in Small Batches                                  | ✔      | This aspect is addressed in _all_ katas as it lies at the heart of TDD! |
+| Foster and Enable Team Experimentation                 | ±       | Although this aspect isn't addressed _specifically_ by any of the katas, it is addressed _implicitly_, as the way of working practiced here contributes to the capability of a team to carry out experiments. |
 
 ## Lean Management and Monitoring Capabilities
 
 The table below lists the coverage of the [lean management and monitoring capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-4).
 
-| Capability                                                                      | Covered | Explanation |
-| ------------------------------------------------------------------------------- | ------- | ----------- |
-| 15. Have Lightweight Change Approval Processes                                  | ✔       | [Pair programming](https://martinfowler.com/articles/on-pair-programming.html) and/or intrateam code reviews are continuously being addressed when practicing katas in coding dojos.   |
-| 16. Monitor across Applications and Infrastructure to Inform Business Decisions | ✗       | This capability is not covered by any of the katas yet.   |
-| 17. Check System Health Proactively                                             | ✗       | This capability is not covered by any of the katas yet.   |
-| 18. Improve Processes and Manage Work with Work-In-Process (WIP) Limits         | ±        | In each and every kata, it is always emphasized to focus on one change at a time, and one change at a time only!   |
-| 19. Visualize Work to Monitor Quality and Communicate throughout the Team       | ✗       | This capability is not covered by any of the katas yet.   |
+| Capability                                                                  | Covered | Explanation |
+| --------------------------------------------------------------------------- | ------- | ----------- |
+| Have Lightweight Change Approval Processes                                  | ✔       | [Pair programming](https://martinfowler.com/articles/on-pair-programming.html) and/or intrateam code reviews are continuously being addressed when practicing katas in coding dojos.   |
+| Monitor across Applications and Infrastructure to Inform Business Decisions | ✗       | This capability is not covered by any of the katas yet.   |
+| Check System Health Proactively                                             | ✗       | This capability is not covered by any of the katas yet.   |
+| Improve Processes and Manage Work with Work-In-Process (WIP) Limits         | ±        | In each and every kata, it is always emphasized to focus on one change at a time, and one change at a time only!   |
+|  Visualize Work to Monitor Quality and Communicate throughout the Team       | ✗       | This capability is not covered by any of the katas yet.   |
 
 ## Cultural Capabilities
 
 The table below lists the coverage of the [cultural capabilities](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/#nav-5).
 
-| Capability                                                | Covered | Explanation |
-| --------------------------------------------------------- | ------- | ----------- |
-| 20. Support a Generative Culture                          | ✔       | Almost all hallmarks of this measure such as good information flow, high cooperation, and trust, bridging between teams, and conscious inquiry are continually practiced during coding dojos, albeit only within the team (so obviously _not_ including leadership itself)   |
-| 21. Encourage and Support Learning                        | ✔       | The whole purpose of a coding dojo and its katas is to support learning!  |
-| 22. Support and Facilitate Collaboration among Teams      | ✗       | This capability is not covered by any of the katas yet.   |
-| 23. Provide Resources and Tools that Make Work Meaningful | ✔       | As this measure is about being given the tools and resources needed to do your job well, it is obviously continually being addressed by these katas.   |
+| Capability                                            | Covered | Explanation |
+| ----------------------------------------------------- | ------- | ----------- |
+| Support a Generative Culture                          | ✔       | Almost all hallmarks of this measure such as good information flow, high cooperation, and trust, bridging between teams, and conscious inquiry are continually practiced during coding dojos, albeit only within the team (so obviously _not_ including leadership itself)   |
+| Encourage and Support Learning                        | ✔       | The whole purpose of a coding dojo and its katas is to support learning!  |
+| Support and Facilitate Collaboration among Teams      | ✗       | This capability is not covered by any of the katas yet.   |
+| Provide Resources and Tools that Make Work Meaningful | ✔       | As this measure is about being given the tools and resources needed to do your job well, it is obviously continually being addressed by these katas.   |
 | 24. Support or Embody Transformational Leadership         | ±        | As participants need regular time to practice these katas, management needs to be informed about these activities. Viewed this way, at least one of the aspects of transformational leadership (intellectual stimulation) is a prerequisite for making coding dojos a reality.   |
 
 ## License
