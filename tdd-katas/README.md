@@ -4,9 +4,6 @@ This section summarizes details off all katas contained in this repository.
 It includes both a difficulty level as well as a list of topics (per kata) 
 that are being targeted.
 Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
-
-<details>
-<summary>Table containing a summary of all katas</summary>
   
 | Kata                                       | Ranking | Aspects                                               | Py | Java | JS | Clj | Kt | TS |
 | ------------------------------------------ | ------- | ----------------------------------------------------- |:--:|:----:|:--:|:---:|:--:|:--:| 
@@ -33,13 +30,14 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [tire-pressure-kata](./tire-pressure-kata) | L       | Ports &amp; adapters / **Testable design** / DI       | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | 
 | [vending-machine](./vending-machine)       | L / M   | **Small steps** / Code smells and **refactoring**     | ✔  | ✔   | ✔  | ✗   | ✔  | ✔ |
 | [video-store-kata](./video-store-kata)     | L       | **Legacy code** / Code smells and **refactoring**     | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ |
-</details>
 
 # Relation with 24 Key Capabilities
 
-Please click on the details to learn more about the 
+The sections below tabulate the 
 relation between the topics that are practiced in the katas and the 
 [24 Key Capabilities to Drive Improvement in Software Delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/).
+
+![Organizational health](../assets/organizational-health.png)
 
 The column with the checkmarks and crosses indicates which practices are covered with the coding katas. A plus-minus sign indicates partial coverage.
 
