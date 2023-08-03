@@ -35,11 +35,19 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 
 The sections below tabulate the 
 relation between the topics that are practiced in the katas and the 
-[24 Key Capabilities to Drive Improvement in Software Delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/).
+[24 Key Capabilities to Drive Improvement in Software Delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/). The columns with the checkmarks and crosses indicate which of 
+the capabilities are covered by the coding katas. 
+A plus-minus sign indicates partial coverage.
+
+The picture below illustrates how improvements on either of these 24 capabilities 
+enhance organizational performance, which in turn can be measured using the 
+[DORA metrics](https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance).
 
 ![Organizational health](../assets/organizational-health.png)
 
-The column with the checkmarks and crosses indicates which practices are covered with the coding katas. A plus-minus sign indicates partial coverage.
+Note that this is a capability model, [_not_ a maturity model](https://octopus.com/blog/devops-uses-capability-not-maturity)! It is crucial that the team (together with the coach) 
+continually reasses its proficiency in order to determine which improvements on which 
+capabilities will result in the greatest return on investment.
 
 ## Continuous Delivery Capabilities
 
