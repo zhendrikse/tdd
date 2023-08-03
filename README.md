@@ -112,8 +112,6 @@ the valuable thing any participant can bring to the table!
 Also, some of the most obvious questions that may come to mind 
 are answered below.
 
-![Skills](./assets/skillz.png)
-
 ### What general programming skills are required?
 
 These katas are intended for people who want to learn TDD. Some basic programming experience is required, 
