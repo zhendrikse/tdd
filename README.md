@@ -131,8 +131,14 @@ practicing the various aspects that are being addressed. I have facilitated
 many [coding dojos](https://codingdojo.org/WhatIsCodingDojo/) where multiple participants were exposed to 
 e.g. Python for the first time, and they managed pretty soon pretty well.
 
+# References
 
-# About the author
+## Links
+
+- [Let's play: test-driven development](https://www.jamesshore.com/v2/projects/lets-play-tdd)
+- [Test-Driven Development (TDD): A Time-Tested Recipe for Quality Software](https://semaphoreci.com/blog/test-driven-development)
+
+## About the author
 
 ![Zeger Hendrikse](assets/zeger_profile.png)
 
@@ -153,8 +159,7 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 
 Pictures in this repo are legally taken from [pixabay.com](https://pixabay.com). 
 
-## License
-
+# License
   
 Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
