@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "{{ cookiecutter.kata }}", "{{ cookiecutter.kata }}\{{ cookiecutter.kata }}.csproj", "{966F6F47-23DB-459B-959F-3115EB010C0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "{{ cookiecutter.kata }}.Tests", "{{ cookiecutter.kata }}.Tests\{{ cookiecutter.kata }}.Tests.csproj", "{BBE7EAF8-7CBB-4C49-81A2-D7D43663EFFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{966F6F47-23DB-459B-959F-3115EB010C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{966F6F47-23DB-459B-959F-3115EB010C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{966F6F47-23DB-459B-959F-3115EB010C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{966F6F47-23DB-459B-959F-3115EB010C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE7EAF8-7CBB-4C49-81A2-D7D43663EFFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE7EAF8-7CBB-4C49-81A2-D7D43663EFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE7EAF8-7CBB-4C49-81A2-D7D43663EFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE7EAF8-7CBB-4C49-81A2-D7D43663EFFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
