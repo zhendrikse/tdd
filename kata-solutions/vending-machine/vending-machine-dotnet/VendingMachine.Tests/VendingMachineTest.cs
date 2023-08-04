@@ -6,6 +6,7 @@ namespace Kata.UnitTests;
 public class FreeDrinksVendingMachine : IDisposable
 {
     private VendingMachine vendingMachine;
+    private Choice _choice; 
 
     // https://xunit.net/docs/shared-context
     public FreeDrinksVendingMachine()
@@ -21,20 +22,33 @@ public class FreeDrinksVendingMachine : IDisposable
     }
 
     [Fact]
-    public void VendingMachineDeliversNothingWhenChoiceIsMade()
+    void VendingMachineDeliversNothingWhenChoiceIsMade()
     {
-        Assert.Equal(Can.NOTHING, vendingMachine.Deliver(Choice.WATER));
+        Given(Choice.WATER);
+        Expect(Can.NOTHING);
     }
   
     [Fact]
-    public void VendingMachineDeliversCokeWhenColaChoiceIsMade()
+    void VendingMachineDeliversCokeWhenColaChoiceIsMade()
     {
-        Assert.Equal(Can.COKE, vendingMachine.Deliver(Choice.COLA));
+        Given(Choice.COLA);
+        Expect(Can.COKE);
     }
 
     [Fact]
-    public void VendingMachineDeliversFantaWhenFizzyOrangeChoiceIsMade()
+    void VendingMachineDeliversFantaWhenFizzyOrangeChoiceIsMade()
     {
-        Assert.Equal(Can.FANTA, vendingMachine.Deliver(Choice.FIZZY_ORANGE));
+        Given(Choice.FIZZY_ORANGE);
+        Expect(Can.FANTA);
+    }
+
+    private void Given(Choice choice)
+    {
+        _choice = choice;
+    }
+
+    private void Expect(Can can) 
+    {
+        Assert.Equivalent(can, vendingMachine.Deliver(_choice));
     }
 }
