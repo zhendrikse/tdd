@@ -1,0 +1,14 @@
+#!/bin/bash
+
+dotnet new sln -o shuntingyardalgo
+cd shuntingyardalgo
+dotnet new classlib -o ShuntingYardAlgo
+mv ./ShuntingYardAlgo/Class1.cs ./ShuntingYardAlgo/ShuntingYardAlgo.cs
+
+dotnet sln add ./ShuntingYardAlgo/ShuntingYardAlgo.csproj
+dotnet new xunit -o ShuntingYardAlgo.Tests
+dotnet add ./ShuntingYardAlgo.Tests/ShuntingYardAlgo.Tests.csproj reference ./ShuntingYardAlgo/ShuntingYardAlgo.csproj
+dotnet sln add ./ShuntingYardAlgo.Tests/ShuntingYardAlgo.Tests.csproj
+
+mv ./ShuntingYardAlgo.Tests/UnitTest1.cs ./ShuntingYardAlgo.Tests/ShuntingYardAlgoTest.cs
+
