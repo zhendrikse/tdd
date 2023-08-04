@@ -1,0 +1,14 @@
+{% if cookiecutter.platform == "unix" %}#!/bin/bash{% endif %}
+
+dotnet new sln -o {{ cookiecutter.project_slug }}
+cd {{ cookiecutter.project_slug }}
+dotnet new classlib -o {{ cookiecutter.kata }}
+{% if cookiecutter.platform == "unix" %}mv ./{{ cookiecutter.kata }}/Class1.cs ./{{ cookiecutter.kata }}/{{ cookiecutter.kata }}.cs{% endif %}
+{% if cookiecutter.platform == "windows" %}ren .\{{ cookiecutter.kata }}\Class1.cs .\{{ cookiecutter.kata }}\{{ cookiecutter.kata }}.cs{% endif %}
+dotnet sln add ./{{ cookiecutter.kata }}/{{ cookiecutter.kata }}.csproj
+dotnet new xunit -o {{ cookiecutter.kata }}.Tests
+dotnet add ./{{ cookiecutter.kata }}.Tests/{{ cookiecutter.kata }}.Tests.csproj reference ./{{ cookiecutter.kata }}/{{ cookiecutter.kata }}.csproj
+dotnet sln add ./{{ cookiecutter.kata }}.Tests/{{ cookiecutter.kata }}.Tests.csproj
+
+{% if cookiecutter.platform == "unix" %}mv ./{{ cookiecutter.kata }}.Tests/UnitTest1.cs ./{{ cookiecutter.kata }}.Tests/{{ cookiecutter.kata }}Test.cs{% endif %}
+{% if cookiecutter.platform == "windows" %}ren ./{{ cookiecutter.kata }}.Tests/UnitTest1.cs ./{{ cookiecutter.kata }}.Tests/{{ cookiecutter.kata }}Test.cs{% endif %}

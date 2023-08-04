@@ -1,7 +1,10 @@
 { pkgs }: {
   deps = [
-		pkgs.gradle_6
-  pkgs.nodePackages.prettier
+		pkgs.jq.bin
+    pkgs.dotnet-sdk
+    pkgs.omnisharp-roslyn
+    pkgs.gradle_6
+    pkgs.nodePackages.prettier
     pkgs.vim
     pkgs.clojure
     pkgs.clojure-lsp

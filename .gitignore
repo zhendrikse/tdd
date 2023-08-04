@@ -8,6 +8,7 @@ venv/
 target/
 build/
 bin/
+obj/
 coverage
 .nyc_output
 node_modules

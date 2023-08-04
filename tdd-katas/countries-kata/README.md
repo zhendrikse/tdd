@@ -7,7 +7,7 @@ You are going to implement a converter that consumes country data
 from a REST API on the web, enrich those data (a bit), and then export 
 it to CSV.
 
-![Ports and adapters](./assets/hex-arch.png)
+![Ports and adapters](../../assets/hex-arch.png)
 
 This kata demonstrates how drive the realization of this application
 by focussing on the domain logic first. Next we are going to define 
@@ -16,7 +16,7 @@ the ports and adapters.
 As the adapters are polymorphic by definition, we can plug in stubs
 when we are writing our test!
 
-![Ports and adapters](./assets/hex-arch-unit.png)
+![Ports and adapters](../../assets/hex-arch-unit.png)
 
 
 ## The domain logic that is requested
