@@ -1,7 +1,7 @@
 { pkgs }: {
   deps = [
 		pkgs.jq.bin
-    pkgs.dotnet-sdk
+    pkgs.dotnet-sdk_7
     pkgs.omnisharp-roslyn
     pkgs.gradle_6
     pkgs.nodePackages.prettier
