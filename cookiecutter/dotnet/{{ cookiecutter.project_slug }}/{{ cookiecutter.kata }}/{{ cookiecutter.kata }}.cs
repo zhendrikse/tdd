@@ -1,4 +1,4 @@
-﻿namespace Kata;
+namespace Kata;
 
 public class {{ cookiecutter.kata }}
 {
