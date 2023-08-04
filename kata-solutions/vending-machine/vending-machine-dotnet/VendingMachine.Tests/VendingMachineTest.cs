@@ -1,4 +1,3 @@
-using Xunit;
 using Kata;
 using System;
 
