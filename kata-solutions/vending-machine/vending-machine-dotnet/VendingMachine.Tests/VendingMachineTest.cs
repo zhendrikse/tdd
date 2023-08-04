@@ -8,6 +8,7 @@ public class FreeDrinksVendingMachine : IDisposable
 {
     private VendingMachine vendingMachine;
 
+    // https://xunit.net/docs/shared-context
     public FreeDrinksVendingMachine()
     {
         vendingMachine = new VendingMachine();
@@ -21,14 +22,12 @@ public class FreeDrinksVendingMachine : IDisposable
     [Fact]
     public void VendingMachineDeliversNothingWhenChoiceIsMade()
     {
-        // var vendingMachine = new VendingMachine();
         Assert.Equal(Can.NOTHING, vendingMachine.Deliver(Choice.COLA));
     }
   
     [Fact]
     public void VendingMachineDeliversCokeWhenColaChoiceIsMade()
     {
-        // var vendingMachine = new VendingMachine();
         vendingMachine.Configure(Choice.COLA, Can.COKE);
         Assert.Equal(Can.COKE, vendingMachine.Deliver(Choice.COLA));
     }

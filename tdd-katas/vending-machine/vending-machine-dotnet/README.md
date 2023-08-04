@@ -1,13 +1,10 @@
 # Introduction
 
-Please read the general [introduction to the stack kata](../README.md) first!
+Please read the general [introduction to the vending machine kata](../README.md) first!
 
 # Getting started
 
-First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
-In this exercise, we _are_ going to use the rSpec syntax, so
-you should enable that option if you are planning to follow the 
-instructions to the letter.
+First, create an intial .Net kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
 Next, go the the newly created project directory and consult
 the provided ``README.md`` in there.
@@ -22,13 +19,13 @@ nothing, whatever we ask it to deliver.
 <details>
   <summary>Specifying an initial vending machine</summary>
 
-```java
-describe("A new vending machine", () -> {
-  it("delivers nothing when asked for a can of Coke", () -> {
-    vendingMachine = new VendingMachine();
-    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.NOTHING);
-  });
-});
+```csharp
+    [Fact]
+    public void VendingMachineDeliversNothingWhenChoiceIsMade()
+    {
+        var vendingMachine = new VendingMachine();
+        Assert.Equal(Can.NOTHING, vendingMachine.Deliver(Choice.COLA));
+    }
 ```
 
 Obviously, this fails miserably, as the both the deliver method and the
@@ -38,70 +35,55 @@ production code.
 <details>
   <summary>Faking and cheating to get the test green</summary>
 
-```java
-public class VendingMachine {
+```csharp
+namespace Kata;
 
-    public Can deliver(final Choice choice) {
-      return Can.NOTHING;
+public class VendingMachine
+{
+    public Can Deliver(Choice choice)
+    {
+        return Can.NOTHING;
     }
 }
 ```
 
 and creating enumerations for the cans
 
-```java
-public enum Can {
-  NOTHING ("No can");
-
-  private final String description;
-
-  Can(String description) {
-    this.description = description;
-  }
-
-  @Override
-  public String toString() {
-    return this.description;
-  }
+```csharp
+public enum Can : ushort
+{
+    [Description("No can")] NOTHING,
+    [Description("Can of Coke")] COKE
+}
 }
 ```
 
 and choices:
 
-```java
-public enum Choice {
-  COKE ("Coke choice");
-
-  private final String description;
-
-  Choice(String description) {
-    this.description = description;
-  }
-
-  @Override
-  public String toString() {
-    return this.description;
-  }
+```csharp
+public enum Choice : ushort
+{
+    [Description("Cola choice")] COLA
 }
 ```
 
 </details>
 </details>
 
-
 We should have our first passing test now.
 
 Let's try to get some coke though!
 
-
 <details>
-  <summary>Specifying an initial vending machine</summary>
+  <summary>Specifying an initial choice and can</summary>
 
-```java
-  it("delivers Cola when coke is selected", () -> {
-    vendingMachine = new VendingMachine();
-    expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
-  });
+```csharp
+    [Fact]
+    public void VendingMachineDeliversCokeWhenColaChoiceIsMade()
+    {
+        var vendingMachine = new VendingMachine();
+        Assert.Equal(Can.COKE, vendingMachine.Deliver(Choice.COLA));
+    }
 ```
 </details>
 
@@ -114,12 +96,14 @@ completely identical, but expect different results. How do we solve this?
 We solve this by configuring the vending machine with a choice, so
 that we can expect a different outcome.
 
-```java
-    it("delivers Cola when coke is selected", () -> {
-      vendingMachine = new VendingMachine();
-      vendingMachine.configure(Choice.COKE, Can.COLA);
-      expect(vendingMachine.deliver(Choice.COKE)).toEqual(Can.COLA);
-    });
+```csharp
+    [Fact]
+    public void VendingMachineDeliversCokeWhenColaChoiceIsMade()
+    {
+        var vendingMachine = new VendingMachine();
+        vendingMachine.Configure(Choice.COLA, Can.COKE);
+        Assert.Equal(Can.COKE, vendingMachine.Deliver(Choice.COLA));
+    }
 ```
 
 Now the vending machine must be extended just a little bit.
@@ -127,16 +111,19 @@ Now the vending machine must be extended just a little bit.
 <details>
   <summary>Making the test pass</summary>
 
-```java
-public class VendingMachine {
-    private Can canToDeliver = Can.NOTHING;
-
-    public void configure(final Choice choice, final Can can) {
-      this.canToDeliver = can;
+```csharp
+public class VendingMachine
+{
+    private Can canOfChoice = Can.NOTHING;
+  
+    public void Configure(Choice choice, Can can) 
+    {
+        this.canOfChoice = can;
     }
-
-    public Can deliver(final Choice choice) {
-      return canToDeliver;
+  
+    public Can Deliver(Choice choice)
+    {
+        return this.canOfChoice;
     }
 }
 ```
@@ -144,10 +131,20 @@ public class VendingMachine {
 Next, identify the duplicate code (hint: in the spec/test file), and
 eliminate it using the ``beforeEach()``
 
-```java
-    beforeEach(() -> {
-      vendingMachine = new VendingMachine();
-    });
+```csharp
+public class FreeDrinksVendingMachine : IDisposable
+{
+    private VendingMachine vendingMachine;
+
+    public FreeDrinksVendingMachine()
+    {
+        vendingMachine = new VendingMachine();
+    }
+
+    public void Dispose()
+    {
+        // vendingMachine = (VendingMachine) null;
+    }
 ```
 </details>
 </details>

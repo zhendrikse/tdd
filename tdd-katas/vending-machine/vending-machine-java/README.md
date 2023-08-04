@@ -1,6 +1,6 @@
 # Introduction
 
-Please read the general [introduction to the stack kata](../README.md) first!
+Please read the general [introduction to the vending machine kata](../README.md) first!
 
 # Getting started
 
@@ -95,7 +95,7 @@ Let's try to get some coke though!
 
 
 <details>
-  <summary>Specifying an initial vending machine</summary>
+  <summary>Specifying an initial choice and can</summary>
 
 ```java
   it("delivers Cola when coke is selected", () -> {

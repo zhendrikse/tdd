@@ -66,7 +66,7 @@ Let's try to get some coke though!
 
 
 <details>
-  <summary>Specifying an initial vending machine</summary>
+  <summary>Specifying an initial choice and can</summary>
 
 ```kotlin
   @Test
