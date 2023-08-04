@@ -38,3 +38,9 @@ $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/ko
 $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/java
 ```
 
+## Dotnet kata generation
+
+```bash
+$ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/dotnet
+```
+
