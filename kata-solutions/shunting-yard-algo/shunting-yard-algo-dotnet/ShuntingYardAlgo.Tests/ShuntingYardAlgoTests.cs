@@ -33,6 +33,20 @@ public class ShuntingYardAlgoTest
         Expect("42");
     }
 
+    [Fact]
+    public void HandlesASingleBinaryOperator()
+    {
+        Given("4 + 2");
+        Expect("4 2 +");        
+    }
+
+    [Fact]
+    public void HandlesMultipleOperatorsOfSamePrecedence()
+    {
+        Given("a - 5 + 3");
+        Expect("a 5 - 3 +");        
+    }
+
     private void Given(string expression) 
     {
         var algorithm = new ShuntingYardAlgo();
