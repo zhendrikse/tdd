@@ -55,7 +55,6 @@ public enum Can : ushort
     [Description("No can")] NOTHING,
     [Description("Can of Coke")] COKE
 }
-}
 ```
 
 and choices:
@@ -155,11 +154,13 @@ Let's configure a different drink.
 <details>
   <summary>Specifying another drink</summary>
   
-```java
-    it("delivers Fanta when fizzy orange is selected", () -> {
-      vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-      expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.FANTA);
-    });
+```csharp
+    [Fact]
+    public void VendingMachineDeliversFantaWhenFizzyOrangeChoiceIsMade()
+    {
+        vendingMachine.Configure(Choice.FIZZY_ORANGE, Can.FANTA);
+        Assert.Equal(Can.FANTA, vendingMachine.Deliver(Choice.FIZZY_ORANGE));
+    }
 ```
 
 After extending the choice and can types, we can notice that this test
@@ -168,12 +169,14 @@ recently configured choice. So by extending the configuration in our
 test, the test will fail and will force us to generalize the production 
 code.
 
-```java
-    it("delivers Fanta when fizzy orange is selected", () -> {
-      vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-      vendingMachine.configure(Choice.COKE, Can.COLA);
-      expect(vendingMachine.deliver(Choice.FIZZY_ORANGE)).toEqual(Can.FANTA);
-    });
+```csharp
+    [Fact]
+    public void VendingMachineDeliversFantaWhenFizzyOrangeChoiceIsMade()
+    {
+        vendingMachine.Configure(Choice.FIZZY_ORANGE, Can.FANTA);
+        vendingMachine.Configure(Choice.COLA, Can.COKE);
+        Assert.Equal(Can.FANTA, vendingMachine.Deliver(Choice.FIZZY_ORANGE));
+    }
 ```
 
 So now we are forced to update the production code.
@@ -181,18 +184,24 @@ So now we are forced to update the production code.
 <details>
   <summary>Making the test pass</summary>
   
-```java
-public class VendingMachine {
-    private Map<Choice, Can> choiceCanMap = new HashMap<Choice, Can>();
+```csharp
+public class VendingMachine
+{
+    private Can canOfChoice = Can.NOTHING;
+    private Dictionary<Choice, Can> choiceCanMap = new Dictionary<Choice, Can>();
 
-    public void configure(final Choice choice, final Can can) {
-      this.choiceCanMap.put(choice, can);
+    public void Configure(Choice choice, Can can) 
+    {
+        canOfChoice = can;
+        choiceCanMap[choice] = can;
     }
-
-    public Can deliver(final Choice choice) {
-      if (!this.choiceCanMap.containsKey(choice)) return Can.NOTHING;
-      
-      return this.choiceCanMap.get(choice);
+  
+    public Can Deliver(Choice choice)
+    {
+        if (!choiceCanMap.ContainsKey(choice))
+            return Can.NOTHING;
+        
+        return choiceCanMap[choice];
     }
 }
 ```
@@ -204,13 +213,13 @@ public class VendingMachine {
 Finally, note that we can actually configure the vending machine 
 once for all tests
 
-```java
-  {
-    beforeEach(() -> {
-      vendingMachine = new VendingMachine();
-      vendingMachine.configure(Choice.FIZZY_ORANGE, Can.FANTA);
-      vendingMachine.configure(Choice.COKE, Can.COLA);
-    });    
+```csharp
+    public FreeDrinksVendingMachine()
+    {
+        vendingMachine = new VendingMachine();
+        vendingMachine.Configure(Choice.FIZZY_ORANGE, Can.FANTA);
+        vendingMachine.Configure(Choice.COLA, Can.COKE);
+    }   
 
     // ...
 ```
