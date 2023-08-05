@@ -13,7 +13,8 @@ the provided ``README.md`` in there.
 
 Please follow the instructions from these videos:
 
-- Shunting yard algorithm in C# [Part 1](http://vimeo.com/10941784)
+- Shunting yard algorithm in C# [Part 1](http://vimeo.com/10941784):
+  simple expressions with operators without precedence.
 - Shunting yard algorithm in C# [Part 2](http://vimeo.com/10942447)
 - Shunting yard algorithm in C# [Part 3](http://vimeo.com/10943328)
 - Shunting yard algorithm in C# [Part 4](http://vimeo.com/10944334)

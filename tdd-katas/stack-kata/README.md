@@ -1,6 +1,6 @@
 # Goal
 
-Test-driven development (TDD) can be explained relatively easily. At the same time TDD turns out to be a skill that can only be properly acquired by practicing it. This step-by-step guide aims to do exactly that: getting you acquainted with TDD by applying its practices to a somewhat academic example. This academic example ensures that you won't be distracted by other challenges. These additional challenges will then be addressed in subsequent exercises. 
+Test-driven development (TDD) can be explained relatively easily. At the same time TDD turns out to be a skill that can only be properly acquired by practicing it. This step-by-step guide aims to do exactly that: getting you acquainted with TDD by applying its practices to a somewhat academic example. This academic example ensures that you won't be distracted by other challenges. These additional challenges can be addressed in other katas. 
 
 ## What you will learn
 
