@@ -42,16 +42,6 @@ in the form of courses, workshops, and/or coding dojos.
 - [Let's play: test-driven development](https://www.jamesshore.com/v2/projects/lets-play-tdd)
 - [Test-Driven Development (TDD): A Time-Tested Recipe for Quality Software](https://semaphoreci.com/blog/test-driven-development)
 
-## About the author
-
-![Zeger Hendrikse](assets/zeger_profile.png)
-
-My name is [Zeger Hendrikse](https://www.linkedin.com/in/zegerhendrikse/). I am a self-employed IT consultant. I'm a fan of [extreme programming](https://en.wikipedia.org/wiki/Extreme_programming), [continuous delivery](https://www.continuousdelivery.com/), and [DevOps](https://cloud.google.com/devops) / [DORA](https://www.devops-research.com/research.html). 
-
-This means my heroes are [Dave Farley](https://www.davefarley.net/), [Robert C. Martin](http://blog.cleancoder.com/) (aka Uncle Bob), [Martin Fowler](https://martinfowler.com/), [Kent Beck](https://www.kentbeck.com/)... just to name a few.
-
-I decided to share one of my passions with all of you here: TDD (test-driven development)!
-
 ## Contact
 
 Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ **gmail** _&lt;dot&gt;_ **com** for e.g.:
