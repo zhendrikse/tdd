@@ -11,14 +11,20 @@ Please be sure to also check out the information on
 and much more on
 the [Wiki pages that are part of this repository](https://github.com/zhendrikse/tdd/wiki).
 
-## Coaching
+## For coaches
 
 The materials found here may seamlessly be incorporated into 
 [the Samman coaching method](https://www.sammancoaching.org/) and
 are ready to be used in cloud development environments (CDEs) such
 as [replit.com](https://replit.com), 
 [GitHub Codespaces](https://github.com/features/codespaces), 
-or [gitpod.io](https://gitpod.io)
+or [gitpod.io](https://gitpod.io). Equally well, they may be
+used during [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo).
+
+## For practitioners
+
+Coding katas remain an unlimited source for both practice and inspiration
+to sharpen your skill as (TDD) developer.
 
 # Contents
 
