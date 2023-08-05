@@ -26,6 +26,11 @@ used during [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-
 Coding katas remain an unlimited source for both practice and inspiration
 to sharpen your skill as (TDD) developer.
 
+## For practitioners
+
+Coding katas remain an unlimited source for both practice and inspiration
+to sharpen your skill as (TDD) developer.
+
 # Contents
 
 This repository contains materials to both practice as well as to teach TDD
