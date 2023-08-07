@@ -1,7 +1,7 @@
 # Introduction
 
 This is a kata that is meant to get acquainted with 
-[the ports and adapters architecture and dependency inversion](https://github.com/zhendrikse/tdd/wiki/Hexagonal-Architecture).
+[the ports &map; adapters architecture and dependency inversion](https://github.com/zhendrikse/tdd/wiki/Hexagonal-Architecture).
 
 You are going to implement a converter that consumes country data
 from a REST API on the web, enrich those data (a bit), and then export 
