@@ -1,32 +1,24 @@
 # Introduction
 
-This is a kata that is meant to get acquainted with the ports and 
-adapters architecture and dependency inversion.
+This is a kata that is meant to get acquainted with 
+[the ports and adapters architecture and dependency inversion](https://github.com/zhendrikse/tdd/wiki/Hexagonal-Architecture).
 
 You are going to implement a converter that consumes country data
 from a REST API on the web, enrich those data (a bit), and then export 
 it to CSV.
 
-![Ports and adapters](../../assets/hex-arch.png)
-
-This kata demonstrates how drive the realization of this application
-by focussing on the domain logic first. Next we are going to define 
+This kata demonstrates how to drive the realization of this application
+by focusing on the domain logic first. Next, we are going to define 
 the ports and adapters. 
-
-As the adapters are polymorphic by definition, we can plug in stubs
-when we are writing our test!
-
-![Ports and adapters](../../assets/hex-arch-unit.png)
-
 
 ## The domain logic that is requested
 
 Given a list of countries (with some data per country such 
-as name, population and capital city), we are interested in
+as name, population, and capital city), we are interested in
 an overview of all countries in the world, sorted by the 
 size of its population in ascending order. In addition, 
 we would like to know per country how many standard deviations
-its population deviates from the world mean population size. 
+its population deviates from the world's mean population size. 
 
 ### Example of expected output 
 
@@ -59,7 +51,7 @@ analogously for the other countries in the list.
 
 **Caveat**: 
 Note that the API returns the capital city in a list, and sometimes this 
-list may even be empty!
+the list may even be empty!
 
 ## Kata as legacy or greenfield
 
@@ -79,15 +71,15 @@ but to follow the rules of ports &amp; adapters architecture:
 - The domain logic itself does not depend directly on
   any of the external systems, but only on ports
 - The protocol for a port is given by the purpose of 
-  the conversation it describes
+  the conversation that it describes.
 - For each external system there is an adapter that converts
   the API definition to the format 
-  needed by that system and vice versa
+  needed by that system and vice versa.
 
 ## Optional extensions
 
 - Add a possibility to filter, e.g. only export those countries to CSV that
-  are a UN member, or only export those countries that have more than 10 million
+  is a UN member, or only export those countries that have more than 10 million
   inhabitants.
 - Add a possibility to update a reference table in a database with these
   country data. Optionally according to a certain time schedule, e.g. weekly.
