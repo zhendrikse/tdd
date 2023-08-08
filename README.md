@@ -1,34 +1,34 @@
-# Test-driven development materials
+# Test-Driven Development Materials
 
 Welcome to this repository that is literally packed with test-driven development (TDD) materials!
 This repository contains a huge collection of coding katas with instructions in various languages, 
-example solutions, presentations, etc.
+sample solutions, presentations, etc.
 
-Please be sure to also check out the information on 
+Be sure to also check out the information on 
 [coding katas](https://github.com/zhendrikse/tdd/wiki/The-Coding-Katas), 
 [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo), 
-[the relation with the 24 DevOps key capabilities](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-24-Key-Capabilities), 
+[how they relate to the 24 DevOps key capabilities](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-24-Key-Capabilities), 
 and much more on
-the [Wiki pages that are part of this repository](https://github.com/zhendrikse/tdd/wiki).
+the [wiki pages that are part of this repository](https://github.com/zhendrikse/tdd/wiki).
 
 ## For coaches
 
-The materials found here may seamlessly be incorporated into 
+The materials found here can be seamlessly integrated into 
 [the Samman coaching method](https://www.sammancoaching.org/) and
 are ready to be used in cloud development environments (CDEs) such
 as [replit.com](https://replit.com), 
 [GitHub Codespaces](https://github.com/features/codespaces), 
-or [gitpod.io](https://gitpod.io). Equally well, they may be
-used during [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo).
+or [gitpod.io](https://gitpod.io). They cay also be
+used in [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo).
 
 ## For practitioners
 
-Coding katas remain an unlimited source for both practice and inspiration
-to sharpen your skill as (TDD) developer.
+Coding katas remain an unlimited source of practice and inspiration
+to sharpen your skills as a (TDD) practitioner.
 
 # Contents
 
-This repository contains materials to both practice as well as to teach TDD
+This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
 
 - **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for setting up a kata in various languages
