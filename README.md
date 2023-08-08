@@ -31,15 +31,14 @@ to sharpen your skills as a (TDD) practitioner.
 This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
 
-- **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for setting up a kata in various languages
-- **[docs](./docs/)** &rarr; additional free books
-- **[kata-solutions](./kata-solutions/)** &rarr; (multiple) solutions in multiple languages for almost all katas, with recently an emphasis on functional programming
+- **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for setting up a kata in various languages.
+- **[docs](./docs/)** &rarr; additional free books.
+- **[kata-solutions](./kata-solutions/)** &rarr; (multiple) solutions in multiple languages for almost all katas, with a recent emphasis on functional programming.
 - **[presentations](./presentations/)** &rarr; [reveal-md](https://github.com/webpro/reveal-md) TDD presentations
 - **[tdd-katas](./tdd-katas/)** &rarr; TDD katas
-  - **[README.md](./tdd-katas/README.md)** &rarr; lists which topics are addressed by which kata at which difficulty level, as well as a detailed explanation of the relation between the katas and the [24 key capabilities to drive improvement in software delivery](https://itrevolution.com/articles/24-key-capabilities-to-drive-improvement-in-software-delivery/).
-  - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language
-- **[tools](./tools/)** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/)
-</details>
+  - **[README.md](./tdd-katas/README.md)** &rarr; lists which topics are addressed by which kata at which level of difficulty.
+  - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language.
+- **[tools](./tools/)** &rarr; playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/).
 
 # References
 
