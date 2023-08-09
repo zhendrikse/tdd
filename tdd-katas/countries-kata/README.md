@@ -1,24 +1,28 @@
 # Introduction
 
-This is a kata that is meant to get acquainted with 
-[the ports &map; adapters architecture and dependency inversion](https://github.com/zhendrikse/tdd/wiki/Hexagonal-Architecture).
+This is a kata designed to teach you how to keep your system 
+under development properly testable when dealing with interactions 
+with external systems, in this case REST endpoints, and writing
+output to files using
+[the ports &amp; adapter architecture and dependency inversion](https://github.com/zhendrikse/tdd/wiki/Hexagonal-Architecture).
 
-You are going to implement a converter that consumes country data
+We are going to implement a converter that will consume some country data
 from a REST API on the web, enrich those data (a bit), and then export 
 it to CSV.
 
-This kata demonstrates how to drive the realization of this application
-by focusing on the domain logic first. Next, we are going to define 
+This kata shows how to drive the realization of this application
+from the inside out, rather than starting from the external data provider 
+by first focusing on the domain logic. Next, we will define  
 the ports and adapters. 
 
 ## The domain logic that is requested
 
 Given a list of countries (with some data per country such 
-as name, population, and capital city), we are interested in
+as name, population, and capital city), we are interested in getting 
 an overview of all countries in the world, sorted by the 
-size of its population in ascending order. In addition, 
-we would like to know per country how many standard deviations
-its population deviates from the world's mean population size. 
+size of their population in ascending order. In addition, 
+we would like to know for each country how many standard deviations
+its population deviates from the world average population size. 
 
 ### Example of expected output 
 

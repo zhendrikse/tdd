@@ -2,6 +2,10 @@
 
 Please read the general [introduction to the DB adapter kata](../README.md) first!
 
+These instructions make use of 
+[Mamba](https://github.com/nestorsalceda/mamba): 
+the definitive test runner for Python in combination with [expects](https://expects.readthedocs.io/en/stable/#).
+
 # Getting started
 
 Carry out the following steps in order:
@@ -48,7 +52,6 @@ We won't be using the real execution of the application frequently though. We wi
 
 The endpoint is implemented using the [FastAPI](https://fastapi.tiangolo.com/tutorial/first-steps/) framework.
 
-As was the case in the previous units, also here we are using [Mamba](https://github.com/nestorsalceda/mamba): the definitive test runner for Python in combination with [expects](https://expects.readthedocs.io/en/stable/#).
 
 ## Our first endpoint
 
