@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "Tell dont ask kata"
+version = "0.1.0"
+description = "Tell dont ask kata"
+authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10.0,<3.11"
+pytest-watch = "^4.2.0"
+approvaltests = "^8.4.1"
+pytest-cov = "4.1.0"
+pyhamcrest = "^2.0.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
