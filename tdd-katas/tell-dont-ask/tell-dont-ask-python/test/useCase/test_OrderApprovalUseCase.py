@@ -9,12 +9,12 @@ from src.useCase.OrderApprovalRequest import OrderApprovalRequest
 from src.useCase.OrderApprovalUseCase import OrderApprovalUseCase
 from src.useCase.RejectedOrderCannotBeApprovedError import RejectedOrderCannotBeApprovedError
 from src.useCase.ShippedOrdersCannotBeChangedError import ShippedOrdersCannotBeChangedError
-from test.doubles.TestOrderRepository import TestOrderRepository
+from test.doubles.StubOrderRepository import StubOrderRepository
 
 
 class TestOrderApprovalUseCase(unittest.TestCase):
     def setUp(self):
-        self.order_repository = TestOrderRepository()
+        self.order_repository = StubOrderRepository()
         self.use_case = OrderApprovalUseCase(self.order_repository)
 
     def test_approved_existing_Order(self):

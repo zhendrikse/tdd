@@ -2,7 +2,7 @@ from src.domain.Order import Order
 from src.repository.OrderRepository import OrderRepository
 
 
-class TestOrderRepository(OrderRepository):
+class StubOrderRepository(OrderRepository):
     def __init__(self):
         self.orders = []
         self.inserted_order = None
