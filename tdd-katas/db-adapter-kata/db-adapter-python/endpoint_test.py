@@ -1,5 +1,5 @@
 from mamba import description, it, context, before
-from expects import expect, equal
+from expects import expect, equal, have_len, raise_error
 from fastapi import HTTPException
 from employee import Employee
 

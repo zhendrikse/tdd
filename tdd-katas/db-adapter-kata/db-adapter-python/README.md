@@ -52,10 +52,16 @@ We won't be using the real execution of the application frequently though. We wi
 
 The endpoint is implemented using the [FastAPI](https://fastapi.tiangolo.com/tutorial/first-steps/) framework.
 
+# Detailed Implementation Instructions
 
 ## Our first endpoint
 
-Let's say we expect our endpoint to return three employees by default:
+<details>
+<summary>
+Implementing an endpoint to return three employees by default
+</summary>
+
+Of course, we start by writing a test first!
 
 ```python
 ...
@@ -72,9 +78,16 @@ Add the associated endpoint:
 def list_all_employees(self):
   pass
 ```
-and implement it first in the simplest way that could possibly work by replacing the pass by returning a hard coded list of three employees. Verify the test is green and refactor the duplicate initialization of the `self.endpoint`.
+
+We make the test pass in the simplest way that could possibly work by replacing the pass by returning a hard coded list of three employees. Verify the test is green and refactor the duplicate initialization of the `self.endpoint`.
+  
+</details>
 
 Now let's add the scenarios for getting an employee by ID to the retrieval of employees context:
+
+<details>
+  <summary>Endpoint for getting an employee by ID</summary>
+
 ```python
 ...
 with it("throws an exception when ID does not exist"):
@@ -89,21 +102,24 @@ Use the following code snippet to complete the implementation that makes this te
 def get_employee_by_id(self, employee_id: str):
   pass
 ```
+</details>
 
-Hint: use `raise HTTPException(status_code=404, detail="Employee not found")`
+Next, let's try to retrieve an existing employee by ID.
 
-Next, let's try to retrieve an existing employee by ID:
+<details>
+  <summary>Retrieval of an existing employee</summary>
 
-```python
+  ```python
 ...
 with it("returns the employee with given ID"):
   expect(
     self.endpoint.get_employee_by_id("001")).to(equal(Employee("Zeger")))
 ```
 and modify the implementation again to make the test green.
+</details>
 
-### Creating the wrapper/adapter
----
+## Creating the wrapper/adapter
+
 Eventually, all employee data will be coming from a database. Let's bundle all these calls together into an employee repository (a term that originates from [domain driven design](https://matfrs2.github.io/RS2/predavanja/literatura/Avram%20A,%20Marinescu%20F.%20-%20Domain%20Driven%20Design%20Quickly.pdf)):
 
 > Repositories are classes or components that encapsulate the logic required to access data sources. They centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer &#8212; [docs.microsoft.com](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design).
