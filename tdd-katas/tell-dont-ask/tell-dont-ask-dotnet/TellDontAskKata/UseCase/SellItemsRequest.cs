@@ -4,6 +4,6 @@ namespace TellDontAskKata.Main.UseCase
 {
     public class SellItemsRequest
     {
-        public IList<SellItemRequest> Requests { get; set; }
+        public IList<SellItemRequest> Requests { get; set; } = default!;
     }
 }

@@ -2,8 +2,8 @@
 {
     public class Product
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
         public decimal Price { get; set; }
-        public Category Category { get; set; }
+        public Category Category { get; set; } = default!;
     }
 }
