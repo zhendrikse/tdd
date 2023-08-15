@@ -11,12 +11,12 @@ from src.useCase.SellItemRequest import SellItemRequest
 from src.useCase.SellItemsRequest import SellItemsRequest
 from src.useCase.UnknownProductError import UnknownProductError
 from test.doubles.InMemoryProductCatalog import InMemoryProductCatalog
-from test.doubles.TestOrderRepository import TestOrderRepository
+from test.doubles.StubOrderRepository import StubOrderRepository
 
 
 class TestOrderCreationUseCase(unittest.TestCase):
     def setUp(self):
-        self.order_repository = TestOrderRepository()
+        self.order_repository = StubOrderRepository()
 
         food = Category("food", decimal.Decimal("10"))
         product1 = Product("salad", decimal.Decimal("3.56"), food)

@@ -27,7 +27,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [stack-kata](./stack-kata)                 | L       | Getting started with TDD (**small steps**)            | ✔  | ✔   | ✔  | ✗   | ✗  | ✗ | ✗ |
 | [sudoku-kata](./sudoku-kata)               | M       | Recursion, TDD and **small steps**                    | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [task-list-kata](./task-list-kata)         | M       | Command-Query / Strong typing / Realistic app         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
-| [tell-dont-ask](./tell-dont-ask)           | M       | **Refactoring** / Anemic domain model / DDD           | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ | 
+| [tell-dont-ask](./tell-dont-ask)           | M       | **Refactoring** / Anemic domain model / DDD           | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ | ✔ | 
 | [tire-pressure-kata](./tire-pressure-kata) | L       | Ports &amp; adapters / **Testable design** / DI       | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ | 
 | [vending-machine](./vending-machine)       | L / M   | **Small steps** / Code smells and **refactoring**     | ✔  | ✔   | ✔  | ✗   | ✔  | ✔ | ✔ |
 | [video-store-kata](./video-store-kata)     | L       | **Legacy code** / Code smells and **refactoring**     | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ | ✗ |

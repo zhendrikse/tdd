@@ -7,9 +7,8 @@ authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
 pytest-watch = "^4.2.0"
-approvaltests = "^8.4.1"
 pytest-cov = "4.1.0"
-pyhamcrest = "^2.0.4"
+PyHamcrest = "^2.0.4"
 
 [tool.poetry.dev-dependencies]
 

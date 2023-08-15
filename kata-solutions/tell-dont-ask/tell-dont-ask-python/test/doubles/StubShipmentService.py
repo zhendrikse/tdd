@@ -2,7 +2,7 @@ from src.domain.Order import Order
 from src.service.ShipmentService import ShipmentService
 
 
-class TestShipmentService(ShipmentService):
+class StubShipmentService(ShipmentService):
     def __init__(self):
         self.shipped_order = None
 

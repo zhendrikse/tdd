@@ -8,14 +8,14 @@ from src.useCase.OrderCannotBeShippedError import OrderCannotBeShippedError
 from src.useCase.OrderCannotBeShippedTwiceError import OrderCannotBeShippedTwiceError
 from src.useCase.OrderShipmentRequest import OrderShipmentRequest
 from src.useCase.OrderShipmentUseCase import OrderShipmentUseCase
-from test.doubles.TestOrderRepository import TestOrderRepository
-from test.doubles.TestShipmentService import TestShipmentService
+from test.doubles.StubOrderRepository import StubOrderRepository
+from test.doubles.StubShipmentService import StubShipmentService
 
 
 class TestOrderShipmentUseCase(unittest.TestCase):
     def setUp(self):
-        self.order_repository = TestOrderRepository()
-        self.shipment_service = TestShipmentService()
+        self.order_repository = StubOrderRepository()
+        self.shipment_service = StubShipmentService()
         self.use_case = OrderShipmentUseCase(self.order_repository, self.shipment_service)
 
     def test_ship_approved_order(self):

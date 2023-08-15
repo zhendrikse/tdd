@@ -1,1 +1,0 @@
-poetry run coverage run -m unittest && poetry run coverage report -m && poetry run coverage html
