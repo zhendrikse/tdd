@@ -1,4 +1,4 @@
-namespace TellDontAskKata.Domain
+﻿namespace TellDontAskKata.Main.Domain
 {
     public class Category
     {
@@ -6,4 +6,3 @@ namespace TellDontAskKata.Domain
         public decimal TaxPercentage { get; set; }
     }
 }
-

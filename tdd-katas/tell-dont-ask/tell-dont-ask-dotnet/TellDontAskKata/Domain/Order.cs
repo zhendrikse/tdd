@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace TellDontAskKata.Domain
+namespace TellDontAskKata.Main.Domain
 {
     public class Order
     {
@@ -12,4 +12,3 @@ namespace TellDontAskKata.Domain
         public int Id { get; set; }
     }
 }
-
