@@ -42,45 +42,27 @@ with description("Game of life") as self:
       expect(dead_cell().next_generation([dead_cell(), living_cell(), living_cell()]).is_alive()).to(be_false)
 
 with context("Neighbours in game"):
-  with it("has eight neighbours for non-edge cells"):
-    game = Game([
+  with before.each:
+    self._game = Game([
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]
     ])
-    expect(game.neighbours_for(1, 1)).to(equal([1, 2, 3, 4, 6, 7, 8, 9]))
+    
+  with it("has eight neighbours for non-edge cells"):
+    expect(self._game.neighbours_for(1, 1)).to(equal([1, 2, 3, 4, 6, 7, 8, 9]))
     
   with it("has five neighbours for left-edge cells"):
-    game = Game([
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9]
-    ])
-    expect(game.neighbours_for(1, 0)).to(equal([1, 2, 5, 7, 8]))
+    expect(self._game.neighbours_for(1, 0)).to(equal([1, 2, 5, 7, 8]))
     
   with it("has five neighbours for right-edge cells"):
-    game = Game([
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9]
-    ])
-    expect(game.neighbours_for(1, 2)).to(equal([2, 3, 5, 8, 9]))
+    expect(self._game.neighbours_for(1, 2)).to(equal([2, 3, 5, 8, 9]))
     
   with it("has five neighbours for top-edge cells"):
-    game = Game([
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9]
-    ])
-    expect(game.neighbours_for(0, 1)).to(equal([1, 3, 4, 5, 6]))
+    expect(self._game.neighbours_for(0, 1)).to(equal([1, 3, 4, 5, 6]))
     
   with it("has five neighbours for bottom-edge cells"):
-    game = Game([
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9]
-    ])
-    expect(game.neighbours_for(2, 1)).to(equal([4, 5, 6, 7, 9]))
+    expect(self._game.neighbours_for(2, 1)).to(equal([4, 5, 6, 7, 9]))
 
     
   with it("creates a new game with a next generation for all fields in a row"):
@@ -90,3 +72,12 @@ with context("Neighbours in game"):
     expect(game.cell_at(0, 1)).to(equal(living_cell()))
     expect(game.cell_at(0, 2)).to(equal(dead_cell()))
     
+  with it("creates a new game with a next generation for all fields in a column"):
+    game = Game([
+      [living_cell()], 
+      [living_cell()], 
+      [living_cell()]])
+    game = game.next_generation()
+    expect(game.cell_at(0, 0)).to(equal(dead_cell()))
+    expect(game.cell_at(1, 0)).to(equal(living_cell()))
+    expect(game.cell_at(2, 0)).to(equal(dead_cell()))    
