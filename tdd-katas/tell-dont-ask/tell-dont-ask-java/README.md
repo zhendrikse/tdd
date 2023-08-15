@@ -198,48 +198,67 @@ public class Product {
 
    - Create an `addOrderItem()` method in [Order.java](app/src/main/java/domain/Order.java):
 
-    ```python
-    def add_order_item(self, item: OrderItem):
-      self.items.append(item)
-      self.total = self.total + item.get_taxed_amount()
-      self.tax= self.tax + item.get_tax()  
+    ```java
+    public void addOrderItem(OrderItem orderItem) {
+        items.add(orderItem);
+        tax = tax.add(orderItem.tax);
+        total = total.add(orderItem.taxedAmount);
+    }
     ```  
-    and use it in the [OrderCreationUseCase](TellDontAskKata#src/useCase/OrderCreationUseCase.py).
+    and use it in the [OrderCreationUseCase](app/src/main/java/useCase/OrderCreationUseCase.java).
 
-   - Create the following methods in [Product.py](TellDontAskKata#src/domain/Product.py):
+   - Create the following methods in [Product.java](app/src/main/java/domain/Product.java):
 
-    ```python
-    def unitary_tax(self):
-      return Decimal(self.price / Decimal(100) * self.category.get_tax_percentage()).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    ```java
+    public BigDecimal unitaryTax() {
+        return price.divide(valueOf(100)).multiply(category.taxPercentage).setScale(2, HALF_UP);
+    }
 
-    def unitary_taxed_amount(self):
-      return Decimal(self.price + self.unitary_tax()).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    public BigDecimal unitaryTaxedAmount() {
+        return price.add(unitaryTax()).setScale(2, HALF_UP);
+    }
     ```
 
-   - Next, in [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) modify the constructor like so:
+   - Next, in [OrderItem.java](app/src/main/java/domain/OrderItem.java) modify the constructor like so:
 
-    ```python
-    def __init__(self, product: Product, quantity: int):
-      self.product = product
-      self.quantity = quantity
-      self.taxed_amount = Decimal(self.product.unitary_taxed_amount() * Decimal(quantity).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
-      self.tax = self.product.unitary_tax() * (Decimal(quantity))
+    ```java
+    public OrderItem(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+        this.taxedAmount = product.unitaryTaxedAmount().multiply(BigDecimal.valueOf(quantity)).setScale(2, HALF_UP);
+        this.tax = product.unitaryTax().multiply(BigDecimal.valueOf(quantity));
+    }
     ```
   
-    The `run()` method in [OrderCreationUseCase.py](TellDontAskKata#src/useCase/OrderCreationUseCase.py) now simplifies to:
-    ```python
-    def run(self, request: SellItemsRequest):
-      order = Order("EUR")
+    The `run()` method in [OrderCreationUseCase.java](app/src/main/java/useCase/OrderCreationUseCase.py) now simplifies to:
+    ```java
+    public void run(SellItemsRequest request) {
+        Order order = new Order(1);
 
-      for item_request in request.get_requests():
-        product = self.product_catalog.get_by_name(item_request.get_product_name())
+        for (SellItemRequest itemRequest : request.getRequests()) {
+            Product product = productCatalog.getByName(itemRequest.getProductName());
 
-        if product is None:
-          raise UnknownProductError()
-        else:
-          order.add_order_item(OrderItem(product, item_request.get_quantity()))
+            if (product == null) 
+                throw new UnknownProductException();
+                
+            order.addOrderItem(new OrderItem(product, itemRequest.getQuantity()));
+        }
+
+        orderRepository.save(order);
+    }
     ``` 
     The tax arguments can now be removed from the `OrderItem` constructor.
 
-   - Finally, the `set_items()`, `set_total()`, and `set_tax()` can be removed from [Order.py](TellDontAskKata#src/domain/Order.py).
+   - Finally, the `set_items()`, `set_total()`, and `set_tax()` can be removed from [Order.java](app/src/main/java/domain/Order.java).
 </details>
+
+7. You may want to get rid of the primitive obsession code smell by replacing the
+   "stringly typed" currency by `java.util.Currency`.
+
+8. You may want to return an unmodifyable list in
+   [OrderItem.java](app/src/main/java/OrderItem.java)
+   ```java
+    public List<OrderItem> getItems() {
+        return Collections.unmodifiableList(items);
+    }
+    ```
