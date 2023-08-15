@@ -24,7 +24,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [poker-hands-kata](./poker-hands-kata)     | H       | Outside-in / Mocks / Design decisions                 | ✔  | ✗   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [registration-form](./registration-form)   | L / M   | **Generic TDD** / Front-end TDD / Custom matchers     | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
 | [shunting-yard-algo](./shunting-yard-algo) | M       | **Generic TDD**                                       | ✗  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ |
-| [stack-kata](./stack-kata)                 | L       | Getting started with TDD (**small steps**)            | ✔  | ✔   | ✔  | ✗   | ✗  | ✗ | ✗ |
+| [stack-kata](./stack-kata)                 | L       | Getting started with TDD (**small steps**)            | ✔  | ✔   | ✔  | ✗   | ✗  | ✔ | ✗ |
 | [sudoku-kata](./sudoku-kata)               | M       | Recursion, TDD and **small steps**                    | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [task-list-kata](./task-list-kata)         | M       | Command-Query / Strong typing / Realistic app         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [tell-dont-ask](./tell-dont-ask)           | M       | **Refactoring** / Anemic domain model / DDD           | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ | ✔ | 
