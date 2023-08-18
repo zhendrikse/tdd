@@ -9,6 +9,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | ------------------------------------------ | ------- | ----------------------------------------------------- |:--:|:----:|:--:|:---:|:--:|:--:|:--:|
 | [audio-player-kata](./audio-player-kata)   | M       | London vs. Detroit schools of TDD / Mocks, spies      | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
 | [bugs-zero-kata](./bugs-zero-kata)         | M       | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
+| [cache-kata](./cache-kata)                 | L       | TDD as if you meant it / Ports &amp; adapters         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [christmas-tree](./christmas-tree)         | L       | Implement an algorithm in **small steps**             | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [connect-four](./connect-four)             | H       | Implement a game in **small steps**                   | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [countries-kata](./countries-kata)         | L / M   | Ports &amp; adapters / **Refactoring** / REST / DI    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
