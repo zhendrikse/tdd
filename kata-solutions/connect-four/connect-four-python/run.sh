@@ -1,0 +1,1 @@
+PYTHONPATH=$PYTHONPATH:src:test python game.py

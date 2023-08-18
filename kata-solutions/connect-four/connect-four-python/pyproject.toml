@@ -1,12 +1,15 @@
 [tool.poetry]
 name = "connect-four"
 version = "0.1.0"
-description = "Connect four kata"
+description = "Connect-4 kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
-pytest = "^7.3.2"
+mamba = "^0.11.2"
+expects = "^0.9.0"
+cl-chess = "^1.2.7"
+pytest-watch = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 
