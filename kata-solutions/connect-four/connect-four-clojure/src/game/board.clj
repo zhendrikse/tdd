@@ -3,12 +3,21 @@
 
 (def player ["_", "X", "O"])
 
+(def board-player-1 0)
+(def board-player-2 0)
+(def turn-player-1 0)
+(def turn-player-2 1)
+
 (def in-initial-game
-  "Empty bitboards for each player and game state (just 0s)."
-  [0 0 0])
+  [board-player-1 board-player-2 turn-player-1])
 
 (def total-rows 6)
 (def total-columns 7)
+
+
+
+
+
 
 (def top-left-bit-number 5)
 (def bottom-right-bit-number 42)
@@ -31,44 +40,37 @@
 
 
 
-(defn index-for 
+
+
+
+(defn- bit-index-for 
   [row column]
-  (+ row (* column 7)))
+  (+ row (* column total-columns)))
 
-(defn bit-insert-at
-  [row column in-game]
-  (bit-set in-game (index-for row column)))
+(defn- bit-insert-at
+  [row column in-board]
+  (bit-set in-board (bit-index-for row column)))
 
-(defn free-row-for
+(defn- combined-player-board
+       [game]
+       (+ (game 0) (game 1)))
+
+(defn- first-free-row-in
   [column in-game]
-    (if (= (in-game 0) 0)
-      0
-      1)
-  )
-
-;; (defn free-row-for
-;;   [column in-game]
-;;   (first 
-;;    (filter 
-;;     #(not (bit-test (in-game 0) (+ % (* column 7))))
-;;     (range 0 6))))
-  
-(defn insert-for-player-one-at
+    (let [board (combined-player-board in-game)
+          bit-off? (fn[row] (not (bit-test board (bit-index-for row column))))]
+      (first (filter bit-off? (range 0 (+ 1 total-rows))))))
+      
+(defn column-full-for?
   [column in-game]
-  (let [row (free-row-for column in-game)]
-    [(bit-insert-at row column (in-game 0)) 
-     (bit-insert-at row column (in-game 1))   
-     (in-game 2) ; player one leaves board of player two alone
-     ]))
+  (= total-rows (first-free-row-in column in-game)))
 
-(defn insert-for-player-two-at
+(defn insert-ply-at
   [column in-game]
-  (let [row (free-row-for column in-game)]
-    [(bit-insert-at row column (in-game 0)) 
-     (in-game 1) ; player two leaves board of player one alone 
-     (bit-insert-at row column (in-game 2))
-     ]))
-
+  (let [row (first-free-row-in column in-game)
+        player-num (in-game 2)]
+    (-> (assoc in-game 2 (bit-xor 1 player-num))
+        (assoc player-num (bit-insert-at row column (in-game player-num))))))
 
 
 
@@ -81,9 +83,9 @@
 
 (defn get-y
   "Determines y-coordinate for given x-coordinate."
-  [board x]
-  (first (filter #(not (bit-test board (+ % (* x 7))))
-                 (range 0 6))))
+  [board column]
+  (first (filter #(not (bit-test board (+ % (* column total-columns))))
+                 (range 0 total-rows))))
 
 (defn insert
   "Inserts symbol for given player (either 1 or 2) at specified x

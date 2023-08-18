@@ -33,7 +33,7 @@ Biboards are a great approach for a fast implementation. In this approach
 a game is represented by a tuple of three 64-bit integers where:
 
 - Every player gets his own bitboard, represented as an at least 64-bit integer
-- An additional 64-bit integer is used to represent the board as a whole
+- An additional integer is used to indicate which players turn it is
 
 Each bit in the 64-bit integer corresponds to a location on the board:
 
@@ -47,7 +47,7 @@ Each bit in the 64-bit integer corresponds to a location on the board:
 |Bit| 0 | 7  | 14 | 21 | 28 | 35 | 42 |
 
 The initial state of the game is thus characterized by the 
-tuple `[board_state, player_red, player_yellow] = [0 0 0]`)
+tuple `[bitboard_player_1, bitboard_player_2, turn_player_one] = [0 0 0]`)
 and may visually be represented as:
 
 ```
