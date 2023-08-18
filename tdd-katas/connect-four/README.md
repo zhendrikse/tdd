@@ -1,24 +1,14 @@
 # Connect 4
 
-```
-Computer plays 1
-|  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |
-|🟡|  |  |🔴|  |  |  |
-  1  2  3  4  5  6  7 
-Enter your row: 
-```
-
-## Definitions
+## Game rules
 
 - Two players: RED and YELLOW
-- RED always starts
 - A board has 7 columns and 6 rows
 - First column is column number 1
+- The first player that manages to get 4-in-a-row horizontally,
+  vertically, or diagonally, wins.
 
+<!--
 ## Setting up a configuration
 
 This means that the string "4433562" leads to the following configuration:
@@ -31,19 +21,74 @@ This means that the string "4433562" leads to the following configuration:
 0 0 2 2 0 0 0
 0 1 1 1 1 2 0
 ```
+-->
 
-## Links
+# Implementation
+
+## The board
+
+### Bitboards
+
+Biboards are a great approach for a fast implementation. In this approach
+a game is represented by a tuple of three 64-bit integers where:
+
+- Every player gets his own bitboard, represented as an at least 64-bit integer
+- An additional 64-bit integer is used to represent the board as a whole
+
+Each bit in the 64-bit integer corresponds to a location on the board:
+
+|Row| 0 |  1 | 2  |  3 |  4 |  5 |  6 |
+|:-:|:-:|:--:|:--:|:--:|:--:|:--:|:--:|
+|Bit| 5 | 12 | 19 | 26 | 33 | 40 | 47 | 
+|Bit| 4 | 11 | 18 | 25 | 32 | 39 | 46 |
+|Bit| 3 | 10 | 17 | 24 | 31 | 38 | 45 | 
+|Bit| 2 | 9  | 16 | 23 | 30 | 37 | 44 | 
+|Bit| 1 | 8  | 15 | 22 | 29 | 36 | 43 | 
+|Bit| 0 | 7  | 14 | 21 | 28 | 35 | 42 |
+
+The initial state of the game is thus characterized by the 
+tuple `[board_state, player_red, player_yellow] = [0 0 0]`)
+and may visually be represented as:
+
+```
+[1 2 3 4 5 6 7]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+```
+
+This means that after two moves
+
+```
+[1 2 3 4 5 6 7]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+[_ _ _ _ _ _ _]
+[O _ _ _ _ _ _]
+[X _ _ _ _ _ _]
+```
+
+the tuple has changed to `[2^0 + 2^1, 2^0, 2^1] = [3 1 2]`. 
+Equivalently, in case the first two moves would have been 
+at the second column of the board, the tuple would have been 
+`[2^7 + 2^8, 2^7, 2^8] = [384, 128, 256]`.
+
+# Links
 
 
-### Board representations
+## Board representations
 
 - [Bitboards and Connect Four](https://github.com/denkspuren/BitboardC4/blob/master/BitboardDesign.md)
 
-### Languages
+## Languages
 
 - [Connect 4 in Clojure](https://github.com/eigenlicht/clj-connect-four), good code but without tests
 
-### Algorithms
+## Algorithms
 
 - [Constructing Agents for Connect-4: Initial Notes](https://markusthill.github.io/programming/connect-4-introduction-and-tree-search-algorithms/)
 - [Solving connect four: how to build a perfect AI](http://blog.gamesolver.org/solving-connect-four/01-introduction/)
