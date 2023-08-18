@@ -25,7 +25,7 @@ Let's first initialize a Sudoku puzzle from a string.
 <details>
   <summary>Read a Sudoku puzzle from string</summary>
   
-The first exercise is to finish up the implementation for the above specification. 
+The first exercise is to finish up the implementation of the above specification. 
 Note that a value of zero is used to indicate that a value still needs to be found, 
 i.e. represents an empty cell in the initial puzzle.
 
@@ -108,7 +108,8 @@ Write the function <code>(has-value? board coordinates)</code> that returns fals
 ```
 </details>
 
-Now we can check if square is empty. To figure out which numbers are valid for a square we need to know which are already taken. Let’s write a couple of functions to figure this out.
+Now we can check if a square is empty. To figure out which numbers are valid for a square 
+we need to know which are already taken. Let’s write a couple of functions to figure this out.
 
 ### Exercise 3
 
@@ -197,7 +198,7 @@ You might want to write a helper function that returns the coordinates for the t
 Write the function <code>(valid-values-for board coordinates)</code> that returns a set with all valid numbers for the square at coordinates.    
   </summary>
 
-If the square at coordinates already has a value, valid-values should return the empty set `#{}`.
+If the square at coordinates already has a value, `valid-values` should return the empty set `#{}`.
 
 Remember that we already defined the set all-values.
 
@@ -239,7 +240,7 @@ Write the function <code>(filled? board)</code> which returns true if there are 
 
 It might help to write a helper function that returns all numbers of the board in a sequence.
 
-Remember that `(contains? set element)` can be used to check if element is in set.
+Remember that `(contains? set element)` can be used to check if `element` is in `set`.
 
 ```clojure
 (filled? sudoku-board) ;=> false
@@ -249,15 +250,16 @@ Remember that `(contains? set element)` can be used to check if element is in se
 
 Now that we can check if a board is full, it would be nice to know if the solution is valid.
 
-A sudoku is valid if each row, each column and each block contains the numbers from 1 to 9 exactly once. Let’s write functions for checking each of these conditions.
+A sudoku is valid if each row, each column, and each block contains the numbers from 
+1 to 9 exactly once. Let’s write functions for checking each of these conditions.
 
-To start, let’s write some functions to get the values for each row, column and block.
+To start, let’s write some functions to get the values for each row, column, and block.
 
 ### Exercise 9
 
 <details>
 <summary>
-Write the function <code>(rows board)</code> that returns a sequence of value sets for each row of board. That is, the first set in <code>(rows board)</code> is a set that has every element of the first row of board as element and so on.</summary>  
+Write the function <code>(rows board)</code> that returns a sequence of value sets for each row of <code>board</code>. That is, the first set in <code>(rows board)</code> is a set that has every element of the first row of <code>board</code> as element and so on.</summary>  
 
 ```clojure
 (rows sudoku-board) ;=> [#{5 3 0 7}
@@ -281,7 +283,7 @@ Write the function <code>(rows board)</code> that returns a sequence of value se
                     ;    #{1 2 3 4 5 6 7 8 9}]
 ```
 
-Write the function `(cols board)` that returns the values of each column in board as a sequence of sets.
+Write the function `(cols board)` that returns the values of each column in `board` as a sequence of sets.
 
 ```clojure
 (cols sudoku-board) ;=> [#{5 6 0 8 4 7}
@@ -310,7 +312,7 @@ Write the function `(cols board)` that returns the values of each column in boar
 
 <details>
   <summary>
-Write the function <code>(blocks board)</code> that returns the values of each block in board as a sequence of sets.
+Write the function <code>(blocks board)</code> that returns the values of each block in <code>board</code> as a sequence of sets.
   </summary>
 
 ```clojure
@@ -336,13 +338,14 @@ Write the function <code>(blocks board)</code> that returns the values of each b
 ```
 </details>
 
-Now we can get the values used in every row, column and block. Let’s write functions that check if every row, column and block is valid as per the rules of sudoku.
+Now we can get the values used in every row, column, and block. Let’s write functions that check if every 
+row, column, and block is valid as per the rules of sudoku.
 
 ### Exercise 11
 
 <details>
   <summary>
-Write the function <code>(valid-rows? board)</code> that returns true if every row in board is a valid filled row.
+Write the function <code>(valid-rows? board)</code> that returns true if every row in <code>board</code> is a valid filled row.
   </summary>
 
 ```clojure
@@ -350,14 +353,14 @@ Write the function <code>(valid-rows? board)</code> that returns true if every r
 (valid-rows? invalid-board) ;=> falsey
 ```
 
-Write the function `(valid-cols? board)` that returns true if every row in board is a valid filled column.
+Write the function `(valid-cols? board)` that returns true if every row in `board` is a valid filled column.
 
 ```clojure
 (valid-cols? solved-board)  ;=> truthy
 (valid-cols? invalid-board) ;=> falsey
 ```
 
-Write the function `(valid-blocks? board)` that returns true if every block in board is a valid filled block.
+Write the function `(valid-blocks? board)` that returns true if every block in `board` is a valid filled block.
 
 ```clojure
 (valid-blocks? solved-board)  ;=> truthy
@@ -371,7 +374,7 @@ Finally, we can write a function that checks if the whole board is a valid solut
 
 <details>
   <summary>
-Write the function <code>(valid-solution? board)</code> that returns true if board is a valid solution to sudoku.
+Write the function <code>(valid-solution? board)</code> that returns true if <code>board</code> is a valid solution to sudoku.
   </summary>
 
 ```clojure
@@ -385,9 +388,9 @@ However, if we want to actually solve a sudoku,
 we need to be able to modify a partial solution.
 
 Earlier we saw how useful `get-in` can be when indexing nested structures. 
-Theres a similar function for changing nested structures, 
+There's a similar function for changing nested structures, 
 called `assoc-in`. The expressions
-`(assoc-in nested-structure path new-value)` changes the value pointed by path, 
+`(assoc-in nested-structure path new-value)` changes the value pointed by `path`, 
 which is a sequence of keys. Here’s an example:
 
 ```clojure
@@ -404,7 +407,7 @@ Now we can write a function to change a single value in our representation of a 
 
 <details>
   <summary>
-Write the function <code>(set-value-at board coord new-value)</code> that changes the value at coord in board to new-value.
+Write the function <code>(set-value-at board coord new-value)</code> that changes the value at coord in <code>board</code> to new-value.
   </summary>
 
 ```clojure
@@ -448,9 +451,9 @@ Write the function <code>(find-empty-point board)</code> that returns coordinate
 
 Okay, so now we can find an empty location and we also know what 
 the valid values for that location are. What’s left is to try each one of 
-those values in that location and trying to solve the rest. 
+those values in that location and try to solve the rest. 
 
-This is called backtracking search:
+This is called a backtracking search:
 - You try one choice and recurse 
 - if the recursive call didn’t find any solutions
   - try the next choice.
@@ -482,7 +485,7 @@ Write the function <code>(solve board)</code> which takes a sudoku board as a pa
 - check if you are at the end
 - if so, is the solution valid?
   - if not, return an empty sequence
-  - otherwise return [solution]
+  - otherwise, return [solution]
 - if not
   - select an empty location
   - try solving with each valid value for that location
