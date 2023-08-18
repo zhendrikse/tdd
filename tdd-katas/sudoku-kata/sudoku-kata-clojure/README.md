@@ -380,9 +380,15 @@ Write the function <code>(valid-solution? board)</code> that returns true if boa
 ```
 </details>
 
-Now we can verify whether or not a solution is valid. However, if we want to actually solve a sudoku, we need to be able to modify a partial solution.
+Now we can verify whether or not a solution is valid. 
+However, if we want to actually solve a sudoku, 
+we need to be able to modify a partial solution.
 
-Earlier we saw how useful get-in can be when indexing nested structures. Theres a similar function for changing nested structures, called assoc-in. (assoc-in nested-structure path new-value) changes the value pointed by path, which is a sequence of keys. Here’s an example:
+Earlier we saw how useful `get-in` can be when indexing nested structures. 
+Theres a similar function for changing nested structures, 
+called `assoc-in`. The expressions
+`(assoc-in nested-structure path new-value)` changes the value pointed by path, 
+which is a sequence of keys. Here’s an example:
 
 ```clojure
  (assoc-in [[:a :b] [:c :d]] [1                                  0] :E)
@@ -438,17 +444,20 @@ Write the function <code>(find-empty-point board)</code> that returns coordinate
   </summary>
 </details>
 
-## Interludium
+## Intermezzo
 
 Okay, so now we can find an empty location and we also know what 
 the valid values for that location are. What’s left is to try each one of 
 those values in that location and trying to solve the rest. 
 
-This is called backtracking search. You try one choice and recurse, 
-if the recursive call didn’t find any solutions, try the next choice. 
-If none of the choices return a valid solution, return nil.
+This is called backtracking search:
+- You try one choice and recurse 
+- if the recursive call didn’t find any solutions
+  - try the next choice.
+- if none of the choices return a valid solution
+  -  return nil.
 
-Please consult 
+You may want to consult 
 [the Wiki page on backtracking algorithms](https://github.com/zhendrikse/tdd/wiki/Coding-Katas#katas-using-backtracking-algorithms)
 before continuing to the next and final exercise. You'll find there 
 [a dedicated section on backtracking with clojure](https://github.com/zhendrikse/tdd/wiki/Coding-Katas#a-simple-backtracking-example-in-clojure).

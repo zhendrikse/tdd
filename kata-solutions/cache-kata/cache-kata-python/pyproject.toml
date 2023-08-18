@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "Cache"
+version = "0.1.0"
+description = "This kata practices TDD"
+authors = ["Zeger Hendrikse  <zegerh@yahoo.co.uk>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10.0,<3.11"
+pytest-watch = "^4.2.0"
+pytest = "^7.3.2"
+pyhamcrest = "^2.0.4"
+
+
+
+
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
