@@ -59,10 +59,11 @@
 
 (defn- play-connect-4
   [moves game]
+  (let [updated-game (make-move (first moves) game)]
   (if (= 1 (count moves))
-    (make-move (first moves) game)
-    (recur (rest moves) (make-move (first moves) game))
-  ))
+    updated-game
+    (recur (rest moves) updated-game)
+  )))
 
 (defn play-connect-4-with
   [moves]
