@@ -2,8 +2,8 @@
   (:require [game.board :as board]))
 
 (defn bit-check
-  [c x]
-  (bit-and c (bit-shift-right c x)))
+  [board x]
+  (bit-and board (bit-shift-right board x)))
 
 (defn check-board-4
   "Checks whether given bitboard has 4 connected coins."

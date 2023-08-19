@@ -10,9 +10,7 @@
 
 # Implementation
 
-## The board
-
-### Bitboards
+## Bitboards
 
 Biboards are a great approach for a fast implementation. In this approach
 a game is represented by a tuple of three 64-bit integers where:
@@ -61,6 +59,66 @@ the tuple has changed to `[2^0 + 2^1, 2^0, 2^1] = [3 1 2]`.
 Equivalently, in case the first two moves would have been 
 at the second column of the board, the tuple would have been 
 `[2^7 + 2^8, 2^7, 2^8] = [384, 128, 256]`.
+
+### Finding the winning combinations
+
+I'll try to explain this algorithm by the aid of an example where a row is a winning combination. The bitboard looks like this:
+
+```
+[1 2 3 4 5 6 7]
+[_ _ _ _ _ _ _]
+[X X X _ _ O _]
+[O X O _ _ X _]
+[X O X X _ O _]
+[O O X O O O O]
+[X O O X O X X]
+```
+
+The bitboard belonging to the winning player looks like this:
+
+```
+[0 0 0 0 0 0 0]
+[0 0 0 0 0 1 0]
+[1 0 1 0 0 0 0]
+[0 1 0 0 0 1 0]
+[1 1 0 1 1 1 1]
+[0 1 1 0 1 0 0]
+```
+
+The number representing this board is 9552816915338. 
+Let's see what those bit-operations actually do.
+
+First step:
+```clojure
+(bit-and bitboard (bit-shift-right bitboard 7)
+``` 
+
+```
+[0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]
+[0 0 0 0 0 1 0]   [0 0 0 0 1 0 0]   [0 0 0 0 0 0 0]
+[1 0 1 0 0 0 0] & [0 1 0 0 0 0 0] = [0 0 0 0 0 0 0]
+[0 1 0 0 0 1 0]   [1 0 0 0 1 0 0]   [0 0 0 0 0 0 0]
+[1 1 0 1 1 1 1]   [1 0 1 1 1 1 0]   [1 0 0 1 1 1 0]
+[0 1 1 0 1 0 0]   [1 1 0 1 0 0 0]   [0 1 0 0 0 0 0]
+```
+
+Second step:
+
+```clojure
+(bit-and bitboard (bit-shift-right bitboard (* 2 7)))
+```
+
+```
+[0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]
+[0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]
+[0 0 0 0 0 0 0] & [0 0 0 0 0 0 0] = [0 0 0 0 0 0 0]
+[0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]
+[1 0 0 1 1 1 0]   [0 1 1 1 0 0 0]   [0 0 0 1 0 0 0]
+[0 1 0 0 0 0 0]   [0 0 0 0 0 0 0]   [0 0 0 0 0 0 0]
+```
+
+As you can see the second row, which contains four connected pieces, results into [0 0 0 1 0 0 0] and is therefore the winning combination. All the other rows results into 0.
+
 
 # Links
 
