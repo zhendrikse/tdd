@@ -57,11 +57,9 @@
 (defn print-game
   [game]
   (let [game-string (map-to-string game)
-        header (vec (map (partial str " ") (range 0 total-columns)))]
+        header (vec (map (partial str " ") (range 1 (inc total-columns))))]
   (println header)
   (print-rows game-string)))
 
 
-(defn -main
-   [& args]
-   (print-game (play-connect-4-with [0 1 2 3 4 5 6 3 4 3 3])))
+

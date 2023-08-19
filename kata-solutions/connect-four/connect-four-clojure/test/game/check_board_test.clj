@@ -6,7 +6,12 @@
 
 (defn player-has-connect-four?
   [player moves]
-  (not (= 0 (connect-four? (get (get (play-connect-4-with moves) bitboards) player)))))
+  (not= 0 (connect-four? (bitboard-for-player-in (play-connect-4-with moves) player))))
+
+(deftest check-bug-configuration
+  ;(print-game (play-connect-4-with [3 3]))
+  (is (not (player-has-connect-four? player-1 [3 3])))
+  (is (not (player-has-connect-four? player-2 [3 3]))))
 
 (deftest check-horizontal-four-player-one
   ;(print-game (play-connect-4-with [0 0 1 1 2 2 3]))

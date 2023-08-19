@@ -5,7 +5,7 @@
 (def column-heights [0 7 14 21 28 35 42])
 (def player-bit-boards [0 0])
 (def moves-counter 0)
-(def game [player-bit-boards moves-counter column-heights])
+(def new-game [player-bit-boards moves-counter column-heights])
 (def bitboards 0)
 (def counter 1)
 (def columns 2)
@@ -14,6 +14,14 @@
 (def player-2 1)
 
 ;; Board logic
+(defn current-player-in
+  [game]
+  (bit-and 1 (get game counter)))
+
+(defn bitboard-for-player-in
+  [game player]
+  (get (get game bitboards) player))
+
 (defn- column-height-for
   [column, game]
   ((get game columns) column))
@@ -27,11 +35,11 @@
 (defn- update-bitboard-in
   [game column]
   (let [move (bit-shift-left 1 (column-height-for column game)) ; // (1)
-        player-num (bit-and 1 (get game counter))
+        player (current-player-in game) 
         bitboards (get game bitboards)
-        board (bitboards player-num)
+        board (bitboard-for-player-in game player)
         updated-board (bit-xor move board)]
-  (assoc bitboards player-num updated-board))) ; // (2)
+  (assoc bitboards player updated-board))) ; // (2)
 
 (defn- increment-move-counter
   [game]
@@ -72,7 +80,7 @@
       (increment-move-counter             ; // (3)
       (update-bitboards-in game column)))))  ; // (2)
 
-(defn- play-connect-4
+(defn play-connect-4
   [moves game]
   (let [updated-game (make-move game (first moves))]
   (if (= 1 (count moves))
@@ -82,5 +90,5 @@
 
 (defn play-connect-4-with
   [moves]
-  (play-connect-4 moves game))
+  (play-connect-4 moves new-game))
 
