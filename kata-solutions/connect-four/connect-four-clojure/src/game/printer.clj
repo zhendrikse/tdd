@@ -57,7 +57,7 @@
 (defn print-game
   [game]
   (let [game-string (map-to-string game)
-        header (vec (map #(str % " ") (range 0 total-columns)))]
+        header (vec (map (partial str " ") (range 0 total-columns)))]
   (println header)
   (print-rows game-string)))
 
