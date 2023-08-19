@@ -22,7 +22,12 @@
   [bitboard]
   (map (partial bit-check bitboard) [6 7 8 1]))
 
-(defn check-board
+(defn check-board-in
   "Checks whether given bitboard has won."
-  [bitboard]
-  (apply bit-or (check-board-4 bitboard)))
+  [game]
+  (let [combined-bitboards (+ ((game 0) 0) ((game 0) 1))]
+  (apply bit-or (check-board-4 combined-bitboards))))
+
+(defn connect-four?
+  [game]
+  (not (= 0 (check-board-in game))))
