@@ -13,14 +13,6 @@
   (let [current-height ((game 2) column)]
   (assoc (game 2) column (inc current-height)))) ; // (1)
 
-(defn- update-column-heights
-  [column game]
-  (assoc game 2 (increment-column-height column game)))
-
-(defn- increment-move-counter
-  [game]
-  (assoc game 1 (inc (game 1)))) ; // (3)
-
 (defn- update-board
   [column game]
   (let [move (bit-shift-left 1 ((game 2) column)) ; // (1)
@@ -28,6 +20,14 @@
         bitboards (game 0)
         board (bitboards player-num)]
   (assoc bitboards player-num (bit-xor move board)))) ; // (2)
+
+(defn- increment-move-counter
+  [game]
+  (assoc game 1 (inc (game 1)))) ; // (3)
+
+(defn- update-column-heights
+  [column game]
+  (assoc game 2 (increment-column-height column game)))
 
 (defn- update-bitboards
   [column game]
@@ -53,9 +53,9 @@
      bitboard[counter & 1] ^= move // (2)
      moves[counter++] = column     // (3) <= Moves aren't stored yet"
   [column game]
-  (-> (update-column-heights column 
-      (increment-move-counter 
-      (update-bitboards column game)))))
+  (-> (update-column-heights column       ; // (1)
+      (increment-move-counter             ; // (3)
+      (update-bitboards column game)))))  ; // (2)
 
 (defn- play-connect-4
   [moves game]
