@@ -6,32 +6,44 @@
 (def player-bit-boards [0 0])
 (def moves-counter 0)
 (def game [player-bit-boards moves-counter column-heights])
+(def bitboards 0)
+(def counter 1)
+(def columns 2)
 
 ;; Board logic
+(defn- column-height-for
+  [column, game]
+  ((get game columns) column))
+
 (defn- increment-column-height
   [column game]
-  (let [current-height ((game 2) column)]
-  (assoc (game 2) column (inc current-height)))) ; // (1)
+  (let [current-height (column-height-for column game)
+        updated-height (inc current-height)]
+  (assoc (get game columns) column updated-height))) ; // (1)
 
-(defn- update-board
-  [column game]
-  (let [move (bit-shift-left 1 ((game 2) column)) ; // (1)
-        player-num (bit-and 1 (game 1))
-        bitboards (game 0)
-        board (bitboards player-num)]
-  (assoc bitboards player-num (bit-xor move board)))) ; // (2)
+(defn- update-bitboard-in
+  [game column]
+  (let [move (bit-shift-left 1 (column-height-for column game)) ; // (1)
+        player-num (bit-and 1 (get game counter))
+        bitboards (get game bitboards)
+        board (bitboards player-num)
+        updated-board (bit-xor move board)]
+  (assoc bitboards player-num updated-board))) ; // (2)
 
 (defn- increment-move-counter
   [game]
-  (assoc game 1 (inc (game 1)))) ; // (3)
+  (let [updated-game-counter (inc (get game counter))]
+  (assoc game counter updated-game-counter))) ; // (3)
 
 (defn- update-column-heights
   [column game]
-  (assoc game 2 (increment-column-height column game)))
+  (let [updated-columns (increment-column-height column game)]
+  (assoc game columns updated-columns)))
 
-(defn- update-bitboards
-  [column game]
-  (assoc game 0 (update-board column game)))
+(defn- update-bitboards-in
+  [game with-column]
+  (let [updated-bitboards (update-bitboard-in game with-column)]
+    (assoc game bitboards updated-bitboards)))
 
 ;; (1) Given the column col, get the index(!) of the position 
 ;;     stored in height for that column, shift a single bit 
@@ -52,14 +64,14 @@
      move = 1 << height[col]++     // (1)
      bitboard[counter & 1] ^= move // (2)
      moves[counter++] = column     // (3) <= Moves aren't stored yet"
-  [column game]
+  [game column]
   (-> (update-column-heights column       ; // (1)
       (increment-move-counter             ; // (3)
-      (update-bitboards column game)))))  ; // (2)
+      (update-bitboards-in game column)))))  ; // (2)
 
 (defn- play-connect-4
   [moves game]
-  (let [updated-game (make-move (first moves) game)]
+  (let [updated-game (make-move game (first moves))]
   (if (= 1 (count moves))
     updated-game
     (recur (rest moves) updated-game)
