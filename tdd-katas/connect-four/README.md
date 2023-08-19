@@ -8,21 +8,6 @@
 - The first player that manages to get 4-in-a-row horizontally,
   vertically, or diagonally, wins.
 
-<!--
-## Setting up a configuration
-
-This means that the string "4433562" leads to the following configuration:
-
-```
-0 0 0 0 0 0 0
-0 0 0 0 0 0 0
-0 0 0 0 0 0 0
-0 0 0 0 0 0 0
-0 0 2 2 0 0 0
-0 1 1 1 1 2 0
-```
--->
-
 # Implementation
 
 ## The board

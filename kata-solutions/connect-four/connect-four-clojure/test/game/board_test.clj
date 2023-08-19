@@ -2,29 +2,21 @@
   (:require [clojure.test :refer :all]
             [game.board :refer :all]))
 
-(def second-column 1)
+(def column-two 1)
 
-(deftest first-player-first-move-in-second-column
+(deftest first-player-first-move-in-column-two
   (is (= [128 0 1] 
-         (insert-ply-at second-column in-initial-game))))
+         (play-connect-4-with [column-two]))))
 
-(deftest second-player-first-move-in-second-column
+(deftest second-player-first-move-in-column-two
   (is (= [128 256 0] 
-         (insert-ply-at second-column
-           (insert-ply-at second-column in-initial-game)))))
+         (play-connect-4-with [column-two, column-two]))))
 
-(deftest first-player-second-move-in-second-column
+(deftest first-player-second-move-in-column-two
   (is (= [640 256 1]
-         (insert-ply-at second-column
-           (insert-ply-at second-column
-             (insert-ply-at second-column in-initial-game))))))
+         (play-connect-4-with [column-two, column-two, column-two]))))
 
-(deftest full-column-when-with-six-plies-in-second-column
+(deftest full-column-when-with-six-plies-in-column-two
   (is (= true
-         (column-full-for? second-column
-          (insert-ply-at second-column
-           (insert-ply-at second-column
-            (insert-ply-at second-column
-             (insert-ply-at second-column
-              (insert-ply-at second-column
-               (insert-ply-at second-column in-initial-game))))))))))
+         (column-full-for? column-two
+          (play-connect-4-with [column-two, column-two, column-two, column-two, column-two, column-two])))))

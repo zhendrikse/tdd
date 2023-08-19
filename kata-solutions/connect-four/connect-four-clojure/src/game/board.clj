@@ -1,23 +1,21 @@
 (ns game.board
   (:gen-class))
 
-(def player ["_", "X", "O"])
+(def for-player-1 0)
+(def for-player-2 1)
+(def for-no-player 2)
+(def game-symbol ["🔴", "🟡", ".."])
+(def red-ply (game-symbol for-player-1))
+(def yellow-ply (game-symbol for-player-2))
+(def no-ply (game-symbol for-no-player))
 
-(def board-player-1 0)
-(def board-player-2 0)
-(def turn-player-1 0)
-(def turn-player-2 1)
-
-(def in-initial-game
-  [board-player-1 board-player-2 turn-player-1])
+(def board-for-player-1 0)
+(def board-for-player-2 0)
+(def initial-game
+  [board-for-player-1 board-for-player-2 for-player-1])
 
 (def total-rows 6)
 (def total-columns 7)
-
-
-
-
-
 
 (def top-left-bit-number 5)
 (def bottom-right-bit-number 42)
@@ -38,10 +36,9 @@
                   (for [x x-range-of-bit-numbers]
                     (+ x y))))))
 
-
-
-
-
+(defn- current-player
+       [in-game]
+       (get in-game 2))
 
 (defn- bit-index-for 
   [row column]
@@ -65,59 +62,43 @@
   [column in-game]
   (= total-rows (first-free-row-in column in-game)))
 
-(defn insert-ply-at
+(defn- insert-ply-at
   [column in-game]
   (let [row (first-free-row-in column in-game)
-        player-num (in-game 2)]
-    (-> (assoc in-game 2 (bit-xor 1 player-num))
-        (assoc player-num (bit-insert-at row column (in-game player-num))))))
+        current-player (current-player in-game)
+        other-player (bit-xor 1 current-player)]
+    (-> (assoc in-game 2 other-player)
+        (assoc current-player (bit-insert-at row column (in-game current-player))))))
 
+(defn board-full? [game]
+  (empty? (filter #(not (bit-test (combined-player-board game) %)) board-bitnumbers)))
 
-
-
-
-
-(defn bit-insert
-  [board row column]
-  (bit-set board (+ row (* column 7))))
-
-(defn get-y
-  "Determines y-coordinate for given x-coordinate."
-  [board column]
-  (first (filter #(not (bit-test board (+ % (* column total-columns))))
-                 (range 0 total-rows))))
-
-(defn insert
-  "Inserts symbol for given player (either 1 or 2) at specified x
-  and sets according bit on his bitboard."
-  [boards x player-num]
-  (let [y (get-y (boards 0) x)]
-    (if (nil? y) nil
-      (-> (assoc boards 0 (bit-insert (boards 0) y x))
-          (assoc player-num (bit-insert (boards player-num) y x))))))
-
-(defn board-full? [boards]
-  (empty? (filter #(not (bit-test (boards 0) %)) board-bitnumbers)))
-
-(defn gen-game-state [boards]
-  (for [y (range 5 -1 -1)]
-    (vec (for [x (range 0 7)]
-           (if (bit-test (boards 1) (+ y (* 7 x))) (player 1)
-             (if (bit-test (boards 2) (+ y (* 7 x))) (player 2)
-               (player 0)))))))
+(defn- generate-game-state-for 
+  [game]
+  (let [bit-is-set-in (fn[board row column] (bit-test board (bit-index-for row column)))]
+  (for [row y-range-of-bit-numbers]
+    (vec (for [column (range 0 total-columns)]
+           (if  (bit-is-set-in (game for-player-1) row column) red-ply
+             (if (bit-is-set-in (game for-player-2) row column) yellow-ply
+               no-ply)))))))
 
 (defn print-board
-  [boards]
-  (println [1 2 3 4 5 6 7])
-  (doseq [row (gen-game-state boards)]
+  [game]
+  (println (vec (map #(str % " ") (range 0 total-columns))))
+  (doseq [row (generate-game-state-for game)]
     (println row)))
 
+(defn- play-connect-4
+  [moves game]
+  (if (= 1 (count moves))
+    (insert-ply-at (first moves) game)
+    (recur (rest moves) (insert-ply-at (first moves) game))
+  ))
+
+(defn play-connect-4-with
+  [moves]
+  (play-connect-4 moves initial-game))
 
 (defn -main
   [& args]
-  ;(print-board (insert (insert (insert( insert (insert (insert (insert in-initial-game 1 1) 1 2) 1 1) 1 2) 1 1) 1 2) 1 1)))
-  (print-board (insert (insert( insert (insert (insert (insert in-initial-game 1 1) 1 2) 1 1) 1 2) 1 1) 1 2)))
-  ;(print-board (insert (insert in-initial-game 0 1) 0 2)))
-  ;(print-board (insert in-initial-game 0 1)))
-  ;(print-board in-initial-game))
-  ;(println (get-y (get in-initial-game 0) 0)))
+  (print-board (play-connect-4-with [0 1 2 3 4 5 6 3 4 3 3])))
