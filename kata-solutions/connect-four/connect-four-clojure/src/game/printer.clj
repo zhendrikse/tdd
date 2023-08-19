@@ -6,13 +6,9 @@
 (def total-rows 6)
 
 ;; Define plies for printing purposes
-(def for-player-1 0)
-(def for-player-2 1)
-(def for-no-player 2)
-(def game-symbol ["🔴", "🟡", ".."])
-(def red-ply (game-symbol for-player-1))
-(def yellow-ply (game-symbol for-player-2))
-(def no-ply (game-symbol for-no-player))
+(def red-ply "🔴")
+(def yellow-ply "🟡")
+(def no-ply "..")
 
 ;; Bitboard indices
 (def top-left-bit-number 5)
@@ -44,14 +40,19 @@
 
 (defn- map-to-string
   [game]
-  (let [bitboards (game 0)
-        game-as-string (vec (map #(to-symbol % bitboards) board-bitnumbers))]
-    game-as-string))
+  (let [bitboards (game 0)]
+    (vec (map #(to-symbol % bitboards) board-bitnumbers))))
 
+(defn- index-in
+    [game-string row column]
+       (game-string (+ column (* row total-columns))))
+    
 (defn- print-rows
   [game-string]
   (doseq [row (range 0 total-rows)] 
-    (println (for [column (range 0 total-columns)] (game-string (+ column (* row total-columns)))))))
+    (println 
+     (for [column (range 0 total-columns)] 
+       (index-in game-string row column)))))
 
 (defn print-game
   [game]
