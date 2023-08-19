@@ -30,8 +30,8 @@
                     (+ x y))))))
 
 ;; Logic for printing a game
-(defn- to-symbol
-  [bitboard-index bitboards]
+(defn- map-to-symbol
+  [bitboards bitboard-index]
   (if (bit-test (get bitboards player-1) bitboard-index)
     red-ply
     (if (bit-test (get bitboards player-2) bitboard-index)
@@ -41,7 +41,7 @@
 (defn- map-to-string
   [game]
   (let [bitboards (get game bitboards)]
-    (vec (map #(to-symbol % bitboards) board-bitnumbers))))
+    (vec (map (partial map-to-symbol bitboards) board-bitnumbers))))
 
 (defn- index-in
     [game-string row column]
