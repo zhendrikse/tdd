@@ -10,6 +10,9 @@
 (def counter 1)
 (def columns 2)
 
+(def player-1 0)
+(def player-2 1)
+
 ;; Board logic
 (defn- column-height-for
   [column, game]

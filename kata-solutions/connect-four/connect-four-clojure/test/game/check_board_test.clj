@@ -4,9 +4,6 @@
             [game.printer :refer :all]
             [game.board :refer :all]))
 
-(def player-1 0)
-(def player-2 1)
-
 (defn player-has-connect-four?
   [player moves]
   (not (= 0 (connect-four? (get (get (play-connect-4-with moves) bitboards) player)))))

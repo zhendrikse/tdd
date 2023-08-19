@@ -1,5 +1,5 @@
 (ns game.printer
-  (:require [game.board :as board]))
+  (:require [game.board :refer :all]))
 
 ;; Board properties
 (def total-columns 7)
@@ -31,16 +31,16 @@
 
 ;; Logic for printing a game
 (defn- to-symbol
-  [index bitboards]
-  (if (bit-test (bitboards 0) index)
+  [bitboard-index bitboards]
+  (if (bit-test (get bitboards player-1) bitboard-index)
     red-ply
-    (if (bit-test (bitboards 1) index)
+    (if (bit-test (get bitboards player-2) bitboard-index)
       yellow-ply
       no-ply)))
 
 (defn- map-to-string
   [game]
-  (let [bitboards (game 0)]
+  (let [bitboards (get game bitboards)]
     (vec (map #(to-symbol % bitboards) board-bitnumbers))))
 
 (defn- index-in
@@ -64,4 +64,4 @@
 
 (defn -main
    [& args]
-   (print-game (board/play-connect-4-with [0 1 2 3 4 5 6 3 4 3 3])))
+   (print-game (play-connect-4-with [0 1 2 3 4 5 6 3 4 3 3])))
