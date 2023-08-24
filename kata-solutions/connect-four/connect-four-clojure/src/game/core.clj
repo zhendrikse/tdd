@@ -1,6 +1,5 @@
 (ns game.core
-  (:require [game.check-board :refer :all]
-            [game.printer :refer :all]
+  (:require [game.printer :refer :all]
             [game.board :refer :all]))
 
 (defn read-input [player-num]
@@ -21,11 +20,14 @@
   [game]
     (let [current-player (current-player-in game)
           move (read-input current-player)
-          updated-game (play-connect-4 [move] game)]
+          updated-game (make-move move game)]
     (print-game updated-game)
-    (if (connect-four-for? current-player updated-game)
-      (println (str "Player " (inc current-player) " has won!"))
-      (recur updated-game))))
+    (cond 
+      (connect-four-for? current-player updated-game) 
+        (println (str "Player " (inc current-player) " has won!"))
+      (is-full? updated-game)
+        (println (str "It's a draw!")) 
+      :else (recur updated-game))))
   
 (defn -main
    [& args]

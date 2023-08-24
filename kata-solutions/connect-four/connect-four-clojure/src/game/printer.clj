@@ -25,7 +25,6 @@
                   (for [x x-range-of-bit-numbers]
                     (+ x y))))))
 
-;; Logic for printing a game
 (defn- map-to-symbol
   [game bitboard-index]
   (cond 

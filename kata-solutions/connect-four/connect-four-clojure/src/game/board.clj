@@ -50,6 +50,14 @@
   (let [updated-columns (increment-column-height column game)]
     (assoc game COLUMNS_INDEX updated-columns)))
 
+(defn is-full? 
+  ([game] 
+   (= TOTAL_COLUMNS (count (filter (partial is-full? game) (range 0 TOTAL_COLUMNS)))))
+  ([game column] 
+   (let [column-bitindex ((game COLUMNS_INDEX) column)
+         full-column-bitindex (+ TOTAL_ROWS (BITBOARD_COLUMN_INDICES column))]
+     (= column-bitindex full-column-bitindex))))
+
 ;; (1) Given the column col, get the index(!) of the position 
 ;;     stored in height for that column, shift a single bit 
 ;;     (1L) to that position in the binary representation of 
@@ -64,7 +72,7 @@
 ;; (3) Store the column col in the history of moves, afterwards 
 ;;     (because ++ is again in postfix position) increment the 
 ;;      counter.
-(defn make-move 
+(defn- do-make-move 
   "def make_move(column):          // Pseudo code
      move = 1 << height[col]++     // (1)
      bitboard[counter & 1] ^= move // (2)
@@ -74,13 +82,34 @@
       (increment-move-counter-in        ; // (3)
       (update-board-in game column))))) ; // (2)
 
-(defn play-connect-4
-  [moves game]
-  (let [updated-game (make-move (first moves) game)]
-    (if (= 1 (count moves))
-      updated-game
-      (recur (rest moves) updated-game))))
+(defn make-move [column game]
+  (if (is-full? game column) 
+    game 
+    (do-make-move column game)))
 
-(defn play-connect-4-with
-  [moves]
-  (play-connect-4 moves GAME))
+
+(defn and-board-with-right-shifted
+  [board by-x-bits]
+  (bit-and board (bit-shift-right board by-x-bits)))
+
+(defn check-board-4
+  "Checks whether given bitboard has 4 connected coins."
+  [bitboard]
+  (map and-board-with-right-shifted
+       (map (partial and-board-with-right-shifted bitboard) [6 7 8 1])
+       [12 14 16 2]))
+
+(defn check-board-3
+  "Checks whether given bitboard has 3 connected coins."
+  [bitboard]
+  (map #(and-board-with-right-shifted (and-board-with-right-shifted bitboard %) %) [6 7 8 1]))
+
+(defn check-board-2
+  "Checks whether given bitboard has 2 connected coins."
+  [bitboard]
+  (map (partial and-board-with-right-shifted bitboard) [6 7 8 1]))
+
+(defn connect-four?
+  "Checks whether given bitboard has won."
+  [bitboard]
+  (apply bit-or (check-board-4 bitboard)))

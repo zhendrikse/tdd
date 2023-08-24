@@ -259,5 +259,80 @@ for example:
 (play-connect-4-with [0 0 1 2 3 2 4]))))
 ```
 
+In Clojure, we are almost invited to implement this
+recursively:
+
+```clojure
+(defn play-connect-4
+  [moves game]
+  (let [updated-game (make-move (first moves) game)]
+    (if (= 1 (count moves))
+      updated-game
+      (recur (rest moves) updated-game))))
+
+(defn play-connect-4-with
+  [moves]
+  (play-connect-4 moves GAME))
+```
+
 It would also be convenient if we can inspect these configurations
 visually:
+
+```
+[ 1  2  3  4  5  6  7]
+(.. .. .. .. .. .. ..)
+(.. ..🟡 .. ..  .. ..)
+(.. ..🔴 🟡 ..  .. ..)
+(..🟡 🔴 🟡 🔴 .. ..)
+(..🔴 🔴 🔴 🟡 .. ..)
+(..🔴 🟡 🟡 🟡 🔴..)
+```
+
+<details>
+<summary>The printing logic</summary>
+
+```clojure
+(def board-bitnumbers
+  "All bit numbers which are inside the bitboard.
+  (
+    (5 12 19 26 33 40 47) 
+    (4 11 18 25 32 39 46) 
+    (3 10 17 24 31 38 45) 
+    (2 9 16 23 30 37 44) 
+    (1 8 15 22 29 36 43) 
+    (0 7 14 21 28 35 42)
+  )"
+  (vec (flatten (for [y y-range-of-bit-numbers]
+                  (for [x x-range-of-bit-numbers]
+                    (+ x y))))))
+
+(defn- map-to-symbol
+  [game bitboard-index]
+  (cond 
+    (bit-test (get game RED) bitboard-index) red
+    (bit-test (get game YELLOW) bitboard-index) yellow
+    :else none))
+
+(defn- map-to-string
+  [game]
+  (vec (map (partial map-to-symbol game) board-bitnumbers)))
+
+(defn- index-in
+    [game-string row column]
+       (game-string (+ column (* row TOTAL_COLUMNS))))
+    
+(defn- print-rows
+  [game-string]
+  (doseq [row (range 0 TOTAL_ROWS)] 
+    (println 
+     (for [column (range 0 TOTAL_COLUMNS)] 
+       (index-in game-string row column)))))
+
+(defn print-game
+  [game]
+  (let [game-string (map-to-string game)
+        header (vec (map (partial str " ") (range 1 (inc TOTAL_COLUMNS))))]
+  (println header)
+  (print-rows game-string)))
+```
+</details>
