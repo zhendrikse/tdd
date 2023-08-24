@@ -10,7 +10,7 @@
 (def top-left-bit-number 5)
 (def bottom-right-bit-number 42)
 (def y-range-of-bit-numbers (range top-left-bit-number -1 -1))
-(def x-range-of-bit-numbers (range 0 (+ bottom-right-bit-number 1) TOTAL_COLUMNS))
+(def x-range-of-bit-numbers (range 0 (+ bottom-right-bit-number 1) WIDTH))
 (def board-bitnumbers
   "All bit numbers which are inside the bitboard.
   (
@@ -38,18 +38,18 @@
 
 (defn- index-in
     [game-string row column]
-       (game-string (+ column (* row TOTAL_COLUMNS))))
+       (game-string (+ column (* row WIDTH))))
     
 (defn- print-rows
   [game-string]
-  (doseq [row (range 0 TOTAL_ROWS)] 
+  (doseq [row (range 0 HEIGHT)] 
     (println 
-     (for [column (range 0 TOTAL_COLUMNS)] 
+     (for [column (range 0 WIDTH)] 
        (index-in game-string row column)))))
 
 (defn print-game
   [game]
   (let [game-string (map-to-string game)
-        header (vec (map (partial str " ") (range 1 (inc TOTAL_COLUMNS))))]
+        header (vec (map (partial str " ") (range 1 (inc WIDTH))))]
   (println header)
   (print-rows game-string)))

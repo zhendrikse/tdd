@@ -4,7 +4,7 @@
             [game.printer :refer :all]))
 
 (defn- bit-position [row column]
-  (+ row (* column TOTAL_COLUMNS)))
+  (+ row (* column WIDTH)))
 
 (defn check-board-at [row column game]
   (cond

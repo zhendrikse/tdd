@@ -3,11 +3,10 @@
 
 (def RED 0)
 (def YELLOW 1)
-(def EMPTY 2)
 (def NEW_BITBOARD 0)
 
-(def TOTAL_ROWS 6)
-(def TOTAL_COLUMNS 7)
+(def HEIGHT 6)
+(def WIDTH 7)
 
 (def MOVES_COUNTER 0)
 (def BITBOARD_COLUMN_INDICES [0 7 14 21 28 35 42])
@@ -52,10 +51,10 @@
 
 (defn is-full? 
   ([game] 
-   (= TOTAL_COLUMNS (count (filter (partial is-full? game) (range 0 TOTAL_COLUMNS)))))
+   (= (* HEIGHT WIDTH) (game MOVES_COUNTER_INDEX)))
   ([game column] 
    (let [column-bitindex ((game COLUMNS_INDEX) column)
-         full-column-bitindex (+ TOTAL_ROWS (BITBOARD_COLUMN_INDICES column))]
+         full-column-bitindex (+ HEIGHT (BITBOARD_COLUMN_INDICES column))]
      (= column-bitindex full-column-bitindex))))
 
 ;; (1) Given the column col, get the index(!) of the position 
