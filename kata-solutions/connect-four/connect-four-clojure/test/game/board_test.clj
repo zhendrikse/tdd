@@ -2,6 +2,15 @@
   (:require [clojure.test :refer :all]
             [game.board :refer :all]))
 
+(defn- bit-position [row column]
+  (+ row (* column TOTAL_COLUMNS)))
+
+(defn check-board-at [row column game]
+  (cond
+    (bit-test (game RED) (bit-position row column)) RED
+    (bit-test (game YELLOW) (bit-position row column)) YELLOW
+    :else EMPTY))
+
 (deftest a-new-board-has-no-plies-at-bottom-left
   (testing "No plies on a new board."
     (is (= EMPTY (check-board-at 0 0 GAME)))))

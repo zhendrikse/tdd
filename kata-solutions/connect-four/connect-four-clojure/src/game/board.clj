@@ -10,7 +10,6 @@
 (def TOTAL_COLUMNS 7)
 
 (def MOVES_COUNTER 0)
-(def BITBOARDS [NEW_BITBOARD NEW_BITBOARD])
 (def BITBOARD_COLUMN_INDICES [0 7 14 21 28 35 42])
 (def GAME [NEW_BITBOARD NEW_BITBOARD MOVES_COUNTER BITBOARD_COLUMN_INDICES])
 (def MOVES_COUNTER_INDEX 2)
@@ -24,15 +23,6 @@
   [game]
   (let [updated-game-counter (inc (get game MOVES_COUNTER_INDEX))]
     (assoc game MOVES_COUNTER_INDEX updated-game-counter))) 
-
-(defn- bit-position [row column]
-  (+ row (* column TOTAL_COLUMNS)))
-
-(defn check-board-at [row column game]
-  (cond
-    (bit-test (game RED) (bit-position row column)) RED
-    (bit-test (game YELLOW) (bit-position row column)) YELLOW
-    :else EMPTY))
 
 (defn- update-bitboard [bitboard bit-index]
   (let [move (bit-shift-left 1 bit-index)]
@@ -60,10 +50,29 @@
   (let [updated-columns (increment-column-height column game)]
     (assoc game COLUMNS_INDEX updated-columns)))
 
-(defn make-move [column game]
-  (-> (update-column-heights-in column
-      (increment-move-counter-in
-      (update-board-in game column)))))
+;; (1) Given the column col, get the index(!) of the position 
+;;     stored in height for that column, shift a single bit 
+;;     (1L) to that position in the binary representation of 
+;;     the bitboard and store the result in move afterwards 
+;;     (because the increment operator is in postfix position), 
+;;     height[col] is incremented by one.
+;; (2) bitboard[counter & 1] gets us the bitboard of the party 
+;;     (either X or O) on turn. The bit move is simply set via the 
+;;     XOR-operator on the corresponding bitboard. 
+;;     bitboard[counter & 1] ^= move is a shortcut for 
+;;     bitboard[counter & 1] = bitboard[counter & 1] ^ move.
+;; (3) Store the column col in the history of moves, afterwards 
+;;     (because ++ is again in postfix position) increment the 
+;;      counter.
+(defn make-move 
+  "def make_move(column):          // Pseudo code
+     move = 1 << height[col]++     // (1)
+     bitboard[counter & 1] ^= move // (2)
+     moves[counter++] = column     // (3) <= Moves aren't stored yet"
+  [column game]
+  (-> (update-column-heights-in column  ; // (1)
+      (increment-move-counter-in        ; // (3)
+      (update-board-in game column))))) ; // (2)
 
 (defn play-connect-4
   [moves game]
