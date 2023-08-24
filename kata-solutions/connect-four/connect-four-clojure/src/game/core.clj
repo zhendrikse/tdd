@@ -15,7 +15,7 @@
 
 (defn- connect-four-for?
   [current-player game]
-  (not= 0 (connect-four? (bitboard-for-player-in game current-player))))
+  (not= 0 (connect-four? (game current-player))))
 
 (defn- play-game
   [game]
@@ -29,6 +29,6 @@
   
 (defn -main
    [& args]
-   (print-game new-game)
-   (play-game new-game))
+   (print-game GAME)
+   (play-game GAME))
    

@@ -1,20 +1,16 @@
 (ns game.printer
   (:require [game.board :refer :all]))
 
-;; Board properties
-(def total-columns 7)
-(def total-rows 6)
-
 ;; Define plies for printing purposes
-(def red-ply "🔴")
-(def yellow-ply "🟡")
-(def no-ply "..")
+(def red "🔴")
+(def yellow "🟡")
+(def none "..")
 
 ;; Bitboard indices
 (def top-left-bit-number 5)
 (def bottom-right-bit-number 42)
 (def y-range-of-bit-numbers (range top-left-bit-number -1 -1))
-(def x-range-of-bit-numbers (range 0 (+ bottom-right-bit-number 1) total-columns))
+(def x-range-of-bit-numbers (range 0 (+ bottom-right-bit-number 1) TOTAL_COLUMNS))
 (def board-bitnumbers
   "All bit numbers which are inside the bitboard.
   (
@@ -31,35 +27,30 @@
 
 ;; Logic for printing a game
 (defn- map-to-symbol
-  [bitboards bitboard-index]
-  (if (bit-test (get bitboards player-1) bitboard-index)
-    red-ply
-    (if (bit-test (get bitboards player-2) bitboard-index)
-      yellow-ply
-      no-ply)))
+  [game bitboard-index]
+  (cond 
+    (bit-test (get game RED) bitboard-index) red
+    (bit-test (get game YELLOW) bitboard-index) yellow
+    :else none))
 
 (defn- map-to-string
   [game]
-  (let [bitboards (get game bitboards)]
-    (vec (map (partial map-to-symbol bitboards) board-bitnumbers))))
+  (vec (map (partial map-to-symbol game) board-bitnumbers)))
 
 (defn- index-in
     [game-string row column]
-       (game-string (+ column (* row total-columns))))
+       (game-string (+ column (* row TOTAL_COLUMNS))))
     
 (defn- print-rows
   [game-string]
-  (doseq [row (range 0 total-rows)] 
+  (doseq [row (range 0 TOTAL_ROWS)] 
     (println 
-     (for [column (range 0 total-columns)] 
+     (for [column (range 0 TOTAL_COLUMNS)] 
        (index-in game-string row column)))))
 
 (defn print-game
   [game]
   (let [game-string (map-to-string game)
-        header (vec (map (partial str " ") (range 1 (inc total-columns))))]
+        header (vec (map (partial str " ") (range 1 (inc TOTAL_COLUMNS))))]
   (println header)
   (print-rows game-string)))
-
-
-
