@@ -110,5 +110,6 @@
 
 (defn connect-four?
   "Checks whether given bitboard has won."
-  [bitboard]
-  (apply bit-or (check-board-4 bitboard)))
+  [game]
+  (let [previous-player (bit-xor 1 (current-player-in game))]
+  (not= 0 (apply bit-or (check-board-4 (game previous-player))))))

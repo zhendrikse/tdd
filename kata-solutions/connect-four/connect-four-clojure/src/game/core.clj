@@ -12,25 +12,28 @@
 ;;                (nil? (board/insert boards % player-num)))
 ;;           (repeatedly #(read-input player-num)))))
 
-(defn- connect-four-for?
-  [current-player game]
-  (not= 0 (connect-four? (game current-player))))
+(defn- game-end? [game] (or (connect-four? game) (is-full? game)))
+
+(defn- game-exit [game]
+  (let [previous-player (bit-xor 1 (current-player-in game))]
+    (if 
+      (connect-four? game) 
+        (println (str "Player " (inc previous-player) " has won!"))
+        (println (str "It's a draw!")))))
+
+(defn ai-move [game] (rand-int WIDTH))
 
 (defn- play-game
   [game]
-    (let [current-player (current-player-in game)
-          move (read-input current-player)
-          updated-game (make-move move game)]
-    (print-game updated-game)
-    (cond 
-      (connect-four-for? current-player updated-game) 
-        (println (str "Player " (inc current-player) " has won!"))
-      (is-full? updated-game)
-        (println (str "It's a draw!")) 
-      :else (recur updated-game))))
-  
+    (let [current-player (current-player-in game)]
+    (print-game game)
+    (if (game-end? game) 
+      (game-exit game)
+      (if (= current-player RED)
+        (recur (make-move (read-input current-player) game))
+        (recur (make-move (ai-move game) game))))))
+
 (defn -main
    [& args]
-   (print-game GAME)
    (play-game GAME))
    

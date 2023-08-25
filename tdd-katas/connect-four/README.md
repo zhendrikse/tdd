@@ -30,7 +30,7 @@ Each bit in the 64-bit integer corresponds to a location on the board:
 |Bit| 0 | 7  | 14 | 21 | 28 | 35 | 42 |
 
 The initial state of the game is thus characterized by the 
-tuple `[bitboard_player_1, bitboard_player_2, turn_player_one] = [0 0 0]`)
+tuple `[bitboard_player_1, bitboard_player_2, moves_counter] = [0 0 0]`)
 and may visually be represented as:
 
 ```
@@ -55,10 +55,32 @@ This means that after two moves
 [X _ _ _ _ _ _]
 ```
 
-the tuple has changed to `[2^0 + 2^1, 2^0, 2^1] = [3 1 2]`. 
+the tuple has changed to `[2^0  2^1 2] = [1 2 2]`.
+
 Equivalently, in case the first two moves would have been 
 at the second column of the board, the tuple would have been 
-`[2^7 + 2^8, 2^7, 2^8] = [384, 128, 256]`.
+`[2^7, 2^8, 2] = [128, 256, 2]`.
+
+We note that we make a move by doing an or-operation on 
+the bit number indicated by the bitboard index number (see above
+table). This implies that when we add the following array of
+column heights to our game
+
+``` 
+column_heights = [0 7 14 21 28 35 42]
+``` 
+
+we know to which power to raise 2 to get the bit index. Raising
+to the power of 2 is equivalent to a bit shift left, by the way, which
+is extremely efficient.
+
+Finally, we have to raise the column height after each move,
+so in our example the updated `column_heights` have become
+
+```
+column_heights = [2 7 14 21 28 35 42]
+```
+
 
 ### Finding the winning combinations
 
