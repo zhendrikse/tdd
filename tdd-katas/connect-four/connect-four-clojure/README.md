@@ -336,3 +336,59 @@ visually:
   (print-rows game-string)))
 ```
 </details>
+
+## Full board
+
+We need a predicate for a full board so that we can determine 
+whether or not the game ended in a draw.
+
+<details>
+  <summary>Predicate for a full board</summary>
+
+```clojure
+(deftest is-draw
+  ;(print-game (play-connect-4-with [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6]))
+  (is (= true (is-full? (play-connect-4-with [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6])))))
+```
+
+You can visually inspect the board configuration by commenting in 
+the print statement and verify that the board is full and has no
+winner.
+
+```clojure
+(defn is-full? 
+  ([game] 
+   (= (* HEIGHT WIDTH) (game MOVES_COUNTER_INDEX))))
+``` 
+</details>
+
+
+## Full column
+
+Likewise, we need a predicate for a full column so that we can determine 
+which columns are still eligible to make a move.
+
+<details>
+  <summary>Predicate for a full column</summary>
+
+```clojure
+(deftest full-column-when-inserted-results-in-no-operation
+  (testing "Insert in full column will be neglected."
+    (is (= (play-connect-4-with [0 0 0 0 0 0]) (play-connect-4-with [0 0 0 0 0 0 0])))))
+```
+
+We test this indirectly by verifying that a move in a column
+that is already full leaves the game board unchanged.
+
+We extend the arity of the `is-full?` predicate to make the test green:
+
+```clojure
+(defn is-full? 
+  ([game] 
+   (= (* HEIGHT WIDTH) (game MOVES_COUNTER_INDEX)))
+  ([game column] 
+   (let [column-bitindex ((game COLUMNS_INDEX) column)
+         full-column-bitindex (+ HEIGHT (BITBOARD_COLUMN_INDICES column))]
+     (= column-bitindex full-column-bitindex))))
+``` 
+</details>

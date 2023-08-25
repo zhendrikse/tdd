@@ -24,7 +24,7 @@
   (play-connect-4 moves GAME))
 
 (deftest a-new-board-has-no-plies-at-bottom-left
-  (testing "No plies on a new board."
+  (testing "No moves are present a new board."
     (is (= EMPTY (check-board-at 0 0 GAME)))))
 
 (deftest player-one-move-at-column-one-results-in-red-at-bottom-left
