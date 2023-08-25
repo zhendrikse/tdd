@@ -81,7 +81,8 @@
       (increment-move-counter-in        ; // (3)
       (update-board-in game column))))) ; // (2)
 
-(defn make-move [column game]
+(defn make-move 
+  [column game]
   (if (is-full? game column) 
     game 
     (do-make-move column game)))

@@ -1,9 +1,13 @@
-# Implementation
+# Introduction
 
-Implementation inspired by [this solution on GitHub](https://github.com/eigenlicht/clj-connect-four/tree/master) combined with [bitboard design](https://github.com/denkspuren/BitboardC4/blob/master/BitboardDesign.md) and 
+The implementation below is inspired by 
+[this solution on GitHub](https://github.com/eigenlicht/clj-connect-four/tree/master) 
+combined with [bitboard design](https://github.com/denkspuren/BitboardC4/blob/master/BitboardDesign.md) and 
 the principles of TDD.
 
-## Moves on the board
+Let's start by implementing the board.
+
+# Moves on the board
 
 We start by making a move in the first column of the board.
 We assume the red player always starts.
@@ -11,7 +15,7 @@ We assume the red player always starts.
 But before he does so, we want to verify that that position is vacant 
 (as a first test).
 
-### An empty board is empty
+## An empty board is empty
 
 <details>
   <summary>Bottom-left position should be empty for a new board</summary>
@@ -39,7 +43,7 @@ We can easily make this test pass by defining the function
 ```
 </details>
 
-### A first move in the first column
+## A first move in the first column
 
 <details>
   <summary>A first move in the first column</summary>
@@ -69,7 +73,7 @@ We fake and cheat once more by hardcoding the updated board.
 Since we have hardcoded the updated board, let's force a first
 generalization, by writing a test for column two.
 
-### A first move in the second column
+## A first move in the second column
 
 <details>
   <summary>A first move in the second column</summary>
@@ -107,7 +111,7 @@ We are now forced to generalize the bit that is being flipped.
 ```
 </details>
 
-### A first move in the third column by the first player
+## A first move in the third column by the first player
 
 Let's see what happens if we play the third column.
 
@@ -159,7 +163,7 @@ functions accordingly:
 ```
 </details>
 
-### A first move by the second player
+## A first move by the second player
 
 Let's see what happens if we play the second player too.
 
@@ -204,7 +208,7 @@ moves counter is even, and yellow when it is odd):
 </details>
 
 
-### A first move by the second player
+## A first move by the second player
 
 Let's see what happens if we play the second player in the same column, so
 that the height in the column increases.
@@ -246,7 +250,7 @@ list containing the bitboard column indices:
 ```
 </details>
 
-## Intermezzo: convenience functions for constructing boards
+# Intermezzo: convenience functions for constructing boards
 
 As we eventually want to test various board configurations, we
 need a way to set up board configurations in a convenient way,
@@ -256,11 +260,10 @@ for example:
 ;; player one plays first column, then player two plays first
 ;; column, then player one the second column, player two the
 ;; third, player one the second, etc.
-(play-connect-4-with [0 0 1 2 3 2 4]))))
+(play-connect-4-with [0 0 1 2 3 2 4])
 ```
 
-In Clojure, we are almost invited to implement this
-recursively:
+In Clojure, we are almost invited to implement this recursively:
 
 ```clojure
 (defn play-connect-4
@@ -391,4 +394,194 @@ We extend the arity of the `is-full?` predicate to make the test green:
          full-column-bitindex (+ HEIGHT (BITBOARD_COLUMN_INDICES column))]
      (= column-bitindex full-column-bitindex))))
 ``` 
+</details>
+
+# Checking for connect four
+
+The code in the solution has been taken from 
+[this solution on GitHub](https://github.com/eigenlicht/clj-connect-four/tree/master) 
+and needs to be developed from scratch using TDD.
+
+There are some tests though.
+
+<details>
+  <summary>Tests for verification of connect four</summary>
+
+```clojure
+(deftest check-no-connect-four
+  ;(print-game (play-connect-4-with [3 3]))
+  (is (= false (connect-four? (play-connect-4-with [3 3])))))
+
+(deftest check-horizontal-four-player-one
+  ;(print-game (play-connect-4-with [0 0 1 1 2 2 3]))
+  (is (connect-four? (play-connect-4-with [0 0 1 1 2 2 3]))))
+
+(deftest check-horizontal-four-player-two
+  ;(print-game (play-connect-4-with [0 1 1 2 2 3 3 4]))
+  (is (connect-four? (play-connect-4-with [0 1 1 2 2 3 3 4]))))
+
+(deftest check-vertical-four-player-one
+  ;(print-game (play-connect-4-with [0 1 0 1 0 1 0]))
+  (is (connect-four? (play-connect-4-with [0 1 0 1 0 1 0]))))
+
+(deftest check-vertical-four-player-two
+  ;(print-game (play-connect-4-with [0 1 0 1 0 1 2 1]))
+  (is (connect-four? (play-connect-4-with [0 1 0 1 0 1 2 1]))))
+
+(deftest check-diagonal-four-player-one
+  ;(print-game (play-connect-4-with [0 1 1 2 2 3 2 3 3 5 3]))
+  (is (connect-four? (play-connect-4-with [0 1 1 2 2 3 2 3 3 5 3]))))
+
+(deftest is-draw
+  ;(print-game (play-connect-4-with [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6]))
+  (is (= true (is-full? (play-connect-4-with [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6])))))
+```
+
+The last test is a bit special, in the sense that it test for a draw.
+</details>
+
+# Playing connect four
+
+## Two human players
+
+Let's first build the logic to have two human players
+compete against one another.
+
+<details>
+<summary>Accommodating two human players</summary>
+
+```clojure
+(defn read-input [player-num]
+  (printf "Player %d's turn [human]: " (inc player-num)) (flush)
+  (dec (Integer/parseInt (or (re-find #"^\d+" (read-line)) "0"))))
+
+(defn- game-end? [game] (or (connect-four? game) (is-full? game)))
+
+(defn- game-exit 
+  [game]
+  (let [previous-player (bit-xor 1 (current-player-in game))]
+    (if (connect-four? game)  
+      (println (str "Player " (inc previous-player) " has won!")) 
+      (println (str "It's a draw!")))))
+
+(defn- play-game
+  [game]
+  (let [current-player (current-player-in game)]
+    (print-game game)
+    (if (game-end? game)
+      (game-exit game)
+      (recur (make-move (read-input current-player) game)))))
+```
+</details>
+
+## A human player against an AI player
+
+### AI player that plays random moves
+
+We extend the above code with the simplest thing that could 
+possibly work, namely an AI player that just randomly picks
+its moves.
+
+<details>
+  <summary>Human player against an AI player with random moves</summary>
+
+```clojure
+(deftest generate-random-ai-move
+  (testing "AI player generates a random move on empty board")
+    (is (and (> (generate-ai-move GAME) 0) (< (generate-ai-move GAME) WIDTH))))
+```
+
+We can make this test pass easily by defining
+
+```clojure
+(defn generate-ai-move [game] (get (vec (range WIDTH)) (rand-int WIDTH)))
+```
+
+The function that plays the game can now use this `genrate-ai-move` function
+for the AI player:
+
+```clojure
+(defn- play-game
+  [game] 
+  (let [current-player (current-player-in game)]
+    (print-game game)
+    (if (game-end? game) 
+      (game-exit game)
+      (if (= current-player RED)
+        (recur (make-move (read-input current-player) game))
+        (recur (make-move (generate-ai-move game) game))))))
+```
+</details>
+
+### AI player that plays the winning move
+
+Next step up is to let the AI player make an exception from
+its default random selection strategy when he can make a 
+winning move. 
+
+To this extent, we are going to rate all the possible moves.
+By default, all moves are rated with a zero score. As has been explained
+[here](http://blog.gamesolver.org/solving-connect-four/02-test-protocol/)
+
+- A score is positive if the current player can win. 
+  The score is 1 if he wins with his last stone, 
+  2 if he wins with your second last stone and so on.
+- A score is zero if the game ends by a draw game
+- A score is negative if the current player loses whatever he plays. 
+  The score is -1 if his opponent wins with his last stone, 
+  -2 if his opponent wins with his second last stone and so on.
+
+<details>
+  <summary>Creating a score for the winning move</summary>
+
+```clojure
+(deftest winning-move-ratings-for-connect-four
+  (testing "Winning move ratings for a connect four."
+    (is (= [0 0 0 18 0 0 0] (rate-moves (play-connect-4-with [0 6 0 5 1 4 1]))))))
+```
+
+We can make this test pass with
+
+```clojure
+(def TOTAL_MOVES (/ (* WIDTH HEIGHT) 2))
+
+(defn- is-winning-move?
+  [move game]
+  (connect-four? (make-move move game)))
+
+(defn- rate-move 
+  [game move]
+  (let [moves-made (/ (dec (game MOVES_COUNTER_INDEX)) 2)
+        moves-left (- TOTAL_MOVES moves-made)
+        score moves-left]
+  (if (is-winning-move? move game)
+    score
+    0)))
+
+(defn rate-moves 
+  [game] 
+  (map (partial rate-move game) (range WIDTH)))
+```
+
+The `genrate-ai-move` function now has to pick this move with
+the highest score:
+
+```clojure
+(deftest ai-selects-highest-move
+  (testing "AI player generates a random move on empty board")
+  (is (= 3 (generate-ai-move (play-connect-4-with [0 6 0 5 1 4 1])))))
+```
+
+So we modify `generate-ai-move`
+
+```clojure
+(defn- equal-ratings? [move-ratings] (apply = move-ratings))
+
+(defn generate-ai-move [game]
+  (let [move-ratings (rate-moves game)
+        best-move (.indexOf move-ratings (apply max move-ratings))] 
+    (if (equal-ratings? move-ratings)
+      ((vec (range WIDTH)) (rand-int WIDTH))
+      best-move)))
+```
 </details>
