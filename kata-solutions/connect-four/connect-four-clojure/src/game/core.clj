@@ -4,6 +4,9 @@
 
 (def TOTAL_MOVES (/ (* WIDTH HEIGHT) 2))
 
+(def DEFAULT_SCORE Integer/MIN_VALUE)
+(def COLUMNS_SCORE_MAP (into {} (map (fn[column] [column DEFAULT_SCORE]) (range WIDTH))))
+
 (defn read-input [player-num]
   (printf "Player %d's turn [human]: " (inc player-num)) (flush)
   (dec (Integer/parseInt (or (re-find #"^\d+" (read-line)) "0"))))
@@ -36,25 +39,22 @@
 ;;     (/ (- (* WIDTH HEIGHT) (game MOVES_COUNTER_INDEX)) 2)
 ;;     0))
 
-(defn- rate-move 
-  [game move]
+(defn rate-moves
+  [game]
   (let [moves-made (/ (dec (game MOVES_COUNTER_INDEX)) 2)
         moves-left (- TOTAL_MOVES moves-made)
-        score moves-left]
-  (if (is-winning-move? move game)
-    score
-    0)))
+        score moves-left
+        score-mapper (fn [[key value]] [key (if (is-winning-move? key game) score value)])] 
+    (into {} (map score-mapper COLUMNS_SCORE_MAP))))
 
-(defn rate-moves 
-  [game] 
-  (map (partial rate-move game) (range WIDTH)))
-
-(defn- equal-ratings? [move-ratings] (apply = move-ratings))
+(defn- pick-max-score-column
+  [columns-score-map]
+  (key (first (sort-by val > columns-score-map))))
 
 (defn generate-ai-move [game]
   (let [move-ratings (rate-moves game)
-        best-move (.indexOf move-ratings (apply max move-ratings))] 
-    (if (equal-ratings? move-ratings)
+        best-move (pick-max-score-column move-ratings)] 
+    (if (= (get move-ratings best-move) DEFAULT_SCORE)
       ((vec (range WIDTH)) (rand-int WIDTH))
       best-move)))
 
@@ -67,7 +67,6 @@
       (if (= current-player RED)
         (recur (make-move (read-input current-player) game))
         (recur (make-move (generate-ai-move game) game))))))
-
 
 (defn -main
    [& args]
