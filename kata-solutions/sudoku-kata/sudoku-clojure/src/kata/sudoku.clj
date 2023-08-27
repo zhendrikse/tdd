@@ -99,3 +99,14 @@
         columns-valid (all-columns-valid? board)
         blocks-valid (all-blocks-valid? board)]
     (every? #(= % true) (list rows-valid columns-valid blocks-valid))))
+
+(defn set-value-at
+  [board path new-value]
+  (assoc-in board path new-value))
+
+
+(defn- square-empty? [board coordinates] (not (square-has-value? board coordinates)))
+(defn find-empty-square 
+  [board]
+  (let [board-coordinates (for [x (range  dim) y (range  dim)] [x y])]
+  (first (filter (partial square-empty? board) board-coordinates))))

@@ -15,6 +15,17 @@
                     [0 0 0 4 1 9 0 0 5]
                     [0 0 0 0 8 0 0 7 9]]))
 
+(def sudoku-board-after-change-at-2-1 (board-from-vector 
+        [[5 3 0 0 7 0 0 0 0]
+         [6 0 0 1 9 5 0 0 0]
+         [0 4 8 0 0 0 0 6 0]
+         [8 0 0 0 6 0 0 0 3]
+         [4 0 0 8 0 3 0 0 1]
+         [7 0 0 0 2 0 0 0 6]
+         [0 6 0 0 0 0 2 8 0]
+         [0 0 0 4 1 9 0 0 5]
+         [0 0 0 0 8 0 0 7 9]]))
+
 (def solved-board (board-from-vector
                    [[5 3 4 6 7 8 9 1 2]
                     [6 7 2 1 9 5 3 4 8]
@@ -165,3 +176,8 @@
 (deftest valid-values-at-square-0-2
   (is (= #{1 2 4} (valid-values-for-square sudoku-board [0 2]))))
 
+(deftest set-value-at-2-1-to-4
+  (is (= sudoku-board-after-change-at-2-1 (set-value-at sudoku-board [2 1] 4))))
+
+(deftest find-empty-square-on-sudoku-board
+  (is (= [0 2] (find-empty-square sudoku-board))))
