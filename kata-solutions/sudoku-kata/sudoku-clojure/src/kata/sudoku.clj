@@ -110,18 +110,14 @@
   (let [board-coordinates (for [x (range  dim) y (range  dim)] [x y])]
     (first (filter (partial square-empty? board) board-coordinates))))
 
-(defn- valid-values-for-next-empty-square
-  [board]
-  (let [next-square (find-empty-square board)]
-    (valid-values-for-square board next-square)))
-
 (defn solve
   [board]
   (if (filled? board)
     (if (valid-solution? board)
       board
       [])
-    (let [valid-values (valid-values-for-next-empty-square board)]
+    (let [next-square (find-empty-square board)
+          valid-values (valid-values-for-square board next-square)]
       (if (empty? valid-values)
         [] ; board not solved and no valid values can be found => backtrack
         (for [value valid-values
