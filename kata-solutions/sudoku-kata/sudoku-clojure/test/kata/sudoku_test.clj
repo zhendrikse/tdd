@@ -167,9 +167,12 @@
   (is (= #{3 1 6 0 5 9} (column-values-in sudoku-board [4 8]))))
 
 (deftest coordinate-sequence-0-0
+  (is (= (list [0 0] [0 1] [0 2] [1 0] [1 1] [1 2] [2 0] [2 1] [2 2]) (block-coordinate-pairs [2 2])))
   (is (= (list [0 0] [0 1] [0 2] [1 0] [1 1] [1 2] [2 0] [2 1] [2 2]) (block-coordinate-pairs [0 0]))))
 (deftest coordinate-sequence-4-8
   (is (= (list [3 6] [3 7] [3 8] [4 6] [4 7] [4 8] [5 6] [5 7] [5 8]) (block-coordinate-pairs [4 8]))))
+(deftest coordinate-sequence-8-8
+  (is (= (list [6 6] [6 7] [6 8] [7 6] [7 7] [7 8] [8 6] [8 7] [8 8]) (block-coordinate-pairs [8 8]))))
 
 (deftest valid-values-at-square-0-0
   (is (= #{} (valid-values-for-square sudoku-board [0 0]))))
@@ -181,3 +184,7 @@
 
 (deftest find-empty-square-on-sudoku-board
   (is (= [0 2] (find-empty-square sudoku-board))))
+
+(deftest solve-sudoku-board
+  ;(println (solve sudoku-board)))
+  (is (= solved-board (solve sudoku-board))))
