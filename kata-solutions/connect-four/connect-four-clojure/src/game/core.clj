@@ -39,20 +39,24 @@
 ;;     (/ (- (* WIDTH HEIGHT) (game MOVES_COUNTER_INDEX)) 2)
 ;;     0))
 
-(defn rate-moves
-  [game]
-  (let [moves-made (/ (dec (game MOVES_COUNTER_INDEX)) 2)
-        moves-left (- TOTAL_MOVES moves-made)
-        score moves-left
-        score-mapper (fn [[key value]] [key (if (is-winning-move? key game) score value)])] 
-    (into {} (map score-mapper COLUMNS_SCORE_MAP))))
-
 (defn- pick-max-score-column
   [columns-score-map]
   (key (first (sort-by val > columns-score-map))))
 
+(defn rate-moves
+  [game scored-columns depth]
+  (let [moves-made (quot (game MOVES_COUNTER_INDEX) 2)
+        moves-left (- TOTAL_MOVES moves-made)
+        score moves-left
+        score-mapper (fn [[key value]] [key (if (is-winning-move? key game) score value)])
+        new-column-scores (into {} (map score-mapper scored-columns))]
+    (if (= 0 depth)
+      scored-columns
+      (rate-moves game new-column-scores (dec depth))
+    )))
+
 (defn generate-ai-move [game]
-  (let [move-ratings (rate-moves game)
+  (let [move-ratings (rate-moves game COLUMNS_SCORE_MAP 1)
         best-move (pick-max-score-column move-ratings)] 
     (if (= (get move-ratings best-move) DEFAULT_SCORE)
       ((vec (range WIDTH)) (rand-int WIDTH))
