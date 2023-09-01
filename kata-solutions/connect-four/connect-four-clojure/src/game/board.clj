@@ -112,7 +112,7 @@
   [bitboard]
   (map (partial and-board-with-right-shifted bitboard) [6 7 8 1]))
 
-(defn connect-four?
+(defn connect-four-on?
   "Checks whether given bitboard has won."
   [game]
   (let [previous-player (bit-xor 1 (current-player-in game))]
