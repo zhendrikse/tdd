@@ -87,6 +87,10 @@
     game 
     (do-make-move column game)))
 
+;; (defn play
+;;   [column]
+;;   (fn [column game] (make-move column game)))
+
 (defn and-board-with-right-shifted
   [board by-x-bits]
   (bit-and board (bit-shift-right board by-x-bits)))

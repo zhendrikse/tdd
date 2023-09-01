@@ -12,13 +12,11 @@
     (bit-test (game YELLOW) (bit-position row column)) YELLOW
     :else EMPTY))
 
-(defn play-connect-4
-  [moves game]
-  (let [updated-game (make-move (first moves) game)]
-    (if (= 1 (count moves))
-      updated-game
-      (recur (rest moves) updated-game))))
-
-(defn play-connect-4-with
+(defn on-board-with-moves
   [moves]
-  (play-connect-4 moves GAME))
+  (loop [moves-to-make moves 
+         board GAME]
+    (let [updated-board (make-move (first moves-to-make) board)]
+    (if (empty? (rest moves-to-make))
+      updated-board
+      (recur (rest moves-to-make) updated-board)))))

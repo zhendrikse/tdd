@@ -4,9 +4,6 @@
 
 (def TOTAL_MOVES (/ (* WIDTH HEIGHT) 2))
 
-(def DEFAULT_SCORE Integer/MIN_VALUE)
-(def COLUMNS_SCORE_MAP (into {} (map (fn[column] [column DEFAULT_SCORE]) (range WIDTH))))
-
 (defn read-input [player-num]
   (printf "Player %d's turn [human]: " (inc player-num)) (flush)
   (dec (Integer/parseInt (or (re-find #"^\d+" (read-line)) "0"))))
@@ -19,60 +16,67 @@
 
 (defn- game-end? [game] (or (connect-four? game) (is-full? game)))
 
-(defn- game-exit 
+(defn- game-exit
   [game]
   (let [previous-player (bit-xor 1 (current-player-in game))]
-    (if (connect-four? game)  
-      (println (str "Player " (inc previous-player) " has won!")) 
+    (if (connect-four? game)
+      (println (str "Player " (inc previous-player) " has won!"))
       (println (str "It's a draw!")))))
 
+(defn is-winning-move? [column]
+  (fn [board] (connect-four? (make-move column board))))
 
-(defn- can-play? [move game] (not (is-full? game move)))
+(defn can-play? [column]
+  (fn [board] (not (is-full? board column))))
 
-(defn- is-winning-move?
-  [move game]
-  (connect-four? (make-move move game)))
+(defn- possible-moves-on [board] 
+  (filter #((can-play? %) board) (range WIDTH)))
 
-;; (defn- negamax 
-;;   [game move]
-;;   (if (and (can-play? move game) (is-winning-move? move game))
-;;     (/ (- (* WIDTH HEIGHT) (game MOVES_COUNTER_INDEX)) 2)
-;;     0))
+(defn- winning-move-is-possible? [board] (any? (map (is-winning-move? (possible-moves-on board)))))
 
-(defn- pick-max-score-column
-  [columns-score-map]
-  (key (first (sort-by val > columns-score-map))))
+(defn- score [board] (- TOTAL_MOVES (quot (board MOVES_COUNTER_INDEX) 2)))
 
-(defn rate-moves
-  [game scored-columns depth]
-  (let [moves-made (quot (game MOVES_COUNTER_INDEX) 2)
-        moves-left (- TOTAL_MOVES moves-made)
-        score moves-left
-        score-mapper (fn [[key value]] [key (if (is-winning-move? key game) score value)])
-        new-column-scores (into {} (map score-mapper scored-columns))]
-    (if (= 0 depth)
-      scored-columns
-      (rate-moves game new-column-scores (dec depth))
-    )))
+(defn negamax-algo
+  [board previous-score depth]
+  (cond 
+    (is-full? board)
+    0
+    (winning-move-is-possible? board)
+      (score board) 
+    (= 0 depth) 
+      previous-score 
+    :else
+      (for [move (possible-moves-on board) 
+            score (- (negamax-algo (make-move move board) previous-score (dec depth)))] 
+          (max score previous-score))))
 
-(defn generate-ai-move [game]
-  (let [move-ratings (rate-moves game COLUMNS_SCORE_MAP 1)
-        best-move (pick-max-score-column move-ratings)] 
-    (if (= (get move-ratings best-move) DEFAULT_SCORE)
+(defn negamax 
+  [board]
+  (negamax-algo board (- (* WIDTH HEIGHT)) 3))
+
+(defn generate-ai-move [board]
+  (let [possible-boards (map #(make-move % board) (possible-moves-on board))
+        move-ratings (map negamax possible-boards)
+        best-score (apply max move-ratings)
+        best-move (.indexOf move-ratings best-score)]
+    (println "Best move is " (inc best-move) " in " move-ratings)
+    (if (not= 1 (apply max (vals (frequencies move-ratings))))
       ((vec (range WIDTH)) (rand-int WIDTH))
       best-move)))
 
 (defn- play-game
-  [game] 
+  [game]
   (let [current-player (current-player-in game)]
     (print-game game)
-    (if (game-end? game) 
+    (if (game-end? game)
       (game-exit game)
       (if (= current-player RED)
         (recur (make-move (read-input current-player) game))
         (recur (make-move (generate-ai-move game) game))))))
 
 (defn -main
-   [& args]
-   (play-game GAME))
+  [& args]
+  (play-game GAME))
+  ;(println (filter #((can-play? %) GAME) (range WIDTH))))
+  ;(println (map #(make-move % GAME) (possible-moves-on GAME))))
    
