@@ -163,11 +163,24 @@ Why? ==> Because we specify! <!-- .element: class="fragment"-->
 1. <!-- .element: class="fragment"-->
    Passes the tests
 2. <!-- .element: class="fragment"-->
-   Reveals intention ([Clean code](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29))
-3. <!-- .element: class="fragment"-->
-   No duplication ([DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself))
+   Reveals intention ([Clean code](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)) &rarr; [game of life](https://github.com/zhendrikse/tdd/blob/master/tdd-katas/game-of-life/README.md):
+   ```clojure
+   (defn next-generation-of [game]
+     (map #(to-living-cell 
+            (which-both 
+             is-dead? 
+             (has-exactly-three? (living-neighbours-in game))) %) 
+     (map #(to-dead-cell 
+            (which-both 
+             is-alive? 
+             (which-either 
+              (has-less-than-two? (living-neighbours-in game)) 
+              (has-more-than-three? (living-neighbours-in game)))) %) game)))
+   ```
 4. <!-- .element: class="fragment"-->
-   Fewest elements ([Simplest thing that could possibly work](http://wiki.c2.com/?DoTheSimplestThingThatCouldPossiblyWork))
+   No duplication ([DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself))
+5. <!-- .element: class="fragment"-->
+   Fewest elements ([STTCPW](http://wiki.c2.com/?DoTheSimplestThingThatCouldPossiblyWork))
 
 ---
 
