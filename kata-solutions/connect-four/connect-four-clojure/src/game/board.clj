@@ -15,12 +15,10 @@
 (def MOVES_COUNTER_INDEX 2)
 (def COLUMNS_INDEX 3)
 
-(defn current-player-in
-  [game]
+(defn current-player-in [game]
   (bit-and 1 (game MOVES_COUNTER_INDEX)))
 
-(defn- increment-move-counter-in
-  [game]
+(defn- increment-move-counter-in [game]
   (let [updated-game-counter (inc (get game MOVES_COUNTER_INDEX))]
     (assoc game MOVES_COUNTER_INDEX updated-game-counter))) 
 
@@ -39,15 +37,14 @@
 (defn- column-height-for [column]
   (fn [game] ((get game COLUMNS_INDEX) column)))
 
-(defn- increment-column-height [column]
+(defn- increment-column-height-in [column]
   (fn [game]
   (let [current-height ((column-height-for column) game)
         updated-height (inc current-height)]
     (assoc (get game COLUMNS_INDEX) column updated-height)))) 
 
-(defn- update-column-heights-in
-  [column game]
-  (let [updated-columns ((increment-column-height column) game)]
+(defn- update-column-heights-in [column game]
+  (let [updated-columns ((increment-column-height-in column) game)]
     (assoc game COLUMNS_INDEX updated-columns)))
 
 (defn is-full? 
@@ -58,8 +55,7 @@
          full-column-bitindex (+ HEIGHT (BITBOARD_COLUMN_INDICES column))]
      (= column-bitindex full-column-bitindex))))
 
-(defn can-play? [column]
-  (fn [board] (not (is-full? board column))))
+(defn can-play? [column] (fn [board] (not (is-full? board column))))
 
 (defn possible-moves-in [game]
   (filter #((can-play? %) game) (range WIDTH)))
@@ -88,8 +84,7 @@
       (increment-move-counter-in            ; // (3)
       ((update-board-with column) game))))) ; // (2)
 
-(defn make-move 
-  [column game]
+(defn make-move [column game]
   (if (is-full? game column) 
     game 
     (do-make-move column game)))
@@ -98,8 +93,7 @@
 ;;   [column]
 ;;   (fn [column game] (make-move column game)))
 
-(defn and-board-with-right-shifted
-  [board by-x-bits]
+(defn and-board-with-right-shifted [board by-x-bits]
   (bit-and board (bit-shift-right board by-x-bits)))
 
 (defn check-board-4
@@ -119,7 +113,7 @@
   [bitboard]
   (map (partial and-board-with-right-shifted bitboard) [6 7 8 1]))
 
-(defn connect-four-on?
+(defn has-connect-four-in?
   "Checks whether given bitboard has won."
   [game]
   (let [previous-player (bit-xor 1 (current-player-in game))]

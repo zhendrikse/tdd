@@ -12,7 +12,7 @@
     (bit-test (game YELLOW) (bit-position row column)) YELLOW
     :else EMPTY))
 
-(defn board-with-moves
+(defn game-with-moves
   [moves]
   (loop [moves-to-make moves 
          board GAME]

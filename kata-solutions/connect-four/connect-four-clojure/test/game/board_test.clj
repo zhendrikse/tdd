@@ -1,7 +1,7 @@
 (ns game.board-test
   (:require [clojure.test :refer [deftest testing is]]
-            [game.board :refer [GAME RED YELLOW make-move connect-four-on? is-full?]]
-            [game.utilities :refer [EMPTY check-board-at board-with-moves]]
+            [game.board :refer [GAME RED YELLOW make-move has-connect-four-in? is-full?]]
+            [game.utilities :refer [EMPTY check-board-at game-with-moves]]
             [game.printer :refer [print-game]]))
 
 (deftest a-new-board-has-no-plies-at-bottom-left
@@ -35,32 +35,32 @@
 
 (deftest full-column-when-inserted-results-in-no-operation
   (testing "Insert in full column will be neglected."
-    (is (= (board-with-moves [0 0 0 0 0 0]) (board-with-moves [0 0 0 0 0 0 0])))))
+    (is (= (game-with-moves [0 0 0 0 0 0]) (game-with-moves [0 0 0 0 0 0 0])))))
 
 (deftest check-no-connect-four
-  ;(print-game (on-board-with-moves [3 3]))
-  (is (= false (connect-four-on? (board-with-moves [3 3])))))
+  ;(print-game (on-game-with-moves [3 3]))
+  (is (= false (has-connect-four-in? (game-with-moves [3 3])))))
 
 (deftest check-horizontal-four-player-one
-  ;(print-game (on-board-with-moves [0 0 1 1 2 2 3]))
-  (is (connect-four-on? (board-with-moves [0 0 1 1 2 2 3]))))
+  ;(print-game (on-game-with-moves [0 0 1 1 2 2 3]))
+  (is (has-connect-four-in? (game-with-moves [0 0 1 1 2 2 3]))))
 
 (deftest check-horizontal-four-player-two
-  ;(print-game (on-board-with-moves [0 1 1 2 2 3 3 4]))
-  (is (connect-four-on? (board-with-moves [0 1 1 2 2 3 3 4]))))
+  ;(print-game (on-game-with-moves [0 1 1 2 2 3 3 4]))
+  (is (has-connect-four-in? (game-with-moves [0 1 1 2 2 3 3 4]))))
 
 (deftest check-vertical-four-player-one
-  ;(print-game (on-board-with-moves [0 1 0 1 0 1 0]))
-  (is (connect-four-on? (board-with-moves [0 1 0 1 0 1 0]))))
+  ;(print-game (on-game-with-moves [0 1 0 1 0 1 0]))
+  (is (has-connect-four-in? (game-with-moves [0 1 0 1 0 1 0]))))
 
 (deftest check-vertical-four-player-two
-  ;(print-game (on-board-with-moves [0 1 0 1 0 1 2 1]))
-  (is (connect-four-on? (board-with-moves [0 1 0 1 0 1 2 1]))))
+  ;(print-game (on-game-with-moves [0 1 0 1 0 1 2 1]))
+  (is (has-connect-four-in? (game-with-moves [0 1 0 1 0 1 2 1]))))
 
 (deftest check-diagonal-four-player-one
-  ;(print-game (on-board-with-moves [0 1 1 2 2 3 2 3 3 5 3]))
-  (is (connect-four-on? (board-with-moves [0 1 1 2 2 3 2 3 3 5 3]))))
+  ;(print-game (on-game-with-moves [0 1 1 2 2 3 2 3 3 5 3]))
+  (is (has-connect-four-in? (game-with-moves [0 1 1 2 2 3 2 3 3 5 3]))))
 
 (deftest is-draw
-  ;(print-game (on-board-with-moves [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6]))
-  (is (= true (is-full? (board-with-moves [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6])))))
+  ;(print-game (on-game-with-moves [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6]))
+  (is (= true (is-full? (game-with-moves [0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 4 3 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6])))))
