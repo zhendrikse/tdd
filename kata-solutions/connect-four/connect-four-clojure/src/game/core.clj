@@ -28,13 +28,6 @@
       (println (str "Player " (inc previous-player) " has won!"))
       (println (str "It's a draw!")))))
 
-(defn- move-winning? [column game]
-  [column (has-connect-four-in? (make-move column game))])
-
-(defn winning-move-in [game]
-  (let [rated-moves (into {} (map #(move-winning? % game) (possible-moves-in game)))]
-    (first (filter val rated-moves))))
-
 (defn- set-for [current-player score] (if (= current-player RED) score (- score)))
 
 (defn- score-for [game] (quot (- TOTAL_MOVES (dec (game MOVES_COUNTER_INDEX))) 2))

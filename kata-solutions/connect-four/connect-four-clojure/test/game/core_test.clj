@@ -2,14 +2,8 @@
   (:require [clojure.test :refer [deftest is]]
             [game.utilities :refer [game-with-moves]]
             [game.board :refer [GAME can-play?]]
-            [game.core :refer [generate-ai-move-for winning-move-in min-max]]
+            [game.core :refer [generate-ai-move-for min-max]]
             [game.printer :refer [print-game]]))
-
-(deftest given-three-in-a-row-test-for-winning-move
-  (is (= [3, true] (winning-move-in (game-with-moves [0 6 0 5 1 4 1])))))
-
-(deftest winning-move-is-not-possible
-  (is (empty? (winning-move-in GAME))))
 
 (deftest given-full-column-cannot-play-full-column
   (is (= false ((can-play? 3) (game-with-moves [2 3 3 2 2 3 3 2 2 3 3]))))
@@ -36,8 +30,6 @@
 
 (deftest score-board-where-red-move-after-yellow-move-can-be-winning
   (is (= -18 (min-max (game-with-moves [3 3 2 2 1]) 2))))
-
-
 
 (deftest suggested-move-on-board-where-yellow-next-move-is-winning)
   (is (= 3 (generate-ai-move-for (game-with-moves [0 6 0 5 1 4 1]))))

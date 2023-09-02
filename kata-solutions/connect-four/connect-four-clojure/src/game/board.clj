@@ -49,7 +49,7 @@
 
 (defn is-full? 
   ([game] 
-   (= (* HEIGHT WIDTH) (game MOVES_COUNTER_INDEX)))
+   (= TOTAL_MOVES (game MOVES_COUNTER_INDEX)))
   ([game column] 
    (let [column-bitindex ((game COLUMNS_INDEX) column)
          full-column-bitindex (+ HEIGHT (BITBOARD_COLUMN_INDICES column))]
