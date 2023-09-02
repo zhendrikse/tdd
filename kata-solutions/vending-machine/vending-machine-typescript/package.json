@@ -4,7 +4,7 @@
    "description": "This kata practices TDD",
    "main": "index.js",
    "scripts": {
-      "test": "mocha",
+      "test": "mocha spec/**/*_spec.ts --require ts-node/register ",
       "build": "tsc",
       "watch": "npx mocha spec/**/*_spec.ts --require ts-node/register --watch --extension ts"
    },
