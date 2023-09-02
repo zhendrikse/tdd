@@ -29,48 +29,54 @@
 (defn can-play? [column]
   (fn [board] (not (is-full? board column))))
 
-(defn possible-moves-on [board] 
+(defn possible-moves-on [board]
   (filter #((can-play? %) board) (range WIDTH)))
 
 (defn winning-move-on [board]
   (let [rated-moves (into {} (map (partial move-winning? board) (possible-moves-on board)))]
-   (first (filter val rated-moves))))
+    (first (filter val rated-moves))))
 
-(defn- score [board] (- TOTAL_MOVES (quot (board MOVES_COUNTER_INDEX) 2)))
+(defn- score [board] 
+  (let [score (- TOTAL_MOVES (quot (board MOVES_COUNTER_INDEX) 2))]
+    (if (= (current-player-in board) RED)
+      score
+      (- score))))
 
-(defn negamax-algo
+(defn- heuristic
+  [board] 
+  0)
+
+(defn min-max
   [board depth]
-  (cond 
-    (is-full? board)
-    0
-    (not (nil? (winning-move-on board)))
+  (cond
+    (connect-four-on? board)
       (score board) 
-    (= 0 depth) 
-      (if (connect-four-on? board)
-        (score board)
-        (- (* WIDTH HEIGHT))) 
+    (is-full? board)
+      0
+    (= depth 0)
+      (heuristic board)
     :else
-      (let [best-score (- (* WIDTH HEIGHT))
-            score-children (fn[move] (- (negamax-algo (make-move move board) (dec depth))))]
-        ;; (println (for [move (possible-moves-on board)] (score-children move)))
-        (max (apply max (for [move (possible-moves-on board)] 
-          (score-children move))) best-score))))
-
-(defn negamax 
-  [board]
-  (negamax-algo board 1))
+      (let [limit (* WIDTH HEIGHT)
+            current-player (current-player-in board)
+            best-score (if (= current-player RED) limit (- limit))]
+        (if (= current-player RED)
+          (do
+            ;(println (for [move (possible-moves-on board)] (min-max (make-move move board) (dec depth))))
+            (min (apply min (for [move (possible-moves-on board)] (min-max (make-move move board) (dec depth)))) best-score)
+            )
+          (do
+            ;(println (for [move (possible-moves-on board)] (min-max (make-move move board) (dec depth))))
+            (max (apply max (for [move (possible-moves-on board)] (min-max (make-move move board) (dec depth)))) best-score)
+            )
+          ))))
 
 (defn generate-ai-move [board]
   (let [possible-boards (map #(make-move % board) (possible-moves-on board))
-        move-ratings (map negamax possible-boards)
+        move-ratings (vec (map #(min-max % 4) possible-boards))
         best-score (apply max move-ratings)
-        best-move (.indexOf move-ratings best-score)]
-    (println "Best move is " (inc best-move) " in " move-ratings)
-    (if (nil? (winning-move-on board)) 
-      (if (apply = move-ratings)
-        ((vec (range WIDTH)) (rand-int WIDTH))
-        best-move)
-      (first (winning-move-on board)))))
+        best-moves (vec (filter #(= (get move-ratings %) best-score) (range (count move-ratings))))]
+    (println "Best moves are " (map inc best-moves) " in " move-ratings)
+    (get best-moves (rand-int (count best-moves)))))
 
 (defn- play-game
   [game]
