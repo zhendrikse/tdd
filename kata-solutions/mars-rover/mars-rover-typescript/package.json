@@ -1,7 +1,7 @@
 {
-   "name": "{{ cookiecutter.kata }}",
+   "name": "MarsRover",
    "version": "1.0.0",
-   "description": "{{ cookiecutter.project_short_description }}",
+   "description": "Mars Rover in Typescript",
    "main": "index.js",
    "scripts": {
       "test": "mocha spec/**/*_spec.ts --require ts-node/register ",
@@ -17,7 +17,7 @@
       "test",
       "unittest"
   ],
-   "author": "{{ cookiecutter.author }}",  
+   "author": "Zeger Hendrikse",  
    "license": "ISC",
    "devDependencies": {
       "expect.js": "^0.3.1",

@@ -21,7 +21,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [greed-kata](./greed-kata)                 | M       | Implement complex rules in **small steps**            | ✗  | ✗   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [locker-room-kata](./locker-room-kata)     | M       | Stateless / Functional programming                    | ✗  | ✗   | ✗  | ✔   | ✔  | ✗ | ✗ |
 | [manhattan-distance](./manhattan-distance) | L       | 1, 2, N / Encapsulation                               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
-| [mars-rover](./mars-rover)                 | M       | **Generic TDD** / Design decisions                    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
+| [mars-rover](./mars-rover)                 | M       | **Generic TDD** / Design decisions                    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ |
 | [poker-hands-kata](./poker-hands-kata)     | H       | Outside-in / Mocks / Design decisions                 | ✔  | ✗   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [registration-form](./registration-form)   | L / M   | **Generic TDD** / Front-end TDD / Custom matchers     | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
 | [shunting-yard-algo](./shunting-yard-algo) | M       | **Generic TDD**                                       | ✗  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ |
