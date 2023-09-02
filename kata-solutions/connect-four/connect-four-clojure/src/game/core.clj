@@ -45,6 +45,9 @@
   (let [current-player (current-player-in game)]
     (set-for current-player (score-for game))))
 
+(defn- pick-best-score-from [children-scores best-score limit-function]
+  (limit-function (apply limit-function children-scores) best-score))
+
 (defn min-max [game depth]
   (cond
     (has-connect-four-in? game) (score-for-current-player-in game)
@@ -57,7 +60,7 @@
           possible-moves (possible-moves-in game)
           limit-function (if (= current-player RED) min max)
           children-scores (for [move possible-moves] (min-max (make-move move game) (dec depth)))]
-      (limit-function (apply limit-function children-scores) best-score))))
+      (pick-best-score-from children-scores best-score limit-function))))
 
 (defn generate-ai-move-for [game]
   (let [possible-boards (map #(make-move % game) (possible-moves-in game))
