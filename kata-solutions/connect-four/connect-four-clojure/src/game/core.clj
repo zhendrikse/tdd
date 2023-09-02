@@ -1,13 +1,13 @@
 (ns game.core
   (:require [game.printer :refer [print-game]]
-            [game.board :refer [TOTAL_MOVES 
-                                MOVES_COUNTER_INDEX 
-                                RED 
-                                GAME 
-                                connect-four-on? 
+            [game.board :refer [TOTAL_MOVES
+                                MOVES_COUNTER_INDEX
+                                RED
+                                GAME
+                                connect-four-on?
                                 current-player-in
-                                is-full? 
-                                possible-moves-in 
+                                is-full?
+                                possible-moves-in
                                 make-move]]))
 
 (defn- read-input [player-num]
@@ -36,32 +36,34 @@
   (let [rated-moves (into {} (map #(move-winning? % game) (possible-moves-in game)))]
     (first (filter val rated-moves))))
 
-(defn- score [game] 
+(defn- score [game]
   (let [score (quot (- TOTAL_MOVES (dec (game MOVES_COUNTER_INDEX))) 2)]
     (if (= (current-player-in game) RED)
       score
       (- score))))
 
 (defn- heuristic
-  [game] 
+  [game]
   0)
 
 (defn min-max
   [game depth]
   (cond
     (connect-four-on? game)
-      (score game) 
+    (score game)
     (is-full? game)
-      0
+    0
     (= depth 0)
-      (heuristic game)
+    (heuristic game)
     :else
-      (let [limit TOTAL_MOVES
-            current-player (current-player-in game)
-            best-score (if (= current-player RED) limit (- limit))]
-        (if (= current-player RED) 
-          (min (apply min (for [move (possible-moves-in game)] (min-max (make-move move game) (dec depth)))) best-score) 
-          (max (apply max (for [move (possible-moves-in game)] (min-max (make-move move game) (dec depth)))) best-score)))))
+    (let [limit TOTAL_MOVES
+          current-player (current-player-in game)
+          best-score (if (= current-player RED) limit (- limit))
+          possible-moves (possible-moves-in game)
+          children-scores (for [move possible-moves] (min-max (make-move move game) (dec depth)))]
+      (if (= current-player RED)
+        (min (apply min children-scores) best-score)
+        (max (apply max children-scores) best-score)))))
 
 (defn generate-ai-move-for [game]
   (let [possible-boards (map #(make-move % game) (possible-moves-in game))
