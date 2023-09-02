@@ -1,5 +1,5 @@
 (ns game.printer
-  (:require [game.board :refer :all]))
+  (:require [game.board :refer [RED YELLOW WIDTH HEIGHT]]))
 
 ;; Define plies for printing purposes
 (def red "🔴")

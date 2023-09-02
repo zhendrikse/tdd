@@ -1,5 +1,5 @@
 (ns game.utilities
-  (:require [game.board :refer :all]))
+  (:require [game.board :refer [GAME RED YELLOW WIDTH make-move]]))
 
 (def EMPTY 2)
 

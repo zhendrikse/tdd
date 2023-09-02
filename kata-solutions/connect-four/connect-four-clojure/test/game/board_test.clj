@@ -1,8 +1,8 @@
 (ns game.board-test
-  (:require [clojure.test :refer :all]
-            [game.board :refer :all]
-            [game.utilities :refer :all]
-            [game.printer :refer :all]))
+  (:require [clojure.test :refer [deftest testing is]]
+            [game.board :refer [GAME RED YELLOW make-move connect-four-on? is-full?]]
+            [game.utilities :refer [EMPTY check-board-at board-with-moves]]
+            [game.printer :refer [print-game]]))
 
 (deftest a-new-board-has-no-plies-at-bottom-left
   (testing "No moves are present a new board."

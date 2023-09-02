@@ -7,6 +7,7 @@
 
 (def HEIGHT 6)
 (def WIDTH 7)
+(def TOTAL_MOVES (* WIDTH HEIGHT))
 
 (def MOVES_COUNTER 0)
 (def BITBOARD_COLUMN_INDICES [0 7 14 21 28 35 42])
@@ -27,26 +28,26 @@
   (let [move (bit-shift-left 1 bit-index)]
   (bit-xor move bitboard)))
 
-(defn- update-board-in [game column]
+(defn- update-board-with [move]
+  (fn [game]
   (let [player (current-player-in game) 
         bitboard (game player)
-        bit-index ((game COLUMNS_INDEX) column)
+        bit-index ((game COLUMNS_INDEX) move)
         updated-bitboard (update-bitboard bitboard bit-index)]
-   (assoc game player updated-bitboard)))
+   (assoc game player updated-bitboard))))
 
-(defn- column-height-for
-  [column, game]
-  ((get game COLUMNS_INDEX) column))
+(defn- column-height-for [column]
+  (fn [game] ((get game COLUMNS_INDEX) column)))
 
-(defn- increment-column-height
-  [column game]
-  (let [current-height (column-height-for column game)
+(defn- increment-column-height [column]
+  (fn [game]
+  (let [current-height ((column-height-for column) game)
         updated-height (inc current-height)]
-    (assoc (get game COLUMNS_INDEX) column updated-height))) 
+    (assoc (get game COLUMNS_INDEX) column updated-height)))) 
 
 (defn- update-column-heights-in
   [column game]
-  (let [updated-columns (increment-column-height column game)]
+  (let [updated-columns ((increment-column-height column) game)]
     (assoc game COLUMNS_INDEX updated-columns)))
 
 (defn is-full? 
@@ -56,6 +57,12 @@
    (let [column-bitindex ((game COLUMNS_INDEX) column)
          full-column-bitindex (+ HEIGHT (BITBOARD_COLUMN_INDICES column))]
      (= column-bitindex full-column-bitindex))))
+
+(defn can-play? [column]
+  (fn [board] (not (is-full? board column))))
+
+(defn possible-moves-in [game]
+  (filter #((can-play? %) game) (range WIDTH)))
 
 ;; (1) Given the column col, get the index(!) of the position 
 ;;     stored in height for that column, shift a single bit 
@@ -77,9 +84,9 @@
      bitboard[counter & 1] ^= move // (2)
      moves[counter++] = column     // (3) <= Moves aren't stored yet"
   [column game]
-  (-> (update-column-heights-in column  ; // (1)
-      (increment-move-counter-in        ; // (3)
-      (update-board-in game column))))) ; // (2)
+  (-> (update-column-heights-in column      ; // (1)
+      (increment-move-counter-in            ; // (3)
+      ((update-board-with column) game))))) ; // (2)
 
 (defn make-move 
   [column game]
