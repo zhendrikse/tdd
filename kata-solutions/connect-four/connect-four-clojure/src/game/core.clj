@@ -1,13 +1,13 @@
 (ns game.core
   (:require [game.printer :refer [print-game]]
-            [game.board :refer [TOTAL_MOVES 
-                                MOVES_COUNTER_INDEX 
-                                RED 
-                                GAME 
-                                connect-four-on? 
+            [game.board :refer [TOTAL_MOVES
+                                MOVES_COUNTER_INDEX
+                                RED
+                                GAME
+                                has-connect-four-in?
                                 current-player-in
-                                is-full? 
-                                possible-moves-in 
+                                is-full?
+                                possible-moves-in
                                 make-move]]))
 
 (defn- read-input [player-num]
@@ -20,48 +20,47 @@
 ;;                (nil? (board/insert boards % player-num)))
 ;;           (repeatedly #(read-input player-num)))))
 
-(defn- game-end? [game] (or (connect-four-on? game) (is-full? game)))
+(defn- game-end? [game] (or (has-connect-four-in? game) (is-full? game)))
 
-(defn- game-exit
-  [game]
+(defn- game-exit [game]
   (let [previous-player (bit-xor 1 (current-player-in game))]
-    (if (connect-four-on? game)
+    (if (has-connect-four-in? game)
       (println (str "Player " (inc previous-player) " has won!"))
       (println (str "It's a draw!")))))
 
 (defn- move-winning? [column game]
-  [column (connect-four-on? (make-move column game))])
+  [column (has-connect-four-in? (make-move column game))])
 
 (defn winning-move-in [game]
   (let [rated-moves (into {} (map #(move-winning? % game) (possible-moves-in game)))]
     (first (filter val rated-moves))))
 
-(defn- score [game] 
-  (let [score (quot (- TOTAL_MOVES (dec (game MOVES_COUNTER_INDEX))) 2)]
-    (if (= (current-player-in game) RED)
-      score
-      (- score))))
+(defn- set-for [current-player score] (if (= current-player RED) score (- score)))
 
-(defn- heuristic
-  [game] 
-  0)
+(defn- score-for [game] (quot (- TOTAL_MOVES (dec (game MOVES_COUNTER_INDEX))) 2))
 
-(defn min-max
-  [game depth]
+(defn- heuristic-for [game] 0)
+
+(defn- score-for-current-player-in [game]
+  (let [current-player (current-player-in game)]
+    (set-for current-player (score-for game))))
+
+(defn- pick-best-score-from [children-scores best-score limit-function]
+  (limit-function (apply limit-function children-scores) best-score))
+
+(defn min-max [game depth]
   (cond
-    (connect-four-on? game)
-      (score game) 
-    (is-full? game)
-      0
-    (= depth 0)
-      (heuristic game)
+    (has-connect-four-in? game) (score-for-current-player-in game)
+    (is-full? game) 0
+    (= depth 0) (heuristic-for game)
     :else
-      (let [limit TOTAL_MOVES
-            current-player (current-player-in game)
-            best-score (if (= current-player RED) limit (- limit))]
-        (if (= current-player RED) 
-          (min (apply min (for [move (possible-moves-in game)] (min-max (make-move move game) (dec depth)))) best-score) 
-          (max (apply max (for [move (possible-moves-in game)] (min-max (make-move move game) (dec depth)))) best-score)))))
+    (let [score-limit TOTAL_MOVES
+          current-player (current-player-in game)
+          best-score (set-for current-player score-limit)
+          possible-moves (possible-moves-in game)
+          limit-function (if (= current-player RED) min max)
+          children-scores (for [move possible-moves] (min-max (make-move move game) (dec depth)))]
+      (pick-best-score-from children-scores best-score limit-function))))
 
 (defn generate-ai-move-for [game]
   (let [possible-boards (map #(make-move % game) (possible-moves-in game))
@@ -71,8 +70,7 @@
     (println "Best moves are " (map inc best-moves) " in " move-ratings)
     (get best-moves (rand-int (count best-moves)))))
 
-(defn- play-game
-  [game]
+(defn- play-game [game]
   (let [current-player (current-player-in game)]
     (print-game game)
     (if (game-end? game)
