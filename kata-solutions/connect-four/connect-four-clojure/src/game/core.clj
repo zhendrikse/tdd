@@ -45,7 +45,7 @@
   (cond
     (has-connect-four-in? game) (score-for-current-player-in game)
     (is-full? game) 0
-    (= depth 0) (heuristic-for game)
+    (zero? depth) (heuristic-for game)
     :else
     (let [score-limit TOTAL_MOVES
           current-player (current-player-in game)
