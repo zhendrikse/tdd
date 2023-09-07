@@ -26,6 +26,17 @@ could look like this:
 
 ![Sample configuration](./images/train-reservation-kata.png)
 
+## Considerations
+
+Consider the following scenarios
+
+- Booking when less than 70% occupancy is inevitable
+- Booking for single persons
+- Booking for multiple persons
+- Same coach reservation
+- Multiple coach reservation
+- Conflicts
+
 # Introduction Example mapping
 
 The image below is based on the [Scrumblr](http://scrumblr.ca/) board running in 
@@ -41,3 +52,6 @@ If you're entering from the main page, the board is called "Example mapping".
 - Short [blog post](https://cucumber.io/blog/bdd/example-mapping-introduction/)
 - [Prepared online board](https://scrumblr.zwh.repl.co/Example%20mapping) that can be used
 - Based on the instructions and code found in the [repo of Emily Bache](https://github.com/emilybache/KataTrainReservation/tree/master#readme)
+- Modeling the train reservation kata
+  [part 1](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-1/) and
+  [part 2](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-2/)
