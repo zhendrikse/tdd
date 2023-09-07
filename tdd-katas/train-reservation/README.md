@@ -1,25 +1,57 @@
 # Train reservation kata
 
+The assignment in this kata is to build a reservation system for
+train tickets based on a set of business rules.
+
 ## Goal
 
 The emphasis in this kata is on practicing/getting acquainted with 
 [double-loop TDD](https://sammancoaching.org/learning_hours/bdd/double_loop_tdd.html)
 using example mapping as a means to formulate the test(s) in the outer loop.
 
-## Task
+## Business Rules
 
-The assignment in this kata is to build a reservation system for
-train tickets based on the following business rules
+The user story is pretty straightforward:
 
-- 70% of the maximum train capacity can be reserved in advance
-- All seats of one reservation must be in the same coach
-- Ideally, all coaches have 70% occupation
+> *As* a passenger
+> *I want to* book a train ticket in advance
+> *so that* I can count on it with my planning.
 
-In case you want to make it even more complex, you may want
-to impose an additional rule
+When facilitating the example mapping workshop, you can choose between
+a couple of different approaches/profiles.
 
-- Ideally, all persons who are part of a single reservation
-  should be seated together as closely as possible.
+### Profile 1: The One With Last-Minute Bookings
+
+- 3 rules are introduced at the same time.<br/>
+  ⇒ All seats for one reservation in the same coach.<br/> 
+  ⇒ Max 70% of the entire train.<br/>
+  ⇒ Ideally, max 70% of each coach.
+- We want to keep seats for last-minute bookings because they are valuable (10% more expensive).
+- We want to distribute bookings for security reasons.
+
+### Profile 2: The One With Hidden Discounts
+
+- 3 rules introduced one by one.<br/>
+  ⇒ All seats for one reservation in the same coach.<br/>
+  ⇒ Max 70% of the entire train.<br/>
+  ⇒ Ideally, max 70% of each coach.
+- We want to keep seats for last-minute bookings because they are valuable (10% more expensive).
+- At most 8 seats per reservation because you benefit from a 5% discount starting from 6 seats per reservation.
+
+### Profile 3: The One With Overbooking
+
+- No rules are introduced at all. There is only one sketched example illustrating the following rule:<br/>
+  ⇒ All seats for one reservation in the same coach.
+- We don’t care about the distribution of bookings across the train.
+- We accept overbooking as you don’t need to have a seat to take the train!
+
+### Profile 4: The One With High-Comfort Standards
+
+- No rules are introduced at all. There is only one sketched example illustrating the following rule:<br/>
+  ⇒ All seats for one reservation in the same coach.
+- We don’t care about the distribution of bookings across the train.
+- We refuse overbooking as we have high comfort standards.
+- You can choose specific locations across the train (window, aisle, duo).
 
 The size nor the layout of the coaches is given, but a typical layout
 could look like this:
