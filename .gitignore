@@ -1,5 +1,6 @@
 __pycache__
 .lein-failures
+.lein-repl-history
 .replit
 .coverage
 package-lock.json
