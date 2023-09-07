@@ -7,7 +7,29 @@ train tickets based on a set of business rules.
 
 The emphasis in this kata is on practicing/getting acquainted with 
 [double-loop TDD](https://sammancoaching.org/learning_hours/bdd/double_loop_tdd.html)
-using example mapping as a means to formulate the test(s) in the outer loop.
+using [example mapping](https://www.linkedin.com/pulse/how-we-do-example-mapping-harver-phil-mander/) 
+as a means to formulate the acceptance test(s) in the outer loop.
+
+![Double loop TDD](../../presentations/intro-tdd/images/tdd-scope.png)
+
+The features/business rules/acceptance criteria that are collected using the
+example mapping technique can _directly_ be translated into 
+[Gherkin](https://cucumber.io/docs/gherkin/) feature files:
+
+```
+Feature: Booking seats on a train from the ticket office
+
+  Scenario: Listing available trains
+    Given There are trains available
+    When I ask for trains
+    Then I get a list of trains
+``` 
+
+These feature files in turn can easily be connected to the production code
+base by implementing fixtures in so-called step files. Some well-known
+frameworks that support this approach are [Cucumber](https://cucumber.io/) and
+[SpecFlow](https://specflow.org/).
+
 
 ## Business Rules
 

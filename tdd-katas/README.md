@@ -30,7 +30,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [task-list-kata](./task-list-kata)         | M       | Command-Query / Strong typing / Realistic app         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [tell-dont-ask](./tell-dont-ask)           | M       | **Refactoring** / Anemic domain model / DDD           | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ | ✔ | 
 | [tire-pressure-kata](./tire-pressure-kata) | L       | Ports &amp; adapters / **Testable design** / DI       | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ | 
-| [train-reservation](./train-reservation)   | L       | Example mapping / Double loop TDD                     | ✗  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ | 
+| [train-reservation](./train-reservation)   | H       | Example mapping / Double loop TDD                     | ✗  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ | 
 | [vending-machine](./vending-machine)       | L / M   | **Small steps** / Code smells and **refactoring**     | ✔  | ✔   | ✔  | ✗   | ✔  | ✔ | ✔ |
 | [video-store-kata](./video-store-kata)     | L       | **Legacy code** / Code smells and **refactoring**     | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ | ✗ |
 
