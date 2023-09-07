@@ -11,17 +11,17 @@ using example mapping as a means to formulate the test(s) in the outer loop.
 The assignment in this kata is to build a reservation system for
 train tickets based on the following business rules
 
-- 70% of maximum train capacity can be reserved in advance
+- 70% of the maximum train capacity can be reserved in advance
 - All seats of one reservation must be in the same coach
 - Ideally, all coaches have 70% occupation
 
 In case you want to make it even more complex, you may want
 to impose an additional rule
 
-- Ideally, all persons that are part of a single reservation
+- Ideally, all persons who are part of a single reservation
   should be seated together as closely as possible.
 
-The size nor the lay-out of the coaches is given, but a typical lay-out
+The size nor the layout of the coaches is given, but a typical layout
 could look like this:
 
 ![Sample configuration](./images/train-reservation-kata.png)
