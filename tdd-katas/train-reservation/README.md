@@ -84,6 +84,14 @@ If you're entering from the main page, the board is called "Example mapping".
 
 ![Example mapping](./images/example-mapping.png)
 
+## A Practical Example
+
+As an example, another user story related to the reservation of train tickets
+is given below:
+
+![Ticket cancellation](./images/ticket-cancellation.png)
+
+
 ## Example mapping References
 - [How we do Example Mapping at Harver](https://www.linkedin.com/pulse/how-we-do-example-mapping-harver-phil-mander/)
 - [Introduction video](https://www.youtube.com/watch?v=VwvrGfWmG_U) to example mapping
