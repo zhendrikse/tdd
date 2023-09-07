@@ -37,6 +37,13 @@ Consider the following scenarios
 - Multiple coach reservation
 - Conflicts
 
+## Train Reservation References
+
+- Based on the instructions and code found in the [repo of Emily Bache](https://github.com/emilybache/KataTrainReservation/tree/master#readme)
+- Modeling the train reservation kata
+  [part 1](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-1/) and
+  [part 2](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-2/)
+
 # Introduction Example mapping
 
 The image below is based on the [Scrumblr](http://scrumblr.ca/) board running in 
@@ -45,13 +52,8 @@ If you're entering from the main page, the board is called "Example mapping".
 
 ![Example mapping](./images/example-mapping.png)
 
-
-## References
-
+## Example mapping References
+- [How we do Example Mapping at Harver](https://www.linkedin.com/pulse/how-we-do-example-mapping-harver-phil-mander/)
 - [Introduction video](https://www.youtube.com/watch?v=VwvrGfWmG_U) to example mapping
 - Short [blog post](https://cucumber.io/blog/bdd/example-mapping-introduction/)
 - [Prepared online board](https://scrumblr.zwh.repl.co/Example%20mapping) that can be used
-- Based on the instructions and code found in the [repo of Emily Bache](https://github.com/emilybache/KataTrainReservation/tree/master#readme)
-- Modeling the train reservation kata
-  [part 1](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-1/) and
-  [part 2](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-2/)
