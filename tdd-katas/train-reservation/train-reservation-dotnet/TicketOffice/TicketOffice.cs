@@ -1,9 +1,9 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace TrainReservation;
+namespace TicketOffice;
 
-public class TrainReservation
+public class TicketOffice
 {
     public int FirstNumber { set; private get; }
     public int SecondNumber { set; private get; }

@@ -1,13 +1,13 @@
-using TrainReservation;
+using TicketOffice;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 
-namespace TrainReservation.Specs.Steps;
+namespace TicketOffice.Specs.Steps;
 
 [Binding]
 public class TrainReservatonSteps
 {
-    private readonly TrainReservation _calculator = new TrainReservation();
+    private readonly TicketOffice _calculator = new TicketOffice();
     private int _result;
 
     [Given(@"I have entered (.*) into the calculator")]

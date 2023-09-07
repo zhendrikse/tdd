@@ -1,13 +1,13 @@
 using Xunit;
 using System;
 
-namespace TrainReservation.Tests;
+namespace TicketOffice.Tests;
 
-public class TrainReservationTest
+public class TicketOfficeTest
 {
     private int _result;
 
-    public TrainReservationTest() 
+    public TicketOfficeTest() 
     {
         _result = 0;
     }
@@ -21,7 +21,7 @@ public class TrainReservationTest
 
     private void Given(int a, int b) 
     {
-        var calculator = new TrainReservation();
+        var calculator = new TicketOffice();
         calculator.FirstNumber = a;
         calculator.SecondNumber = b;
         _result = calculator.Add();

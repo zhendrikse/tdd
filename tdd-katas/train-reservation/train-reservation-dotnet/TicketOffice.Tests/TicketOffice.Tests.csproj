@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <ProjectReference Include="..\TrainReservation\TrainReservation.csproj" />
+	  <ProjectReference Include="..\TicketOffice\TicketOffice.csproj" />
   </ItemGroup>
 
 </Project>
