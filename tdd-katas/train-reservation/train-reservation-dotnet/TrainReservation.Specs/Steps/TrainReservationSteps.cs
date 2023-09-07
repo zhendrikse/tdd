@@ -5,9 +5,9 @@ using TechTalk.SpecFlow;
 namespace TrainReservation.Specs.Steps;
 
 [Binding]
-public class CalculatorSteps
+public class TrainReservatonSteps
 {
-    private readonly Calculator _calculator = new Calculator();
+    private readonly TrainReservation _calculator = new TrainReservation();
     private int _result;
 
     [Given(@"I have entered (.*) into the calculator")]

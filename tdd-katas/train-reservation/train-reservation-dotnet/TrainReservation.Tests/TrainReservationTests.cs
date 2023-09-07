@@ -5,56 +5,30 @@ namespace TrainReservation.Tests;
 
 public class TrainReservationTest
 {
-    private string _result;
+    private int _result;
 
     public TrainReservationTest() 
     {
-        _result = "";
+        _result = 0;
     }
 
     [Fact]
     public void EmptyExpressionResultsInSame()
     {
-        Given("");
-        Expect("");
+        Given(5, 3);
+        Expect(8);
     }
 
-    [Fact]
-    public void NullExpressionProducesEmtpyResult()
+    private void Given(int a, int b) 
     {
-        Given(null);
-        Expect("");
+        var calculator = new TrainReservation();
+        calculator.FirstNumber = a;
+        calculator.SecondNumber = b;
+        _result = calculator.Add();
     }
 
-    [Fact]
-    public void JustANumberResultsInTheSame()
+    private void Expect(int addition) 
     {
-        Given("42");
-        Expect("42");
-    }
-
-    [Fact]
-    public void HandlesASingleBinaryOperator()
-    {
-        Given("4 + 2");
-        Expect("4 2 +");        
-    }
-
-    [Fact]
-    public void HandlesMultipleOperatorsOfSamePrecedence()
-    {
-        Given("a - 5 + 3");
-        Expect("a 5 - 3 +");        
-    }
-
-    private void Given(string expression) 
-    {
-        var algorithm = new TrainReservation();
-        _result = algorithm.Transform(expression);
-    }
-
-    private void Expect(string expression) 
-    {
-        Assert.Equivalent(expression, _result);        
+        Assert.Equivalent(addition, _result);        
     }
 }
