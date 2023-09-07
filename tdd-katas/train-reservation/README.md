@@ -60,7 +60,7 @@ could look like this:
 
 ## Considerations
 
-Consider the following scenarios
+You may want to consider the following scenarios when formulating the examples:
 
 - Booking when less than 70% occupancy is inevitable
 - Booking for single persons
@@ -69,9 +69,9 @@ Consider the following scenarios
 - Multiple coach reservation
 - Conflicts
 
-## Train Reservation References
+## References
 
-- Based on the instructions and code found in the [repo of Emily Bache](https://github.com/emilybache/KataTrainReservation/tree/master#readme)
+- This kata is inspired by the version of this kata found in the [repo of Emily Bache](https://github.com/emilybache/KataTrainReservation/tree/master#readme)
 - Modeling the train reservation kata
   [part 1](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-1/) and
   [part 2](https://sadraskol.com/posts/modeling-the-train-reservation-kata-part-2/)
