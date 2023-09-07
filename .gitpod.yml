@@ -1,3 +1,5 @@
+image: 
+  gitpod/workspace-dotnet
 vscode:
   extensions:
     - fwcd.kotlin
