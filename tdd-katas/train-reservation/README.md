@@ -3,7 +3,17 @@
 The assignment in this kata is to build a reservation system for
 train tickets based on a set of business rules.
 
-## Goal
+## Purpose
+
+The purpose of this kata is to put TDD into the context of a generally coarse-grained 
+user story and its acceptance criteria, if any. After completion of this kata, you
+should have (some) answers to the following questions:
+
+- How do you formulate/refine a user story and its acceptance criteria in a structured manner?
+- Can we translate the outcomes of a refinement directly into executable specifications, and if so, how?
+- How exactly are these coarse-grained acceptance criteria and the associated tests related to TDD? 
+
+## The kata
 
 The emphasis in this kata is on practicing/getting acquainted with 
 [double-loop TDD](https://sammancoaching.org/learning_hours/bdd/double_loop_tdd.html)
@@ -16,7 +26,6 @@ You may want to learn more about example mapping on the
 The features/business rules/acceptance criteria that are collected using the
 example mapping technique can _directly_ be translated into 
 [Gherkin](https://cucumber.io/docs/gherkin/) feature files:
-
 
 ```
 Feature: Booking seats on a train from the ticket office
