@@ -7,15 +7,11 @@ train tickets based on a set of business rules.
 
 The emphasis in this kata is on practicing/getting acquainted with 
 [double-loop TDD](https://sammancoaching.org/learning_hours/bdd/double_loop_tdd.html)
-using [example mapping](https://github.com/zhendrikse/tdd/wiki/Example-mapping)
-as a means to formulate the acceptance test(s) in the outer loop.
+using example mapping as a means to formulate the acceptance test(s) in the outer loop.
+You may want to learn more about example mapping on the
+[example mapping](https://github.com/zhendrikse/tdd/wiki/Example-mapping) Wiki page.
 
-![Double loop TDD](https://github.com/zhendrikse/tdd/raw/master/assets/tdd-with-acceptance-tests.svg?sanitize=true)
-
-
-The above picture has been taken from 
-[Growing Object-Oriented Software Guided by Tests](http://www.growing-object-oriented-software.com/figures.html)
-by Steve Freeman and Nat Pryce ([Creative Commons License](http://creativecommons.org/licenses/by-sa/4.0/)).
+![Double loop TDD](../../presentations/intro-tdd/images/tdd-scope.png)
 
 The features/business rules/acceptance criteria that are collected using the
 example mapping technique can _directly_ be translated into 
@@ -97,8 +93,7 @@ You may want to consider the following scenarios when formulating the examples:
 - Multiple coach reservation
 - Conflicts
 
-An example for another user story (ticket cancellation) is
-detailed on the
+An example of another user story (ticket cancellation) is detailed on the
 [example mapping](https://github.com/zhendrikse/tdd/wiki/Example-mapping) Wiki page.
 
 
