@@ -16,7 +16,7 @@ Practicing this kata pays off the most when it is done multiple times in
 multiple different ways. Many people have already written about such approaches:
 
 - [Solving every Sudoku puzzle](http://norvig.com/sudoku.html) by Peter Norvig and
-  references contained therein, such as
+  references contained therein.
 - [TDD Practice #2: The Sudoku Example in Clojure – Starting the Unit Testing](https://www.linkedin.com/pulse/tdd-practice-2-sudoku-example-clojure-starting-unit-testing-viana-/)
   outlines a _strict_ TDD approach using the [Transformation Priority Premise](https://blog.cleancoder.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html).
   This approach clearly shows how to incrementally develop a recursive algorithm.
@@ -24,7 +24,7 @@ multiple different ways. Many people have already written about such approaches:
   The idea is to let the computer solve Sudoku puzzles using a brute-force approach. However, by using backtracking, we ensure that invalid branches are pruned early.
   
 
-In the Java and Python versions (i.e. based on the OO paradigm), 
-there is an option to exercise with the [data clumping](https://refactoring.guru/smells/data-clumps) refactoring 
+In the Java and Python versions (i.e. based on the OO paradigm), there 
+is an option to exercise with the [data clumping](https://refactoring.guru/smells/data-clumps) refactoring 
 that is applicable to the pervasive grouping of the row and column parameters.
 
