@@ -13,10 +13,17 @@ public class TicketOfficeTest
     }
 
     [Fact]
-    public void EmptyExpressionResultsInSame()
+    public void AddTwoNumbers()
     {
         Given(5, 3);
         Expect(8);
+    }
+
+    [Fact]
+    public void SampleSeatReservation()
+    {
+        var confirmation = "{\"train_id\": \"express_2000\", \"booking_reference\": \"75bcd15\", \"seats\": [\"1A\", \"1B\"]}";
+        Assert.Equivalent(confirmation, new TicketOffice().ReserveSeats("express_2000", 2));
     }
 
     private void Given(int a, int b) 

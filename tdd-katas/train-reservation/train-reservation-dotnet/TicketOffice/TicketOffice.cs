@@ -12,4 +12,9 @@ public class TicketOffice
     {
         return FirstNumber + SecondNumber;
     }
+
+    public string ReserveSeats(string stringId, int seats)
+    {
+        return "{\"train_id\": \"express_2000\", \"booking_reference\": \"75bcd15\", \"seats\": [\"1A\", \"1B\"]}";
+    }
 }
