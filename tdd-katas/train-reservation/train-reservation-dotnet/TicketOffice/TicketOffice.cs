@@ -7,7 +7,7 @@ namespace TicketOffice;
 
 // public class DataObject
 // {
-//     public string? BookingReference { get; set; }
+//     public string? Name { get; set; }
 // }
 
 public class TicketOffice
@@ -27,7 +27,6 @@ public class TicketOffice
 
     static void Main(string[] args)
     {
-        //var URL = "http://5041-zhendrikse-tdd-6jh1jco8rnf.ws-eu104.gitpod.io/booking_reference";
         var URL = "http://localhost:5041/booking_reference";
         var urlParameters = "";
 
@@ -40,7 +39,7 @@ public class TicketOffice
             //var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;
             // foreach (var d in dataObjects)
             // {
-            //     Console.WriteLine("{0}", d.BookingReference);
+            //     Console.WriteLine("{0}", d.Name);
             // }
             var bookingReference = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine("Booking reference fetched: {0}", bookingReference);
