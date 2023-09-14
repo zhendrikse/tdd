@@ -1,5 +1,9 @@
 # Registration form kata
 
+This kata is based on 
+[the original login form UI kata](https://github.com/SoftDevGang/login-form-tdd-ui-kata)
+and comprehensively introduced [here](http://blog.code-cop.org/2020/01/login-form-tdd-ui-kata.html).
+
 ## Introduction
 
 This kata is based on a combination of resources:
@@ -14,6 +18,15 @@ The idea is to learn how to apply TDD to code that is meant to be used/executed 
 
 The goal is to build the validation logic belonging to the [Aliens' Registration Form ](https://codepen.io/absalan/pen/WNbwbXB?editors=1111)
 using TDD. This way practitioners should get an idea of how the same principles can/should be applied to front-end development.
+
+Requirements for the minimum functionality
+- There is a user name input field, which is limited to 20 characters.
+- The label "Phone, email or username" is left, next to the input field.
+- There is a password field, which is limited to 20 characters.
+- The password is either visible as asterisk or bullet signs.
+- The label "Password" is left, next to the input field.
+- There is a "Log in" button in the bottom right corner of the window.
+- There is a label in a red box above the button. It is only visible if there was an error.
 
 ### Possible extensions
 

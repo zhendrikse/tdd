@@ -110,3 +110,5 @@ function playSound(url: string): void {
     audio.load();
     audio.play();
 }
+
+export { CreateTimerHtml };
