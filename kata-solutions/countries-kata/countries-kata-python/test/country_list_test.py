@@ -13,14 +13,14 @@ UNITED_KINGDOM = Country("United Kingdom", "London", 10)
 
 COUNTRY_LIST_FOR_TESTING = [NETHERLANDS, PORTUGAL, BELGIUM, UNITED_KINGDOM]
 
-class EmptyMockCountriesInputAdapter:
+class EmptyCountriesInputAdapterStub:
   def load_all(self) -> List[Country]:
       return []
 
 class TestEmptyCountryList:
   @pytest.fixture(autouse = True)
   def country_list(self):
-      return CountryList(input_port = EmptyMockCountriesInputAdapter())
+      return CountryList(input_port = EmptyCountriesInputAdapterStub())
   
   def test_given_an_empty_country_list_it_calculates_the_average_population(self, country_list):
       assert_that(country_list.average_population(), equal_to(0))
@@ -30,7 +30,7 @@ class TestEmptyCountryList:
 
 
 
-class MockCountriesInputAdapter:
+class CountriesInputAdapterStub:
   def load_all(self) -> List[Country]:
       return COUNTRY_LIST_FOR_TESTING
 
@@ -54,7 +54,7 @@ class TestFilledCountryList:
   @pytest.fixture(autouse = True)
   def country_list(self):
       return CountryList(
-        MockCountriesInputAdapter(),
+        CountriesInputAdapterStub(),
         MockCountriesOutputAdapter(CsvCountriesOutputAdapter()))
   
   def test_sorted_list_by_population_size(self, country_list):

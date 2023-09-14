@@ -28,13 +28,13 @@ its population deviates from the world's average population size.
 
 The output should be a CSV file:
 
-  ```
-  name,capital,population,deviation
-  Belgium,Brussels,3,0.40
-  Netherlands,Amsterdam,4,0.73
-  Portugal,Lissabon,7,0.37
-  United Kingdom,London,10,1.46 
-  ```
+```
+name,capital,population,deviation
+Belgium,Brussels,3,0.40
+Netherlands,Amsterdam,4,0.73
+Portugal,Lissabon,7,0.37
+United Kingdom,London,10,1.46 
+```
 
 ### Country data retrieval
 
