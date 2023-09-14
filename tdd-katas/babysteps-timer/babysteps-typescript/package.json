@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "BabyStep kata in TypeScript",
   "scripts": {
-    "precompile": "rimraf app/**/*.js test/**/*.js",
+    "precompile": "rimraf babystep/**/*.js spec/**/*.js",
     "compile": "tsc",
-    "pretest": "rimraf app/**/*.js test/**/*.js",
-    "test": "nyc mocha"
+    "pretest": "rimraf babystep/**/*.js spec/**/*.js",
+    "test": "mocha spec/**/*_spec.ts --require ts-node/register ",
+    "serve": "npx http-server -a 0.0.0.0 -p 8088 -o babystep.html",
+    "watch": "npx mocha spec/**/*_spec.ts --require ts-node/register --watch --extension ts"
   },
   "license": "MIT",
   "private": true,
@@ -15,6 +17,7 @@
     "@types/mocha": "~2.2.41",
     "@types/node": "~7.0.18",
     "chai": "~3.5.0",
+    "http-server": "^14.1.1",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "rimraf": "~2.5.2",
@@ -37,6 +40,5 @@
       "html",
       "text"
     ]
-  },
-  "dependencies": {}
+  }
 }
