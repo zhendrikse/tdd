@@ -6,7 +6,7 @@ Please read the general [introduction to the countries kata](../README.md) first
 
 Carry out the following steps in order:
 
-1. Create an intial Python kata set-up as described
+1. Create an initial Python kata set-up as described
    [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
    Choose 'n' when prompted for the rSpec syntax. The code coverage is optional.
 2. Remove the `.py` files in the `src` and `test` directories, but leave the
@@ -34,17 +34,17 @@ Carry out the following steps in order:
 
    - Run `$ python main.py` to run the program and generate a CSV file.
    - Before we change the contents of the generated CSV file to what
-     is asked for, we first need to separate out the communicaton with
-     the outside world, i.e. the file system and external REST API call.
+     is asked for, we first need to separate out the communication with
+     the outside world, i.e. the file system and external REST API calls.
 
    **Greenfield scenario**:
 
-   - Run `$ ./run_tests.sh` to run the test and veriffy that all
+   - Run `$ ./run_tests.sh` to run the test and verify that all
      assertions are still valid: we are testing a real production API,
      which may well have changed by the time you are reading this!
    - The code in the `country.py` and `countries_test.py` are merely
      meant to illustrate how to get the data from the endpoint. The 
-     idea is to empty both files and start from scratch indeed!
+     idea is to empty both files and start from scratch!
 
 ## Design considerations
 
@@ -75,7 +75,7 @@ The domain object containing these country data may then hand over these data
 to an output port.
 
 Bearing this in mind, it makes sense to define both a `CountriesInputPort` 
-and `CountriesOutputPort` that retrieve and export the required country data
+and `CountriesOutputPort` that retrieves and exports the required country data
 from and to "the outside world" respectively.
 
 <details>
@@ -142,7 +142,7 @@ United Kingdom,London,10,1.46
 
 ## Sorting the list
 
-First, we are going to sort a given list of countries by the size of its population.
+First, we are going to sort a given list of countries by the size of their population.
 
 <details>
   <summary>Test sorting by population size</summary>
@@ -191,7 +191,7 @@ class CountryList:
 
 </details>
 
-## Calcuation of the statistics
+## Calculation of the statistics
 
 ### Average population
 
@@ -216,7 +216,7 @@ size given a list of countries.
 </details>
 </details>
 
-Obvisouly, we need to introduce a non-empty list to force a more generic
+Obviously, we need to introduce a non-empty list to force a more generic
 implementation.
 
 <details>
@@ -273,7 +273,7 @@ Let's now calculate the standard deviation.
 </details>
 </details>
 
-Obvisouly, we need to introduce a non-empty list to force a more generic
+Obviously, we need to introduce a non-empty list to force a more generic
 implementation.
 
 <details>
@@ -344,13 +344,13 @@ main was/is sorted by population size by default.
 
 ## Preparations for input and output
 
-### Preparation 1: list of countries as nested array
+### Preparation 1: list of countries as a nested array
 
 As explained in the beginning, it would be very convenient to
-have the list that is going to be exported availabe as nested array.
+have the list that is going to be exported available as a nested array.
 
 <details>
-<summary>The list of countries "knows" how to present itself as nested array</summary>
+<summary>The list of countries "knows" how to present itself as a nested array</summary>
 
 ```python
   def test_country_list_as_nested_array(self, country_list):
@@ -380,7 +380,7 @@ have the list that is going to be exported availabe as nested array.
 ### Preparation 2: ports to the outside world
 
 As outlined in the introduction, let's now define the ports (and adapters)
-that take care of the communication to "the outside world". We'll put
+that takes care of the communication with "the outside world". We'll put
 them in their own file `ports_adapters.py` for now:
 
 ```python
@@ -456,7 +456,7 @@ class RestCountriesInputAdapter:
 ```
 </details>
 
-If we want to interface to the real countries data REST endpoint, we 
+If we want to interface to the real countries' data REST endpoint, we 
 may want to implement our `RestCountriesInputAdapter` all the way.
 
 <details>
@@ -479,7 +479,7 @@ class RestCountriesInputAdapter:
     return [self.country_from_json(country_data) for country_data in response.json()]
 ```
 
-Note that the capital is not 100% correct still, as some countries may come with
+Note that the capital is not 100% correct, as some countries may come with
 multiple capital cities.
 </details>
 
