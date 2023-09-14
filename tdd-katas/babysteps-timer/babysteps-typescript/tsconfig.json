@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es5",
+        "target": "es6",
+        "esModuleInterop": true,
         "strict": true,
-        "noImplicitAny": false,
-        "sourceMap": false
+        "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "node_modules"
     ]
 }
+
