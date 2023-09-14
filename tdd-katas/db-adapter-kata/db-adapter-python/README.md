@@ -26,14 +26,15 @@ Carry out the following steps in order:
    $ ./run_tests.sh
    ``` 
 
-### Running the tests
+## Running the tests
 First make sure you can execute the provided scenario/test for the ping endpoint:
 
 ```bash
 $ ./run_tests.sh
 ```
 
-### Running the application
+## Running the application
+
 Second, make sure the application itself can also be started by going to the shell tab and execute the following two commands:
 
 ```bash
@@ -46,9 +47,12 @@ To further test the application in the remainder of this kata, first push on the
 We won't be using the real execution of the application frequently though. We will just use it for some additional manual testing.
 
 
-### Components and libraries
+## Components and libraries
 
-<!-- For the implementation we are going to use the [Replit DB](https://docs.replit.com/tutorials/11-using-the-replit-database) as storage for simple employee records. The calls to the Replit DB will be implemented using an adapter/repository, so that the calls to the Replit DB can easily be isolated during (unit) testing. -->
+We are going to use an in-memory database. For those working on [replit](https://replit.com/),
+we will also provide an adapter for the  
+[Replit DB](https://docs.replit.com/tutorials/11-using-the-replit-database) 
+as storage for simple employee records. 
 
 The endpoint is implemented using the [FastAPI](https://fastapi.tiangolo.com/tutorial/first-steps/) framework.
 
