@@ -2,18 +2,18 @@
 
 This is a kata designed to teach you how to keep your system 
 under development properly testable when dealing with interactions 
-with external systems, in this case REST endpoints, and writing
+with external systems, in this case, REST endpoints, and writing
 output to files using
 [the ports &amp; adapter architecture and dependency inversion](https://github.com/zhendrikse/tdd/wiki/Hexagonal-Architecture).
 
-We are going to implement a converter that will consume some country data
-from a REST API on the web, enrich those data (a bit), and then export 
-it to CSV.
+We are going to implement a converter that consumes some country data
+from a REST API on the web, enrich those data (a bit), and then 
+export those data to CSV.
 
 This kata shows how to drive the realization of this application
 from the inside out, rather than starting from the external data provider 
-by first focusing on the domain logic. Next, we will define  
-the ports and adapters. 
+by first focusing on the domain logic. Eventually, we connect the
+domain to the outside world using ports &amp; adapters.
 
 ## The domain logic that is requested
 
@@ -22,7 +22,7 @@ as name, population, and capital city), we are interested in getting
 an overview of all countries in the world, sorted by the 
 size of their population in ascending order. In addition, 
 we would like to know for each country how many standard deviations
-its population deviates from the world average population size. 
+its population deviates from the world's average population size. 
 
 ### Example of expected output 
 
@@ -54,8 +54,8 @@ of 24 / 4 = 6. As the standard deviation = 2.738612788, we see that the first nu
 analogously for the other countries in the list.
 
 **Caveat**: 
-Note that the API returns the capital city in a list, and sometimes this 
-the list may even be empty!
+Note that the API returns the capital city in a list, and sometimes 
+this list may even be empty!
 
 ## Kata as legacy or greenfield
 
@@ -83,7 +83,7 @@ but to follow the rules of ports &amp; adapters architecture:
 ## Optional extensions
 
 - Add a possibility to filter, e.g. only export those countries to CSV that
-  is a UN member, or only export those countries that have more than 10 million
+  are a UN member, or only export those countries that have more than 10 million
   inhabitants.
 - Add a possibility to update a reference table in a database with these
   country data. Optionally according to a certain time schedule, e.g. weekly.
