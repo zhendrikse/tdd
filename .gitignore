@@ -15,4 +15,5 @@ coverage
 node_modules
 htmlcov
 .gradle
-
+tdd-katas/babysteps-timer/babysteps-typescript/src/*.js
+tdd-katas/babysteps-timer/babysteps-typescript/spec/*.js

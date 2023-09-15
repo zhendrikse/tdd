@@ -12,18 +12,18 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/chai": "^4.1.4",
-    "@types/jsdom-global": "3.0.2",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "~7.0.18",
-    "chai": "^4.1.2",
-    "jsdom": "^16.7.0",
-    "jsdom-global": "3.0.2",
-    "mocha": "^10.2.0",
-    "ts-node": "7.0.0",
-    "typescript": "3.9.5",
+    "@types/chai": "^4.3.6",
+    "@types/jsdom-global": "^3.0.4",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.6.0",
+    "chai": "^4.3.8",
     "http-server": "^14.1.1",
-    "rimraf": "~2.5.2"
+    "jsdom": "^22.1.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^10.2.0",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   },
   "nyc": {
     "extension": [
@@ -40,7 +40,5 @@
       "html",
       "text"
     ]
-  },
-  "dependencies": {
   }
 }

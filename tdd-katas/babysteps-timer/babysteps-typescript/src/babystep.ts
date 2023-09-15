@@ -8,7 +8,9 @@ let _timerRunning: boolean;
 let _currentCycleStartTime: number;
 let _lastRemainingTime: string;
 let _bodyBackgroundColor: string = BackgroundColorNeutral;
-let _threadTimer: NodeJS.Timer;
+//let _threadTimer: NodeJS.Timer;
+//let _threadTimer: number;
+let _threadTimer: NodeJS.Timeout;
 
 
 document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, false);
