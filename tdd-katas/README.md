@@ -1,6 +1,6 @@
 # Kata overview
 
-This section summarizes details off all katas contained in this repository.
+This section summarizes details of all katas contained in this repository.
 It includes both a difficulty level as well as a list of topics (per kata) 
 that are being targeted.
 Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
@@ -8,6 +8,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | Kata                                       | Ranking | Aspects                                               | Py | Java | JS | Clj | Kt | TS | C# |
 | ------------------------------------------ | ------- | ----------------------------------------------------- |:--:|:----:|:--:|:---:|:--:|:--:|:--:|
 | [audio-player-kata](./audio-player-kata)   | M       | London vs. Detroit schools of TDD / Mocks, spies      | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
+| [babysteps-timer](./babysteps-timer)       | M       | **Front-end legacy code** / **Refactoring**           | ✗  | ✗   | ✗  | ✗   | ✗  | ✔ | ✗ |
 | [bugs-zero-kata](./bugs-zero-kata)         | M       | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [cache-kata](./cache-kata)                 | L       | TDD as if you meant it / Ports &amp; adapters         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [christmas-tree](./christmas-tree)         | L       | Implement an algorithm in **small steps**             | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
