@@ -8,15 +8,13 @@ let _timerRunning: boolean;
 let _currentCycleStartTime: number;
 let _lastRemainingTime: string;
 let _bodyBackgroundColor: string = BackgroundColorNeutral;
-//let _threadTimer: NodeJS.Timer;
-//let _threadTimer: number;
 let _threadTimer: NodeJS.Timeout;
 
 
 document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, false);
 
 
-function command(arg: string): void {
+export function command(arg: string): void {
     let args = { Url: { AbsoluteUri: `command://${arg}/` } }
     console.log('called', arg, args.Url.AbsoluteUri);
     if (args.Url.AbsoluteUri == "command://start/") {
@@ -74,7 +72,7 @@ function command(arg: string): void {
 };
 
 
-function getRemainingTimeCaption(elapsedTime: number): string {
+export function getRemainingTimeCaption(elapsedTime: number): string {
 
     let remainingTime: Date = new Date((SecondsInCycle * 1000) - elapsedTime);
     var minute: string | number = remainingTime.getMinutes();
@@ -85,7 +83,7 @@ function getRemainingTimeCaption(elapsedTime: number): string {
     return '' + minute + ':' + second
 }
 
-function CreateTimerHtml(timerText: string, bodyColor: string, running: boolean): string {
+export function CreateTimerHtml(timerText: string, bodyColor: string, running: boolean): string {
 
     let timerHtml: string = "<div style=\"border: 3px solid #555555; background: " + bodyColor +
         "; margin: 0; padding: 0;\">" +
@@ -112,5 +110,3 @@ function playSound(url: string): void {
     audio.load();
     audio.play();
 }
-
-export { CreateTimerHtml };
