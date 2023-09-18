@@ -105,7 +105,7 @@ export function CreateTimerHtml(timerText: string, bodyColor: string, running: b
 
 function playSound(url: string): void {
     let audio = new Audio();
-    audio.src = `./babystep/sounds/${url}`;
+    audio.src = `./src/sounds/${url}`;
     console.log(audio.src);
     audio.load();
     audio.play();
