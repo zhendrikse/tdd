@@ -5,7 +5,7 @@ This repository contains a huge collection of coding katas with instructions in 
 sample solutions, presentations, etc.
 
 Be sure to also check out the information on 
-[coding katas](https://github.com/zhendrikse/tdd/wiki/The-Coding-Katas), 
+[coding katas](https://github.com/zhendrikse/tdd/wiki/Coding-Katas), 
 [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo), 
 [how they relate to the 24 DevOps key capabilities](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-24-Key-Capabilities), 
 and much more on
