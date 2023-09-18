@@ -41,6 +41,7 @@ The original code was taken from the
 repository with some modifcations and updates such as
 
 - Updates of all the npm packages.
+- Removed deprecated `mocha.opts` file
 - Updates (using modules) of the `package.json` and `tsconfig.json` to make tests possible
 - Minor update of `babysteps.ts` to latest node (timer) types.
 - Changed the way the Javascript is included as a module from within the HTML file using

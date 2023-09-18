@@ -6,9 +6,9 @@
     "precompile": "rimraf src/**/*.js spec/**/*.js",
     "compile": "tsc",
     "pretest": "rimraf src/*.js spec/*.js",
-    "test": "mocha -r ts-node/register -r jsdom-global/register --file spec/global-setup.ts spec/*.spec.ts",
+    "test": "mocha -r ts-node/register -r jsdom-global/register -r source-map-support/register spec/*.spec.ts",
     "serve": "npx http-server -a 0.0.0.0 -p 8088 -o babystep.html",
-    "watch": "npx mocha -r ts-node/register -r jsdom-global/register --file spec/global-setup.ts spec/*.spec.ts --watch --extension ts"
+    "watch": "npx mocha -r ts-node/register -r jsdom-global/register -r source-map-support/register --watch --extension ts"
   },
   "license": "MIT",
   "devDependencies": {
@@ -23,6 +23,7 @@
     "mocha": "^10.2.0",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
+    "source-map-support": "^0.5.21",
     "typescript": "^5.2.2"
   },
   "nyc": {
@@ -40,5 +41,7 @@
       "html",
       "text"
     ]
+  },
+  "dependencies": {
   }
 }
