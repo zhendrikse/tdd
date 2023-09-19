@@ -6,6 +6,15 @@ from dataclasses import dataclass
 
 @dataclass(frozen = True)
 class CountriesDTO:
+  """
+  A nested list of country data, for example:
+    [
+      ["Belgium", "Brussels", 3, 1.10], 
+      ["Netherlands", "Amsterdam", 4, 0.73], 
+      ["Portugal", "Lissabon", 7, 0.37], 
+      ["United Kingdom", "London", 10, 1.46]
+    ]
+  """
   countries: List[List[str]]
 
 class CountriesOutputPort(Protocol):
