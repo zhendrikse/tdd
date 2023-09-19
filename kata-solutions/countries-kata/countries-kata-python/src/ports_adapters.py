@@ -18,12 +18,12 @@ class CountriesDataDto:
   countries: List[List[str]]
 
 class CountriesOutputPort(Protocol):
-  def export(self, countries_dto) -> None:
-      pass
+  def export(self, countries_dto: CountriesDataDto) -> None:
+      ...
 
 class CountriesInputPort(Protocol):
   def load_all(self) -> List[Country]:
-      pass
+      ...
 
 class CsvCountriesOutputAdapter:
   def export(self, countries_dto) -> None:

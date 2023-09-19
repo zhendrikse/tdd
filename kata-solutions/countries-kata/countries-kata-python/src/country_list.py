@@ -1,11 +1,11 @@
 from country import Country
 from math import sqrt
-from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter, CountriesDataDto
+from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter, CountriesDataDto, CountriesInputPort, CountriesOutputPort
 
 class CountryList:
   def __init__(self, 
-               input_port = RestCountriesInputAdapter(),
-               output_port = CsvCountriesOutputAdapter()):
+               input_port: CountriesInputPort = RestCountriesInputAdapter(),
+               output_port: CountriesOutputPort = CsvCountriesOutputAdapter()):
     self._countries = input_port.load_all()
     self._output_port = output_port
   
