@@ -5,7 +5,7 @@ from http import HTTPStatus
 from dataclasses import dataclass
 
 @dataclass(frozen = True)
-class CountriesDTO:
+class CountriesDataDto:
   """
   A nested list of country data, for example:
     [

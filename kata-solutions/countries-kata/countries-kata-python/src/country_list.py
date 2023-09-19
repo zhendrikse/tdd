@@ -1,6 +1,6 @@
 from country import Country
 from math import sqrt
-from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter, CountriesDTO
+from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter, CountriesDataDto
 
 class CountryList:
   def __init__(self, 
@@ -27,7 +27,7 @@ class CountryList:
   def export_to_csv(self):
     sorted_countries = self.sorted_by_population()
     standard_deviations_per_country = self.standard_deviations_per_country()
-    countries_dto = CountriesDTO([[sorted_countries[i].name, 
+    countries_dto = CountriesDataDto([[sorted_countries[i].name, 
             sorted_countries[i].capital, 
             sorted_countries[i].population, 
             standard_deviations_per_country[i]] for i in range(len(self._countries))])
