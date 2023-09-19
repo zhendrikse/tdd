@@ -22,6 +22,11 @@ def test_reserve_seat_when_already_reserved():
     train_data = service.data_for_train("foo_train")
     assert '"booking_reference": "existing"' in train_data
 
+def test_cancel_reservation():
+    service = TrainDataService("""{ "foo_train": {"seats": {"1A": {"coach": "A", "seat_number": "1", "booking_reference": "01234567"} }}}""")
+    train_data = service.cancel("foo_train", "01234567")
+    assert 'existing' not in train_data
+  
 def test_reserve_with_typo_in_seatid():
     service = TrainDataService("""{ "foo_train": {"seats": {"1A": {"coach": "A", "seat_number": "1", "booking_reference": "existing"} }}}""")
     response = service.reserve("foo_train", json.dumps(["typo"]), "01234567")

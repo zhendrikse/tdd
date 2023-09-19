@@ -1,12 +1,17 @@
 import urllib.request
 import json
+import urllib.request
+import json
 
 class TicketOffice:
 
     def cancel_reservation(self, train_id, booking_reference):
         url = "http://127.0.0.1:8081"
-        urllib.request.urlopen(url + "/reset/" + train_id)
-
+        form_data = {"train_id": train_id, "booking_reference": booking_reference}
+        data = urllib.parse.urlencode(form_data)
+        req = urllib.request.Request(url + "/cancel", bytes(data, encoding="ISO-8859-1"))
+        return json.loads(urllib.request.urlopen(req).read().decode("utf-8"))
+    
 
     def reserve(self, train_id, seat_count):
         # TODO: write this code!
