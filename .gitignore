@@ -17,3 +17,5 @@ htmlcov
 .gradle
 tdd-katas/babysteps-timer/babysteps-typescript/src/*.js
 tdd-katas/babysteps-timer/babysteps-typescript/spec/*.js
+tdd-katas/train-reservation/train-reservation-dotnet/TicketOffice.Specs/Features/TrainCancellation.feature.cs
+tdd-katas/train-reservation/train-reservation-dotnet/TicketOffice.Specs/Features/TrainReservation.feature.cs

@@ -11,3 +11,5 @@ find . -name .pytest_cache | xargs rm -rf
 find . -name poetry.lock | xargs rm -rf
 find . -name package-lock.json | xargs rm -rf
 find . -name .lein-failures | xargs rm -rf
+rm tdd-katas/train-reservation/train-reservation-dotnet/TicketOffice.Specs/Features/TrainCancellation.feature.cs
+rm tdd-katas/train-reservation/train-reservation-dotnet/TicketOffice.Specs/Features/TrainReservation.feature.cs
