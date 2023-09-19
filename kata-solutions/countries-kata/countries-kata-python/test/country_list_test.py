@@ -35,13 +35,17 @@ class CountriesInputAdapterStub:
       return COUNTRY_LIST_FOR_TESTING
 
 class MockCountriesOutputAdapter:
+  """
+  This mock also verifies the output that would 
+  actually be written to the file system.
+  """
   def __init__(self, adapter_under_test):
     self._adapter_under_test = adapter_under_test
     
-  def write(self, country_list) -> None:
+  def export(self, countries_dto) -> None:
     open_mock = mock_open()
     with patch("ports_adapters.open", open_mock, create=True):
-        self._adapter_under_test.write(country_list)
+        self._adapter_under_test.export(countries_dto)
   
     open_mock.assert_called_with("countries.csv", "w")
     open_mock.return_value.write.assert_has_calls([
@@ -72,13 +76,5 @@ class TestFilledCountryList:
   def test_standard_deviations_per_country(self, country_list):
       assert_that(country_list.standard_deviations_per_country(), equal_to([1.10, 0.73, 0.37, 1.46]))
 
-  def test_country_list_as_nested_array(self, country_list):
-      expected_output = [
-         ["Belgium", "Brussels", 3, 1.10], 
-         ["Netherlands", "Amsterdam", 4, 0.73], 
-         ["Portugal", "Lissabon", 7, 0.37], 
-         ["United Kingdom", "London", 10, 1.46]]
-      assert_that(country_list.as_nested_array(), equal_to(expected_output))
-
   def test_write_to_csv(self, country_list):
-    country_list.export()
+    country_list.export_to_csv()

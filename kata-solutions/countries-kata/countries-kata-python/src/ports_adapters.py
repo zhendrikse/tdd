@@ -2,9 +2,14 @@ from typing import Protocol, List
 import csv, requests
 from country import Country
 from http import HTTPStatus
+from dataclasses import dataclass
+
+@dataclass(frozen = True)
+class CountriesDTO:
+  countries: List[List[str]]
 
 class CountriesOutputPort(Protocol):
-  def write(self, country_list) -> None:
+  def export(self, countries_dto) -> None:
       pass
 
 class CountriesInputPort(Protocol):
@@ -12,11 +17,11 @@ class CountriesInputPort(Protocol):
       pass
 
 class CsvCountriesOutputAdapter:
-  def write(self, country_list) -> None:
+  def export(self, countries_dto) -> None:
     with open('countries.csv', 'w') as file:
         writer = csv.writer(file)
         #writer.writerow(header)
-        writer.writerows(country_list.as_nested_array())
+        writer.writerows(countries_dto.countries)
 
 class RestCountriesInputAdapter:
   def country_from_json(self, country_json):

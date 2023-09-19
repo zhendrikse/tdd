@@ -1,6 +1,6 @@
 from country import Country
 from math import sqrt
-from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter
+from ports_adapters import CsvCountriesOutputAdapter, RestCountriesInputAdapter, CountriesDTO
 
 class CountryList:
   def __init__(self, 
@@ -23,16 +23,15 @@ class CountryList:
     return [
       round(abs(self.average_population() - country.population) / standard_deviation, 2) 
       for country in self.sorted_by_population()]
-  
-  def as_nested_array(self):
+
+  def export_to_csv(self):
     sorted_countries = self.sorted_by_population()
-    return[[sorted_countries[i].name, 
+    standard_deviations_per_country = self.standard_deviations_per_country()
+    countries_dto = CountriesDTO([[sorted_countries[i].name, 
             sorted_countries[i].capital, 
             sorted_countries[i].population, 
-            self.standard_deviations_per_country()[i]] for i in range(len(self._countries))]
-
-  def export(self):
-    self._output_port.write(self)
+            standard_deviations_per_country[i]] for i in range(len(self._countries))])
+    self._output_port.export(countries_dto)
     
 def average_of(a_collection):
   if not a_collection: return 0
@@ -43,7 +42,7 @@ def standard_deviation_of(a_collection):
   return sqrt(sum([(item - average_of(a_collection)) ** 2 for item in a_collection]) / len(a_collection))
 
 def main():
-    CountryList().export()
+    CountryList().export_to_csv()
     print("List with country data exported to countries.csv")
 
 if __name__ == "__main__":
