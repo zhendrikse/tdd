@@ -16,29 +16,27 @@ public class TicketOffice
         return FirstNumber + SecondNumber;
     }
 
+    public void CancelReservation(string traindId, string booking_reference) {
+        ResetTrain(traindId);
+    }
+
     public string ReserveSeats(string stringId, int seats)
     {
         return "{\"train_id\": \"express_2000\", \"booking_reference\": \"75bcd15\", \"seats\": [\"1A\", \"1B\"]}";
     }
 
-    static void Main(string[] args)
+    static void ResetTrain(string trainId)
     {
-        SampleCodeForBookingReferenceRestCall();
-        SampleCodeForTrainSeatsReservationRestCall();
-    }
-
-    static void SampleCodeForTrainSeatsReservationRestCall()
-    {
-        var URL = "http://localhost:5091/reserve";
-        var requestMessageContent = new StringContent("{\"train_id\":\"express_2000\",\"seats\": [\"1A\", \"1B\"], \"booking_reference\": \"1ffab\"}", Encoding.UTF8, "application/json");
+        var URL = "http://localhost:5091/reset/" + trainId;
+        var requestMessageContent = new StringContent("", Encoding.UTF8, "application/json");
 
         HttpClient client = new HttpClient();
         client.BaseAddress = new Uri(URL);
         HttpResponseMessage response = client.PostAsync(URL, requestMessageContent).Result;
         if (response.IsSuccessStatusCode)
         {
-            var bookingReference = response.Content.ReadAsStringAsync().Result;
-            Console.WriteLine("Booking reference fetched: {0}", bookingReference);
+            var trainInfo = response.Content.ReadAsStringAsync().Result;
+            // Console.WriteLine("Reservation with booking reference {0} successfully made", bookingReference);
         }
         else 
         {
@@ -47,23 +45,9 @@ public class TicketOffice
         client.Dispose();    
     }
 
-    static void SampleCodeForBookingReferenceRestCall() 
+    static void Main(string[] args)
     {
-        var URL = "http://localhost:5041/booking_reference";
-        var urlParameters = "";
-
-        HttpClient client = new HttpClient();
-        client.BaseAddress = new Uri(URL);
-        HttpResponseMessage response = client.GetAsync(urlParameters).Result;
-        if (response.IsSuccessStatusCode)
-        {
-            var bookingReference = response.Content.ReadAsStringAsync().Result;
-            Console.WriteLine("Booking reference fetched: {0}", bookingReference);
-        }
-        else 
-        {
-            Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-        }
-        client.Dispose();
+        Console.WriteLine("Put your code to make the ticket office a REST service right here");
     }
+
 }

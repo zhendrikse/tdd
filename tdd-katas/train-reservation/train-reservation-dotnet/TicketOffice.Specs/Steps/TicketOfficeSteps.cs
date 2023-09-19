@@ -7,30 +7,30 @@ namespace TicketOffice.Specs.Steps;
 [Binding]
 public class TrainReservatonSteps
 {
-    private readonly TicketOffice _calculator = new TicketOffice();
-    private int _result;
+    private readonly TicketOffice _ticketOffice = new TicketOffice();
+    private string _booking_reference = "";
+    private readonly string _trainId = "express_2000";
 
-    [Given(@"I have entered (.*) into the calculator")]
-    public void GivenIHaveEnteredIntoTheCalculator(int number)
+    [Given(@"I have made a reservation with booking reference (.*)")]
+    public void GivenIHaveMadeAReservationWithBookingReference(string booking_reference)
     {
-        _calculator.FirstNumber = number;
+        var train = RestCalls.MakeTrainSeatsReservationRestCall(_trainId, booking_reference);
+        train.seats["1A"].booking_reference.Should().Be(booking_reference);
+        train.seats["1B"].booking_reference.Should().Be(booking_reference);
+        _booking_reference = booking_reference;
     }
 
-    [Given(@"I have also entered (.*) into the calculator")]
-    public void GivenIHaveAlsoEnteredIntoTheCalculator(int number)
+    [When(@"I cancel my reservation")]
+    public void WhenICancelMyReservation()
     {
-        _calculator.SecondNumber = number;
+        _ticketOffice.CancelReservation(_trainId, _booking_reference);
     }
 
-    [When(@"I press add")]
-    public void WhenIPressAdd()
+    [Then(@"the reserved seats should be available again")]
+    public void ThenTheReservedSeatsShouldBeAvailableAgain()
     {
-        _result = _calculator.Add();
-    }
-
-    [Then(@"the result should be (.*) on the screen")]
-    public void ThenTheResultShouldBeOnTheScreen(int expectedResult)
-    {
-        _result.Should().Be(expectedResult);
+        var train = RestCalls.GetTrainSeatInformation(_trainId);
+        train.seats["1A"].booking_reference.Should().Be("");
+        train.seats["1B"].booking_reference.Should().Be("");
     }
 }

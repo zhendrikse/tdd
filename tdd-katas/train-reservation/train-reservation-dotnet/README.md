@@ -14,7 +14,33 @@ _The only difference will be the URLs that these services are invoked at_.
 
 The latter will help you to set up certain scenarios for testing,
 i.e. the "given" from the "given-when-then".
+
+A rudimentary implementation of a ticket cancellation story has already 
+been provided to get you up and running as quickly as possible.
+
+# Getting started
+
+## TLDR;
+
+1. Start the booking reference service by opening a terminal and type
+   ```bash
+   $ cd BookingReferenceService
+   $ dotnet run
+   ```
+
+2. Start the train data service by opening a terminal and type
+   ```bash
+   $ cd TrainDataService
+   $ dotnet run
+   ```
+
+3. Start running the provided tests and scenario by opening a terminal and type
+   ```bash
+   $ ./run_tests.sh
+   ```
    
+Next, you can start coding the user story for the reservation of train tickets.
+
 ## Instructions to run the Booking Reference Service
 
 You can get a unique booking reference using a REST-based service. 
@@ -32,32 +58,6 @@ $ curl http://localhost:5041/booking_reference
 ```
 
 This will return an hexadecimal booking reference like `75bcd15`.
-
-The code below illustrates how one may want to invoke 
-the booking reference service from within C#.
-
-<details>
-  <summary>C# code to invoke the booking reference service</summary>
-
-```csharp
-var URL = "http://localhost:5091/reserve";
-var requestMessageContent = new StringContent("{\"train_id\":\"express_2000\",\"seats\": [\"1A\", \"1B\"], \"booking_reference\": \"1ffab\"}", Encoding.UTF8, "application/json");
-
-HttpClient client = new HttpClient();
-client.BaseAddress = new Uri(URL);
-HttpResponseMessage response = client.PostAsync(URL, requestMessageContent).Result;
-if (response.IsSuccessStatusCode)
-{
-    var bookingReference = response.Content.ReadAsStringAsync().Result;
-    Console.WriteLine("Booking reference fetched: {0}", bookingReference);
-}
-else 
-{
-    Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-}
-client.Dispose();    
-``` 
-</details>
    
 ## Instructions to run the Train Data Service
 
@@ -96,33 +96,10 @@ $ curl http://localhost:5091/reserve
 
 and attach form data for which seats to reserve. 
 
-There should be three fields, namely `train_id`, `seats`, and `booking_reference`. The "seats" field should be a json encoded list of seat ids, for example `["1A", "2A"]`. The other two fields are ordinary strings. Note the server will prevent you from booking a seat that is already reserved with another booking reference.
-
-The code below illustrates how to make a reservation REST call to 
-the train data service from within C#.
-
-<details>
-  <summary>C# code to reserve seats using the train data service</summary>
-
-```csharp
-var URL = "http://localhost:5041/booking_reference";
-var urlParameters = "";
-
-HttpClient client = new HttpClient();
-client.BaseAddress = new Uri(URL);
-HttpResponseMessage response = client.GetAsync(urlParameters).Result;
-if (response.IsSuccessStatusCode)
-{
-    var bookingReference = response.Content.ReadAsStringAsync().Result;
-    Console.WriteLine("Booking reference fetched: {0}", bookingReference);
-}
-else 
-{
-    Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-}
-client.Dispose();    
-``` 
-</details>
+There should be three fields, namely `train_id`, `seats`, and `booking_reference`. 
+The "seats" field should be a json encoded list of seat ids, for example `["1A", "2A"]`. 
+The other two fields are ordinary strings. 
+Note the server will prevent you from booking a seat that is already reserved with another booking reference.
 
 ### Freeing up all seats by removing all reservations 
 
