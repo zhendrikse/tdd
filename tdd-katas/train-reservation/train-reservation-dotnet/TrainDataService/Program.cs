@@ -12,6 +12,21 @@ var trains = GetTrains();
 
 app.MapGet("/data_for_train/{trainId}", (string trainId) => trains[trainId]);
 
+app.MapPost("/cancel", (ReserveRequest request) =>
+{
+    var train = trains[request.train_id];
+
+    foreach (var seatKey in train.seats.Keys)
+    {
+        var existingReservation = train.seats[seatKey].booking_reference;
+        
+        if (!string.IsNullOrEmpty(existingReservation) && existingReservation == request.booking_reference)
+            train.seats[seatKey].booking_reference = "";
+    }
+    
+    return Ok(train);
+});
+  
 app.MapPost("/reserve", (ReserveRequest request) =>
 {
     var train = trains[request.train_id];
