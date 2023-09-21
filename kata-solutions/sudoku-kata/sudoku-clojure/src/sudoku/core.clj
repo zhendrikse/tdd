@@ -1,20 +1,14 @@
-(ns kata.sudoku
+(ns sudoku.core
   "Sudoku solver"
   (:require
    [clojure.string :as string]
    [clojure.set :as set]))
 
-(def board-from-vector identity)
-(def all-values #{1 2 3 4 5 6 7 8 9})
-(def dim (count all-values))
+(def board identity)
 
-(defn board-from-string
-  "creates a sudoku board from a string"
-  [board-as-string]
-  (let [string-with-zeros (string/replace board-as-string #"(\.)" "0")
-        vector-with-integers (map #(Integer/parseInt (str %)) string-with-zeros)
-        substring (fn [x] (drop (* dim x) (drop-last (* dim (- (- dim 1) x)) vector-with-integers)))]
-    (into [] (for [x (range dim)] (into [] (substring x))))))
+(def all-values #{1 2 3 4 5 6 7 8 9})
+
+(def dim (count all-values))
 
 (defn value-at [board coordinates] (get-in board coordinates))
 
@@ -123,7 +117,15 @@
         (for [value valid-values
               updated-board (solve (set-value-at board (find-empty-square board) value))] updated-board)))))
 
-(def demo-board (board-from-vector
+(defn board-from-string
+  "creates a sudoku board from a string"
+  [board-as-string]
+  (let [string-with-zeros (string/replace board-as-string #"(\.)" "0")
+        vector-with-integers (map #(Integer/parseInt (str %)) string-with-zeros)
+        substring (fn [x] (drop (* dim x) (drop-last (* dim (- (- dim 1) x)) vector-with-integers)))]
+    (into [] (for [x (range dim)] (into [] (substring x))))))
+
+(def demo-board (board
                  [[5 3 0 0 7 0 0 0 0]
                   [6 0 0 1 9 5 0 0 0]
                   [0 9 8 0 0 0 0 6 0]

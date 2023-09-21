@@ -1,11 +1,13 @@
-(defproject kata/sudoku "0.1.0-SNAPSHOT"
-  :description "Sample Sudoku solver"
-  :url "http://example.com/FIXME"
-  :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
-            :url "https://www.eclipse.org/legal/epl-2.0/"}
+(defproject sudoku "0.0.1-SNAPSHOT"
+  :description "Sudoku solver in Clojure"
   :plugins [[dev.weavejester/lein-cljfmt "0.11.2"]]
   :dependencies [[org.clojure/clojure "1.11.1"]]
-  :main ^:skip-aot kata.sudoku
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+  :profiles {:dev {:dependencies [[midje "1.10.9"]]}
+             ;; You can add dependencies that apply to `lein midje` below.
+             ;; An example would be changing the logging destination for test runs.
+             :midje {}})
+             ;; Note that Midje itself is in the `dev` profile to support
+             ;; running autotest in the repl.
+
+  
