@@ -1,11 +1,11 @@
 (ns kata.game-of-life
   (:gen-class))
 
-(defn living-cell 
+(defn living-cell
   [x y]
   [x y true])
 
-(defn dead-cell 
+(defn dead-cell
   [x y]
   [x y false])
 
@@ -30,17 +30,17 @@
     cell))
 
 (defn- x-coordinate-from
-    [cell]
-    (first cell))
+  [cell]
+  (first cell))
 
 (defn- y-coordinate-from
-    [cell]
-    (get cell 1))
+  [cell]
+  (get cell 1))
 
 (defn- distance-between
   [cell other-cell]
-  (list 
-   (Math/abs (- (x-coordinate-from cell) (x-coordinate-from other-cell))) 
+  (list
+   (Math/abs (- (x-coordinate-from cell) (x-coordinate-from other-cell)))
    (Math/abs (- (y-coordinate-from cell) (y-coordinate-from other-cell)))))
 
 (defn- distance-less-than-two-between?
@@ -49,14 +49,13 @@
 
 (defn is-neighbour-of?
   [given-cell]
-  (fn 
-    [cell] 
-    (and (not(= cell given-cell)) (distance-less-than-two-between? cell given-cell))
-  ))
+  (fn
+    [cell]
+    (and (not (= cell given-cell)) (distance-less-than-two-between? cell given-cell))))
 
 (defn living-neighbours-in
   [game]
-  (fn [cell] (filter is-alive? (filter (is-neighbour-of? cell) game) )))
+  (fn [cell] (filter is-alive? (filter (is-neighbour-of? cell) game))))
 
 (defn has-exactly-three?
   [find-neighbours-for]
@@ -75,23 +74,22 @@
 ; https://groups.google.com/g/clojure/c/O977jrXU-Cg?pli=1 |
 (defmacro which-either [& predicates]                    ;| 
   (let [x# (gensym)]                                     ;|
-  `(fn [~x#] (or ~@(map #(list % x#) predicates)))))     ;|
+    `(fn [~x#] (or ~@(map #(list % x#) predicates)))))     ;|
                                                          ;|
 (defmacro which-both [& predicates]                      ;|   
   (let [x# (gensym)]                                     ;|
-  `(fn [~x#] (and ~@(map #(list % x#) predicates)))))    ;|
+    `(fn [~x#] (and ~@(map #(list % x#) predicates)))))    ;|
 ; --------------------------------------------------------+
 
 (defn next-generation-of
   [game]
-  (map #(to-living-cell 
-         (which-both 
-          is-dead? 
-          (has-exactly-three? (living-neighbours-in game))) %) 
-  (map #(to-dead-cell 
-         (which-both 
-          is-alive? 
-          (which-either 
-           (has-less-than-two? (living-neighbours-in game)) 
-           (has-more-than-three? (living-neighbours-in game))) ) %) game)   )
-)
+  (map #(to-living-cell
+         (which-both
+          is-dead?
+          (has-exactly-three? (living-neighbours-in game))) %)
+       (map #(to-dead-cell
+              (which-both
+               is-alive?
+               (which-either
+                (has-less-than-two? (living-neighbours-in game))
+                (has-more-than-three? (living-neighbours-in game)))) %) game)))
