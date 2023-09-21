@@ -37,6 +37,7 @@ to sharpen your skills as a (TDD) practitioner.
 ![GitHub language count](https://img.shields.io/github/languages/count/zhendrikse/tdd)
 ![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?label=kata%20contributors)
 [![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd)](https://github.com/zhendrikse/tdd/pulls)
+![GitHub top language](https://img.shields.io/github/languages/top/zhendrikse/tdd)
 
 This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
