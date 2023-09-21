@@ -27,7 +27,7 @@
 
 (defn- map-to-symbol
   [game bitboard-index]
-  (cond 
+  (cond
     (bit-test (get game RED) bitboard-index) red
     (bit-test (get game YELLOW) bitboard-index) yellow
     :else none))
@@ -37,19 +37,19 @@
   (vec (map (partial map-to-symbol game) board-bitnumbers)))
 
 (defn- index-in
-    [game-string row column]
-       (game-string (+ column (* row WIDTH))))
-    
+  [game-string row column]
+  (game-string (+ column (* row WIDTH))))
+
 (defn- print-rows
   [game-string]
-  (doseq [row (range 0 HEIGHT)] 
-    (println 
-     (for [column (range 0 WIDTH)] 
+  (doseq [row (range 0 HEIGHT)]
+    (println
+     (for [column (range 0 WIDTH)]
        (index-in game-string row column)))))
 
 (defn print-game
   [game]
   (let [game-string (map-to-string game)
         header (vec (map (partial str " ") (range 1 (inc WIDTH))))]
-  (println header)
-  (print-rows game-string)))
+    (println header)
+    (print-rows game-string)))

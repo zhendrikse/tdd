@@ -14,9 +14,9 @@
 
 (defn game-with-moves
   [moves]
-  (loop [moves-to-make moves 
+  (loop [moves-to-make moves
          board GAME]
     (let [updated-board (make-move (first moves-to-make) board)]
-    (if (empty? (rest moves-to-make))
-      updated-board
-      (recur (rest moves-to-make) updated-board)))))
+      (if (empty? (rest moves-to-make))
+        updated-board
+        (recur (rest moves-to-make) updated-board)))))

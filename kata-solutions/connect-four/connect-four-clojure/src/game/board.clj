@@ -20,37 +20,37 @@
 
 (defn- increment-move-counter-in [game]
   (let [updated-game-counter (inc (get game MOVES_COUNTER_INDEX))]
-    (assoc game MOVES_COUNTER_INDEX updated-game-counter))) 
+    (assoc game MOVES_COUNTER_INDEX updated-game-counter)))
 
 (defn- update-bitboard [bitboard bit-index]
   (let [move (bit-shift-left 1 bit-index)]
-  (bit-xor move bitboard)))
+    (bit-xor move bitboard)))
 
 (defn- update-board-with [move]
   (fn [game]
-  (let [player (current-player-in game) 
-        bitboard (game player)
-        bit-index ((game COLUMNS_INDEX) move)
-        updated-bitboard (update-bitboard bitboard bit-index)]
-   (assoc game player updated-bitboard))))
+    (let [player (current-player-in game)
+          bitboard (game player)
+          bit-index ((game COLUMNS_INDEX) move)
+          updated-bitboard (update-bitboard bitboard bit-index)]
+      (assoc game player updated-bitboard))))
 
 (defn- column-height-for [column]
   (fn [game] ((get game COLUMNS_INDEX) column)))
 
 (defn- increment-column-height-in [column]
   (fn [game]
-  (let [current-height ((column-height-for column) game)
-        updated-height (inc current-height)]
-    (assoc (get game COLUMNS_INDEX) column updated-height)))) 
+    (let [current-height ((column-height-for column) game)
+          updated-height (inc current-height)]
+      (assoc (get game COLUMNS_INDEX) column updated-height))))
 
 (defn- update-column-heights-in [column game]
   (let [updated-columns ((increment-column-height-in column) game)]
     (assoc game COLUMNS_INDEX updated-columns)))
 
-(defn is-full? 
-  ([game] 
+(defn is-full?
+  ([game]
    (= TOTAL_MOVES (game MOVES_COUNTER_INDEX)))
-  ([game column] 
+  ([game column]
    (let [column-bitindex ((game COLUMNS_INDEX) column)
          full-column-bitindex (+ HEIGHT (BITBOARD_COLUMN_INDICES column))]
      (= column-bitindex full-column-bitindex))))
@@ -74,19 +74,19 @@
 ;; (3) Store the column col in the history of moves, afterwards 
 ;;     (because ++ is again in postfix position) increment the 
 ;;      counter.
-(defn- do-make-move 
+(defn- do-make-move
   "def make_move(column):          // Pseudo code
      move = 1 << height[col]++     // (1)
      bitboard[counter & 1] ^= move // (2)
      moves[counter++] = column     // (3) <= Moves aren't stored yet"
   [column game]
   (-> (update-column-heights-in column      ; // (1)
-      (increment-move-counter-in            ; // (3)
-      ((update-board-with column) game))))) ; // (2)
+                                (increment-move-counter-in            ; // (3)
+                                 ((update-board-with column) game))))) ; // (2)
 
 (defn make-move [column game]
-  (if (is-full? game column) 
-    game 
+  (if (is-full? game column)
+    game
     (do-make-move column game)))
 
 ;; (defn play
@@ -117,4 +117,4 @@
   "Checks whether given bitboard has won."
   [game]
   (let [previous-player (bit-xor 1 (current-player-in game))]
-  (not= 0 (apply bit-or (check-board-4 (game previous-player))))))
+    (not= 0 (apply bit-or (check-board-4 (game previous-player))))))
