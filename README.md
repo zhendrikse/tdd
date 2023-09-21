@@ -28,10 +28,14 @@ to sharpen your skills as a (TDD) practitioner.
 
 # Contents
 
-[![Ideas & Issues](https://img.shields.io/github/issues/zhendrikse/tdd?label=content%20ideas%20and%20issues&logoColor=green&style=for-the-badge)](https://github.com/zhendrikse/tdd/issues)
-[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?style=for-the-badge)](https://github.com/zhendrikse/tdd/pulls)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/zhendrikse/tdd?style=for-the-badge)
 ![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?style=for-the-badge&label=github%20contributors)
+![GitHub repo size](https://img.shields.io/github/repo-size/zhendrikse/tdd)
+[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?style=for-the-badge)](https://github.com/zhendrikse/tdd/pulls)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/zhendrikse/tdd/master)
+![GitHub language count](https://img.shields.io/github/languages/count/zhendrikse/tdd)
+[![Ideas & Issues](https://img.shields.io/github/issues/zhendrikse/tdd?label=content%20ideas%20and%20issues&logoColor=green&style=for-the-badge)](https://github.com/zhendrikse/tdd/issues)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/zhendrikse/tdd)
 
 This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
