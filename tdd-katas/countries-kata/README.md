@@ -48,10 +48,21 @@ The endpoint _intentionally_ delivers more fields than we are interested in!
 If unsure about how to calculate the numbers, you can go to any 
 [online standard deviation calculator](https://www.mathsisfun.com/data/standard-deviation-calculator.html).
 
-Using the numbers from the example (3, 4, 7, 10), we arrive at an average
-of 24 / 4 = 6. As the standard deviation = 2.738612788, we see that the first number differs
-3 from the mean, which is approximately 0.40 standard deviations. This number is calculated
-analogously for the other countries in the list.
+Using the numbers from the example (3, 4, 7, 10), we arrive at a mean
+of 24 / 4 = 6, with a standard deviation of 2.738612788.
+
+We see that the first number differs 3 from the mean, which is approximately 1.095 standard deviations.
+hint: you can use numpy to calulate the mean and standard deviation (std).
+
+Example calculation:
+
+| population | difference    | std         | deviation   |
+|------------|---------------|-------------|-------------|
+| 3          | abs(6-3) = 3  | 2.738612788 | 1.095445115 |
+| 4          | abs(6-4) = 2  | 2.738612788 | 0.730296743 |
+| 7          | abs(6-7) = 1  | 2.738612788 | 0.365148372 |
+| 10         | abs(6-10) = 4 | 2.738612788 | 1.460593486 |
+
 
 **Caveat**: 
 Note that the API returns the capital city in a list, and sometimes 

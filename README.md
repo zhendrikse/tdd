@@ -28,6 +28,11 @@ to sharpen your skills as a (TDD) practitioner.
 
 # Contents
 
+[![Ideas & Issues](https://img.shields.io/github/issues/zhendrikse/tdd?label=content%20ideas%20and%20issues&logoColor=green&style=for-the-badge)](https://github.com/zhendrikse/tdd/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?style=for-the-badge)](https://github.com/zhendrikse/tdd/pulls)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/zhendrikse/tdd?style=for-the-badge)
+![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?style=for-the-badge&label=github%20contributors)
+
 This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
 
