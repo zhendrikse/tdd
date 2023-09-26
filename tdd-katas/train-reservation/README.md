@@ -21,7 +21,7 @@ using example mapping as a means to formulate the acceptance test(s) in the oute
 You may want to learn more about example mapping on the
 [example mapping](https://github.com/zhendrikse/tdd/wiki/Example-mapping) Wiki page.
 
-![Double loop TDD](../../assets/atdd.png)
+<img alt="Double loop TDD" src="../../assets/atdd.png" width="55%" height="55%"/>
 
 The features/business rules/acceptance criteria that are collected using the
 example mapping technique can _directly_ be translated into 
