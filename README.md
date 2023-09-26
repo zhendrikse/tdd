@@ -38,6 +38,8 @@ to sharpen your skills as a (TDD) practitioner.
 ![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?label=kata%20contributors)
 [![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd)](https://github.com/zhendrikse/tdd/pulls)
 ![GitHub top language](https://img.shields.io/github/languages/top/zhendrikse/tdd)
+![Static Badge](https://img.shields.io/badge/View-TDD_presentations-blue?link=https%3A%2F%2Freplit.com%2F%40zwh%2Ftdd)
+
 
 This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
@@ -45,7 +47,7 @@ in the form of courses, workshops, and/or coding dojos.
 - **[cookiecutter](./cookiecutter/)** &rarr; [cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for setting up a kata in various languages.
 - **[docs](./docs/)** &rarr; additional free books.
 - **[kata-solutions](./kata-solutions/)** &rarr; (multiple) solutions in multiple languages for almost all katas, with a recent emphasis on functional programming.
-- **[presentations](./presentations/)** &rarr; [reveal-md](https://github.com/webpro/reveal-md) TDD presentations
+- **[presentations](./presentations/)** &rarr; [TDD presentations](https://replit.com/@zwh/tdd)
 - **[tdd-katas](./tdd-katas/)** &rarr; TDD katas
   - **[README.md](./tdd-katas/README.md)** &rarr; lists which topics are addressed by which kata at which level of difficulty.
   - **a-kata-name** &rarr; katas in various languages such as Python, Java, Javascript, Kotlin, and Clojure with both a general introduction in the readme files as well as detailed instruction files per kata per language.
