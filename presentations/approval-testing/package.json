@@ -4,9 +4,7 @@
     "description": "Introduction into approval testing",
     "main": "index.js",
     "dependencies": {
-        "reveal": "^0.0.4",
-        "reveal-md": "^5.4.0",
-        "server": "^1.0.36"
+        "reveal-md": "^5.5.1"
     },
     "devDependencies": {},
     "scripts": {
