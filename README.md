@@ -36,7 +36,7 @@ to sharpen your skills as a (TDD) practitioner.
 ![GitHub repo size](https://img.shields.io/github/repo-size/zhendrikse/tdd?logo=git&logoColor=white)
 ![GitHub language count](https://img.shields.io/github/languages/count/zhendrikse/tdd)
 ![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?label=kata%20contributors)
-[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd)](https://github.com/zhendrikse/tdd/pulls)
+[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?logo=git&logoColor=white)](https://github.com/zhendrikse/tdd/pulls)
 ![GitHub top language](https://img.shields.io/github/languages/top/zhendrikse/tdd?logo=python)
 [![View slides in browser](https://img.shields.io/badge/view-slides-orange?logo=reveal.js&logoColor=white)](https://replit.com/@zwh/tdd/)
 
