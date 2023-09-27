@@ -39,16 +39,11 @@ words: []"""
 class TestReportGeneration:
 
   def test_data_file_1(self):
-      # Hamcrest style
-      # assert_that(True, equal_to(False))
-      assert ReportGenerator().get_report(DATA_FILE1) == expected1
-      print("First one OK!")
+      assert_that(ReportGenerator.get_report(DATA_FILE1), equal_to(expected1))
 
   def test_data_file_2(self):
-      assert ReportGenerator().get_report(DATA_FILE2) == expected2
-      print("Second one OK!")
+      assert_that(ReportGenerator.get_report(DATA_FILE2), equal_to(expected2))
 
   def test_empty_data_file(self):
-      assert ReportGenerator().get_report(DATA_FILE3) == expected3
-      print("All OK, woop woop!")
+      assert_that(ReportGenerator.get_report(DATA_FILE3), equal_to(expected3))
 

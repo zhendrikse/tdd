@@ -1,19 +1,7 @@
 class ReportGenerator:
-    def get_report(path):
-        """
-        Creates a report of the file specified as argument.
-    
-        :param path: path to file from which the report should be created (string)
-        :return: the report (string)
-        """
-        data = _read_file(path)
-        missing_count = data[0]
-        numbers = data[1]
-        words = data[2]
-        report = _make_report(missing_count, numbers, words)
-        return report
     
     
+    @staticmethod
     def _read_file(path):
         """
         Reads and returns the data from the file specified as argument.
@@ -54,6 +42,7 @@ class ReportGenerator:
         return empty_lines, numbers, words
     
     
+    @staticmethod
     def _make_report(missing_values, numbers, words):
         """
         Creates and a report based on data given as arguments.
@@ -63,9 +52,9 @@ class ReportGenerator:
         :param words: non numeric values (list of strings)
         :return: the generated report (string)
         """
-        max_value = _get_max_value(numbers)
-        lower_case_words = _words_to_lowercase(words)
-        most_common_info = _get_most_common_words(lower_case_words)
+        max_value = ReportGenerator._get_max_value(numbers)
+        lower_case_words = ReportGenerator._words_to_lowercase(words)
+        most_common_info = ReportGenerator._get_most_common_words(lower_case_words)
         most_common_words = most_common_info[0]
         most_common_count = most_common_info[1]
     
@@ -95,6 +84,7 @@ class ReportGenerator:
         return report
     
     
+    @staticmethod
     def _get_max_value(numbers):
         """
         Returns the greatest value of the list given as argument.
@@ -111,6 +101,7 @@ class ReportGenerator:
         return max_value
     
     
+    @staticmethod
     def _words_to_lowercase(words):
         """
         :param words: words to be converted (list of strings)
@@ -123,6 +114,7 @@ class ReportGenerator:
         return lowercased
     
     
+    @staticmethod
     def _get_most_common_words(words):
         """
         Finds the most common words in a list of words.
@@ -160,3 +152,18 @@ class ReportGenerator:
         most_common_words = sorted(most_common_words)
     
         return most_common_words, max_count
+      
+    @staticmethod
+    def get_report(path):
+        """
+        Creates a report of the file specified as argument.
+    
+        :param path: path to file from which the report should be created (string)
+        :return: the report (string)
+        """
+        data = ReportGenerator._read_file(path)
+        missing_count = data[0]
+        numbers = data[1]
+        words = data[2]
+        report = ReportGenerator._make_report(missing_count, numbers, words)
+        return report
