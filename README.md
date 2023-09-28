@@ -18,10 +18,11 @@ the [wiki pages that are part of this repository](https://github.com/zhendrikse/
 
 ## One-click start
 
-[![Edit with Gitpod](https://img.shields.io/badge/open-in_gitpod-yellow?logo=gitpod)](https://gitpod.io/#https://github.com/zhendrikse/tdd)
-[![Edit with Replit](https://img.shields.io/badge/open-in_replit-yellow?logo=replit)](https://replit.com/github/zhendrikse/tdd)
-[![Edit with GitHub](https://img.shields.io/badge/open-in_github_codespace-yellow?logo=github)](https://codespaces.new/zhendrikse/tdd)
-[![View slides in browser](https://img.shields.io/badge/view-slides-yellow?logo=reveal.js)](https://replit.com/@zwh/tdd/)
+[![Open in Gitpod](https://img.shields.io/badge/Open_in-gitpod-yellow?logo=gitpod)](https://gitpod.io/#https://github.com/zhendrikse/tdd)
+[![Open in Replit](https://img.shields.io/badge/Open_in-replit-yellow?logo=replit)](https://replit.com/github/zhendrikse/tdd)
+[![Open in GitHub](https://img.shields.io/badge/Open_in-github_codespace-yellow?logo=github)](https://codespaces.new/zhendrikse/tdd)
+[![Open in CodeSandbox](https://img.shields.io/badge/Open_in-CodeSandbox-yellow?logo=codesandbox)](https://githubbox.com/zhendrikse/tdd)
+[![View slides in browser](https://img.shields.io/badge/View-slides-yellow?logo=reveal.js)](https://replit.com/@zwh/tdd/)
 
 
 The TDD materials found here can be seamlessly integrated into 
