@@ -1,3 +1,9 @@
+---
+title: Example mapping
+author: Zeger Hendrikse
+date: 2023-09-29
+---
+
 <section data-background-image="https://github.com/zhendrikse/tdd/raw/master/assets/ticket-cancellation.png">
 
 ## Example mapping

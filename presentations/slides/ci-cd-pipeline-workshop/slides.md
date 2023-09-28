@@ -1,3 +1,9 @@
+---
+title: Master class CI/CD
+author: Zeger Hendrikse
+date: 2023-09-29
+---
+
 ## Exercises
 
 ![Exercise](./images/exercise-722x406.jpg)

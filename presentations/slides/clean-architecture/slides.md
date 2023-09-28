@@ -1,3 +1,9 @@
+---
+title: Clean architecture
+author: Zeger Hendrikse
+date: 2023-09-29
+---
+
 ## Repository / Adapter
 
 ### A pattern for clean design &amp; tests

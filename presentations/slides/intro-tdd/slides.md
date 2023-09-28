@@ -1,3 +1,8 @@
+---
+title: Introduction into test-driven development
+author: Zeger Hendrikse
+date: 2023-09-29
+---
 <section data-background-image="./images/intricate-explorer-HZ7VEe7Ni1s-unsplash.jpg">
 
 #### Coders should test &mdash; testers should code

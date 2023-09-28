@@ -1,3 +1,8 @@
+---
+title: Gilded rose kata
+author: Zeger Hendrikse
+date: 2023-09-29
+---
 <section data-background-image="./images/photo-1532010940201-c31e6beacd39.jpg">
 
 ## The Gilded Rose kata
