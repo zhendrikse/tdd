@@ -1,9 +1,9 @@
 # Test-Driven Development Materials
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/zhendrikse/tdd?logo=git&logoColor=white)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/zhendrikse/tdd/master?logo=git&logoColor=white)
-![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/zhendrikse/tdd?color=darkgreen&logo=git&logoColor=white)
-[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?logo=git&logoColor=white)](https://github.com/zhendrikse/tdd/pulls)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/zhendrikse/tdd?logo=git)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/zhendrikse/tdd/master?logo=git&color=blue)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/zhendrikse/tdd?color=blue&logo=git)
+[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?logo=git&color=blue)](https://github.com/zhendrikse/tdd/pulls)
 
 Welcome to this repository that is literally packed with test-driven development (TDD) materials!
 This repository contains a huge collection of coding katas with instructions in various languages, 
@@ -16,47 +16,43 @@ Be sure to also check out the information on
 and much more on
 the [wiki pages that are part of this repository](https://github.com/zhendrikse/tdd/wiki).
 
-## For coaches
+## One-click start
 
-[![View slides in browser](https://img.shields.io/badge/view-slides-darkGreen?logo=reveal.js&logoColor=white)](https://replit.com/@zwh/tdd/)
+[![Edit with Gitpod](https://img.shields.io/badge/open-in_gitpod-yellow?logo=gitpod)](https://gitpod.io/#https://github.com/zhendrikse/tdd)
+[![Edit with Replit](https://img.shields.io/badge/open-in_replit-yellow?logo=replit)](https://replit.com/github/zhendrikse/tdd)
+[![Edit with GitHub](https://img.shields.io/badge/open-in_github_codespace-yellow?logo=github)](https://codespaces.new/zhendrikse/tdd)
+[![View slides in browser](https://img.shields.io/badge/view-slides-yellow?logo=reveal.js)](https://replit.com/@zwh/tdd/)
 
-The materials found here can be seamlessly integrated into 
-[the Samman coaching method](https://www.sammancoaching.org/) and
-are ready to be used in cloud development environments (CDEs) such
-as [replit.com](https://replit.com), 
-[GitHub Codespaces](https://github.com/features/codespaces), 
-[gitpod.io](https://gitpod.io), or [codesandbox.io](https://codesandbox.io/) and 
-are very well suited to be
-used in [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo).
 
-## For practitioners
+The TDD materials found here can be seamlessly integrated into 
+[the Samman coaching method](https://www.sammancoaching.org/) 
+and are very well-suited to be used in 
+[coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo).
 
-[![Edit with Gitpod](https://img.shields.io/badge/open-in_gitpod-darkGreen?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/zhendrikse/tdd)
-
-Coding katas remain an unlimited source of practice and inspiration
-to sharpen your skills as a (TDD) practitioner.
+Just click on one of the above badges to effortlessly get started in one of the cloud development 
+environments (CDEs)! 
 
 # Contents
 
-![GitHub repo size](https://img.shields.io/github/repo-size/zhendrikse/tdd?logo=git&logoColor=white)
-![GitHub language count](https://img.shields.io/github/languages/count/zhendrikse/tdd)
-![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?label=kata%20contributors)
-![GitHub top language](https://img.shields.io/github/languages/top/zhendrikse/tdd?logo=python)
-[![Ideas & Issues](https://img.shields.io/github/issues/zhendrikse/tdd?label=ideas%20and%20issues&color=green&logo=git&logoColor=white)](https://github.com/zhendrikse/tdd/issues)
+![GitHub repo size](https://img.shields.io/github/repo-size/zhendrikse/tdd?logo=git&color=blue)
+![GitHub language count](https://img.shields.io/github/languages/count/zhendrikse/tdd?logo=git&color=blue)
+![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?label=kata%20contributors&logo=git&color=blue)
+![GitHub top language](https://img.shields.io/github/languages/top/zhendrikse/tdd?logo=python&color=blue)
+[![Ideas & Issues](https://img.shields.io/github/issues/zhendrikse/tdd?label=ideas%20and%20issues&color=blue&logo=git)](https://github.com/zhendrikse/tdd/issues)
 
 This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
 
 | Directory | Content | 
 |:--------- |:--------| 
-| [cookiecutter](./cookiecutter/)     | [Cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for setting up a kata in various languages | 
-| [docs](./docs/)                     | Additional free books |
-| [kata-solutions](./kata-solutions/) | Sample solutions in multiple languages for almost all katas, with a recent emphasis on functional programming | 
-| [presentations](./presentations/)   | [TDD presentations](https://replit.com/@zwh/tdd) | 
-| [tdd-katas](./tdd-katas/)           | Each subdirectory contains &rarr; | 
-| &nbsp;                              | [README.md](./tdd-katas/README.md)  &rarr; Summary of which topics are addressed by which kata at which level of difficulty | 
-| &nbsp;                              | **a-kata-name** &rarr; Kata with instructions in various programming languages with both a general introduction in the readme files as well as detailed instruction files per kata per language | 
-| [tools](./tools/)                   | Playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/) | 
+| [<code>cookiecutter</code>](./cookiecutter/)     | [Cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for setting up a kata in various languages | 
+| [<code>docs</code>](./docs/)                     | Additional free books |
+| [<code>kata-solutions</code>](./kata-solutions/) | Sample solutions in multiple languages for almost all katas, with a recent emphasis on functional programming | 
+| [<code>presentations</code>](./presentations/)   | [TDD presentations](https://replit.com/@zwh/tdd) | 
+| [<code>tdd-katas</code>](./tdd-katas/)           | Coding katas remain an unlimited source of practice and inspiration to sharpen your skills as a (TDD) practitioner. |
+| [<code>tdd-katas/README.md</code>](./tdd-katas/README.md) | [README.md](./tdd-katas/README.md)  &rarr; Summary of which topics are addressed by which kata at which level of difficulty | 
+| <code>./tdd-katas/&lt;kata&gt;</code>            | Kata with instructions in various programming languages with both a general introduction in the readme files as well as detailed instruction files per kata per language | 
+| [<code>tools</code>](./tools/)                   | Playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/) | 
 
 # References
 
