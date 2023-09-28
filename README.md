@@ -23,8 +23,8 @@ The materials found here can be seamlessly integrated into
 are ready to be used in cloud development environments (CDEs) such
 as [replit.com](https://replit.com), 
 [GitHub Codespaces](https://github.com/features/codespaces), 
-[gitpod.io](https://gitpod.io), or [codesandbox.io](https://codesandbox.io/). 
-These materials are also very well suited to be
+[gitpod.io](https://gitpod.io), or [codesandbox.io](https://codesandbox.io/) and 
+are very well suited to be
 used in [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-Coding-Dojo).
 
 ## For practitioners
