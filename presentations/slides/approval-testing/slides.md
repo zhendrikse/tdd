@@ -4,7 +4,7 @@ author: Zeger Hendrikse
 date: 2023-09-29
 ---
 
-<section data-background-image="./images/clay-banks-a9kHtTbjpwY-unsplash.jpg" style="color:black;">
+<!-- .slide: data-background="./images/clay-banks-a9kHtTbjpwY-unsplash.jpg" -->
 
 <h3 style="color: black;">Refactoring Legacy Code</h3>
 
@@ -19,15 +19,6 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 &nbsp;
 
 &nbsp;
-
-</section>
-
-
----
-
-# Geeft dit zo'n titel
-
-Hoe ziet mijn tekst eruit
 
 ---
 

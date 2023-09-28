@@ -4,7 +4,8 @@ author: Zeger Hendrikse
 date: 2023-09-29
 ---
 
-<section data-background-image="https://github.com/zhendrikse/tdd/raw/master/assets/ticket-cancellation.png">
+<!-- .slide: data-background="https://github.com/zhendrikse/tdd/raw/master/assets/ticket-cancellation.png" -->
+
 
 ## Example mapping
 
@@ -23,8 +24,6 @@ date: 2023-09-29
 &nbsp;
 
 #### Based on [these slides](https://le-mois-du-product-owner.xebia.fr/wp-content/uploads/2019/11/Mois-du-PO-Dessine-moi-une-Example-Map.pdf)
-
-</section>
 
 ---
 
