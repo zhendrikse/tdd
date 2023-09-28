@@ -2,8 +2,8 @@
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/zhendrikse/tdd?logo=git&logoColor=white)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/zhendrikse/tdd/master?logo=git&logoColor=white)
-[![Ideas & Issues](https://img.shields.io/github/issues/zhendrikse/tdd?label=ideas%20and%20issues&color=green&logo=git&logoColor=white)](https://github.com/zhendrikse/tdd/issues)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/zhendrikse/tdd?color=darkgreen&logo=git&logoColor=white)
+[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?logo=git&logoColor=white)](https://github.com/zhendrikse/tdd/pulls)
 
 Welcome to this repository that is literally packed with test-driven development (TDD) materials!
 This repository contains a huge collection of coding katas with instructions in various languages, 
@@ -18,6 +18,8 @@ the [wiki pages that are part of this repository](https://github.com/zhendrikse/
 
 ## For coaches
 
+[![View slides in browser](https://img.shields.io/badge/view-slides-darkGreen?logo=reveal.js&logoColor=white)](https://replit.com/@zwh/tdd/)
+
 The materials found here can be seamlessly integrated into 
 [the Samman coaching method](https://www.sammancoaching.org/) and
 are ready to be used in cloud development environments (CDEs) such
@@ -29,6 +31,8 @@ used in [coding dojos](https://github.com/zhendrikse/tdd/wiki/The-Katas-and-the-
 
 ## For practitioners
 
+[![Edit with Gitpod](https://img.shields.io/badge/open-in_gitpod-darkGreen?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/zhendrikse/tdd)
+
 Coding katas remain an unlimited source of practice and inspiration
 to sharpen your skills as a (TDD) practitioner.
 
@@ -37,10 +41,8 @@ to sharpen your skills as a (TDD) practitioner.
 ![GitHub repo size](https://img.shields.io/github/repo-size/zhendrikse/tdd?logo=git&logoColor=white)
 ![GitHub language count](https://img.shields.io/github/languages/count/zhendrikse/tdd)
 ![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?label=kata%20contributors)
-[![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?logo=git&logoColor=white)](https://github.com/zhendrikse/tdd/pulls)
 ![GitHub top language](https://img.shields.io/github/languages/top/zhendrikse/tdd?logo=python)
-[![View slides in browser](https://img.shields.io/badge/view-slides-orange?logo=reveal.js&logoColor=white)](https://replit.com/@zwh/tdd/)
-
+[![Ideas & Issues](https://img.shields.io/github/issues/zhendrikse/tdd?label=ideas%20and%20issues&color=green&logo=git&logoColor=white)](https://github.com/zhendrikse/tdd/issues)
 
 This repository contains materials for both practicing and teaching TDD
 in the form of courses, workshops, and/or coding dojos.
