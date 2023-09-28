@@ -2,6 +2,8 @@
 title: Approval testing legacy code
 author: Zeger Hendrikse
 date: 2023-09-29
+<!--css: slides/smithbm2316.css-->
+highlightTheme: atom-one-dark
 ---
 
 <!-- .slide: data-background="./images/clay-banks-a9kHtTbjpwY-unsplash.jpg" -->
