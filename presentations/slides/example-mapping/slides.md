@@ -2,12 +2,13 @@
 title: Example mapping
 author: Zeger Hendrikse
 date: 2023-09-29
+css: custom.css
 ---
 
 <!-- .slide: data-background="https://github.com/zhendrikse/tdd/raw/master/assets/ticket-cancellation.png" -->
 
 
-## Example mapping
+# Example mapping
 
 &nbsp;
 
@@ -23,17 +24,37 @@ date: 2023-09-29
 
 &nbsp;
 
-#### Based on [these slides](https://le-mois-du-product-owner.xebia.fr/wp-content/uploads/2019/11/Mois-du-PO-Dessine-moi-une-Example-Map.pdf)
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+## Based on [these slides](https://le-mois-du-product-owner.xebia.fr/wp-content/uploads/2019/11/Mois-du-PO-Dessine-moi-une-Example-Map.pdf)
+
+&nbsp;
 
 ---
 
-#### ATDD
-
-![ATDD](https://github.com/zhendrikse/tdd/raw/master/assets/atdd.png) <!-- .element width="55%" height="55%" -->
+<ul>
+  <li>Aap
+  <ul>
+    <li>Noot</li>
+    <li>Mies</li>
+  </li>
+</ul>
 
 ---
 
-#### ATDD is _not_ about
+## ATDD
+
+![ATDD](https://github.com/zhendrikse/tdd/raw/master/assets/atdd.png) <!-- .element width="65%" height="65%" -->
+
+---
+
+## ATDD is _not_ about
 
 - <!-- .element: class="fragment"-->
   Tools (Specflow / Cucumber)
@@ -44,7 +65,7 @@ date: 2023-09-29
 
 ---
 
-#### ATDD _is_ about
+### ATDD _is_ about
 
 - <!-- .element: class="fragment"-->
   Collaboration
@@ -53,7 +74,7 @@ date: 2023-09-29
 
 ---
 
-#### The ATDD process
+## The ATDD process
 
 
 1. <!-- .element: class="fragment"-->
@@ -65,7 +86,7 @@ date: 2023-09-29
 
 ---
 
-#### The discovery phase
+## The discovery phase
 
 
 1. <!-- .element: class="fragment"-->
@@ -78,7 +99,7 @@ date: 2023-09-29
 
 ---
 
-#### The conversation phase
+## The conversation phase
 
 
 1. <!-- .element: class="fragment"-->
@@ -95,23 +116,23 @@ date: 2023-09-29
 - <!-- .element: class="fragment"-->
   &rarr; <font style="color:red">Unstructured</font>
 
-![Three amigos](images/three-amigos.jpg) <!-- .element width="25%" height="25%" --> <!-- .element: class="fragment"-->
+![Three amigos](images/three-amigos.jpg) <!-- .element width="35%" height="35%" --> <!-- .element: class="fragment"-->
 
 ---
 
-#### Example mapping in a nutshell
+## Example mapping in a nutshell
 
 ![Example mapping](https://github.com/zhendrikse/tdd/raw/master/assets/example-mapping.png) <!-- .element width="70%" height="70%" -->
 
 ---
 
-#### Sample user story
+## Sample user story
 
 ![Ticket cancellation](https://github.com/zhendrikse/tdd/raw/master/assets/ticket-cancellation.png) <!-- .element width="75%" height="75%" -->
 
 ---
 
-#### Do's
+## Do's
 
 - <!-- .element: class="fragment"-->
   Structure the examples: 
@@ -127,7 +148,7 @@ date: 2023-09-29
 
 ---
 
-#### Dont's
+## Dont's
 
 - <!-- .element: class="fragment"-->
   Do not use wireframes/visual designs

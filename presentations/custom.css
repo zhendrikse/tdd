@@ -34,8 +34,11 @@
 .reveal h4, .reveal h5, .reveal li, .reveal p {
   color: #000;
 }
-.reveal li, .reveal p {
-    font-size: 1.5em;
+.reveal ul li, .reveal ol li, .reveal p {
+    font-size: 3rem;
+}
+.reveal ul li ul li, .reveal ol li ol li {
+    font-size: 2.5rem;
 }
 .reveal  a, .reveal  a:hover, .reveal  a:focus, .reveal  a:active, .reveal  a:visited {
   color: #c00;
