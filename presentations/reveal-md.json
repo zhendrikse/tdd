@@ -4,7 +4,7 @@
   "progress": true,
   "slideNumber": true,
   "revealOptions": {
-    "transition": "fade"
+    "transition": "slide"
   },  
   "pdfSeparateFragments": true
 }

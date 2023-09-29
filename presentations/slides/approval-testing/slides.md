@@ -3,9 +3,10 @@ title: Approval testing legacy code
 author: Zeger Hendrikse
 date: 2023-09-29
 css: custom.css
+highlightTheme: github-dark
 ---
 
-<!-- .slide: data-background="./images/clay-banks-a9kHtTbjpwY-unsplash.jpg" -->
+<!-- .slide: data-background="./images/clay-banks-a9kHtTbjpwY-unsplash.jpg" data-transition="fade" -->
 
 ## Refactoring Legacy Code
 
@@ -47,20 +48,20 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
 
-##### Or even better...
+## Or even better...
 
 > Legacy Code is valuable code you’re afraid to change &#8212; [Nicolas Carlo](https://understandlegacycode.com/blog/what-is-legacy-code-is-it-code-without-tests/)
 
 ---
 
-##### 😱 But we need to modify it 😱 
+## 😱 But we need to modify it 😱 
 
 
 ![Question](./images/hiclipart.com.png)
 
 ---
 
-##### [The naive](https://github.com/nicoespeon/talk-how-to-change-untested-code): Edit and Pray 🙏
+## [The naive](https://github.com/nicoespeon/talk-how-to-change-untested-code): Edit and Pray 🙏
 
 1. <!-- .element: class="fragment" --> 
    Edit the code
@@ -75,7 +76,7 @@ Drawbacks: very risky &amp; stressful
 
 ---
 
-##### [The ideal](https://github.com/nicoespeon/talk-how-to-change-untested-code): Write the damn tests ✅
+## [The ideal](https://github.com/nicoespeon/talk-how-to-change-untested-code): Write the damn tests ✅
 
 1. <!-- .element: class="fragment" --> 
    Reverse engineer the specs from the code
@@ -91,7 +92,7 @@ Drawbacks: very costly and sl-o-o-o-w...
 <!-- .element: class="fragment" --> 
 
 ---
-### [The pragmatic](https://github.com/nicoespeon/talk-how-to-change-untested-code): Approval tests 💁
+## [The pragmatic](https://github.com/nicoespeon/talk-how-to-change-untested-code): Approval tests 💁
 
 1. <!-- .element: class="fragment" --> 
    Generate an output you can snapshot 📸 
@@ -103,7 +104,7 @@ Drawbacks: very costly and sl-o-o-o-w...
 
 ---
 
-##### [Approval tests](https://approvaltests.com/)
+## [Approval tests](https://approvaltests.com/)
 
 Also known as
 
@@ -114,7 +115,7 @@ Also known as
 - Regression Tests
 ---
 
-##### What we are going to test
+## What we are going to test
 
 ```python
 class Calculator():
@@ -125,7 +126,7 @@ class Calculator():
 
 ---
 
-##### How we verify
+## How we verify
 
 ```python
 import unittest
@@ -146,7 +147,7 @@ class CalculatorTest(unittest.TestCase):
 
 ---
 
-##### Even with combinatorial tests 🤩
+## Even with combinatorial tests 🤩
 
 ```python
 ...
@@ -164,7 +165,7 @@ class CalculatorTest(unittest.TestCase):
 
 ---
 
-##### Approval testing [use cases](file://solon.prd/files/P/Global/Users/C65923/UserData/Downloads/raid_informaatika_2021.pdf)
+## Approval testing [use cases](file://solon.prd/files/P/Global/Users/C65923/UserData/Downloads/raid_informaatika_2021.pdf)
 
 - <!-- .element: class="fragment" --> 
   Code without tests that needs to be changed
@@ -177,7 +178,7 @@ class CalculatorTest(unittest.TestCase):
 
 ---
 
-##### [You should NOT keep these tests](https://github.com/nicoespeon/talk-how-to-change-untested-code)
+## [You should NOT keep these tests](https://github.com/nicoespeon/talk-how-to-change-untested-code)
 
 Problems:
 

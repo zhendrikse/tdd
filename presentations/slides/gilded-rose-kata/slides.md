@@ -2,6 +2,8 @@
 title: Gilded rose kata
 author: Zeger Hendrikse
 date: 2023-09-29
+css: custom.css
+highlightTheme: github-dark
 ---
 
 <!-- .slide: data-background="./images/photo-1532010940201-c31e6beacd39.jpg" -->
@@ -21,34 +23,36 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 &nbsp;
 
-</section>
 
 ---
+
 ![Goals](./images/goals.png)
-<ul>
-<div>
-<li>Explain various refactoring techniques</li>
-</div> 
-<div class="fragment">
-<li>Learn to refactor in <em><b>small</b></em> steps</li>
-</div> 
-<div class="fragment">
-<li>The one and only useful use of code coverage</li>
-</div> 
-</ul>
+
+- <!-- .element: class="fragment" --> 
+  Explain various refactoring techniques
+- <!-- .element: class="fragment" --> 
+  Learn to refactor in _small_ steps
+- <!-- .element: class="fragment" --> 
+  The one and only useful use of code coverage
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 ---
 
-### [Martin Fowler](https://martinfowler.com/): good programmers
+## [Martin Fowler](https://martinfowler.com/): good programmers
 
 ![Martin Fowler](./images/fowler.jpg)
 
-A fool can write code that a computer can understand.
-Good programmers write code that humans can understand.
+> A fool can write code that a computer can understand.
+  Good programmers write code that humans can understand.
 
 ---
 
-### [Gilded Rose kata](https://github.com/emilybache/GildedRose-Refactoring-Kata)
+## [Gilded Rose kata](https://github.com/emilybache/GildedRose-Refactoring-Kata)
 
 Store where goods degrade in quality as they approach their sell date
 
@@ -56,7 +60,7 @@ Store where goods degrade in quality as they approach their sell date
 
 ---
 
-#### System updates items daily
+## System updates items daily
 
 * `SellIn` = number of days left to sell the item
 * `Quality` = how valuable the item is
@@ -64,17 +68,17 @@ Store where goods degrade in quality as they approach their sell date
 
 ---
 
-#### Task: add a new category of items
+## Task: add a new category of items
 
 * "Conjured" items degrade in `Quality` twice as fast as normal items
 
 ---
 
-<iframe frameborder="0" width="100%" height="500px" src="https://replit.com/@zwh/tdd?lite=false"></iframe>
+<iframe frameborder="0" width="100%" height="700px" src="https://replit.com/@zwh/tdd?lite=false"></iframe>
 
 ---
 
-### 😱 How do I even begin 😱 
+## 😱 How do I even begin 😱 
 
 ```python
 def update_quality(self):
@@ -94,7 +98,7 @@ def update_quality(self):
 ```
 ---
 
-### Start with approval tests
+## Start with approval tests
 
 ```python
 import unittest
@@ -119,34 +123,43 @@ if __name__ == "__main__":
 ```
 ---
 
-### Start with all the names
+## Start with all the names
 
 - “Sulfuras, Hand of Ragnaros”
 - “Aged Brie”
 - “Backstage passes to a TAFKAL80ETC concert”
 ---
 
-### Quality and Sell In days
+## Quality and Sell In days
 
-- `Quality 50`
-- `SellIn 11` <!-- .element: class="fragment"-->
-- `SellIn -1` <!-- .element: class="fragment"-->
-- `Quality 49` <!-- .element: class="fragment"-->
+- <!-- .element: class="fragment"-->
+  `Quality 50`
+- <!-- .element: class="fragment"-->
+  `SellIn 11`
+- <!-- .element: class="fragment"-->
+  `SellIn -1`
+- <!-- .element: class="fragment"-->
+  `Quality 49` 
 
 ---
 
-### Edge cases &amp; mutation testing
+## Edge cases &amp; mutation testing
 
-- What if we change the "6" &rarr; "7" in line 19?
-- Add "6" to sell in <!-- .element: class="fragment"-->
-- What if we change the "50" &rarr; "49" in line 17? <!-- .element: class="fragment"-->
-- Add "48" to quality <!-- .element: class="fragment"-->
-- What if we change the "50" &rarr; "49" in line 20? <!-- .element: class="fragment"-->
+- <!-- .element: class="fragment"-->
+  What if we change the "6" &rarr; "7" in line 19?
+- <!-- .element: class="fragment"-->
+  Add "6" to sell in 
+- <!-- .element: class="fragment"-->
+  What if we change the "50" &rarr; "49" in line 17? 
+- <!-- .element: class="fragment"-->
+  Add "48" to quality 
+- <!-- .element: class="fragment"-->
+  What if we change the "50" &rarr; "49" in line 20?
 - Etc... <!-- .element: class="fragment"-->
 
 ---
 
-### End result of approval tests
+## End result of approval tests
 
 ```python
 import unittest
@@ -171,81 +184,74 @@ if __name__ == "__main__":
 ```
 ---
 
-### [Extract method](https://wiki.c2.com/?ExtractMethod)
+## [Extract method](https://wiki.c2.com/?ExtractMethod)
 
 - Turn the fragment into a method whose name explains the purpose of the method
 
-  ```python
-  def update_quality(self):
-    for item in self.items:
-      update_item_quality(item)
-  ```
+```python
+def update_quality(self):
+  for item in self.items:
+    update_item_quality(item)
+```
 
 ---
 
-### [Refactor Negate If](https://wiki.c2.com/?RefactorNegateIf)
+## [Refactor Negate If](https://wiki.c2.com/?RefactorNegateIf)
 
 - Eliminate negate and "flip" the conditional
 
-  ```python
-  if item.name == "Aged Brie" or item.name == "Backstage passes to a TAFKAL80ETC concert":
-  ```
+```python
+if item.name == "Aged Brie" or item.name == "Backstage passes to a TAFKAL80ETC concert":
+```
 ---
 
-### [Lift-Up Conditional](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2) &mdash; step 1
+## [Lift-Up Conditional](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2) &mdash; step 1
 
 - Create temporary `foo(self, item)` with all logic
 
-  ```python
-  def update_item_quality(self, item):
-    self.foo(item)
+```python
+def update_item_quality(self, item):
+  self.foo(item)
 
-  def foo(self, item):
-    if item.name == "Aged Brie" or item.name == "Backstage passes to a TAFKAL80ETC concert":
-    ...
-  ```
+def foo(self, item):
+  if item.name == "Aged Brie" or item.name == "Backstage passes to a TAFKAL80ETC concert":
+  ...  
+```
+
 ---
 
-### [Lift-Up Conditional](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2) &mdash; step 2
+## [Lift-Up Conditional](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2) &mdash; step 2
   
 - Add conditional
 
-  ```python
-  def update_item_quality(self, item):
-    if item.name == "Aged Brie":
-      self.foo(item)
-    else: 
-      self.foo(item)
-  ```
+```python
+def update_item_quality(self, item):
+  if item.name == "Aged Brie":
+    self.foo(item)
+  else: 
+    self.foo(item)
+```
 
 ---
 
-### [Lift-Up Conditional](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2) &mdash; step 3
+## [Lift-Up Conditional](https://www.eficode.com/blog/advanced-testing-refactoring-techniques-2) &mdash; step 3
   
-<ol>
-<div>
-<li>Inline `foo()`, run and inspect coverage!</li>
-</div>
-<div class="fragment">
-<li>Remove dead code</li>
-</div>
-<div class="fragment">
-<li>Inspect coverage of conditionals</li>
-  <ul>
-    <li>Hover over to see more details</li>
-    <li>Remove dead branches</li>
-  </ul>
-</div>
-<div class="fragment">
-<li>Take out "Agred Brie" from `else`-clause</li>
-</div>
-</ol>
-
+1. <!-- .element: class="fragment"-->
+   Inline `foo()`, run and inspect coverage!
+2. <!-- .element: class="fragment"-->
+   Remove dead code
+3. <!-- .element: class="fragment"-->
+   Inspect coverage of conditionals
+   - Hover over to see more details 
+   - Remove dead branches
+4. <!-- .element: class="fragment"-->
+   Take out "Agred Brie" from `else`-clause
+   
 ---
 
-### Rinse and repeat 
+## Rinse and repeat 
 
-Do the same for the `else`-branch of "Aged Brie"
+The same for the `else`-branch of "Aged Brie"
 
 ```python
 else:
@@ -257,7 +263,7 @@ else:
 
 ---
 
-### Rinse and repeat 
+## Rinse and repeat 
 
 Do the same for the `else`-branch of "Backstage passes to a TAFKAL80ETC concert"
 
@@ -271,7 +277,7 @@ else:
 
 ---
 
-### Rearrange item type conditional
+## Rearrange item type conditional
 
 ```python
 if item.name == "Aged Brie":
@@ -285,7 +291,7 @@ else:
 
 ---
 
-### [Refactor Negate If](https://wiki.c2.com/?RefactorNegateIf)
+## [Refactor Negate If](https://wiki.c2.com/?RefactorNegateIf)
 
 ```python
 if item.name == "Aged Brie":
@@ -305,7 +311,7 @@ else:
 
 ---
 
-### Introduce Aged Brie class
+## Introduce Aged Brie class
 
 ```python
 class AgedBrieItem(Item):
@@ -330,7 +336,7 @@ def do_update_quality(self, name: str, sellIn: int, quality: int) -> str:
 
 ---
 
-### The other subclasses
+## The other subclasses
 
 ```python
 class BackstagePassItem(Item):
@@ -351,7 +357,7 @@ class BackstagePassItem(Item):
 
 ---
 
-### The other subclasses
+## The other subclasses
 
 ```python
 class SulfurasItem(Item):
@@ -361,7 +367,7 @@ class SulfurasItem(Item):
 
 ---
 
-### The base class
+## The base class
 
 ```python
 class Item:
@@ -375,7 +381,7 @@ class Item:
 
 ---
 
-### Set name in constructor
+## Set name in constructor
 
 ```python
 class BackstagePassItem(Item):
@@ -385,7 +391,7 @@ class BackstagePassItem(Item):
 
 ---
 
-### Primitive obsession
+## Primitive obsession
 
 ```python
 class Quality:
@@ -416,19 +422,13 @@ class Item:
 
 ---
 
-### Retrospective
+## Retrospective
 
-<ul>
-<div>
-<li><a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks, stubs, fakes, spies, ...</a></li>
-</div>
-<div class="fragment">
-<li><a href="https://khalilstemmler.com/articles/software-design-architecture/organizing-app-logic/">The Clean Architecture</a>: how to cope with dependencies on external systems</li>
-</div>
-<div class="fragment">
-<li><a href="https://blog.devgenius.io/detroit-and-london-schools-of-test-driven-development-3d2f8dca71e5">London school / Detroit schools</a></li>
-</div>
-<div class="fragment">
-<li>Developer tests his own code: <a href="../four-eyes/index.html">the nightmare of every auditor!</a></li>
-</div>
-</ul>
+- <!-- .element: class="fragment"-->
+  [Mocks, stubs, fakes, spies, ...](https://martinfowler.com/articles/mocksArentStubs.html)
+- <!-- .element: class="fragment"-->
+  [The Clean Architecture](https://khalilstemmler.com/articles/software-design-architecture/organizing-app-logic/): how to cope with dependencies on external systems</li>
+- <!-- .element: class="fragment"-->
+  [London school / Detroit school of TDD](https://blog.devgenius.io/detroit-and-london-schools-of-test-driven-development-3d2f8dca71e5)
+- <!-- .element: class="fragment"-->
+  Developer tests his own code: the nightmare of every auditor!

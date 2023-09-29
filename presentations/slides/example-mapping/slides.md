@@ -38,16 +38,6 @@ css: custom.css
 
 ---
 
-<ul>
-  <li>Aap
-  <ul>
-    <li>Noot</li>
-    <li>Mies</li>
-  </li>
-</ul>
-
----
-
 ## ATDD
 
 ![ATDD](https://github.com/zhendrikse/tdd/raw/master/assets/atdd.png) <!-- .element width="65%" height="65%" -->
