@@ -36,6 +36,7 @@ environments (CDEs)!
 # Contents
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/zhendrikse/tdd?logo=git&color=blue)
+[![Lines](https://tokei.rs/b1/github/zhendrikse/tdd)](https://github.com/zhendrikse/tdd)
 ![GitHub language count](https://img.shields.io/github/languages/count/zhendrikse/tdd?logo=git&color=blue)
 ![GitHub contributors](https://img.shields.io/github/contributors/zhendrikse/tdd?label=kata%20contributors&logo=git&color=blue)
 ![GitHub top language](https://img.shields.io/github/languages/top/zhendrikse/tdd?logo=python&color=blue)
