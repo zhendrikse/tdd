@@ -1,0 +1,71 @@
+.reveal {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 1.75em;
+  background: url("images/cardboard_flat.png");
+}
+/* line 17, granite.scss */
+.reveal  h1 {
+  color: #424242;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.9);
+}
+/* line 22, granite.scss */
+.reveal  h2 {
+  color: #424242;
+  border-bottom-color: #CCC;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.9);
+}
+/* line 27, granite.scss */
+.reveal  h2 .red {
+  color: #890000;
+}
+/* line 31, granite.scss */
+.reveal  h2 .green {
+  color: #0c580c;
+}
+/* line 36, granite.scss */
+.reveal  h3 {
+  color: #888;
+}
+/* line 39, granite.scss */
+.reveal  h3 strong {
+  font-weight: 900;
+  color: #890000;
+}
+.reveal h4, .reveal h5, .reveal li, .reveal p {
+  color: #000;
+}
+.reveal li, .reveal p {
+    font-size: 1.5em;
+}
+.reveal  a, .reveal  a:hover, .reveal  a:focus, .reveal  a:active, .reveal  a:visited {
+  color: #c00;
+  text-decoration: none;
+}
+.reveal  a:hover, .reveal  a:focus {
+  text-decoration: underline;
+}
+.reveal  pre {
+  border-color: #ccc;
+  background-color: #FFF;
+  padding: .5em;
+  font-size: 1em;
+}
+.reveal  code {
+  color: #888;
+}
+.reveal  blockquote {
+  font-size: 1.25em;
+  font-style: italic;
+  padding: 1em 2em;
+  color: #000;
+  border-left: 5px solid #ccc;
+}
+.reveal  blockquote p {
+  margin: 0;
+}
+.reveal  blockquote cite {
+  font-size: .5em;
+  font-style: normal;
+  font-weight: bold;
+  color: #888;
+}

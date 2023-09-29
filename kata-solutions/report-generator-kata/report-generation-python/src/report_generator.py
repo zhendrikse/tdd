@@ -58,10 +58,9 @@ class FileReader:
 
 class ReportGenerator:
     def get_report(self, stats):
-        most_common_str = "".join(
-            word + ", " for word in stats.most_common_words())
+        most_common_str = "".join(f"{word}, " for word in stats.most_common_words())
         # remove the last comma and space
-        common_words_as_string = most_common_str[0: len(most_common_str) - 2]
+        common_words_as_string = most_common_str[:len(most_common_str) - 2]
 
         return (
             f"missing values: {stats._empty_lines}\n"

@@ -5,7 +5,7 @@ description = "This kata practices TDD"
 authors = ["Your name  <your@email.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0,<3.11"
+python = ">=3.10.0,<=3.12"
 pytest-watch = "^4.2.0"
 pytest = "^7.3.2"
 mamba = "^0.11.2"

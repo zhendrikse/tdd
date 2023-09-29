@@ -2,15 +2,14 @@
 title: Approval testing legacy code
 author: Zeger Hendrikse
 date: 2023-09-29
-<!--css: slides/smithbm2316.css-->
-highlightTheme: atom-one-dark
+css: custom.css
 ---
 
 <!-- .slide: data-background="./images/clay-banks-a9kHtTbjpwY-unsplash.jpg" -->
 
-<h3 style="color: black;">Refactoring Legacy Code</h3>
+## Refactoring Legacy Code
 
-<h2 style="color: black;">Using approval testing</h2>
+# Using approval tests
 
 by [Zeger Hendrikse](https://www.it-essence.nl/)
 

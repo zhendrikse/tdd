@@ -1,3 +1,4 @@
+import itertools
 from dataclasses import dataclass
 
 @dataclass(frozen = True)
@@ -21,7 +22,7 @@ class Sudoku:
   def __init__(self, puzzle_string: str) -> None:
     puzzle_string = puzzle_string.replace('.', '0')
 
-    self.puzzle = [ [0]*9 for i in range(9)]
+    self.puzzle = [[0]*9 for _ in range(9)]
     for i in range(81):
       self.puzzle[i // 9][i % 9] = int(puzzle_string[i])
 
@@ -35,24 +36,22 @@ class Sudoku:
   def duplicate_cell_value_in_3_3_block(self, index:SudokuIndex) -> bool:
     row = index.row
     column = index.column
-    for i in range((row // 3) * 3, (row // 3) * 3 + 3):
-      for j in range((column // 3) * 3, (column // 3) * 3 + 3):
-        if not (i == row and j == column) and self.puzzle[row][column] == self.puzzle[i][j]:
-          return True
-
-    return False
+    return any((i != row or j != column)
+               and self.puzzle[row][column] == self.puzzle[i][j]
+               for i, j in itertools.product(
+                   range((row // 3) * 3, (row // 3) * 3 + 3),
+                   range((column // 3) * 3, (column // 3) * 3 + 3),
+               ))
 
   def cell_value_at(self, index:SudokuIndex) -> int:
     return self.puzzle[index.row][index.column]
 
   def cell_value_allowed(self, index:SudokuIndex) -> bool:
     if self.duplicate_cell_value_in_row(index):
-      return False   
+      return False
     if self.duplicate_cell_value_in_column(index):
-      return False   
-    if self.duplicate_cell_value_in_3_3_block(index):
-      return False   
-    return True
+      return False
+    return not self.duplicate_cell_value_in_3_3_block(index)
 
   def is_cell_empty(self, index:SudokuIndex) -> bool:
     return self.cell_value_at(index) == 0

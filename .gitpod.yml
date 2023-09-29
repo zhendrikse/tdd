@@ -7,3 +7,6 @@ vscode:
     - ms-python.python
     - genuitecllc.CodeTogether
     - appulate.filewatcher
+    - betterthantomorrow.calva
+    - sourcery.sourcery
+
