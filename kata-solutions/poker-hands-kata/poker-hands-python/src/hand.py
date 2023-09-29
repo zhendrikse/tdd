@@ -16,12 +16,12 @@ class Hand:
     return len(set(suits)) == 1
 
   def of_a_kind(self, kind_type: int, cards = None):
-    ranked_cards = self.rank_cards() if cards == None else cards
+    ranked_cards = self.rank_cards() if cards is None else cards
 
-    for card in ranked_cards:
-      if ranked_cards.count(card) == kind_type:
-        return card
-    return False
+    return next(
+        (card for card in ranked_cards if ranked_cards.count(card) == kind_type),
+        False,
+    )
 
   # Ranks cards in descending order
   def rank_cards(self):

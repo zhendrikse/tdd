@@ -7,4 +7,4 @@ class Country:
   population: int
 
   def as_string(self):
-    return self.name + "," + self.capital + "," + str(self.population)
+    return f"{self.name},{self.capital},{str(self.population)}"

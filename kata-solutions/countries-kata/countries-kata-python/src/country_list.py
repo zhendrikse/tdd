@@ -34,12 +34,13 @@ class CountryList:
     self._output_port.export(countries_dto)
     
 def average_of(a_collection):
-  if not a_collection: return 0
-  return sum([item for item in a_collection]) / len(a_collection)
+  return sum(list(a_collection)) / len(a_collection) if a_collection else 0
 
 def standard_deviation_of(a_collection):
   if not a_collection: return 0
-  return sqrt(sum([(item - average_of(a_collection)) ** 2 for item in a_collection]) / len(a_collection))
+  return sqrt(
+      sum((item - average_of(a_collection))**2
+          for item in a_collection) / len(a_collection))
 
 def main():
     CountryList().export_to_csv()

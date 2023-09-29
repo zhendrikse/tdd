@@ -61,14 +61,10 @@ class Cell:
         return self._next_generation_when_dead(neighbours)
 
     def _next_generation_when_dead(self, neighbours):
-        if len(living(neighbours)) == 3:
-            return living_cell()
-        return dead_cell()
+        return living_cell() if len(living(neighbours)) == 3 else dead_cell()
 
     def _next_generation_when_alive(self, neighbours):
-        if len(living(neighbours)) in [2, 3]:
-            return living_cell()
-        return dead_cell()
+        return living_cell() if len(living(neighbours)) in {2, 3} else dead_cell()
 
     def is_alive(self):
         return self._alive
@@ -96,8 +92,12 @@ from random import choice
 import os, time
 
 if __name__ == '__main__':
-    game = Game([[choice([dead_cell, living_cell])() for c in range(80)]
-                 for r in range(40)])
+    game = Game(
+        [
+            [choice([dead_cell, living_cell])() for _ in range(80)]
+            for _ in range(40)
+        ]
+    )
     while True:
         os.system('clear')
         print(game)
