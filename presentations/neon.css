@@ -1,0 +1,153 @@
+/* line 1, neon.scss */
+{
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  font-size: 1.75em;
+  color: #aaa;
+  background: #000;
+}
+/* line 7, neon.scss */
+.reveal {
+  background: #000;
+}
+/* line 10, neon.scss */
+.reveal h1 {
+  color: #0af;
+  font-weight: normal;
+  font-weight: 100;
+  text-shadow: 0 0 50px #0af, 0 0 3px #fff;
+}
+/* line 17, neon.scss */
+.reveal h2 {
+  color: #af0;
+  border-bottom-color: #ccc;
+  font-weight: normal;
+  font-weight: 100;
+  text-shadow: 0 0 15px #af0, 0 0 2px #fff;
+  border-bottom: 1px solid #333;
+}
+/* line 26, neon.scss */
+.reveal h3 {
+  color: #fff;
+  font-weight: normal;
+  font-weight: 100;
+  text-shadow: 0 0 10px #fff, 0 0 2px #fff;
+}
+/* line 33, neon.scss */
+.reveal pre {
+  border-color: #333;
+}
+/* line 36, neon.scss */
+.reveal pre code {
+  color: #fff;
+}
+/* line 41, neon.scss */
+.reveal code {
+  color: #f0a;
+}
+/* line 45, neon.scss */
+.reveal blockquote {
+  font-size: 1em;
+  padding: 1em 2em;
+  color: #fff;
+  border-left: 5px solid #fff;
+}
+/* line 51, neon.scss */
+.reveal blockquote p {
+  margin: 0;
+}
+/* line 55, neon.scss */
+.reveal blockquote cite {
+  font-size: .5em;
+  font-style: normal;
+  font-weight: normal;
+  font-weight: 100;
+  color: #aaa;
+  text-shadow: 0 0 15px #fff, 0 0 2px #fff;
+}
+/* line 65, neon.scss */
+.reveal ::-moz-selection {
+  background: #a0f;
+}
+/* line 66, neon.scss */
+.reveal ::selection {
+  background: #a0f;
+}
+/* line 69, neon.scss */
+.reveal a, .reveal a:hover, .reveal a:focus, .reveal a:active, .reveal a:visited {
+  color: #f0a;
+  text-decoration: none;
+}
+/* line 74, neon.scss */
+.reveal a:hover, .reveal a:focus {
+  text-decoration: underline;
+}
+/* line 80, neon.scss */
+.deck-prev-link, .deck-next-link {
+  background: #f0a;
+  text-shadow: 0 0 3px #fff;
+}
+/* line 84, neon.scss */
+.deck-prev-link, .deck-prev-link:hover, .deck-prev-link:focus, .deck-prev-link:active, .deck-prev-link:visited, .deck-next-link, .deck-next-link:hover, .deck-next-link:focus, .deck-next-link:active, .deck-next-link:visited {
+  color: #fff;
+}
+/* line 88, neon.scss */
+.deck-prev-link:hover, .deck-prev-link:focus, .deck-next-link:hover, .deck-next-link:focus {
+  text-decoration: none;
+}
+/* line 91, neon.scss */
+.boxshadow .deck-prev-link:hover, .boxshadow .deck-prev-link:focus, .boxshadow .deck-next-link:hover, .boxshadow .deck-next-link:focus {
+  -webkit-box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+  -moz-box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+  box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+}
+/* line 100, neon.scss */
+> .reveal .deck-before, > .reveal .deck-previous {
+  opacity: 0.4;
+}
+/* line 104, neon.scss */
+> .reveal .deck-before:not(.deck-child-current) .deck-before, > .reveal .deck-before:not(.deck-child-current) .deck-previous, > .reveal .deck-previous:not(.deck-child-current) .deck-before, > .reveal .deck-previous:not(.deck-child-current) .deck-previous {
+  opacity: 1;
+}
+/* line 110, neon.scss */
+> .reveal .deck-child-current {
+  opacity: 1;
+}
+/* line 115, neon.scss */
+.deck-status {
+  font-size: 0.6666em;
+}
+/* line 119, neon.scss */
+.goto-form {
+  background: #000;
+  border: 1px solid #f0a;
+}
+/* line 123, neon.scss */
+.goto-form label {
+  color: #fff;
+}
+/* line 129, neon.scss */
+.deck-container.deck-menu .reveal {
+  background: #333;
+}
+/* line 133, neon.scss */
+.deck-container.deck-menu .deck-current {
+  background: #444;
+}
+/* line 136, neon.scss */
+.boxshadow .deck-container.deck-menu .deck-current {
+  background: #000;
+  -webkit-box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+  -moz-box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+  box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+}
+/* line 144, neon.scss */
+.no-touch .deck-container.deck-menu .reveal:hover {
+  background: #444;
+}
+/* line 148, neon.scss */
+.no-touch.boxshadow .deck-container.deck-menu .reveal:hover {
+  background: #000;
+  -webkit-box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+  -moz-box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+  box-shadow: 0 0 20px #f0a, 0 0 5px #fff;
+}

@@ -2,13 +2,13 @@
 title: Gilded rose kata
 author: Zeger Hendrikse
 date: 2023-09-29
-css: custom.css
+css: neon.css
 highlightTheme: github-dark
 ---
 
 <!-- .slide: data-background="./images/photo-1532010940201-c31e6beacd39.jpg" -->
 
-## The Gilded Rose kata
+# The Gilded Rose kata
 
 &nbsp;
 
@@ -17,7 +17,7 @@ highlightTheme: github-dark
 &nbsp;
 
 &nbsp;
-by [Zeger Hendrikse](https://www.it-essence.nl/)
+## by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 &nbsp;
 
@@ -68,7 +68,7 @@ Store where goods degrade in quality as they approach their sell date
 
 ---
 
-## Task: add a new category of items
+### Task: add a new category of items
 
 * "Conjured" items degrade in `Quality` twice as fast as normal items
 

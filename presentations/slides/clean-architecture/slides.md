@@ -2,6 +2,7 @@
 title: Clean architecture
 author: Zeger Hendrikse
 date: 2023-09-29
+css: web-2.0.css
 ---
 
 ## Repository / Adapter

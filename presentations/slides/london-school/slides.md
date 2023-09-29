@@ -2,6 +2,7 @@
 title: London school of test-driven development
 author: Zeger Hendrikse
 date: 2023-09-29
+css: neon.css
 ---
 
 #### Coders should test
@@ -13,53 +14,49 @@ date: 2023-09-29
 by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
+
 ![Goals](./images/goals.png)
-<ul>
-<div>
-<li><a href="https://blog.devgenius.io/detroit-and-london-schools-of-test-driven-development-3d2f8dca71e5">London vs Detroit schools of TDD</a></li>
-</div>
-<div class="fragment">
-<li>See when mocks should be used <em>in practice</em></li>
-</div> 
-<div class="fragment">
-<li>Practice TDD as a mockist</li>
-</div> 
-</ul>
+
+- <!-- .element: class="fragment" --> 
+  [London versus Detroit schools](https://blog.devgenius.io/detroit-and-london-schools-of-test-driven-development-3d2f8dca71e5) of TDD
+- <!-- .element: class="fragment" --> 
+  See when mocks should be used _in practice_
+- <!-- .element: class="fragment" --> 
+  Practice TDD as a mockist
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 ---
 
 ### Don't mock what you don't own
 
-<div class="fragment">
-  <h2>Use <a href="../clean-architecture/repository-adapter/slides.md">adapters</a> instead!</h2>
-</div>
+## Use [adapters](../clean-architecture/slides.md) instead! 
 
 > Effective unit tests only test one thing. To do this you have to move the irrelevant portions out of the way (e.g., MockObjects). This forces out what might be a poor design choice.
----
-
-### Test doubles
-
-<ul>
-  <div class="fragment">
-    <li><b>Dummy</b>: a filler, i.e. not really used</li>
-  </div>
-  <div class="fragment">
-    <li><b>Fake</b>: fake implementation, e.g. in-mem DB</li>
-  </div>
-  <div class="fragment">
-    <li><b>Stubs</b>: canned answers (for <i>queries</i>)</li>
-  </div>
-  <div class="fragment">
-    <li><b>Spies</b>: objects that record call info(<i>commands</i>)</li>
-  </div>
-  <div class="fragment">
-    <li><b>Mocks</b>: objects that verify <i>behaviour</i></li>
-  </div>
-</ul>
 
 ---
 
-### Rulez of the TDD game
+## Test doubles
+
+- <!-- .element: class="fragment" --> 
+  **Dummy**: a filler, i.e. not really used
+  </div>
+- <!-- .element: class="fragment" --> 
+  **Fake**: fake implementation, e.g. in-mem DBs
+- <!-- .element: class="fragment" --> 
+  **Stubs**: canned answers (for _queries_)
+- <!-- .element: class="fragment" --> 
+  **Spies**: in-between objects that record call info (_commands_)
+- <!-- .element: class="fragment" --> 
+  **Mocks**: objects that verify _behaviour_
+
+---
+
+## Rulez of the TDD game
 
 <table>
   <colgroup>
@@ -83,7 +80,7 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
 
-### Rulez of the TDD game
+## Rulez of the TDD game
 
 **Small increments**, so we are [not allowed to write](http://blog.cleancoder.com/uncle-bob/2014/12/17/TheCyclesOfTDD.html)
 <ol>
@@ -99,7 +96,7 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 </ol>
 ---
 
-### Kent Beck
+## Kent Beck
 
 ![Kent Beck](./images/kentbeck.jpg)
 
@@ -113,9 +110,9 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
 
-### User story / epic
+## User story / epic
 
-#### Audio player
+### Audio player
 
 <div style="font-size: 20px; border: 1px solid;" >
 
@@ -134,9 +131,9 @@ now ᴘʟᴀʏɪɴɢ: MyGreatSong.mp3 ───────────⚪──
 
 ---
 
-#### Plans are worthless ...
+### Plans are worthless ...
 
-### ... but planning is essential:
+## ... but planning is essential:
 
 - Audio player in initial state
 - Previous track button
@@ -152,15 +149,16 @@ Credits to <a href="http://barbra-coco.dyndns.org/yuri/Kent_Beck_TDD.pdf">Kent B
 
 ---
 
-### What the result will be
+## What the result will be
 
 <iframe width="100%" height="500" src="//jsfiddle.net/zhendrikse/bu7tv1kp/3/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ---
 
-### Jasmine prerequisites
+## Jasmine prerequisites
 
 - Creating a [spy object](https://stackoverflow.com/questions/24321307/what-is-the-difference-between-createspy-and-createspyobj)
+  
 ```javascript
 beforeEach(function() {
   tape = jasmine.createSpyObj('tape', ['play', 'pause', 'stop', 'rewind']);
@@ -173,7 +171,7 @@ beforeEach(function() {
 
 ---
 
-### Jasmine prerequisites
+## Jasmine prerequisites
 
 - Mocking return value
 ```javascript
@@ -186,7 +184,7 @@ my_object.my_method.and.returnValues("my_return_value1", "my_return_value2")
 ```
 ---
 
-### Jasmine prerequisites
+## Jasmine prerequisites
 
 - Calls [with arguments](https://jasmine.github.io/api/edge/Spy#withArgs)
   
@@ -204,9 +202,9 @@ my_object.my_method.and.returnValues("my_return_value1", "my_return_value2")
 ---
 
 
-### Let's do this
+## Let's do this
 
-<iframe frameborder="0" width="100%" height="500px" src="https://replit.com/@zwh/Audioplayer-with-TDD-Javascript-and-Jasmine?lite=false"></iframe>
+<iframe frameborder="0" width="100%" height="500px" src="https://replit.com/@zwh/tdd?lite=false"></iframe>
 
 ---
 
