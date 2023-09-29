@@ -1,8 +1,18 @@
-# sudoku
+# Sudoku solution in Clojure
 
 The project uses [Midje](https://github.com/marick/Midje/).
 
-## How to run the tests
+## How to use midje
+
+
+### Prerequisite
+Add this to your `~/.lein/profiles.clj` file:
+
+```bash
+$ echo '{:user {:plugins [[lein-midje "3.2.1"]]}}' >> ~/.lein/profiles.clj
+```
+
+### Running the tests
 
 `lein midje` will run all tests.
 
