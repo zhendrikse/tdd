@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "dashboard_kata_python"
+version = "0.1.0"
+description = "Dashboard kata for data science"
+authors = ["Zeger Hendrikse  <zegerh@yahoo.co.uk>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10.0,<3.13"
+pytest-watch = "^4.2.0"
+pytest = "^7.3.2"
+pyhamcrest = "^2.0.4"
+pandas = "^2.1.1"
+openpyxl = "^3.1.2"
+
+
+
+
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
