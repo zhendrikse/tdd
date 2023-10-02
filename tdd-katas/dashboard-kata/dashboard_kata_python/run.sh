@@ -1,0 +1,1 @@
+poetry run streamlit run src/dashboard_kata.py
