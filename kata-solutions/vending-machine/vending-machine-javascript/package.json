@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Vending machine kata in Javascript",
   "scripts": { 
-    "test": "nodemon --exec \"nyc --reporter=text --reporter=lcov mocha spec/*_spec.js\"",
+    "watch": "nodemon --exec \"nyc --reporter=text --reporter=lcov mocha spec/*_spec.js\"",
+    "test": "nyc --reporter=text --reporter=lcov mocha spec/*_spec.js",
     "report": "npx http-server coverage/lcov-report/"
   },
   "nyc": {
