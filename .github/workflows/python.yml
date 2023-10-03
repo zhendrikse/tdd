@@ -7,6 +7,7 @@ on:
       - '.github/workflows/python.yml'
       - 'kata-solutions/stack-kata/stack-kata-python/**'  
       - 'kata-solutions/vending-machine/vending-machine-python/**'
+      - 'kata-solutions/bugs-zero-kata/bugs-zero-python/**'
   pull_request:
     branches: [ "master" ]
 
@@ -64,4 +65,10 @@ jobs:
         run: poetry install --no-interaction
       - name: Vending machine kata run tests
         working-directory: kata-solutions/vending-machine/vending-machine-python
+        run: ./run_tests.sh
+      - name: Bugs zero kata install dependencies
+        working-directory: kata-solutions/bugs-zero-kata/bugs-zero-python
+        run: poetry install --no-interaction
+      - name: Bugs zero kata run tests
+        working-directory: kata-solutions/bugs-zero-kata/bugs-zero-python
         run: ./run_tests.sh
