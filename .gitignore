@@ -4,8 +4,6 @@ __pycache__
 .rebel_readline_history
 .replit
 .coverage
-package-lock.json
-poetry.lock
 venv/
 target/
 build/
