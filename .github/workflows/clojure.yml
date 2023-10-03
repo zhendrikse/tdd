@@ -1,0 +1,27 @@
+name: Clojure CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Connect four kata
+      working-directory: kata-solutions/connect-four/connect-four-clojure
+      run: lein test
+    - name: Sudoku kata
+      working-directory: kata-solutions/sudoku-kata/sudoku-clojure
+      run: ./run_tests.sh
+    - name: Game of life
+      working-directory: kata-solutions/game-of-life/game-of-life-clojure
+      run: lein test
+    - name: Poker hands kata
+      working-directory: kata-solutions/poker-hands-kata/poker-hands-clojure
+      run: lein test
