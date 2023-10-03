@@ -22,22 +22,19 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
+  build-gradle-project:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
-    - name: CQRS booking
+    - name: Checkout project sources
+      uses: actions/checkout@v3
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    - name: Run CQRS booking kata
       working-directory: kata-solutions/cqrs-booking/cqrs-booking-java
       run: ./gradlew test jacocoTestReport
-
+    - name: Run Sudoku kata
+      working-directory: kata-solutions/sudoku-kata/sudoku-java
+      run: ./gradlew test
+    - name: Run video store kata
+      working-directory: kata-solutions/video-store-kata/video-store-java
+      run: ./gradlew test
