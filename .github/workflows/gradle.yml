@@ -33,7 +33,7 @@ jobs:
     - name: Checkout project sources
       uses: actions/checkout@v3
     - name: Setup Gradle
-      uses: gradle/gradle-build-action@2.4.2
+      uses: gradle/gradle-build-action@v2.4.2
     - name: Run CQRS booking kata
       working-directory: kata-solutions/cqrs-booking/cqrs-booking-java
       run: ./gradlew test jacocoTestReport
