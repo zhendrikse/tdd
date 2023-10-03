@@ -33,5 +33,9 @@ jobs:
       #  Run actual jobs   #
       #--------------------#
       - name: Stack kata
-        run: poetry install && ./run_tests.sh
+        uses: packetcoders/action-setup-cache-python-poetry@main
+        with:
+          python-version: ${{matrix.python-version}}
+          poetry-version: ${{matrix.poetry-version}}
+      - run: poetry install && ./run_tests.sh
         working-directory: kata-solutions/stack-kata/stack-kata-python
