@@ -52,13 +52,15 @@ jobs:
       #----------------------------------------------
       # install your root project, if required
       #----------------------------------------------
-      - name: Stack kata
+      - name: Stack kata install dependencies
         working-directory: kata-solutions/stack-kata/stack-kata-python
-        run: 
-          poetry install --no-interaction
-          ./run_tests.sh
-      - name: Vending machine kata
+        run: poetry install --no-interaction
+      - name: Stack kata run tests
+        working-directory: kata-solutions/stack-kata/stack-kata-python
+        run: ./run_tests.sh
+      - name: Vending machine kata install dependencies
         working-directory: kata-solutions/vending-machine-kata/vending-machine-python
-        run: 
-          poetry install --no-interaction
-          ./run_tests.sh
+        run: poetry install --no-interaction
+      - name: Vending machine kata run tests
+        working-directory: kata-solutions/vending-machine-kata/vending-machine-python
+        run: ./run_tests.sh
