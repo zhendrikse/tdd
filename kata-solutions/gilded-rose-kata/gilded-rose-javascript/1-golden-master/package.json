@@ -18,6 +18,8 @@
     "coverage": "nodemon --exec \"nyc --exclude=**/spec/** --reporter=text --reporter=html --reporter=lcov jasmine spec/*_spec.js\""
   },
   "devDependencies": {
-    "approvals": "^6.2.1"
+    "approvals": "^6.2.1",
+    "jasmine-browser-runner": "^2.3.0",
+    "jasmine-core": "^5.1.1"
   }
 }

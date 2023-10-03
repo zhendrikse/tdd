@@ -46,3 +46,11 @@ jobs:
       working-directory: kata-solutions/audio-player-kata/audio-player-javascript
     - run: npm test
       working-directory: kata-solutions/audio-player-kata/audio-player-javascript
+    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master
+    - run: npm test
+      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master
