@@ -9,6 +9,7 @@ on:
       - 'kata-solutions/vending-machine/vending-machine-python/**'
       - 'kata-solutions/bugs-zero-kata/bugs-zero-python/**'
       - 'kata-solutions/cache-kata/cache-kata-python/**'
+      - 'kata-solutions/video-store-kata/video-store-python/**'
   pull_request:
     branches: [ "master" ]
 
@@ -82,3 +83,10 @@ jobs:
       - name: Cache kata run tests
         working-directory: kata-solutions/cache-kata/cache-kata-python
         run: poetry run pytest 
+     
+      - name: Video store kata install dependencies
+        working-directory: kata-solutions/video-store-kata/video-store-python
+        run: poetry install --no-interaction
+      - name: Video store kata run tests
+        working-directory: kata-solutions/video-store-kata/video-store-python
+        run: ./run_tests.sh
