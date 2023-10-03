@@ -23,11 +23,12 @@ jobs:
       #------------------------------------#
       - name: Check out the repository
         uses: actions/checkout@v3
-      - name: "Setup Python, Poetry and Dependencies"
+      - name: "Stack kata"
         uses: packetcoders/action-setup-cache-python-poetry@main
         with:
           python-version: ${{matrix.python-version}}
           poetry-version: ${{matrix.poetry-version}}
+<<<<<<< HEAD
 
       #--------------------#
       #  Run actual jobs   #
@@ -37,7 +38,8 @@ jobs:
         with:
           python-version: ${{matrix.python-version}}
           poetry-version: ${{matrix.poetry-version}}
-      - run: | 
-        cd kata-solutions/stack-kata/stack-kata-python
-	poetry install 
-	./run_tests.sh
+      - name: Run tests
+        run: | 
+          cd kata-solutions/stack-kata/stack-kata-python
+          poetry install 
+          ./run_tests.sh
