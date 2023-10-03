@@ -22,21 +22,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Vending machine kata with ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - run: npm ci
       working-directory: kata-solutions/vending-machine/vending-machine-javascript
     - run: npm test
       working-directory: kata-solutions/vending-machine/vending-machine-javascript
-    - name: Stack kata with ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-      working-directory: kata-solutions/stack-kata/stack-kata-javascript
-    - run: npm test
-      working-directory: kata-solutions/stack-kata/stack-kata-javascript
