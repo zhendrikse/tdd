@@ -15,6 +15,11 @@ on:
       - 'kata-solutions/cqrs-booking/cqrs-booking-java/**'
       - 'kata-solutions/sudoku-kata/sudoku-java/**'
       - 'kata-solutions/video-store-kata/video-store-java/**'
+      - 'kata-solutions/game-of-life/game-of-life-java/**'
+      - 'kata-solutions/stack-kata/stack-kata-java/**'
+      - 'kata-solutions/vending-machine/vending-machine-java/**'
+      - 'kata-solutions/tell-dont-ask/tell-dont-ask-java/**'
+
   pull_request:
     branches: [ "master" ]
 
@@ -37,4 +42,16 @@ jobs:
       run: ./gradlew test
     - name: Run video store kata
       working-directory: kata-solutions/video-store-kata/video-store-java
+      run: ./gradlew test
+    - name: Run game of life kata
+      working-directory: kata-solutions/game-of-life/game-of-life-java
+      run: ./gradlew test
+    - name: Run stack kata
+      working-directory: kata-solutions/stack-kata/stack-kata-java
+      run: ./gradlew test
+    - name: Run vending machine kata
+      working-directory: kata-solutions/vending-machine/vending-machine-java
+      run: ./gradlew test
+    - name: Run tell dont ask kata
+      working-directory: kata-solutions/tell-dont-ask/tell-dont-ask-java
       run: ./gradlew test
