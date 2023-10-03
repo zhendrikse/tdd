@@ -8,6 +8,7 @@ on:
       - 'kata-solutions/stack-kata/stack-kata-python/**'  
       - 'kata-solutions/vending-machine/vending-machine-python/**'
       - 'kata-solutions/bugs-zero-kata/bugs-zero-python/**'
+      - 'kata-solutions/cache-kata/cache-kata-python/**'
   pull_request:
     branches: [ "master" ]
 
@@ -60,15 +61,24 @@ jobs:
       - name: Stack kata run tests
         working-directory: kata-solutions/stack-kata/stack-kata-python
         run: ./run_tests.sh
+
       - name: Vending machine kata install dependencies
         working-directory: kata-solutions/vending-machine/vending-machine-python
         run: poetry install --no-interaction
       - name: Vending machine kata run tests
         working-directory: kata-solutions/vending-machine/vending-machine-python
         run: ./run_tests.sh
+
       - name: Bugs zero kata install dependencies
         working-directory: kata-solutions/bugs-zero-kata/bugs-zero-python
         run: poetry install --no-interaction
       - name: Bugs zero kata run tests
         working-directory: kata-solutions/bugs-zero-kata/bugs-zero-python
         run: ./run_tests.sh
+     
+      - name: Cache kata install dependencies
+        working-directory: kata-solutions/cache-kata/cache-kata-python
+        run: poetry install --no-interaction
+      - name: Cache kata run tests
+        working-directory: kata-solutions/cache-kata/cache-kata-python
+        run: poetry run pytest 
