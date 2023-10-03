@@ -1,0 +1,46 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - '.github/workflows/node.js.yml'
+      - 'kata-solutions/vending-machine/vending-machine-javascript/**'
+      - 'kata-solutions/stack-kata/stack-kata-javascript/**'
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Vending machine kata with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: |
+       cd ./kata-solutions/vending-machine/vending-machine-javascript
+       npm install
+       npm run build --if-present
+       npm test
+    - name: Stack kata with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: |
+       cd ./kata-solutions/stack-kata/stack-kata-javascript
+       npm install
+       npm run build --if-present
+       npm test
