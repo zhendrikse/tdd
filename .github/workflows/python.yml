@@ -33,22 +33,22 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: true
 
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
-      - name: Install dependencies
-        working-directory: kata-solutions/stack-kata/stack-kata-python
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
+      # #----------------------------------------------
+      # #       load cached venv if cache exists
+      # #----------------------------------------------
+      # - name: Load cached venv
+      #   id: cached-poetry-dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: .venv
+      #     key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      # #----------------------------------------------
+      # # install dependencies if cache does not exist
+      # #----------------------------------------------
+      # - name: Install dependencies
+      #   working-directory: kata-solutions/stack-kata/stack-kata-python
+      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      #   run: poetry install --no-interaction --no-root
       #----------------------------------------------
       # install your root project, if required
       #----------------------------------------------
@@ -59,6 +59,7 @@ jobs:
       #              run test suite
       #----------------------------------------------
       - name: Run tests
+        working-directory: kata-solutions/stack-kata/stack-kata-python
         run: |
           ./run_tests.sh
 
