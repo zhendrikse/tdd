@@ -49,11 +49,9 @@ in the form of courses, workshops, and/or coding dojos.
 |:--------- |:--------| 
 | [<code>cookiecutter</code>](./cookiecutter/)     | [Cookiecutter](https://github.com/cookiecutter/cookiecutter) templates for setting up a kata in various languages | 
 | [<code>docs</code>](./docs/)                     | Additional free books |
-| [<code>kata-solutions</code>](./kata-solutions/) | Sample solutions:<br/> ![Clojure build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/clojure.yml?label=Clojure%20katas) ![Python build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/python.yml?label=Python%20katas)![Nodejs build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/node.js.yml?label=NodeJS%20katas) ![Java build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/gradle.yml?label=Java%20katas) | 
+| [<code>kata-solutions</code>](./kata-solutions/) | <ul><li>Sample solutions for the katas</li><li>![Clojure build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/clojure.yml?label=Clojure%20katas)</li><li>![Python build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/python.yml?label=Python%20katas)</li><li>![Nodejs build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/node.js.yml?label=NodeJS%20katas)</li><li>![Java build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/gradle.yml?label=Java%20katas)</li></ul> | 
 | [<code>presentations</code>](./presentations/)   | [View presentations](https://replit.com/@zwh/tdd) live| 
-| [<code>tdd-katas</code>](./tdd-katas/)           | Coding katas remain an unlimited source of practice and inspiration to sharpen your skills as a (TDD) practitioner. |
-| [<code>tdd-katas/README.md</code>](./tdd-katas/README.md) | [README.md](./tdd-katas/README.md)  &rarr; Summary of which topics are addressed by which kata at which level of difficulty | 
-| <code>./tdd-katas/&lt;kata&gt;</code>            | Kata with instructions in various programming languages with both a general introduction in the readme files as well as detailed instruction files per kata per language | 
+| [<code>tdd-katas</code>](./tdd-katas/)           |  <ul><li>[README.md](./tdd-katas/README.md)  &rarr; Summary of which topics are addressed by which kata at which level of difficulty</li><li>Huge collection of Coding katas </li></ul> |
 | [<code>tools</code>](./tools/)                   | Playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/) | 
 
 # References
