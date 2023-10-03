@@ -1,8 +1,8 @@
-name: ci
+name: Python CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "master" ]
     paths:
       - '.github/workflows/python.yml'
       - 'kata-solutions/stack-kata/stack-kata-python/**'  
