@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master" ]
     paths:
-      - '.github/worksflows/clojure.yml'
+      - '.github/workflows/clojure.yml'
       - 'kata-solutions/connect-four/connect-four-clojure/**'
       - 'kata-solutions/sudoku-kata/sudoku-clojure/**'
       - 'kata-solutions/game-of-life/game-of-life-clojure/**'
