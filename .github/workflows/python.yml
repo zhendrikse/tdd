@@ -55,10 +55,10 @@ jobs:
       - name: Stack kata
         working-directory: kata-solutions/stack-kata/stack-kata-python
         run: 
-	  poetry install --no-interaction
+          poetry install --no-interaction
           ./run_tests.sh
       - name: Vending machine kata
         working-directory: kata-solutions/vending-machine-kata/vending-machine-python
         run: 
-	  poetry install --no-interaction
+          poetry install --no-interaction
           ./run_tests.sh
