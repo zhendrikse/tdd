@@ -2,12 +2,12 @@
 name = "BugsZeroKata"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0,<3.11"
-approvaltests = "^3.2.2"
-coverage = "^6.2"
+python = ">=3.10.0,<3.12"
+approvaltests = "^9.0.0"
+pytest-cov = "^4.1.0"
 
 [tool.poetry.dev-dependencies]
 
