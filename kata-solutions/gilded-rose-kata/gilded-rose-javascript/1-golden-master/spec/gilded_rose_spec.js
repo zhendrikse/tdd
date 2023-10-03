@@ -1,5 +1,6 @@
 require("approvals").mocha();
-var { Shop, Item } = require("../src/gilded_rose.js");
+const { expect } = require('chai');  // Using Expect style
+const { Shop, Item } = require("../src/gilded_rose.js");
 
 function convert_items_to_string(items) {
   data = "";
@@ -44,6 +45,6 @@ describe("Gilded Rose", function () {
   it("should output equal to snapshot without items", function () {
     const gildedRose = new Shop();
     const updated_items = gildedRose.updateQuality();
-    expect(updated_items).toEqual([]);
+    expect(updated_items).to.deep.equal([]);
   });
 });
