@@ -18,7 +18,7 @@ jobs:
       run: lein test
     - name: Sudoku kata
       working-directory: kata-solutions/sudoku-kata/sudoku-clojure
-      run: lein test
+      run: ./run_tests.sh
     - name: Game of life
       working-directory: kata-solutions/game-of-life/game-of-life-clojure
       run: lein test
