@@ -7,6 +7,7 @@ on:
       - '.github/workflows/node.js.yml'
       - 'kata-solutions/vending-machine/vending-machine-javascript/**'
       - 'kata-solutions/stack-kata/stack-kata-javascript/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master/**'
   pull_request:
     branches: [ "master" ]
 
