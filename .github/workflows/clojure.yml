@@ -9,6 +9,7 @@ on:
       - 'kata-solutions/sudoku-kata/sudoku-clojure/**'
       - 'kata-solutions/game-of-life/game-of-life-clojure/**'
       - 'kata-solutions/poker-hands-kata/poker-hands-clojure/**'
+      - 'kata-solutions/locker-room-kata/locker-room-clojure/**'
   pull_request:
     branches: [ "master" ]
 
@@ -30,4 +31,7 @@ jobs:
       run: lein test
     - name: Poker hands kata
       working-directory: kata-solutions/poker-hands-kata/poker-hands-clojure
+      run: lein test
+    - name: Poker hands kata
+      working-directory: kata-solutions/locker-room-kata/locker-room-clojure
       run: lein test
