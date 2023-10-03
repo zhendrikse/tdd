@@ -26,9 +26,9 @@ jobs:
       - name: "Stack kata"
         uses: packetcoders/action-setup-cache-python-poetry@main
         with:
-          working-directory: kata-solutions/stack-kata/stack-kata-python
           python-version: ${{matrix.python-version}}
           poetry-version: ${{matrix.poetry-version}}
       - name: Run tests
+        working-directory: kata-solutions/stack-kata/stack-kata-python
         run: |
           ./run_tests.sh
