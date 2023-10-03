@@ -8,6 +8,9 @@ on:
       - 'kata-solutions/vending-machine/vending-machine-javascript/**'
       - 'kata-solutions/stack-kata/stack-kata-javascript/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored/**'
+      - 'kata-solutions/registration-from/registration-form-javascript/**'
   pull_request:
     branches: [ "master" ]
 
@@ -55,3 +58,27 @@ jobs:
       working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master
     - run: npm test
       working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master
+    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional
+    - run: npm test
+      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional
+    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored
+    - run: npm test
+      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored
+    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+      working-directory: kata-solutions/registration-from/registration-form-javascript
+    - run: npm test
+      working-directory: kata-solutions/registration-from/registration-form-javascript

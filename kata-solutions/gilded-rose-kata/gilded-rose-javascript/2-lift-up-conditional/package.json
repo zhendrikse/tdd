@@ -1,23 +1,21 @@
 {
   "name": "gilded_rose",
-  "description": "This kata practices TDD",
+  "description": "Gilded rose kata",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Your name",
-  "dependencies": {
-    "express": "^4.18.2",
-    "http-server": "^14.1.1",
-    "jasmine": "^5.0.1",
-    "nodemon": "^3.0.1",
-    "nyc": "^15.1.0"
-  },
+  "author": "Zeger Hendrikse",
   "scripts": {
-    "test": "jasmine",
-    "watch": "nodemon --exec jasmine",
+    "test": "mocha spec/**",
+    "watch": "nodemon --exec mocha spec/**",
     "report": "npx http-server -c-1 coverage/lcov-report",
-    "coverage": "nodemon --exec \"nyc --exclude=**/spec/** --reporter=text --reporter=html --reporter=lcov jasmine spec/*_spec.js\""
+    "coverage": "nodemon --exec \"nyc --exclude=**/spec/** --reporter=text --reporter=html --reporter=lcov mocha spec/*_spec.js\""
   },
   "devDependencies": {
-    "approvals": "^6.2.1"
+    "approvals": "^6.2.2",
+    "chai": "^4.3.10",
+    "http-server": "^14.1.1",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
+    "nyc": "^15.1.0"
   }
 }

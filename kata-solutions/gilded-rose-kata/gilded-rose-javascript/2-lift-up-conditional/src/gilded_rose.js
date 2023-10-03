@@ -6,7 +6,7 @@ class Item {
   }
 
   toString() {
-    return "name: " + this.name + ", sellIn: " + this.sellIn + ", quality: " + this.quality
+    return "name=\"" + this.name + "\", sellIn=\"" + this.sellIn + "\", quality=\"" + this.quality + "\""
   }
 }
 
