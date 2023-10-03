@@ -19,10 +19,10 @@
     pkgs.pipenv
     pkgs.cookiecutter
     pkgs.pipreqs
-    #pkgs.python311Packages.pytest_6
-    #pkgs.python311Packages.pytest-watch
     pkgs.python311Full
     pkgs.python311.pkgs.pip
+    pkgs.python311.pkgs.pytest-watch
+    pkgs.python311.pkgs.pytest
     pkgs.python311.pkgs.virtualenv
     pkgs.poetry
     pkgs.nodejs-18_x
