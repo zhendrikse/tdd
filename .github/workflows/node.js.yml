@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
     paths:
       - '.github/workflows/node.js.yml'
+      - 'kata-solutions/vending-machine/vending-machine-type/**'
       - 'kata-solutions/vending-machine/vending-machine-javascript/**'
       - 'kata-solutions/stack-kata/stack-kata-javascript/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master/**'
@@ -26,59 +27,74 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Vending machine kata with Node.js ${{ matrix.node-version }}
+    - name: Vending machine kata typescript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/vending-machine/vending-machine-typescript
+
+    - name: Vending machine kata Javascript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
       working-directory: kata-solutions/vending-machine/vending-machine-javascript
-    - run: npm test
-      working-directory: kata-solutions/vending-machine/vending-machine-javascript
-    - name: Stack kata with Node.js ${{ matrix.node-version }}
+
+    - name: Stack kata with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: | 
+        npm ci
+        npm test
       working-directory: kata-solutions/stack-kata/stack-kata-javascript
-    - run: npm test
-      working-directory: kata-solutions/stack-kata/stack-kata-javascript
-    - name: Audio player kata with Node.js ${{ matrix.node-version }}
+
+    - name: Audio player kata with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: | 
+        npm ci
+        npm test
       working-directory: kata-solutions/audio-player-kata/audio-player-javascript
-    - run: npm test
-      working-directory: kata-solutions/audio-player-kata/audio-player-javascript
-    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+
+    - name: Gilded rose kata part one with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: | 
+        npm ci
+        npm test
       working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master
-    - run: npm test
-      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master
-    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+
+    - name: Gilded rose kata part two with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: | 
+        npm ci
+        npm test
       working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional
-    - run: npm test
-      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional
-    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+
+    - name: Gilded rose kata part three with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: | 
+        npm ci
+        npm test
       working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored
-    - run: npm test
-      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored
-    - name: Gilded rose kata part one with Node.js ${{ matrix.node-version }}
+
+    - name: Registration form with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-      working-directory: kata-solutions/registration-form/registration-form-javascript
-    - run: npm test
+    - run: | 
+        npm ci
+        npm test
       working-directory: kata-solutions/registration-form/registration-form-javascript
