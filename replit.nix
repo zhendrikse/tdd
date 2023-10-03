@@ -1,9 +1,14 @@
 { pkgs }: {
   deps = [
+    pkgs.stdenv.cc.cc.lib
+    #pkgs.zlib
+    #pkgs.glib
+    #pkgs.xorg.libX11
+    #pkgs.glibc
 		pkgs.jq.bin
     pkgs.dotnet-sdk_7
     pkgs.omnisharp-roslyn
-    pkgs.gradle_6
+    pkgs.gradle_7
     pkgs.nodePackages.prettier
     pkgs.vim
     pkgs.clojure
@@ -11,29 +16,34 @@
     pkgs.leiningen
     pkgs.graalvm17-ce
 		pkgs.maven
-		pkgs.replitPackages.jdt-language-server
-		pkgs.replitPackages.java-debug
     pkgs.pipenv
     pkgs.cookiecutter
     pkgs.pipreqs
-    pkgs.python310Full
-    pkgs.replitPackages.prybar-python310
-    pkgs.replitPackages.stderred
-    pkgs.python310Packages.pip
-    pkgs.python310Packages.poetry
-    pkgs.python310Packages.pytest_6
-    pkgs.python310Packages.pytest-watch
-    pkgs.nodejs-16_x
+    #pkgs.python311Packages.pytest_6
+    #pkgs.python311Packages.pytest-watch
+    pkgs.python311Full
+    pkgs.python311.pkgs.pip
+    pkgs.python311.pkgs.virtualenv
+    pkgs.poetry
+    pkgs.nodejs-18_x
 		pkgs.nodePackages.typescript-language-server
 		pkgs.yarn
-		pkgs.replitPackages.jest
     pkgs.esbuild
     pkgs.nodePackages.typescript
-    pkgs.nodePackages.typescript-language-server
   ];
-  PYTHONHOME = "${pkgs.python310Full}";
-  PYTHONBIN = "${pkgs.python310Full}/bin/python3.10";
+  # environment = {
+  #   sessionVariables = {
+  #     LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+  #   };
+  # };
+  # PYTHON_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+  #     pkgs.stdenv.cc.cc.lib
+  #     pkgs.zlib
+  #     pkgs.glib
+  #     pkgs.xorg.libX11
+  # ];
+  #PYTHON_LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}";
+  PYTHONHOME = "${pkgs.python311}";
+  PYTHONBIN = "${pkgs.python311}/bin/python3.11";
   LANG = "en_US.UTF-8";
-  STDERREDBIN = "${pkgs.replitPackages.stderred}/bin/stderred";
-  PRYBAR_PYTHON_BIN = "${pkgs.replitPackages.prybar-python310}/bin/prybar-python310";
 }
