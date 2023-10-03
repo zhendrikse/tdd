@@ -38,3 +38,11 @@ jobs:
       working-directory: kata-solutions/stack-kata/stack-kata-javascript
     - run: npm test
       working-directory: kata-solutions/stack-kata/stack-kata-javascript
+    - name: Audio player kata with Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+      working-directory: kata-solutions/audio-player-kata/audio-player-javascript
+    - run: npm test
+      working-directory: kata-solutions/audio-player-kata/audio-player-javascript
