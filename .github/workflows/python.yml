@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/python.yml'
       - 'kata-solutions/stack-kata/stack-kata-python/**'  
+      - 'kata-solutions/vending-machine/vending-machine-python/**'
   pull_request:
     branches: [ "master" ]
 
@@ -59,8 +60,8 @@ jobs:
         working-directory: kata-solutions/stack-kata/stack-kata-python
         run: ./run_tests.sh
       - name: Vending machine kata install dependencies
-        working-directory: kata-solutions/vending-machine-kata/vending-machine-python
+        working-directory: kata-solutions/vending-machine/vending-machine-python
         run: poetry install --no-interaction
       - name: Vending machine kata run tests
-        working-directory: kata-solutions/vending-machine-kata/vending-machine-python
+        working-directory: kata-solutions/vending-machine/vending-machine-python
         run: ./run_tests.sh
