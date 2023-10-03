@@ -27,11 +27,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: |
-       cd ./kata-solutions/vending-machine/vending-machine-javascript
-       npm install
-       npm run build --if-present
-       npm test
+    - run: cd ./kata-solutions/vending-machine/vending-machine-javascript && npm ci && npm test
     - name: Stack kata with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -39,6 +35,6 @@ jobs:
         cache: 'npm'
     - run: |
        cd ./kata-solutions/stack-kata/stack-kata-javascript
-       npm install
+       npm ci
        npm run build --if-present
        npm test
