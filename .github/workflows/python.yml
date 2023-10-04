@@ -15,6 +15,7 @@ on:
       - 'kata-solutions/gilded-rose-kata/gilded-rose-python/2-lift-up-conditional/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-python/3-gilded-rose-refactored/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-python/4-gilded-rose-extended/**'
+      - 'kata-solutions/poker-hands-kata/poker-hands-python/**'
       - 'tdd-katas/report-generator-kata/report-generator-python/**'
       
   pull_request:
@@ -128,6 +129,13 @@ jobs:
         run: poetry install --no-interaction
       - name: Video store kata run tests
         working-directory: kata-solutions/video-store-kata/video-store-python
+        run: ./run_tests.sh
+          
+      - name: Poker hands kata install dependencies
+        working-directory: kata-solutions/poker-hands-kata/poker-hands-python
+        run: poetry install --no-interaction
+      - name: Poker hands kata run tests
+        working-directory: kata-solutions/poker-hands-kata/poker-hands-python
         run: ./run_tests.sh
           
       - name: Report generator kata install dependencies
