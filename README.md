@@ -6,7 +6,7 @@
 [![Pull requests](https://img.shields.io/github/issues-pr/zhendrikse/tdd?logo=git&color=blue)](https://github.com/zhendrikse/tdd/pulls)
 
 Welcome to this repository that is literally packed with test-driven development (TDD) materials!
-This repository contains a huge collection of coding katas with instructions in various languages, 
+This repository contains [a huge collection of coding katas](./tdd-katas/README.md) with instructions in various languages, 
 sample solutions, presentations, etc.
 
 Be sure to also check out the information on 
