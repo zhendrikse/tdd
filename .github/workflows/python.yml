@@ -19,23 +19,19 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ['3.10 , '3.11']
+        python-version: ['3.10', '3.11']
     
     steps:
-      #----------------------------------------------
-      #       check-out repo and set-up python
-      #----------------------------------------------
-      - name: Check out repository
+      - name: Check out TDD repository
         uses: actions/checkout@v3
-      - name: Set up python
+        
+      - name: Set up Python with version ${{ matrix.python-version }}
         id: setup-python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      #----------------------------------------------
-      #  -----  install & configure poetry  -----
-      #----------------------------------------------
-      - name: Install Poetry
+          
+      - name: Install and configure Poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
