@@ -8,7 +8,7 @@
     "pretest": "rimraf --glob src/*.js spec/*.js",
     "test": "mocha -r ts-node/register -r jsdom-global/register -r source-map-support/register spec/*.spec.ts",
     "serve": "npx http-server -a 0.0.0.0 -p 8088 -o babystep.html",
-    "watch": "npx mocha -r ts-node/register -r jsdom-global/register -r source-map-support/register --watch --extension ts"
+    "watch": "npx mocha -r ts-node/register -r jsdom-global/register -r source-map-support/register spec/*.spec.ts --watch --extension ts"
   },
   "license": "MIT",
   "devDependencies": {
