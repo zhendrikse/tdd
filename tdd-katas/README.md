@@ -3,7 +3,8 @@
 ![Clojure build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/clojure.yml?label=Clojure%20katas)
 ![Python build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/python.yml?label=Python%20katas)
 ![Nodejs build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/node.js.yml?label=NodeJS%20katas)
-![Java/Kotlin build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/gradle.yml?label=Java%2FKotlin%20katas)</li></ul>
+![Java/Kotlin build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/gradle.yml?label=Java%2FKotlin%20katas)
+![.Net build](https://img.shields.io/github/actions/workflow/status/zhendrikse/tdd/dotnet.yml?label=.NET%20katas)
 
 This section summarizes details of all katas contained in this repository.
 It includes both a difficulty level as well as a list of topics (per kata) 
