@@ -6,11 +6,14 @@ name: .NET CI
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - '.github/workflows/dotnet.yml'
+      - 'kata-solutions/shunting-yard-algo/shunting-yard-algo-dotnet/**'
   pull_request:
     branches: [ "master" ]
 
 jobs:
-  build:
+  kata-solutions-tests:
 
     runs-on: ubuntu-latest
 
