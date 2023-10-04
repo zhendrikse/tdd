@@ -11,6 +11,10 @@ on:
       - 'kata-solutions/cache-kata/cache-kata-python/**'
       - 'kata-solutions/video-store-kata/video-store-python/**'
       - 'kata-solutions/report-generator-kata/report-generator-python/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-python/1-golden-master/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-python/2-lift-up-conditional/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-python/3-gilded-rose-refactored/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-python/4-gilded-rose-extended/**'
       - 'tdd-katas/report-generator-kata/report-generator-python/**'
       
   pull_request:
@@ -132,3 +136,30 @@ jobs:
       - name: Report generator kata run tests
         working-directory: kata-solutions/report-generator-kata/report-generator-python
         run: ./run_tests.sh
+          
+      - name: Gilded rose kata part one install dependencies
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/1-golden-master
+        run: poetry install --no-interaction
+      - name: Gilded rose kata part one run tests
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/1-golden-master
+        run: ./run_tests.sh
+      - name: Gilded rose kata part two install dependencies
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/2-lift-up-conditional
+        run: poetry install --no-interaction
+      - name: Gilded rose kata part two run tests
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/2-lift-up-conditional
+        run: ./run_tests.sh
+      - name: Gilded rose kata part three install dependencies
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/3-gilded-rose-refactored
+        run: poetry install --no-interaction
+      - name: Gilded rose kata part three run tests
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/3-gilded-rose-refactored
+        run: ./run_tests.sh
+      - name: Gilded rose kata part four install dependencies
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/4-gilded-rose-extended
+        run: poetry install --no-interaction
+      - name: Gilded rose kata part four run tests
+        working-directory: kata-solutions/gilded-rose-kata/gilded-rose-python/4-gilded-rose-extended
+        run: ./run_tests.sh
+
+
