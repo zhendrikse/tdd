@@ -10,11 +10,45 @@ on:
       - 'kata-solutions/bugs-zero-kata/bugs-zero-python/**'
       - 'kata-solutions/cache-kata/cache-kata-python/**'
       - 'kata-solutions/video-store-kata/video-store-python/**'
+      - 'kata-solutions/report-generator-kata/report-generator-python/**'
+      - 'tdd-katas/report-generator-kata/report-generator-python/**'
+      
   pull_request:
     branches: [ "master" ]
 
 jobs:
-  kata-solution-tests:
+  tdd-katas-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11']
+    
+    steps:
+      - name: Check out TDD repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Python with version ${{ matrix.python-version }}
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+          
+      - name: Report generator kata install dependencies
+        working-directory: tdd-katas/report-generator-kata/report-generator-python
+        run: poetry install --no-interaction
+      - name: Report generator kata run tests
+        working-directory: tdd-katas/report-generator-kata/report-generator-python
+        run: ./run_tests.sh
+        
+  kata-solutions-tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -90,4 +124,11 @@ jobs:
         run: poetry install --no-interaction
       - name: Video store kata run tests
         working-directory: kata-solutions/video-store-kata/video-store-python
+        run: ./run_tests.sh
+          
+      - name: Report generator kata install dependencies
+        working-directory: kata-solutions/report-generator-kata/report-generator-python
+        run: poetry install --no-interaction
+      - name: Report generator kata run tests
+        working-directory: kata-solutions/report-generator-kata/report-generator-python
         run: ./run_tests.sh
