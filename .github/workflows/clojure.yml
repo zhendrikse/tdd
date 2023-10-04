@@ -32,6 +32,6 @@ jobs:
     - name: Poker hands kata
       working-directory: kata-solutions/poker-hands-kata/poker-hands-clojure
       run: lein test
-    - name: Poker hands kata
+    - name: Locker room kata
       working-directory: kata-solutions/locker-room-kata/locker-room-clojure
       run: lein test
