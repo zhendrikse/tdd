@@ -14,8 +14,34 @@ on:
     branches: [ "master" ]
 
 jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Vending machine kata typescript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/vending-machine/vending-machine-typescript
+
+jobs:
   kata-solution-tests:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.11']
+    
     steps:
       #----------------------------------------------
       #       check-out repo and set-up python
@@ -26,7 +52,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.node-version }}
       #----------------------------------------------
       #  -----  install & configure poetry  -----
       #----------------------------------------------
