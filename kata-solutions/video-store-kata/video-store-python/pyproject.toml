@@ -5,9 +5,10 @@ description = "Video store kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0,<3.11"
+python = ">=3.10.0,<3.12"
 pytest = "^7.3.2"
-coverage = "^7.2.7"
+pytest-cov = "^4.1.0"
+pytest-watch = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 

@@ -5,7 +5,7 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Gradle CI for Java and Kotlin
 
 on:
   push:
@@ -27,7 +27,7 @@ permissions:
   contents: read
 
 jobs:
-  build-gradle-project:
+  kata-solution-tests:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project sources
