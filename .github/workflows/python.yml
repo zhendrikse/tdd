@@ -31,7 +31,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.node-version }}
+          python-version: ${{ matrix.python-version }}
       #----------------------------------------------
       #  -----  install & configure poetry  -----
       #----------------------------------------------
