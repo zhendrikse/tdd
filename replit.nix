@@ -1,11 +1,7 @@
 { pkgs }: {
   deps = [
-    pkgs.stdenv.cc.cc.lib
-    #pkgs.zlib
-    #pkgs.glib
-    #pkgs.xorg.libX11
-    #pkgs.glibc
-		pkgs.jq.bin
+		pkgs.nettools
+  pkgs.jq.bin
     pkgs.dotnet-sdk_7
     pkgs.omnisharp-roslyn
     pkgs.gradle_7
@@ -17,33 +13,22 @@
     pkgs.graalvm17-ce
 		pkgs.maven
     pkgs.pipenv
+    pkgs.poetry
     pkgs.cookiecutter
     pkgs.pipreqs
-    pkgs.python311Full
-    pkgs.python311.pkgs.pip
-    pkgs.python311.pkgs.pytest-watch
-    pkgs.python311.pkgs.pytest
-    pkgs.python311.pkgs.virtualenv
-    pkgs.poetry
+    pkgs.python310Full
+    pkgs.python310Packages.pip
+    pkgs.python310Packages.pytest_6
+    pkgs.python310Packages.pytest-watch
     pkgs.nodejs-18_x
-		pkgs.nodePackages.typescript-language-server
 		pkgs.yarn
     pkgs.esbuild
     pkgs.nodePackages.typescript
+    pkgs.nodePackages.typescript-language-server
   ];
-  # environment = {
-  #   sessionVariables = {
-  #     LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
-  #   };
-  # };
-  # PYTHON_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-  #     pkgs.stdenv.cc.cc.lib
-  #     pkgs.zlib
-  #     pkgs.glib
-  #     pkgs.xorg.libX11
-  # ];
-  #PYTHON_LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}";
-  PYTHONHOME = "${pkgs.python311}";
-  PYTHONBIN = "${pkgs.python311}/bin/python3.11";
+  PYTHONHOME = "${pkgs.python310Full}";
+  PYTHONBIN = "${pkgs.python310Full}/bin/python3.10";
   LANG = "en_US.UTF-8";
+  STDERREDBIN = "${pkgs.replitPackages.stderred}/bin/stderred";
+  PRYBAR_PYTHON_BIN = "${pkgs.replitPackages.prybar-python310}/bin/prybar-python310";
 }

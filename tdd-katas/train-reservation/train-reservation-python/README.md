@@ -38,6 +38,8 @@ been provided to get you up and running as quickly as possible.
 
 3. Start running the provided tests and scenario by opening a terminal and type
    ```bash
+   $ cd ticket_office_service
+   $ poetry install
    $ poetry run behave
    ```
    
