@@ -139,7 +139,7 @@ jobs:
         run: ./run_tests.sh
           
       - name: Christmas tree kata install dependencies
-        working-directory: kata-solutions/christmas-tree/chirstmas-tree-python
+        working-directory: kata-solutions/christmas-tree/christmas-tree-python
         run: poetry install --no-interaction
       - name: Christmas tree kata run tests
         working-directory: kata-solutions/christmas-tree/christmas-tree-python
