@@ -26,7 +26,7 @@ public class TrainReservatonSteps
         _ticketOffice.CancelReservation(_trainId, _booking_reference);
     }
 
-    [Then(@"the reserved seats should be available again")]
+    [Then(@"the reservation should be cancelled")]
     public void ThenTheReservedSeatsShouldBeAvailableAgain()
     {
         var train = RestCalls.GetTrainSeatInformation(_trainId);
