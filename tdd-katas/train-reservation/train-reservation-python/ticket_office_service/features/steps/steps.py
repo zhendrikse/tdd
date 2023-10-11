@@ -17,7 +17,7 @@ def i_have_made_a_reservation_with_booking_reference(context, booking_reference)
 def i_cancel_my_reservation(context):
     TicketOffice().cancel_reservation(context.train_id, context.booking_reference)
 
-@then(u'the reserved seats should be available again')
+@then(u'the reservation should be cancelled')
 def the_reserved_seats_should_be_available_again(context):
     train = get_data_for(context.train_id)
   

@@ -6,4 +6,4 @@ Feature: Ticket cancellation
 Scenario: Cancel a reservation
 	Given I have made a reservation with booking reference 75bcd15
 	When I cancel my reservation
-	Then the reserved seats should be available again
+	Then the reservation should be cancelled
