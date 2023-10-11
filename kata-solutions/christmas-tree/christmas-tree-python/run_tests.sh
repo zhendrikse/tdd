@@ -1,1 +1,1 @@
-poetry run ptw --runner="poetry run mamba --format=documentation --enable-coverage tree_spec.py"
+poetry run mamba --format=documentation *_spec.py --enable-coverage && poetry run coverage html
