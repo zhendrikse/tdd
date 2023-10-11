@@ -138,6 +138,13 @@ jobs:
         working-directory: kata-solutions/poker-hands-kata/poker-hands-python
         run: ./run_tests.sh
           
+      - name: Christmas tree kata install dependencies
+        working-directory: kata-solutions/christmas-tree/chirstmas-tree-python
+        run: poetry install --no-interaction
+      - name: Christmas tree kata run tests
+        working-directory: kata-solutions/christmas-tree/christmas-tree-python
+        run: ./run_tests.sh
+        
       - name: Report generator kata install dependencies
         working-directory: kata-solutions/report-generator-kata/report-generator-python
         run: poetry install --no-interaction
