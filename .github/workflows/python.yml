@@ -125,7 +125,7 @@ jobs:
         run: poetry install --no-interaction
       - name: Manhattan distance kata run tests
         working-directory: kata-solutions/manhattan-distance/manhattan-distance-python
-        run: poetry run pytest 
+        run: ./run_tests.sh
      
       - name: Cache kata install dependencies
         working-directory: kata-solutions/cache-kata/cache-kata-python
