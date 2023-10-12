@@ -36,6 +36,11 @@ class Dashboard:
         dataframe = pnds.read_excel(
             io = excel_file_name,
             engine = "openpyxl",
+            sheet_name = "variabelen",
+        #    header = 0,
+        #    index_col = 0,
+        #    usecols = "A:Z",
+        #    dtype = str, 
         #     sheet_name="NS Klimaat ritten - jan-mrt 202",
         #     skiprows="3",
         #     usecols="Q2:Q4",
