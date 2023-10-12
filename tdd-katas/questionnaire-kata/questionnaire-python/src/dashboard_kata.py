@@ -1,6 +1,7 @@
 import pandas as pnds
 # import plotly.express as plotly 
 import streamlit as strmlit
+from raw_data_reader import RawDataReader
 
 col1 = "Q2"
 col2 = "Q4"
@@ -13,11 +14,11 @@ col7 = "aankomststation"
 class Dashboard:
     def __init__(self, excel_file_name):
         self._init_webpage()
-        self._dataframe = self._read_data(excel_file_name)
+        reader = RawDataReader(excel_file_name)
+        self._dataframe = reader._ritten
 
         # if 'dataframe' not in strmlit.session_state:
         #     strmlit.dataframe(self._dataframe)
-
 
         if 'count' not in strmlit.session_state:
             strmlit.session_state.count = 0
@@ -31,22 +32,6 @@ class Dashboard:
             page_title = "Trein ritten dashboard", 
             page_icon = ":train:",
             layout = "wide")
-
-    def _read_data(self, excel_file_name):
-        dataframe = pnds.read_excel(
-            io = excel_file_name,
-            engine = "openpyxl",
-            sheet_name = "variabelen",
-        #    header = 0,
-        #    index_col = 0,
-        #    usecols = "A:Z",
-        #    dtype = str, 
-        #     sheet_name="NS Klimaat ritten - jan-mrt 202",
-        #     skiprows="3",
-        #     usecols="Q2:Q4",
-            nrows = 20
-        )
-        return dataframe[[col1, col2, col3, col4, col5, col6, col7]]
 
     def add(self):
         strmlit.session_state.count += 1
