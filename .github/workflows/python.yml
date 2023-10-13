@@ -20,6 +20,7 @@ on:
       - 'kata-solutions/christmas-tree/christmas-tree-python/**'
       - 'kata-solutions/poker-hands-kata/poker-hands-python/**'
       - 'tdd-katas/report-generator-kata/report-generator-python/**'
+      - 'tdd-katas/video-store-kata/video-store-python/**'
       
   pull_request:
     branches: [ "master" ]
@@ -54,6 +55,13 @@ jobs:
         run: poetry install --no-interaction
       - name: Report generator kata run tests
         working-directory: tdd-katas/report-generator-kata/report-generator-python
+        run: ./run_tests.sh
+          
+      - name: Video store kata install dependencies
+        working-directory: tdd-katas/video-store-kata/video-store-python
+        run: poetry install --no-interaction
+      - name: Video store kata run tests
+        working-directory: tdd-katas/video-store-kata/video-store-python
         run: ./run_tests.sh
         
   kata-solutions-tests:
