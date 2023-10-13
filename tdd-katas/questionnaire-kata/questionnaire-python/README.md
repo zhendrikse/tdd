@@ -1,46 +1,24 @@
 # Introduction
 
-This kata practises Exploration Data Analysis (EDA) based on 
-[a questionnaire](questionnaire.md) sent out to
-questionnaire sent to train passengers in the Netherlands.
+Please read the general [introduction to the questionnaire kata](../README.md) first!
 
-In this kata we will practice TDD for some of the steps 
-that are normally to be found in a data analysis flow.
+# Getting started
 
-## Introduction data analysis
+First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-![Data analysis](./images/data-analysis.webp)
+Next, go the the newly created project directory and consult
+the provided ``README.md`` in there.
 
-Let's see how the above steps are applied in this kata:
+# 1. Reading the data from CSV
 
-1. **Raw data**: 
-   We will start with a raw data/excel file containing the answers to the questions in 
-   [the questionnaire](questionnaire.md). These data need to be converted into a format
-   (dataframes), in order to facilitate further data processing.
-2. **Structured data**: 
-   The raw data coming from the excel file is still unstructured. A couple of additional
-   steps may be required to structure these data so that they can be analyzed:
-   - Cleaning the Unstructured Data
-   - Check to see if it should be kept or deleted
-   - Choose the technology for data collection and storage based on company requirements
-   - Entity Extraction
-3. **Data preprocessing**: Data preprocessing is an important step in the data mining process 
-   that involves cleaning and transforming raw data to make it suitable for analysis. 
-   Some common steps in data preprocessing include:
-   - Feature selection
-   - Data Integration
-   - Data Transformation
-   - Data Reduction
-   - Data Discretization
-   - Data Normalization
-4. **EDA**:
-5. **Insights/reports/graphs**:
+## Obtaining the raw data from Excel
 
-# Processing the raw data
-
-## 1. Reading the data from CSV
-
-1. Read the Excel from CSV
+1. Import the required libraries
+   ```bash
+   $ poetry add pandas
+   $ poetry add ...
+   ```
+2. Read the Excel from CSV
    <details>
      <summary>Reading raw data from Excel</summary>
 
@@ -62,17 +40,17 @@ Let's see how the above steps are applied in this kata:
    ```
    </details>
 
-# Structuring the data
+# 2. Structuring the data
 
 ## Cleansing the data
 
 In column `Q4A_1` there is a string "Weet ik niet", that cannot be converted to an integer. 
 
-# Data preprocessing
+# 4. Data preprocessing
 
-# EDA
+# 5. EDA
 
-# Insights / reports / graphs
+# 6. Insights / reports / graphs
 
 # References
 
