@@ -1,7 +1,7 @@
 import pandas as pnds
-# import plotly.express as plotly 
+import plotly.express as plotly 
 import streamlit as strmlit
-from raw_data_reader import RawDataReader
+from raw_data_reader import ExcelDataReader
 
 col1 = "Q2"
 col2 = "Q4"
@@ -14,11 +14,12 @@ col7 = "aankomststation"
 class Dashboard:
     def __init__(self, excel_file_name):
         self._init_webpage()
-        reader = RawDataReader(excel_file_name)
-        self._dataframe = reader._ritten
+        reader = ExcelDataReader(excel_file_name, 200)
+        self._ritten = reader.ritten
+        self._overview = reader.combined_sheets
 
         # if 'dataframe' not in strmlit.session_state:
-        #     strmlit.dataframe(self._dataframe)
+        #     strmlit.dataframe(self._ritten)
 
         if 'count' not in strmlit.session_state:
             strmlit.session_state.count = 0
@@ -51,34 +52,47 @@ class Dashboard:
         strmlit.sidebar.header("Please filter here:")
         Dag_treinreis = strmlit.sidebar.multiselect(
             "Select the day:",
-            options = self._dataframe["Dag_treinreis"].unique(),
-            default = self._dataframe["Dag_treinreis"].unique()
+            options = self._ritten["Dag_treinreis"].unique(),
+            default = self._ritten["Dag_treinreis"].unique()
         )
         Q2 = strmlit.sidebar.multiselect(
             "Select gender:",
-            options = self._dataframe[col1].unique(),
-            default = self._dataframe[col1].unique()
+            options = self._ritten[col1].unique(),
+            default = self._ritten[col1].unique()
         )
         Q4 = strmlit.sidebar.multiselect(
             "Select days per week:",
-            options = self._dataframe[col2].unique(),
-            default = self._dataframe[col2].unique()
+            options = self._ritten[col2].unique(),
+            default = self._ritten[col2].unique()
         )
         Q18D = strmlit.sidebar.multiselect(
             "Select purpose:",
-            options = self._dataframe[col4].unique(),
-            default = self._dataframe[col4].unique()
+            options = self._ritten[col4].unique(),
+            default = self._ritten[col4].unique()
         )
 
-        self._dataframe = self._dataframe.query(
+        self._ritten = self._ritten.query(
             "Dag_treinreis == @Dag_treinreis & Q2 == @Q2 & Q4 == @Q4 & Q18D == @Q18D"
         )
 
-        strmlit.dataframe(self._dataframe)
+        strmlit.dataframe(self._ritten)
 
     def cleanse(self):
-        self._dataframe = self._dataframe[self._dataframe[col1].isin(["Een jongen", "Een meisje"])]
-        strmlit.dataframe(self._dataframe)
+        self._ritten = self._ritten[self._ritten[col1].isin(["Een jongen", "Een meisje"])]
+        strmlit.dataframe(self._ritten)
+
+    def plot_chart(self):
+        travel_frequency_data = self._overview.value_counts("Treinreisfrequentie afgelopen 12 maanden (q4)") 
+        bar_chart = plotly.bar(
+            travel_frequency_data,
+            #x = "count",
+            #y = travel_frequency_data.index,
+            #orientation = "h",
+            title="<b>Travel freqency</b>",
+            #color_discrete_sequence = ["#0083B8"] * len (travel_frequency_data),
+            template="plotly_white"
+            )
+        strmlit.plotly_chart(bar_chart)
         
 
     def render(self):
@@ -91,6 +105,8 @@ class Dashboard:
         with self.col2:
             strmlit.button('test me', on_click=self.tester)
             strmlit.button('Cleanse', on_click=self.cleanse)
+
+        self.plot_chart()
 
 
 if __name__ == '__main__':

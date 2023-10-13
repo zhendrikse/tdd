@@ -64,6 +64,10 @@ Let's see how the above steps are applied in this kata:
 
 # Structuring the data
 
+## Cleansing the data
+
+In column `Q4A_1` there is a string "Weet ik niet", that cannot be converted to an integer. 
+
 # Data preprocessing
 
 # EDA
