@@ -1,7 +1,6 @@
 { pkgs }: {
   deps = [
-		pkgs.nettools
-  pkgs.jq.bin
+    pkgs.jq.bin
     pkgs.dotnet-sdk_7
     pkgs.omnisharp-roslyn
     pkgs.gradle_7
@@ -11,17 +10,22 @@
     pkgs.clojure-lsp
     pkgs.leiningen
     pkgs.graalvm17-ce
-		pkgs.maven
+    pkgs.maven
+    pkgs.replitPackages.jdt-language-server
+    pkgs.replitPackages.java-debug
     pkgs.pipenv
-    pkgs.poetry
     pkgs.cookiecutter
     pkgs.pipreqs
     pkgs.python310Full
+    pkgs.replitPackages.prybar-python310
+    pkgs.replitPackages.stderred
     pkgs.python310Packages.pip
+    pkgs.python310Packages.poetry
     pkgs.python310Packages.pytest_6
     pkgs.python310Packages.pytest-watch
     pkgs.nodejs-18_x
-		pkgs.yarn
+    pkgs.yarn
+    pkgs.replitPackages.jest
     pkgs.esbuild
     pkgs.nodePackages.typescript
     pkgs.nodePackages.typescript-language-server
