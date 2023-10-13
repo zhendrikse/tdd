@@ -78,3 +78,5 @@ In column `Q4A_1` there is a string "Weet ik niet", that cannot be converted to 
 
 - [Turn An Excel Sheet Into An Interactive Dashboard Using Python (Streamlit)](https://www.youtube.com/watch?v=Sb0A9i6d320)
 - [Example Streamlit class-based application](https://learningtofly.dev/blog/streamlit-class-based-app)
+- [Analyze Survey Data with Python for Beginners | Pandas](https://www.youtube.com/watch?v=B-lliwc0ZMk)
+- [How to Analyze Survey Data with Python for Beginners](https://www.dataquest.io/blog/how-to-analyze-survey-data-python-beginner/)
