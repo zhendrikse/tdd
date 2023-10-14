@@ -25,6 +25,6 @@ class ExcelDataReader:
             io = excel_file_name,
             engine = "openpyxl",
             # sheet_name="NS Klimaat ritten - jan-mrt 202",
-            nrows = 10
+            nrows = 200
         )
     

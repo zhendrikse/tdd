@@ -1,7 +1,8 @@
 import pandas as pnds
 import plotly.express as plotly 
 import streamlit as strmlit
-from raw_data_reader import ExcelDataReader
+from excel_data_reader import ExcelDataReader
+from data_processor import DataProcessor
 
 col1 = "Q2"
 col2 = "Q4"
@@ -14,9 +15,9 @@ col7 = "aankomststation"
 class Dashboard:
     def __init__(self, excel_file_name):
         self._init_webpage()
-        reader = ExcelDataReader(excel_file_name, 200)
-        self._ritten = reader.ritten
-        self._overview = reader.combined_sheets
+        data_processor = DataProcessor(ExcelDataReader(excel_file_name))
+        self._ritten = data_processor.ritten
+        self._overview = data_processor.combined_sheets
 
         # if 'dataframe' not in strmlit.session_state:
         #     strmlit.dataframe(self._ritten)
