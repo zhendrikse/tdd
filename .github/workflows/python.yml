@@ -20,6 +20,7 @@ on:
       - 'kata-solutions/christmas-tree/christmas-tree-python/**'
       - 'kata-solutions/poker-hands-kata/poker-hands-python/**'
       - 'kata-solutions/countries-kata/countries-kata-python/**'
+      - 'kata-solutions/questionnaire-kata/questionnaire-python/**'
       - 'tdd-katas/report-generator-kata/report-generator-python/**'
       - 'tdd-katas/video-store-kata/video-store-python/**'
       
@@ -113,6 +114,13 @@ jobs:
         run: poetry install --no-interaction
       - name: Stack kata run tests
         working-directory: kata-solutions/stack-kata/stack-kata-python
+        run: ./run_tests.sh
+        
+      - name: Questionnaire kata install dependencies
+        working-directory: kata-solutions/questionnaire-kata/questionnaire-python
+        run: poetry install --no-interaction
+      - name: Questionnaire kata run tests
+        working-directory: kata-solutions/questionnaire-kata/questionnaire-python
         run: ./run_tests.sh
 
       - name: Vending machine kata install dependencies
