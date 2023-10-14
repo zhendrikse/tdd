@@ -1,27 +1,13 @@
 import pytest
 from hamcrest import *
-from excel_data_reader import ExcelDataReader
-from data_processor import DataProcessor
 import pandas as pnds
-import io
 
-from test_data import RITTEN_DATA, VARIABLES_DATA
+from stub_data_reader import StubRawDataReader
+from data_processor import DataProcessor
 
 ROWS_TO_READ = 10
 DATA_ROW_COUNT = 225
 
-class StubRawDataReader:
-    def __init__(self, excel_file_name):
-        self._variables = pnds.read_json(io.StringIO(VARIABLES_DATA))
-        self._ritten = pnds.read_json(io.StringIO(RITTEN_DATA))
-
-    @property
-    def ritten(self):
-        return self._ritten
-        
-    @property
-    def variables(self):
-        return self._variables
 
 class TestDataProcessor:
     @pytest.fixture(autouse=True)
