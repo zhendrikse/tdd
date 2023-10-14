@@ -1,15 +1,32 @@
 import pytest
 from hamcrest import *
-from raw_data_reader import ExcelDataReader
+from excel_data_reader import ExcelDataReader
+from data_processor import DataProcessor
 import pandas as pnds
+import io
+
+from test_data import RITTEN_DATA, VARIABLES_DATA
 
 ROWS_TO_READ = 10
 DATA_ROW_COUNT = 225
 
-class TestExcelDataReader:
+class StubRawDataReader:
+    def __init__(self, excel_file_name):
+        self._variables = pnds.read_json(io.StringIO(VARIABLES_DATA))
+        self._ritten = pnds.read_json(io.StringIO(RITTEN_DATA))
+
+    @property
+    def ritten(self):
+        return self._ritten
+        
+    @property
+    def variables(self):
+        return self._variables
+
+class TestDataProcessor:
     @pytest.fixture(autouse=True)
     def data_reader(self):
-        return ExcelDataReader("test/ritten-jan_mar_2023.xlsx", ROWS_TO_READ)
+        return DataProcessor(StubRawDataReader("test/ritten-jan_mar_2023.xlsx"))
 
     def test_replace_header_codes(self, data_reader):
         assert_that(data_reader.header_values()[3], equal_to('Treinreisfrequentie afgelopen 12 maanden (q4)'))
@@ -44,3 +61,4 @@ class TestExcelDataReader:
         #print(data_reader.ritten.value_counts('Q56_1', normalize=True))
         print(data_reader.combined_sheets.value_counts("Treinreisfrequentie afgelopen 12 maanden (q4)", normalize=True))
         #print(data_reader.combined_sheets.groupby(by=["Geslacht (q58)"]).sum())
+
