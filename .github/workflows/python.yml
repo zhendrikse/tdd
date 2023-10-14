@@ -19,6 +19,7 @@ on:
       - 'kata-solutions/manhattan-distance/manhattan-distance-python/**'
       - 'kata-solutions/christmas-tree/christmas-tree-python/**'
       - 'kata-solutions/poker-hands-kata/poker-hands-python/**'
+      - 'kata-solutions/countries-kata/countries-kata-python/**'
       - 'tdd-katas/report-generator-kata/report-generator-python/**'
       - 'tdd-katas/video-store-kata/video-store-python/**'
       
@@ -156,10 +157,17 @@ jobs:
         working-directory: kata-solutions/poker-hands-kata/poker-hands-python
         run: ./run_tests.sh
           
-      - name: Game of life kata install dependencies
+      - name: Countries kata install dependencies
+        working-directory: kata-solutions/countries-kata/countries-kata-python
+        run: poetry install --no-interaction
+      - name: Countries kata run tests
+        working-directory: kata-solutions/countries-kata/countries-kata-python
+        run: ./run_tests.sh
+          
+      - name: Game of Life kata install dependencies
         working-directory: kata-solutions/game-of-life/game-of-life-python
         run: poetry install --no-interaction
-      - name: Game of life kata run tests
+      - name: Game of Life kata run tests
         working-directory: kata-solutions/game-of-life/game-of-life-python
         run: ./run_tests.sh
           
