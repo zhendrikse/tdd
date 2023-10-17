@@ -4,23 +4,18 @@ import streamlit as strmlit
 from excel_data_reader import ExcelDataReader
 from data_processor import DataProcessor
 
-col1 = "Q2"
-col2 = "Q4"
-col3 = "Dag_treinreis"
-col4 = "Q18D"
-col5 = "LeeftCat"
-col6 = "vertrekstation"
-col7 = "aankomststation"
-
 class Dashboard:
     def __init__(self, excel_file_name):
         self._init_webpage()
         data_processor = DataProcessor(ExcelDataReader(excel_file_name))
-        self._ritten = data_processor.ritten
-        self._overview = data_processor.combined_sheets
+        #self._data = data_processor.ritten
+        #self._variables = data_processor.variables
+        self._data = data_processor.get_dataframe_for(
+            ('Q4', 'Q4A_1', 'Q4A_2', 'Q6', 'Q8', 'HQ8', 'Q25', 'Q25A', 'Q25B', 'Q25C', 'Q25D', 'Q26', 'Q27A', 'Q27B'))
+        self._data = data_processor.merge_two_columns(self._data, 'Q25', 'Q25B')
 
         # if 'dataframe' not in strmlit.session_state:
-        #     strmlit.dataframe(self._ritten)
+        #     strmlit.dataframe(self._data)
 
         if 'count' not in strmlit.session_state:
             strmlit.session_state.count = 0
@@ -51,39 +46,34 @@ class Dashboard:
 
     def _define_filters(self):
         strmlit.sidebar.header("Please filter here:")
-        Dag_treinreis = strmlit.sidebar.multiselect(
-            "Select the day:",
-            options = self._ritten["Dag_treinreis"].unique(),
-            default = self._ritten["Dag_treinreis"].unique()
-        )
-        Q2 = strmlit.sidebar.multiselect(
-            "Select gender:",
-            options = self._ritten[col1].unique(),
-            default = self._ritten[col1].unique()
+        Q6 = strmlit.sidebar.multiselect(
+            "Laatst gemaakte treinreis:",
+            options = self._data['Q6'].unique(),
+            default = self._data['Q6'].unique()
         )
         Q4 = strmlit.sidebar.multiselect(
-            "Select days per week:",
-            options = self._ritten[col2].unique(),
-            default = self._ritten[col2].unique()
+            "Treinreisfrequentie de afgelopen 12 maanden:",
+            options = self._data['Q4'].unique(),
+            default = self._data['Q4'].unique()
         )
-        Q18D = strmlit.sidebar.multiselect(
-            "Select purpose:",
-            options = self._ritten[col4].unique(),
-            default = self._ritten[col4].unique()
-        )
-
-        self._ritten = self._ritten.query(
-            "Dag_treinreis == @Dag_treinreis & Q2 == @Q2 & Q4 == @Q4 & Q18D == @Q18D"
+        Q25_Q25B = strmlit.sidebar.multiselect(
+            "Soort vervoermiddel gebrach:",
+            options = self._data['Q25_Q25B'].unique(),
+            default = self._data['Q25_Q25B'].unique()
         )
 
-        strmlit.dataframe(self._ritten)
+        self._data = self._data.query(
+            "Q6 == @Q6 & Q4 == @Q4 & Q25_Q25B == Q25_Q25B"
+        )
+
+        strmlit.dataframe(self._data)
 
     def cleanse(self):
-        self._ritten = self._ritten[self._ritten[col1].isin(["Een jongen", "Een meisje"])]
-        strmlit.dataframe(self._ritten)
+        self._data = self._data[self._data[col1].isin(["Een jongen", "Een meisje"])]
+        strmlit.dataframe(self._data)
 
     def plot_chart(self):
-        travel_frequency_data = self._overview.value_counts("Treinreisfrequentie afgelopen 12 maanden (q4)") 
+        travel_frequency_data = self._data.value_counts("Q4") 
         bar_chart = plotly.bar(
             travel_frequency_data,
             #x = "count",
@@ -93,11 +83,45 @@ class Dashboard:
             #color_discrete_sequence = ["#0083B8"] * len (travel_frequency_data),
             template="plotly_white"
             )
-        strmlit.plotly_chart(bar_chart)
+
+        travel_motivation_data = self._data.value_counts("HQ8")
+        bar_chart_2 = plotly.bar(
+            travel_motivation_data,
+            #x = "count",
+            #y = travel_frequency_data.index,
+            #orientation = "h",
+            title="<b>Travel Motivation</b>",
+            #color_discrete_sequence = ["#0083B8"] * len (travel_frequency_data),
+            template="plotly_white"
+            )
+
+        with self.col1:
+            strmlit.plotly_chart(bar_chart)
+        with self.col2:
+            strmlit.plotly_chart(bar_chart_2)
+
+        labels = self._data.value_counts("Q25_Q25B").index
+        values = self._data.value_counts("Q25_Q25B").values
+        labels = [label if label.strip() else "Onbekend" for label in labels]
+
+        pie_chart = plotly.pie(
+            labels = labels, 
+            values = values,
+            names = labels,
+            title="<b>Transport to station</b>",
+            template="plotly_white"
+        )
+        strmlit.plotly_chart(pie_chart)
         
+
 
     def render(self):
         self._define_filters()
+
+        # option = strmlit.selectbox(
+        #     'How would you like to be contacted?',
+        #     self._variables.iloc[:, 1].to_list())
+        # strmlit.write('You selected:', option)
 
         with self.col1:
             strmlit.button("Increment", on_click=self.add)
