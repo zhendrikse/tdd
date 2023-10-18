@@ -14,9 +14,6 @@ class TestDataProcessor:
     def data_processor(self):
         return DataProcessor(StubRawDataReader("test/ritten-jan_mar_2023.xlsx"))
 
-    def test_replace_header_codes(self, data_processor):
-        assert_that(data_processor.header_values()[3], equal_to('Treinreisfrequentie afgelopen 12 maanden (q4)'))
-
     def test_header_description_for_non_existing_column_code(self, data_processor):
         assert_that(data_processor.find_header_description_for('does_not_exist'), equal_to("does_not_exist"))
 
@@ -25,11 +22,14 @@ class TestDataProcessor:
         assert_that(data_processor.find_header_description_for('Q59'), equal_to("Samenstelling huishouden (q59)"))
 
     def test_read_questionnaire(self, data_processor):
+        selected_columns = ('Q2', 'Q4A_1', 'Q4A_2')
+        test_dataframe = data_processor.get_dataframe_for(selected_columns)
+
         expected_res = pnds.Series(["Een jongen", "Een jongen", "Een meisje", "Een meisje", "Wil niet zeggen", 
             "Een meisje", "Een jongen", "Een meisje", "Een meisje", "Een jongen"])
         
-        assert_that(data_processor.ritten.shape, equal_to((ROWS_TO_READ, DATA_ROW_COUNT)))
-        pnds.testing.assert_series_equal(data_processor.ritten['Q2'], expected_res, check_names=False)
+        assert_that(test_dataframe.shape, equal_to((ROWS_TO_READ, len(selected_columns))))
+        pnds.testing.assert_series_equal(test_dataframe['Q2'], expected_res, check_names=False)
 
     def test_replace_text_in_numerical_column(self, data_processor):
         selected_columns = ('Q2', 'Q4A_1', 'Q4A_2')
@@ -37,8 +37,6 @@ class TestDataProcessor:
 
         test_dataframe = data_processor.remove_text_from_numerical_columns(test_dataframe, ['Q4A_1', 'Q4A_2'])
 
-        print(test_dataframe['Q4A_1'])
-        print(test_dataframe['Q4A_2'])
         assert_that(test_dataframe['Q4A_1'].tolist(), not(has_item('Weet ik niet')))
         assert_that(test_dataframe['Q4A_2'].tolist(), not(has_item('Weet ik niet')))
 

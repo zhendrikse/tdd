@@ -6,27 +6,12 @@ from data_processor import DataProcessor
 
 class Dashboard:
     def __init__(self, excel_file_name):
+        selected_columns = ['Q4', 'Q4A_1', 'Q4A_2', 'Q6', 'Q8', 'HQ8', 'Q25', 'Q25A', 'Q25B', 'Q25C', 'Q25D', 'Q26', 'Q27A', 'Q27B', 'Q28A', 'Q28B']
+        data = DataProcessor(ExcelDataReader(excel_file_name)).get_survey_data(selected_columns)
+        self._data = data[0]
+        self._headers = data[1]
+
         self._init_webpage()
-        data_processor = DataProcessor(ExcelDataReader(excel_file_name))
-        #self._data = data_processor.ritten
-        #self._variables = data_processor.variables
-        self._data = data_processor.get_dataframe_for(
-            ('Q4', 'Q4A_1', 'Q4A_2', 'Q6', 'Q8', 'HQ8', 'Q25', 'Q25A', 'Q25B', 'Q25C', 'Q25D', 'Q26', 'Q27A', 'Q27B', 'Q28A', 'Q28B'))
-        self._data = data_processor.merge_two_columns(self._data, 'Q25', 'Q25B')
-        self._data = data_processor.merge_two_columns(self._data, 'Q25C', 'Q25D')
-        self._data = data_processor.merge_two_columns(self._data, 'Q27A', 'Q28A')
-        self._data = data_processor.merge_two_columns(self._data, 'Q27B', 'Q28B')
-        self._data = data_processor.merge_two_columns(self._data, 'Q25C_Q25D', 'Q27A_Q28A')
-        self._data = data_processor.remove_text_from_numerical_columns(self._data, ['Q4A_1', 'Q4A_2'])
-
-        if 'dataframe' not in strmlit.session_state:
-            strmlit.dataframe(self._data)
-
-        # if 'count' not in strmlit.session_state:
-        #     strmlit.session_state.count = 0
-        # if 'title' not in strmlit.session_state:
-        #     strmlit.session_state.title = "Calculator"
-        self.col1, self.col2 = strmlit.columns(2)
 
     def _init_webpage(self):
         # emoji's https://www.webfx.com/tools/emoji-cheat-sheet/
@@ -35,19 +20,11 @@ class Dashboard:
             page_icon = ":train:",
             layout = "wide")
 
-    # def add(self):
-    #     strmlit.session_state.count += 1
+        if 'dataframe' not in strmlit.session_state:
+            strmlit.write(self._headers)
+            strmlit.dataframe(self._data)
 
-    # def subtract(self):
-    #     strmlit.session_state.count -= 1
-
-    # def tester(self):
-    #     if 'tester' not in strmlit.session_state:
-    #         strmlit.session_state.tester = "Tester"
-    #     else:
-    #         strmlit.session_state.tester = "Already tested"
-    #     with self.col2:
-    #         strmlit.write(f"Hello from the {strmlit.session_state.tester}!")
+        self.col1, self.col2 = strmlit.columns(2)            
 
     def _define_filters(self):
         strmlit.sidebar.header("Please filter here:")
@@ -71,95 +48,49 @@ class Dashboard:
             "Q6 == @Q6 & Q4 == @Q4 & Q25_Q25B == Q25_Q25B"
         )
 
-
-    def cleanse(self):
-        self._data = self._data[self._data[col1].isin(["Een jongen", "Een meisje"])]
-        strmlit.dataframe(self._data)
-
-    def plot_chart(self):
-        travel_frequency_data = self._data.value_counts("Q4") 
-        bar_chart = plotly.bar(
-            travel_frequency_data,
+    def _create_bar_chart_for(self, column, title):
+        data = self._data.value_counts(column) 
+        return plotly.bar(
+            data,
             #x = "count",
             #y = travel_frequency_data.index,
             #orientation = "h",
-            title="<b>Travel freqency</b>",
-            #color_discrete_sequence = ["#0083B8"] * len (travel_frequency_data),
+            title=title,
             template="plotly_white"
             )
 
-        travel_motivation_data = self._data.value_counts("HQ8")
-        bar_chart_2 = plotly.bar(
-            travel_motivation_data,
-            #x = "count",
-            #y = travel_frequency_data.index,
-            #orientation = "h",
-            title="<b>Travel Motivation</b>",
-            #color_discrete_sequence = ["#0083B8"] * len (travel_frequency_data),
-            template="plotly_white"
-            )
-
-        with self.col1:
-            strmlit.plotly_chart(bar_chart)
-        with self.col2:
-            strmlit.plotly_chart(bar_chart_2)
-
-        labels = self._data.value_counts("Q25_Q25B").index
-        values = self._data.value_counts("Q25_Q25B").values
-        #labels = [label if label.strip() else "Onbekend" for label in labels]
-
-        pie_chart = plotly.pie(
+    def _create_pie_chart_for(self, column, title):
+        labels = self._data.value_counts(column).index
+        values = self._data.value_counts(column).values
+    
+        return plotly.pie(
             labels = labels, 
             values = values,
             names = labels,
-            title="<b>Transport to station</b>",
+            title=title,
             template="plotly_white"
         )
-        strmlit.plotly_chart(pie_chart)
-        
-        eigen_vervoer_labels = self._data.value_counts("Q25C_Q25D_Q27A_Q28A").index
-        eigen_vervoer_values = self._data.value_counts("Q25C_Q25D_Q27A_Q28A").values
-        pie_chart_vervoer = plotly.pie(
-            labels = eigen_vervoer_labels, 
-            values = eigen_vervoer_values,
-            names = eigen_vervoer_labels,
-            title="<b>Own transport to station</b>",
-            template="plotly_white"
-        )
-        with self.col1:
-            strmlit.plotly_chart(pie_chart_vervoer)
-        
-        electrisch_vervoer_labels = self._data.value_counts("Q27B_Q28B").index
-        electrisch_vervoer_values = self._data.value_counts("Q27B_Q28B").values
-        pie_chart_electrisch = plotly.pie(
-            labels = electrisch_vervoer_labels, 
-            values = electrisch_vervoer_values,
-            names = electrisch_vervoer_labels,
-            title="<b>With own electric car or bike to station</b>",
-            template="plotly_white"
-        )
-        with self.col2:
-            strmlit.plotly_chart(pie_chart_electrisch)
 
+    def _plot_charts(self):
+        travel_frequency_histogram = self._create_bar_chart_for("Q4", "<b>Travel freqency</b>")
+        travel_motivation_histogram = self._create_bar_chart_for("HQ8", "<b>Travel motivation</b>")
+        with self.col1:
+            strmlit.plotly_chart(travel_frequency_histogram)
+        with self.col2:
+            strmlit.plotly_chart(travel_motivation_histogram)
+
+        strmlit.plotly_chart(self._create_pie_chart_for("Q25_Q25B", "<b>Transport to station</b>"))
+        
+        with self.col1:
+            strmlit.plotly_chart(self._create_pie_chart_for("Q25C_Q25D_Q27A_Q28A", "<b>Own means of transport to station</b>"))
+        with self.col2:
+            strmlit.plotly_chart(self._create_pie_chart_for("Q27B_Q28B", "<b>With own <em>electric</em> car or bike to station</b>"))
+    
     def render(self):
         self._define_filters()
-
-        # option = strmlit.selectbox(
-        #     'How would you like to be contacted?',
-        #     self._variables.iloc[:, 1].to_list())
-        # strmlit.write('You selected:', option)
-
-        self.plot_chart()
-
-        # with self.col1:
-        #     strmlit.button("Increment", on_click=self.add)
-        #     strmlit.button("Subtract", on_click=self.subtract)
-        #     strmlit.write(f'Count = {strmlit.session_state.count}')
-        # with self.col2:
-        #     strmlit.button('test me', on_click=self.tester)
-        #     strmlit.button('Cleanse', on_click=self.cleanse)
+        self._plot_charts()
 
 
 if __name__ == '__main__':
-    dashboard = Dashboard("test/ritten-jan_mar_2023.xlsx")
+    dashboard = Dashboard("ritten-jan_mar_2023.xlsx")
     dashboard.render()

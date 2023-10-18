@@ -1,18 +1,24 @@
 import pandas as pnds
-from typing import Protocol
+from excel_data_reader import ExcelDataReader
 
 class DataProcessor:
     def __init__(self, raw_data_reader):
         self._variables = raw_data_reader.variables
         self._ritten = raw_data_reader.ritten
+    
+    def get_survey_data(self, selected_columns):
+        data = self.get_dataframe_for(selected_columns)
+        data = self.merge_two_columns(data, 'Q25', 'Q25B')
+        data = self.merge_two_columns(data, 'Q25C', 'Q25D')
+        data = self.merge_two_columns(data, 'Q27A', 'Q28A')
+        data = self.merge_two_columns(data, 'Q27B', 'Q28B')
+        data = self.merge_two_columns(data, 'Q25C_Q25D', 'Q27A_Q28A')
+        data = self.remove_text_from_numerical_columns(data, ['Q4A_1', 'Q4A_2'])
 
-    @property
-    def ritten(self):
-        return self._ritten
+        headers = [self.find_header_description_for(header) for header in selected_columns]
+        header_description_map = dict(zip(selected_columns, headers))
 
-    @property
-    def variables(self):
-        return self._variables
+        return data, pnds.DataFrame([header_description_map])
 
     def get_column_by_code(self, column_code):
         return self._ritten[column_code]
@@ -24,10 +30,6 @@ class DataProcessor:
 
         row_for_header_code = matching_row.index[0]
         return self._variables.iloc[row_for_header_code, 1]
-
-    def header_values(self):
-        headers = list(self._ritten)
-        return [self.find_header_description_for(header) for header in headers]
 
     def get_dataframe_for(self, column_codes_list):
         return self._ritten.loc[:, self._ritten.columns.isin(column_codes_list)]
