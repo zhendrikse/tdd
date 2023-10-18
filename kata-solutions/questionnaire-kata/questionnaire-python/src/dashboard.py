@@ -20,12 +20,7 @@ class Dashboard:
             page_icon = ":train:",
             layout = "wide")
 
-        strmlit.write(self._headers)
-        strmlit.dataframe(self._data)
-
-        self.col1, self.col2 = strmlit.columns(2)            
-
-    def _define_filters(self):
+    def _render_dataframes(self):
         strmlit.sidebar.header("Please filter here:")
         Q26 = strmlit.sidebar.multiselect(
             "Duur reis naar station:",
@@ -46,6 +41,9 @@ class Dashboard:
         self._data = self._data.query(
             "Q26 == @Q26 & Q4 == @Q4 & Q25_Q25B == Q25_Q25B"
         )
+
+        strmlit.write(self._headers)
+        strmlit.dataframe(self._data)
 
     def _create_bar_chart_for(self, column, title):
         data = self._data.value_counts(column) 
@@ -73,20 +71,22 @@ class Dashboard:
     def _plot_charts(self):
         travel_frequency_histogram = self._create_bar_chart_for("Q4", "<b>Travel freqency</b>")
         travel_motivation_histogram = self._create_bar_chart_for("HQ8", "<b>Travel motivation</b>")
-        with self.col1:
+
+        self._col1, self._col2 = strmlit.columns(2)            
+        with self._col1:
             strmlit.plotly_chart(travel_frequency_histogram)
-        with self.col2:
+        with self._col2:
             strmlit.plotly_chart(travel_motivation_histogram)
 
         strmlit.plotly_chart(self._create_pie_chart_for("Q25_Q25B", "<b>Transport to station</b>"))
         
-        with self.col1:
+        with self._col1:
             strmlit.plotly_chart(self._create_pie_chart_for("Q25C_Q25D_Q27A_Q28A", "<b>Own means of transport to station</b>"))
-        with self.col2:
+        with self._col2:
             strmlit.plotly_chart(self._create_pie_chart_for("Q27B_Q28B", "<b>With own <em>electric</em> car or bike to station</b>"))
     
     def render(self):
-        self._define_filters()
+        self._render_dataframes()
         self._plot_charts()
 
 
