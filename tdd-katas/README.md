@@ -30,6 +30,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [manhattan-distance](./manhattan-distance)      | L       | 1, 2, N / Encapsulation                               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [mars-rover](./mars-rover)                      | M       | **Generic TDD** / Design decisions                    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ |
 | [poker-hands-kata](./poker-hands-kata)          | H       | Outside-in / Mocks / Design decisions                 | ✔  | ✗   | ✗  | ✔   | ✗  | ✗ | ✗ |
+| [questionnaire-kata](./questionnaire-kata)      | M       | Data science / Dashboarding / Ports &amp adapters     | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [report-generator-kata](./report-generator-kata)| L / M   | **Refactoring** / SOLID / Code smells / Clean code    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [registration-form](./registration-form)        | L / M   | **Generic TDD** / Front-end TDD / Custom matchers     | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
 | [shunting-yard-algo](./shunting-yard-algo)      | M       | **Generic TDD**                                       | ✗  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ |
