@@ -20,18 +20,17 @@ class Dashboard:
             page_icon = ":train:",
             layout = "wide")
 
-        if 'dataframe' not in strmlit.session_state:
-            strmlit.write(self._headers)
-            strmlit.dataframe(self._data)
+        strmlit.write(self._headers)
+        strmlit.dataframe(self._data)
 
         self.col1, self.col2 = strmlit.columns(2)            
 
     def _define_filters(self):
         strmlit.sidebar.header("Please filter here:")
-        Q6 = strmlit.sidebar.multiselect(
-            "Laatst gemaakte treinreis:",
-            options = self._data['Q6'].unique(),
-            default = self._data['Q6'].unique()
+        Q26 = strmlit.sidebar.multiselect(
+            "Duur reis naar station:",
+            options = self._data['Q26'].unique(),
+            default = self._data['Q26'].unique()
         )
         Q4 = strmlit.sidebar.multiselect(
             "Treinreisfrequentie de afgelopen 12 maanden:",
@@ -39,13 +38,13 @@ class Dashboard:
             default = self._data['Q4'].unique()
         )
         Q25_Q25B = strmlit.sidebar.multiselect(
-            "Soort vervoermiddel gebrach:",
+            "Soort vervoermiddel gebracht:",
             options = self._data['Q25_Q25B'].unique(),
             default = self._data['Q25_Q25B'].unique()
         )
 
         self._data = self._data.query(
-            "Q6 == @Q6 & Q4 == @Q4 & Q25_Q25B == Q25_Q25B"
+            "Q26 == @Q26 & Q4 == @Q4 & Q25_Q25B == Q25_Q25B"
         )
 
     def _create_bar_chart_for(self, column, title):
@@ -92,5 +91,5 @@ class Dashboard:
 
 
 if __name__ == '__main__':
-    dashboard = Dashboard("ritten-jan_mar_2023.xlsx")
+    dashboard = Dashboard("../../../tdd-katas/questionnaire-kata/ritten-jan_mar_2023.xlsx")
     dashboard.render()
