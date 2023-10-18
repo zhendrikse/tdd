@@ -59,13 +59,4 @@ class TestDataProcessor:
         expected_res = pnds.Series(["Fiets", "Lopend", "Fiets", "Auto", "Lopend", "Auto", "Fiets", "Auto", "Lopend", "Met de taxi, NS zonetaxi, regiotaxi"])
         pnds.testing.assert_series_equal(dataframe['Q25_Q25B'], expected_res, check_names=False)
 
-    #def test_bla(self, data_processor):
-        #print(data_processor.combined_sheets.value_counts('Grootte huishouden (q60)', normalize=True))
-        #print(data_processor.combined_sheets.value_counts('Geslacht (q58)', normalize=True))
-        #print(data_processor.combined_sheets.value_counts('Leeftijdscategorie (q57)', normalize=True))
-        #print(data_processor.ritten.value_counts('Q65', normalize=True))
-
-        #print(data_processor.ritten.value_counts('Q56_1', normalize=True))
-        #print(data_processor.combined_sheets.value_counts("Treinreisfrequentie afgelopen 12 maanden (q4)", normalize=True))
-        #print(data_processor.combined_sheets.groupby(by=["Geslacht (q58)"]).sum())
 
