@@ -104,6 +104,7 @@ jobs:
       #----------------------------------------------
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        working-directory: ..
         run: poetry install --no-interaction --no-root
 
       #- name: Stack kata install dependencies
