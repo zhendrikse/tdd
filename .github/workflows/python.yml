@@ -90,35 +90,33 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: true
 
-      # #----------------------------------------------
-      # #       load cached venv if cache exists
-      # #----------------------------------------------
-      # - name: Load cached venv
-      #   id: cached-poetry-dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: .venv
-      #     key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      # #----------------------------------------------
-      # # install dependencies if cache does not exist
-      # #----------------------------------------------
-      # - name: Install dependencies
-      #   working-directory: kata-solutions/stack-kata/stack-kata-python
-      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      #   run: poetry install --no-interaction --no-root
       #----------------------------------------------
-      # install your root project, if required
+      #       load cached venv if cache exists
       #----------------------------------------------
-      - name: Stack kata install dependencies
-        working-directory: kata-solutions/stack-kata/stack-kata-python
-        run: poetry install --no-interaction
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install dependencies
+        working-directory: ./
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+
+      #- name: Stack kata install dependencies
+      #  working-directory: kata-solutions/stack-kata/stack-kata-python
+      #  run: poetry install --no-interaction
       - name: Stack kata run tests
         working-directory: kata-solutions/stack-kata/stack-kata-python
         run: ./run_tests.sh
         
-      - name: Questionnaire kata install dependencies
-        working-directory: kata-solutions/questionnaire-kata/questionnaire-python
-        run: poetry install --no-interaction
+      #- name: Questionnaire kata install dependencies
+      #  working-directory: kata-solutions/questionnaire-kata/questionnaire-python
+      #  run: poetry install --no-interaction
       - name: Questionnaire kata run tests
         working-directory: kata-solutions/questionnaire-kata/questionnaire-python
         run: ./run_tests.sh
