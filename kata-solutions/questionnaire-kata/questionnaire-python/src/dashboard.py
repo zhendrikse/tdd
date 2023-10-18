@@ -17,6 +17,7 @@ class Dashboard:
         self._data = data_processor.merge_two_columns(self._data, 'Q27A', 'Q28A')
         self._data = data_processor.merge_two_columns(self._data, 'Q27B', 'Q28B')
         self._data = data_processor.merge_two_columns(self._data, 'Q25C_Q25D', 'Q27A_Q28A')
+        self._data = data_processor.remove_text_from_numerical_columns(self._data, ['Q4A_1', 'Q4A_2'])
 
         if 'dataframe' not in strmlit.session_state:
             strmlit.dataframe(self._data)
