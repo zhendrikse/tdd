@@ -59,4 +59,12 @@ class TestDataProcessor:
         expected_res = pnds.Series(["Fiets", "Lopend", "Fiets", "Auto", "Lopend", "Auto", "Fiets", "Auto", "Lopend", "Met de taxi, NS zonetaxi, regiotaxi"])
         pnds.testing.assert_series_equal(dataframe['Q25_Q25B'], expected_res, check_names=False)
 
+    def test_get_survey_data(self, data_processor):
+        selected_columns = ['Q4', 'Q4A_1', 'Q4A_2', 'Q6', 'Q8', 'HQ8', 'Q25', 'Q25A', 'Q25B', 'Q25C', 'Q25D', 'Q26', 'Q27A', 'Q27B', 'Q28A', 'Q28B']
+        survey_data = data_processor.get_survey_data(selected_columns)
+        data = survey_data[0]
+        headers = survey_data[1]
+
+        assert_that(headers.shape, equal_to((1, len(selected_columns))))
+        assert_that(data.shape, equal_to((ROWS_TO_READ, 11)))
 
