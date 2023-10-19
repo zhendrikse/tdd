@@ -15,4 +15,3 @@ describe("A new babysteps timer", function() {
     })
 })
 
-
