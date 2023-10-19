@@ -13,15 +13,25 @@ let _threadTimer: NodeJS.Timeout;
 
 document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, false);
 
+interface Clock {
+    currentTime(): number
+  }
+  
+class RealClock implements Clock {
 
-export function command(arg: string): void {
+    currentTime() {
+       return Date.now();
+    }
+}
+
+export function command(arg: string, clock: RealClock = new RealClock()): void {
     let args = { Url: { AbsoluteUri: `command://${arg}/` } }
     console.log('called', arg, args.Url.AbsoluteUri);
     if (args.Url.AbsoluteUri == "command://start/") {
         document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, true);
 
         _timerRunning = true;
-        _currentCycleStartTime = Date.now();
+        _currentCycleStartTime = clock.currentTime();
 
         _threadTimer = setInterval(function() {
             if (_timerRunning) {
