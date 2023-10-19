@@ -12,6 +12,7 @@ on:
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored/**'
       - 'kata-solutions/registration-form/registration-form-javascript/**'
+      - 'kata-solutions/babysteps-timer/babysteps-typescript/**'
       - 'tdd-katas/babysteps-timer/babysteps-typescript/**'
   pull_request:
     branches: [ "master" ]
@@ -54,6 +55,15 @@ jobs:
         npm ci
         npm test
       working-directory: kata-solutions/vending-machine/vending-machine-typescript
+
+    - name: Babysteps timer Typescript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: ../kata-solutions/babysteps-timer/babysteps-typescript
 
     - name: Vending machine kata Javascript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
