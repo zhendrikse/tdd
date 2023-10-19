@@ -18,12 +18,12 @@ describe("A new babysteps timer", function() {
     })
 
     it("time ticks back over time", async() => {
-        await new Promise(resolve => setTimeout(resolve, 50))
+        await new Promise(resolve => setTimeout(resolve, 750))
         expect(document.querySelector("h1")?.innerHTML).to.equal("01:59")
     })
 
     it("time ticks back over longer time", async() => {
-        await new Promise(resolve => setTimeout(resolve, 1050))
+        await new Promise(resolve => setTimeout(resolve, 1750))
         expect(document.querySelector("h1")?.innerHTML).to.equal("01:58")
     })
 })
