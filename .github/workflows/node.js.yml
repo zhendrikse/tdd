@@ -12,6 +12,7 @@ on:
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored/**'
       - 'kata-solutions/registration-form/registration-form-javascript/**'
+      - 'kata-solutions/babysteps-timer/babysteps-typescript/**'
       - 'tdd-katas/babysteps-timer/babysteps-typescript/**'
   pull_request:
     branches: [ "master" ]
@@ -35,6 +36,24 @@ jobs:
         npm ci
         npm test
       working-directory: tdd-katas/babysteps-timer/babysteps-typescript
+
+  single-node-version-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Babysteps timer Typescript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/babysteps-timer/babysteps-typescript
   
   kata-solutions-tests:
     runs-on: ubuntu-latest
