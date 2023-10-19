@@ -12,16 +12,16 @@ $ poetry install
 
 ## Running the tests
 
-If you are using PyTest, use
+To run tests once, use
 
 ```bash
-$ ptw
+$ ./run_tests.sh
 ```
 
-If you are using the Mamba framework for the tests, use
+If you want to run test continuously, use
 
 ```bash
-$ poetry run mamba --format=documentation test/*_test.py
+$ ./run_watch.sh
 ```
 
 # Introduction TDD
