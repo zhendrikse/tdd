@@ -19,25 +19,19 @@ class Dashboard:
             page_title = "Trein ritten dashboard", 
             page_icon = ":train:",
             layout = "wide")
+        
+    def _create_filter_for(self, column, filter_title):
+        return strmlit.sidebar.multiselect(
+            filter_title,
+            options = self._data[column].unique(),
+            default = self._data[column].unique()
+        )
 
     def _render_dataframes(self):
         strmlit.sidebar.header("Please filter here:")
-        Q26 = strmlit.sidebar.multiselect(
-            "Duur reis naar station:",
-            options = self._data['Q26'].unique(),
-            default = self._data['Q26'].unique()
-        )
-        Q4 = strmlit.sidebar.multiselect(
-            "Treinreisfrequentie de afgelopen 12 maanden:",
-            options = self._data['Q4'].unique(),
-            default = self._data['Q4'].unique()
-        )
-        Q25_Q25B = strmlit.sidebar.multiselect(
-            "Soort vervoermiddel gebracht:",
-            options = self._data['Q25_Q25B'].unique(),
-            default = self._data['Q25_Q25B'].unique()
-        )
-
+        Q26 = self._create_filter_for("Q26", "Duur reis naar station:")
+        Q4 = self._create_filter_for("Q4", "Treinreisfrequentie de afgelopen 12 maanden:")
+        Q25_Q25B = self._create_filter_for("Q25_Q25B", "Soort vervoermiddel gebracht:")
         self._data = self._data.query(
             "Q26 == @Q26 & Q4 == @Q4 & Q25_Q25B == Q25_Q25B"
         )
