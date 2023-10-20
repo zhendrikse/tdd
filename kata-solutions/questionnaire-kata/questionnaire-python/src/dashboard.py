@@ -7,7 +7,7 @@ from data_processor import DataProcessor
 class Dashboard:
     def __init__(self, excel_file_name):
         selected_columns = ['Q4', 'Q4A_1', 'Q4A_2', 'Q6', 'Q8', 'HQ8', 'Q25', 'Q25A', 'Q25B', 'Q25C', 'Q25D', 'Q26', 'Q27A', 'Q27B', 'Q28A', 'Q28B']
-        data = DataProcessor(ExcelDataReader(excel_file_name)).get_survey_data(selected_columns)
+        data = DataProcessor(ExcelDataReader(excel_file_name)).get_processed_survey_data(selected_columns)
         self._data = data[0]
         self._headers = data[1]
 
