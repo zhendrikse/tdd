@@ -56,6 +56,7 @@ export function command(arg: string): void {
     }
     else if (args.Url.AbsoluteUri == "command://stop/") {
         _timerRunning = false;
+        _lastRemainingTime = "";
         clearInterval(_threadTimer)
         document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, false);
 

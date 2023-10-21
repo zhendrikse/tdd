@@ -29,18 +29,23 @@ describe("A new babysteps timer", function() {
         command("stop")
     })
 
-    it("h1 contains the time", function() {
+    it("h1 contains the time", function(): void {
         expect(document.querySelector("h1")?.innerHTML).to.equal("02:00")
     })
 
-    it("time ticks back over time", async() => {
+    it("time ticks back over time", async(): Promise<void> => {
         await fakeClock.nextCurrentTimeValueIs(0.75)
         expect(document.querySelector("h1")?.innerHTML).to.equal("01:59")
     })
 
-    it("time ticks back over longer time", async() => {
+    it("time ticks back over longer time", async(): Promise<void> => {
         await fakeClock.nextCurrentTimeValueIs(1.75)
         expect(document.querySelector("h1")?.innerHTML).to.equal("01:58")
+    })
+
+    it("resets when time has passd beyond the expiry time", async(): Promise<void> => {
+        // await fakeClock.nextCurrentTimeValueIs(121)
+        expect(document.querySelector("h1")?.innerHTML).to.equal("02:00")
     })
 })
 
