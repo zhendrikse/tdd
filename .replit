@@ -1,0 +1,16 @@
+run = "cd ~/tdd/presentations && npm install && npm run slides"
+
+#modules = ["nodejs-18:v3-20230608-f4cd419"]
+modules = ["nodejs-20:v8-20230920-bd784b9", "python-3.10:v18-20230807-322e88b"]
+
+hidden = [".pythonlibs"]
+
+
+[nix]
+#channel = "stable-22_11"
+channel = "stable-23_05"
+
+[env]
+# Fix Import issues /w some python packages
+LD_LIBRARY_PATH = "$PYTHON_LD_LIBRARY_PATH"
+
