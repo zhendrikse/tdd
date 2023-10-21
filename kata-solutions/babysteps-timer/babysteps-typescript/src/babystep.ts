@@ -13,7 +13,7 @@ let _threadTimer: NodeJS.Timeout;
 
 document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, false);
 
-interface Clock {
+export interface Clock {
     currentTime(): number
   }
   

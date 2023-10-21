@@ -170,4 +170,85 @@ Let's obtain that value via a separate function call:
     // ...
     //
   ```
+  </details>
+
+  ## Using the `Clock` interface in our tests
+
+  After adding an `export` to the `Clock` interface, we can now use
+  it in the `beforeEach` of our tests.
+
+  <details>
+  <summary>Implementation of a `FakeClock` in our tests</summary>
+
+  Let's first start by defining a anonymous inner class:
+
+  ```typescript
+  beforeEach(() => {
+    command("start", new class implements Clock {
+      currentTime(): number {
+        return Date.now()
+      }
+    })
+  })
+  ```
+
+  This anonymous class can again be promoted to a named class
+
+  ```typescript
+  class FakeClock implements Clock {
+    currentTime(): number {
+        return Date.now()
+    }
+  }
+
+  describe("A new babysteps timer", function() {  
+    beforeEach(() => {
+        command("start", new FakeClock())
+    })
+
+    // ...
+  ```
+
+  Next, when we extend our `FakeClock` with one additional method that we
+  can use in our tests, we can set the time in our tests.
+  ```typescript
+  class FakeClock implements Clock {
+    private nextTimeValue: number = 0
+
+    currentTime(): number {
+        return Date.now()
+    }
+
+    async nextCurrentTimeValueIs(nextTimeValue: number): Promise<void> {
+        this.nextTimeValue = nextTimeValue * 1000
+        await new Promise(resolve => setTimeout(resolve, this.nextTimeValue))
+    }
+  }
+  ```
+
+  With which our tests become
+
+  ```typescript
+  describe("A new babysteps timer", function() {
+    let fakeClock: FakeClock
+
+    beforeEach(() => {
+        fakeClock = new FakeClock()
+        command("start", fakeClock)
+    })
+
+    // ...
+
+    it("time ticks back over time", async() => {
+        await fakeClock.nextCurrentTimeValueIs(0.75)
+        expect(document.querySelector("h1")?.innerHTML).to.equal("01:59")
+    })
+
+    it("time ticks back over longer time", async() => {
+        await fakeClock.nextCurrentTimeValueIs(1.75)
+        expect(document.querySelector("h1")?.innerHTML).to.equal("01:58")
+    })
+  })
+  ```
 </details>
+
