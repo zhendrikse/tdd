@@ -74,7 +74,6 @@ jobs:
         npm test
       working-directory: kata-solutions/vending-machine/vending-machine-typescript
 
-    steps:
     - name: Babysteps timer kata typescript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
