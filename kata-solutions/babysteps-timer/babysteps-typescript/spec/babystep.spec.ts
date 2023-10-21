@@ -44,8 +44,7 @@ describe("A new babysteps timer", function() {
     })
 
     it("resets when time has passd beyond the expiry time", async(): Promise<void> => {
-        // await fakeClock.nextCurrentTimeValueIs(121)
+        //await fakeClock.nextCurrentTimeValueIs(121)
         expect(document.querySelector("h1")?.innerHTML).to.equal("02:00")
     })
 })
-

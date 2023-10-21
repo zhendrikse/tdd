@@ -35,11 +35,11 @@ export function command(arg: string, clock: RealClock = new RealClock()): void {
 
         _threadTimer = setInterval(function() {
             if (_timerRunning) {
-                let elapsedTime: number = Date.now() - _currentCycleStartTime;
+                let elapsedTime: number = clock.currentTime() - _currentCycleStartTime;
 
                 if (elapsedTime >= SecondsInCycle * 1000 + 980) {
-                    _currentCycleStartTime = Date.now();
-                    elapsedTime = Date.now() - _currentCycleStartTime;
+                    _currentCycleStartTime = clock.currentTime()
+                    elapsedTime = clock.currentTime() - _currentCycleStartTime;
                 }
                 if (elapsedTime >= 5000 && elapsedTime < 6000 && _bodyBackgroundColor != BackgroundColorNeutral) {
                     _bodyBackgroundColor = BackgroundColorNeutral;

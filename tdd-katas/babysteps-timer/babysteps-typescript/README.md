@@ -250,5 +250,60 @@ Let's obtain that value via a separate function call:
     })
   })
   ```
+ 
+  Finally, all `Date.now()` statements in the babysteps timer can be 
+  replaced by our `clock.currentTime()`:
+
+  ```typescript
+  export function command(arg: string, clock: RealClock = new RealClock()): void {
+    let args = { Url: { AbsoluteUri: `command://${arg}/` } }
+    console.log('called', arg, args.Url.AbsoluteUri);
+    if (args.Url.AbsoluteUri == "command://start/") {
+        document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, true);
+
+        _timerRunning = true;
+        _currentCycleStartTime = clock.currentTime();
+
+        _threadTimer = setInterval(function() {
+            if (_timerRunning) {
+                let elapsedTime: number = clock.currentTime() - _currentCycleStartTime;
+
+                if (elapsedTime >= SecondsInCycle * 1000 + 980) {
+                    _currentCycleStartTime = clock.currentTime()
+                    elapsedTime = clock.currentTime() - _currentCycleStartTime;
+                }
+
+                // ...
+  ```
+  </details>
+
+## Check that the clock resets
+
+Next, we can write a test that tests that the clock resets after two minutes:
+
+<details>
+<summary>A tests for a clock reset after two minutes</summary>
+
+```typescript
+it("resets when time has passd beyond the expiry time", async(): Promise<void> => {
+    await fakeClock.nextCurrentTimeValueIs(121)
+    expect(document.querySelector("h1")?.innerHTML).to.equal("02:00")
+})
+```
+
+This fails because a system call is made to play the audio, which we
+obviously don't have available when running our tests (outside of the
+browser):
+
+```
+  2) A new babysteps timer
+       resets when time has passd beyond the expiry time:
+     Uncaught ReferenceError: Audio is not defined
+      at playSound (src/babystep.ts:2:5894)
+      at Timeout._onTimeout (src/babystep.ts:2:2566)
+      at listOnTimeout (node:internal/timers:569:17)
+      at processTimers (node:internal/timers:512:7)
+```
 </details>
 
+## Intervening the audio
