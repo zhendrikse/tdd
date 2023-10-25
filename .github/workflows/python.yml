@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/python.yml'
       - 'kata-solutions/stack-kata/stack-kata-python/**'  
+      - 'kata-solutions/sudoku-kata/sudoku-python/**'
       - 'kata-solutions/vending-machine/vending-machine-python/**'
       - 'kata-solutions/bugs-zero-kata/bugs-zero-python/**'
       - 'kata-solutions/cache-kata/cache-kata-python/**'
@@ -89,6 +90,13 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: true
+
+      - name: Sudoku kata install dependencies
+        working-directory: kata-solutions/sudoku-kata/sudoku-python
+        run: poetry install --no-interaction
+      - name: Sudoku kata run tests
+        working-directory: kata-solutions/sudoku-kata/sudoku-python
+        run: ./run_tests.sh
 
       - name: Stack kata install dependencies
         working-directory: kata-solutions/stack-kata/stack-kata-python
