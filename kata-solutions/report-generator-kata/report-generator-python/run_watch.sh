@@ -1,1 +1,1 @@
-PYTHONPATH=$PYTHONPATH:src:test poetry run ptw 
+PYTHONPATH=src poetry run ptw
