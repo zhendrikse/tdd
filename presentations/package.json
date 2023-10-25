@@ -12,6 +12,6 @@
   "dependencies": {
     "@fontsource/inter": "^4.5.0",
     "@fontsource/jetbrains-mono": "^4.5.0",
-    "reveal-md": "^5.5.1"
+    "reveal-md": "^5.5.2"
   }
 }

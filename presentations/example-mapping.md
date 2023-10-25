@@ -2,7 +2,7 @@
 title: Example mapping
 author: Zeger Hendrikse
 date: 2023-09-29
-css: custom.css
+css: css/custom.css
 ---
 
 <!-- .slide: data-background="https://github.com/zhendrikse/tdd/raw/master/assets/ticket-cancellation.png" -->
@@ -40,7 +40,7 @@ css: custom.css
 
 ## ATDD
 
-![ATDD](https://github.com/zhendrikse/tdd/raw/master/assets/atdd.png) <!-- .element width="65%" height="65%" -->
+![ATDD](https://github.com/zhendrikse/tdd/raw/master/assets/atdd.png) <!-- .element width="55%" height="55%" -->
 
 ---
 
