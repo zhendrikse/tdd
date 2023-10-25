@@ -13,7 +13,7 @@ let _threadTimer: NodeJS.Timeout;
 
 document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, false);
 
-interface Clock {
+export interface Clock {
     currentTime(): number
   }
   
@@ -35,11 +35,11 @@ export function command(arg: string, clock: RealClock = new RealClock()): void {
 
         _threadTimer = setInterval(function() {
             if (_timerRunning) {
-                let elapsedTime: number = Date.now() - _currentCycleStartTime;
+                let elapsedTime: number = clock.currentTime() - _currentCycleStartTime;
 
                 if (elapsedTime >= SecondsInCycle * 1000 + 980) {
-                    _currentCycleStartTime = Date.now();
-                    elapsedTime = Date.now() - _currentCycleStartTime;
+                    _currentCycleStartTime = clock.currentTime()
+                    elapsedTime = clock.currentTime() - _currentCycleStartTime;
                 }
                 if (elapsedTime >= 5000 && elapsedTime < 6000 && _bodyBackgroundColor != BackgroundColorNeutral) {
                     _bodyBackgroundColor = BackgroundColorNeutral;
@@ -66,6 +66,7 @@ export function command(arg: string, clock: RealClock = new RealClock()): void {
     }
     else if (args.Url.AbsoluteUri == "command://stop/") {
         _timerRunning = false;
+        _lastRemainingTime = "";
         clearInterval(_threadTimer)
         document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, false);
 

@@ -6,9 +6,9 @@
     "precompile": "rimraf --glob src/**/*.js spec/**/*.js",
     "compile": "tsc",
     "pretest": "rimraf --glob src/*.js spec/*.js",
-    "test": "nyc --reporter=html mocha -r ts-node/register -r jsdom-global/register -r source-map-support/register spec/*.spec.ts",
+    "test": "nyc --reporter=html mocha --timeout 122000 -r ts-node/register -r jsdom-global/register -r source-map-support/register spec/*.spec.ts",
     "serve": "npx http-server -a 0.0.0.0 -p 8088 -o babystep.html",
-    "watch": "nodemon --exec nyc --reporter=text --reporter=html mocha -r ts-node/register -r jsdom-global/register -r source-map-support/register spec/*.spec.ts"
+    "watch": "nodemon --exec nyc --reporter=text --reporter=html mocha --timeout 122000 -r ts-node/register -r jsdom-global/register -r source-map-support/register spec/*.spec.ts"
   },
   "license": "MIT",
   "devDependencies": {

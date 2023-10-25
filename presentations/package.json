@@ -6,12 +6,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "reveal-md slides/ --disable-auto-open -w",
-    "slides": "reveal-md slides/ -w",
-    "build": "reveal-md slides/ --static"
+    "slides": "reveal-md ./ -w",
+    "build": "reveal-md ./ --static"
   },
   "dependencies": {
     "@fontsource/inter": "^4.5.0",
     "@fontsource/jetbrains-mono": "^4.5.0",
-    "reveal-md": "^5.5.1"
+    "got": "^13.0.0",
+    "reveal-md": "^5.5.2"
   }
 }

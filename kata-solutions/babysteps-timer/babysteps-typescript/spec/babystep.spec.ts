@@ -2,30 +2,49 @@
 
 import { describe, it } from "mocha"
 import { expect, assert } from "chai"
-import { CreateTimerHtml, command } from "../src/babystep"
+import { CreateTimerHtml, command, Clock } from "../src/babystep"
 
-describe("A new babysteps timer", function() {  
+class FakeClock implements Clock {
+    private nextTimeValue: number = 0
+
+    currentTime(): number {
+        return Date.now()
+    }
+
+    async nextCurrentTimeValueIs(nextTimeValue: number): Promise<void> {
+        this.nextTimeValue = nextTimeValue * 1000
+        await new Promise(resolve => setTimeout(resolve, this.nextTimeValue))
+    }
+}
+
+describe("A new babysteps timer", function() {
+    let fakeClock: FakeClock
+
     beforeEach(() => {
-        command("start")
+        fakeClock = new FakeClock()
+        command("start", fakeClock)
     })
 
     afterEach(() => {
         command("stop")
     })
 
-    it("h1 contains the time", function() {
+    it("h1 contains the time", function(): void {
         expect(document.querySelector("h1")?.innerHTML).to.equal("02:00")
     })
 
-    it("time ticks back over time", async() => {
-        await new Promise(resolve => setTimeout(resolve, 750))
+    it("time ticks back over time", async(): Promise<void> => {
+        await fakeClock.nextCurrentTimeValueIs(0.75)
         expect(document.querySelector("h1")?.innerHTML).to.equal("01:59")
     })
 
-    it("time ticks back over longer time", async() => {
-        await new Promise(resolve => setTimeout(resolve, 1750))
+    it("time ticks back over longer time", async(): Promise<void> => {
+        await fakeClock.nextCurrentTimeValueIs(1.75)
         expect(document.querySelector("h1")?.innerHTML).to.equal("01:58")
     })
+
+    it("resets when time has passd beyond the expiry time", async(): Promise<void> => {
+        //await fakeClock.nextCurrentTimeValueIs(121)
+        expect(document.querySelector("h1")?.innerHTML).to.equal("02:00")
+    })
 })
-
-

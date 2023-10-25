@@ -170,4 +170,140 @@ Let's obtain that value via a separate function call:
     // ...
     //
   ```
+  </details>
+
+  ## Using the `Clock` interface in our tests
+
+  After adding an `export` to the `Clock` interface, we can now use
+  it in the `beforeEach` of our tests.
+
+  <details>
+  <summary>Implementation of a `FakeClock` in our tests</summary>
+
+  Let's first start by defining a anonymous inner class:
+
+  ```typescript
+  beforeEach(() => {
+    command("start", new class implements Clock {
+      currentTime(): number {
+        return Date.now()
+      }
+    })
+  })
+  ```
+
+  This anonymous class can again be promoted to a named class
+
+  ```typescript
+  class FakeClock implements Clock {
+    currentTime(): number {
+        return Date.now()
+    }
+  }
+
+  describe("A new babysteps timer", function() {  
+    beforeEach(() => {
+        command("start", new FakeClock())
+    })
+
+    // ...
+  ```
+
+  Next, when we extend our `FakeClock` with one additional method that we
+  can use in our tests, we can set the time in our tests.
+  ```typescript
+  class FakeClock implements Clock {
+    private nextTimeValue: number = 0
+
+    currentTime(): number {
+        return Date.now()
+    }
+
+    async nextCurrentTimeValueIs(nextTimeValue: number): Promise<void> {
+        this.nextTimeValue = nextTimeValue * 1000
+        await new Promise(resolve => setTimeout(resolve, this.nextTimeValue))
+    }
+  }
+  ```
+
+  With which our tests become
+
+  ```typescript
+  describe("A new babysteps timer", function() {
+    let fakeClock: FakeClock
+
+    beforeEach(() => {
+        fakeClock = new FakeClock()
+        command("start", fakeClock)
+    })
+
+    // ...
+
+    it("time ticks back over time", async() => {
+        await fakeClock.nextCurrentTimeValueIs(0.75)
+        expect(document.querySelector("h1")?.innerHTML).to.equal("01:59")
+    })
+
+    it("time ticks back over longer time", async() => {
+        await fakeClock.nextCurrentTimeValueIs(1.75)
+        expect(document.querySelector("h1")?.innerHTML).to.equal("01:58")
+    })
+  })
+  ```
+ 
+  Finally, all `Date.now()` statements in the babysteps timer can be 
+  replaced by our `clock.currentTime()`:
+
+  ```typescript
+  export function command(arg: string, clock: RealClock = new RealClock()): void {
+    let args = { Url: { AbsoluteUri: `command://${arg}/` } }
+    console.log('called', arg, args.Url.AbsoluteUri);
+    if (args.Url.AbsoluteUri == "command://start/") {
+        document.body.innerHTML = CreateTimerHtml(getRemainingTimeCaption(0), BackgroundColorNeutral, true);
+
+        _timerRunning = true;
+        _currentCycleStartTime = clock.currentTime();
+
+        _threadTimer = setInterval(function() {
+            if (_timerRunning) {
+                let elapsedTime: number = clock.currentTime() - _currentCycleStartTime;
+
+                if (elapsedTime >= SecondsInCycle * 1000 + 980) {
+                    _currentCycleStartTime = clock.currentTime()
+                    elapsedTime = clock.currentTime() - _currentCycleStartTime;
+                }
+
+                // ...
+  ```
+  </details>
+
+## Check that the clock resets
+
+Next, we can write a test that tests that the clock resets after two minutes:
+
+<details>
+<summary>A tests for a clock reset after two minutes</summary>
+
+```typescript
+it("resets when time has passd beyond the expiry time", async(): Promise<void> => {
+    await fakeClock.nextCurrentTimeValueIs(121)
+    expect(document.querySelector("h1")?.innerHTML).to.equal("02:00")
+})
+```
+
+This fails because a system call is made to play the audio, which we
+obviously don't have available when running our tests (outside of the
+browser):
+
+```
+  2) A new babysteps timer
+       resets when time has passd beyond the expiry time:
+     Uncaught ReferenceError: Audio is not defined
+      at playSound (src/babystep.ts:2:5894)
+      at Timeout._onTimeout (src/babystep.ts:2:2566)
+      at listOnTimeout (node:internal/timers:569:17)
+      at processTimers (node:internal/timers:512:7)
+```
 </details>
+
+## Intervening the audio

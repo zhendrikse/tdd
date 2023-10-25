@@ -2,7 +2,7 @@
 title: Approval testing legacy code
 author: Zeger Hendrikse
 date: 2023-09-29
-css: custom.css
+css: css/custom.css
 highlightTheme: github-dark
 ---
 
@@ -42,7 +42,7 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
 
-![Michael Feathers](./images/legacy_code.png)
+![Michael Feathers](./images/legacy_code.png) <!-- .element width="33%" height="33%" -->
 
 > To me, legacy code is simply code without tests &#8212; [Michael Feathers](https://www.goodreads.com/book/show/44919.Working_Effectively_with_Legacy_Code)
 
