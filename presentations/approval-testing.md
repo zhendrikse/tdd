@@ -2,7 +2,7 @@
 title: Approval testing legacy code
 author: Zeger Hendrikse
 date: 2023-09-29
-css: custom.css
+css: css/custom.css
 highlightTheme: github-dark
 ---
 
