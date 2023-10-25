@@ -2,7 +2,7 @@
 title: Gilded rose kata
 author: Zeger Hendrikse
 date: 2023-09-29
-css: neon.css
+css: css/neon.css
 highlightTheme: github-dark
 ---
 
