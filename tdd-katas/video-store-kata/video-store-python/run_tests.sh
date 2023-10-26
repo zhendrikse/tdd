@@ -1,1 +1,1 @@
-PYTHONPATH=$PYTHONPATH:src:test poetry run pytest --cov
+PYTHONPATH=src poetry run pytest --cov
