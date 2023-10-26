@@ -11,6 +11,7 @@ on:
       - 'kata-solutions/bugs-zero-kata/bugs-zero-python/**'
       - 'kata-solutions/cache-kata/cache-kata-python/**'
       - 'kata-solutions/video-store-kata/video-store-python/**'
+      - 'kata-solutions/tell-dont-ask/tell-dont-ask-python/**'
       - 'kata-solutions/report-generator-kata/report-generator-python/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-python/1-golden-master/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-python/2-lift-up-conditional/**'
@@ -24,6 +25,7 @@ on:
       - 'kata-solutions/questionnaire-kata/questionnaire-python/**'
       - 'tdd-katas/report-generator-kata/report-generator-python/**'
       - 'tdd-katas/video-store-kata/video-store-python/**'
+      - 'tdd-katas/tell-dont-ask/tell-dont-ask-python/**'
       
   pull_request:
     branches: [ "master" ]
@@ -66,6 +68,13 @@ jobs:
       - name: Video store kata run tests
         working-directory: tdd-katas/video-store-kata/video-store-python
         run: ./run_tests.sh
+          
+      - name: Tell do not ask kata install dependencies
+        working-directory: tdd-katas/tell-dont-ask/tell-dont-ask-python
+        run: poetry install --no-interaction
+      - name: Tell do not ask kata run tests
+        working-directory: tdd-katas/tell-dont-ask/tell-dont-ask-python
+        run: ./run_tests.sh
         
   kata-solutions-tests:
     runs-on: ubuntu-latest
@@ -90,6 +99,13 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: true
+
+      - name: Tell do not ask kata install dependencies
+        working-directory: kata-solutions/tell-dont-ask/tell-dont-ask-python
+        run: poetry install --no-interaction
+      - name: Tell do not ask kata run tests
+        working-directory: kata-solutions/tell-dont-ask/tell-dont-ask-python
+        run: ./run_tests.sh
 
       - name: Sudoku kata install dependencies
         working-directory: kata-solutions/sudoku-kata/sudoku-python
