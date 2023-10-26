@@ -14,9 +14,9 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | Kata                                            | Ranking | Aspects                                               | Py | Java | JS | Clj | Kt | TS | C# |
 | ----------------------------------------------- | ------- | ----------------------------------------------------- |:--:|:----:|:--:|:---:|:--:|:--:|:--:|
 | [audio-player-kata](./audio-player-kata)        | M       | London vs. Detroit schools of TDD / Mocks, spies      | ✗  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
-| [babysteps-timer](./babysteps-timer)            | M       | **Refactoring front-end legacy** / Baby steps TDD     | ✗  | ✗   | ✗  | ✗   | ✗  | ✔ | ✗ |
+| [babysteps-timer](./babysteps-timer)            | H       | **Refactoring front-end legacy** / Baby steps TDD     | ✗  | ✗   | ✗  | ✗   | ✗  | ✔ | ✗ |
 | [bugs-zero-kata](./bugs-zero-kata)              | M       | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
-| [cache-kata](./cache-kata)                      | L       | TDD as if you meant it / Ports &amp; adapters         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
+| [cache-kata](./cache-kata)                      | L       | Verification of state versus behavior                 | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [christmas-tree](./christmas-tree)              | L       | Implement an algorithm in **small steps**             | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [connect-four](./connect-four)                  | H       | Implement a game in **small steps**                   | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [countries-kata](./countries-kata)              | L / M   | Ports &amp; adapters / **Refactoring** / REST / DI    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
