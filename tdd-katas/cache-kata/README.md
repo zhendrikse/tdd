@@ -15,3 +15,11 @@ The challenge of this kata is to write the cache in a
 which also means that you have to
 come up with a mechanism to deal with the expiry mechanism (and
 system time).
+
+## Considerations
+
+Martin Fowler has [this to say](https://martinfowler.com/articles/mocksArentStubs.html) 
+about the implementation of a cache and state verification:
+
+> But before I do, let me throw in an edge case. Occasionally you do run into things that are really hard to use state verification on, even if they aren't awkward collaborations. A great example of this is a cache. The whole point of a cache is that you can't tell from its state whether the cache hit or missed - this is a case where behavior verification would be the wise choice for even a hard-core classical TDDer. I'm sure there are other exceptions in both directions.
+
