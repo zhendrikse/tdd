@@ -13,6 +13,7 @@ on:
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored/**'
       - 'kata-solutions/registration-form/registration-form-javascript/**'
       - 'kata-solutions/babysteps-timer/babysteps-typescript/**'
+      - 'kata-solutions/countries-kata/countries-kata-javascript/**'
       - 'tdd-katas/babysteps-timer/babysteps-typescript/**'
   pull_request:
     branches: [ "master" ]
@@ -64,6 +65,15 @@ jobs:
         npm ci
         npm test
       working-directory: kata-solutions/babysteps-timer/babysteps-typescript
+
+    - name: Countries kata Javascript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/countries-kata/countries-kata-javascript
 
     - name: Vending machine kata Javascript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
