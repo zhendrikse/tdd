@@ -50,5 +50,17 @@ describe('A list with countries', function () {
   it('calculates the standard deviation', function() {
     expect(countryList.standard_deviation()).toBeCloseTo(2.7386, 4);
   });
+
+  it('calculates the number of standard deviations for each country', function() {
+    expect(countryList.standard_deviations_for(NETHERLANDS)).toEqual(0.73);
+  });
   
+  it('representes itself as nested array', function() {
+    expected_output = [
+       ["Belgium", "Brussels", 3, 1.10], 
+       ["Netherlands", "Amsterdam", 4, 0.73], 
+       ["Portugal", "Lissabon", 7, 0.37], 
+       ["United Kingdom", "London", 10, 1.46]]
+    expect(countryList.as_nested_array()).toEqual(expected_output);
+  });
 });

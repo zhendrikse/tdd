@@ -11,8 +11,6 @@ class CountryList {
 
   sorted_by_population() {
     return this.countryList.sort(this.compare);
-    //return this.countryList.sort(function(country1, country2) {return country1.population - country2.population});
-    //return [this.countryList[2], this.countryList[0], this.countryList[1], this.countryList[3]];
   }
 
   sumOf(anArray) {
@@ -32,8 +30,18 @@ class CountryList {
       return 0;
 
     var average = this.average_population();
-    var diviationList = this.countryList.map(country => (country.population - average) * (country.population - average));
-    return Math.sqrt(this.sumOf(diviationList) / this.countryList.length)
+    var diviationsList = this.countryList.map(country => (country.population - average) * (country.population - average));
+    return Math.sqrt(this.sumOf(diviationsList) / this.countryList.length)
+  }
+
+  standard_deviations_for(country) {
+    var standardDeviations = Math.abs(this.average_population() - country.population) / this.standard_deviation();
+    return Math.round((standardDeviations + Number.EPSILON) * 100) / 100
+  }
+
+  as_nested_array() {
+    var sortedCountries = this.sorted_by_population();
+    return sortedCountries.map(country => [country.name, country.capital, country.population, this.standard_deviations_for(country)]); 
   }
 }
 
