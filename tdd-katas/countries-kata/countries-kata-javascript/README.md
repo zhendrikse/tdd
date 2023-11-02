@@ -267,24 +267,151 @@ it would be convenient if the list with calculated standard deviations from the
 main was/is sorted by population size by default. 
 
 <details>
-  <summary>A test for the calculation of the standard deviation for population size</summary>
+  <summary>A test for the standard deviation count for a country</summary>
 
-  ```python
-  def test_standard_deviations_per_country(self, country_list):
-      assert_that(country_list.standard_deviations_per_country(), equal_to([1.10, 0.73, 0.37, 1.46]))
+  ```javascript
+  it('calculates the number of standard deviations for each country', () => {
+    expect(countryList.standard_deviations_for(NETHERLANDS)).toEqual(0.73);
+  });
   ```
 
 <details>
   <summary>Implementation that makes the test pass</summary>
 
-  ```python
-  def standard_deviations_per_country(self):
-    standard_deviation = self.standard_deviation()
-    return [
-      round(abs(self.average_population() - country.population) / standard_deviation, 2) 
-      for country in self.sorted_by_population()]
+  ```javascript
+  standard_deviations_for(country) {
+    var standardDeviations = Math.abs(this.average_population() - country.population) / this.standard_deviation();
+    return Math.round((standardDeviations + Number.EPSILON) * 100) / 100
+  }
   ```
 </details>
 </details>
 
 ## Preparations for input and output
+
+In Javascript, a call to an external REST API is asynchronous by definition.
+
+This means that if we want to make a call to the countries endpoint to fetch
+the country data to initialize our country list, i.e. in the constructor, 
+the constructor becomes asynchronous.
+
+This poses a challenge that is described in 
+[The proper way to write async constructors in Javascript](https://dev.to/somedood/the-proper-way-to-write-async-constructors-in-javascript-1o8c). We opt here for the last (and best) option described in
+that post, namely to initialize the class in an `async` function like so:
+
+```javascript
+async function main() {
+  let countryList = await CountryList.create_instance();
+  countryList.to_csv();
+}
+```
+
+This way, we _first_ wait for the `countryList` instance to
+be populated with the country data coming from the country data
+REST endpoint, _before_ continuing with our calls and/or operations on it.
+
+A `countryList` instance from the `CountryList` class is then
+created by invoking a static factory method. 
+
+```javascript
+class CountryList {
+// @private
+constructor(inputPort, outputPort) {
+  this.countryList = inputPort.load_all();
+  this.outputPort = outputPort;
+}
+
+static async create_instance(inputPort = RestCountriesInputAdapter, outputPort = new CsvOutputAdapter()) {
+  return new CountryList(await inputPort.instance(), outputPort);
+}
+```
+
+Unfortunately, Javascript does not have a means to limit the
+access to a constructor to `private`, so we must rely on the 
+instantiating class to create instances using the static
+`create_instance()` method.
+
+Let's first see how this works out in our tests.
+
+## Stub input adapters in our tests
+
+First, we define a stub to provide the `CountryList` with 
+an empty list of countries.
+
+<details>
+  <summary>Stub for empty country list</summary>
+
+  ```javascript
+  class EmptyCountriesInputAdapterStub {
+    load_all() {
+      return []; 
+    }
+
+    static async instance() {
+      return new EmptyCountriesInputAdapterStub();
+    }
+  }
+  ```
+
+  This is then used for the set of tests that are based on an
+  empty list:
+
+  ```javascript
+  describe('A list without countries (empty list)', () => {
+    let countryList;
+
+    beforeEach(async () => {
+      countryList = await CountryList.create_instance(EmptyCountriesInputAdapterStub, new MockCountriesOutputAdapter());
+    });
+
+    it('should sort the empty list', () => {
+      expect(countryList.sorted_by_population()).toEqual([]);
+    });
+
+    // ...
+  ```
+</details>
+
+
+Next, we define a stub to provide the `CountryList` with 
+an empty list of countries.
+
+<details>
+  <summary>Stub for populated country list</summary>
+
+```javascript
+const NETHERLANDS = new Country("Netherlands", "Amsterdam", 4)
+const PORTUGAL = new Country("Portugal", "Lissabon", 7)
+const BELGIUM = new Country("Belgium", "Brussels", 3)
+const UNITED_KINGDOM = new Country("United Kingdom", "London", 10)
+
+const COUNTRY_LIST_FOR_TESTING = [NETHERLANDS, PORTUGAL, BELGIUM, UNITED_KINGDOM]
+
+class CountriesInputAdapterStub {
+  load_all() {
+    return COUNTRY_LIST_FOR_TESTING; 
+  }
+
+  static async instance() {
+    return new CountriesInputAdapterStub();
+  }
+}
+```
+
+  This is then used for the set of tests that are based on an
+  populated list:
+
+  ```javascript
+  describe('A list with countries', () => {
+    let countryList;
+
+    beforeEach(async () => {
+      countryList = await CountryList.create_instance(CountriesInputAdapterStub, new MockCountriesOutputAdapter());
+    });
+
+
+    it('should sort the countries by population size', () => {
+    // ...
+  ```
+</details>
+
