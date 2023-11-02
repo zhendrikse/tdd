@@ -5,6 +5,8 @@ Please read the general [introduction to the countries kata](../README.md) first
 ## References
 
 - [Hexagonal architecture in Javascript](https://picostitch.com/tidbits/2021/02/hexagonal-architecture-in-javascript/)
+- [Hexagonal architecture in JavaScript applications — and how it relates to Flux](https://medium.com/@Killavus/hexagonal-architecture-in-javascript-applications-and-how-it-relates-to-flux-349616d1268d#.ik8250i7s)
+- [Interfaces in Java using Flow](https://flow.org/en/docs/types/interfaces)
 
 # Getting started
 

@@ -1,5 +1,5 @@
 const { CountryList } = require('../src/CountryList');
-const { Country } = require('../src/Country')
+const { Country } = require('../src/Country');
 
 const NETHERLANDS = new Country("Netherlands", "Amsterdam", 4)
 const PORTUGAL = new Country("Portugal", "Lissabon", 7)
@@ -20,11 +20,27 @@ class CountriesInputAdapterStub {
   }
 }
 
+class MockCountriesOutputAdapter {
+  write(countrList) {
+    let csvContent = "";
+
+    countrList.forEach(function(rowArray) {
+      let row = rowArray.join(",");
+      csvContent += row + "\r\n";
+    });
+
+    expect(csvContent).toEqual("Belgium,Brussels,3,1.1\r\n" +
+                               "Netherlands,Amsterdam,4,0.73\r\n" +
+                               "Portugal,Lissabon,7,0.37\r\n" +
+                               "United Kingdom,London,10,1.46\r\n");
+  }
+}
+
 describe('A list without countries (empty list)', function () {
   let countryList;
 
   beforeEach(function() {
-    countryList = new CountryList(new EmptyCountriesInputAdapterStub());
+    countryList = new CountryList(new EmptyCountriesInputAdapterStub(), new MockCountriesOutputAdapter());
   });
 
   it('should sort the empty list', function () {
@@ -45,7 +61,7 @@ describe('A list with countries', function () {
   let countryList;
 
   beforeEach(function() {
-    countryList = new CountryList(new CountriesInputAdapterStub());
+    countryList = new CountryList(new CountriesInputAdapterStub(), new MockCountriesOutputAdapter());
   });
 
   it('should sort the countries by population size', function () {
@@ -75,4 +91,8 @@ describe('A list with countries', function () {
        ["United Kingdom", "London", 10, 1.46]]
     expect(countryList.as_nested_array()).toEqual(expected_output);
   });
+
+  it('writes the country data to CSV', function() {
+    countryList.to_csv();
+  })
 });

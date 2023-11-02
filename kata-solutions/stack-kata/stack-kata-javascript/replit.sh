@@ -1,1 +1,0 @@
-npx nodemon --exec npm test

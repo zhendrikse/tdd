@@ -1,14 +1,15 @@
 {
   "type": "module",
   "dependencies": {
-    "jasmine": "^5.1.0",
-    "nodemon": "^3.0.1"
   },
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "watch": "npx nodemon --exec npm test"
   },
   "devDependencies": {
     "jasmine-browser-runner": "^2.1.0",
-    "jasmine-core": "^5.1.0"
+    "jasmine-core": "^5.1.0",
+    "jasmine": "^5.1.0",
+    "nodemon": "^3.0.1"
   }
 }
