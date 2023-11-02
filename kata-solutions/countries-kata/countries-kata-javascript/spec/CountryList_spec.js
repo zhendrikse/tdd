@@ -8,11 +8,23 @@ const UNITED_KINGDOM = new Country("United Kingdom", "London", 10)
 
 const COUNTRY_LIST_FOR_TESTING = [NETHERLANDS, PORTUGAL, BELGIUM, UNITED_KINGDOM]
 
+class EmptyCountriesInputAdapterStub {
+  load_all() {
+    return [];
+  }
+}
+
+class CountriesInputAdapterStub {
+  load_all() {
+    return COUNTRY_LIST_FOR_TESTING;
+  }
+}
+
 describe('A list without countries (empty list)', function () {
   let countryList;
 
   beforeEach(function() {
-    countryList = new CountryList();
+    countryList = new CountryList(new EmptyCountriesInputAdapterStub());
   });
 
   it('should sort the empty list', function () {
@@ -33,7 +45,7 @@ describe('A list with countries', function () {
   let countryList;
 
   beforeEach(function() {
-    countryList = new CountryList(COUNTRY_LIST_FOR_TESTING);
+    countryList = new CountryList(new CountriesInputAdapterStub());
   });
 
   it('should sort the countries by population size', function () {

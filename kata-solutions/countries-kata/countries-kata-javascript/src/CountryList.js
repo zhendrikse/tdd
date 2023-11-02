@@ -1,8 +1,14 @@
 'use strict';
 
+class RestCountriesInputAdapter {
+  load_all() {
+    return [];
+  }
+}
+
 class CountryList {
-  constructor(countryList = []) {
-    this.countryList = countryList;
+  constructor(inputPort = new RestCountriesInputAdapter()) {
+    this.countryList = inputPort.load_all();
   }
 
   compare(country1, country2) {
