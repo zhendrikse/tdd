@@ -44,28 +44,28 @@ class MockCountriesOutputAdapter {
   }
 }
 
-describe('A list without countries (empty list)', function () {
+describe('A list without countries (empty list)', () => {
   let countryList;
 
   beforeEach(async () => {
     countryList = await CountryList.create_instance(EmptyCountriesInputAdapterStub, new MockCountriesOutputAdapter());
   });
 
-  it('should sort the empty list', async function () {
+  it('should sort the empty list', () => {
     expect(countryList.sorted_by_population()).toEqual([]);
   });
 
-  it('calculates the average population', function() {
+  it('calculates the average population', () => {
     expect(countryList.average_population()).toEqual(0);
   });
 
-  it('calculates the standard deviation', function() {
+  it('calculates the standard deviation', () => {
     expect(countryList.standard_deviation()).toEqual(0);
   });
 });
 
 
-describe('A list with countries', function () {
+describe('A list with countries', () => {
   let countryList;
 
   beforeEach(async () => {
@@ -73,26 +73,26 @@ describe('A list with countries', function () {
   });
 
 
-  it('should sort the countries by population size', function () {
+  it('should sort the countries by population size', () => {
     expect(countryList.sorted_by_population()[0]).toEqual(BELGIUM);
     expect(countryList.sorted_by_population()[1]).toEqual(NETHERLANDS);
     expect(countryList.sorted_by_population()[2]).toEqual(PORTUGAL);
     expect(countryList.sorted_by_population()[3]).toEqual(UNITED_KINGDOM);
   });
 
-  it('calculates the average population', function() {
+  it('calculates the average population', () => {
     expect(countryList.average_population()).toEqual(6);
   });
 
-  it('calculates the standard deviation', function() {
+  it('calculates the standard deviation', () => {
     expect(countryList.standard_deviation()).toBeCloseTo(2.7386, 4);
   });
 
-  it('calculates the number of standard deviations for each country', function() {
+  it('calculates the number of standard deviations for each country', () => {
     expect(countryList.standard_deviations_for(NETHERLANDS)).toEqual(0.73);
   });
   
-  it('representes itself as nested array', function() {
+  it('representes itself as nested array', () => {
     expected_output = [
        ["Belgium", "Brussels", 3, 1.10], 
        ["Netherlands", "Amsterdam", 4, 0.73], 
@@ -101,7 +101,7 @@ describe('A list with countries', function () {
     expect(countryList.as_nested_array()).toEqual(expected_output);
   });
 
-  it('writes the country data to CSV', function() {
+  it('writes the country data to CSV', () => {
     countryList.to_csv();
   })
 });
