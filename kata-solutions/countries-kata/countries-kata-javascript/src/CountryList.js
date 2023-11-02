@@ -3,34 +3,7 @@ const fs = require('fs');
 
 const { Country } = require('../src/Country');
 
-const userAction = async () => {
-  const response = fetch('https://restcountries.com/v3.1/all?fields=name,capital,population,cioc,region');
-  const responseAsJson = await response.json();
-  let restCountries = JSON.parse(decodeURIComponent(responseAsJson));
-  let countries = restCountries.map(country => new Country(country.name.common, country.capital[0], country.population));
-  return countries;
-}
-
-const RESPONSE = "[{\"name\":{\"common\":\"Turks and Caicos Islands\",\"official\":\"Turks and Caicos Islands\",\"nativeName\":{\"eng\":{\"official\":\"Turks and Caicos Islands\",\"common\":\"Turks and Caicos Islands\"}}},\"cioc\":\"\",\"capital\":[\"Cockburn Town\"],\"region\":\"Americas\",\"population\":38718}" +
-  ",{\"name\":{\"common\":\"Nigeria\",\"official\":\"Federal Republic of Nigeria\",\"nativeName\":{\"eng\":{\"official\":\"Federal Republic of Nigeria\",\"common\":\"Nigeria\"}}},\"cioc\":\"NGR\",\"capital\":[\"Abuja\"],\"region\":\"Africa\",\"population\":206139587}]";
-
-
-class RestCountriesInputAdapter {
-  load_all() {
-    console.log("Start")
-
-    async(userAction) => {
-      console.log("Voer request uit");
-      console.log(await userAction());
-    }
-
-    console.log("Done")
-
-    let restCountries1 = JSON.parse(decodeURIComponent(RESPONSE));
-    let countries1 = restCountries1.map(country => new Country(country.name.common, country.capital[0], country.population));
-    return countries1;
-  }
-}
+const REST_ENDPOINT = 'https://restcountries.com/v3.1/all?fields=name,capital,population,cioc,region';
 
 class CountriesOutputAdapter {
   write(countrList) {
@@ -52,6 +25,17 @@ class CountryList {
   constructor(inputPort = new RestCountriesInputAdapter(), outputPort = new CountriesOutputAdapter()) {
     this.countryList = inputPort.load_all();
     this.outputPort = outputPort;
+  }
+
+  static async create_instance() {
+    const response = await fetch(REST_ENDPOINT, {
+      method: 'GET'
+    });
+    const responseAsJson = await response.json();
+    let restCountries = JSON.parse(JSON.stringify(responseAsJson));
+    let countries = restCountries.map(country => new Country(country.name.common, country.capital[0], country.population));
+    
+    return new CountryList(new class { load_all() { return countries } }, new CountriesOutputAdapter());
   }
 
   compare(country1, country2) {
@@ -103,7 +87,7 @@ module.exports = {
 }
 
 async function main() {
-  let countryList = new CountryList()
+  let countryList = await CountryList.create_instance();
   countryList.to_csv();
 }
 
