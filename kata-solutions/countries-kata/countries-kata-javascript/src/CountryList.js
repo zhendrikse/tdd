@@ -21,21 +21,36 @@ class CountriesOutputAdapter {
   }
 }
 
-class CountryList {
-  constructor(inputPort = new RestCountriesInputAdapter(), outputPort = new CountriesOutputAdapter()) {
-    this.countryList = inputPort.load_all();
-    this.outputPort = outputPort;
+class RestCountriesInputAdapter {
+  #countries = [];
+
+  constructor(countries) {
+    this.#countries = countries;
   }
 
-  static async create_instance() {
+  load_all() {
+    return this.#countries; 
+  }
+
+  static async instance() {
     const response = await fetch(REST_ENDPOINT, {
       method: 'GET'
     });
     const responseAsJson = await response.json();
     let restCountries = JSON.parse(JSON.stringify(responseAsJson));
-    let countries = restCountries.map(country => new Country(country.name.common, country.capital[0], country.population));
-    
-    return new CountryList(new class { load_all() { return countries } }, new CountriesOutputAdapter());
+    return new RestCountriesInputAdapter(restCountries.map(country => new Country(country.name.common, country.capital[0], country.population)));
+  }
+}
+
+class CountryList {
+  // @private
+  constructor(inputPort, outputPort) {
+    this.countryList = inputPort.load_all();
+    this.outputPort = outputPort;
+  }
+
+  static async create_instance(inputPort = RestCountriesInputAdapter, outputPort = new CountriesOutputAdapter()) {
+    return new CountryList(await inputPort.instance(), outputPort);
   }
 
   compare(country1, country2) {

@@ -10,13 +10,21 @@ const COUNTRY_LIST_FOR_TESTING = [NETHERLANDS, PORTUGAL, BELGIUM, UNITED_KINGDOM
 
 class EmptyCountriesInputAdapterStub {
   load_all() {
-    return [];
+    return []; 
+  }
+
+  static async instance() {
+    return new EmptyCountriesInputAdapterStub();
   }
 }
 
 class CountriesInputAdapterStub {
   load_all() {
-    return COUNTRY_LIST_FOR_TESTING;
+    return COUNTRY_LIST_FOR_TESTING; 
+  }
+
+  static async instance() {
+    return new CountriesInputAdapterStub();
   }
 }
 
@@ -39,11 +47,11 @@ class MockCountriesOutputAdapter {
 describe('A list without countries (empty list)', function () {
   let countryList;
 
-  beforeEach(function() {
-    countryList = new CountryList(new EmptyCountriesInputAdapterStub(), new MockCountriesOutputAdapter());
+  beforeEach(async () => {
+    countryList = await CountryList.create_instance(EmptyCountriesInputAdapterStub, new MockCountriesOutputAdapter());
   });
 
-  it('should sort the empty list', function () {
+  it('should sort the empty list', async function () {
     expect(countryList.sorted_by_population()).toEqual([]);
   });
 
@@ -60,9 +68,10 @@ describe('A list without countries (empty list)', function () {
 describe('A list with countries', function () {
   let countryList;
 
-  beforeEach(function() {
-    countryList = new CountryList(new CountriesInputAdapterStub(), new MockCountriesOutputAdapter());
+  beforeEach(async () => {
+    countryList = await CountryList.create_instance(CountriesInputAdapterStub, new MockCountriesOutputAdapter());
   });
+
 
   it('should sort the countries by population size', function () {
     expect(countryList.sorted_by_population()[0]).toEqual(BELGIUM);
