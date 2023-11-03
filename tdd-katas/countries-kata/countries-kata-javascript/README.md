@@ -296,7 +296,7 @@ the country data to initialize our country list, i.e. in the constructor,
 the constructor becomes asynchronous.
 
 This poses a challenge that is described in 
-[The proper way to write async constructors in Javascript](https://dev.to/somedood/the-proper-way-to-write-async-constructors-in-javascript-1o8c). We opt here for the last (and best) option described in
+[the proper way to write async constructors in Javascript](https://dev.to/somedood/the-proper-way-to-write-async-constructors-in-javascript-1o8c). We opt here for the last (and best) option described in
 that post, namely to initialize the class in an `async` function like so:
 
 ```javascript
@@ -415,3 +415,90 @@ class CountriesInputAdapterStub {
   ```
 </details>
 
+## Countries REST-based input adapter
+
+We use the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) 
+to get the countries data from the REST endpoint. 
+
+<details>
+  <summary>Implementation of the REST-based adapter</summary>
+
+```javascript
+const REST_ENDPOINT = 'https://restcountries.com/v3.1/all?fields=name,capital,population,cioc,region';
+
+class RestCountriesInputAdapter {
+  #countries = [];
+
+  constructor(countries) {
+    this.#countries = countries;
+  }
+
+  load_all() {
+    return this.#countries; 
+  }
+
+  static async instance() {
+    const response = await fetch(REST_ENDPOINT, {
+      method: 'GET'
+    });
+    const responseAsJson = await response.json();
+    let restCountries = JSON.parse(JSON.stringify(responseAsJson));
+    return new RestCountriesInputAdapter(restCountries.map(country => new Country(country.name.common, country.capital[0], country.population)));
+  }
+}
+```
+</details>
+
+## CSV output adapter
+
+The output adapter doesn't necessarily need to be asynchronous,
+as in addition to `fs.writeFile()` there is a
+`fs.writeFileSync()` function available.
+
+<details>
+  <summary>CSV output adapter</summary>
+
+```javascript
+class CsvOutputAdapter {
+  write(countrList) {
+    let csvContent = "";
+
+    countrList.forEach(function (rowArray) {
+      let row = rowArray.join(",");
+      csvContent += row + "\r\n";
+    });
+
+    fs.writeFileSync('countries.csv', csvContent, (err) => {
+      if (err) throw err;
+      console.log('countries.csv saved.');
+    });
+  }
+}
+```
+</details>
+
+In our tests, we can inject a mock that verifies the contents
+that is normally written to a (CSV) file.
+
+<details>
+  <summary>A mock output adapter</summary>
+
+```javascript
+
+class MockCountriesOutputAdapter {
+  write(countrList) {
+    let csvContent = "";
+
+    countrList.forEach(function(rowArray) {
+      let row = rowArray.join(",");
+      csvContent += row + "\r\n";
+    });
+
+    expect(csvContent).toEqual("Belgium,Brussels,3,1.1\r\n" +
+                               "Netherlands,Amsterdam,4,0.73\r\n" +
+                               "Portugal,Lissabon,7,0.37\r\n" +
+                               "United Kingdom,London,10,1.46\r\n");
+  }
+}
+```
+</details>
