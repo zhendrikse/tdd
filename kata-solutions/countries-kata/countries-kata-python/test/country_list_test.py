@@ -50,7 +50,7 @@ class MockCountriesOutputAdapter:
         with patch("ports_adapters.open", open_mock, create=True):
             self._adapter_under_test.export(countries_dto)
 
-        open_mock.assert_called_with("countries.csv", "w")
+        open_mock.assert_called_with("countries.csv", "w", encoding="utf-8")
         open_mock.return_value.write.assert_has_calls([
             call(BELGIUM.as_string() + ',1.1\r\n'),
             call(NETHERLANDS.as_string() + ',0.73\r\n'),
