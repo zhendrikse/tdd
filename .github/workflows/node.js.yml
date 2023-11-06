@@ -15,6 +15,7 @@ on:
       - 'kata-solutions/babysteps-timer/babysteps-typescript/**'
       - 'kata-solutions/countries-kata/countries-kata-javascript/**'
       - 'tdd-katas/babysteps-timer/babysteps-typescript/**'
+      - 'tdd-katas/video-store-kata/video-store-javascript/**'
   pull_request:
     branches: [ "master" ]
 
@@ -29,6 +30,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Video store kata Javascript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: tdd-katas/video-store-kata/video-store-javascript
+
     - name: Babysteps timer kata typescript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
