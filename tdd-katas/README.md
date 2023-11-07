@@ -41,7 +41,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [tire-pressure-kata](./tire-pressure-kata)      | L       | Ports &amp; adapters / **Testable design** / DI       | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ | 
 | [train-reservation](./train-reservation)        | M       | Example mapping / Double loop TDD / Test doubles      | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ | 
 | [vending-machine](./vending-machine)            | L / M   | **Small steps** / Code smells and **refactoring**     | ✔  | ✔   | ✔  | ✗   | ✔  | ✔ | ✔ |
-| [video-store-kata](./video-store-kata)          | L       | **Legacy code** / Code smells and **refactoring**     | ✔  | ✔   | ✗  | ✗   | ✗  | ✗ | ✗ |
+| [video-store-kata](./video-store-kata)          | L       | **Legacy code** / Code smells and **refactoring**     | ✔  | ✔   | ✔  | ✗   | ✗  | ✔ | ✗ |
 
 ## License
   
