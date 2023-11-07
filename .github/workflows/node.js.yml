@@ -14,6 +14,7 @@ on:
       - 'kata-solutions/registration-form/registration-form-javascript/**'
       - 'kata-solutions/babysteps-timer/babysteps-typescript/**'
       - 'kata-solutions/countries-kata/countries-kata-javascript/**'
+      - 'kata-solutions/countries-kata/countries-kata-typescript/**'
       - 'tdd-katas/babysteps-timer/babysteps-typescript/**'
       - 'tdd-katas/video-store-kata/video-store-javascript/**'
       - 'tdd-katas/video-store-kata/video-store-typescript/**'
@@ -85,6 +86,15 @@ jobs:
         npm ci
         npm test
       working-directory: kata-solutions/babysteps-timer/babysteps-typescript
+
+    - name: Countries kata Typescript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/countries-kata/countries-kata-typescript
 
     - name: Countries kata Javascript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
