@@ -1,32 +1,36 @@
 'use strict';
 
-const { CsvOutputAdapter } = require('./CsvOutputAdapter')
-const { RestCountriesInputAdapter } = require('./RestCountriesInputAdapter')
+import { InputPort, OutputPort } from "./Ports";
+import { Country} from "./Country";
+import { RestCountriesInputAdapter } from "./RestCountriesInputAdapter";
+import { CsvOutputAdapter } from "./CsvOutputAdapter";
 
-class CountryList {
-  // @private
-  constructor(inputPort, outputPort) {
+export class CountryList {
+  private countryList: Country[];
+  private outputPort: OutputPort;
+  
+   private constructor(inputPort: InputPort, outputPort: OutputPort) {
     this.countryList = inputPort.load_all();
     this.outputPort = outputPort;
   }
 
-  static async create_instance(inputPort = RestCountriesInputAdapter, outputPort = CsvOutputAdapter) {
-    return new CountryList(await inputPort.instance(), outputPort);
+  static async create_instance(inputPort: InputPort, outputPort: OutputPort = new CsvOutputAdapter()): Promise<CountryList> {
+     return new CountryList(inputPort, outputPort);
   }
 
-  compare(country1, country2) {
+  public compare(country1: Country, country2: Country): number {
     return country1.population - country2.population
   }
 
-  sorted_by_population() {
+  public sorted_by_population(): Country[] {
     return this.countryList.sort(this.compare);
   }
 
-  sumOf(anArray) {
+  public sumOf(anArray: number[]): number {
     return anArray.reduce((total, item) => total + item, 0);
   }
 
-  average_population() {
+  public average_population() {
     if (!this.countryList.length)
       return 0;
 
@@ -34,7 +38,7 @@ class CountryList {
     return totalPopulation / this.countryList.length;
   }
 
-  standard_deviation() {
+  public standard_deviation(): number {
     if (!this.countryList.length)
       return 0;
 
@@ -43,14 +47,14 @@ class CountryList {
     return Math.sqrt(this.sumOf(diviationsList) / this.countryList.length)
   }
 
-  standard_deviations_for(country) {
+  public standard_deviations_for(country: Country): number {
     var standardDeviations = Math.abs(this.average_population() - country.population) / this.standard_deviation();
     return Math.round((standardDeviations + Number.EPSILON) * 100) / 100
   }
 
-  as_nested_array() {
+  public as_nested_array(): string[][] {
     var sortedCountries = this.sorted_by_population();
-    return sortedCountries.map(country => [country.name, country.capital, country.population, this.standard_deviations_for(country)]);
+    return sortedCountries.map(country => [country.name, country.capital, String(country.population), String(this.standard_deviations_for(country))]);
   }
 
   to_csv() {
@@ -58,12 +62,9 @@ class CountryList {
   }
 }
 
-module.exports = {
-  CountryList: CountryList
-}
 
 async function main() {
-  let countryList = await CountryList.create_instance();
+  let countryList = await CountryList.create_instance(await RestCountriesInputAdapter.instance());
   countryList.to_csv();
 }
 

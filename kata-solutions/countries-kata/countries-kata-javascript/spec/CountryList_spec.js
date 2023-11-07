@@ -29,7 +29,7 @@ class CountriesInputAdapterStub {
 }
 
 class MockCountriesOutputAdapter {
-  write(countrList) {
+  static write(countrList) {
     let csvContent = "";
 
     countrList.forEach(function(rowArray) {
@@ -48,7 +48,7 @@ describe('A list without countries (empty list)', () => {
   let countryList;
 
   beforeEach(async () => {
-    countryList = await CountryList.create_instance(EmptyCountriesInputAdapterStub, new MockCountriesOutputAdapter());
+    countryList = await CountryList.create_instance(EmptyCountriesInputAdapterStub, MockCountriesOutputAdapter);
   });
 
   it('should sort the empty list', () => {
@@ -69,7 +69,7 @@ describe('A list with countries', () => {
   let countryList;
 
   beforeEach(async () => {
-    countryList = await CountryList.create_instance(CountriesInputAdapterStub, new MockCountriesOutputAdapter());
+    countryList = await CountryList.create_instance(CountriesInputAdapterStub, MockCountriesOutputAdapter);
   });
 
 
