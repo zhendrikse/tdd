@@ -3,22 +3,27 @@ from customer import Customer
 from rental import Rental
 from movie import Movie, MovieType
 
+
 @pytest.fixture
 def customer():
-  return  Customer("Fred")
+    return Customer("Fred")
+
 
 def testSingleNewReleaseStatement(customer):
     customer.add_rental(Rental(Movie("The Cell", MovieType.NEW_RELEASE), 3))
     assert "Rental Record for Fred\n\tThe Cell\t9.0\nYou owed 9.0\nYou earned 2 frequent renter points\n" == customer.statement()
 
+
 def test_DualNewReleaseStatement(customer):
     customer.add_rental(Rental(Movie("The Cell", MovieType.NEW_RELEASE), 3))
     customer.add_rental(Rental(Movie("The Tigger Movie", MovieType.NEW_RELEASE), 3))
     assert "Rental Record for Fred\n\tThe Cell\t9.0\n\tThe Tigger Movie\t9.0\nYou owed 18.0\nYou earned 4 frequent renter points\n" == customer.statement()
-  
+
+
 def test_SingleChildrensStatement(customer):
     customer.add_rental(Rental(Movie("The Tigger Movie", MovieType.CHILDRENS), 3))
     assert "Rental Record for Fred\n\tThe Tigger Movie\t1.5\nYou owed 1.5\nYou earned 1 frequent renter points\n" == customer.statement()
+
 
 def test_MultipleRegularStatement(customer):
     customer.add_rental(Rental(Movie("Plan 9 from Outer Space", MovieType.REGULAR), 1))
