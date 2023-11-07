@@ -10,7 +10,7 @@ class CountryList {
     this.outputPort = outputPort;
   }
 
-  static async create_instance(inputPort = RestCountriesInputAdapter, outputPort = new CsvOutputAdapter()) {
+  static async create_instance(inputPort = RestCountriesInputAdapter, outputPort = CsvOutputAdapter) {
     return new CountryList(await inputPort.instance(), outputPort);
   }
 

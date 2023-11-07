@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 class CsvOutputAdapter {
-    write(countrList) {
+    static write(countrList) {
       let csvContent = "";
   
       countrList.forEach(function (rowArray) {

@@ -328,7 +328,7 @@ constructor(inputPort, outputPort) {
   this.outputPort = outputPort;
 }
 
-static async create_instance(inputPort = RestCountriesInputAdapter, outputPort = new CsvOutputAdapter()) {
+static async create_instance(inputPort = RestCountriesInputAdapter, outputPort = CsvOutputAdapter {
   return new CountryList(await inputPort.instance(), outputPort);
 }
 ```
@@ -368,7 +368,7 @@ an empty list of countries.
     let countryList;
 
     beforeEach(async () => {
-      countryList = await CountryList.create_instance(EmptyCountriesInputAdapterStub, new MockCountriesOutputAdapter());
+      countryList = await CountryList.create_instance(EmptyCountriesInputAdapterStub, MockCountriesOutputAdapter;
     });
 
     it('should sort the empty list', () => {
@@ -413,7 +413,7 @@ class CountriesInputAdapterStub {
     let countryList;
 
     beforeEach(async () => {
-      countryList = await CountryList.create_instance(CountriesInputAdapterStub, new MockCountriesOutputAdapter());
+      countryList = await CountryList.create_instance(CountriesInputAdapterStub, MockCountriesOutputAdapter);
     });
 
 
@@ -467,7 +467,7 @@ as in addition to `fs.writeFile()` there is a
 
 ```javascript
 class CsvOutputAdapter {
-  write(countrList) {
+  static write(countrList) {
     let csvContent = "";
 
     countrList.forEach(function (rowArray) {
@@ -493,7 +493,7 @@ that is normally written to a (CSV) file.
 ```javascript
 
 class MockCountriesOutputAdapter {
-  write(countrList) {
+  static write(countrList) {
     let csvContent = "";
 
     countrList.forEach(function(rowArray) {
