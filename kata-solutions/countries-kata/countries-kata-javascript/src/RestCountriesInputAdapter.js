@@ -10,7 +10,7 @@ class RestCountriesInputAdapter {
   }
 
   load_all() {
-    return this.#countries; 
+    return this.#countries;
   }
 
   static async instance() {
@@ -22,7 +22,7 @@ class RestCountriesInputAdapter {
     return new RestCountriesInputAdapter(restCountries.map(country => new Country(country.name.common, country.capital[0], country.population)));
   }
 }
-  
+
 module.exports = {
-    RestCountriesInputAdapter: RestCountriesInputAdapter
+  RestCountriesInputAdapter: RestCountriesInputAdapter
 }
