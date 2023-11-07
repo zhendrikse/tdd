@@ -1,18 +1,19 @@
 from movie import MovieType
+from rental import Rental
 
 
 class Customer:
-    def __init__(self, name):
+    def __init__(self, name: str):
         self._name = name
         self._rentals = []
 
-    def add_rental(self, rental):
+    def add_rental(self, rental: Rental) -> None:
         self._rentals.append(rental)
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self._name
 
-    def statement(self):
+    def statement(self) -> str:
         total_amount = 0
         frequent_renter_points = 0
         result = "Rental Record for " + self.get_name() + "\n"
