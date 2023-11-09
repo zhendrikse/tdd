@@ -1,6 +1,6 @@
 import decimal
 
-from src.domain.OrderStatus import OrderStatus
+from ..domain.OrderStatus import OrderStatus
 
 
 class Order(object):

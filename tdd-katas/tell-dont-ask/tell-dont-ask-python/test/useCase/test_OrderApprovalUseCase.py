@@ -9,7 +9,7 @@ from src.useCase.OrderApprovalRequest import OrderApprovalRequest
 from src.useCase.OrderApprovalUseCase import OrderApprovalUseCase
 from src.useCase.RejectedOrderCannotBeApprovedError import RejectedOrderCannotBeApprovedError
 from src.useCase.ShippedOrdersCannotBeChangedError import ShippedOrdersCannotBeChangedError
-from test.doubles.StubOrderRepository import StubOrderRepository
+from ..doubles.StubOrderRepository import StubOrderRepository
 
 
 class TestOrderApprovalUseCase(unittest.TestCase):

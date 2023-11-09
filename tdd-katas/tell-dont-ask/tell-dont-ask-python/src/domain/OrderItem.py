@@ -1,6 +1,6 @@
 import decimal
 
-from src.domain.Product import Product
+from ..domain.Product import Product
 
 
 class OrderItem(object):

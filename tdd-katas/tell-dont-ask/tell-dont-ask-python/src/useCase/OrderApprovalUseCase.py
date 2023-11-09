@@ -1,9 +1,9 @@
-from src.domain.OrderStatus import OrderStatus
-from src.repository.OrderRepository import OrderRepository
-from src.useCase.ApprovedOrderCannotBeRejectedError import ApprovedOrderCannotBeRejectedError
-from src.useCase.OrderApprovalRequest import OrderApprovalRequest
-from src.useCase.RejectedOrderCannotBeApprovedError import RejectedOrderCannotBeApprovedError
-from src.useCase.ShippedOrdersCannotBeChangedError import ShippedOrdersCannotBeChangedError
+from ..domain.OrderStatus import OrderStatus
+from ..repository.OrderRepository import OrderRepository
+from ..useCase.ApprovedOrderCannotBeRejectedError import ApprovedOrderCannotBeRejectedError
+from ..useCase.OrderApprovalRequest import OrderApprovalRequest
+from ..useCase.RejectedOrderCannotBeApprovedError import RejectedOrderCannotBeApprovedError
+from ..useCase.ShippedOrdersCannotBeChangedError import ShippedOrdersCannotBeChangedError
 
 
 class OrderApprovalUseCase:
