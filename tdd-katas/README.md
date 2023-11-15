@@ -18,7 +18,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [bugs-zero-kata](./bugs-zero-kata)              | M       | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [cache-kata](./cache-kata)                      | L       | Verification of state versus behavior                 | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [christmas-tree](./christmas-tree)              | L       | Implement an algorithm in **small steps**             | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
-| [connect-four](./connect-four)                  | H       | Implement a game in **small steps**                   | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
+| [connect-four](./connect-four)                  | H       | Implement a game in **small steps**                   | ✔  | ✗   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [countries-kata](./countries-kata)              | L / M   | Ports &amp; adapters / **Refactoring** / REST / DI    | ✔  | ✗   | ✔  | ✗   | ✗  | ✔ | ✗ |
 | [cqrs-booking](./cqrs-booking)                  | H       | CQRS / DDD / Event-based architecture                 | ✗  | ✔   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [db-adapter-kata](./db-adapter-kata)            | M       | Ports &amp; adapters / Database / DI                  | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |

@@ -10,8 +10,8 @@ from src.useCase.OrderCreationUseCase import OrderCreationUseCase
 from src.useCase.SellItemRequest import SellItemRequest
 from src.useCase.SellItemsRequest import SellItemsRequest
 from src.useCase.UnknownProductError import UnknownProductError
-from test.doubles.InMemoryProductCatalog import InMemoryProductCatalog
-from test.doubles.StubOrderRepository import StubOrderRepository
+from ..doubles.InMemoryProductCatalog import InMemoryProductCatalog
+from ..doubles.StubOrderRepository import StubOrderRepository
 
 
 class TestOrderCreationUseCase(unittest.TestCase):

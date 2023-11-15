@@ -1,12 +1,12 @@
 from decimal import Decimal, ROUND_HALF_UP
 
-from src.domain.Order import Order
-from src.domain.OrderItem import OrderItem
-from src.domain.OrderStatus import OrderStatus
-from src.repository.OrderRepository import OrderRepository
-from src.repository.ProductCatalog import ProductCatalog
-from src.useCase.SellItemsRequest import SellItemsRequest
-from src.useCase.UnknownProductError import UnknownProductError
+from ..domain.Order import Order
+from ..domain.OrderItem import OrderItem
+from ..domain.OrderStatus import OrderStatus
+from ..repository.OrderRepository import OrderRepository
+from ..repository.ProductCatalog import ProductCatalog
+from ..useCase.SellItemsRequest import SellItemsRequest
+from ..useCase.UnknownProductError import UnknownProductError
 
 
 class OrderCreationUseCase:

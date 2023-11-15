@@ -8,8 +8,8 @@ from src.useCase.OrderCannotBeShippedError import OrderCannotBeShippedError
 from src.useCase.OrderCannotBeShippedTwiceError import OrderCannotBeShippedTwiceError
 from src.useCase.OrderShipmentRequest import OrderShipmentRequest
 from src.useCase.OrderShipmentUseCase import OrderShipmentUseCase
-from test.doubles.StubOrderRepository import StubOrderRepository
-from test.doubles.StubShipmentService import StubShipmentService
+from ..doubles.StubOrderRepository import StubOrderRepository
+from ..doubles.StubShipmentService import StubShipmentService
 
 
 class TestOrderShipmentUseCase(unittest.TestCase):
