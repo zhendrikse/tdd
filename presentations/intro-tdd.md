@@ -34,7 +34,9 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 ![XP](./images/xp_circles.jpg)
 
 ---
- 
+
+<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
+
 ![Feedback loops](./images/Extreme_Programming.svg.png) <!-- .element width="75%" height="75%" -->
 
 ---
@@ -83,7 +85,10 @@ end
 
 ---
 
-##### TDD &amp; BDD
+### TDD &amp; BDD
+
+<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
+
 
 ![TDD &amp; BDD](./images/tdd-scope.png)
 
@@ -91,6 +96,10 @@ end
 
 
 ### Contra-variance and co-variance
+
+
+<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
+
 
 ![Contra- and co-variance](./images/contra_co_variant5.png)
 
@@ -112,10 +121,11 @@ end
 
 Why? ==> Because we specify! <!-- .element: class="fragment"-->
 
-
 ---
 
 ### Rulez of the TDD game
+
+<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
 
 <table>
   <colgroup>
