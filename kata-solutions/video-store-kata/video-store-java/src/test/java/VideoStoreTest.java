@@ -51,6 +51,4 @@ public class VideoStoreTest {
       assertEquals("Frequent renter points", 3, statement.getFrequentRenterPoints());
       assertEquals("Total amount you owed", "7.5", statement.getTotalAmountOwedAsString());
     }
-
-    private Customer customer;
 }
