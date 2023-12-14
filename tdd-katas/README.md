@@ -22,6 +22,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [countries-kata](./countries-kata)              | L / M   | Ports &amp; adapters / **Refactoring** / REST / DI    | ✔  | ✗   | ✔  | ✗   | ✗  | ✔ | ✗ |
 | [cqrs-booking](./cqrs-booking)                  | H       | CQRS / DDD / Event-based architecture                 | ✗  | ✔   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [db-adapter-kata](./db-adapter-kata)            | M       | Ports &amp; adapters / Database / DI                  | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
+| [elephant-carpaccio](./elephant-carpaccio)      | M       | Slicing user stories                                  | ✗  | ✔   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [fibonacci-kata](./db-adapter-kata)             | M       | Pipelines / Automated deployments / IaC               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [game-of-life](./game-of-life)                  | M       | **Generic TDD** / **Small steps**                     | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [gilded-rose-kata](./gilded-rose-kata)          | M / H   | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
