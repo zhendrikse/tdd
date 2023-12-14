@@ -270,9 +270,64 @@ of items. And should there also be a maximum?
 Obviously, the same holds for the prices of products, these can never be
 negative!
 
-## User story VI: unsupported / invalid state codes
+## User story VI: invalid state codes
 
-> As a user I want to want to get notified of unsupported state codes so that I can correct my input.
+> As a user I want to want to get notified of invalid state codes so that I can correct my input.
+
+<details>
+<summary>Invalid state codes</summary>
+
+Let's write a test first!
+
+```java
+@Test 
+void letsUserKnowThatStateCodeIsinvalid() {
+    IllegalArgumentException thrown = assertThrows(
+        IllegalArgumentException.class,
+        () -> calculator.calculateTax(new InputParameters(2, 345.00, "99")),
+        "Expected calculateTax() to throw, but it didn't"
+        );
+}
+```
+
+We can make this test pass by introducing an enumeration for the state codes:
+
+```java
+enum State {
+    NY,
+    TX,
+    NV,
+    CA,
+    AL,
+    UT
+}
+```
+
+And removing the [primitive obsession]() code smells in the `InputParameters`, `OrderPriceCalculator`, and `OrderPriceCalculatorTest`
+
+```java
+public class InputParameters {
+    public final int quantity;
+    public final double price;
+    public final State state;
+
+    public InputParameters(final int quantity, final double price, final String state) {
+        if (quantity < 1) throw new IllegalArgumentException("Quantity should be positive");
+        if (price < 0) throw new IllegalArgumentException("Price should be positive");
+
+        this.quantity = quantity;
+        this.price = price;
+        this.state = State.valueOf(state);
+    }
+
+    // ...
+```
+
+</details>
+
+## User story VII: unsupported state taxes
+
+> As a user I want to want to get notified of a unsupported (valid) state so that I can correct my input.
 
 <details>
 <summary>Unsupported state codes</summary>
@@ -281,16 +336,17 @@ Let's write a test first!
 
 ```java
 @Test 
-void letsUserKnowThatCurrentStateCodeIsUnsupported() {
+void letsUserKnowThatStateCodeIsUnsupported() {
     UnsupportedStateException thrown = assertThrows(
         UnsupportedStateException.class,
-        () -> calculator.calculateTax(new InputParameters(2, 345.00, "99")),
+        () -> calculator.calculateTax(new InputParameters(2, 345.00, "NY")),
         "Expected calculateTax() to throw, but it didn't"
         );
 
-        assertTrue(thrown.getMessage().contains("Unknown state code: '99'"));
+        assertTrue(thrown.getMessage().contains("Unsupported state: 'NY'"));
 }
 ```
+
 We can make this test pass by modifying the `calculateTax()` method:
 
 ```java
@@ -303,35 +359,65 @@ public Double calculateTax(final InputParameters input) {
 
 </details>
 
-## User story VII: non-positive item quantities
+## User story VIII: non-positive item quantities
 
-> As a user I want to want to get notified of negative quantities so that I can correct my input.
+> As a user I want to want to get notified of non-positive quantities so that I can correct my input.
 
 <details>
-<summary>Negative quantities</summary>
+<summary>Non-positive quantities</summary>
 
 Let's write a test first!
 
 ```java
 @Test 
-void letsUserKnowThatCurrentStateCodeIsUnsupported() {
-    UnsupportedStateException thrown = assertThrows(
-        UnsupportedStateException.class,
-        () -> calculator.calculateTax(new InputParameters(2, 345.00, "99")),
+void letsUserKnowThatNonPositiveQuantityIsUnsupported() {
+    IllegalArgumentException thrown = assertThrows(
+        IllegalArgumentException.class,
+        () -> calculator.calculateTax(new InputParameters(0, 345.00, "UT")),
         "Expected calculateTax() to throw, but it didn't"
         );
 
-        assertTrue(thrown.getMessage().contains("Unknown state code: '99'"));
+        assertTrue(thrown.getMessage().contains("Quantity should be positive"));
 }
 ```
-We can make this test pass by modifying the `calculateTax()` method:
+We can make this test pass by adding a guard statement to the constructor of the input parameters:
 
 ```java
-public Double calculateTax(final InputParameters input) {
-    if (!stateTaxMap.containsKey(input.state))
-        throw new UnsupportedStateException("Unknown state code: '" + input.state + "'");
-    return input.quantity * input.price * stateTaxMap.get(input.state) * 0.01;
+    public InputParameters(final int quantity, final double price, final String state) {
+        if (quantity < 1) throw new IllegalArgumentException("Quantity should be positive");
+
+        // ...
+```
+</details>
+
+## User story IX: non-positive item prices
+
+> As a user I want to want to get notified of non-positive prices so that I can correct my input.
+
+<details>
+<summary>Non-positive prices</summary>
+
+Let's write a test first!
+
+```java
+@Test 
+void letsUserKnowThatNonPositivePriceIsUnsupported() {
+    IllegalArgumentException thrown = assertThrows(
+        IllegalArgumentException.class,
+        () -> calculator.calculateTax(new InputParameters(1, -345.00, "UT")),
+        "Expected calculateTax() to throw, but it didn't"
+        );
+
+        assertTrue(thrown.getMessage().contains("Price should be positive"));
 }
 ```
+We can make this test pass by adding a guard statement to the constructor of the input parameters:
 
+```java
+    public InputParameters(final int quantity, final double price, final String state) {
+        if (price < 0) throw new IllegalArgumentException("Price should be positive");
+        if (quantity < 1) throw new IllegalArgumentException("Quantity should be positive");
+
+        // ...
+```
 </details>

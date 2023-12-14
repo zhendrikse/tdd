@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,9 +11,9 @@ class OrderPriceCalculatorTest {
     @BeforeEach
     void createCalculatorInstance() {
         this.calculator = new OrderPriceCalculator();
-        this.calculator.configure("UT", 6.85);
-        this.calculator.configure("NV", 8.00);
-        this.calculator.configure("TX", 6.25);
+        this.calculator.configure(State.UT, 6.85);
+        this.calculator.configure(State.NV, 8.00);
+        this.calculator.configure(State.TX, 6.25);
     }
 
     @Test 
@@ -38,14 +37,45 @@ class OrderPriceCalculatorTest {
     }
 
     @Test 
-    void letsUserKnowThatCurrentStateCodeIsUnsupported() {
-        UnsupportedStateException thrown = assertThrows(
-            UnsupportedStateException.class,
+    void letsUserKnowThatStateCodeIsInvalid() {
+        IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
             () -> calculator.calculateTax(new InputParameters(2, 345.00, "99")),
             "Expected calculateTax() to throw, but it didn't"
          );
+    }
+
+    @Test 
+    void letsUserKnowThatStateCodeIsUnsupported() {
+        UnsupportedStateException thrown = assertThrows(
+            UnsupportedStateException.class,
+            () -> calculator.calculateTax(new InputParameters(2, 345.00, "NY")),
+            "Expected calculateTax() to throw, but it didn't"
+         );
  
-         assertTrue(thrown.getMessage().contains("Unknown state code: '99'"));
+         assertTrue(thrown.getMessage().contains("Unsupported state: 'NY'"));
+    }
+
+    @Test 
+    void letsUserKnowThatNonPositiveQuantityIsUnsupported() {
+        IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> calculator.calculateTax(new InputParameters(0, 345.00, "UT")),
+            "Expected calculateTax() to throw, but it didn't"
+         );
+ 
+         assertTrue(thrown.getMessage().contains("Quantity should be positive"));
+    }
+
+    @Test 
+    void letsUserKnowThatNonPositivePriceIsUnsupported() {
+        IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> calculator.calculateTax(new InputParameters(1, -345.00, "UT")),
+            "Expected calculateTax() to throw, but it didn't"
+         );
+ 
+         assertTrue(thrown.getMessage().contains("Price should be positive"));
     }
 }
 
