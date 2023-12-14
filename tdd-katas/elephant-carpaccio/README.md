@@ -63,3 +63,9 @@ results by month.
 Create a PowerPoint presentation that shows your sponsors what you 
 have created, with the formula you used, sample inputs and outputs, 
 the sales history and the graphs.
+
+## References
+
+- [Facilitation guide by Henrik Kniberg &amp; Alistair Cockburn](https://docs.google.com/document/d/1TCuuu-8Mm14oxsOnlk8DqfZAA1cvtYu9WGv67Yj_sSk/pub)
+- [Slide deck by Michael Wallace](https://static1.squarespace.com/static/59e39ba7268b9625f429cc67/t/5a37ed1124a6949ae31ae169/1513614612707/Elephant-Carpaccio_november2017_chapter-presentation.pdf)
+- [Two times remote Elephant Carpaccio](https://smallsheds.garden/blog/2021/two-times-remote-elephant-carpaccio/)
