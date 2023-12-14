@@ -2,8 +2,8 @@
 
 # Getting started
 
-First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
-We suggest to name the kata `OrderPriceCalculator`.
+First, create an initial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+We suggest naming the kata `OrderPriceCalculator`.
 
 Add the following snippet to the `build.gradle.kts`, so that you can generate an executable JAR:
 
@@ -58,7 +58,7 @@ public class OrderPriceCalculator {
     // ...
 ```
 
-Also verify the output when we run the executable JAR file:
+Also, we need to verify the output when we run the executable JAR file:
 
 ```bash
 $ java -jar build/libs/orderpricecalculator.jar 
@@ -72,7 +72,7 @@ Welcome to the order price calculator!
 
 > As a user I want to see the input parameters echoed so that I know the calculator parsed them correctly.
 
-Since the sprints are only eight minutes during this kata, let's for the input fall back to a manual test only.
+Since the sprints are only eight minutes during this kata, let's for the input to fall back to a manual test only.
 
 <details>
   <summary>Echo input parameters</summary>
@@ -128,7 +128,7 @@ With this object, we can easily read the input parameters from the command line
 
 ## User story III: calculate the tax for one state
 
-> As a user I want to calculate the taxes in the state Utah so that I serve my products in Utah.
+> As a user I want to calculate the taxes in the state of Utah so that I serve my products in Utah.
 
 <details>
 <summary>Selling products in Utah</summary>
@@ -263,7 +263,7 @@ The most likely thing to do is to throw an `UnsupportedStateException`.
 However, it may be even better to ask your product owner what the calculator
 is actually supposed to do in these cases!
 
-Likewise, we probably also what to validate the other two input fields.
+Likewise, we probably also want to validate the other two input fields.
 For example, we should not be able to enter zero or even a negative amount
 of items. And should there also be a maximum?
 
@@ -272,7 +272,7 @@ negative!
 
 ## User story VI: invalid state codes
 
-> As a user I want to want to get notified of invalid state codes so that I can correct my input.
+> As a user I want to get notified of invalid state codes so that I can correct my input.
 
 <details>
 <summary>Invalid state codes</summary>
@@ -327,7 +327,7 @@ public class InputParameters {
 
 ## User story VII: unsupported state taxes
 
-> As a user I want to want to get notified of a unsupported (valid) state so that I can correct my input.
+> As a user I want to get notified of an unsupported (valid) state so that I can correct my input.
 
 <details>
 <summary>Unsupported state codes</summary>
@@ -361,7 +361,7 @@ public Double calculateTax(final InputParameters input) {
 
 ## User story VIII: non-positive item quantities
 
-> As a user I want to want to get notified of non-positive quantities so that I can correct my input.
+> As a user I want to get notified of non-positive quantities so that I can correct my input.
 
 <details>
 <summary>Non-positive quantities</summary>
@@ -392,7 +392,7 @@ We can make this test pass by adding a guard statement to the constructor of the
 
 ## User story IX: non-positive item prices
 
-> As a user I want to want to get notified of non-positive prices so that I can correct my input.
+> As a user I want to get notified of non-positive prices so that I can correct my input.
 
 <details>
 <summary>Non-positive prices</summary>
