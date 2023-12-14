@@ -1,12 +1,8 @@
 import java.util.Scanner;
 
 public class TaxDiscountCalculator {
-    public String getGreeting() {
-        return "Hello world";
-    }
-
-    private static String calculateTaxFor(Integer numberOfItems, Float pricePerItem, String stateCode) {
-        return "0";
+    static Double calculateTaxFor(Integer numberOfItems, Double pricePerItem, String stateCode) {
+        return 6.85;
     }
 
     public static void main(String[] args) {
@@ -15,10 +11,12 @@ public class TaxDiscountCalculator {
             Integer numberOfItems = scanner.nextInt();
 
             System.out.print("Price item: ");
-            Float pricePerItem = scanner.nextFloat();
+            Double pricePerItem = scanner.nextDouble();
 
             System.out.print("Two-letter state code: ");
             String stateCode = scanner.nextLine();
+
+            scanner.nextLine();
             
 
             System.out.println("The total tax is: " + TaxDiscountCalculator.calculateTaxFor(numberOfItems, pricePerItem, stateCode));
