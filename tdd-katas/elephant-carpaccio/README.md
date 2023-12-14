@@ -1,6 +1,8 @@
 # Elephant Carpaccio Kata
 
-Original content taken from [Alistair Cockburn's PDF](https://alistair.cockburn.us/wp-content/uploads/2018/02/Elephant-Carpaccio-exercise-instructions.pdf).
+![images/
+
+Original content is taken from [Alistair Cockburn's PDF](https://alistair.cockburn.us/wp-content/uploads/2018/02/Elephant-Carpaccio-exercise-instructions.pdf).
 
 ## Learning outcomes 
 
@@ -16,15 +18,15 @@ Original content taken from [Alistair Cockburn's PDF](https://alistair.cockburn.
    - Each team writes down on paper the 10-20 demo-able user 
      stories ("slices") they will develop and possibly demo. 
    - Each story should be doable in 3-8 minutes. 
-   - No slice is just mockup of a UI, creation of a data table 
+   - No slice is just a mockup of a UI, the creation of a data table 
      or data structure. 
    - All demos show real input & output (not test harness).
 3. **15 minutes**: Discussion 
    - Instructor/facilitator leads discussion of the slices, 
-     what is and isn't acceptable, solicits ways to slice finer.
+     what is and isn't acceptable, and solicits ways to slice finer.
 4. **40 minutes**: Development 
    - A fixed time-box of 40 minutes, five 8-minute development sprints,
-     clock does not stop. At the end of each sprint, each team shows its 
+     the clock does not stop. At the end of each sprint, each team shows its 
      product to another team.
 5. Debrief
 
@@ -43,7 +45,7 @@ giving a discount based on the order value (not number of items),
 adding state tax based on the state and the discounted order value.
 
 | Order value | Discount rate | State Tax rate |
-|%----------- |%------------- |%-------------- |
+|:----------- |:------------- |:-------------- |
 | $ 1,000     |  3 %          | UT 6.85 %      |
 | $ 5,000     |  5 %          | NV 8.00 %      |
 | $ 7,000     |  7 %          | TX 6.25 %      |
@@ -54,10 +56,10 @@ adding state tax based on the state and the discounted order value.
 
 Create a set of orders from different months and different states.
 
-Produce a report as histogram of sales results by state, 
+Produce a report as a histogram of sales results by state, 
 then a second sales report histogram of sales
 results by month.
 
-Create a Powerpoint presentation that shows your sponsors what you 
+Create a PowerPoint presentation that shows your sponsors what you 
 have created, with the formula you used, sample inputs and outputs, 
 the sales history and the graphs.
