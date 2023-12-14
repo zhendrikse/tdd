@@ -1,15 +1,5 @@
-package com.cleancode.martinfowler.videostore;
-
-
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-import java.util.ArrayList;
-
-import com.cleancode.martinfowler.videostore.Customer;
-import com.cleancode.martinfowler.videostore.Movie;
-import com.cleancode.martinfowler.videostore.Rental;
 
 import static org.junit.Assert.*;
 

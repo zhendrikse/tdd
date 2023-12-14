@@ -1,5 +1,3 @@
-package com.cleancode.martinfowler.videostore;
-
 public class ChildrenMovie extends Movie {
     public ChildrenMovie(String title) {
         super(title);

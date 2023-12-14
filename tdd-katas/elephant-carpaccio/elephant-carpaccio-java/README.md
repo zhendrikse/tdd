@@ -255,13 +255,20 @@ public class OrderPriceCalculator {
 ```
 </details>
 
-## Intermezzo: How about invalid state codes
+## Intermezzo: How about invalid input?
 
 Note that we did not provide any logic for invalid state codes.
 The most likely thing to do is to throw an `UnsupportedStateException`.
 
-However, it is even better to ask your product owner what the calculator
+However, it may be even better to ask your product owner what the calculator
 is actually supposed to do in these cases!
+
+Likewise, we probably also what to validate the other two input fields.
+For example, we should not be able to enter zero or even a negative amount
+of items. And should there also be a maximum?
+
+Obviously, the same holds for the prices of products, these can never be
+negative!
 
 ## User story VI: unsupported / invalid state codes
 
@@ -269,6 +276,39 @@ is actually supposed to do in these cases!
 
 <details>
 <summary>Unsupported state codes</summary>
+
+Let's write a test first!
+
+```java
+@Test 
+void letsUserKnowThatCurrentStateCodeIsUnsupported() {
+    UnsupportedStateException thrown = assertThrows(
+        UnsupportedStateException.class,
+        () -> calculator.calculateTax(new InputParameters(2, 345.00, "99")),
+        "Expected calculateTax() to throw, but it didn't"
+        );
+
+        assertTrue(thrown.getMessage().contains("Unknown state code: '99'"));
+}
+```
+We can make this test pass by modifying the `calculateTax()` method:
+
+```java
+public Double calculateTax(final InputParameters input) {
+    if (!stateTaxMap.containsKey(input.state))
+        throw new UnsupportedStateException("Unknown state code: '" + input.state + "'");
+    return input.quantity * input.price * stateTaxMap.get(input.state) * 0.01;
+}
+```
+
+</details>
+
+## User story VII: non-positive item quantities
+
+> As a user I want to want to get notified of negative quantities so that I can correct my input.
+
+<details>
+<summary>Negative quantities</summary>
 
 Let's write a test first!
 

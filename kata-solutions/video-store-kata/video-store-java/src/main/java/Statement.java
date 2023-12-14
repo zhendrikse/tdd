@@ -1,7 +1,3 @@
-package com.cleancode.martinfowler.videostore;
-
-import java.util.List;
-
 public class Statement {
   private final Customer customer;
 

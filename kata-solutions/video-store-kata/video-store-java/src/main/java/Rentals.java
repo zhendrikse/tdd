@@ -1,5 +1,3 @@
-package com.cleancode.martinfowler.videostore;
-
 import java.util.ArrayList;
 import java.util.List;
 

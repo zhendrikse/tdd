@@ -1,5 +1,3 @@
-package com.cleancode.martinfowler.videostore;
-
 public class Rental {
 	private final Movie movie;
 	private final int daysRented;

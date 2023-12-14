@@ -1,5 +1,3 @@
-package com.cleancode.martinfowler.videostore;
-
 public abstract class Movie {
 	private final String title;
 	

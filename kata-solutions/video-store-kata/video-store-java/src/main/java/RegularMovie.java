@@ -1,5 +1,3 @@
-package com.cleancode.martinfowler.videostore;
-
 public class RegularMovie extends Movie {
   public RegularMovie(String title) {
     super(title);
