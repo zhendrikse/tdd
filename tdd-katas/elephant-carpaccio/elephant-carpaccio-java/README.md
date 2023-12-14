@@ -261,13 +261,13 @@ Note that we did not provide any logic for invalid state codes.
 The most likely thing to do is to throw an `UnsupportedStateException`.
 
 However, it may be even better to ask your product owner what the calculator
-is actually supposed to do in these cases!
+is supposed to do in these cases!
 
 Likewise, we probably also want to validate the other two input fields.
 For example, we should not be able to enter zero or even a negative amount
 of items. And should there also be a maximum?
 
-Obviously, the same holds for the prices of products, these can never be
+The same holds for the prices of products, these can never be
 negative!
 
 ## User story VI: invalid state codes
@@ -303,7 +303,7 @@ enum State {
 }
 ```
 
-And removing the [primitive obsession]() code smells in the `InputParameters`, `OrderPriceCalculator`, and `OrderPriceCalculatorTest`
+And removing the [primitive obsession](https://refactoring.guru/smells/primitive-obsession) code smells in the `InputParameters`, `OrderPriceCalculator`, and `OrderPriceCalculatorTest`
 
 ```java
 public class InputParameters {
@@ -322,6 +322,9 @@ public class InputParameters {
 
     // ...
 ```
+
+As the sprints are so short, we'll leave the other two [primitive obsession](https://refactoring.guru/smells/primitive-obsession) code smells
+for the price and quantity alone for the time being.
 
 </details>
 
