@@ -1,6 +1,6 @@
 # Elephant Carpaccio Kata
 
-![Elephant carpaccio](images/sliced-elephant.png)
+![Elephant carpaccio](images/sliced_elephant.png)
 
 Original content is taken from [Alistair Cockburn's PDF](https://alistair.cockburn.us/wp-content/uploads/2018/02/Elephant-Carpaccio-exercise-instructions.pdf).
 
