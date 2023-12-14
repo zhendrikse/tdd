@@ -23,11 +23,11 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("TaxDiscountCalculator")
+    mainClass.set("OrderPriceCalculator")
 }
 
 tasks.jar {
-    manifest.attributes["Main-Class"] = "TaxDiscountCalculator"
+    manifest.attributes["Main-Class"] = "OrderPriceCalculator"
 }
 
 tasks.test {

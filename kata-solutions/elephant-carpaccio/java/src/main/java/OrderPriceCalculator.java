@@ -1,0 +1,50 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class OrderPriceCalculator {
+    private Map<String, Double> stateTaxMap = new HashMap<>();
+
+    public String getStartUpMessage() {
+        return "Welcome to the order price calculator!";
+    }
+
+    public InputParameters readInputParameters() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("How many items: ");
+            Integer numberOfItems = scanner.nextInt();
+
+            System.out.print("Price item: ");
+            Double pricePerItem = scanner.nextDouble();
+
+            System.out.print("Two-letter state code: ");
+            String stateCode = scanner.next();
+
+            return new InputParameters(numberOfItems, pricePerItem, stateCode);
+        }
+    }
+
+    public static void main(String[] args) {
+        final OrderPriceCalculator calculator = new OrderPriceCalculator();
+        calculator.configure("UT", 6.85);
+        calculator.configure("NV", 8.00);
+        calculator.configure("TX", 6.25);
+        calculator.configure("AL", 4.00);
+        calculator.configure("CA", 8.25);
+        System.out.println(calculator.getStartUpMessage());
+
+        final InputParameters input = calculator.readInputParameters();
+        System.out.println(input);
+        System.out.println(calculator.calculateTax(input));
+    }
+
+    public Double calculateTax(final InputParameters input) {
+        if (!stateTaxMap.containsKey(input.state))
+            throw new UnsupportedStateException("Unknown state code: '" + input.state + "'");
+        return input.quantity * input.price * stateTaxMap.get(input.state) * 0.01;
+    }
+
+    public void configure(String state, double tax) {
+        stateTaxMap.put(state, tax);
+    }
+}
