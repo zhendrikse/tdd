@@ -19,6 +19,7 @@ on:
       - 'kata-solutions/stack-kata/stack-kata-java/**'
       - 'kata-solutions/vending-machine/vending-machine-java/**'
       - 'kata-solutions/tell-dont-ask/tell-dont-ask-java/**'
+      - 'kata-solutions/elephant-carpaccio/elephant-carpaccio-java/**'
 
   pull_request:
     branches: [ "master" ]
@@ -54,4 +55,7 @@ jobs:
       run: ./gradlew test
     - name: Run tell dont ask kata
       working-directory: kata-solutions/tell-dont-ask/tell-dont-ask-java
+      run: ./gradlew test
+    - name: Run elephant carpaccio kata
+      working-directory: kata-solutions/elephant-carpaccio/elephant-carpaccio-java
       run: ./gradlew test
