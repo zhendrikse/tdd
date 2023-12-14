@@ -26,6 +26,10 @@ application {
     mainClass.set("TaxDiscountCalculator")
 }
 
+tasks.jar {
+    manifest.attributes["Main-Class"] = "TaxDiscountCalculator"
+}
+
 tasks.test {
     // Use junit platform for unit tests.
     useJUnitPlatform()
