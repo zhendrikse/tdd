@@ -35,4 +35,8 @@ This is exactly what we will do in this excercise using [approval testing](https
 ## References
 
 - Refactoring the Gilded Rose [manually versus using Sourcery](https://sourcery.ai/blog/refactoring-gilded-rose/)
-
+- [Gilding the rose](https://www.youtube.com/watch?v=kTcDBYCpj7Q) by Kevlin Henney
+- Emily Bache
+  - [Introducing the Gilded Rose kata and writing test cases using Approval Tests](https://www.youtube.com/watch?v=zyM2Ep28ED8)
+  - [Refactoring item logic using ‘lift up conditional'](https://www.youtube.com/watch?v=OJmg9aMxPDI)
+  - [Replace Conditional with Polymorphism](https://www.youtube.com/watch?v=NADVhSjeyJA)
