@@ -82,19 +82,19 @@ during this kata, although "Negotiable" can sometimes be applied as well!
 The challenge is to always slice user stories _vertically_, so that each user
 story adds some value, however small that added value may be!
 
-![vertical user stories](./images/vertical_user_stories.png)
+![vertical user stories](../../assets/vertical_user_stories.png)
 
 Story slicing boils down to the art of making the slices as thin as possible
 _while at the same time_ retaining business value for each slice
 
-![sliced user stories](./images/sliced_user_stories.png)
+![sliced user stories](../../assets/sliced_user_stories.png)
 
 This is of utmost importance, as the value delivered is maximized as early as
 possible. This is caused by the fact that frequent and early delivery 
 enables users to use to product much sooner and thus providing the opportunity
 to give feedback as well as reprioritization requests to the product owner. 
 
-![vertical user stories](./images/value_delivered.png)
+![vertical user stories](../../assets/value_delivered.png)
 
 ## Priorities
 
