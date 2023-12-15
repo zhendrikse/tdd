@@ -35,7 +35,7 @@ public class OrderPriceCalculator {
 
         final InputParameters input = calculator.readInputParameters();
         System.out.println(input);
-        System.out.println(calculator.calculateTax(input));
+        System.out.println("Grand total: " + calculator.calculatesRoundedTotalPrice(input));
     }
 
     Double calculateOrderValue(final int quantity, final double price) {
@@ -47,6 +47,11 @@ public class OrderPriceCalculator {
             throw new UnsupportedStateException("Unsupported state: '" + input.state + "'");
         
         return calculateOrderValue(input.quantity, input.price) * stateTaxMap.get(input.state) * 0.01;
+    }
+
+
+    public Double calculatesRoundedTotalPrice(final InputParameters input) {
+        return Math.round(100 * (calculateOrderValue(input.quantity, input.price) + calculateTax(input))) / 100.0;
     }
 
     public void configure(final State state, final double tax) {

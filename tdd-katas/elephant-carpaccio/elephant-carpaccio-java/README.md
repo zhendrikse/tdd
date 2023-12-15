@@ -473,3 +473,30 @@ We can make this test pass by adding a guard statement to the constructor of the
 Let's write a test first!
 
 ```java
+@Test
+void calculatesRoundedTotalPrice() {
+    assertEquals(calculator.calculatesRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
+}
+```
+
+We make this test pass by adding a `` method
+
+```java
+public Double calculatesRoundedTotalPrice(final InputParameters input) {
+    return Math.round(100 * (calculateOrderValue(input.quantity, input.price) + calculateTax(input))) / 100.0;
+}
+```
+
+By invoking this method in the `main()`, we get the desired endresult:
+
+```java
+public static void main(String[] args) {
+    // ...
+
+    final InputParameters input = calculator.readInputParameters();
+    System.out.println(input);
+    System.out.println("Grand total: " + calculator.calculatesRoundedTotalPrice(input));
+}
+```
+
+</details>

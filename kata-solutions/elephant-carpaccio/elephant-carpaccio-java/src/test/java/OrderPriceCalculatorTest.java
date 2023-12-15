@@ -82,6 +82,11 @@ class OrderPriceCalculatorTest {
  
          assertTrue(thrown.getMessage().contains("Price should be positive"));
     }
+
+    @Test
+    void calculatesRoundedTotalPrice() {
+        assertEquals(calculator.calculatesRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
+    }
 }
 
 
