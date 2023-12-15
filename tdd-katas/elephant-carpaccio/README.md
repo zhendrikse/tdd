@@ -64,41 +64,23 @@ Create a PowerPoint presentation that shows your sponsors what you
 have created, with the formula you used, sample inputs and outputs, 
 the sales history and the graphs.
 
-# Additional background information
+# Splitting user stories &amp; setting priorities
 
-## Splitting stories
+## Background information
 
-A user story is preferably [INVEST](https://www.agilealliance.org/glossary/invest/)
-- “I” ndependent (of all others)
-- “N” egotiable (not a specific contract for features)
-- “V” aluable (or vertical)
-- “E” stimable (to a good approximation)
-- “S” mall (so as to fit within an iteration)
-- “T” estable (in principle, even if there isn’t a test for it yet)
+Please first make sure you are familiar with the
+[how and why](https://github.com/zhendrikse/tdd/wiki/Telling-and-slicing-user-stories#slicing-user-stories) 
+of splitting user stories which is part of the Wiki page on
+[telling and slicing user stories](https://github.com/zhendrikse/tdd/wiki/Telling-and-slicing-user-stories).
 
-It is especially the "Vertical", "Small", and "Testable" that we are interested in
-during this kata, although "Negotiable" can sometimes be applied as well!
-
-The challenge is to always slice user stories _vertically_, so that each user
-story adds some value, however small that added value may be!
-
-![vertical user stories](../../assets/vertical_user_stories.png)
-
-Story slicing boils down to the art of making the slices as thin as possible
-_while at the same time_ retaining business value for each slice
-
-![sliced user stories](../../assets/sliced_user_stories.png)
-
-This is of utmost importance, as the value delivered is maximized as early as
-possible. This is caused by the fact that frequent and early delivery 
-enables users to use to product much sooner and thus providing the opportunity
-to give feedback as well as reprioritization requests to the product owner. 
-
-![vertical user stories](../../assets/value_delivered.png)
+Once we have managed to split our user stories into sufficiently small pieces, we 
+can start to think about the order, i.e. setting the priorities.
 
 ## Priorities
 
 ### The ultimate target
+
+The ultimate target is to be able to calculate the taxes and discounts for all five states.
 
 ![Prio 1](./images/five_states_five_discounts_1.png)
 
