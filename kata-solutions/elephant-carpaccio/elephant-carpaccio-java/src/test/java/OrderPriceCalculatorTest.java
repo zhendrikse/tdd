@@ -22,6 +22,11 @@ class OrderPriceCalculatorTest {
     }
 
     @Test
+    void calculatesOrderValue() {
+        assertEquals(calculator.calculateOrderValue(2, 345.00), 690.00);
+    }
+
+    @Test
     void calculatesTaxesInUtah() {
         assertEquals(calculator.calculateTax(new InputParameters(2, 345.00, "UT")), 47.265);
     }

@@ -38,10 +38,15 @@ public class OrderPriceCalculator {
         System.out.println(calculator.calculateTax(input));
     }
 
-    public Double calculateTax(final InputParameters input) {
+    Double calculateOrderValue(final int quantity, final double price) {
+        return quantity * price;
+    }
+
+    Double calculateTax(final InputParameters input) {
         if (!stateTaxMap.containsKey(input.state))
             throw new UnsupportedStateException("Unsupported state: '" + input.state + "'");
-        return input.quantity * input.price * stateTaxMap.get(input.state) * 0.01;
+        
+        return calculateOrderValue(input.quantity, input.price) * stateTaxMap.get(input.state) * 0.01;
     }
 
     public void configure(final State state, final double tax) {

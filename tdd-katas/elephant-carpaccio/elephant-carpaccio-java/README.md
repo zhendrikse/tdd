@@ -126,7 +126,45 @@ With this object, we can easily read the input parameters from the command line
 ```
 </details>
 
-## User story III: calculate the tax for one state
+## User story III: calculate the order value
+
+> As a user I want to calculate the order value so that I know the total order price.
+
+<details>
+<summary>Order value calculation</summary>
+
+Let's write a test first!
+
+```java
+@Test
+void calculatesOrderValue() {
+    assertEquals(calculator.calculateOrderValue(2, 345.00), 690.00);
+}
+```
+
+We can make this test pass by adding the `calculateOrderValue()` method to the production code:
+
+```java
+Double calculateOrderValue(final int quantity, final double price) {
+    return quantity * price;
+}
+```
+
+Finally, this should also be echoed on the console:
+
+```java
+public static void main(String[] args) {
+    final OrderPriceCalculator calculator = new OrderPriceCalculator();
+    System.out.println(calculator.getStartUpMessage());
+
+    final InputParameters input = calculator.readInputParameters();
+    System.out.println(input);
+    System.out.println(calculator.calculateOrderValue(input.quantity, input.price));
+}
+```
+</details>
+
+## User story IV: calculate the tax for one state
 
 > As a user I want to calculate the taxes in the state of Utah so that I serve my products in Utah.
 
@@ -146,8 +184,8 @@ void calculatesTaxesInUtah() {
 We can make this test pass by adding the `calculateTax()` method to the production code:
 
 ```java
-public Double calculateTax(final InputParameters input) {
-    return input.quantity * input.price * 6.85 * 0.01;
+Double calculateTax(final InputParameters input) {
+    return calculateOrderValue(input.quantity, input.price) * 6.85 * 0.01;
 }
 ```
 
@@ -166,7 +204,7 @@ public static void main(String[] args) {
 
 </details>
 
-## User story IV: calculate the tax for two states
+## User story V: calculate the tax for two states
 
 > As a user I want to calculate the taxes in the state Nevada so that I serve my products in Nevada.
 
@@ -188,9 +226,9 @@ We make this test pass easily
 ```java
 public Double calculateTax(final InputParameters input) {
     if (input.state.equals("UT"))
-        return input.quantity * input.price * 6.85 * 0.01;
+        return calculateOrderValue(input.quantity, input.price) * 6.85 * 0.01;
 
-    return input.quantity * input.price * 8.00 * 0.01;
+    return calculateOrderValue(input.quantity, input.price) * 8.00 * 0.01;
 }
 ```
 
@@ -198,7 +236,7 @@ No further changes in the `main()` method are needed at this point.
 
 </details>
 
-## User story V: calculate the tax for all states
+## User story VI: calculate the tax for all states
 
 > As a user I want to calculate the taxes in all five states so that I serve my products everywhere.
 
@@ -219,11 +257,11 @@ We make this test pass by
 ```java
 public Double calculateTax(final InputParameters input) {
     if (input.state.equals("UT"))
-        return input.quantity * input.price * 6.85 * 0.01;
+        return calculateOrderValue(input.quantity, input.price) * 6.85 * 0.01;
     else if (input.state.equals("TX"))
-        return input.quantity * input.price * 6.25 * 0.01;
+        return calculateOrderValue(input.quantity, input.price) * 6.25 * 0.01;
 
-    return input.quantity * input.price * 8.00 * 0.01;
+    return calculateOrderValue(input.quantity, input.price) * 8.00 * 0.01;
 }
 ```
 
@@ -236,7 +274,7 @@ public class OrderPriceCalculator {
     // ...
 
     public Double calculateTax(final InputParameters input) {
-        return input.quantity * input.price * stateTaxMap.get(input.state) * 0.01;
+        return calculateOrderValue(input.quantity, input.price) * stateTaxMap.get(input.state) * 0.01;
     }
 
     public void configure(String state, double tax) {
@@ -270,7 +308,7 @@ of items. And should there also be a maximum?
 The same holds for the prices of products, these can never be
 negative!
 
-## User story VI: invalid state codes
+## User story VII: invalid state codes
 
 > As a user I want to get notified of invalid state codes so that I can correct my input.
 
@@ -328,7 +366,7 @@ for the price and quantity alone for the time being.
 
 </details>
 
-## User story VII: unsupported state taxes
+## User story VIII: unsupported state taxes
 
 > As a user I want to get notified of an unsupported (valid) state so that I can correct my input.
 
@@ -362,7 +400,7 @@ public Double calculateTax(final InputParameters input) {
 
 </details>
 
-## User story VIII: non-positive item quantities
+## User story IX: non-positive item quantities
 
 > As a user I want to get notified of non-positive quantities so that I can correct my input.
 
@@ -393,7 +431,7 @@ We can make this test pass by adding a guard statement to the constructor of the
 ```
 </details>
 
-## User story IX: non-positive item prices
+## User story X: non-positive item prices
 
 > As a user I want to get notified of non-positive prices so that I can correct my input.
 
@@ -424,3 +462,14 @@ We can make this test pass by adding a guard statement to the constructor of the
         // ...
 ```
 </details>
+
+## User story XI: rounding off
+
+> As a user I want to get prices rounded off so that I can directly use them.
+
+<details>
+<summary>Rounding off prices</summary>
+
+Let's write a test first!
+
+```java
