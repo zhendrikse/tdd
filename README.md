@@ -70,6 +70,8 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 - Offering any of the katas in other languages than offered here
 - Facilitating a course and/or [coding dojos](https://codingdojo.org/WhatIsCodingDojo/), where apprentices can practice [katas](http://codekata.com/) together (with me as sensei 😉).
 
+![Coding dojo](./assets/zeger_teaching.jpg)
+
 ## Credits
 
 Pictures in this repo are legally taken from [pixabay.com](https://pixabay.com). 
