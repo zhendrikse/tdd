@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 
-
-class OrderPriceCalculatorTest {
+class OrderTaxesCalculatorTest {
     private OrderPriceCalculator calculator;
 
     @BeforeEach
@@ -14,16 +13,6 @@ class OrderPriceCalculatorTest {
         this.calculator.configure(State.UT, 6.85);
         this.calculator.configure(State.NV, 8.00);
         this.calculator.configure(State.TX, 6.25);
-    }
-
-    @Test 
-    void calculatorShowsStartUpMessage() {
-        assertEquals(calculator.getStartUpMessage(), "Welcome to the order price calculator!");
-    }
-
-    @Test
-    void calculatesOrderValue() {
-        assertEquals(calculator.calculateOrderValue(2, 345.00), 690.00);
     }
 
     @Test
@@ -85,7 +74,7 @@ class OrderPriceCalculatorTest {
 
     @Test
     void calculatesRoundedTotalPrice() {
-        assertEquals(calculator.calculatesRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
+        assertEquals(calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
     }
 }
 
