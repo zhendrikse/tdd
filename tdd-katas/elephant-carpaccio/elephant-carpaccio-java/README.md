@@ -29,7 +29,10 @@ $ java -jar build/libs/orderpricecalculator.jar
 
 # A possible solution
 
-## User story I: Print "Welcome to the order price calculator"
+## Value of an order
+
+### **User story I**: Print "Welcome to the order price calculator"
+---
 
 > As a user I want to invoke the order price calculator so that I know I can use it.
 
@@ -68,7 +71,8 @@ Welcome to the order price calculator!
 
 </details>
 
-## User story II: Echo input parameters
+### **User story II**: Echo input parameters
+---
 
 > As a user I want to see the input parameters echoed so that I know the calculator parsed them correctly.
 
@@ -126,7 +130,8 @@ With this object, we can easily read the input parameters from the command line
 ```
 </details>
 
-## User story III: calculate the order value
+### **User story III**: calculate the order value
+---
 
 > As a user I want to calculate the order value so that I know the total order price.
 
@@ -164,7 +169,10 @@ public static void main(String[] args) {
 ```
 </details>
 
-## User story IV: calculate the tax for one state
+## State taxes
+
+### **User story IV**: calculate the tax for one state
+---
 
 > As a user I want to calculate the taxes in the state of Utah so that I serve my products in Utah.
 
@@ -204,7 +212,8 @@ public static void main(String[] args) {
 
 </details>
 
-## User story V: calculate the tax for two states
+### **User story V**: calculate the tax for two states
+---
 
 > As a user I want to calculate the taxes in the state Nevada so that I serve my products in Nevada.
 
@@ -236,7 +245,8 @@ No further changes in the `main()` method are needed at this point.
 
 </details>
 
-## User story VI: calculate the tax for all states
+### **User story VI**: calculate the tax for all states
+---
 
 > As a user I want to calculate the taxes in all five states so that I serve my products everywhere.
 
@@ -308,7 +318,8 @@ of items. And should there also be a maximum?
 The same holds for the prices of products, these can never be
 negative!
 
-## User story VII: invalid state codes
+### **User story VII**: invalid state codes
+---
 
 > As a user I want to get notified of invalid state codes so that I can correct my input.
 
@@ -366,7 +377,8 @@ for the price and quantity alone for the time being.
 
 </details>
 
-## User story VIII: unsupported state taxes
+### **User story VIII**: unsupported state taxes
+---
 
 > As a user I want to get notified of an unsupported (valid) state so that I can correct my input.
 
@@ -400,7 +412,8 @@ public Double calculateTax(final InputParameters input) {
 
 </details>
 
-## User story IX: non-positive item quantities
+### **User story IX**: non-positive item quantities
+---
 
 > As a user I want to get notified of non-positive quantities so that I can correct my input.
 
@@ -431,7 +444,8 @@ We can make this test pass by adding a guard statement to the constructor of the
 ```
 </details>
 
-## User story X: non-positive item prices
+### **User story X**: non-positive item prices
+---
 
 > As a user I want to get notified of non-positive prices so that I can correct my input.
 
@@ -463,7 +477,8 @@ We can make this test pass by adding a guard statement to the constructor of the
 ```
 </details>
 
-## User story XI: rounding off
+### **User story XI**: rounding off
+---
 
 > As a user I want to get prices rounded off so that I can directly use them.
 
@@ -475,14 +490,14 @@ Let's write a test first!
 ```java
 @Test
 void calculatesRoundedTotalPrice() {
-    assertEquals(calculator.calculatesRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
+    assertEquals(calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
 }
 ```
 
 We make this test pass by adding a `` method
 
 ```java
-public Double calculatesRoundedTotalPrice(final InputParameters input) {
+public Double calculateRoundedTotalPrice(final InputParameters input) {
     return Math.round(100 * (calculateOrderValue(input.quantity, input.price) + calculateTax(input))) / 100.0;
 }
 ```
@@ -495,8 +510,37 @@ public static void main(String[] args) {
 
     final InputParameters input = calculator.readInputParameters();
     System.out.println(input);
-    System.out.println("Grand total: " + calculator.calculatesRoundedTotalPrice(input));
+    System.out.println("Grand total: " + calculator.calculateRoundedTotalPrice(input));
 }
 ```
 
+</details>
+
+## Discounts
+
+
+### **User story XII**: discounts for Utah
+---
+
+> As a user I want to know the discount value when I ordered in Utah so that I can get my discount.
+
+<details>
+<summary>Discounts in Utah</summary>
+
+Let's write a test first!
+
+```java
+@Test
+void calculatesDiscountForUtah() {
+    assertEquals(calculator.calculateDiscountValue(new InputParameters(2, 345.00, "UT")), 20.70);
+}
+```
+
+and the production code to make the test pass
+
+```java
+Double calculateDiscountValue(final InputParameters input) {
+    return 0.03 * input.quantity * input.price;
+}
+```
 </details>
