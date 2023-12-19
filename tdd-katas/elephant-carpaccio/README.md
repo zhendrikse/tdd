@@ -1,6 +1,6 @@
 # Elephant Carpaccio Kata
 
-![Elephant carpaccio](images/elephant.png)
+![Elephant carpaccio](https://github.com/zhendrikse/tdd/blob/master/presentations/images/sliced_elephant.png)
 
 Original content is taken from [Alistair Cockburn's PDF](https://alistair.cockburn.us/wp-content/uploads/2018/02/Elephant-Carpaccio-exercise-instructions.pdf).
 
@@ -82,14 +82,14 @@ can start to think about the order, i.e. setting the priorities.
 
 The ultimate target is to be able to calculate the taxes and discounts for all five states.
 
-![Prio 1](./images/five_states_five_discounts_1.png)
+![Prio 1](https://github.com/zhendrikse/tdd/blob/master/presentations/images/five_states_five_discounts_1.png)
 
 ### The taxes first
 
 The product owner wants 5 states before doing anything with discounts. 
 Why? (so we can deploy! State tax is a legal requirement, discount is not)
 
-![Prio 2](./images/five_states_five_discounts_2.png)
+![Prio 2](https://github.com/zhendrikse/tdd/blob/master/presentations/images/five_states_five_discounts_2.png)
 
 ### Validation &amp; fancy GUI comes after 5 states &amp; 5 discounts
 
@@ -97,15 +97,13 @@ A (fancy) GUI is of the _least_ importance! As long as the prices and taxes
 of the products can be determined, the products can be sold. The longer we
 wait for the fancy GUI, the more we miss out on our revenues!
 
-![Prio 3](./images/five_states_five_discounts_3.png)
+![Prio 3](https://github.com/zhendrikse/tdd/blob/master/presentations/images/five_states_five_discounts_3.png)
 
 ### Coarse-grained slicing strategy
 
 Concluding, a good slicing strategy will roughly look as follows:
 
-![Prio 4](./images/five_states_five_discounts_4.png)
-
-
+![Prio 4](https://github.com/zhendrikse/tdd/blob/master/presentations/images/five_states_five_discounts_4.png)
 
 # References
 
