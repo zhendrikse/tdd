@@ -152,10 +152,35 @@ highlightTheme: github-dark
 
 ---
 
-## Exercise
+## The kata
 
-- Create 8 – 10 user stories for a simple application
-- Elephant Carpaccio = 
-  - very thin slices, each one still elephant-shaped.
-  - Together they form the whole elephant
+- Assignment
+  - Create +/- 15 user stories for a simple application
+  - Extremely thin slices, but each is elephant-shaped
 
+![Elephant](./images/sliced_elephant.png) <!-- .element width="50%" height="50%" -->
+
+
+---
+
+## The Product
+
+- Build a retail calculator app
+  - Inputs:
+    - How many of an item
+    - Price per item
+    - 2 letter state code for calculating sales tax
+  - Output:
+    - Total price of order
+    - Includes discount based on order value and sales tax
+
+---
+
+## Priorities
+
+
+![Elephant](./images/five_states_five_discounts_1.png)
+
+---
+
+## Priorities
