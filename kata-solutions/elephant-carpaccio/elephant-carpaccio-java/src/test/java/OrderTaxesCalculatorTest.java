@@ -32,7 +32,7 @@ class OrderTaxesCalculatorTest {
 
     @Test 
     void letsUserKnowThatStateCodeIsInvalid() {
-        IllegalArgumentException thrown = assertThrows(
+        assertThrows(
             IllegalArgumentException.class,
             () -> calculator.calculateTax(new InputParameters(2, 345.00, "99")),
             "Expected calculateTax() to throw, but it didn't"

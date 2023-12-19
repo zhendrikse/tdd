@@ -1,2 +1,2 @@
-rootProject.name = "orderpricecalculator"
+rootProject.name = "OrderPricesCalculator"
 include("app")
