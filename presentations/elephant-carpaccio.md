@@ -85,12 +85,26 @@ highlightTheme: github-dark
 
 ## How big are your stories
 
+![Size of user stories](./images/sliced_user_stories.png)
+
+
+- Target
+  - <!-- .element: class="fragment" --> 
+    Story = a few days
+  - <!-- .element: class="fragment" --> 
+    Task = a few hours
+  - <!-- .element: class="fragment" --> 
+    Commit = several times per hour
+
 ---
 
-### Why split stories
+## Why split stories
 
-- <!-- .element: class="fragment" --> 
-  Discuss in teams (5 minutes)
+- Discuss in teams (5 minutes)
+
+----
+
+- Example outcomes:
   - <!-- .element: class="fragment" --> 
     Learn faster
   - <!-- .element: class="fragment" --> 
@@ -116,4 +130,32 @@ highlightTheme: github-dark
 
 ---
 
-### Software delivery value curve
+## Software delivery value curve
+
+![Size of user stories](./images/value_delivered.png)
+
+---
+
+## User story splitting 
+
+- <!-- .element: class="fragment" --> 
+  Split by
+  - capabilities offered
+  - user roles / user personas
+  - target device
+  - CRUD boundaries
+  - Happy path/other paths
+- <!-- .element: class="fragment" --> 
+  Zero/One/Many approach
+- <!-- .element: class="fragment" --> 
+  Scope: walking skeleton
+
+---
+
+## Exercise
+
+- Create 8 – 10 user stories for a simple application
+- Elephant Carpaccio = 
+  - very thin slices, each one still elephant-shaped.
+  - Together they form the whole elephant
+
