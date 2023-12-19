@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class OrderPriceCalculator {
     private Map<State, Double> stateTaxMap = new HashMap<>();
-    private int discount;
+    private Map<State, Integer> discountsMap = new HashMap<>();
 
     public String getStartUpMessage() {
         return "Welcome to the order price calculator!";
@@ -27,11 +27,11 @@ public class OrderPriceCalculator {
 
     public static void main(String[] args) {
         final OrderPriceCalculator calculator = new OrderPriceCalculator();
-        calculator.configure(State.UT, 6.85);
-        calculator.configure(State.NV, 8.00);
-        calculator.configure(State.TX, 6.25);
-        calculator.configure(State.AL, 4.00);
-        calculator.configure(State.CA, 8.25);
+        calculator.configure(State.UT, 6.85, 3);
+        calculator.configure(State.NV, 8.00, 5);
+        calculator.configure(State.TX, 6.25, 7);
+        calculator.configure(State.AL, 4.00, 10);
+        calculator.configure(State.CA, 8.25, 15);
         System.out.println(calculator.getStartUpMessage());
 
         final InputParameters input = calculator.readInputParameters();
@@ -48,8 +48,8 @@ public class OrderPriceCalculator {
             throw new UnsupportedStateException("Unsupported state: '" + input.state + "'");
         
         double orderValue = calculateOrderValue(input.quantity, input.price); 
-        if (discount != 0) 
-            orderValue -= calculateDiscountValue(input.quantity, input.price);
+        if (discountsMap.containsKey(input.state)) 
+            orderValue -= calculateDiscountValue(input);
 
         return orderValue * stateTaxMap.get(input.state) * 0.01;
     }
@@ -63,12 +63,12 @@ public class OrderPriceCalculator {
         stateTaxMap.put(state, tax);
     }
 
-    double calculateDiscountValue(final int quantity, final double price) {
-        return 0.03 * quantity * price;
+    double calculateDiscountValue(final InputParameters input) {
+        return discountsMap.get(input.state) * 0.01 * input.quantity * input.price;
     }
 
     public void configure(final State state, final double tax, final int discountInPercent) {
         stateTaxMap.put(state, tax);
-        discount = discountInPercent;
+        discountsMap.put(state, discountInPercent);
     }
 }

@@ -552,7 +552,7 @@ Double calculateDiscountValue(final int quantity, final double price) {
 > As a user I want to know the tax based on the discount value when I ordered in Utah so that I can calculate my total price.
 
 <details>
-<summary>Discounts in Utah</summary>
+<summary>Taxes on discounted products in Utah</summary>
 
 Let's write a test first!
 
@@ -578,5 +578,85 @@ double calculateTax(final InputParameters input) {
 
     return orderValue * stateTaxMap.get(input.state) * 0.01;
 }
+```
+</details>
+
+### **User story XIV**: calculate taxes based on discounts in Texas
+---
+
+> As a user I want to know the tax based on the discount value when I ordered in Texas so that I can calculate my total price.
+
+<details>
+<summary>Taxes on discounted products in Texas</summary>
+
+Let's write a test first!
+
+```java
+@Test
+void calculatesTaxesBasedOnDiscountForTexas() {
+    calculator.configure(State.TX, 6.85, 7);
+    assertEquals(43.95645, calculator.calculateTax(new InputParameters(2, 345.00, "TX")), 0.001);
+}
+```
+
+and the production code to make the test pass
+
+```java
+double calculateTax(final InputParameters input) {
+    if (!stateTaxMap.containsKey(input.state))
+        throw new UnsupportedStateException("Unsupported state: '" + input.state + "'");
+    
+    double orderValue = calculateOrderValue(input.quantity, input.price); 
+    if (discountsMap.containsKey(input.state)) 
+        orderValue -= calculateDiscountValue(input);
+
+    return orderValue * stateTaxMap.get(input.state) * 0.01;
+```
+
+where we have introduced a discounts hashmap as well:
+
+```java
+public class OrderPriceCalculator {
+    private Map<State, Double> stateTaxMap = new HashMap<>();
+    private Map<State, Integer> discountsMap = new HashMap<>();
+
+    // ...
+```
+</details>
+
+### **User story XV**: calculate total price based on taxes and discounts
+---
+
+> As a user I want to know the total price based on tax and discount so that I can quote an order.
+
+<details>
+<summary>Total price based on taxes and discounts</summary>
+
+Let's write a test first!
+
+```java
+@Test
+void calculatesTotalPriceBasedOnTaxesAndDiscountForTexas() {
+    calculator.configure(State.TX, 6.85, 7);
+    assertEquals(733.96, calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")));
+}
+```
+
+Because of  the way we implemented the order price calculator, this
+test immediately jumps to green, so we may as well discard it.
+
+Let's take the opportunity to update the `main()`, so that the discounts
+are also taken into account when running the stand-alone executable:
+
+```java
+    public static void main(String[] args) {
+        final OrderPriceCalculator calculator = new OrderPriceCalculator();
+        calculator.configure(State.UT, 6.85, 3);
+        calculator.configure(State.NV, 8.00, 5);
+        calculator.configure(State.TX, 6.25, 7);
+        calculator.configure(State.AL, 4.00, 10);
+        calculator.configure(State.CA, 8.25, 15);
+
+        // ...
 ```
 </details>
