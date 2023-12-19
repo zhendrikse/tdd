@@ -19,7 +19,7 @@ class OrderTotalCalculatorTest {
 
     @Test
     void calculatesOrderValue() {
-        assertEquals(calculator.calculateOrderValue(2, 345.00), 690.00);
+        assertEquals(690.0, calculator.calculateOrderValue(2, 345.00));
     }
 }
 

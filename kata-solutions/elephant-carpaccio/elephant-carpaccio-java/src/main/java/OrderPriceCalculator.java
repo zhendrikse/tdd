@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class OrderPriceCalculator {
     private Map<State, Double> stateTaxMap = new HashMap<>();
+    private int discount;
 
     public String getStartUpMessage() {
         return "Welcome to the order price calculator!";
@@ -15,7 +16,7 @@ public class OrderPriceCalculator {
             Integer numberOfItems = scanner.nextInt();
 
             System.out.print("Price item: ");
-            Double pricePerItem = scanner.nextDouble();
+            double pricePerItem = scanner.nextDouble();
 
             System.out.print("Two-letter state code: ");
             String stateCode = scanner.next();
@@ -38,19 +39,23 @@ public class OrderPriceCalculator {
         System.out.println("Grand total: " + calculator.calculateRoundedTotalPrice(input));
     }
 
-    Double calculateOrderValue(final int quantity, final double price) {
+    double calculateOrderValue(final int quantity, final double price) {
         return quantity * price;
     }
 
-    Double calculateTax(final InputParameters input) {
+    double calculateTax(final InputParameters input) {
         if (!stateTaxMap.containsKey(input.state))
             throw new UnsupportedStateException("Unsupported state: '" + input.state + "'");
         
-        return calculateOrderValue(input.quantity, input.price) * stateTaxMap.get(input.state) * 0.01;
+        double orderValue = calculateOrderValue(input.quantity, input.price); 
+        if (discount != 0) 
+            orderValue -= calculateDiscountValue(input.quantity, input.price);
+
+        return orderValue * stateTaxMap.get(input.state) * 0.01;
     }
 
 
-    public Double calculateRoundedTotalPrice(final InputParameters input) {
+    public double calculateRoundedTotalPrice(final InputParameters input) {
         return Math.round(100 * (calculateOrderValue(input.quantity, input.price) + calculateTax(input))) / 100.0;
     }
 
@@ -58,11 +63,12 @@ public class OrderPriceCalculator {
         stateTaxMap.put(state, tax);
     }
 
-    Double calculateDiscountValue(final InputParameters input) {
-        return 0.03 * input.quantity * input.price;
+    double calculateDiscountValue(final int quantity, final double price) {
+        return 0.03 * quantity * price;
     }
 
-    // public void configure(final State state, final double tax, final int discountInPercent) {
-    //     stateTaxMap.put(state, tax);
-    // }
+    public void configure(final State state, final double tax, final int discountInPercent) {
+        stateTaxMap.put(state, tax);
+        discount = discountInPercent;
+    }
 }

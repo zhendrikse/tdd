@@ -17,17 +17,17 @@ class OrderTaxesCalculatorTest {
 
     @Test
     void calculatesTaxesInUtah() {
-        assertEquals(calculator.calculateTax(new InputParameters(2, 345.00, "UT")), 47.265);
+        assertEquals(47.265, calculator.calculateTax(new InputParameters(2, 345.00, "UT")));
     }
 
     @Test
     void calculatesTaxesInNevada() {
-        assertEquals(calculator.calculateTax(new InputParameters(2, 345.00, "NV")), 55.20);
+        assertEquals(55.20, calculator.calculateTax(new InputParameters(2, 345.00, "NV")));
     }
 
     @Test 
     void calculatesTaxesInTexas() {
-        assertEquals(calculator.calculateTax(new InputParameters(2, 345.00, "TX")), 43.125);
+        assertEquals(43.125, calculator.calculateTax(new InputParameters(2, 345.00, "TX")));
     }
 
     @Test 
@@ -74,7 +74,7 @@ class OrderTaxesCalculatorTest {
 
     @Test
     void calculatesRoundedTotalPrice() {
-        assertEquals(calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
+        assertEquals(733.13, calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")));
     }
 }
 

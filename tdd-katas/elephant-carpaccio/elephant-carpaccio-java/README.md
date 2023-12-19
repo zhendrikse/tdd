@@ -185,7 +185,7 @@ Let's write a test first!
 @Test
 void calculatesTaxesInUtah() {
     OrderPriceCalculator classUnderTest = new OrderPriceCalculator();
-    assertEquals(classUnderTest.calculateTax(new InputParameters(2, 345.00, "UT")), 47.265);
+    assertEquals(47.265, classUnderTest.calculateTax(new InputParameters(2, 345.00, "UT")));
 }
 ```
 
@@ -226,14 +226,14 @@ Let's write a test first!
 @Test
 void calculatesTaxesInNevada() {
     OrderPriceCalculator classUnderTest = new OrderPriceCalculator();
-    assertEquals(classUnderTest.calculateTax(new InputParameters(2, 345.00, "NV")), 55.20);
+    assertEquals(classUnderTest.calculateTax(55.20, new InputParameters(2, 345.00, "NV")));
 }
 ```
 
 We make this test pass easily
 
 ```java
-public Double calculateTax(final InputParameters input) {
+public double calculateTax(final InputParameters input) {
     if (input.state.equals("UT"))
         return calculateOrderValue(input.quantity, input.price) * 6.85 * 0.01;
 
@@ -258,14 +258,14 @@ Let's write a test first!
 ```java
 @Test 
 void calculatesTaxesInTexas() {
-    assertEquals(calculator.calculateTax(new InputParameters(2, 345.00, "TX")), 43.125);
+    assertEquals(43.125, calculator.calculateTax(new InputParameters(2, 345.00, "TX")));
 }
 ```
 
 We make this test pass by
 
 ```java
-public Double calculateTax(final InputParameters input) {
+public double calculateTax(final InputParameters input) {
     if (input.state.equals("UT"))
         return calculateOrderValue(input.quantity, input.price) * 6.85 * 0.01;
     else if (input.state.equals("TX"))
@@ -403,7 +403,7 @@ void letsUserKnowThatStateCodeIsUnsupported() {
 We can make this test pass by modifying the `calculateTax()` method:
 
 ```java
-public Double calculateTax(final InputParameters input) {
+public double calculateTax(final InputParameters input) {
     if (!stateTaxMap.containsKey(input.state))
         throw new UnsupportedStateException("Unknown state code: '" + input.state + "'");
     return input.quantity * input.price * stateTaxMap.get(input.state) * 0.01;
@@ -490,14 +490,14 @@ Let's write a test first!
 ```java
 @Test
 void calculatesRoundedTotalPrice() {
-    assertEquals(calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")), 733.13);
+    assertEquals(733.13, calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")));
 }
 ```
 
 We make this test pass by adding a `` method
 
 ```java
-public Double calculateRoundedTotalPrice(final InputParameters input) {
+public double calculateRoundedTotalPrice(final InputParameters input) {
     return Math.round(100 * (calculateOrderValue(input.quantity, input.price) + calculateTax(input))) / 100.0;
 }
 ```
@@ -532,15 +532,51 @@ Let's write a test first!
 ```java
 @Test
 void calculatesDiscountForUtah() {
-    assertEquals(calculator.calculateDiscountValue(new InputParameters(2, 345.00, "UT")), 20.70);
+    assertEquals(20.70, calculator.calculateDiscountValue(2, 345.00));
 }
 ```
 
 and the production code to make the test pass
 
 ```java
-Double calculateDiscountValue(final InputParameters input) {
-    return 0.03 * input.quantity * input.price;
+Double calculateDiscountValue(final int quantity, final double price) {
+    return 0.03 * quantity * price;
+}
+```
+</details>
+
+
+### **User story XIII**: calculate taxes based on discounts in Utah
+---
+
+> As a user I want to know the tax based on the discount value when I ordered in Utah so that I can calculate my total price.
+
+<details>
+<summary>Discounts in Utah</summary>
+
+Let's write a test first!
+
+```java
+@Test
+void calculatesTaxesBasedOnDiscountForUtah() {
+    calculator.configure(State.UT, 6.85, 3);
+
+    assertEquals(45.84705, calculator.calculateTax(new InputParameters(2, 345.00, "UT")), 0.001);
+}
+```
+
+and the production code to make the test pass
+
+```java
+double calculateTax(final InputParameters input) {
+    if (!stateTaxMap.containsKey(input.state))
+        throw new UnsupportedStateException("Unsupported state: '" + input.state + "'");
+    
+    double orderValue = calculateOrderValue(input.quantity, input.price); 
+    if (discount != 0) 
+        orderValue -= calculateDiscountValue(input.quantity, input.price);
+
+    return orderValue * stateTaxMap.get(input.state) * 0.01;
 }
 ```
 </details>

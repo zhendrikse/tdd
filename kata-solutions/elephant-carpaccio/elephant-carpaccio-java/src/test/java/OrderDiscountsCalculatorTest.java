@@ -12,10 +12,16 @@ class OrderTaxesDiscountsTest {
         this.calculator = new OrderPriceCalculator();
     }
 
-
     @Test
     void calculatesDiscountForUtah() {
-        assertEquals(calculator.calculateDiscountValue(new InputParameters(2, 345.00, "UT")), 20.70);
+        assertEquals(20.70, calculator.calculateDiscountValue(2, 345.00));
+    }
+
+    @Test
+    void calculatesTaxesBasedOnDiscountForUtah() {
+        calculator.configure(State.UT, 6.85, 3);
+
+        assertEquals(45.84705, calculator.calculateTax(new InputParameters(2, 345.00, "UT")), 0.001);
     }
 }
 
