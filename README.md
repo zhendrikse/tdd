@@ -75,13 +75,14 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 
 ![Coding dojo](./assets/zeger_teaching.jpg)
 
-> Ik steek veel op van de dojo's, maar heb soms ook het idee dat ik echt nog maar de punt van de ijsberg heb geleerd en er nog VEEL meer is waar we nog een jaar meer door hadden kunnen gaan.
+> Ik steek veel op van de dojo's, maar heb soms ook het idee dat ik echt nog maar de punt van de ijsberg heb
+> geleerd en er nog VEEL meer is waar we nog een jaar meer door hadden kunnen gaan &mdash; [Rogier van Dinther](https://github.com/rogierdinther)
 ---
-> We gaan ons best doen om gewoon door te blijven leren. En wie weet is er uiteindelijk toch iemand met budget om een nieuwe coach in te huren.
+> We gaan ons best doen om gewoon door te blijven leren. En wie weet is er uiteindelijk toch iemand met budget om een nieuwe coach in te huren &mdash; [Walter Vos](https://github.com/waltervos)
 ---
 > Ik wil voorop stellen dat ik het een hele leuke dag vond. Dank aan Zeger voor het enthousiasme en voorbereiding!!!
 ---
-> Op aanraden van [naam verwijderd] heb ik gevraagd aan [naam verwijderd] of we Zeger kunnen inhuren tbv van voortzetting vd Coding Dojo’s.
+> Op aanraden van [naam verwijderd] heb ik gevraagd aan [naam verwijderd] of we Zeger kunnen inhuren tbv van voortzetting vd Coding Dojo’s &mdash; Bert Huisman
 ---
 
 ## Credits
