@@ -161,26 +161,100 @@ highlightTheme: github-dark
 ![Elephant](./images/sliced_elephant.png) <!-- .element width="50%" height="50%" -->
 
 
----
+----
 
 ## The Product
 
 - Build a retail calculator app
-  - Inputs:
+  - <!-- .element: class="fragment" --> 
+    Inputs:
     - How many of an item
     - Price per item
-    - 2 letter state code for calculating sales tax
-  - Output:
+    - two-letter state code (for sales tax)
+  - <!-- .element: class="fragment" --> 
+    Output:
     - Total price of order
-    - Includes discount based on order value and sales tax
+      - Discount based on order value 
+      - Sales tax based on discounted value
 
----
+----
+
+- Create 10 - 20 slices to reach the target
+  - <!-- .element: class="fragment" --> 
+    A slice should 
+    - have a UI (input and output)
+    - be visibly different from the last slice
+  - <!-- .element: class="fragment" --> 
+    Sales tax _before_ discounts
+    - Compliance: tax is a legal requirement
+    - When compliant: we can deploy
+  - <!-- .element: class="fragment" --> 
+    Validation &amp; GUI &rarr; last!
+
+----
 
 ## Priorities
 
+<div class="r-stack">
+  <img class="fragment fade-in-then-out" data-fragment-index="0" src="./images/five_states_five_discounts_1.png" />
+  <img class="fragment fade-in-then-out" data-fragment-index="1" src="./images/five_states_five_discounts_2.png" />
+  <img class="fragment fade-in-then-out" data-fragment-index="2" src="./images/five_states_five_discounts_3.png" />
+  <img class="fragment fade-in-then-out" data-fragment-index="3" src="./images/five_states_five_discounts_4.png" />
+</div>
 
-![Elephant](./images/five_states_five_discounts_1.png)
+----
+
+- Create the backlog
+  - <!-- .element: class="fragment" --> 
+    Work in teams of 2 or 3 (or by table)
+    - 10 minutes to create backlog on cards
+    - 10-20 demo-able user stories (“slices”) to 5 states and 5 discounts.
+  - <!-- .element: class="fragment" --> 
+    A slice should be:
+    - Implementable (including UI).
+    - Noticeably different from last slice.
+    - More valuable to customer than last slice
+    - _Not_ be a mockup/UI/data structure/test case.
+
+----
+
+### Discounts
+<!-- .element id="left" -->
+
+### Taxes
+<!-- .element id="right" -->
+
+<!-- .element id="left" -->
+| State | Tax rate |
+|:----- |:-------- |
+| UT    |  6.85%   |
+| NV    |  8.00%   |
+| TX    |  6.25%   |
+| AL    |  4.00%   |
+| CA    |  8.25%   |
+
+
+<!-- .element id="right" -->
+| Order value | Discount rate |
+|:----------- |:------------- |
+| $1,000      | 3%            |
+| $7,000      | 7%            |
+| $10,000     | 10%           |
+| $50,000     | 15%           |
+| &nbsp;      | &nbsp;        |
 
 ---
 
-## Priorities
+- Debrief
+  - What was it like?
+  - How many slices did you have? Examples?
+  - Testing
+    - No tests/unit tests/TDD?
+    - Manual/automated (acceptance) tests?
+  - Code quality?
+  - Round-robin:
+    - Any other questions or reflections?
+    - What did you learn?
+    - Take-aways from today?
+
+
