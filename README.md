@@ -62,7 +62,7 @@ in the form of courses, workshops, and/or coding dojos.
 - [TDD and small steps: the Christmas tree kata](https://medium.com/ns-techblog/tdd-and-small-steps-the-christmas-tree-kata-ee23a8152a4b)
 - [Test Double TDD Wiki](https://github.com/testdouble/contributing-tests/wiki)
 - [Let's play: test-driven development](https://www.jamesshore.com/v2/projects/lets-play-tdd)
-- [Test-Driven Development (TDD): A Time-Tested Recipe for Quality Software](https://semaphoreci.com/blog/test-driven-development)
+- [Test-Driven Development (TDD): A Time-Tested Recipe for Quality Software](https://semaphoreci.com/blog/test-driven-development) 
 
 ## Contact
 
@@ -71,7 +71,15 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 - Offering any of the katas in other languages than offered here
 - Facilitating a course and/or [coding dojos](https://codingdojo.org/WhatIsCodingDojo/), where apprentices can practice [katas](http://codekata.com/) together (with me as sensei 😉).
 
+## Testimonies
+
 ![Coding dojo](./assets/zeger_teaching.jpg)
+
+> Ik steek veel op van de dojo's, maar heb soms ook het idee dat ik echt nog maar de punt van de ijsberg heb geleerd en er nog VEEL meer is waar we nog een jaar meer door hadden kunnen gaan.
+---
+> We gaan ons best doen om gewoon door te blijven leren. En wie weet is er uiteindelijk toch iemand met budget om een nieuwe coach in te huren.
+---
+> Ik wil voorop stellen dat ik het een hele leuke dag vond. Dank aan Zeger voor het enthousiasme en voorbereiding!!!
 
 ## Credits
 
