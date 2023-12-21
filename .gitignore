@@ -3,6 +3,7 @@ __pycache__
 .lein-repl-history
 .rebel_readline_history
 .coverage
+.idea/
 venv/
 target/
 build/
