@@ -30,7 +30,7 @@ public class OrderPriceCalculator {
         return calculateOrderValue(input.quantity, input.price);
     }
 
-    public InputParameters readInputParameters() {
+    InputParameters readInputParameters() {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("How many items: ");
             Integer numberOfItems = scanner.nextInt();
