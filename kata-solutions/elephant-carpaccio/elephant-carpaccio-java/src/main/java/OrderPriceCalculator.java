@@ -9,7 +9,7 @@ public class OrderPriceCalculator {
     private Map<State, Double> stateTaxMap = new HashMap<>();
     private Map<Integer, Integer> discountsMap = new TreeMap<>(Collections.reverseOrder());
 
-    public String getStartUpMessage() {
+    String getStartUpMessage() {
         return "Welcome to the order price calculator!";
     }
 
