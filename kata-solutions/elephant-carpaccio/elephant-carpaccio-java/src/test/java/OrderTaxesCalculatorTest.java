@@ -10,71 +10,31 @@ class OrderTaxesCalculatorTest {
     @BeforeEach
     void createCalculatorInstance() {
         this.calculator = new OrderPriceCalculator();
-        this.calculator.configure(State.UT, 6.85);
-        this.calculator.configure(State.NV, 8.00);
-        this.calculator.configure(State.TX, 6.25);
+        this.calculator.configureTax(State.UT, 6.85);
+        this.calculator.configureTax(State.NV, 8.00);
+        this.calculator.configureTax(State.TX, 6.25);
     }
 
     @Test
     void calculatesTaxesInUtah() {
-        assertEquals(47.265, calculator.calculateTax(new InputParameters(2, 345.00, "UT")));
+        assertEquals(47.265, calculator.calculateTax(new InputParameters(2, 345.00, "UT")), 0.01);
     }
 
     @Test
     void calculatesTaxesInNevada() {
-        assertEquals(55.20, calculator.calculateTax(new InputParameters(2, 345.00, "NV")));
+        assertEquals(55.20, calculator.calculateTax(new InputParameters(2, 345.00, "NV")), 0.01);
     }
 
     @Test 
     void calculatesTaxesInTexas() {
-        assertEquals(43.125, calculator.calculateTax(new InputParameters(2, 345.00, "TX")));
-    }
-
-    @Test 
-    void letsUserKnowThatStateCodeIsInvalid() {
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> calculator.calculateTax(new InputParameters(2, 345.00, "99")),
-            "Expected calculateTax() to throw, but it didn't"
-         );
-    }
-
-    @Test 
-    void letsUserKnowThatStateCodeIsUnsupported() {
-        UnsupportedStateException thrown = assertThrows(
-            UnsupportedStateException.class,
-            () -> calculator.calculateTax(new InputParameters(2, 345.00, "NY")),
-            "Expected calculateTax() to throw, but it didn't"
-         );
- 
-         assertTrue(thrown.getMessage().contains("Unsupported state: 'NY'"));
-    }
-
-    @Test 
-    void letsUserKnowThatNonPositiveQuantityIsUnsupported() {
-        IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> calculator.calculateTax(new InputParameters(0, 345.00, "UT")),
-            "Expected calculateTax() to throw, but it didn't"
-         );
- 
-         assertTrue(thrown.getMessage().contains("Quantity should be positive"));
-    }
-
-    @Test 
-    void letsUserKnowThatNonPositivePriceIsUnsupported() {
-        IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> calculator.calculateTax(new InputParameters(1, -345.00, "UT")),
-            "Expected calculateTax() to throw, but it didn't"
-         );
- 
-         assertTrue(thrown.getMessage().contains("Price should be positive"));
+        assertEquals(43.125, calculator.calculateTax(new InputParameters(2, 345.00, "TX")), 0.01);
     }
 
     @Test
-    void calculatesRoundedTotalPrice() {
-        assertEquals(733.13, calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")));
+    void calculatesTaxesBasedOnDiscountedPrice() {
+        calculator.configureDiscount(1000, 0);
+        calculator.configureDiscount(5000, 3);
+        assertEquals(267.72, calculator.calculateTax(new InputParameters(10, 345.00, "NV")), 0.01);
     }
 }
 

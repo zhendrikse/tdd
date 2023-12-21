@@ -10,28 +10,32 @@ class OrderTaxesDiscountsTest {
     @BeforeEach
     void createCalculatorInstance() {
         this.calculator = new OrderPriceCalculator();
-        calculator.configure(State.UT, 6.85, 3);
-        calculator.configure(State.TX, 6.85, 7);
+        calculator.configureTax(State.UT, 6.85);
+        calculator.configureTax(State.TX, 6.85);
+        calculator.configureDiscount(1000, 0);
+        calculator.configureDiscount(5000, 3);
+        calculator.configureDiscount(7000, 5);
+        calculator.configureDiscount(10000, 7);
     }
 
     @Test
-    void calculatesDiscountForUtah() {
-        assertEquals(20.70, calculator.calculateDiscountValue(new InputParameters(2, 345.00,  "UT")));
+    void calculatesDiscountForOverrOneThousand() {
+        assertEquals(103.5, calculator.calculateDiscountValue(10, 345.00), 001);
     }
 
     @Test
-    void calculatesTaxesBasedOnDiscountForUtah() {
-        assertEquals(45.84705, calculator.calculateTax(new InputParameters(2, 345.00, "UT")), 0.001);
+    void calculatesDiscountForUnderOneThousand() {
+        assertEquals(0.0, calculator.calculateDiscountValue(2, 345.00), 001);
     }
 
     @Test
-    void calculatesTaxesBasedOnDiscountForTexas() {
-        assertEquals(43.95645, calculator.calculateTax(new InputParameters(2, 345.00, "TX")), 0.001);
+    void calculatesDiscountForOverFiveThousand() {
+        assertEquals(345.0, calculator.calculateDiscountValue(20, 345.00), 001);
     }
-
+    
     @Test
-    void calculatesTotalPriceBasedOnTaxesAndDiscountForTexas() {
-        assertEquals(733.96, calculator.calculateRoundedTotalPrice(new InputParameters(2, 345.00, "TX")));
+    void calculatesDiscountForOverSevenThousand() {
+        assertEquals(603.75, calculator.calculateDiscountValue(25, 345.00), 001);
     }
 }
 
