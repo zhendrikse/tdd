@@ -238,10 +238,10 @@ highlightTheme: github-dark
 | Order value | Discount rate |
 |:----------- |:------------- |
 | $1,000      | 3%            |
+| $5,000      | 5%            |
 | $7,000      | 7%            |
 | $10,000     | 10%           |
 | $50,000     | 15%           |
-| &nbsp;      | &nbsp;        |
 
 ---
 
