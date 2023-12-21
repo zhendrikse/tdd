@@ -32,8 +32,7 @@ class OrderTaxesCalculatorTest {
 
     @Test
     void calculatesTaxesBasedOnDiscountedPrice() {
-        calculator.configureDiscount(1000, 0);
-        calculator.configureDiscount(5000, 3);
+        calculator.configureDiscount(1000, 3);
         assertEquals(267.72, calculator.calculateTax(new InputParameters(10, 345.00, "NV")), 0.01);
     }
 }

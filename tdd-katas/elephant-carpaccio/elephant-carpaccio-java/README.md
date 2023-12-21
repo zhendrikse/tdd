@@ -355,8 +355,8 @@ so the modified `calculateDiscountValue` becomes:
 ```java
 double calculateDiscountValue(final int quantity, final double price) {
     final double orderValue = calculateOrderValue(quantity, price);
-    if (orderValue < 1000) return 0.0;
-    return 0.01 * 3 * orderValue; 
+    if (orderValue >= 1000) return 0.01 * 3 * orderValue;
+    return 0.0; 
 }
 ```
 
@@ -380,8 +380,6 @@ Let's write a test for that case
 ```java
 @Test
 void calculatesTaxesBasedOnDiscountedPrice() {
-    calculator.configureDiscount(1000, 0);
-    calculator.configureDiscount(5000, 3);
     assertEquals(267.72, calculator.calculateTax(new InputParameters(10, 345.00, "NV")), 0.01);
 }
 ```
@@ -418,9 +416,9 @@ and the code to make this test pass
 ```java
 double calculateDiscountValue(final int quantity, final double price) {
     final double orderValue = calculateOrderValue(quantity, price);
-    if (orderValue < 1000) return 0.0;
-    if (orderValue < 5000) return 0.01 * 3 * orderValue;
-    return 0.01 * 5 * orderValue; 
+    if (orderValue >= 5000) return 0.01 * 5 * orderValue;
+    if (orderValue >= 1000) return 0.01 * 3 * orderValue;
+    return 0.0; 
 }
 ```
 </details>
@@ -448,10 +446,10 @@ with implementation
 ```java
 double calculateDiscountValue(final int quantity, final double price) {
     final double orderValue = calculateOrderValue(quantity, price);
-    if (orderValue < 1000) return 0.01 * 0 * orderValue;
-    if (orderValue < 5000) return 0.01 * 3 * orderValue;
-    if (orderValue < 7000) return 0.01 * 5 * orderValue;
-    return 0.01 * 7 * orderValue; 
+    if (orderValue >= 7000) return 0.01 * 7 * orderValue;
+    if (orderValue >= 5000) return 0.01 * 5 * orderValue;
+    if (orderValue >= 1000) return 0.01 * 3 * orderValue;
+    return 0.0; 
 }
 ```
 
@@ -460,7 +458,7 @@ This can then easily be generalized:
 ```java
 public class OrderPriceCalculator {    
     private Map<String, Double> stateTaxMap = new HashMap<>();
-    private Map<Integer, Integer> discountsMap = new TreeMap<>();
+    private Map<Integer, Integer> discountsMap = new TreeMap<>(Collections.reverseOrder());
 
     public void configureDiscount(final int upperLimit, final int percentage) {
         discountsMap.put(upperLimit, percentage);
@@ -469,13 +467,29 @@ public class OrderPriceCalculator {
     double calculateDiscountValue(final int quantity, final double price) {
         final double orderValue = calculateOrderValue(quantity, price);
         for (Entry<Integer, Integer> entry : discountsMap.entrySet()) 
-            if (orderValue < entry.getKey()) 
+            if (orderValue >= entry.getKey()) 
                 return 0.01 * entry.getValue() * orderValue;
        
         return 0.0;
     }
 
     // ...
+
+    public static void main(String[] args) {
+        final OrderPriceCalculator calculator = new OrderPriceCalculator();
+        calculator.configureTax(State.UT, 6.85);
+        calculator.configureTax(State.NV, 8.00);
+        calculator.configureTax(State.TX, 6.25);
+        calculator.configureTax(State.AL, 4.00);
+        calculator.configureTax(State.CA, 8.25);
+
+        calculator.configureDiscount(1000, 3);
+        calculator.configureDiscount(5000, 5);
+        calculator.configureDiscount(7000, 7);
+        calculator.configureDiscount(10000, 10);
+        calculator.configureDiscount(50000, 15);
+
+        // ...
 ```
 </details>
 
@@ -493,8 +507,8 @@ Let's write a test first!
 @Test
 void calculatesTotalOrderValue() {
     calculator.configureTax("UT", 6.85);
-    calculator.configureDiscount(1000, 0);
-    calculator.configureDiscount(5000, 3);
+    calculator.configureDiscount(1000, 3);
+    calculator.configureDiscount(5000, 5);
     assertEquals(3575.73525, calculator.calculateGrandTotal(new InputParameters(10, 345.00, "UT")), 0.01);
 }
 ```
@@ -537,8 +551,8 @@ Let's write a test first!
 @Test
 void calculatesRoundedTotalOrderValue() {
     calculator.configureTax("UT", 6.85);
-    calculator.configureDiscount(1000, 0);
-    calculator.configureDiscount(5000, 3);
+    calculator.configureDiscount(1000, 3);
+    calculator.configureDiscount(5000, 5);
     assertEquals(3575.74, calculator.calculateRoundedGrandTotal(new InputParameters(10, 345.00, "UT")), 0.01);
 }
 ```

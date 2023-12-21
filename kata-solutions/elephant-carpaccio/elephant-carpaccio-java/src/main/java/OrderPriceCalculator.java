@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Map;
@@ -6,7 +7,7 @@ import java.util.Map.Entry;
 
 public class OrderPriceCalculator {    
     private Map<State, Double> stateTaxMap = new HashMap<>();
-    private Map<Integer, Integer> discountsMap = new TreeMap<>();
+    private Map<Integer, Integer> discountsMap = new TreeMap<>(Collections.reverseOrder());
 
     public String getStartUpMessage() {
         return "Welcome to the order price calculator!";
@@ -47,7 +48,7 @@ public class OrderPriceCalculator {
     double calculateDiscountValue(final int quantity, final double price) {
         final double orderValue = calculateOrderValue(quantity, price);
         for (Entry<Integer, Integer> entry : discountsMap.entrySet()) 
-            if (orderValue < entry.getKey()) 
+            if (orderValue >= entry.getKey()) 
                 return 0.01 * entry.getValue() * orderValue;
        
         return 0.0;
@@ -76,9 +77,16 @@ public class OrderPriceCalculator {
         calculator.configureTax(State.TX, 6.25);
         calculator.configureTax(State.AL, 4.00);
         calculator.configureTax(State.CA, 8.25);
-        System.out.println(calculator.getStartUpMessage());
 
+        calculator.configureDiscount(1000, 3);
+        calculator.configureDiscount(5000, 5);
+        calculator.configureDiscount(7000, 7);
+        calculator.configureDiscount(10000, 10);
+        calculator.configureDiscount(50000, 15);
+        
         final InputParameters input = calculator.readInputParameters();
+
+        System.out.println(calculator.getStartUpMessage());
         System.out.println(input);
         System.out.println("Order value: " + calculator.calculateOrderValue(input.quantity, input.price));
         System.out.println("Discount: " + calculator.calculateDiscountValue(input.quantity, input.price));

@@ -11,11 +11,10 @@ class OrderTaxesDiscountsTest {
     void createCalculatorInstance() {
         this.calculator = new OrderPriceCalculator();
         calculator.configureTax(State.UT, 6.85);
-        calculator.configureTax(State.TX, 6.85);
-        calculator.configureDiscount(1000, 0);
-        calculator.configureDiscount(5000, 3);
-        calculator.configureDiscount(7000, 5);
-        calculator.configureDiscount(10000, 7);
+        calculator.configureTax(State.TX, 6.25);
+        calculator.configureDiscount(1000, 3);
+        calculator.configureDiscount(5000, 5);
+        calculator.configureDiscount(7000, 7);
     }
 
     @Test

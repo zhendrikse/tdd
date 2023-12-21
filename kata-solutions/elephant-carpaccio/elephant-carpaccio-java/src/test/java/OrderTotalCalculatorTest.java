@@ -27,12 +27,12 @@ class OrderTotalCalculatorTest {
     
     @Test
     void calculatesTotalOrderValue() {
-        assertEquals(3575.73525, calculator.calculateGrandTotal(new InputParameters(10, 345.00, "UT")), 0.01);
+        assertEquals(3686.325, calculator.calculateGrandTotal(new InputParameters(10, 345.00, "UT")), 0.01);
     }
     
     @Test
     void calculatesRoundedTotalOrderValue() {
-        assertEquals(3575.74, calculator.calculateRoundedGrandTotal(new InputParameters(10, 345.00, "UT")), 0.01);
+        assertEquals(3686.33, calculator.calculateRoundedGrandTotal(new InputParameters(10, 345.00, "UT")), 0.01);
     }
 
     @Test 
