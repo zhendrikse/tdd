@@ -44,13 +44,25 @@ Create a 1-line calculator that computes the price of the order,
 giving a discount based on the order value (not number of items), 
 adding state tax based on the state and the discounted order value.
 
-| Order value | Discount rate | State Tax rate |
-|:----------- |:------------- |:-------------- |
-| $ 1,000     |  3 %          | UT 6.85 %      |
-| $ 5,000     |  5 %          | NV 8.00 %      |
-| $ 7,000     |  7 %          | TX 6.25 %      |
-| $10,000     | 10 %          | AL 4.00 %      |
-| $50,000     | 15 %          | CA 8.25 %      |
+### State taxes
+
+| State | State Tax rate |
+|:----- |:-------------- |
+| UT    | 6.85 %         |
+| NV    | 8.00 %         |
+| TX    | 6.25 %         |
+| AL    | 4.00 %         |
+| CA    | 8.25 %         |
+
+### Discount rates
+
+| Order value | Discount rate | 
+|:----------- |:------------- |
+| $ 1,000     |  3 %          | 
+| $ 5,000     |  5 %          | 
+| $ 7,000     |  7 %          | 
+| $10,000     | 10 %          | 
+| $50,000     | 15 %          | 
 
 ## Stage 2 for spreadsheets only:
 
