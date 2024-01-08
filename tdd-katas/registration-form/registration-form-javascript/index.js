@@ -4,8 +4,17 @@ var express = require('express'),
 const path = require('path');
 const PORT = 3000;
 const { validator } = require('./src/helpers');
+const setRateLimit = require("express-rate-limit");
 
 var app = express();
+
+// Rate limit middleware
+const rateLimitMiddleware = setRateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  message: "You have exceeded your 5 requests per minute limit.",
+  headers: true,
+});
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -15,16 +24,17 @@ app.use(bodyParser.json())
 
 app.use(express.static(__dirname));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+app.get('/', rateLimitMiddleware, (request, response) => {
+  response.sendFile(path.join(__dirname + '/index.html'));
 });
+app.set('trust proxy', 1)
 
-app.post('/submitform', (req, res) => {
-  const messages = validator(req.body);
+app.post('/submitform', rateLimitMiddleware, (request, response) => {
+  const messages = validator(request.body);
 
   if (Object.keys(messages).length > 0)
-    return res.status(433).send(messages);
-  return res.send('Thank you for subscribing');
+    return response.status(433).send(messages);
+  return response.send('Thank you for subscribing');
 });
 
 app.listen(PORT, (error) => {
