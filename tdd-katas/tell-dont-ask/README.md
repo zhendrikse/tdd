@@ -1,8 +1,12 @@
-This is a fork of the original Tell Don't Ask Kata of [@rachelcarmena](https://github.com/rachelcarmena/tell-dont-ask-kata) in Java. 
-In this directory, you'll find ports to other languages as well. 
-
 # Tell Don't Ask Kata
-A legacy refactor kata, focused on the violation of the [tell don't ask](https://pragprog.com/articles/tell-dont-ask) principle and the [anemic domain model](https://martinfowler.com/bliki/AnemicDomainModel.html).
+
+![Tell don't ask](./sound-159915_640.png)
+
+This kata focuses on refactoring legacy code, legacy code that violates the [tell don't ask](https://pragprog.com/articles/tell-dont-ask) principle. 
+This type of code/domain model is also known as the [anemic domain model](https://martinfowler.com/bliki/AnemicDomainModel.html).
+
+This is a fork of the original Tell Don't Ask Kata by [@rachelcarmena](https://github.com/rachelcarmena/tell-dont-ask-kata) in Java. 
+In addition, in this directory, you'll find ports to other languages as well. 
 
 ## Instructions
 Here you find a simple order flow application. It's able to create orders, do some calculations (totals and taxes), and manage them (approval/rejection and shipment).
