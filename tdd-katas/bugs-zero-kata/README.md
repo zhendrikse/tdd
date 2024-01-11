@@ -1,3 +1,10 @@
-# Introduction
+# Bugs zero 
 
-[Bugs zero kata](https://blog.adrianbolboaca.ro/2020/01/bugszero-kata/)
+![No bugs](https://github.com/martinsson/BugsZero-Kata/blob/master/bugs-zero-image.jpg)
+
+# References
+
+- [Description of goal(s)](https://kata-log.rocks/bugs-zero-kata) on kata-log.rocks
+- [Bugs zero kata blog post](https://blog.adrianbolboaca.ro/2020/01/bugszero-kata/)
+- [BugsZero-kata GitHub repository](https://github.com/martinsson/BugsZero-Kata)
+  
