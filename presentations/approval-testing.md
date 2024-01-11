@@ -42,13 +42,15 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
 
-![Michael Feathers](./images/legacy_code.png) <!-- .element width="33%" height="33%" -->
+![Michael Feathers](https://heiwa-it.com/wp-content/uploads/2020/02/MF-WEWLC-1.png) <!-- .element width="33%" height="33%" -->
 
 > To me, legacy code is simply code without tests &#8212; [Michael Feathers](https://www.goodreads.com/book/show/44919.Working_Effectively_with_Legacy_Code)
 
 ---
 
 ## Or even better...
+
+![Nicolas Carlo](./images/legacy_code.png) <!-- .element width="33%" height="33%" -->
 
 > Legacy Code is valuable code you’re afraid to change &#8212; [Nicolas Carlo](https://understandlegacycode.com/blog/what-is-legacy-code-is-it-code-without-tests/)
 
