@@ -147,7 +147,7 @@ class CalculatorTest(unittest.TestCase):
 
 ---
 
-## Even with combinatorial tests 🤩
+## Even with combinatoric tests 🤩
 
 ```python
 ...
