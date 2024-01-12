@@ -12,7 +12,7 @@ pytest = "^7.3.2"
 pyhamcrest = "^2.0.4"
 pandas = "^2.1.1"
 openpyxl = "^3.1.2"
-streamlit = "^1.27.2"
+streamlit = "^1.30.0"
 plotly-express = "^0.4.1"
 
 
