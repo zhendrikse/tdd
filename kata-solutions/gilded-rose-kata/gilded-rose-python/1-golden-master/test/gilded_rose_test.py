@@ -4,7 +4,7 @@ from gilded_rose import GildedRose, Item
 
 
 class GildedRoseTest(unittest.TestCase):
-    def test_add_combinatorial(self):
+    def test_update_combinatoric(self):
         names = [
             "foo", "Aged Brie", "Sulfuras, Hand of Ragnaros",
             "Backstage passes to a TAFKAL80ETC concert"
