@@ -8,7 +8,7 @@ authors = ["{{ cookiecutter.author }}  <{{ cookiecutter.email}}>"]
 python = ">=3.10.0,<3.12"
 {% if cookiecutter.rspec_syntax == "n" %}
 pytest-watch = "^4.2.0"
-pytest = "^7.3.2"
+pytest = "^7.4.4"
 pyhamcrest = "^2.0.4"
 {% if cookiecutter.code_coverage == "y" %}pytest-cov = "^4.1.0"{% endif %}
 {% endif %}
