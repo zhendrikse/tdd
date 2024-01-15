@@ -39,6 +39,9 @@ below fixes the seed of the random generator that
 is used to simulate the roll of a die. This becomes necessary once
 we wil be using the output for our snapshots.
 
+<details>
+    <summary>Definition of the <code>GameRunner</code> class</summary>
+
 ```python
 from random import seed, randrange
 from game import Game
@@ -76,6 +79,7 @@ class GameRunner:
 if __name__ == '__main__':
     GameRunner.main()
 ```
+</details>
 
 When we run the game runner, we should see the output on the console:
 
@@ -87,6 +91,9 @@ $ python3 src/game_runner.py
 
 We capture the console output of a function with a little trick:
 
+<details>
+    <summary>Capturing the output from the console</summary>
+    
 ```python
 import io
 from contextlib import redirect_stdout
@@ -105,6 +112,7 @@ class TestGame:
     output = self.catch_output(GameRunner.main)
     verify(output)
 ```
+</details>
 
 This should give our first snapshot! By modifying the invocation of `pytest`
 a little bit, we also get a coverage report
