@@ -1,13 +1,19 @@
 [tool.poetry]
-name = "BugsZeroKata"
+name = "Trivia"
 version = "0.1.0"
-description = ""
-authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
+description = "The bugs zero kata"
+authors = ["Zeger Hendrikse  <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.12"
-approvaltests = "^9.0.0"
+
+pytest-watch = "^4.2.0"
+pytest = "^7.4.4"
+pyhamcrest = "^2.1.0"
 pytest-cov = "^4.1.0"
+approvaltests = "^10.2.0"
+
+
 
 [tool.poetry.dev-dependencies]
 

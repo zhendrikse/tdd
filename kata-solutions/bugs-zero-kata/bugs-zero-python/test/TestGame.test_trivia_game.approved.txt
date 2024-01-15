@@ -95,11 +95,33 @@ Chet's new location is 1
 The category is Science
 Science Question 3
 Answer was correct!!!!
-Pat now has 5 Gold Coins.
+Chet now has 4 Gold Coins.
 Pat is the current player
 They have rolled a 5
 Pat's new location is 1
 The category is Science
 Science Question 4
+Answer was corrent!!!!
+Pat now has 5 Gold Coins.
+Sue is the current player
+They have rolled a 5
+Sue's new location is 1
+The category is Science
+Science Question 5
+Answer was corrent!!!!
+Sue now has 5 Gold Coins.
+Chet is the current player
+They have rolled a 5
+Chet is getting out of the penalty box
+Chet's new location is 6
+The category is Sports
+Sports Question 3
+Answer was correct!!!!
+Chet now has 5 Gold Coins.
+Pat is the current player
+They have rolled a 5
+Pat's new location is 6
+The category is Sports
+Sports Question 4
 Answer was corrent!!!!
 Pat now has 6 Gold Coins.
