@@ -80,6 +80,8 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 ---
 > We gaan ons best doen om gewoon door te blijven leren. En wie weet is er uiteindelijk toch iemand met budget om een nieuwe coach in te huren &mdash; [Walter Vos](https://github.com/waltervos)
 ---
+> Jammer dat jou werk voor NS erop zit. Voor mij was het leerzaam en heeft het best veel nieuwe inzichten gegeven! Jou kennis en kunde waardeer ik dan ook zeer! &mdash; Ian Hulsbos
+---
 > Ik wil voorop stellen dat ik het een hele leuke dag vond. Dank aan Zeger voor het enthousiasme en voorbereiding!!!
 ---
 > Op aanraden van [naam verwijderd] heb ik gevraagd aan [naam verwijderd] of we Zeger kunnen inhuren tbv van voortzetting vd Coding Dojo’s &mdash; Bert Huisman
