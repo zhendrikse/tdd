@@ -118,7 +118,7 @@ This should give our first snapshot! By modifying the invocation of `pytest`
 a little bit, we also get a coverage report
 
 ```bash
-PYTHONPATH=src poetry run pytest --cov game test/game_test.py
+PYTHONPATH=src poetry run pytest --cov-report html --cov=game test/game_test.py
 ```
 
 
