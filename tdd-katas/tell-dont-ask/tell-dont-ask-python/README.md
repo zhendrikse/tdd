@@ -134,9 +134,9 @@ class Product(object):
   
    ```python
    order.check_shipment()
-     self.shipment_service.ship(order)
-     order.shipped()
-     self.order_repository.save(order)
+   self.shipment_service.ship(order)
+   order.shipped()
+   self.order_repository.save(order)
    ```
    </details>
 
