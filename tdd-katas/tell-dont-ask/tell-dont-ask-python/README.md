@@ -1,29 +1,17 @@
 ## Make [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) a [value object](https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6)
 
-Make [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) a value object and modify [OrderCreationUseCase.py](TellDontAskKata#src/useCase/OrderCreationUseCase.py) accordingly.
+Make [OrderItem.py](TellDontAskKata#src/domain/OrderItem.py) a value object and modify [OrderCreationUseCase.py](TellDontAskKata#src/useCase/OrderCreationUseCase.py) accordingly by moving the setter parameter values into the constructor..
 
 <details>
 <summary>Making <code>OrderItem.py</code> a value object</summary>
 
 ```python
+@dataclass(frozen=True)
 class OrderItem(object):
-  def __init__(self, product: Product, quantity: int, tax: Decimal, taxed_amount: Decimal):
-    self.product = product
-    self.quantity = quantity
-    self.taxed_amount = taxed_amount
-    self.tax = tax
-
-  def get_product(self):
-    return self.product
-
-  def get_quantity(self):
-    return self.quantity
-
-  def get_taxed_amount(self):
-    return self.taxed_amount
-      
-  def get_tax(self):
-    return self.tax
+    product: Product
+    quantity: int
+    taxed_amount: decimal.Decimal
+    tax: decimal.Decimal
 ```
 </details>
 
@@ -35,16 +23,10 @@ Make [Category.py](TellDontAskKata#src/domain/Category.py) a value object and mo
 <summary>Making <code>Category.py</code> a value object</summary>
 
 ```python
+@dataclass(frozen=True)
 class Category(object):
-  def __init__(self, name:str, tax_percentage: decimal.Decimal):
-    self.name = name
-    self.tax_percentage = tax_percentage
-
-  def get_name(self):
-    return self.name
-
-  def get_tax_percentage(self):
-    return self.tax_percentage
+    name: str
+    tax_percentage: decimal.Decimal
 ```
 </details>
 
@@ -57,20 +39,11 @@ Make [Product.py](TellDontAskKata#src/domain/Product.py) a value object and modi
 <summary>Making <code>Product.py</code> a value object</summary>
 
 ```python
+@dataclass(frozen=True)
 class Product(object):
-  def __init__(self, name: str, price: decimal.Decimal, category: Category):
-    self.name = name
-    self.price = price
-    self.category = category
-    
-  def get_name(self):
-    return self.name
-
-  def get_price(self):
-    return self.price
-
-  def get_category(self):
-    return self.category
+    name: str
+    price: decimal.Decimal
+    category: Category
 ```
 </details>
 
