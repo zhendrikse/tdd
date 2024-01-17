@@ -54,6 +54,30 @@ in the form of courses, workshops, and/or coding dojos.
 | [<code>tdd-katas</code>](./tdd-katas/)           |  <ul><li>[README.md](./tdd-katas/README.md)  &rarr; Summary of which topics are addressed by which kata at which level of difficulty</li><li>Huge collection of Coding katas </li></ul> |
 | [<code>tools</code>](./tools/)                   | Playgrounds for getting acquainted with tools, libraries, and frameworks such as [approval testing](https://approvaltests.com/) | 
 
+# Coding dojos
+
+## In the office
+
+![Coding dojo](./assets/zeger_teaching.jpg)
+
+## On-line
+
+![Coding dojo](./assets/DojoInAction.png)
+
+## Testimonies
+
+> Ik steek veel op van de dojo's, maar heb soms ook het idee dat ik echt nog maar de punt van de ijsberg heb
+> geleerd en er nog VEEL meer is waar we nog een jaar meer door hadden kunnen gaan &mdash; [Rogier van Dinther](https://github.com/rogierdinther)
+---
+> We gaan ons best doen om gewoon door te blijven leren. En wie weet is er uiteindelijk toch iemand met budget om een nieuwe coach in te huren &mdash; [Walter Vos](https://github.com/waltervos)
+---
+> Jammer dat jou werk voor NS erop zit. Voor mij was het leerzaam en heeft het best veel nieuwe inzichten gegeven! Jou kennis en kunde waardeer ik dan ook zeer! &mdash; Ian Hulsbos
+---
+> Ik wil voorop stellen dat ik het een hele leuke dag vond. Dank aan Zeger voor het enthousiasme en voorbereiding!!!
+---
+> Op aanraden van [naam verwijderd] heb ik gevraagd aan [naam verwijderd] of we Zeger kunnen inhuren tbv van voortzetting vd Coding Dojo’s &mdash; Bert Huisman
+---
+
 # References
 
 ## Links
@@ -70,22 +94,6 @@ Feel free to contact me at: **zeger** _&lt;dot&gt;_ **hendrikse** _&lt;at&gt;_ *
 - Feedback and suggestions
 - Offering any of the katas in other languages than offered here
 - Facilitating a course and/or [coding dojos](https://codingdojo.org/WhatIsCodingDojo/), where apprentices can practice [katas](http://codekata.com/) together (with me as sensei 😉).
-
-## Testimonies
-
-![Coding dojo](./assets/zeger_teaching.jpg)
-
-> Ik steek veel op van de dojo's, maar heb soms ook het idee dat ik echt nog maar de punt van de ijsberg heb
-> geleerd en er nog VEEL meer is waar we nog een jaar meer door hadden kunnen gaan &mdash; [Rogier van Dinther](https://github.com/rogierdinther)
----
-> We gaan ons best doen om gewoon door te blijven leren. En wie weet is er uiteindelijk toch iemand met budget om een nieuwe coach in te huren &mdash; [Walter Vos](https://github.com/waltervos)
----
-> Jammer dat jou werk voor NS erop zit. Voor mij was het leerzaam en heeft het best veel nieuwe inzichten gegeven! Jou kennis en kunde waardeer ik dan ook zeer! &mdash; Ian Hulsbos
----
-> Ik wil voorop stellen dat ik het een hele leuke dag vond. Dank aan Zeger voor het enthousiasme en voorbereiding!!!
----
-> Op aanraden van [naam verwijderd] heb ik gevraagd aan [naam verwijderd] of we Zeger kunnen inhuren tbv van voortzetting vd Coding Dojo’s &mdash; Bert Huisman
----
 
 ## Credits
 
