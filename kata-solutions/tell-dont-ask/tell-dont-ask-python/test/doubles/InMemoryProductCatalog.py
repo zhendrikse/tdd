@@ -6,4 +6,4 @@ class InMemoryProductCatalog(ProductCatalog):
         self.products = products
 
     def get_by_name(self, name: str):
-        return next(filter(lambda product: product.name is name, self.products), None)
+        return next(filter(lambda product: product.get_name() is name, self.products), None)

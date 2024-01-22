@@ -1,12 +1,16 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class OrderApprovalRequest:
-    def set_order_id(self, order_id: int):
-        self.order_id = order_id
+    _order_id: int
+    _approved: bool = False
 
     def get_order_id(self):
-        return self.order_id
+        return self._order_id
 
-    def set_approved(self, approved: bool):
-        self.approved = approved
+    def approve(self):
+        self._approved = True
 
     def is_approved(self):
-        return self.approved
+        return self._approved

@@ -10,60 +10,60 @@ from src.useCase.OrderCannotBeShippedTwiceError import OrderCannotBeShippedTwice
 
 class Order(object):
     def __init__(self, order_id:int, currency:str = "EUR"):
-        self.status = OrderStatus.CREATED
-        self.items= []
-        self.currency= "EUR"
-        self.total = Decimal("0.00")
-        self.tax = Decimal("0.00")
-        self.id = order_id
+        self._status = OrderStatus.CREATED
+        self._items= []
+        self._currency= "EUR"
+        self._total = Decimal("0.00")
+        self._tax = Decimal("0.00")
+        self._id = order_id
 
     def get_total(self):
-        return self.total
+        return self._total
 
     def get_currency(self):
-        return self.currency
+        return self._currency
 
     def get_items(self):
-        return self.items
+        return self._items
 
     def get_tax(self):
-        return self.tax
+        return self._tax
 
     def get_status(self):
-        return self.status
+        return self._status
 
     def get_id(self):
-        return self.id
+        return self._id
       
     def add_order_item(self, item: OrderItem):
-        self.items.append(item)
-        self.total = self.total + item.get_taxed_amount()
-        self.tax= self.tax + item.get_tax()
+        self._items.append(item)
+        self._total = self._total + item.get_taxed_amount()
+        self._tax= self._tax + item.get_tax()
 
     def approve(self):
-        if self.status is OrderStatus.SHIPPED:
+        if self._status is OrderStatus.SHIPPED:
             raise ShippedOrdersCannotBeChangedError()
 
-        if self.status is OrderStatus.REJECTED:
+        if self._status is OrderStatus.REJECTED:
             raise RejectedOrderCannotBeApprovedError()
 
-        self.status = OrderStatus.APPROVED
+        self._status = OrderStatus.APPROVED
 
     def reject(self):
-        if self.status is OrderStatus.SHIPPED:
+        if self._status is OrderStatus.SHIPPED:
             raise ShippedOrdersCannotBeChangedError()
             
-        if self.status is OrderStatus.APPROVED:
+        if self._status is OrderStatus.APPROVED:
             raise ApprovedOrderCannotBeRejectedError()
 
-        self.status = OrderStatus.REJECTED
+        self._status = OrderStatus.REJECTED
 
     def check_shipment(self):
-        if self.status is OrderStatus.CREATED or self.status is OrderStatus.REJECTED:
+        if self._status is OrderStatus.CREATED or self._status is OrderStatus.REJECTED:
             raise OrderCannotBeShippedError()
 
-        if self.status is OrderStatus.SHIPPED:
+        if self._status is OrderStatus.SHIPPED:
             raise OrderCannotBeShippedTwiceError()
 
     def shipped(self):
-        self.status = OrderStatus.SHIPPED
+        self._status = OrderStatus.SHIPPED
