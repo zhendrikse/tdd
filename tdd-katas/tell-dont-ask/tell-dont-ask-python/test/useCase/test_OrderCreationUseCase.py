@@ -3,13 +3,13 @@ import unittest
 
 from hamcrest import assert_that, is_, has_length, calling, raises
 
-from src.domain.Category import Category
-from src.domain.OrderStatus import OrderStatus
-from src.domain.Product import Product
-from src.useCase.OrderCreationUseCase import OrderCreationUseCase
-from src.useCase.SellItemRequest import SellItemRequest
-from src.useCase.SellItemsRequest import SellItemsRequest
-from src.useCase.UnknownProductError import UnknownProductError
+from ..domain.Category import Category
+from ..domain.OrderStatus import OrderStatus
+from ..domain.Product import Product
+from ..useCase.OrderCreationUseCase import OrderCreationUseCase
+from ..useCase.SellItemRequest import SellItemRequest
+from ..useCase.SellItemsRequest import SellItemsRequest
+from ..useCase.UnknownProductError import UnknownProductError
 from ..doubles.InMemoryProductCatalog import InMemoryProductCatalog
 from ..doubles.StubOrderRepository import StubOrderRepository
 
@@ -32,8 +32,8 @@ class TestOrderCreationUseCase(unittest.TestCase):
         product2.set_price(decimal.Decimal("4.65"))
         product2.set_category(food)
 
-        productCatalog = InMemoryProductCatalog([product1, product2])
-        self.use_case = OrderCreationUseCase(self.order_repository, productCatalog)
+        product_catalog = InMemoryProductCatalog([product1, product2])
+        self.use_case = OrderCreationUseCase(self.order_repository, product_catalog)
 
     def test_sell_multiple_items(self):
         salad_request = SellItemRequest()
