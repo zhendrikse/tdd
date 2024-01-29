@@ -4,14 +4,17 @@ Please read the general [introduction to the manhattan distance kata](../README.
 
 # Getting started
 
-First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First, create an initial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
 Next, go the the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # Implementation instructions
 
-We are going to start as simple as possible by defining everything in the specification file and gradually move the code to dedicated classes such `point.py` whenever we deem appropriate.
+We are going to start as simple as possible by defining everything in the specification file and gradually moving the code to dedicated classes such `point.py` whenever we deem appropriate.
+
+<details>
+   <summary>Optional: suggestion for a possible implementation</summary>
 
 - Start writing a scenario for a point on a line, i.e. in one dimension, so it only needs one coordinate: 
    1. Let's specify first that the distance to itself is zero.
@@ -21,7 +24,7 @@ We are going to start as simple as possible by defining everything in the specif
    with it("has zero distance to itself"):
       expect(manhattanDistance(point_a, point_a)).to(equal(0))
    ```
-     b. Implement the `manhattanDistance()` function in the most stupid way possible, just to make the test pass. For this it is also necessary to add a constructor to the `Point` class, but may still be empty!
+     b. Implement the `manhattanDistance()` function in the most stupid way possible, just to make the test pass. For this, it is also necessary to add a constructor to the `Point` class, but may still be empty!
      
      c. After the test is green, you may want to refactor the hard-coded return value into the `Point` class.
    
@@ -38,7 +41,7 @@ We are going to start as simple as possible by defining everything in the specif
 
  - Start writing a scenario for a point in a plane, i.e. in two dimensions, so it needs two coordinates. Do this in a way that you do _not_ have to modify the scenarios that are already there.
    1. Let's specify first that the distance to a point itself in a plane/two-dimensional space is zero.
-   2. Now specify the distance to antoher point.
+   2. Now specify the distance to another point.
    3. Make the test green and refactor where necessary.
    4. Do we need any additional scenarios/tests?
    
@@ -51,7 +54,7 @@ We are going to start as simple as possible by defining everything in the specif
   
   We are going to refactor our code in the following _small_ steps:
   
-  1. Refactor the constructor so that it takes `*args` as argument and assign it to the existing `self.x` and `self.y` cooordinates. 
+  1. Refactor the constructor so that it takes `*args` as an argument and assigns it to the existing `self.x` and `self.y` coordinates. 
   Hint: use the following code to assign the second optional coordinate:
     ```python
     self.y = args[1] if len(args) > 1 else 0
@@ -71,18 +74,19 @@ We are going to start as simple as possible by defining everything in the specif
   Verify that everything still works by running your tests!
   5. Convert the above if-statements to a generalized loop.
   Verify that everything still works by running your tests!
+</details>
 
 # Optional: determine all shortest paths
 
 For those that are up to a more challenging extension: determine all possible shortest paths when the points are two-dimensional (see [this web page](https://www.robertdickau.com/manhattan.html) for a nice graphical representation when the horizontal and vertical distances are equal).   
 
-Let's say two points are _x_ blocks separated horizontally and _y_ blocks vertically. This means that the number of possible routes is defined by the number of ways in which we can distribute the _horizontal steps_ over the _total number of steps_, i.e. _x + y_ choose _x_ (where [_n_ choose _k_](https://programming-idioms.org/idiom/67/binomial-coefficient-n-choose-k/1426/python) is defined as the [binomial coefficient](https://en.wikipedia.org/wiki/Binomial_coefficient)). Obviously we reach the same answer when considering the distribution of _vertical steps_ over the _total number of steps_. 
+Let's say two points are _x_ blocks separated horizontally and _y_ blocks vertically. This means that the number of possible routes is defined by the number of ways in which we can distribute the _horizontal steps_ over the _total number of steps_, i.e. _x + y_ choose _x_ (where [_n_ choose _k_](https://programming-idioms.org/idiom/67/binomial-coefficient-n-choose-k/1426/python) is defined as the [binomial coefficient](https://en.wikipedia.org/wiki/Binomial_coefficient)). Obviously, we reach the same answer when considering the distribution of _vertical steps_ over the _total number of steps_. 
 
-For example, in [the above mentioned web page](https://www.robertdickau.com/manhattan.html) for two points that are 3 blocks separated in both directions we get 6 choose 3 &rarr; (6 x 5 x 4) / (3 x 2 x 1) = 20. This corresponds with the number of routes drawn on that page. 
+For example, in [the above-mentioned web page](https://www.robertdickau.com/manhattan.html) for two points that are 3 blocks separated in both directions, we get 6 choose 3 &rarr; (6 x 5 x 4) / (3 x 2 x 1) = 20. This corresponds with the number of routes drawn on that page. 
 
-The simplest extension would thus be to add an additional function that calculates the total number of shortest paths.
+The simplest extension would thus be to add a function that calculates the total number of shortest paths.
 
-The somewhat more complex extension would be to output all paths explicitly in sequence of steps, where `u` is up, `d` is down, `l` is left, and `r` is right. A typical output for two points separated 3 blocks horizontally and 2 vertically would then look something like
+The somewhat more complex extension would be to output all paths explicitly in a sequence of steps, where `u` is up, `d` is down, `l` is left, and `r` is right. A typical output for two points separated 3 blocks horizontally and 2 vertically would then look something like
 
 ```
 llluu
@@ -97,8 +101,9 @@ ullul
 ulull  
 ```
 
-![Manhattan distance](./assets/spoiler.png)
-<p align="center" ><b>Figure 2</b>: <i>Continue reading the hint below if you can't find the algorithm to find all possible paths yourself.</i></p>
+<img alt="spoiler" src="../assets/spoiler.png" width="40%" height="40%"/>
+
+**Figure 2**: _Continue reading the hint below if you can't find the algorithm to find all possible paths yourself._
 
 ### Hint
 
