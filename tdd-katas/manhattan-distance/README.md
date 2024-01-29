@@ -25,3 +25,24 @@ So summarizing, the following rules need to be applied:
 - The class `Point` is immutable (its state cannot be changed after instantiation)
 - The class `Point` has no getters for the coordinates
 - The class `Point` has no public properties (i.e. the internal state cannot be read nor modified from outside the class).
+
+## Optional extension
+
+# Optional: determine all shortest paths
+
+For those that are up to a more challenging extension: determine the number of possible shortest paths when the points are two-dimensional (see [this web page](https://www.robertdickau.com/manhattan.html) for a nice graphical representation when the horizontal and vertical distances are equal).   
+
+A somewhat more complex extension would be to output all paths explicitly in a sequence of steps, where `u` is up, `d` is down, `l` is left, and `r` is right. A typical output for two points separated 3 blocks horizontally and 2 vertically would then look something like
+
+```
+llluu
+lluul
+luull 
+uulll
+llulu
+lullu 
+ulllu
+lulul 
+ullul
+ulull  
+```
