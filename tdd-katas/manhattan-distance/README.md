@@ -26,9 +26,9 @@ So summarizing, the following rules need to be applied:
 - The class `Point` has no getters for the coordinates
 - The class `Point` has no public properties (i.e. the internal state cannot be read nor modified from outside the class).
 
-## Optional extension
+# Optional extensions
 
-# Optional: determine all shortest paths
+## Determine all shortest paths
 
 For those that are up to a more challenging extension: determine the number of possible shortest paths when the points are two-dimensional (see [this web page](https://www.robertdickau.com/manhattan.html) for a nice graphical representation when the horizontal and vertical distances are equal).   
 
