@@ -6,7 +6,8 @@
 kata [GameOfLife]: 
 ```
 
-Name of the kata. The name of the two generatied source and 
+Name of the kata.
+The name of the two generated source and 
 test files will be based on this name.
 
 ### Project slug
@@ -17,7 +18,7 @@ project_slug [gameoflife]:
 
 This slug is automatically generated and generally doesn't
 need to be modified. The directory name of the kata will be
-named usiing this slug.
+named using this slug.
 
 ### Short description
 
@@ -51,7 +52,7 @@ Choose from 1, 2 [1]:
 Choose this if you want to have code coverage facilities.
 
 When code coverage is enabled, a file called ``coverage`` will be produced.
-This can be inspected by invoking
+This file can be analyzed by invoking
 
 ```shell
 $ poetry run coverage report

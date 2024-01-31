@@ -1,7 +1,7 @@
 # {{ cookiecutter.kata }} Code Kata
 
 Welcome to your new Code Kata.  Test-driven development is a lot of fun, and a
-great form of "deliberate practice".  You're almost there - there's
+great form of "deliberate practice."  You're almost there - there's
 one more step needed to get up and running.
 
 ## Running the tests
@@ -14,17 +14,18 @@ $ gradle test --continuous
 
 # Introduction TDD
 
-TDD gives you a very fast feedback cycle, and helps you evolve a
-solution incrementally, in _extremely small_ increments.  TDD gives you feedback
+TDD gives you a fast feedback cycle, and helps you evolve a
+solution incrementally, in _tiny_ increments.  
+TDD gives you feedback
 on your design and lets you make many small improvements to your
 code. You can do this with confidence because the tests will catch any
 accidental regression as you apply these refactorings.
 
 Doing TDD means you iteratively repeat the following three steps 
 
-1. First we write a _failing_ test. It is important to make the test fail first, as this assures us the test actually works! We are allowed to write just so much test code, that makes test fail. This includes compilation errors!
-2. Next we implement _just enough_ production code to make the test pass.
-3. We ask ourselves if there is anything that we can refactor, by applying e.g. the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
+1. First, we write a _failing_ test. It is important to make the test fail first, as this assures us the test actually works! We are allowed to write just so much test code, that makes test fail. This includes compilation errors!
+2. Next, we implement _just enough_ production code to make the test pass.
+3. We ask ourselves if there is anything that we can refactor, by applying, e.g. the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
 
 ```                                 
   +--------------------------------+
@@ -52,7 +53,7 @@ Doing TDD means you iteratively repeat the following three steps
 ## Kent Beck's design rules
 
 ![Kent Beck](./assets/kent_beck.png)
-**Figure 1**: _One of the fouding fathers of test-driven development: [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)._
+**Figure 1**: _One of the founding fathers of test-driven development: [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)._
 
 Kent Beck introduced the [four design rules](https://martinfowler.com/bliki/BeckDesignRules.html). After making the test pass, he (strictly) applies the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and the [reveal intent, hide implementation](https://dev.to/codingunicorn/reveal-intent-hide-implementation-42lc) principles. Last but not least, he also (again strictly) applies the simplest thing that could possibly work. This may actually be one of the trickiest practices to apply properly, as you will see.
 

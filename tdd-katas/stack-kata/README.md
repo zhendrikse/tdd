@@ -9,7 +9,7 @@ You will learn to:
 1. Effectively and strictly apply TDD, i.e. writing tests for each and every line of code.
 2. To use code coverage effectively (i.e. always reaching 100%).
 3. That TDD and BDD are in fact _very closely_ related.
-4. To work in _extremely small_ increments.
+4. To work in _tiny_ increments.
 5. Experience the joy every time the tests are green (again)!
 
 # The exercise

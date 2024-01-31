@@ -6,8 +6,8 @@ Please read the general [introduction to the manhattan distance kata](../README.
 
 First, create an initial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
-the provided ``README.md`` in there.
+Next, go the newly created project directory and consult
+the provided `README.md` in there.
 
 # Implementation instructions
 
@@ -16,7 +16,7 @@ We are going to start as simple as possible by defining everything in the specif
 <details>
    <summary>Optional: suggestion for a possible implementation</summary>
 
-- Start writing a scenario for a point on a line, i.e. in one dimension, so it only needs one coordinate: 
+- Start writing a scenario for a point on a line, i.e., in one dimension, so it only needs one coordinate: 
    1. Let's specify first that the distance to itself is zero.
 
      a. Let's first write the scenario:

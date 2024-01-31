@@ -6,7 +6,7 @@
 kata [GameOfLife]: 
 ```
 
-Name of the kata. The name of the two generatied source and 
+Name of the kata. The name of the two generated source and 
 test files will be based on this name.
 
 ### Project slug
@@ -17,7 +17,7 @@ project_slug [gameoflife]:
 
 This slug is automatically generated and generally doesn't
 need to be modified. The directory name of the kata will be
-named usiing this slug.
+named using this slug.
 
 ### Short description
 
@@ -25,7 +25,7 @@ named usiing this slug.
 project_short_description [This kata practices TDD]: 
 ```
 
-Optional, will be used in packaging files such as the ```package.json```.
+Optional, will be used in packaging files such as the `package.json`.
 
 
 ### Author
@@ -34,7 +34,7 @@ Optional, will be used in packaging files such as the ```package.json```.
 author [Your name]: 
 ```
 
-Optional, will be used in packaging files such as the ```package.json```.
+Optional, will be used in packaging files such as the `package.json`.
 
 # Running the project
 

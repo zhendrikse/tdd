@@ -4,13 +4,13 @@ Please read the general [introduction to the vending machine kata](../README.md)
 
 # Getting started
 
-First, create an intial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First, create an initial Java kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 In this exercise, we _are_ going to use the rSpec syntax, so
 you should enable that option if you are planning to follow the 
 instructions to the letter.
 
-Next, go the the newly created project directory and consult
-the provided ``README.md`` in there.
+Next, go the newly created project directory and consult
+the provided `README.md` in there.
 
 # Implementation instructions
 
@@ -31,7 +31,7 @@ describe("A new vending machine", () -> {
 });
 ```
 
-Obviously, this fails miserably, as the both the deliver method and the
+This fails miserably, as both the delivery method and the
 enumerations are not defined. So let's introduce them both in the 
 production code.
 

@@ -4,10 +4,10 @@ Please read the general [introduction to the stack kata](../README.md) first!
 
 # Getting started
 
-First, create an intial Typescript kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First, create an initial Typescript kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
-the provided ``README.md`` in there.
+Next, go the newly created project directory and consult
+the provided `README.md` in there.
 
 # Implementation instructions
 
@@ -117,7 +117,7 @@ Let's configure a different drink
 
 After extending the choice and can types, the test jumps to green.
 
-In order to make the configuration more similar with the previous test,
+To make the configuration more similar with the previous test,
 we can add a similar line to our current test and vice versa:
 
 ```typescript

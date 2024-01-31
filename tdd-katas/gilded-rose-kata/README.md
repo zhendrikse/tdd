@@ -6,10 +6,10 @@ The [Gilded Rose kata](https://github.com/emilybache/GildedRose-Refactoring-Kata
 
 - All items have a SellIn value which denotes the number of days we have to sell the item
 - All items have a Quality value which denotes how valuable the item is
-- At the end of each day our system lowers both values for every item
+- At the end of each day, our system lowers both values for every item
 
 The item sell date and quality are daily updated by invocation of the associated `update()` method call.
-Pretty simple, right? Well this is where it gets interesting:
+Pretty simple, right? Well, this is where it gets interesting:
 
 - Once the sell by date has passed, Quality degrades twice as fast
 - The Quality of an item is never negative
@@ -30,7 +30,7 @@ Before we can touch/modify/refactor an existing code base, we first have to make
 
 ![Snapshot](./assets/snapshot.png)
 
-This is exactly what we will do in this excercise using [approval testing](https://approvaltests.com/).
+This is exactly what we will do in this exercise using [approval testing](https://approvaltests.com/).
 
 ## References
 

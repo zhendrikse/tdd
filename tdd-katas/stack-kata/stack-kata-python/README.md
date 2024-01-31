@@ -4,9 +4,9 @@ Please read the general [introduction to the stack kata](../README.md) first!
 
 # Getting started
 
-First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First, create an initial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
+Next, go the newly created project directory and consult
 the provided ``README.md`` in there.
 
 ## Preparations
@@ -96,7 +96,7 @@ Arriving at item number four from our TODO list:
 
 ### Exercise VI: multple pushes and pops
 
-Finally we are going for the real stack implementation:
+Finally, we are going for the real stack implementation:
 
 - Write a failing specification that asserts the stack is not empty after an additional element is pushed onto the stack followed by a single pop operation.
 - Modify the production code to make the test green by introducing a member varialbe `size`.

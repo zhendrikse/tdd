@@ -4,9 +4,9 @@ Please read the general [introduction to the vending machine kata](../README.md)
 
 # Getting started
 
-First, create an intial Kotlin kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First, create an initial Kotlin kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
+Next, go the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # Implementation instructions

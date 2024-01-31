@@ -15,7 +15,7 @@ As a thirsty traveler, I want to buy a can of soda so that I can quench my thirs
 
 ## TODO list
 
-- Unconfigured machine delivers nothing
+- An unconfigured machine delivers nothing
 - Choosing cola delivers Coke
 - Choosing fizzy orange delivers Fanta
 

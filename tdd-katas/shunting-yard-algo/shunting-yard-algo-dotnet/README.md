@@ -4,9 +4,10 @@ Please read the general [introduction to the shunting yard algorithm](../README.
 
 # Getting started
 
-First, create an intial .Net kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First,
+create an initial .Net kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
+Next, go the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # Implementation instructions

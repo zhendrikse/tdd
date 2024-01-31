@@ -4,10 +4,11 @@ Please read the general [introduction to the stack kata](../README.md) first!
 
 # Getting started
 
-First, create an intial Javascript kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First,
+create an initial Javascript kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
-the provided ``README.md`` in there.
+Next, go the newly created project directory and consult
+the provided `README.md` in there.
 
 # Implementation instructions
 
@@ -25,7 +26,7 @@ describe("A new vending machine", function() {
 })
 ```
 
-Obviously, this fails miserably, as the both the deliver method and the
+This fails miserably, as both the delivery method and the
 enumerations are not defined. So let's introduce them both in the 
 production code
 
@@ -63,7 +64,7 @@ to the production code and add
 const { VendingMachine, Choice, Can } = require('../src/VendingMachine.js')
 ```
 
-to our specifications file. 
+to our specification file. 
 
 We should have our first passing test now.
 
@@ -109,7 +110,7 @@ class VendingMachine {
 ```
 
 Next, identify the duplicate code (hint: in the spec file), and
-eliminate it using the ``beforeEach()``
+eliminate it using the `beforeEach()`
 
 ```javascript
     beforeEach(function () {
@@ -127,7 +128,7 @@ Let's configure a different drink
 ```
 
 After extending the choice and can types, we can easily make this test
-pass by modifying the ``deliver()`` method slightly
+pass by modifying the `deliver()` method slightly
 
 ```javascript
   configure(choice, can) {
@@ -184,8 +185,8 @@ once for all tests
 
 This makes our first test fail, because it now actually gets 
 delivered a can of Coke. But the idea of the first test was to 
-test for a non-existing choice, so let's replace the ``Choice.COLA`` 
-by ``Choice.BEER``. Now all three tests are green again!
+test for a non-existing choice, so let's replace the `Choice.COLA` 
+by `Choice.BEER`. Now all three tests are green again!
 
 ## Delivering cans that cost money
 

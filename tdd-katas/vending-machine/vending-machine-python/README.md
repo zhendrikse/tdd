@@ -4,9 +4,10 @@ Please read the general [introduction to the vending machine](../README.md) firs
 
 # Getting started
 
-First, create an intial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First, 
+create an initial Python kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
+Next, go the newly created project directory and consult
 the provided ``README.md`` in there.
 
 # Implementation instructions
@@ -28,7 +29,7 @@ with description(VendingMachine) as self:
 ```
 </details>
 
-Obviously, this test fails miserably, as both the deliver method and the
+This test fails miserably, as both the delivery method and the
 enumerations are not defined. So let's introduce them both in the 
 production code
 
@@ -114,7 +115,7 @@ eliminate it using the ``before.Each:``
 </details>
 
 Configuring a different drink will force us to further
-generlize the production code!
+generalize the production code!
 
 <details>
   <summary>Adding a test for yet another type of can</summary>
@@ -297,7 +298,7 @@ the ``before.each`` step, the test fails!
 So now we need to introduce yet another map, namely a map between choices
 and prices.
 
-Finaly, we expect no more cans after a can has been withdrawn, as our
+Finally, we expect no more cans after a can has been withdrawn, as our
 balance should have shrunk
 
 ```python

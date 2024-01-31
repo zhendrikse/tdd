@@ -4,10 +4,11 @@ Please read the general [introduction to the vending machine kata](../README.md)
 
 # Getting started
 
-First, create an intial .Net kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
+First,
+create an initial .Net kata set-up as described [here](https://github.com/zhendrikse/tdd/tree/master/cookiecutter).
 
-Next, go the the newly created project directory and consult
-the provided ``README.md`` in there.
+Next, go the newly created project directory and consult
+the provided `README.md` in there.
 
 # Implementation instructions
 
@@ -28,7 +29,7 @@ nothing, whatever we ask it to deliver.
     }
 ```
 
-Obviously, this fails miserably, as the both the deliver method and the
+This fails miserably, as both the delivery method and the
 enumerations are not defined. So let's introduce them both in the 
 production code.
 
@@ -164,7 +165,7 @@ Let's configure a different drink.
 ```
 
 After extending the choice and can types, we can notice that this test
-already passes! That is cause by the fact we always deliver the most
+already passes! That is caused by the fact we always deliver the most
 recently configured choice. So by extending the configuration in our
 test, the test will fail and will force us to generalize the production 
 code.
@@ -329,7 +330,7 @@ This forces us to modify the implementation.
 </details>
 
 Again, we observe duplication in the specification file, which leads
-to a nesting of the ``describe`` statements.
+to a nesting of the `describe` statements.
 
 <details>
   <summary>Applying the DRY principle once more</summary>

@@ -20,7 +20,7 @@ multiple different ways. Many people have already written about such approaches:
 - [TDD Practice #2: The Sudoku Example in Clojure – Starting the Unit Testing](https://www.linkedin.com/pulse/tdd-practice-2-sudoku-example-clojure-starting-unit-testing-viana-/)
   outlines a _strict_ TDD approach using the [Transformation Priority Premise](https://blog.cleancoder.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html).
   This approach clearly shows how to incrementally develop a recursive algorithm.
-- Brute force approaches often rely on some form of [backtraching](https://github.com/zhendrikse/tdd/wiki/Coding-Katas#katas-using-backtracking-algorithms).
+- Brute force approaches often rely on some form of [backtracking](https://github.com/zhendrikse/tdd/wiki/Coding-Katas#katas-using-backtracking-algorithms).
   The idea is to let the computer solve Sudoku puzzles using a brute-force approach. However, by using backtracking, we ensure that invalid branches are pruned early.
   
 

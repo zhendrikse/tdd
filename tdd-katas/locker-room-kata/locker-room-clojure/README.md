@@ -6,12 +6,12 @@ Imagine a wall with lockers in a locker room. All lockers are centrally opened a
 
 ### Tentative TODO list
 
-- [ ] locker is unlocked initially
-- [ ] locker can be locked by entering a PIN for that locker
-- [ ] locker can be unlocked by entering a the correct ping for that locker
+- [ ] a locker is unlocked initially
+- [ ] a locker can be locked by entering a PIN for that locker
+- [ ] a locker can be unlocked by entering the correct ping for that locker
 - [ ] unlocking fails when pin is incorrect
-- [ ] asking state or entering PIN for non existing locker, fails
+- [ ] asking state or entering PIN for non-existing locker, fails
 - [ ] PIN confirm on locking a locker
-- [ ] PIN on locked locker can be retried by user
+- [ ] A user can retry a pin on a locked locker
 - [ ] unlocking fails after two retries
-- [ ] master key opens any locker
+- [ ] the master key opens any locker

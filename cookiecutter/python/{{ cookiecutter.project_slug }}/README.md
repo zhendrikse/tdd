@@ -1,7 +1,7 @@
 # {{ cookiecutter.kata }} Code Kata
 
 Welcome to your new Code Kata.  Test-driven development is a lot of fun, and a
-great form of "deliberate practice".  You're almost there - there's
+great form of "deliberate practice."  You're almost there - there's
 one more step needed to get up and running.
 
 ## Installing the required packages
@@ -26,17 +26,18 @@ $ ./run_watch.sh
 
 # Introduction TDD
 
-TDD gives you a very fast feedback cycle, and helps you evolve a
-solution incrementally, in _extremely small_ increments.  TDD gives you feedback
+TDD gives you a fast feedback cycle, and helps you evolve a
+solution incrementally, in _tiny_ increments.  
+TDD gives you feedback
 on your design and lets you make many small improvements to your
 code. You can do this with confidence because the tests will catch any
 accidental regression as you apply these refactorings.
 
 Doing TDD means you iteratively repeat the following three steps 
 
-1. First we write a _failing_ test. It is important to make the test fail first, as this assures us the test actually works! We are allowed to write just so much test code, that makes test fail. This includes compilation errors!
-2. Next we implement _just enough_ production code to make the test pass.
-3. We ask ourselves if there is anything that we can refactor, by applying e.g. the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
+1. First, we write a _failing_ test. It is important to make the test fail first, as this assures us the test actually works! We are allowed to write just so much test code, that makes test fail. This includes compilation errors!
+2. Next, we implement _just enough_ production code to make the test pass.
+3. We ask ourselves if there is anything that we can refactor, by applying, e.g. the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
 
 ```                                 
   +--------------------------------+
