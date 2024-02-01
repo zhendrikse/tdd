@@ -45,3 +45,65 @@ while running:
 pygame.quit()
 ```
 </details>
+
+## Introduction of `Game` and `GameLoop` classes
+
+<details>
+  <summary>Rendering a moving circle</summary>
+
+The `Game` class:
+
+```python
+import pygame
+from game_loop import GameLoop
+
+class Game:
+
+    def __init__(self, game_loop):
+        self._game_loop = game_loop
+        self._x = 50
+
+    def run(self):
+        self._game_loop.run(self)
+
+    def tick(self, dt, screen) -> bool:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return True
+        
+        self._x = self._x + dt * 0.3 if self._x <=500 else 50
+        
+        screen.fill("purple")
+        pygame.draw.circle(screen, "red", (self._x, 50), 40)
+
+if __name__ == "__main__":
+   Game(GameLoop()).run()
+```
+
+The `GameLoop` class
+
+```python
+import pygame
+
+class GameLoop:
+
+    def run(self, game):
+        pygame.init()
+        screen = pygame.display.set_mode((1280, 720))
+        clock = pygame.time.Clock()
+        running = True
+        dt = 0
+        
+        while running:
+            if game.tick(dt, screen):
+                running = False
+            pygame.display.flip()
+            dt = clock.tick(60)
+        
+        pygame.quit()
+```
+</details>
+
+# References
+
+- [Test driving the game loop](https://rickardlindberg.me/writing/agdpp-game-loop/)
