@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "PacMan kata Python"
+version = "0.1.0"
+description = "PacMan kata"
+authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+pygame = "^2.5.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
