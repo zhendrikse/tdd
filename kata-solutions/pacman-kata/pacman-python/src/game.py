@@ -37,6 +37,7 @@ class Game:
         self._screen.flip()
         self._screen.fill("purple")
 
+
 if __name__ == "__main__":
     game = Game(PyGameEventBus(), PyGameClock(), PyGameScreen(Coordinates(1280, 720)))
     game.run()
