@@ -1,41 +1,42 @@
 from circle import Circle
-from game_engine import GameEngine
 from game_event import GameEvent
 from coordinates import Coordinates
 from pygame_screen import PyGameScreen
 from pygame_eventbus import PyGameEventBus
 from pygame_clock import PyGameClock
+from eventbus import EventBus
+from clock import Clock
+from screen import Screen
 
 
 class Game:
 
-    def __init__(self, game_engine):
+    def __init__(self, eventbus: EventBus, clock: Clock, screen: Screen) -> None:
         self._sprite = Circle()
-        self._game_engine = game_engine
+        self._eventbus = eventbus
+        self._clock = clock
+        self._screen = screen
 
     def run(self) -> None:
         keep_running = True
         dt = 0
 
         while keep_running:
-            for event in self._game_engine.get_events():
+            for event in self._eventbus.get_events():
                 if event == GameEvent.QUIT:
                     keep_running = False
 
             self._tick(dt)
-            dt = self._game_engine.tick(60)
+            dt = self._clock.tick(60)
 
-        self._game_engine.quit()
+        self._screen.quit()
 
     def _tick(self, dt) -> None:
         self._sprite.tick(dt)
-        self._sprite.draw(self._game_engine)
-        self._game_engine.refresh()
-
+        self._sprite.draw(self._screen)
+        self._screen.flip()
+        self._screen.fill("purple")
 
 if __name__ == "__main__":
-    screen = PyGameScreen(Coordinates(1280, 720))
-    clock = PyGameClock()
-    event_bus = PyGameEventBus()
-    game = Game(GameEngine(screen, clock, event_bus))
+    game = Game(PyGameEventBus(), PyGameClock(), PyGameScreen(Coordinates(1280, 720)))
     game.run()

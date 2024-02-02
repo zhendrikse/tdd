@@ -1,13 +1,13 @@
 from coordinates import Coordinates
-from game_engine import GameEngine
+from screen import Screen
 
 
 class Circle:
     def __init__(self):
         self._xy = Coordinates(50, 50)
 
-    def draw(self, game_engine: GameEngine):
-        game_engine.draw_circle("red", self._xy, 40)
+    def draw(self, screen: Screen):
+        screen.render_circle("red", self._xy, 40)
 
     def tick(self, dt):
         if self._xy.x <= 500:
