@@ -1,8 +1,11 @@
+import pygame
+
 from circle import Circle
 from game_engine import GameEngine
 from game_event import GameEvent
 from coordinates import Coordinates
 from screen import Screen
+from event_bus import PyGameEventBus
 
 
 class Game:
@@ -32,4 +35,8 @@ class Game:
 
 
 if __name__ == "__main__":
-    Game(GameEngine(Screen(Coordinates(1280, 720)))).run()
+    screen = Screen(Coordinates(1280, 720))
+    clock = pygame.time.Clock()
+    event_bus = PyGameEventBus()
+    game = Game(GameEngine(screen, clock, event_bus))
+    game.run()
