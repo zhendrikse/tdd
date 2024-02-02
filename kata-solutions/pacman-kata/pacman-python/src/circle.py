@@ -1,11 +1,12 @@
 from coordinates import Coordinates
+from game_engine import GameEngine
 
 
 class Circle:
     def __init__(self):
         self._xy = Coordinates(50, 50)
 
-    def draw(self, game_engine):
+    def draw(self, game_engine: GameEngine):
         game_engine.draw_circle("red", self._xy, 40)
 
     def tick(self, dt):

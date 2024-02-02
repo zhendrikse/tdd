@@ -1,23 +1,23 @@
 from circle import Circle
-from pygame_game_engine import PyGameGameEngine
+from game_engine import GameEngine
 from game_event import GameEvent
 from coordinates import Coordinates
 
 
 class Game:
 
-    def __init__(self, game_engine=PyGameGameEngine(Coordinates(1280, 720))):
+    def __init__(self, game_engine):
         self._sprite = Circle()
         self._game_engine = game_engine
 
-    def run(self):
-        running = True
+    def run(self) -> None:
+        keep_running = True
         dt = 0
 
-        while running:
-            for event in self._game_engine.events():
+        while keep_running:
+            for event in self._game_engine.get_events():
                 if event == GameEvent.QUIT:
-                    running = False
+                    keep_running = False
 
             self._tick(dt)
             dt = self._game_engine.tick(60)
@@ -31,4 +31,4 @@ class Game:
 
 
 if __name__ == "__main__":
-    Game().run()
+    Game(GameEngine(Coordinates(1280, 720))).run()
