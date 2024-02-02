@@ -24,12 +24,12 @@ class PyGameGameEngine:
     def quit(self):
         self._renderer.quit()
 
-    def _map_events(self, pygame_events) -> List[Enum]:
-        for event in pygame_events:
+    def _map_events(self) -> List[Enum]:
+        for event in self._renderer.event.get():
             if event.type == pygame.QUIT:
                 return [GameEvent.QUIT]
 
         return []
 
     def events(self) -> List[Enum]:
-        return self._map_events(self._renderer.event.get())
+        return self._map_events()
