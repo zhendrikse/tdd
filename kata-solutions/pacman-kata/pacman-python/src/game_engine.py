@@ -3,10 +3,11 @@ from typing import List
 from coordinates import Coordinates
 from eventbus import EventBus
 from clock import Clock
+from screen import Screen
 
 
 class GameEngine:
-    def __init__(self, screen, clock: Clock, eventbus: EventBus):
+    def __init__(self, screen: Screen, clock: Clock, eventbus: EventBus):
         self._screen = screen
         self._clock = clock
         self._eventbus = eventbus
