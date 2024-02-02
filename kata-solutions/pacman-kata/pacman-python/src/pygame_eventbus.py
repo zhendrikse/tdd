@@ -5,7 +5,7 @@ from typing import List
 from game_event import GameEvent
 
 
-class EventBus:
+class PyGameEventBus:
 
     def get_events(self) -> List[Enum]:
         for event in pygame.event.get():

@@ -1,11 +1,10 @@
-import pygame
-
 from circle import Circle
 from game_engine import GameEngine
 from game_event import GameEvent
 from coordinates import Coordinates
 from screen import Screen
-from event_bus import EventBus
+from pygame_eventbus import PyGameEventBus
+from pygame_clock import PyGameClock
 
 
 class Game:
@@ -36,7 +35,7 @@ class Game:
 
 if __name__ == "__main__":
     screen = Screen(Coordinates(1280, 720))
-    clock = pygame.time.Clock()
-    event_bus = EventBus()
+    clock = PyGameClock()
+    event_bus = PyGameEventBus()
     game = Game(GameEngine(screen, clock, event_bus))
     game.run()
