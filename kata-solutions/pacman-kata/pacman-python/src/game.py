@@ -5,7 +5,7 @@ from game_engine import GameEngine
 from game_event import GameEvent
 from coordinates import Coordinates
 from screen import Screen
-from event_bus import PyGameEventBus
+from event_bus import EventBus
 
 
 class Game:
@@ -37,6 +37,6 @@ class Game:
 if __name__ == "__main__":
     screen = Screen(Coordinates(1280, 720))
     clock = pygame.time.Clock()
-    event_bus = PyGameEventBus()
+    event_bus = EventBus()
     game = Game(GameEngine(screen, clock, event_bus))
     game.run()
