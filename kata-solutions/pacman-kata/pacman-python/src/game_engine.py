@@ -6,8 +6,8 @@ from screen import Screen
 from coordinates import Coordinates
 
 class GameEngine:
-    def __init__(self, resolution):
-        self._screen = Screen(resolution)
+    def __init__(self, screen):
+        self._screen = screen
         self._clock = pygame.time.Clock()
         self._eventbus = pygame.event
         pygame.init()

@@ -1,6 +1,7 @@
 import pygame
 from coordinates import Coordinates
 
+
 class Screen:
     def __init__(self, resolution):
         self._renderer = pygame.draw

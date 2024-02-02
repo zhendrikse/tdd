@@ -2,6 +2,7 @@ from circle import Circle
 from game_engine import GameEngine
 from game_event import GameEvent
 from coordinates import Coordinates
+from screen import Screen
 
 
 class Game:
@@ -31,4 +32,4 @@ class Game:
 
 
 if __name__ == "__main__":
-    Game(GameEngine(Coordinates(1280, 720))).run()
+    Game(GameEngine(Screen(Coordinates(1280, 720)))).run()
