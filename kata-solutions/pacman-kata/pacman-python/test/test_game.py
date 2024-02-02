@@ -6,11 +6,12 @@ from src.coordinates import Coordinates
 
 from test.fake_clock import FakeClock
 from test.fake_eventbus import FakeEventBus
+from test.fake_screen import FakeScreen
 
 
 class TestGame:
     def test_first_tick_draws_circle_at_50_50(self):
-        screen = Screen(Coordinates(1280, 720))
+        screen = FakeScreen()
         clock = FakeClock()
         event_bus = FakeEventBus()
         game = Game(GameEngine(screen, clock, event_bus))
