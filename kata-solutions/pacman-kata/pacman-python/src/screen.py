@@ -1,13 +1,13 @@
-import pygame
 from coordinates import Coordinates
 
 
 class Screen:
-    def __init__(self, resolution):
-        self._renderer = pygame.draw
-        self._screen = pygame.display.set_mode((resolution.x, resolution.y))
-        self._display = pygame.display
-        pygame.init()
+    def __init__(self, resolution, framework, renderer, display):
+        self._framework = framework
+        self._renderer = renderer
+        self._screen = display.set_mode((resolution.x, resolution.y))
+        self._display = display
+        framework.init()
 
     def render_circle(self, color: str, coordinates: Coordinates, radius: int) -> None:
         self._renderer.circle(self._screen, color, (coordinates.x, coordinates.y), radius)
@@ -19,5 +19,5 @@ class Screen:
         self._screen.fill(color)
 
     def quit(self) -> None:
-        pygame.quit()
+        self._framework.quit()
 
