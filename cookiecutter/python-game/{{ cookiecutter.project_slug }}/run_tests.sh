@@ -1,0 +1,1 @@
+PYTHONPATH=src poetry run pytest -s
