@@ -8,10 +8,7 @@ class Screen(Protocol):
     def render_circle(self, color: str, coordinates: Coordinates, radius: int) -> None:
         ...
 
-    def flip(self) -> None:
-        ...
-
-    def fill(self, color) -> None:
+    def refresh(self) -> None:
         ...
 
     def quit(self) -> None:

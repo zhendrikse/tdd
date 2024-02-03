@@ -31,22 +31,19 @@ class TestGame:
     def test_first_tick_draws_sprite_at_50_50(self, given_a_game_with_single_quit_event):
         given_a_game_with_single_quit_event.run()
 
-        assert_that(self._screen_observer.messages, has_length(4))
+        assert_that(self._screen_observer.messages, has_length(3))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 40 rendered at <50.0, 50>'))
-        assert_that(self._screen_observer.messages[1], is_('flip'))
-        assert_that(self._screen_observer.messages[2], is_('fill with purple'))
-        assert_that(self._screen_observer.messages[3], is_('quit'))
+        assert_that(self._screen_observer.messages[1], is_('refresh'))
+        assert_that(self._screen_observer.messages[2], is_('quit'))
 
     def test_second_tick_moves_sprite(self, given_a_game_with_single_tick_and_single_quit_event):
         given_a_game_with_single_tick_and_single_quit_event.run()
 
-        assert_that(self._screen_observer.messages, has_length(7))
+        assert_that(self._screen_observer.messages, has_length(5))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 40 rendered at <50.0, 50>'))
-        assert_that(self._screen_observer.messages[1], is_('flip'))
-        assert_that(self._screen_observer.messages[2], is_('fill with purple'))
-        assert_that(self._screen_observer.messages[3], is_('Circle with radius 40 rendered at <54.8, 50>'))
-        assert_that(self._screen_observer.messages[4], is_('flip'))
-        assert_that(self._screen_observer.messages[5], is_('fill with purple'))
-        assert_that(self._screen_observer.messages[6], is_('quit'))
+        assert_that(self._screen_observer.messages[1], is_('refresh'))
+        assert_that(self._screen_observer.messages[2], is_('Circle with radius 40 rendered at <54.8, 50>'))
+        assert_that(self._screen_observer.messages[3], is_('refresh'))
+        assert_that(self._screen_observer.messages[4], is_('quit'))
 
 

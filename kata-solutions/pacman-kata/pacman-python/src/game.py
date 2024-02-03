@@ -34,10 +34,9 @@ class Game:
     def _tick(self, dt) -> None:
         self._sprite.tick(dt)
         self._sprite.draw(self._screen)
-        self._screen.flip()
-        self._screen.fill("purple")
+        self._screen.refresh()
 
 
 if __name__ == "__main__":
-    game = Game(PyGameEventBus(), PyGameClock(), PyGameScreen(Coordinates(1280, 720)))
+    game = Game(PyGameEventBus(), PyGameClock(), PyGameScreen(Coordinates(1280, 720), "purple"))
     game.run()

@@ -12,11 +12,8 @@ class FakeScreen(Screen):
     def render_circle(self, color: str, coordinates: Coordinates, radius: int) -> None:
         self._observer.notify(f"Circle with radius {radius} rendered at {coordinates}")
 
-    def flip(self) -> None:
-        self._observer.notify("flip")
-
-    def fill(self, color) -> None:
-        self._observer.notify(f"fill with {color}")
+    def refresh(self) -> None:
+        self._observer.notify("refresh")
 
     def quit(self) -> None:
         self._observer.notify("quit")

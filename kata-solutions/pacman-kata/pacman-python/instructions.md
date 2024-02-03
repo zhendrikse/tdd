@@ -33,14 +33,14 @@ while running:
 
     # RENDER YOUR GAME HERE
 
-    pos_x = pos_x + dt * 0.3 if pos_x <= 500 else 50 
+    pos_x = pos_x + dt * 0.3 if pos_x <= 500 else 50
 
     pygame.draw.circle(screen, "red", (pos_x, 50), 40)
-    
+
     dt = clock.tick(60)  # limits FPS to 60
 
     # flip() the display to put your work on screen
-    pygame.display.flip()
+    pygame.display.update()
 
 pygame.quit()
 ```
@@ -85,6 +85,7 @@ The `GameLoop` class
 ```python
 import pygame
 
+
 class GameLoop:
 
     def run(self, game):
@@ -93,13 +94,13 @@ class GameLoop:
         clock = pygame.time.Clock()
         running = True
         dt = 0
-        
+
         while running:
             if game.tick(dt, screen):
                 running = False
-            pygame.display.flip()
+            pygame.display.update()
             dt = clock.tick(60)
-        
+
         pygame.quit()
 ```
 </details>
