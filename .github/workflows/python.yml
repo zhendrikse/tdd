@@ -18,6 +18,7 @@ on:
       - 'kata-solutions/gilded-rose-kata/gilded-rose-python/3-gilded-rose-refactored/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-python/4-gilded-rose-extended/**'
       - 'kata-solutions/game-of-life/game-of-life-python/**'
+      - 'kata-solutions/pacman-kata/pacman-python/**'
       - 'kata-solutions/manhattan-distance/manhattan-distance-python/**'
       - 'kata-solutions/christmas-tree/christmas-tree-python/**'
       - 'kata-solutions/poker-hands-kata/poker-hands-python/**'
@@ -99,6 +100,13 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: true
+
+      - name: Pacman kata install dependencies
+        working-directory: kata-solutions/pacman-kata/pacman-python
+        run: poetry install --no-interaction
+      - name: Pacman kata run tests
+        working-directory: kata-solutions/pacman-kata/pacman-python
+        run: ./run_tests.sh
 
       - name: Tell do not ask kata install dependencies
         working-directory: kata-solutions/tell-dont-ask/tell-dont-ask-python
