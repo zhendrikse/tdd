@@ -9,6 +9,7 @@ from .ports.screen import Screen
 from .pacman import Pacman
 from .game_event import Command
 
+
 class Game:
 
     def __init__(self, eventbus: EventBus, clock: Clock, screen: Screen) -> None:

@@ -61,9 +61,5 @@ class GameEvent:
             KeyPress.ARROW_LEFT_RELEASED.value,
             KeyPress.ARROW_DOWN_RELEASED.value]
 
-    @property
-    def key_press_value(self):
-        return self._key_event.value
-
     def __str__(self):
         return f"GameEvent = [{self._key_event}, quit={self._quit}]"
