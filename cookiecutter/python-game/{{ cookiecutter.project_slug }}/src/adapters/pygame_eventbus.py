@@ -1,8 +1,8 @@
 import pygame
 
 from typing import List
-from game_event import GameEvent, KeyPress
-from ports.eventbus import EventBus
+from ..game_event import GameEvent, KeyPress
+from ..ports.eventbus import EventBus
 
 
 class PyGameEventBus(EventBus):

@@ -1,1 +1,1 @@
-PYTHONPATH=src poetry run python src/game.py
+poetry run python -m src.game

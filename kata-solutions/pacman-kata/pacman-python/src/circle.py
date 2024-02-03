@@ -1,6 +1,6 @@
-from coordinates import Coordinates
-from ports.screen import Screen
-from sprite import Sprite
+from .coordinates import Coordinates
+from .ports.screen import Screen
+from .sprite import Sprite
 
 
 class Circle(Sprite):

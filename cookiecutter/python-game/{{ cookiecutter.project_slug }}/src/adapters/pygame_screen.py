@@ -1,6 +1,6 @@
 import pygame
-from coordinates import Coordinates
-from ports.screen import Screen
+from ..coordinates import Coordinates
+from ..ports.screen import Screen
 
 TILEWIDTH = 32
 TILEHEIGHT = 32

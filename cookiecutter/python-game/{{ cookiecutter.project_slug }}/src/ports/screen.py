@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from coordinates import Coordinates
+from ..coordinates import Coordinates
 
 
 class Screen(Protocol):

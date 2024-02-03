@@ -1,8 +1,8 @@
 from typing import Protocol
 
-from coordinates import Coordinates
-from ports.screen import Screen
-from test.observer import Observer
+from src.coordinates import Coordinates
+from src.ports.screen import Screen
+from ..observer import Observer
 
 
 class FakeScreen(Screen):

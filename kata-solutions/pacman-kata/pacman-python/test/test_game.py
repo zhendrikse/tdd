@@ -1,13 +1,13 @@
 import pytest
-from typing import List
 from hamcrest import is_, assert_that, has_length
-from game import Game
-from game_event import GameEvent, KeyPress
+from typing import List
+from src.game import Game
+from src.game_event import KeyPress, GameEvent
 
-from test.adapters.fake_clock import FakeClock
-from test.adapters.fake_eventbus import FakeEventBus
-from test.adapters.fake_screen import FakeScreen
-from test.screen_observer import FakeScreenObserver
+from .adapters.fake_clock import FakeClock
+from .adapters.fake_eventbus import FakeEventBus
+from .adapters.fake_screen import FakeScreen
+from .screen_observer import FakeScreenObserver
 
 QUIT_EVENT = GameEvent(do_quit=True)
 

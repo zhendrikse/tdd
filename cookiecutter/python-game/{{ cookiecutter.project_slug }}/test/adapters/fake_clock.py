@@ -1,4 +1,4 @@
-from ports.clock import Clock
+from src.ports.clock import Clock
 
 
 class FakeClock(Clock):

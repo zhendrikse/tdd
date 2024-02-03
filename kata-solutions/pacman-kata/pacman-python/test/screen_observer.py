@@ -1,6 +1,6 @@
 from typing import List
 
-from test.observer import Observer
+from .observer import Observer
 
 
 class FakeScreenObserver(Observer):

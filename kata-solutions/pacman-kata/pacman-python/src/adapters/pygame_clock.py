@@ -1,5 +1,5 @@
 import pygame
-from ports.clock import Clock
+from ..ports.clock import Clock
 
 
 class PyGameClock(Clock):

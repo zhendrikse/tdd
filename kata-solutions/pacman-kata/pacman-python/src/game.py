@@ -1,11 +1,11 @@
-from circle import Circle
-from coordinates import Coordinates
-from adapters.pygame_screen import PyGameScreen
-from adapters.pygame_eventbus import PyGameEventBus
-from adapters.pygame_clock import PyGameClock
-from ports.eventbus import EventBus
-from ports.clock import Clock
-from ports.screen import Screen
+from .circle import Circle
+from .coordinates import Coordinates
+from .adapters.pygame_screen import PyGameScreen
+from .adapters.pygame_eventbus import PyGameEventBus
+from .adapters.pygame_clock import PyGameClock
+from .ports.eventbus import EventBus
+from .ports.clock import Clock
+from .ports.screen import Screen
 
 
 class Game:

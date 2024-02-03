@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import List
-from ports.eventbus import EventBus
-from game_event import GameEvent
+from src.ports.eventbus import EventBus
+from src.game_event import GameEvent
 
 
 class FakeEventBus(EventBus):

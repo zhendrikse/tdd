@@ -1,4 +1,4 @@
-from game_event import GameEvent
+from ..game_event import GameEvent
 from typing import List, Protocol
 
 
