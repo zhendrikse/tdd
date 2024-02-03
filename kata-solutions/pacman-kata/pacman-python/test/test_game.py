@@ -23,25 +23,27 @@ class TestGame:
         event_bus = FakeEventBus(events)
         return Game(event_bus, FakeClock(), screen)
 
+    def _assert_observed_screen_updates(self, expected_updates: List[str], updates: List[str]) -> None:
+        assert_that(updates, has_length(len(expected_updates)))
+        for i in range(len(updates)):
+            assert_that(updates[i], is_(expected_updates[i]))
+
     def test_game_without_events_draws_sprite(self):
         events = [[QUIT_EVENT]]
-        self._given_a_game_with_events(events).run()
+        expected_updates = ['Circle with radius 10 rendered at <50, 50>', 'refresh', 'quit']
 
-        assert_that(self._screen_observer.messages, has_length(3))
-        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50, 50>'))
-        assert_that(self._screen_observer.messages[1], is_('refresh'))
-        assert_that(self._screen_observer.messages[2], is_('quit'))
+        self._given_a_game_with_events(events).run()
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
 
     def test_second_tick_leaves_sprite_position_unchanged(self):
         events = [[], [QUIT_EVENT]]
+        expected_updates = [
+            'Circle with radius 10 rendered at <50, 50>', 'refresh',
+            'Circle with radius 10 rendered at <50, 50>', 'refresh',
+            'quit'
+        ]
         self._given_a_game_with_events(events).run()
-
-        assert_that(self._screen_observer.messages, has_length(5))
-        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50, 50>'))
-        assert_that(self._screen_observer.messages[1], is_('refresh'))
-        assert_that(self._screen_observer.messages[2], is_('Circle with radius 10 rendered at <50, 50>'))
-        assert_that(self._screen_observer.messages[3], is_('refresh'))
-        assert_that(self._screen_observer.messages[4], is_('quit'))
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
 
     def test_move_sprite_to_the_right(self):
         events = [
@@ -51,22 +53,17 @@ class TestGame:
             [GameEvent(keypress=KeyPress.ARROW_RIGHT_RELEASED)],
             [],
             [QUIT_EVENT]]
+        expected_updates = [
+            'Circle with radius 10 rendered at <50, 50>', 'refresh',
+            'Circle with radius 10 rendered at <51, 50>', 'refresh',
+            'Circle with radius 10 rendered at <52, 50>', 'refresh',
+            'Circle with radius 10 rendered at <53, 50>', 'refresh',
+            'Circle with radius 10 rendered at <53, 50>', 'refresh',
+            'Circle with radius 10 rendered at <53, 50>', 'refresh',
+            'quit'
+        ]
         self._given_a_game_with_events(events).run()
-
-        assert_that(self._screen_observer.messages, has_length(13))
-        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50, 50>'))
-        assert_that(self._screen_observer.messages[1], is_('refresh'))
-        assert_that(self._screen_observer.messages[2], is_('Circle with radius 10 rendered at <51, 50>'))
-        assert_that(self._screen_observer.messages[3], is_('refresh'))
-        assert_that(self._screen_observer.messages[4], is_('Circle with radius 10 rendered at <52, 50>'))
-        assert_that(self._screen_observer.messages[5], is_('refresh'))
-        assert_that(self._screen_observer.messages[6], is_('Circle with radius 10 rendered at <53, 50>'))
-        assert_that(self._screen_observer.messages[7], is_('refresh'))
-        assert_that(self._screen_observer.messages[8], is_('Circle with radius 10 rendered at <53, 50>'))
-        assert_that(self._screen_observer.messages[9], is_('refresh'))
-        assert_that(self._screen_observer.messages[10], is_('Circle with radius 10 rendered at <53, 50>'))
-        assert_that(self._screen_observer.messages[11], is_('refresh'))
-        assert_that(self._screen_observer.messages[12], is_('quit'))
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
 
     def test_move_sprite_to_the_left(self):
         events = [
@@ -76,22 +73,17 @@ class TestGame:
             [GameEvent(keypress=KeyPress.ARROW_LEFT_RELEASED)],
             [],
             [QUIT_EVENT]]
+        expected_updates = [
+            'Circle with radius 10 rendered at <50, 50>', 'refresh',
+            'Circle with radius 10 rendered at <49, 50>', 'refresh',
+            'Circle with radius 10 rendered at <48, 50>', 'refresh',
+            'Circle with radius 10 rendered at <47, 50>', 'refresh',
+            'Circle with radius 10 rendered at <47, 50>', 'refresh',
+            'Circle with radius 10 rendered at <47, 50>', 'refresh',
+            'quit'
+        ]
         self._given_a_game_with_events(events).run()
-
-        assert_that(self._screen_observer.messages, has_length(13))
-        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50, 50>'))
-        assert_that(self._screen_observer.messages[1], is_('refresh'))
-        assert_that(self._screen_observer.messages[2], is_('Circle with radius 10 rendered at <49, 50>'))
-        assert_that(self._screen_observer.messages[3], is_('refresh'))
-        assert_that(self._screen_observer.messages[4], is_('Circle with radius 10 rendered at <48, 50>'))
-        assert_that(self._screen_observer.messages[5], is_('refresh'))
-        assert_that(self._screen_observer.messages[6], is_('Circle with radius 10 rendered at <47, 50>'))
-        assert_that(self._screen_observer.messages[7], is_('refresh'))
-        assert_that(self._screen_observer.messages[8], is_('Circle with radius 10 rendered at <47, 50>'))
-        assert_that(self._screen_observer.messages[9], is_('refresh'))
-        assert_that(self._screen_observer.messages[10], is_('Circle with radius 10 rendered at <47, 50>'))
-        assert_that(self._screen_observer.messages[11], is_('refresh'))
-        assert_that(self._screen_observer.messages[12], is_('quit'))
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
 
 
 
