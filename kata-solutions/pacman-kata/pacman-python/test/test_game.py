@@ -32,7 +32,7 @@ class TestGame:
         given_a_game_with_single_quit_event.run()
 
         assert_that(self._screen_observer.messages, has_length(3))
-        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50.0, 50>'))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50, 50>'))
         assert_that(self._screen_observer.messages[1], is_('refresh'))
         assert_that(self._screen_observer.messages[2], is_('quit'))
 
@@ -40,9 +40,9 @@ class TestGame:
         given_a_game_with_single_tick_and_single_quit_event.run()
 
         assert_that(self._screen_observer.messages, has_length(5))
-        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50.0, 50>'))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <50, 50>'))
         assert_that(self._screen_observer.messages[1], is_('refresh'))
-        assert_that(self._screen_observer.messages[2], is_('Circle with radius 10 rendered at <54.8, 50>'))
+        assert_that(self._screen_observer.messages[2], is_('Circle with radius 10 rendered at <58, 50>'))
         assert_that(self._screen_observer.messages[3], is_('refresh'))
         assert_that(self._screen_observer.messages[4], is_('quit'))
 

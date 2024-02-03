@@ -10,12 +10,13 @@ SCREENWIDTH = NCOLS * TILEWIDTH
 SCREENHEIGHT = NROWS * TILEHEIGHT
 SCREENSIZE = (SCREENWIDTH, SCREENHEIGHT)
 BLACK = (0, 0, 0)
+BITS_USED_FOR_COLOR = 32
 
 
 class PyGameScreen(Screen):
     def __init__(self):
         self._renderer = pygame.draw
-        self._screen = pygame.display.set_mode(SCREENSIZE, 0, 32)
+        self._screen = pygame.display.set_mode(SCREENSIZE, pygame.SHOWN, BITS_USED_FOR_COLOR)
         self._display = pygame.display
         self._background = pygame.surface.Surface(SCREENSIZE).convert()
         self._background.fill(BLACK)

@@ -32,7 +32,7 @@ class Game:
         self._screen.quit()
 
     def _render(self, dt) -> None:
-        self._sprite.tick(dt)
+        self._sprite.update_coordinates(Coordinates(dt // 2, 0))
         self._sprite.draw(self._screen)
         self._screen.refresh()
 
