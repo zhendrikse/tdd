@@ -1,30 +1,29 @@
 import pytest
 from hamcrest import is_, assert_that, has_length
-from src.game import Game
-from src.game_event import GameEvent
+from game import Game
+from game_event import GameEvent
 
-from test.fake_clock import FakeClock
-from test.fake_eventbus import FakeEventBus
-from test.fake_screen import FakeScreen
+from test.adapters.fake_clock import FakeClock
+from test.adapters.fake_eventbus import FakeEventBus
+from test.adapters.fake_screen import FakeScreen
 from test.screen_observer import FakeScreenObserver
 
 
 class TestGame:
-    def __init__(self):
-        self._screen_observer = None
+    _screen_observer = None
 
     @pytest.fixture(autouse=True)
     def screen_observer(self):
         self._screen_observer = FakeScreenObserver()
 
     @pytest.fixture
-    def given_a_game_with_single_quit_event(self, screen_observer):
+    def given_a_game_with_single_quit_event(self):
         screen = FakeScreen(self._screen_observer)
         event_bus = FakeEventBus([[GameEvent.QUIT]])
         return Game(event_bus, FakeClock(), screen)
 
     @pytest.fixture
-    def given_a_game_with_single_tick_and_single_quit_event(self, screen_observer):
+    def given_a_game_with_single_tick_and_single_quit_event(self):
         screen = FakeScreen(self._screen_observer)
         event_bus = FakeEventBus([[], [GameEvent.QUIT]])
         return Game(event_bus, FakeClock(), screen)

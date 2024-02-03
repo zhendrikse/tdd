@@ -1,12 +1,12 @@
 from circle import Circle
 from game_event import GameEvent
 from coordinates import Coordinates
-from pygame_screen import PyGameScreen
-from pygame_eventbus import PyGameEventBus
-from pygame_clock import PyGameClock
-from eventbus import EventBus
-from clock import Clock
-from screen import Screen
+from adapters.pygame_screen import PyGameScreen
+from adapters.pygame_eventbus import PyGameEventBus
+from adapters.pygame_clock import PyGameClock
+from ports.eventbus import EventBus
+from ports.clock import Clock
+from ports.screen import Screen
 
 
 class Game:

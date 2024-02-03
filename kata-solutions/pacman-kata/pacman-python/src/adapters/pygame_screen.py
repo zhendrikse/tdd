@@ -1,6 +1,6 @@
 import pygame
 from coordinates import Coordinates
-from screen import Screen
+from ports.screen import Screen
 
 
 class PyGameScreen(Screen):

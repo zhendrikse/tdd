@@ -1,10 +1,11 @@
 from typing import Protocol
 
 from coordinates import Coordinates
+from ports.screen import Screen
 from test.observer import Observer
 
 
-class FakeScreen:
+class FakeScreen(Screen):
     def __init__(self, observer: Observer):
         self._observer = observer
 
