@@ -1,5 +1,5 @@
 from circle import Circle
-from game_event import GameEvent
+from game_event import KeyPress, GameEvent
 from coordinates import Coordinates
 from adapters.pygame_screen import PyGameScreen
 from adapters.pygame_eventbus import PyGameEventBus
@@ -19,20 +19,22 @@ class Game:
 
     def run(self) -> None:
         keep_running = True
-        dt = 0
+        dx_dy = Coordinates(0, 0)
 
         while keep_running:
+            # print(f"Rendering with dx-xy={dx_dy}")
+            self._render(dx_dy)
             for event in self._eventbus.get_events():
-                if event.value == GameEvent.QUIT.value:
+                # print(f"Received event {event}")
+                if event.is_quit():
                     keep_running = False
-
-            self._render(dt)
-            dt = self._clock.tick(60)
+                elif event.is_arrow_key():
+                    dx_dy = Coordinates(event.key_press_value[0], event.key_press_value[1])
 
         self._screen.quit()
 
-    def _render(self, dt) -> None:
-        self._sprite.update_coordinates(Coordinates(dt // 2, 0))
+    def _render(self, dx_dy: Coordinates) -> None:
+        self._sprite.update_coordinates(dx_dy)
         self._sprite.draw(self._screen)
         self._screen.refresh()
 

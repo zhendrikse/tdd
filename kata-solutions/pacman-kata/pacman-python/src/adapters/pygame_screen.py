@@ -2,8 +2,8 @@ import pygame
 from coordinates import Coordinates
 from ports.screen import Screen
 
-TILEWIDTH = 16
-TILEHEIGHT = 16
+TILEWIDTH = 32
+TILEHEIGHT = 32
 NROWS = 36
 NCOLS = 28
 SCREENWIDTH = NCOLS * TILEWIDTH
