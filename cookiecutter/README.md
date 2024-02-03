@@ -44,3 +44,8 @@ $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/ja
 $ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/dotnet
 ```
 
+## Python game kata generation
+
+```bash
+$ cookiecutter https://github.com/zhendrikse/tdd.git --directory=cookiecutter/python-game
+```
