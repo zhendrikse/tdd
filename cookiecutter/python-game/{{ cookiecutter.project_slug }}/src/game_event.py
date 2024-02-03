@@ -12,6 +12,14 @@ class KeyPress(Enum):
     ARROW_RIGHT_RELEASED = [0, 0]
 
 
+class Command(Enum):
+    STOP = 0
+    UP = 1
+    DOWN = -1
+    LEFT = 2
+    RIGHT = -2
+
+
 class GameEvent:
     def __init__(self, keypress: KeyPress = None, do_quit=False):
         self._key_event = keypress
@@ -22,6 +30,22 @@ class GameEvent:
 
     def is_not_a_keyboard_event(self) -> bool:
         return self._key_event is None
+
+    def as_command(self):
+        if self._key_event.value == KeyPress.ARROW_UP_PRESSED.value:
+            return Command.UP
+        if self._key_event.value == KeyPress.ARROW_DOWN_PRESSED.value:
+            return Command.DOWN
+        if self._key_event.value == KeyPress.ARROW_LEFT_PRESSED.value:
+            return Command.LEFT
+        if self._key_event.value == KeyPress.ARROW_RIGHT_PRESSED.value:
+            return Command.RIGHT
+        if self._key_event.value in [
+            KeyPress.ARROW_UP_RELEASED.value,
+            KeyPress.ARROW_RIGHT_RELEASED.value,
+            KeyPress.ARROW_LEFT_RELEASED.value,
+            KeyPress.ARROW_DOWN_RELEASED.value]:
+            return Command.STOP
 
     def is_arrow_key(self) -> bool:
         if self.is_not_a_keyboard_event():

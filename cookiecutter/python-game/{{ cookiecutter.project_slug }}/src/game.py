@@ -1,40 +1,42 @@
-from .circle import Circle
-from .coordinates import Coordinates
+from enum import Enum
+
 from .adapters.pygame_screen import PyGameScreen
 from .adapters.pygame_eventbus import PyGameEventBus
 from .adapters.pygame_clock import PyGameClock
 from .ports.eventbus import EventBus
 from .ports.clock import Clock
 from .ports.screen import Screen
-
+from .pacman import Pacman
+from .game_event import Command
 
 class Game:
 
     def __init__(self, eventbus: EventBus, clock: Clock, screen: Screen) -> None:
-        self._sprite = Circle()
+        self._pacman = Pacman()
         self._eventbus = eventbus
         self._clock = clock
         self._screen = screen
 
     def run(self) -> None:
         keep_running = True
-        dx_dy = Coordinates(0, 0)
+        direction = Command.STOP
 
         while keep_running:
-            # print(f"Rendering with dx-xy={dx_dy}")
-            self._render(dx_dy)
+            dt = self._clock.tick(30) / 1000.0
+            self._render(direction, dt)
             for event in self._eventbus.get_events():
-                # print(f"Received event {event}")
+                #  print(f"Received event {event}, direction is now {direction}")
                 if event.is_quit():
                     keep_running = False
                 elif event.is_arrow_key():
-                    dx_dy = Coordinates(event.key_press_value[0], event.key_press_value[1])
+                    direction = event.as_command()
 
         self._screen.quit()
 
-    def _render(self, dx_dy: Coordinates) -> None:
-        self._sprite.update_coordinates(dx_dy)
-        self._sprite.draw(self._screen)
+    def _render(self, direction: Command, dt: float) -> None:
+        # print(f"Rendering with direction={direction} and dt={dt}")
+        self._pacman.update(direction, dt)
+        self._pacman.render(self._screen)
         self._screen.refresh()
 
 

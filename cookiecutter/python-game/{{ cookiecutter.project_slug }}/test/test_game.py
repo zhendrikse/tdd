@@ -31,7 +31,7 @@ class TestGame:
 
     def test_game_without_events_draws_sprite(self):
         events = [[QUIT_EVENT]]
-        expected_updates = ['Circle with radius 10 rendered at <50, 50>', 'refresh', 'quit']
+        expected_updates = ['Circle with radius 10 rendered at <200.0, 400.0>', 'refresh', 'quit']
 
         self._given_a_game_with_events(events).run()
         self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
@@ -39,8 +39,8 @@ class TestGame:
     def test_second_tick_leaves_sprite_position_unchanged(self):
         events = [[], [QUIT_EVENT]]
         expected_updates = [
-            'Circle with radius 10 rendered at <50, 50>', 'refresh',
-            'Circle with radius 10 rendered at <50, 50>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
             'quit'
         ]
         self._given_a_game_with_events(events).run()
@@ -55,12 +55,12 @@ class TestGame:
             [],
             [QUIT_EVENT]]
         expected_updates = [
-            'Circle with radius 10 rendered at <50, 50>', 'refresh',
-            'Circle with radius 10 rendered at <51, 50>', 'refresh',
-            'Circle with radius 10 rendered at <52, 50>', 'refresh',
-            'Circle with radius 10 rendered at <53, 50>', 'refresh',
-            'Circle with radius 10 rendered at <53, 50>', 'refresh',
-            'Circle with radius 10 rendered at <53, 50>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <205.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <210.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <215.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <215.0, 400.0>', 'refresh',
             'quit'
         ]
         self._given_a_game_with_events(events).run()
@@ -75,12 +75,12 @@ class TestGame:
             [],
             [QUIT_EVENT]]
         expected_updates = [
-            'Circle with radius 10 rendered at <50, 50>', 'refresh',
-            'Circle with radius 10 rendered at <49, 50>', 'refresh',
-            'Circle with radius 10 rendered at <48, 50>', 'refresh',
-            'Circle with radius 10 rendered at <47, 50>', 'refresh',
-            'Circle with radius 10 rendered at <47, 50>', 'refresh',
-            'Circle with radius 10 rendered at <47, 50>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <195.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <190.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <185.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <185.0, 400.0>', 'refresh',
             'quit'
         ]
         self._given_a_game_with_events(events).run()
