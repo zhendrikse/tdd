@@ -1,8 +1,9 @@
 import pygame
 from coordinates import Coordinates
+from screen import Screen
 
 
-class PyGameScreen:
+class PyGameScreen(Screen):
     def __init__(self, resolution):
         self._renderer = pygame.draw
         self._screen = pygame.display.set_mode((resolution.x, resolution.y))
@@ -20,4 +21,3 @@ class PyGameScreen:
 
     def quit(self) -> None:
         pygame.quit()
-

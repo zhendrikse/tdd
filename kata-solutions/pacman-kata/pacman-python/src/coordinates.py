@@ -13,3 +13,6 @@ class Coordinates:
     @property
     def y(self):
         return self._y
+
+    def __str__(self):
+        return f"<{self._x}, {self._y}>"

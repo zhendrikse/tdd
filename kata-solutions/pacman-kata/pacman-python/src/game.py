@@ -23,7 +23,7 @@ class Game:
 
         while keep_running:
             for event in self._eventbus.get_events():
-                if event == GameEvent.QUIT:
+                if event.value == GameEvent.QUIT.value:
                     keep_running = False
 
             self._tick(dt)
