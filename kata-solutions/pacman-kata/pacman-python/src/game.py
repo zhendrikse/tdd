@@ -26,17 +26,17 @@ class Game:
                 if event.value == GameEvent.QUIT.value:
                     keep_running = False
 
-            self._tick(dt)
+            self._render(dt)
             dt = self._clock.tick(60)
 
         self._screen.quit()
 
-    def _tick(self, dt) -> None:
+    def _render(self, dt) -> None:
         self._sprite.tick(dt)
         self._sprite.draw(self._screen)
         self._screen.refresh()
 
 
 if __name__ == "__main__":
-    game = Game(PyGameEventBus(), PyGameClock(), PyGameScreen(Coordinates(1280, 720), "purple"))
+    game = Game(PyGameEventBus(), PyGameClock(), PyGameScreen())
     game.run()

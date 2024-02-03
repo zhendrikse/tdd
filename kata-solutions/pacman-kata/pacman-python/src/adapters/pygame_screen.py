@@ -2,13 +2,23 @@ import pygame
 from coordinates import Coordinates
 from ports.screen import Screen
 
+TILEWIDTH = 16
+TILEHEIGHT = 16
+NROWS = 36
+NCOLS = 28
+SCREENWIDTH = NCOLS * TILEWIDTH
+SCREENHEIGHT = NROWS * TILEHEIGHT
+SCREENSIZE = (SCREENWIDTH, SCREENHEIGHT)
+BLACK = (0, 0, 0)
+
 
 class PyGameScreen(Screen):
-    def __init__(self, resolution, background_color: str):
+    def __init__(self):
         self._renderer = pygame.draw
-        self._screen = pygame.display.set_mode((resolution.x, resolution.y))
+        self._screen = pygame.display.set_mode(SCREENSIZE, 0, 32)
         self._display = pygame.display
-        self._background_color = background_color
+        self._background = pygame.surface.Surface(SCREENSIZE).convert()
+        self._background.fill(BLACK)
         pygame.init()
 
     def render_circle(self, color: str, coordinates: Coordinates, radius: int) -> None:
@@ -16,7 +26,7 @@ class PyGameScreen(Screen):
 
     def refresh(self) -> None:
         self._display.update()
-        self._screen.fill(self._background_color)
+        self._screen.fill(BLACK)
 
     def quit(self) -> None:
         pygame.quit()
