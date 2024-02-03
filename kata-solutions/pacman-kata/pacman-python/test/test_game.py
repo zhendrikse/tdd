@@ -11,6 +11,7 @@ from test.screen_observer import FakeScreenObserver
 
 QUIT_EVENT = GameEvent(do_quit=True)
 
+
 class TestGame:
     _screen_observer = None
 
@@ -84,6 +85,3 @@ class TestGame:
         ]
         self._given_a_game_with_events(events).run()
         self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
-
-
-

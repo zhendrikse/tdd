@@ -15,19 +15,18 @@ BITS_USED_FOR_COLOR = 32
 
 class PyGameScreen(Screen):
     def __init__(self):
-        self._renderer = pygame.draw
+        self._pygame = pygame
         self._screen = pygame.display.set_mode(SCREENSIZE, pygame.SHOWN, BITS_USED_FOR_COLOR)
-        self._display = pygame.display
         self._background = pygame.surface.Surface(SCREENSIZE).convert()
         self._background.fill(BLACK)
-        pygame.init()
+        self._pygame.init()
 
     def render_circle(self, color: str, coordinates: Coordinates, radius: int) -> None:
-        self._renderer.circle(self._screen, color, (coordinates.x, coordinates.y), radius)
+        self._pygame.draw.circle(self._screen, color, (coordinates.x, coordinates.y), radius)
 
     def refresh(self) -> None:
-        self._display.update()
+        self._pygame.display.update()
         self._screen.fill(BLACK)
 
     def quit(self) -> None:
-        pygame.quit()
+        self._pygame.quit()
