@@ -1,5 +1,4 @@
 from circle import Circle
-from game_event import KeyPress, GameEvent
 from coordinates import Coordinates
 from adapters.pygame_screen import PyGameScreen
 from adapters.pygame_eventbus import PyGameEventBus
