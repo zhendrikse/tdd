@@ -1,5 +1,5 @@
-from movie import MovieType
-from rental import Rental
+from .movie import MovieType
+from .rental import Rental
 
 
 class Customer:

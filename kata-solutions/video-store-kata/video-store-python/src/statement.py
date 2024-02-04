@@ -1,6 +1,6 @@
-from regular_movie import RegularMovie
-from new_release_movie import NewReleaseMovie
-from childrens_movie import ChildrensMovie
+from .regular_movie import RegularMovie
+from .new_release_movie import NewReleaseMovie
+from .childrens_movie import ChildrensMovie
 from dataclasses import dataclass
 
 

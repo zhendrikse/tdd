@@ -1,1 +1,1 @@
-PYTHONPATH=src poetry run pytest --cov
+poetry run pytest -s --cov=. --cov-branch --cov-report html

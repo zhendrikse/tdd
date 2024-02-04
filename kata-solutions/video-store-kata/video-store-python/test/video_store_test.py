@@ -1,10 +1,10 @@
 import pytest
-from customer import Customer
-from rental import Rental
-from new_release_movie import NewReleaseMovie
-from childrens_movie import ChildrensMovie
-from regular_movie import RegularMovie
-from statement_printer import TextStatementPrinter, HtmlStatementPrinter
+from src.customer import Customer
+from src.rental import Rental
+from src.new_release_movie import NewReleaseMovie
+from src.childrens_movie import ChildrensMovie
+from src.regular_movie import RegularMovie
+from src.statement_printer import TextStatementPrinter, HtmlStatementPrinter
 
 
 class TestSingleNewReleaseRental:

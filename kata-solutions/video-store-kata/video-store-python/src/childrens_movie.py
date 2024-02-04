@@ -1,7 +1,7 @@
-import movie
+from .movie import Movie
 
 
-class ChildrensMovie(movie.Movie):
+class ChildrensMovie(Movie):
     def __init__(self, title):
         super().__init__(title)
 

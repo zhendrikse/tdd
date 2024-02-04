@@ -1,4 +1,4 @@
-import statement
+from .statement import Statement
 
 
 class Customer:
@@ -10,4 +10,4 @@ class Customer:
         self._rentals.append(rental)
 
     def statement(self):
-        return statement.Statement(self._rentals, self._name)
+        return Statement(self._rentals, self._name)

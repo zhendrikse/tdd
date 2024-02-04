@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from movie import Movie
+from .movie import Movie
 
 
 @dataclass(frozen=True)

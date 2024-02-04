@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-import movie
+from .movie import Movie
 
 
 @dataclass(frozen=True)
 class Rental:
-    _movie: movie.Movie
+    _movie: Movie
     _days_rented: int
 
     def get_movie_title(self):

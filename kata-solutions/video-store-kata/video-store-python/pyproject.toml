@@ -5,12 +5,35 @@ description = "Video store kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0,<3.12"
-pytest = "^7.3.2"
-pytest-watch = "^4.2.0"
+python = ">=3.10,<3.13"
+pytest = "^8.0.0"
 pytest-cov = "^4.1.0"
+pytest-watch = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
+
+[tool.coverage.run]
+branch = true
+omit = [ "test/*" , "*/pygame_*.py", "*/__init__.py"]   
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_also = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod",
+    ]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
