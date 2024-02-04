@@ -7,7 +7,7 @@ public enum Room {
   YELLOW_ROOM("Yellow room"),
   BROWN_ROOM("Brown room");
 
-  private String name;
+  private final String name;
 
   Room(final String name) {
     this.name = name;
