@@ -17,3 +17,10 @@ class Screen(Protocol):
     def quit(self) -> None:
         ...
 
+    @abstractmethod
+    def render_line(self, color: Tuple[int, int, int], line_start: Coordinates, line_end: Coordinates, width: int):
+        ...
+
+    @abstractmethod
+    def set_background(self) -> None:
+        ...

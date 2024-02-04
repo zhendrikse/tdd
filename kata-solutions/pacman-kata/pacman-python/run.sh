@@ -1,1 +1,1 @@
-poetry run python -m src.game
+poetry run python -m src.main
