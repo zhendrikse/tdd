@@ -1,5 +1,5 @@
 from random import seed, randrange
-from game import Game, Player
+from .game import Game, Player
 
 
 class GameRunner:
