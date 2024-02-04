@@ -4,20 +4,20 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class SudokuIndex(object):
-    row: int
-    column: int
+    _row: int
+    _column: int
 
     def next_row(self) -> int:
-        return (self.row * 9 + self.column + 1) // 9
+        return (self._row * 9 + self._column + 1) // 9
 
     def next_column(self) -> int:
-        return (self.row * 9 + self.column + 1) % 9
+        return (self._row * 9 + self._column + 1) % 9
 
     def next(self):
         return SudokuIndex(self.next_row(), self.next_column())
 
     def is_last_cell(self) -> bool:
-        return self.row == 9 and self.column == 0
+        return self._row == 9 and self._column == 0
 
 
 class Sudoku:
@@ -29,15 +29,15 @@ class Sudoku:
             self.puzzle[i // 9][i % 9] = int(puzzle_string[i])
 
     def duplicate_cell_value_in_row(self, index: SudokuIndex) -> bool:
-        return self.puzzle[index.row].count(self.cell_value_at(index)) > 1
+        return self.puzzle[index._row].count(self.cell_value_at(index)) > 1
 
     def duplicate_cell_value_in_column(self, index: SudokuIndex) -> bool:
         transposed_puzzle = [list(i) for i in zip(*self.puzzle)]
-        return transposed_puzzle[index.column].count(self.cell_value_at(index)) > 1
+        return transposed_puzzle[index._column].count(self.cell_value_at(index)) > 1
 
     def duplicate_cell_value_in_3_3_block(self, index: SudokuIndex) -> bool:
-        row = index.row
-        column = index.column
+        row = index._row
+        column = index._column
         return any((i != row or j != column)
                    and self.puzzle[row][column] == self.puzzle[i][j]
                    for i, j in itertools.product(
@@ -46,7 +46,7 @@ class Sudoku:
         ))
 
     def cell_value_at(self, index: SudokuIndex) -> int:
-        return self.puzzle[index.row][index.column]
+        return self.puzzle[index._row][index._column]
 
     def cell_value_allowed(self, index: SudokuIndex) -> bool:
         if self.duplicate_cell_value_in_row(index):
@@ -69,12 +69,12 @@ class Sudoku:
 
             # build tree for each allowed value 1...9
         for i in range(1, 10):
-            self.puzzle[index.row][index.column] = i
+            self.puzzle[index._row][index._column] = i
             if not self.cell_value_allowed(index):
                 continue
             if self.solve(index.next()):
                 return True
 
         # backtrack because at this point all values failed
-        self.puzzle[index.row][index.column] = 0
+        self.puzzle[index._row][index._column] = 0
         return False
