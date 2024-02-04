@@ -1,5 +1,6 @@
 from .coordinates import Coordinates
 from .adapters.pygame_screen import TILEWIDTH
+from .node_group import NodeGroup
 from .ports.screen import Screen
 from .sprite import Sprite
 from .game_event import Command
@@ -20,15 +21,16 @@ COLOR = YELLOW
 
 
 class Pacman(Sprite):
-    def __init__(self):
+    def __init__(self, nodes: NodeGroup):
         self._name = PACMAN
-        self._position = Coordinates(200, 400)
+        self._position = Coordinates(200, 400) \
+            if nodes.is_empty() else nodes.first().coordinates
         self._direction = Command.STOP
 
-    def update(self, direction: Command, dt):
+    def update(self, command: Command, dt):
         increment = DIRECTIONS[self._direction]
         self._position = Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
-        self._direction = direction
+        self._direction = command
 
     def render(self, screen: Screen):
         screen.render_circle(COLOR, self._position, RADIUS)

@@ -26,12 +26,14 @@ class PyGameScreen(Screen):
         self._background = pygame.surface.Surface(SCREENSIZE).convert()
         self._background.fill(BLACK)
 
+    def blit(self) -> None:
+        self._screen.blit(self._background, (0, 0))
+
     def render_circle(self, color: Tuple[int, int, int], coordinates: Coordinates, radius: int) -> None:
         self._pygame.draw.circle(self._screen, color, (coordinates.x, coordinates.y), radius)
 
-    def refresh(self) -> None:
+    def update(self) -> None:
         self._pygame.display.update()
-        self._screen.fill(BLACK)
 
     def quit(self) -> None:
         self._pygame.quit()

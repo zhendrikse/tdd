@@ -10,7 +10,11 @@ class Screen(Protocol):
         ...
 
     @abstractmethod
-    def refresh(self) -> None:
+    def blit(self) -> None:
+        ...
+
+    @abstractmethod
+    def update(self) -> None:
         ...
 
     @abstractmethod

@@ -15,8 +15,11 @@ class FakeScreen(Screen):
     def render_line(self, color: Tuple[int, int, int], line_start: Coordinates, line_end: Coordinates, width: int):
         self._observer.notify(f"Line between {line_start} and {line_end} with width={width}")
 
-    def refresh(self) -> None:
-        self._observer.notify("refresh")
+    def update(self) -> None:
+        self._observer.notify("update")
+
+    def blit(self) -> None:
+        self._observer.notify("blit")
 
     def quit(self) -> None:
         self._observer.notify("quit")

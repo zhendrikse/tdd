@@ -13,12 +13,12 @@ class Game:
         self._eventbus = eventbus
         self._clock = clock
         self._screen = screen
-        self._pacman: Sprite = Pacman()
         self._nodes: NodeGroup = NodeGroup([])
+        self._pacman: Sprite = Pacman(self._nodes)
 
     def start(self, nodes: NodeGroup = NodeGroup([])) -> None:
         self._screen.set_background()
-        self._pacman = Pacman()
+        self._pacman = Pacman(nodes)
         self._nodes = nodes
 
     def run(self) -> None:
@@ -37,18 +37,14 @@ class Game:
 
         self._screen.quit()
 
-    def _render(self, direction: Command, dt: float) -> None:
-        # print(f"Rendering with direction={direction} and dt={dt}")
+    def _render(self, command: Command, dt: float) -> None:
+        # print(f"Rendering with command={command} and dt={dt}")
+        self._pacman.update(command, dt)
 
-        # This statement is part of the original code
-        # self._screen.blit(self.background, (0, 0))
-
+        self._screen.blit()
         self._nodes.render(self._screen)
-
-        self._pacman.update(direction, dt)
         self._pacman.render(self._screen)
-
-        self._screen.refresh()
+        self._screen.update()
 
 
 
