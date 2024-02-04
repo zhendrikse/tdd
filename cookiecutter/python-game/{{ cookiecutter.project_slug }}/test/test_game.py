@@ -85,3 +85,43 @@ class TestGame:
         ]
         self._given_a_game_with_events(events).run()
         self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
+
+    def test_move_sprite_up(self):
+        events = [
+            [GameEvent(keypress=KeyPress.ARROW_UP_PRESSED)],
+            [],
+            [],
+            [GameEvent(keypress=KeyPress.ARROW_UP_RELEASED)],
+            [],
+            [QUIT_EVENT]]
+        expected_updates = [
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 395.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 390.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 385.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 385.0>', 'refresh',
+            'quit'
+        ]
+        self._given_a_game_with_events(events).run()
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
+
+    def test_move_sprite_down(self):
+        events = [
+            [GameEvent(keypress=KeyPress.ARROW_DOWN_PRESSED)],
+            [],
+            [],
+            [GameEvent(keypress=KeyPress.ARROW_DOWN_RELEASED)],
+            [],
+            [QUIT_EVENT]]
+        expected_updates = [
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 400.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 405.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 410.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 415.0>', 'refresh',
+            'Circle with radius 10 rendered at <200.0, 415.0>', 'refresh',
+            'quit'
+        ]
+        self._given_a_game_with_events(events).run()
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)

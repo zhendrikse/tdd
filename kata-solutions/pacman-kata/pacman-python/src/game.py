@@ -27,10 +27,10 @@ class Game:
             self._render(direction, dt)
             for event in self._eventbus.get_events():
                 #  print(f"Received event {event}, direction is now {direction}")
+                if event.is_arrow_key():
+                    direction = event.as_command()
                 if event.is_quit():
                     keep_running = False
-                elif event.is_arrow_key():
-                    direction = event.as_command()
 
         self._screen.quit()
 

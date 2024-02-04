@@ -31,7 +31,7 @@ class GameEvent:
     def is_not_a_keyboard_event(self) -> bool:
         return self._key_event is None
 
-    def as_command(self):
+    def as_command(self) -> Command:
         if self._key_event.value == KeyPress.ARROW_UP_PRESSED.value:
             return Command.UP
         if self._key_event.value == KeyPress.ARROW_DOWN_PRESSED.value:
@@ -40,12 +40,8 @@ class GameEvent:
             return Command.LEFT
         if self._key_event.value == KeyPress.ARROW_RIGHT_PRESSED.value:
             return Command.RIGHT
-        if self._key_event.value in [
-            KeyPress.ARROW_UP_RELEASED.value,
-            KeyPress.ARROW_RIGHT_RELEASED.value,
-            KeyPress.ARROW_LEFT_RELEASED.value,
-            KeyPress.ARROW_DOWN_RELEASED.value]:
-            return Command.STOP
+        
+        return Command.STOP
 
     def is_arrow_key(self) -> bool:
         if self.is_not_a_keyboard_event():

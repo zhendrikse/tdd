@@ -1,1 +1,1 @@
-poetry run pytest -s
+poetry run pytest -s --cov=. --cov-branch --cov-report html
