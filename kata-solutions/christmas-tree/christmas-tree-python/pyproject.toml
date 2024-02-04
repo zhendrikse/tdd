@@ -10,6 +10,7 @@ mamba = "^0.11.2"
 expects = "^0.9.0"
 coverage = "^7.3.2"
 pytest-watch = "^4.2.0"
+pyhamcrest = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 
