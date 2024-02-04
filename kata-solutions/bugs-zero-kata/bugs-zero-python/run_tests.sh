@@ -1,1 +1,2 @@
-poetry run pytest --cov-report html --cov=game -m test.game_test
+poetry run pytest --cov=. --cov-branch --cov-report html
+
