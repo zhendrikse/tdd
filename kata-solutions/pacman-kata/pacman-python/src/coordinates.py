@@ -3,16 +3,14 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Coordinates:
-    _x: int = 0
-    _y: int = 0
+    x: int = 0
+    y: int = 0
 
-    @property
-    def x(self):
-        return self._x
+    def manhattan_distance_to(self, other):
+        return abs(self.x - other.x) + abs(self.y - other.y)
 
-    @property
-    def y(self):
-        return self._y
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
 
     def __str__(self):
-        return f"<{self._x}, {self._y}>"
+        return f"<{int(self.x)}, {int(self.y)}>"

@@ -20,6 +20,7 @@ class PyGameScreen(Screen):
         self._pygame = pygame
         self._screen = pygame.display.set_mode(SCREENSIZE, pygame.SHOWN, BITS_USED_FOR_COLOR)
         self._background = None
+        self.set_background()
         self._pygame.init()
 
     def set_background(self) -> None:

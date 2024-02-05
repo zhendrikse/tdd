@@ -1,5 +1,8 @@
 from enum import Enum
 
+from src.command import Command
+from src.direction import Direction
+
 
 class KeyPress(Enum):
     ARROW_UP_PRESSED = [0, -1]
@@ -10,14 +13,6 @@ class KeyPress(Enum):
     ARROW_LEFT_RELEASED = [0, 0]
     ARROW_RIGHT_PRESSED = [1, -0]
     ARROW_RIGHT_RELEASED = [0, 0]
-
-
-class Command(Enum):
-    STOP = 0
-    UP = 1
-    DOWN = -1
-    LEFT = 2
-    RIGHT = -2
 
 
 class GameEvent:
@@ -33,15 +28,15 @@ class GameEvent:
 
     def as_command(self) -> Command:
         if self._key_event.value == KeyPress.ARROW_UP_PRESSED.value:
-            return Command.UP
+            return Command(Direction.UP)
         if self._key_event.value == KeyPress.ARROW_DOWN_PRESSED.value:
-            return Command.DOWN
+            return Command(Direction.DOWN)
         if self._key_event.value == KeyPress.ARROW_LEFT_PRESSED.value:
-            return Command.LEFT
+            return Command(Direction.LEFT)
         if self._key_event.value == KeyPress.ARROW_RIGHT_PRESSED.value:
-            return Command.RIGHT
+            return Command(Direction.RIGHT)
         
-        return Command.STOP
+        return Command(Direction.NONE)
 
     def is_arrow_key(self) -> bool:
         if self.is_not_a_keyboard_event():

@@ -1,3 +1,6 @@
+from .coordinates import Coordinates
+from .direction import Direction
+from .node import Node
 from .sprite import Sprite
 from .node_group import NodeGroup
 from .ports.eventbus import EventBus
@@ -9,29 +12,23 @@ from .game_event import Command
 
 class Game:
 
-    def __init__(self, eventbus: EventBus, clock: Clock, screen: Screen) -> None:
+    def __init__(self, eventbus: EventBus, clock: Clock, screen: Screen, nodes: NodeGroup = NodeGroup([])) -> None:
         self._eventbus = eventbus
         self._clock = clock
         self._screen = screen
-        self._nodes: NodeGroup = NodeGroup([])
-        self._pacman: Sprite = Pacman(self._nodes)
-
-    def start(self, nodes: NodeGroup = NodeGroup([])) -> None:
-        self._screen.set_background()
-        self._pacman = Pacman(nodes)
-        self._nodes = nodes
+        self._nodes: NodeGroup = nodes
+        start_node = Node(Coordinates(200, 400)) if nodes.is_empty() else nodes.first()
+        self._pacman: Sprite = Pacman(start_node)
 
     def run(self) -> None:
         keep_running = True
-        command = Command.STOP
+        command = Command(Direction.NONE)
 
         while keep_running:
             dt = self._clock.tick(30) / 1000.0
             self._pacman.update(command, dt)
-
             self._render()
             for event in self._eventbus.get_events():
-                #  print(f"Received event {event}, direction is now {direction}")
                 if event.is_arrow_key():
                     command = event.as_command()
                 if event.is_quit():

@@ -1,7 +1,6 @@
 from typing import List
 
-from .coordinates import Coordinates
-from .node import Orientation, Node
+from .node import Node
 from .ports.screen import Screen
 
 
