@@ -1,8 +1,13 @@
 import pytest
 from hamcrest import is_, assert_that, has_length
 from typing import List
+
+from src.coordinates import Coordinates
+from src.direction import Direction
 from src.game import Game
 from src.game_event import KeyPress, GameEvent
+from src.node import Node
+from src.node_group import NodeGroup
 
 from .adapters.fake_clock import FakeClock
 from .adapters.fake_eventbus import FakeEventBus
@@ -22,7 +27,11 @@ class TestGame:
     def _given_a_game_with_events(self, events: List[List[GameEvent]]) -> Game:
         screen = FakeScreen(self._screen_observer)
         event_bus = FakeEventBus(events)
-        return Game(event_bus, FakeClock(), screen)
+        a_node = Node(Coordinates(80, 80))
+        neighbor = Node(Coordinates(80, 70))
+        a_node.set_neighbor(neighbor, Direction.UP)
+
+        return Game(event_bus, FakeClock(), screen, NodeGroup([a_node, neighbor]))
 
     def _assert_observed_screen_updates(self, expected_updates: List[str], updates: List[str]) -> None:
         assert_that(updates, has_length(len(expected_updates)))
@@ -32,7 +41,12 @@ class TestGame:
     def test_game_without_events_draws_sprite(self):
         events = [[QUIT_EVENT]]
         expected_updates = [
-            'blit', 'Circle with radius 10 rendered at <200, 400>', 'update',
+            'blit',
+            'Circle with radius 12 rendered at <80, 80>',
+            'Line between <80, 80> and <80, 70> with width=4',
+            'Circle with radius 12 rendered at <80, 70>',
+            'Circle with radius 10 rendered at <80, 80>',
+            'update',
             'quit']
 
         self._given_a_game_with_events(events).run()
@@ -41,13 +55,21 @@ class TestGame:
     def test_second_tick_leaves_sprite_position_unchanged(self):
         events = [[], [QUIT_EVENT]]
         expected_updates = [
-            'blit', 'Circle with radius 10 rendered at <200, 400>', 'update',
-            'blit', 'Circle with radius 10 rendered at <200, 400>', 'update',
+            'blit',
+            'Circle with radius 12 rendered at <80, 80>',
+            'Line between <80, 80> and <80, 70> with width=4',
+            'Circle with radius 12 rendered at <80, 70>',
+            'Circle with radius 10 rendered at <80, 80>', 'update',
+            'blit',
+            'Circle with radius 12 rendered at <80, 80>',
+            'Line between <80, 80> and <80, 70> with width=4',
+            'Circle with radius 12 rendered at <80, 70>',
+            'Circle with radius 10 rendered at <80, 80>', 'update',
             'quit'
         ]
         self._given_a_game_with_events(events).run()
         self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
-
+    #
     # def test_move_sprite_to_the_right(self):
     #     events = [
     #         [GameEvent(keypress=KeyPress.ARROW_RIGHT_PRESSED)],
@@ -67,7 +89,7 @@ class TestGame:
     #     ]
     #     self._given_a_game_with_events(events).run()
     #     self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
-    #
+
     # def test_move_sprite_to_the_left(self):
     #     events = [
     #         [GameEvent(keypress=KeyPress.ARROW_LEFT_PRESSED)],

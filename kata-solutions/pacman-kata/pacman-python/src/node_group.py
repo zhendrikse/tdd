@@ -12,7 +12,7 @@ class NodeGroup(object):
         return len(self._nodes) == 0
 
     def first(self) -> Node:
-        return self._nodes.pop()
+        return self._nodes[0]
 
     def render(self, screen: Screen) -> None:
         _ = [node.render(screen) for node in self._nodes]

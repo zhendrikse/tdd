@@ -59,10 +59,11 @@ class TestNodes:
         node1 = Node(Coordinates(60, 70))
         node2 = Node(Coordinates(60, 90))
         node1.set_neighbor(node2, Direction.DOWN)
-        node1.render(screen)
-        assert_that(len(self._screen_observer.messages), is_(2))
+        NodeGroup([node1, node2]).render(screen)
+        assert_that(len(self._screen_observer.messages), is_(3))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 12 rendered at <60, 70>'))
         assert_that(self._screen_observer.messages[1], is_('Line between <60, 70> and <60, 90> with width=4'))
+        assert_that(self._screen_observer.messages[2], is_('Circle with radius 12 rendered at <60, 90>'))
 
     def test_render_node_group(self, test_node_group, screen):
         test_node_group.render(screen)
