@@ -16,7 +16,7 @@ pyhamcrest = "^2.1.0"
 
 [tool.coverage.run]
 branch = true
-omit = [ "test/*" , "*/pygame_*.py", "*/__init__.py"]   
+omit = [ "test/*" , "*/pygame_*.py", "*/__init__.py", "main.py"]
 
 [tool.coverage.report]
 # Regexes for lines to exclude from consideration

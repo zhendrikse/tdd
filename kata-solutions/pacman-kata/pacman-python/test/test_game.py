@@ -34,7 +34,7 @@ class TestGame:
         return Game(event_bus, FakeClock(), screen, NodeGroup([a_node, neighbor]))
 
     def _assert_observed_screen_updates(self, expected_updates: List[str], updates: List[str]) -> None:
-        assert_that(updates, has_length(len(expected_updates)))
+        assert_that(len(updates), is_(len(expected_updates)))
         for i in range(len(updates)):
             assert_that(updates[i], is_(expected_updates[i]))
 

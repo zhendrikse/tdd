@@ -2,15 +2,8 @@ from typing import Tuple
 
 import pygame
 from ..coordinates import Coordinates
-from ..ports.screen import Screen
+from ..ports.screen import Screen, SCREENSIZE
 
-TILEWIDTH = 16
-TILEHEIGHT = 16
-NROWS = 36
-NCOLS = 28
-SCREENWIDTH = NCOLS * TILEWIDTH
-SCREENHEIGHT = NROWS * TILEHEIGHT
-SCREENSIZE = (SCREENWIDTH, SCREENHEIGHT)
 BLACK = (0, 0, 0)
 BITS_USED_FOR_COLOR = 32
 

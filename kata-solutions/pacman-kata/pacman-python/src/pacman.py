@@ -1,6 +1,6 @@
 from .command import Command
 from .coordinates import Coordinates
-from .adapters.pygame_screen import TILEWIDTH
+from .ports.screen import TILEWIDTH
 from .direction import Direction
 from .node import Node
 from .ports.screen import Screen
