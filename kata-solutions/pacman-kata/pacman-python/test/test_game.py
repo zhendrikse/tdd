@@ -58,9 +58,9 @@ class TestGame:
             [QUIT_EVENT]]
         expected_updates = [
             'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
-            'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <205.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <210.0, 400.0>', 'update',
+            'blit', 'Circle with radius 10 rendered at <215.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <215.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <215.0, 400.0>', 'update',
             'quit'
@@ -78,9 +78,9 @@ class TestGame:
             [QUIT_EVENT]]
         expected_updates = [
             'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
-            'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <195.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <190.0, 400.0>', 'update',
+            'blit', 'Circle with radius 10 rendered at <185.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <185.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <185.0, 400.0>', 'update',
             'quit'
@@ -98,9 +98,9 @@ class TestGame:
             [QUIT_EVENT]]
         expected_updates = [
             'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
-            'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 395.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 390.0>', 'update',
+            'blit', 'Circle with radius 10 rendered at <200.0, 385.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 385.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 385.0>', 'update',
             'quit'
@@ -118,9 +118,9 @@ class TestGame:
             [QUIT_EVENT]]
         expected_updates = [
             'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
-            'blit', 'Circle with radius 10 rendered at <200.0, 400.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 405.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 410.0>', 'update',
+            'blit', 'Circle with radius 10 rendered at <200.0, 415.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 415.0>', 'update',
             'blit', 'Circle with radius 10 rendered at <200.0, 415.0>', 'update',
             'quit'
