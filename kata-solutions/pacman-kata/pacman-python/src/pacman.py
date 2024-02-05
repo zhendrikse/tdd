@@ -47,9 +47,16 @@ class Pacman(Sprite):
             self._update_position(command, new_position)
 
     def _update_position(self, command, new_position):
-        if (command.direction == self._direction
-                or command.direction == Direction.opposite_direction_of(self._direction)):
+        if command.direction == self._direction:
             self._position = new_position
+        if command.direction == Direction.opposite_direction_of(self._direction):
+            self._switch_start_and_target()
+            self._position = new_position
+
+    def _switch_start_and_target(self):
+        node = self._target_node
+        self._target_node = self._start_node
+        self._start_node = node
 
     def _target_node_reached(self):
         self._direction = Direction.NONE

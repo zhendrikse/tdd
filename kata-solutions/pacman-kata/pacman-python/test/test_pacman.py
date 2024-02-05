@@ -95,3 +95,14 @@ class TestPacman:
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 75>'))
+
+    def test_switch_start_and_target_after_reverse_direction(self, screen, one_neighbor_node):
+        pacman = Pacman(one_neighbor_node)
+
+        pacman.update(Command(Direction.UP), 0.03)
+        pacman.update(Command(Direction.NONE), 0.02)
+        pacman.update(Command(Direction.DOWN), 0.01)
+        pacman.update(Command(Direction.DOWN), 0.05)
+        pacman.render(screen)
+        assert_that(len(self._screen_observer.messages), is_(1))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 80>'))
