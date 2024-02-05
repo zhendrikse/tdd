@@ -3,16 +3,8 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Coordinates:
-    _x: int = 0
-    _y: int = 0
-
-    @property
-    def x(self):
-        return self._x
-
-    @property
-    def y(self):
-        return self._y
+    x: int = 0
+    y: int = 0
 
     def __str__(self):
-        return f"<{self._x}, {self._y}>"
+        return f"<{self.x}, {self.y}>"
