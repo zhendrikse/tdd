@@ -68,8 +68,8 @@ class Pacman(Sprite):
         return Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
 
     def _depart_from_start_node(self, command):
-        self._direction = command.direction
         if self._start_node.direction_is_valid(command.direction):
+            self._direction = command.direction
             self._target_node = self._start_node.neighbor_at(command.direction)
 
     def render(self, screen: Screen):
