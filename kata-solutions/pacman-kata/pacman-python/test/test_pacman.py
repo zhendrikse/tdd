@@ -65,3 +65,33 @@ class TestPacman:
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 70>'))
+
+    def test_pacman_may_not_depart_from_road(self, screen, one_neighbor_node):
+        pacman = Pacman(one_neighbor_node)
+
+        pacman.update(Command(Direction.UP), 0.03)
+        pacman.update(Command(Direction.NONE), 0.02)
+        pacman.update(Command(Direction.LEFT), 0.02)
+        pacman.render(screen)
+        assert_that(len(self._screen_observer.messages), is_(1))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 77>'))
+
+    def test_pacman_stops_when_key_released(self, screen, one_neighbor_node):
+        pacman = Pacman(one_neighbor_node)
+
+        pacman.update(Command(Direction.UP), 0.01)
+        pacman.update(Command(Direction.UP), 0.02)
+        pacman.update(Command(Direction.NONE), 0.02)
+        pacman.render(screen)
+        assert_that(len(self._screen_observer.messages), is_(1))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 77>'))
+
+    def test_pacman_may_reverse_direction(self, screen, one_neighbor_node):
+        pacman = Pacman(one_neighbor_node)
+
+        pacman.update(Command(Direction.UP), 0.08)
+        pacman.update(Command(Direction.NONE), 0.02)
+        pacman.update(Command(Direction.DOWN), 0.03)
+        pacman.render(screen)
+        assert_that(len(self._screen_observer.messages), is_(1))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 75>'))
