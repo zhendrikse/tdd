@@ -23,24 +23,23 @@ class Game:
 
     def run(self) -> None:
         keep_running = True
-        direction = Command.STOP
+        command = Command.STOP
 
         while keep_running:
             dt = self._clock.tick(30) / 1000.0
-            self._render(direction, dt)
+            self._pacman.update(command, dt)
+
+            self._render()
             for event in self._eventbus.get_events():
                 #  print(f"Received event {event}, direction is now {direction}")
                 if event.is_arrow_key():
-                    direction = event.as_command()
+                    command = event.as_command()
                 if event.is_quit():
                     keep_running = False
 
         self._screen.quit()
 
-    def _render(self, command: Command, dt: float) -> None:
-        # print(f"Rendering with command={command} and dt={dt}")
-        self._pacman.update(command, dt)
-
+    def _render(self) -> None:
         self._screen.blit()
         self._nodes.render(self._screen)
         self._pacman.render(self._screen)
