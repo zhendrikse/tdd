@@ -23,12 +23,10 @@ class Pacman(Sprite):
     def __init__(self):
         self._name = PACMAN
         self._position = Coordinates(200, 400)
-        self._direction = Command.STOP
 
-    def update(self, direction: Command, dt):
-        increment = DIRECTIONS[self._direction]
+    def update(self, command: Command, dt) -> None:
+        increment = DIRECTIONS[command]
         self._position = Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
-        self._direction = direction
 
-    def render(self, screen: Screen):
+    def render(self, screen: Screen) -> None:
         screen.render_circle(COLOR, self._position, RADIUS)
