@@ -5,7 +5,7 @@
 This kata brings together the techniques that we practiced in many other katas such as
 
 - Steering Pacman left, right, up, and, down much like we did in the [mars rover kata](../mars-rover)
-- Applying ports and adapters to isolate all the calls to the gaming engine framework
+- Applying [ports and adapters](https://github.com/zhendrikse/tdd/wiki/Hexagonal-Architecture) to isolate all the calls to the gaming engine framework
 - Determining the distances in the Pacman maze by using the [manhattan distance](../manhattan-distance)
 - Working with nodes and neighbors much like we do in the [game of life](../game-of-life)
 
