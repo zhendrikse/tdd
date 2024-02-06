@@ -30,6 +30,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [locker-room-kata](./locker-room-kata)          | M       | Stateless / Functional programming                    | ✗  | ✗   | ✗  | ✔   | ✔  | ✗ | ✗ |
 | [manhattan-distance](./manhattan-distance)      | L       | 1, 2, N / Encapsulation                               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [mars-rover](./mars-rover)                      | M       | **Generic TDD** / Design decisions                    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✔ |
+| [pacman-kata](./pacman-kata)                    | H       | Unites many of the practices from other katas         | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [poker-hands-kata](./poker-hands-kata)          | H       | Outside-in / Mocks / Design decisions                 | ✔  | ✗   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [questionnaire-kata](./questionnaire-kata)      | M       | Data science / Dashboarding / Ports &amp; adapters    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [report-generator-kata](./report-generator-kata)| L / M   | **Refactoring** / SOLID / Code smells / Clean code    | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
