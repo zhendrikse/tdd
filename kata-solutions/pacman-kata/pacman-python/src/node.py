@@ -1,5 +1,5 @@
-from enum import Enum
-from typing import Any, List
+from dataclasses import dataclass, field
+from typing import Any, Dict
 
 from .coordinates import Coordinates
 from .direction import Direction
@@ -9,10 +9,10 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
 
+@dataclass(frozen=True)
 class Node:
-    def __init__(self, position: Coordinates) -> None:
-        self._position: Coordinates = position
-        self._neighbors: [Direction | Node] = {}
+    _position: Coordinates
+    _neighbors: dict[Direction | Any] = field(default_factory=dict)
 
     @property
     def coordinates(self):

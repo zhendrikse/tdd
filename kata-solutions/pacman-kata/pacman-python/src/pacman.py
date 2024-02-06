@@ -28,7 +28,7 @@ class Pacman(Sprite):
         self._direction = Direction.NONE
 
     def _is_on_start_node(self) -> bool:
-        return self._position == self._start_node.coordinates
+        return self._position.manhattan_distance_to(self._start_node.coordinates) < 3
 
     def _is_beyond_target_node(self, position: Coordinates) -> bool:
         distance_start_target = self._start_node.coordinates.manhattan_distance_to(self._target_node.coordinates)
