@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import List
 
 from .coordinates import Coordinates
@@ -10,9 +11,9 @@ SPACE_SYMBOL = "X"
 LINE_SYMBOL = "."
 
 
-class NodeGroup(object):
-    def __init__(self, node_group: List[Node]):
-        self._nodes: List[Node] = node_group
+@dataclass(frozen=True)
+class NodeGroup:
+    _nodes: List[Node]
 
     def is_empty(self) -> bool:
         return len(self._nodes) == 0
@@ -26,18 +27,20 @@ class NodeGroup(object):
     @classmethod
     def from_string(cls, text_based_node_group: str):
         game_as_string = text_based_node_group.replace(" ", "")
+
         if not NODE_SYMBOL in text_based_node_group:
             return NodeGroup([])
 
-        game_nodes = cls._nodes_with_horizontal_vertices(game_as_string.splitlines())
+        list_of_lines = game_as_string.splitlines()
+        dimension = Coordinates(len(list_of_lines[0]), len(list_of_lines))
 
-        return NodeGroup(game_nodes)
+        list_of_nodes = [cls._parse_line(i, list_of_lines[i]) for i in range(dimension.y)]
 
-    @classmethod
-    def _nodes_with_horizontal_vertices(cls, lines):
-        list_of_node_lists = [cls._parse_line(i, lines[i]) for i in range(len(lines))]
-        # Return the flattened list
-        return [item for node_list in list_of_node_lists for item in node_list]
+        # transposed_lines_list =
+        # transposed_nodes_list =
+
+        flattened_list = [node for node_list in list_of_nodes for node in node_list]
+        return NodeGroup(flattened_list)
 
     @classmethod
     def _parse_line(cls, line_number, line: str):
@@ -47,9 +50,9 @@ class NodeGroup(object):
         return nodes
 
     @classmethod
-    def _determine_horizontal_vertices(cls, node_positions, nodes, text_based_node_group):
+    def _determine_horizontal_vertices(cls, node_positions, nodes, line):
         for node_counter in range(len(node_positions) - 1):
-            if text_based_node_group[node_positions[node_counter] + 1] == LINE_SYMBOL:
+            if line[node_positions[node_counter] + 1] == LINE_SYMBOL:
                 nodes[node_counter].set_neighbor(nodes[node_counter + 1], Direction.RIGHT)
                 nodes[node_counter + 1].set_neighbor(nodes[node_counter], Direction.LEFT)
 
@@ -58,4 +61,3 @@ class NodeGroup(object):
         nodes = []
         _ = [nodes.append(Node(Coordinates(TILEWIDTH * position, y))) for position in node_positions]
         return nodes
-

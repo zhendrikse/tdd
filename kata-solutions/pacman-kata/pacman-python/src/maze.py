@@ -1,0 +1,37 @@
+PACMAN_MAZE = ''''X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+X + . . . . + . . . . . + X X + . . . . . + . . . . + X
+X . X X X X . X X X X X . X X . X X X X X . X X X X . X
+X . X X X X . X X X X X . X X . X X X X X . X X X X . X
+X . X X X X . X X X X X . X X . X X X X X . X X X X . X
+X + . . . . + . . + . . + . . + . . + . . + . . . . + X
+X . X X X X . X X . X X X X X X X X . X X . X X X X . X
+X . X X X X . X X . X X X X X X X X . X X . X X X X . X
+X + . . . . + X X + . . + X X + . . + X X + . . . . + X
+X X X X X X . X X X X X . X X . X X X X X . X X X X X X
+X X X X X X . X X X X X . X X . X X X X X . X X X X X X
+X X X X X X . X X + . . + . . + . . + X X . X X X X X X
+X X X X X X . X X . X X X = = X X X . X X . X X X X X X
+X X X X X X . X X . X X X X X X X X . X X . X X X X X X
++ . . . . . + . . + X X X X X X X X + . . + . . . . . +
+X X X X X X . X X . X X X X X X X X . X X . X X X X X X
+X X X X X X . X X . X X X X X X X X . X X . X X X X X X
+X X X X X X . X X + . . . . . . . . + X X . X X X X X X
+X X X X X X . X X . X X X X X X X X . X X . X X X X X X
+X X X X X X . X X . X X X X X X X X . X X . X X X X X X
+X + . . . . + . . + . . + X X + . . + . . + . . . . + X
+X . X X X X . X X X X X . X X . X X X X X . X X X X . X
+X . X X X X . X X X X X . X X . X X X X X . X X X X . X
+X + . + X X + . . + . . + . . + . . + . . + X X + . + X
+X X X . X X . X X . X X X X X X X X . X X . X X . X X X
+X X X . X X . X X . X X X X X X X X . X X . X X . X X X
+X + . + . . + X X + . . + X X + . . + X X + . . + . + X
+X . X X X X X X X X X X . X X . X X X X X X X X X X . X
+X . X X X X X X X X X X . X X . X X X X X X X X X X . X
+X + . . . . . . . . . . + . . + . . . . . . . . . . + X
+X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+'''
