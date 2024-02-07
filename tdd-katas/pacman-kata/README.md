@@ -31,3 +31,7 @@ In addition, this kata brings together quite a few techniques that we practiced 
 6. Add the pellets and eat them
 7. Add the ghosts by giving them random movements
 8. Etc.
+
+# References
+
+- [pacmancode.com](https://pacmancode.com)
