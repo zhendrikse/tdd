@@ -1,12 +1,16 @@
 from dataclasses import dataclass
 
 
+class Coordinates:
+    pass
+
+
 @dataclass(frozen=True)
 class Coordinates:
     x: int = 0
     y: int = 0
 
-    def manhattan_distance_to(self, other):
+    def manhattan_distance_to(self, other: Coordinates) -> int:
         return abs(self.x - other.x) + abs(self.y - other.y)
 
     def __eq__(self, other):

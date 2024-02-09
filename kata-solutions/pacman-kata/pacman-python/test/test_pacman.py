@@ -61,10 +61,10 @@ class TestPacman:
         pacman = Pacman(one_neighbor_node)
 
         pacman.update(Command(Direction.UP), 0.09)
-        pacman.update(Command(Direction.UP), 0.02)
+        pacman.update(Command(Direction.UP), 0.08)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
-        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 70>'))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 71>'))
 
     def test_pacman_may_not_depart_from_road(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)

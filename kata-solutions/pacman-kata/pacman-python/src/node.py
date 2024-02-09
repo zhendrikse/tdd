@@ -19,7 +19,7 @@ class Node:
         return self._position
 
     def direction_is_valid(self, direction: Direction) -> bool:
-        return direction in [direction for direction in self._neighbors.keys()]
+        return direction in self._neighbors.keys()
 
     def render(self, screen: Screen) -> None:
         screen.render_circle(RED, self._position, 12)

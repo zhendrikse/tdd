@@ -1,8 +1,5 @@
 from dataclasses import dataclass
 from typing import List
-
-from .coordinates import Coordinates
-from .direction import Direction
 from .node import Node
 from .ports.screen import Screen, TILEWIDTH, TILEHEIGHT
 

@@ -2,21 +2,15 @@ from enum import Enum
 
 
 class Direction(Enum):
-    NONE = "None"
+    NONE = "No direction"
     UP = "Up"
     DOWN = "Down"
     LEFT = "Left"
     RIGHT = "Right"
 
-    @staticmethod
-    def opposite_direction_of(direction):
-        if direction == Direction.UP:
-            return Direction.DOWN
-        elif direction == Direction.DOWN:
-            return Direction.UP
-        elif direction == Direction.RIGHT:
-            return Direction.LEFT
-        elif direction == Direction.LEFT:
-            return Direction.RIGHT
-        else:
-            return Direction.NONE
+    def is_opposite_direction_of(self, direction) -> bool:
+        return (direction.value == Direction.UP.value and self.value == Direction.DOWN.value or
+                direction.value == Direction.DOWN.value and self.value == Direction.UP.value or
+                direction.value == Direction.LEFT.value and self.value == Direction.RIGHT.value or
+                direction.value == Direction.RIGHT.value and self.value == Direction.LEFT.value)
+

@@ -23,54 +23,51 @@ class Pacman(Sprite):
     def __init__(self, initial_node: Node):
         self._name = PACMAN
         self._start_node = initial_node
-        self._target_node = initial_node
+        self._target_node = None
         self._position = initial_node.coordinates
         self._direction = Direction.NONE
 
-    def _is_on_start_node(self) -> bool:
-        return self._position.manhattan_distance_to(self._start_node.coordinates) < 3
+    def _pacman_near_target(self) -> bool:
+        return self._position.manhattan_distance_to(self._target_node.coordinates) < 5
 
-    def _is_beyond_target_node(self, position: Coordinates) -> bool:
-        distance_start_target = self._start_node.coordinates.manhattan_distance_to(self._target_node.coordinates)
-        distance_pacman_from_start = self._start_node.coordinates.manhattan_distance_to(position)
-        return distance_pacman_from_start > distance_start_target
+    def _pacman_near_start(self) -> bool:
+        return self._position.manhattan_distance_to(self._start_node.coordinates) < 5
 
-    def update(self, command: Command, dt):
-        if self._is_on_start_node():
-            self._depart_from_start_node(command)
-
-        new_position = self._calculate_new_position(command, dt)
-
-        if self._is_beyond_target_node(new_position):
-            self._target_node_reached()
-        else:
-            self._update_position(command, new_position)
-
-    def _update_position(self, command, new_position):
-        if command.direction == self._direction:
-            self._position = new_position
-        if command.direction == Direction.opposite_direction_of(self._direction):
+    def update(self, command: Command, dt: float) -> None:
+        if self._pacman_near_start():
+            if self._start_node.direction_is_valid(command.direction):
+                self._target_node = self._start_node.neighbor_at(command.direction)
+                self._calculate_new_position(command, dt)
+        elif self._pacman_near_target():
+            if self._target_node.direction_is_valid(command.direction):
+                self._start_node = self._target_node
+                self._target_node = self._start_node.neighbor_at(command.direction)
+                self._calculate_new_position(command, dt)
+        elif command.direction.value == self._direction.value:
+            self._calculate_new_position(command, dt)
+        elif command.direction.is_opposite_direction_of(self._direction):
             self._switch_start_and_target()
-            self._position = new_position
+            self._calculate_new_position(command, dt)
+        else:
+            # User tries to make pacman leave the vertices between the nodes
+            pass
 
     def _switch_start_and_target(self):
         node = self._target_node
         self._target_node = self._start_node
         self._start_node = node
 
-    def _target_node_reached(self):
-        self._direction = Direction.NONE
-        self._start_node = self._target_node
-        self._position = self._target_node.coordinates
-
-    def _calculate_new_position(self, command, dt):
+    def _calculate_new_position(self, command: Command, dt: float) -> None:
         increment = DIRECTIONS[command.direction.value]
-        return Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
+        self._position = Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
 
-    def _depart_from_start_node(self, command):
-        if self._start_node.direction_is_valid(command.direction):
-            self._direction = command.direction
-            self._target_node = self._start_node.neighbor_at(command.direction)
+        # Recalibrate pacman on vertex
+        if command.direction.value == Direction.UP.value or command.direction.value == Direction.DOWN.value:
+            self._position = Coordinates(self._start_node.coordinates.x, self._position.y)
+        else:
+            self._position = Coordinates(self._position.x, self._start_node.coordinates.y)
+
+        self._direction = command.direction
 
     def render(self, screen: Screen):
         screen.render_circle(COLOR, self._position, RADIUS)

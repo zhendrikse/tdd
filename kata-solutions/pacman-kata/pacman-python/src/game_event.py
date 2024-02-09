@@ -1,7 +1,7 @@
 from enum import Enum
 
-from src.command import Command
-from src.direction import Direction
+from .command import Command
+from .direction import Direction
 
 
 class KeyPress(Enum):
