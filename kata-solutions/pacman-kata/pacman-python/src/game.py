@@ -29,8 +29,7 @@ class Game:
             self._pacman.move(command, dt)
             self._render()
             for event in self._eventbus.get_events():
-                if event.is_arrow_key():
-                    command = event.as_command()
+                command = event.as_command()
                 if event.is_quit():
                     keep_running = False
 
