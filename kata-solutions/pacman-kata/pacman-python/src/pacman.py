@@ -9,7 +9,7 @@ from .sprite import Sprite
 YELLOW = (255, 255, 0)
 PACMAN = 0
 SPEED = 100 * TILEWIDTH / 16
-DIRECTIONS = {
+INCREMENTS = {
     Direction.NONE.value: Coordinates(0, 0),
     Direction.UP.value: Coordinates(0, -1 * SPEED),
     Direction.DOWN.value: Coordinates(0, 1 * SPEED),
@@ -17,6 +17,7 @@ DIRECTIONS = {
     Direction.RIGHT.value: Coordinates(1 * SPEED, 0)}
 RADIUS = 10
 COLOR = YELLOW
+PROXIMITY_TOLERANCE = 3
 
 
 class Pacman(Sprite):
@@ -28,10 +29,10 @@ class Pacman(Sprite):
         self._direction = Direction.NONE
 
     def _pacman_near_target(self) -> bool:
-        return self._position.manhattan_distance_to(self._target_node.coordinates) < 5
+        return self._position.manhattan_distance_to(self._target_node.coordinates) < PROXIMITY_TOLERANCE
 
     def _pacman_near_start(self) -> bool:
-        return self._position.manhattan_distance_to(self._start_node.coordinates) < 5
+        return self._position.manhattan_distance_to(self._start_node.coordinates) < PROXIMITY_TOLERANCE
 
     def update(self, command: Command, dt: float) -> None:
         if self._pacman_near_start():
@@ -58,16 +59,16 @@ class Pacman(Sprite):
         self._start_node = node
 
     def _calculate_new_position(self, command: Command, dt: float) -> None:
-        increment = DIRECTIONS[command.direction.value]
+        increment = INCREMENTS[command.direction.value]
         self._position = Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
+        self._recalibrate_pacman_on_vertex(command)
+        self._direction = command.direction
 
-        # Recalibrate pacman on vertex
+    def _recalibrate_pacman_on_vertex(self, command):
         if command.direction.value == Direction.UP.value or command.direction.value == Direction.DOWN.value:
             self._position = Coordinates(self._start_node.coordinates.x, self._position.y)
         else:
             self._position = Coordinates(self._position.x, self._start_node.coordinates.y)
-
-        self._direction = command.direction
 
     def render(self, screen: Screen):
         screen.render_circle(COLOR, self._position, RADIUS)

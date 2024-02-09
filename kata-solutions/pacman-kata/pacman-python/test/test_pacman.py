@@ -5,7 +5,7 @@ from src.coordinates import Coordinates
 from src.game_event import Command
 from src.direction import Direction
 from src.node import Node
-from src.pacman import Pacman
+from src.pacman import Pacman, PROXIMITY_TOLERANCE
 from src.ports.screen import Screen
 from .adapters.fake_screen import FakeScreen
 from .screen_observer import FakeScreenObserver
@@ -90,7 +90,6 @@ class TestPacman:
         pacman = Pacman(one_neighbor_node)
 
         pacman.update(Command(Direction.UP), 0.08)
-        pacman.update(Command(Direction.NONE), 0.02)
         pacman.update(Command(Direction.DOWN), 0.03)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
