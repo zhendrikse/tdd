@@ -34,7 +34,7 @@ class Pacman(Sprite):
     def _pacman_near_start(self) -> bool:
         return self._position.manhattan_distance_to(self._start_node.coordinates) < PROXIMITY_TOLERANCE
 
-    def update(self, command: Command, dt: float) -> None:
+    def move(self, command: Command, dt: float) -> None:
         if self._pacman_near_start():
             if self._start_node.direction_is_valid(command.direction):
                 self._target_node = self._start_node.neighbor_at(command.direction)

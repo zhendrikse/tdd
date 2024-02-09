@@ -10,5 +10,5 @@ class Sprite(Protocol):
         ...
 
     @abstractmethod
-    def update(self, direction: Command, dt: float) -> None:
+    def move(self, direction: Command, dt: float) -> None:
         ...

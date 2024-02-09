@@ -26,7 +26,7 @@ class Game:
 
         while keep_running:
             dt = self._clock.tick(30) / 1000.0
-            self._pacman.update(command, dt)
+            self._pacman.move(command, dt)
             self._render()
             for event in self._eventbus.get_events():
                 if event.is_arrow_key():
