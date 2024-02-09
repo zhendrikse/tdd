@@ -18,7 +18,7 @@ class Node:
     def coordinates(self):
         return self._position
 
-    def direction_is_valid(self, direction: Direction) -> bool:
+    def has_neighbor_in(self, direction: Direction) -> bool:
         return direction in self._neighbors.keys()
 
     def render(self, screen: Screen) -> None:

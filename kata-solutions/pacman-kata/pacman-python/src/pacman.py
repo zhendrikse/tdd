@@ -36,11 +36,11 @@ class Pacman(Sprite):
 
     def move(self, command: Command, dt: float) -> None:
         if self._pacman_near_start():
-            if self._start_node.direction_is_valid(command.direction):
+            if self._start_node.has_neighbor_in(command.direction):
                 self._target_node = self._start_node.neighbor_at(command.direction)
                 self._calculate_new_position(command, dt)
         elif self._pacman_near_target():
-            if self._target_node.direction_is_valid(command.direction):
+            if self._target_node.has_neighbor_in(command.direction):
                 self._start_node = self._target_node
                 self._target_node = self._start_node.neighbor_at(command.direction)
                 self._calculate_new_position(command, dt)

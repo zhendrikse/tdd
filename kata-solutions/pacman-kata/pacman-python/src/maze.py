@@ -69,7 +69,7 @@ class Maze:
         return transposed_lines_list
 
     def as_node_group(self) -> NodeGroup:
-        if not NODE_SYMBOL in self._maze_as_string:
+        if NODE_SYMBOL not in self._maze_as_string:
             return NodeGroup([])
 
         node_coordinates = self._determine_node_coordinates()

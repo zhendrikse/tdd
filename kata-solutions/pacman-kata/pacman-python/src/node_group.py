@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 from .node import Node
-from .ports.screen import Screen, TILEWIDTH, TILEHEIGHT
+from .ports.screen import Screen
 
 
 @dataclass(frozen=True)
