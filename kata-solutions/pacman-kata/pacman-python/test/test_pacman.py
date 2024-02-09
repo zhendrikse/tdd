@@ -106,3 +106,25 @@ class TestPacman:
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 79>'))
+
+    def test_arrived_at_target_pacman_switches_direction(self, one_neighbor_node, screen):
+        one_neighbor_node.neighbor_at(Direction.UP).set_neighbor(Node(Coordinates(90, 70)), Direction.RIGHT)
+        pacman = Pacman(one_neighbor_node)
+
+        pacman.move(Command(Direction.UP), 0.09)
+        pacman.move(Command(Direction.RIGHT), 0.05)
+        pacman.render(screen)
+        assert_that(len(self._screen_observer.messages), is_(1))
+        assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <85, 70>'))
+
+    def test_pacman_continues_moving_in_same_direction(self, one_neighbor_node, screen):
+        pacman = Pacman(one_neighbor_node)
+
+        pacman.move(Command(Direction.UP), PROXIMITY_TOLERANCE * .01 + 0.01)
+        pacman.move(Command(Direction.UP), 0.02)
+        pacman.move(Command(Direction.UP), 0.02)
+        pacman.render(screen)
+
+        expected_coordinates = Coordinates(80, 80 - PROXIMITY_TOLERANCE - 1 - 2 - 2)
+        assert_that(len(self._screen_observer.messages), is_(1))
+        assert_that(self._screen_observer.messages[0], is_(f'Circle with radius 10 rendered at {expected_coordinates}'))
