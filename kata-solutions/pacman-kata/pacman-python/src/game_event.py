@@ -37,5 +37,5 @@ class GameEvent:
         else:
             return Command(Direction.NONE)
 
-    def __str__(self):
+    def __repr__(self):
         return f"GameEvent = [{self._key_event}, quit={self._quit}]"

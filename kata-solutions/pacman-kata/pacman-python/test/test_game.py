@@ -28,12 +28,23 @@ class TestGame:
         screen = FakeScreen(self._screen_observer)
         event_bus = FakeEventBus(events)
         a_node = Node(Coordinates(80, 80))
-        neighbor = Node(Coordinates(80, 70))
-        a_node.set_neighbor(neighbor, Direction.UP)
 
-        return Game(event_bus, FakeClock(), screen, NodeGroup([a_node, neighbor]))
+        right_neighbor = Node(Coordinates(100, 80))
+        left_neighbor = Node(Coordinates(60, 80))
+        up_neighbor = Node(Coordinates(80, 60))
+        down_neighbor = Node(Coordinates(80, 100))
 
-    def _assert_observed_screen_updates(self, expected_updates: List[str], updates: List[str]) -> None:
+        a_node.set_neighbor(right_neighbor, Direction.RIGHT)
+        a_node.set_neighbor(left_neighbor, Direction.LEFT)
+        a_node.set_neighbor(up_neighbor, Direction.UP)
+        a_node.set_neighbor(down_neighbor, Direction.DOWN)
+
+        non_rendered_node_group = NodeGroup(
+            [a_node, right_neighbor, left_neighbor, up_neighbor, down_neighbor], render_group=False)
+        return Game(event_bus, FakeClock(), screen, non_rendered_node_group)
+
+    @staticmethod
+    def _assert_observed_screen_updates(expected_updates: List[str], updates: List[str]) -> None:
         assert_that(len(updates), is_(len(expected_updates)))
         for i in range(len(updates)):
             assert_that(updates[i], is_(expected_updates[i]))
@@ -42,9 +53,6 @@ class TestGame:
         events = [[QUIT_EVENT]]
         expected_updates = [
             'blit',
-            'Circle with radius 12 rendered at <80, 80>',
-            'Line between <80, 80> and <80, 70> with width=4',
-            'Circle with radius 12 rendered at <80, 70>',
             'Circle with radius 10 rendered at <80, 80>',
             'update',
             'quit']
@@ -56,96 +64,90 @@ class TestGame:
         events = [[], [QUIT_EVENT]]
         expected_updates = [
             'blit',
-            'Circle with radius 12 rendered at <80, 80>',
-            'Line between <80, 80> and <80, 70> with width=4',
-            'Circle with radius 12 rendered at <80, 70>',
             'Circle with radius 10 rendered at <80, 80>', 'update',
             'blit',
-            'Circle with radius 12 rendered at <80, 80>',
-            'Line between <80, 80> and <80, 70> with width=4',
-            'Circle with radius 12 rendered at <80, 70>',
             'Circle with radius 10 rendered at <80, 80>', 'update',
             'quit'
         ]
         self._given_a_game_with_events(events).run()
         self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
-    #
-    # def test_move_sprite_to_the_right(self):
-    #     events = [
-    #         [GameEvent(keypress=KeyPress.ARROW_RIGHT_PRESSED)],
-    #         [],
-    #         [],
-    #         [GameEvent(keypress=KeyPress.ARROW_RIGHT_RELEASED)],
-    #         [],
-    #         [QUIT_EVENT]]
-    #     expected_updates = [
-    #         'blit', 'Circle with radius 10 rendered at <200, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <205, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <210, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <215, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <215, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <215, 400>', 'update',
-    #         'quit'
-    #     ]
-    #     self._given_a_game_with_events(events).run()
-    #     self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
 
-    # def test_move_sprite_to_the_left(self):
-    #     events = [
-    #         [GameEvent(keypress=KeyPress.ARROW_LEFT_PRESSED)],
-    #         [],
-    #         [],
-    #         [GameEvent(keypress=KeyPress.ARROW_LEFT_RELEASED)],
-    #         [],
-    #         [QUIT_EVENT]]
-    #     expected_updates = [
-    #         'blit', 'Circle with radius 10 rendered at <200, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <195, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <190, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <185, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <185, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <185, 400>', 'update',
-    #         'quit'
-    #     ]
-    #     self._given_a_game_with_events(events).run()
-    #     self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
-    #
-    # def test_move_sprite_up(self):
-    #     events = [
-    #         [GameEvent(keypress=KeyPress.ARROW_UP_PRESSED)],
-    #         [],
-    #         [],
-    #         [GameEvent(keypress=KeyPress.ARROW_UP_RELEASED)],
-    #         [],
-    #         [QUIT_EVENT]]
-    #     expected_updates = [
-    #         'blit', 'Circle with radius 10 rendered at <200, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 395>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 390>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 385>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 385>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 385>', 'update',
-    #         'quit'
-    #     ]
-    #     self._given_a_game_with_events(events).run()
-    #     self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
-    #
-    # def test_move_sprite_down(self):
-    #     events = [
-    #         [GameEvent(keypress=KeyPress.ARROW_DOWN_PRESSED)],
-    #         [],
-    #         [],
-    #         [GameEvent(keypress=KeyPress.ARROW_DOWN_RELEASED)],
-    #         [],
-    #         [QUIT_EVENT]]
-    #     expected_updates = [
-    #         'blit', 'Circle with radius 10 rendered at <200, 400>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 405>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 410>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 415>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 415>', 'update',
-    #         'blit', 'Circle with radius 10 rendered at <200, 415>', 'update',
-    #         'quit'
-    #     ]
-    #     self._given_a_game_with_events(events).run()
-    #     self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
+    def test_move_sprite_to_the_right(self):
+        events = [
+            [GameEvent(keypress=KeyPress.ARROW_RIGHT_PRESSED)],
+            [],
+            [],
+            [GameEvent(keypress=KeyPress.ARROW_RIGHT_RELEASED)],
+            [],
+            [QUIT_EVENT]]
+        expected_updates = [
+            'blit', 'Circle with radius 10 rendered at <80, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <84, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <88, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <92, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <92, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <92, 80>', 'update',
+            'quit'
+        ]
+        self._given_a_game_with_events(events).run()
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
+
+    def test_move_sprite_to_the_left(self):
+        events = [
+            [GameEvent(keypress=KeyPress.ARROW_LEFT_PRESSED)],
+            [],
+            [],
+            [GameEvent(keypress=KeyPress.ARROW_LEFT_RELEASED)],
+            [],
+            [QUIT_EVENT]]
+        expected_updates = [
+            'blit', 'Circle with radius 10 rendered at <80, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <76, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <72, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <68, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <68, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <68, 80>', 'update',
+            'quit'
+        ]
+        self._given_a_game_with_events(events).run()
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
+
+    def test_move_sprite_up(self):
+        events = [
+            [GameEvent(keypress=KeyPress.ARROW_UP_PRESSED)],
+            [],
+            [],
+            [GameEvent(keypress=KeyPress.ARROW_UP_RELEASED)],
+            [],
+            [QUIT_EVENT]]
+        expected_updates = [
+            'blit', 'Circle with radius 10 rendered at <80, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 76>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 72>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 68>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 68>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 68>', 'update',
+            'quit'
+        ]
+        self._given_a_game_with_events(events).run()
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)
+
+    def test_move_sprite_down(self):
+        events = [
+            [GameEvent(keypress=KeyPress.ARROW_DOWN_PRESSED)],
+            [],
+            [],
+            [GameEvent(keypress=KeyPress.ARROW_DOWN_RELEASED)],
+            [],
+            [QUIT_EVENT]]
+        expected_updates = [
+            'blit', 'Circle with radius 10 rendered at <80, 80>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 84>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 88>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 92>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 92>', 'update',
+            'blit', 'Circle with radius 10 rendered at <80, 92>', 'update',
+            'quit'
+        ]
+        self._given_a_game_with_events(events).run()
+        self._assert_observed_screen_updates(expected_updates, self._screen_observer.messages)

@@ -4,5 +4,5 @@ from typing import Protocol
 
 class Clock(Protocol):
     @abstractmethod
-    def tick(self, rate: int) -> int:
+    def tick(self, rate: float) -> int:
         ...
