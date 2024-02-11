@@ -96,3 +96,13 @@ X X X X X X X X
         assert_that(self._screen_observer.messages[7], is_("Line between <16, 48> and <16, 16> with width=4"))
         assert_that(self._screen_observer.messages[8], is_("Line between <16, 48> and <64, 48> with width=4"))
         # We leave the remainder of the assertions out
+
+    def test_maze_with_portals(self, screen):
+        test_maze = '''X X X X X X X X
+X + . . + X X X
+X . X X . X X X
++ . . . + . . +
+X X X X X X X X'''
+        nodegroup = Maze(test_maze).as_node_group()
+        portal_nodes = [node for node in nodegroup.nodes if node.is_portal()]
+        assert_that(len(portal_nodes), is_(2))

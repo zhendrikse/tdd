@@ -1,12 +1,11 @@
 import pytest
 
-from hamcrest import is_, assert_that, is_not
+from hamcrest import is_, assert_that
 
 from src.coordinates import Coordinates
-from src.direction import Direction
-from src.node import Node
+from src.node import Node, NeighborType
 from src.node_group import NodeGroup
-from src.ports.screen import Screen, TILEWIDTH
+from src.ports.screen import Screen
 from .adapters.fake_screen import FakeScreen
 from .screen_observer import FakeScreenObserver
 
@@ -31,22 +30,22 @@ class TestRenderNodeGroup:
         node_e = Node(Coordinates(208, 160))
         node_f = Node(Coordinates(80, 320))
         node_g = Node(Coordinates(208, 320))
-        node_a.set_neighbor(node_b, Direction.RIGHT)
-        node_a.set_neighbor(node_c, Direction.DOWN)
-        node_b.set_neighbor(node_a, Direction.LEFT)
-        node_b.set_neighbor(node_d, Direction.DOWN)
-        node_c.set_neighbor(node_a, Direction.UP)
-        node_c.set_neighbor(node_d, Direction.RIGHT)
-        node_c.set_neighbor(node_f, Direction.DOWN)
-        node_d.set_neighbor(node_b, Direction.UP)
-        node_d.set_neighbor(node_c, Direction.LEFT)
-        node_d.set_neighbor(node_e, Direction.RIGHT)
-        node_e.set_neighbor(node_d, Direction.LEFT)
-        node_e.set_neighbor(node_g, Direction.DOWN)
-        node_f.set_neighbor(node_c, Direction.UP)
-        node_f.set_neighbor(node_g, Direction.RIGHT)
-        node_g.set_neighbor(node_e, Direction.UP)
-        node_g.set_neighbor(node_f, Direction.LEFT)
+        node_a.set_neighbor(node_b, NeighborType.RIGHT)
+        node_a.set_neighbor(node_c, NeighborType.DOWN)
+        node_b.set_neighbor(node_a, NeighborType.LEFT)
+        node_b.set_neighbor(node_d, NeighborType.DOWN)
+        node_c.set_neighbor(node_a, NeighborType.UP)
+        node_c.set_neighbor(node_d, NeighborType.RIGHT)
+        node_c.set_neighbor(node_f, NeighborType.DOWN)
+        node_d.set_neighbor(node_b, NeighborType.UP)
+        node_d.set_neighbor(node_c, NeighborType.LEFT)
+        node_d.set_neighbor(node_e, NeighborType.RIGHT)
+        node_e.set_neighbor(node_d, NeighborType.LEFT)
+        node_e.set_neighbor(node_g, NeighborType.DOWN)
+        node_f.set_neighbor(node_c, NeighborType.UP)
+        node_f.set_neighbor(node_g, NeighborType.RIGHT)
+        node_g.set_neighbor(node_e, NeighborType.UP)
+        node_g.set_neighbor(node_f, NeighborType.LEFT)
         return NodeGroup([node_a, node_b, node_c, node_d, node_e, node_f, node_g])
 
     def test_render_single_node(self, screen):
@@ -57,7 +56,7 @@ class TestRenderNodeGroup:
     def test_render_two_connected_nodes(self, screen):
         node1 = Node(Coordinates(60, 70))
         node2 = Node(Coordinates(60, 90))
-        node1.set_neighbor(node2, Direction.DOWN)
+        node1.set_neighbor(node2, NeighborType.DOWN)
         NodeGroup([node1, node2]).render(screen)
         assert_that(len(self._screen_observer.messages), is_(3))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 12 rendered at <60, 70>'))

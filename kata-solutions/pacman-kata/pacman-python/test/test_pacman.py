@@ -4,7 +4,7 @@ from hamcrest import assert_that, is_
 from src.coordinates import Coordinates
 from src.game_event import Command
 from src.direction import Direction
-from src.node import Node
+from src.node import Node, NeighborType
 from src.pacman import Pacman, PROXIMITY_TOLERANCE
 from src.ports.screen import Screen
 from .adapters.fake_screen import FakeScreen
@@ -22,7 +22,7 @@ class TestPacman:
     def one_neighbor_node(self):
         a_node = Node(Coordinates(80, 80))
         neighbor = Node(Coordinates(80, 70))
-        a_node.set_neighbor(neighbor, Direction.UP)
+        a_node.set_neighbor(neighbor, NeighborType.UP)
         return a_node
 
     @pytest.fixture(autouse=True)
@@ -107,8 +107,8 @@ class TestPacman:
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 79>'))
 
-    def test_arrived_at_target_pacman_switches_direction(self, one_neighbor_node, screen):
-        one_neighbor_node.neighbor_at(Direction.UP).set_neighbor(Node(Coordinates(90, 70)), Direction.RIGHT)
+    def test_arrived_at_target_pacman_changes_direction(self, one_neighbor_node, screen):
+        one_neighbor_node.neighbor_at(Direction.UP).set_neighbor(Node(Coordinates(90, 70)), NeighborType.RIGHT)
         pacman = Pacman(one_neighbor_node)
 
         pacman.move(Command(Direction.UP), 0.09)
@@ -126,5 +126,26 @@ class TestPacman:
         pacman.render(screen)
 
         expected_coordinates = Coordinates(80, 80 - PROXIMITY_TOLERANCE - 1 - 2 - 2)
+        assert_that(len(self._screen_observer.messages), is_(1))
+        assert_that(self._screen_observer.messages[0], is_(f'Circle with radius 10 rendered at {expected_coordinates}'))
+
+    def test_pacman_moves_through_portal(self, screen):
+        portal_node_left = Node(Coordinates(100, 100))
+        portal_node_right = Node(Coordinates(120, 100))
+        middle_node = Node(Coordinates(110, 100))
+        middle_node.set_neighbor(portal_node_right, NeighborType.RIGHT)
+        middle_node.set_neighbor(portal_node_left, NeighborType.LEFT)
+        portal_node_left.set_neighbor(portal_node_right, NeighborType.PORTAL)
+        portal_node_left.set_neighbor(middle_node, NeighborType.RIGHT)
+        portal_node_right.set_neighbor(portal_node_left, NeighborType.PORTAL)
+        portal_node_right.set_neighbor(middle_node, NeighborType.LEFT)
+
+        pacman = Pacman(middle_node)
+
+        pacman.move(Command(Direction.RIGHT), 0.1)
+        pacman.move(Command(Direction.RIGHT), 0.05)
+        pacman.render(screen)
+
+        expected_coordinates = Coordinates(105, 100)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_(f'Circle with radius 10 rendered at {expected_coordinates}'))

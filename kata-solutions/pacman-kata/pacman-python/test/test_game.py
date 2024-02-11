@@ -3,10 +3,9 @@ from hamcrest import is_, assert_that, has_length
 from typing import List
 
 from src.coordinates import Coordinates
-from src.direction import Direction
 from src.game import Game
 from src.game_event import KeyPress, GameEvent
-from src.node import Node
+from src.node import Node, NeighborType
 from src.node_group import NodeGroup
 
 from .adapters.fake_clock import FakeClock
@@ -34,10 +33,10 @@ class TestGame:
         up_neighbor = Node(Coordinates(80, 60))
         down_neighbor = Node(Coordinates(80, 100))
 
-        a_node.set_neighbor(right_neighbor, Direction.RIGHT)
-        a_node.set_neighbor(left_neighbor, Direction.LEFT)
-        a_node.set_neighbor(up_neighbor, Direction.UP)
-        a_node.set_neighbor(down_neighbor, Direction.DOWN)
+        a_node.set_neighbor(right_neighbor, NeighborType.RIGHT)
+        a_node.set_neighbor(left_neighbor, NeighborType.LEFT)
+        a_node.set_neighbor(up_neighbor, NeighborType.UP)
+        a_node.set_neighbor(down_neighbor, NeighborType.DOWN)
 
         non_rendered_node_group = NodeGroup(
             [a_node, right_neighbor, left_neighbor, up_neighbor, down_neighbor], render_group=False)

@@ -2,8 +2,7 @@ from dataclasses import dataclass, field
 from typing import List
 
 from .coordinates import Coordinates
-from .direction import Direction
-from .node import Node
+from .node import Node, NeighborType
 from .node_group import NodeGroup
 from .ports.screen import TILEHEIGHT, TILEWIDTH
 
@@ -76,7 +75,7 @@ class Maze:
         flattened_node_coordinates = [coordinate for node_list in node_coordinates for coordinate in node_list]
 
         for coordinate in flattened_node_coordinates:
-            self._nodes.append(self._create_node_with_neighbors(coordinate))
+            self._create_node_with_neighbors(coordinate)
 
         return NodeGroup(self._nodes)
 
@@ -92,19 +91,24 @@ class Maze:
         node = Node(Maze._screen_coordinates_from(coordinate))
         self._set_horizontal_neighbors(coordinate, node)
         self._set_vertical_neighbors(coordinate, node)
+        self._nodes.append(node)
+        if coordinate.x == len(self._maze_lines[0]) - 1:
+            portal_neighbor = self._node_with_x_y_from(Coordinates(0, coordinate.y))
+            node.set_neighbor(portal_neighbor, NeighborType.PORTAL)
+            portal_neighbor.set_neighbor(node, NeighborType.PORTAL)
         return node
 
     def _set_vertical_neighbors(self, coordinate: Coordinates, node: Node) -> None:
         if self._node_has_upper_connection(coordinate):
             neighbor = self._find_upper_neighbor(coordinate)
-            node.set_neighbor(neighbor, Direction.UP)
-            neighbor.set_neighbor(node, Direction.DOWN)
+            node.set_neighbor(neighbor, NeighborType.UP)
+            neighbor.set_neighbor(node, NeighborType.DOWN)
 
     def _set_horizontal_neighbors(self, coordinate: Coordinates, node: Node) -> None:
         if self._node_has_left_connection(coordinate):
             neighbor = self._find_left_neighbor(coordinate)
-            node.set_neighbor(neighbor, Direction.LEFT)
-            neighbor.set_neighbor(node, Direction.RIGHT)
+            node.set_neighbor(neighbor, NeighborType.LEFT)
+            neighbor.set_neighbor(node, NeighborType.RIGHT)
 
     def _node_has_left_connection(self, coordinate: Coordinates) -> bool:
         line = self._maze_lines[coordinate.y]

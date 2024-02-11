@@ -40,10 +40,7 @@ class Pacman(Sprite):
                 self._target_node = self._start_node.neighbor_at(command.direction)
                 self._calculate_new_position(command, dt)
         elif self._pacman_near_target():
-            if self._target_node.has_neighbor_in(command.direction):
-                self._start_node = self._target_node
-                self._target_node = self._start_node.neighbor_at(command.direction)
-                self._calculate_new_position(command, dt)
+            self._set_new_target(command, dt)
         elif command.direction.value == self._direction.value:
             self._calculate_new_position(command, dt)
         elif command.direction.is_opposite_direction_of(self._direction):
@@ -52,6 +49,16 @@ class Pacman(Sprite):
         else:
             # User tries to make pacman leave the vertices between the nodes
             pass
+
+    def _set_new_target(self, command, dt):
+        if self._target_node.is_portal():
+            self._start_node = self._target_node.portal_neighbor()
+            self._position = self._start_node.coordinates
+            self._calculate_new_position(command, dt)
+        if self._target_node.has_neighbor_in(command.direction):
+            self._start_node = self._target_node
+            self._target_node = self._start_node.neighbor_at(command.direction)
+            self._calculate_new_position(command, dt)
 
     def _switch_start_and_target(self):
         node = self._target_node
