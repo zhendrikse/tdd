@@ -78,19 +78,29 @@ class Maze:
 
         node_coordinates = self._determine_node_coordinates()
         flattened_node_coordinates = [coordinate for node_list in node_coordinates for coordinate in node_list]
-
         for coordinate in flattened_node_coordinates:
             self._create_node_with_neighbors(coordinate)
 
+        # pallet_coordinates = self._determine_pellet_coordinates()
+
         return NodeGroup(self._nodes)
 
+    @staticmethod
+    def _is_node_symbol(char) -> bool:
+        return char in [NODE_WITH_PELLET_SYMBOL, NODE_WITH_POWER_PELLET_SYMBOL, NODE_WITHOUT_PELLET_SYMBOL]
+
+    @staticmethod
+    def _is_pellet_symbol(char) -> bool:
+        return char in [NODE_WITH_PELLET_SYMBOL, NODE_WITH_POWER_PELLET_SYMBOL, PELLET_SYMBOL, POWER_PELLET_SYMBOL]
+
+    @staticmethod
+    def _is_power_pellet_symbol(char) -> bool:
+        return char in [NODE_WITH_POWER_PELLET_SYMBOL, POWER_PELLET_SYMBOL]
+
     def _determine_node_coordinates(self) -> List[List[Coordinates]]:
-        node_coordinates = []
-        for y in range(len(self._maze_lines)):
-            line = self._maze_lines[y]
-            x_coordinates_of_notes = [x for x, char in enumerate(line) if char == NODE_WITH_PELLET_SYMBOL]
-            node_coordinates.append([Coordinates(x, y) for x in x_coordinates_of_notes])
-        return node_coordinates
+        return [[Coordinates(x, y)
+                for x in [x for x, char in enumerate(self._maze_lines[y]) if self._is_node_symbol(char)]]
+                for y in range(len(self._maze_lines))]
 
     def _create_node_with_neighbors(self, coordinate: Coordinates) -> Node:
         node = Node(self._screen_coordinates_associated_with(coordinate))
