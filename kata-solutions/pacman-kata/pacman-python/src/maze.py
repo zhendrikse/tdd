@@ -4,11 +4,12 @@ from typing import List
 from .coordinates import Coordinates
 from .node import Node, NeighborType
 from .node_group import NodeGroup
+from .pellet_group import PelletGroup
 from .ports.screen import TILEHEIGHT, TILEWIDTH
 
 NODE_WITH_PELLET_SYMBOL = "+"
 NODE_WITH_POWER_PELLET_SYMBOL = "P"
-NODE_WITHOUT_PELLET_SYMBOL = "N"
+NODE_WITHOUT_PELLET_SYMBOL = "n"
 SPACE_SYMBOL = "X"
 PELLET_SYMBOL = "."
 POWER_PELLET_SYMBOL = "p"
@@ -65,15 +66,53 @@ class Maze:
         return maze_as_string.splitlines()
 
     @property
-    def _transposed_maze_lines(self) -> List[str]:
-        transposed_lines_list = ["" for _ in range(len(self._maze_lines[0]))]
-        for i in range(len(self._maze_lines[0])):
-            for j in range(len(self._maze_lines)):
-                transposed_lines_list[i] += self._maze_lines[j][i]
-        return transposed_lines_list
+    def _dimension_x(self):
+        return len(self._maze_lines[0])
+
+    @property
+    def _dimension_y(self):
+        return len(self._maze_lines)
+
+    @property
+    def _transposed_maze_lines(self) -> List[List[str]]:
+        return [[self._maze_lines[j][i] for j in range(self._dimension_y)] for i in range(self._dimension_x)]
+
+    @staticmethod
+    def _is_connection_symbol(char) -> bool:
+        return char in [H_CONNECTION_WITHOUT_PELLET_SYMBOL,
+                        V_CONNECTION_WITHOUT_PELLET_SYMBOL,
+                        POWER_PELLET_SYMBOL,
+                        PELLET_SYMBOL]
+
+    @staticmethod
+    def _is_node_symbol(char) -> bool:
+        return char in [NODE_WITH_PELLET_SYMBOL,
+                        NODE_WITH_POWER_PELLET_SYMBOL,
+                        NODE_WITHOUT_PELLET_SYMBOL]
+
+    @staticmethod
+    def _is_pellet_symbol(char) -> bool:
+        return char in [NODE_WITH_PELLET_SYMBOL,
+                        NODE_WITH_POWER_PELLET_SYMBOL,
+                        PELLET_SYMBOL,
+                        POWER_PELLET_SYMBOL]
+
+    @staticmethod
+    def _is_power_pellet_symbol(char) -> bool:
+        return char in [NODE_WITH_POWER_PELLET_SYMBOL,
+                        POWER_PELLET_SYMBOL]
+
+    def as_pellet_group(self):
+        if (NODE_WITH_PELLET_SYMBOL not in self._maze_as_string or
+                PELLET_SYMBOL not in self._maze_as_string or
+                POWER_PELLET_SYMBOL not in self._maze_as_string or
+                NODE_WITH_POWER_PELLET_SYMBOL not in self._maze_as_string):
+            return PelletGroup([])
 
     def as_node_group(self) -> NodeGroup:
-        if NODE_WITH_PELLET_SYMBOL not in self._maze_as_string:
+        if (NODE_WITH_PELLET_SYMBOL not in self._maze_as_string and
+                NODE_WITHOUT_PELLET_SYMBOL not in self._maze_as_string and
+                NODE_WITH_POWER_PELLET_SYMBOL not in self._maze_as_string):
             return NodeGroup([])
 
         node_coordinates = self._determine_node_coordinates()
@@ -84,18 +123,6 @@ class Maze:
         # pallet_coordinates = self._determine_pellet_coordinates()
 
         return NodeGroup(self._nodes)
-
-    @staticmethod
-    def _is_node_symbol(char) -> bool:
-        return char in [NODE_WITH_PELLET_SYMBOL, NODE_WITH_POWER_PELLET_SYMBOL, NODE_WITHOUT_PELLET_SYMBOL]
-
-    @staticmethod
-    def _is_pellet_symbol(char) -> bool:
-        return char in [NODE_WITH_PELLET_SYMBOL, NODE_WITH_POWER_PELLET_SYMBOL, PELLET_SYMBOL, POWER_PELLET_SYMBOL]
-
-    @staticmethod
-    def _is_power_pellet_symbol(char) -> bool:
-        return char in [NODE_WITH_POWER_PELLET_SYMBOL, POWER_PELLET_SYMBOL]
 
     def _determine_node_coordinates(self) -> List[List[Coordinates]]:
         return [[Coordinates(x, y)
@@ -127,16 +154,16 @@ class Maze:
 
     def _node_has_left_connection(self, coordinate: Coordinates) -> bool:
         line = self._maze_lines[coordinate.y]
-        return coordinate.x > 0 and line[coordinate.x - 1] == PELLET_SYMBOL
+        return coordinate.x > 0 and self._is_connection_symbol(line[coordinate.x - 1])
 
     def _node_has_upper_connection(self, coordinate: Coordinates) -> bool:
         line = self._transposed_maze_lines[coordinate.x]
-        return coordinate.y > 0 and line[coordinate.y - 1] == PELLET_SYMBOL
+        return coordinate.y > 0 and self._is_connection_symbol(line[coordinate.y - 1])
 
     def _find_left_neighbor(self, coordinate: Coordinates) -> Node:
         line = self._maze_lines[coordinate.y]
         x = coordinate.x - 1
-        while not line[x] == NODE_WITH_PELLET_SYMBOL:
+        while not self._is_node_symbol(line[x]):
             x -= 1
 
         return self._node_associated_with(Coordinates(x, coordinate.y))
@@ -144,7 +171,7 @@ class Maze:
     def _find_upper_neighbor(self, coordinate: Coordinates) -> Node:
         line = self._transposed_maze_lines[coordinate.x]
         y = coordinate.y - 1
-        while not line[y] == NODE_WITH_PELLET_SYMBOL:
+        while not self._is_node_symbol(line[y]):
             y -= 1
 
         return self._node_associated_with(Coordinates(coordinate.x, y))

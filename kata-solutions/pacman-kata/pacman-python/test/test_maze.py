@@ -106,3 +106,37 @@ X X X X X X X X'''
         nodegroup = Maze(test_maze).as_node_group()
         portal_nodes = [node for node in nodegroup.nodes if node.is_portal()]
         assert_that(len(portal_nodes), is_(2))
+
+    def test_maze_with_nodes_without_pellets(self, screen):
+        test_maze = '''X X X X X X X X
+        X n - - n X X X
+        X | X X | X X X
+        X n - - n . + X
+        X . X X X X . X
+        X . X X X X . X
+        X + . . . . + X
+        X X X X X X X X
+        '''
+
+        nodes = Maze(test_maze).as_node_group()
+        nodes.render(screen)
+
+        assert_that(len(self._screen_observer.messages), is_(23))
+
+    def test_that_maze_contains_pellets_and_power_pellets(self, screen):
+        test_maze = '''X X X X X X X X
+        X n - - n X X X
+        X | X X | X X X
+        X n - - n . + X
+        X . X X X X p X
+        X . X X X X . X
+        X P . . . . P X
+        X X X X X X X X
+        '''
+
+        nodes = Maze(test_maze).as_node_group()
+        pellets = Maze(test_maze).as_pellet_group()
+        nodes.render(screen)
+
+        assert_that(len(self._screen_observer.messages), is_(23))
+
