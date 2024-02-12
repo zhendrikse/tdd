@@ -4,6 +4,7 @@ from typing import List
 from .coordinates import Coordinates
 from .node import Node, NeighborType
 from .node_group import NodeGroup
+from .pellet import Pellet
 from .pellet_group import PelletGroup
 from .ports.screen import TILEHEIGHT, TILEWIDTH
 
@@ -102,12 +103,17 @@ class Maze:
         return char in [NODE_WITH_POWER_PELLET_SYMBOL,
                         POWER_PELLET_SYMBOL]
 
-    def as_pellet_group(self):
+    def as_pellet_group(self) -> PelletGroup:
         if (NODE_WITH_PELLET_SYMBOL not in self._maze_as_string or
                 PELLET_SYMBOL not in self._maze_as_string or
                 POWER_PELLET_SYMBOL not in self._maze_as_string or
                 NODE_WITH_POWER_PELLET_SYMBOL not in self._maze_as_string):
             return PelletGroup([])
+
+        pellets = [self._create_pellet(pellet_coordinate)
+                   for pellet_coordinate in self._determine_coordinates(self._is_pellet_symbol)]
+
+        return PelletGroup(pellets)
 
     def as_node_group(self) -> NodeGroup:
         if (NODE_WITH_PELLET_SYMBOL not in self._maze_as_string and
@@ -115,19 +121,22 @@ class Maze:
                 NODE_WITH_POWER_PELLET_SYMBOL not in self._maze_as_string):
             return NodeGroup([])
 
-        node_coordinates = self._determine_node_coordinates()
-        flattened_node_coordinates = [coordinate for node_list in node_coordinates for coordinate in node_list]
-        for coordinate in flattened_node_coordinates:
-            self._create_node_with_neighbors(coordinate)
+        nodes = [self._create_node_with_neighbors(node_coordinate)
+             for node_coordinate in self._determine_coordinates(self._is_node_symbol)]
 
-        # pallet_coordinates = self._determine_pellet_coordinates()
+        return NodeGroup(nodes)
 
-        return NodeGroup(self._nodes)
+    @staticmethod
+    def _create_pellet(coordinate: Coordinates) -> Pellet:
+        return Pellet(coordinate)
 
-    def _determine_node_coordinates(self) -> List[List[Coordinates]]:
-        return [[Coordinates(x, y)
-                for x in [x for x, char in enumerate(self._maze_lines[y]) if self._is_node_symbol(char)]]
-                for y in range(len(self._maze_lines))]
+    def _determine_coordinates(self, symbol_selector) -> List[Coordinates]:
+        node_coordinates = [
+            [Coordinates(x, y) for x in [
+                x for x, char in enumerate(self._maze_lines[y]) if symbol_selector(char)]
+             ] for y in range(len(self._maze_lines))]
+        flattened_list = [coordinate for node_list in node_coordinates for coordinate in node_list]
+        return flattened_list
 
     def _create_node_with_neighbors(self, coordinate: Coordinates) -> Node:
         node = Node(self._screen_coordinates_associated_with(coordinate))

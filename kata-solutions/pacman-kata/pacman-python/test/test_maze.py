@@ -123,7 +123,17 @@ X X X X X X X X'''
 
         assert_that(len(self._screen_observer.messages), is_(23))
 
-    def test_that_maze_contains_pellets_and_power_pellets(self, screen):
+    def test_maze_without_pellets(self, screen):
+        test_maze = "X X X X X X X X"
+        pellets = Maze(test_maze).as_pellet_group()
+        assert_that(len(pellets.pellets), is_(0))
+
+    def test_maze_with_pellets(self, screen):
+        test_maze = "P . p - - n - +"
+        pellets = Maze(test_maze).as_pellet_group()
+        assert_that(len(pellets.pellets), is_(4))
+
+    def test_maze_contains_pellets_and_power_pellets(self, screen):
         test_maze = '''X X X X X X X X
         X n - - n X X X
         X | X X | X X X
