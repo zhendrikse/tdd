@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Protocol
 from .ports.screen import Screen
-from .game_event import Command
+from .direction import Direction
 
 
 class Sprite(Protocol):
@@ -10,5 +10,5 @@ class Sprite(Protocol):
         ...
 
     @abstractmethod
-    def move(self, direction: Command, dt: float) -> None:
+    def move(self, direction: Direction, dt: float) -> None:
         ...

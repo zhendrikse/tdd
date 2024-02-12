@@ -2,7 +2,6 @@ import pytest
 from hamcrest import assert_that, is_
 
 from src.coordinates import Coordinates
-from src.game_event import Command
 from src.direction import Direction
 from src.node import Node, NeighborType
 from src.pacman import Pacman, PROXIMITY_TOLERANCE
@@ -35,7 +34,7 @@ class TestPacman:
 
     def test_move_pacman_on_single_node_without_neighbors(self, screen, a_node):
         pacman = Pacman(a_node)
-        pacman.move(Command(Direction.UP), 0.01)
+        pacman.move(Direction.UP, 0.01)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 80>'))
@@ -43,7 +42,7 @@ class TestPacman:
     def test_move_pacman_one_step_from_single_node_with_neighbor(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), 0.01)
+        pacman.move(Direction.UP, 0.01)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 79>'))
@@ -51,8 +50,8 @@ class TestPacman:
     def test_move_pacman_two_steps_from_node_with_neighbor(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), 0.01)
-        pacman.move(Command(Direction.UP), 0.03)
+        pacman.move(Direction.UP, 0.01)
+        pacman.move(Direction.UP, 0.03)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 76>'))
@@ -60,8 +59,8 @@ class TestPacman:
     def test_pacman_cannot_move_beyond_target(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), 0.09)
-        pacman.move(Command(Direction.UP), 0.08)
+        pacman.move(Direction.UP, 0.09)
+        pacman.move(Direction.UP, 0.08)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 71>'))
@@ -69,9 +68,9 @@ class TestPacman:
     def test_pacman_may_not_depart_from_road(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), 0.03)
-        pacman.move(Command(Direction.NONE), 0.02)
-        pacman.move(Command(Direction.LEFT), 0.02)
+        pacman.move(Direction.UP, 0.03)
+        pacman.move(Direction.NONE, 0.02)
+        pacman.move(Direction.LEFT, 0.02)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 77>'))
@@ -79,9 +78,9 @@ class TestPacman:
     def test_pacman_stops_when_key_released(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), 0.01)
-        pacman.move(Command(Direction.UP), 0.02)
-        pacman.move(Command(Direction.NONE), 0.02)
+        pacman.move(Direction.UP, 0.01)
+        pacman.move(Direction.UP, 0.02)
+        pacman.move(Direction.NONE, 0.02)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 77>'))
@@ -89,8 +88,8 @@ class TestPacman:
     def test_pacman_may_reverse_direction(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), PROXIMITY_TOLERANCE * .01 + 0.03)
-        pacman.move(Command(Direction.DOWN), 0.02)
+        pacman.move(Direction.UP, PROXIMITY_TOLERANCE * .01 + 0.03)
+        pacman.move(Direction.DOWN, 0.02)
         pacman.render(screen)
 
         expected_coordinates = Coordinates(80, 80 - PROXIMITY_TOLERANCE - 0.03 + 0.02)
@@ -100,9 +99,9 @@ class TestPacman:
     def test_switch_start_and_target_after_reverse_direction(self, screen, one_neighbor_node):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), PROXIMITY_TOLERANCE * .01 + 0.03)
-        pacman.move(Command(Direction.DOWN), 0.05)
-        pacman.move(Command(Direction.DOWN), 0.05)
+        pacman.move(Direction.UP, PROXIMITY_TOLERANCE * .01 + 0.03)
+        pacman.move(Direction.DOWN, 0.05)
+        pacman.move(Direction.DOWN, 0.05)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <80, 79>'))
@@ -111,8 +110,8 @@ class TestPacman:
         one_neighbor_node.neighbor_at(Direction.UP).set_neighbor(Node(Coordinates(90, 70)), NeighborType.RIGHT)
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), 0.09)
-        pacman.move(Command(Direction.RIGHT), 0.05)
+        pacman.move(Direction.UP, 0.09)
+        pacman.move(Direction.RIGHT, 0.05)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_('Circle with radius 10 rendered at <85, 70>'))
@@ -120,9 +119,9 @@ class TestPacman:
     def test_pacman_continues_moving_in_same_direction(self, one_neighbor_node, screen):
         pacman = Pacman(one_neighbor_node)
 
-        pacman.move(Command(Direction.UP), PROXIMITY_TOLERANCE * .01 + 0.01)
-        pacman.move(Command(Direction.UP), 0.02)
-        pacman.move(Command(Direction.UP), 0.02)
+        pacman.move(Direction.UP, PROXIMITY_TOLERANCE * .01 + 0.01)
+        pacman.move(Direction.UP, 0.02)
+        pacman.move(Direction.UP, 0.02)
         pacman.render(screen)
 
         expected_coordinates = Coordinates(80, 80 - PROXIMITY_TOLERANCE - 1 - 2 - 2)
@@ -142,8 +141,8 @@ class TestPacman:
 
         pacman = Pacman(middle_node)
 
-        pacman.move(Command(Direction.RIGHT), 0.1)
-        pacman.move(Command(Direction.RIGHT), 0.05)
+        pacman.move(Direction.RIGHT, 0.1)
+        pacman.move(Direction.RIGHT, 0.05)
         pacman.render(screen)
 
         expected_coordinates = Coordinates(105, 100)

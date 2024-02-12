@@ -1,4 +1,3 @@
-from .command import Command
 from .coordinates import Coordinates
 from .ports.screen import TILEWIDTH
 from .direction import Direction
@@ -34,45 +33,45 @@ class Pacman(Sprite):
     def _pacman_near_start(self) -> bool:
         return self._position.manhattan_distance_to(self._start_node.coordinates) < PROXIMITY_TOLERANCE
 
-    def move(self, command: Command, dt: float) -> None:
+    def move(self, direction: Direction, dt: float) -> None:
         if self._pacman_near_start():
-            if self._start_node.has_neighbor_in(command.direction):
-                self._target_node = self._start_node.neighbor_at(command.direction)
-                self._calculate_new_position(command, dt)
+            if self._start_node.has_neighbor_in(direction):
+                self._target_node = self._start_node.neighbor_at(direction)
+                self._calculate_new_position(direction, dt)
         elif self._pacman_near_target():
-            self._set_new_target(command, dt)
-        elif command.direction.value == self._direction.value:
-            self._calculate_new_position(command, dt)
-        elif command.direction.is_opposite_direction_of(self._direction):
+            self._set_new_target(direction, dt)
+        elif direction.value == self._direction.value:
+            self._calculate_new_position(direction, dt)
+        elif direction.is_opposite_direction_of(self._direction):
             self._switch_start_and_target()
-            self._calculate_new_position(command, dt)
+            self._calculate_new_position(direction, dt)
         else:
             # User tries to make pacman leave the vertices between the nodes
             pass
 
-    def _set_new_target(self, command, dt):
+    def _set_new_target(self, direction: Direction, dt):
         if self._target_node.is_portal():
             self._start_node = self._target_node.portal_neighbor()
             self._position = self._start_node.coordinates
-            self._calculate_new_position(command, dt)
-        if self._target_node.has_neighbor_in(command.direction):
+            self._calculate_new_position(direction, dt)
+        if self._target_node.has_neighbor_in(direction):
             self._start_node = self._target_node
-            self._target_node = self._start_node.neighbor_at(command.direction)
-            self._calculate_new_position(command, dt)
+            self._target_node = self._start_node.neighbor_at(direction)
+            self._calculate_new_position(direction, dt)
 
     def _switch_start_and_target(self):
         node = self._target_node
         self._target_node = self._start_node
         self._start_node = node
 
-    def _calculate_new_position(self, command: Command, dt: float) -> None:
-        increment = INCREMENTS[command.direction.value]
+    def _calculate_new_position(self, direction: Direction, dt: float) -> None:
+        increment = INCREMENTS[direction.value]
         self._position = Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
-        self._recalibrate_pacman_on_vertex(command)
-        self._direction = command.direction
+        self._recalibrate_pacman_on_vertex(direction)
+        self._direction = direction
 
-    def _recalibrate_pacman_on_vertex(self, command):
-        if command.direction.value == Direction.UP.value or command.direction.value == Direction.DOWN.value:
+    def _recalibrate_pacman_on_vertex(self, direction: Direction):
+        if direction.value == Direction.UP.value or direction.value == Direction.DOWN.value:
             self._position = Coordinates(self._start_node.coordinates.x, self._position.y)
         else:
             self._position = Coordinates(self._position.x, self._start_node.coordinates.y)

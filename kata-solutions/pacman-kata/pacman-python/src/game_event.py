@@ -1,6 +1,5 @@
 from enum import Enum
 
-from .command import Command
 from .direction import Direction
 
 
@@ -23,19 +22,19 @@ class GameEvent:
     def is_quit(self) -> bool:
         return self._quit
 
-    def as_command(self) -> Command:
+    def as_command(self) -> Direction:
         if self._key_event is None:
-            return Command(Direction.NONE)
+            return Direction.NONE
         elif self._key_event.value == KeyPress.ARROW_UP_PRESSED.value:
-            return Command(Direction.UP)
+            return Direction.UP
         elif self._key_event.value == KeyPress.ARROW_DOWN_PRESSED.value:
-            return Command(Direction.DOWN)
+            return Direction.DOWN
         elif self._key_event.value == KeyPress.ARROW_LEFT_PRESSED.value:
-            return Command(Direction.LEFT)
+            return Direction.LEFT
         elif self._key_event.value == KeyPress.ARROW_RIGHT_PRESSED.value:
-            return Command(Direction.RIGHT)
+            return Direction.RIGHT
         else:
-            return Command(Direction.NONE)
+            return Direction.NONE
 
     def __repr__(self):
         return f"GameEvent = [{self._key_event}, quit={self._quit}]"

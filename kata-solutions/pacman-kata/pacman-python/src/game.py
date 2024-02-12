@@ -7,7 +7,6 @@ from .ports.eventbus import EventBus
 from .ports.clock import Clock
 from .ports.screen import Screen
 from .pacman import Pacman
-from .game_event import Command
 
 
 class Game:
@@ -22,7 +21,7 @@ class Game:
 
     def run(self) -> None:
         keep_running = True
-        command = Command(Direction.NONE)
+        command = Direction.NONE
 
         while keep_running:
             dt = self._clock.tick(30) / 1000.0
