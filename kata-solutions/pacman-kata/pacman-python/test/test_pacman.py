@@ -3,8 +3,8 @@ from hamcrest import assert_that, is_
 
 from src.coordinates import Coordinates
 from src.direction import Direction
-from src.node import Node, NeighborType
-from src.pacman import Pacman, PROXIMITY_TOLERANCE
+from src.sprites.node import Node, NeighborType
+from src.sprites.pacman import Pacman, PROXIMITY_TOLERANCE
 from src.ports.screen import Screen
 from .adapters.fake_screen import FakeScreen
 from .screen_observer import FakeScreenObserver

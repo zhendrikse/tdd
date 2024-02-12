@@ -1,11 +1,11 @@
 import pytest
-from hamcrest import is_, assert_that, has_length
+from hamcrest import is_, assert_that
 from typing import List
 
 from src.coordinates import Coordinates
 from src.game import Game
 from src.game_event import KeyPress, GameEvent
-from src.node import Node, NeighborType
+from src.sprites.node import Node, NeighborType
 from src.node_group import NodeGroup
 
 from .adapters.fake_clock import FakeClock

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import List
-from .node import Node
+from src.sprites.node import Node
 from .ports.screen import Screen
 
 

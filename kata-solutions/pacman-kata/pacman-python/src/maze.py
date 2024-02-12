@@ -2,9 +2,9 @@ from dataclasses import dataclass, field
 from typing import List
 
 from .coordinates import Coordinates
-from .node import Node, NeighborType
+from src.sprites.node import Node, NeighborType
 from .node_group import NodeGroup
-from .pellet import Pellet
+from src.sprites.pellet import Pellet
 from .pellet_group import PelletGroup
 from .ports.screen import TILEHEIGHT, TILEWIDTH
 
@@ -26,11 +26,11 @@ X . X X X X . X X X X X . X X . X X X X X . X X X X . X
 X p X X X X . X X X X X . X X . X X X X X . X X X X p X
 X . X X X X . X X X X X . X X . X X X X X . X X X X . X
 X + . . . . + . . + . . + . . + . . + . . + . . . . + X
-X . X X X X . X X . X X X X X X X X . X X . X X X X . X
-X . X X X X . X X . X X X X X X X X . X X . X X X X . X
+X . X X X X . X X . X X | X X | X X . X X . X X X X . X
+X . X X X X . X X . X X | X X | X X . X X . X X X X . X
 X + . . . . n X X n - - n - - n - - n X X + . . . . + X
-X X X X X X | X X | X X . X X . X X | X X . X X X X X X
-X X X X X X | X X | X X . X X . X X | X X . X X X X X X
+X X X X X X | X X | X X X = = X X X | X X . X X X X X X
+X X X X X X | X X | X X X X X X X X | X X . X X X X X X
 n - - - - - + - - n X X X X X X X X n - - + - - - - - n
 X X X X X X . X X | X X X X X X X X | X X . X X X X X X
 X X X X X X . X X | X X X X X X X X | X X . X X X X X X
@@ -125,7 +125,8 @@ class Maze:
 
     def _create_pellet(self, coordinate: Coordinates) -> Pellet:
         pellet_symbol = self._maze_lines[coordinate.y][coordinate.x]
-        return Pellet(coordinate, self._is_power_pellet_symbol(pellet_symbol))
+        return Pellet(self._screen_coordinates_associated_with(coordinate),
+                      self._is_power_pellet_symbol(pellet_symbol))
 
     def _determine_coordinates(self, symbol_selector) -> List[Coordinates]:
         node_coordinates = [

@@ -3,7 +3,7 @@ import pytest
 from hamcrest import is_, assert_that
 
 from src.coordinates import Coordinates
-from src.node import Node, NeighborType
+from src.sprites.node import Node, NeighborType
 from src.node_group import NodeGroup
 from src.ports.screen import Screen
 from .adapters.fake_screen import FakeScreen

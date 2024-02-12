@@ -1,13 +1,11 @@
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict
+from typing import Any
 
-from .coordinates import Coordinates
-from .direction import Direction
-from .ports.screen import Screen
-
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
+from ..coordinates import Coordinates
+from ..direction import Direction
+from ..ports.screen import Screen
+from ..sprites.sprite import Sprite, RED, WHITE
 
 
 class NeighborType(Enum):
@@ -27,7 +25,7 @@ DIRECTION_TO_NEIGHBOR_MAP = {
 
 
 @dataclass(frozen=True)
-class Node:
+class Node(Sprite):
     position: Coordinates
     neighbors: dict[NeighborType | Any] = field(default_factory=dict)
 
@@ -53,8 +51,8 @@ class Node:
         _ = [screen.render_line(WHITE, self.position, node.coordinates, 4)
              for node in self.neighbors.values()]
 
-    def set_neighbor(self, new_neighbor: Any, type: NeighborType) -> None:
-        self.neighbors[type] = new_neighbor
+    def set_neighbor(self, new_neighbor: Any, neighbor_type: NeighborType) -> None:
+        self.neighbors[neighbor_type] = new_neighbor
 
     def neighbor_at(self, direction: Direction) -> Any:
         neighbor_type = DIRECTION_TO_NEIGHBOR_MAP[direction]

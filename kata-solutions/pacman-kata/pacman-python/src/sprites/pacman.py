@@ -1,11 +1,11 @@
-from .coordinates import Coordinates
-from .ports.screen import TILEWIDTH
-from .direction import Direction
-from .node import Node
-from .ports.screen import Screen
-from .sprite import Sprite
+from .sprite import YELLOW
+from ..coordinates import Coordinates
+from ..sprites.movable import Movable
+from ..ports.screen import TILEWIDTH
+from ..direction import Direction
+from ..sprites.node import Node
+from ..ports.screen import Screen
 
-YELLOW = (255, 255, 0)
 PACMAN = 0
 SPEED = 100 * TILEWIDTH / 16
 INCREMENTS = {
@@ -15,11 +15,10 @@ INCREMENTS = {
     Direction.LEFT.value: Coordinates(-1 * SPEED, 0),
     Direction.RIGHT.value: Coordinates(1 * SPEED, 0)}
 RADIUS = 10
-COLOR = YELLOW
 PROXIMITY_TOLERANCE = 3
 
 
-class Pacman(Sprite):
+class Pacman(Movable):
     def __init__(self, initial_node: Node):
         self._name = PACMAN
         self._start_node = initial_node
@@ -77,4 +76,4 @@ class Pacman(Sprite):
             self._position = Coordinates(self._position.x, self._start_node.coordinates.y)
 
     def render(self, screen: Screen):
-        screen.render_circle(COLOR, self._position, RADIUS)
+        screen.render_circle(YELLOW, self._position, RADIUS)
