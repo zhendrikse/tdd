@@ -146,7 +146,9 @@ X X X X X X X X'''
 
         nodes = Maze(test_maze).as_node_group()
         pellets = Maze(test_maze).as_pellet_group()
-        nodes.render(screen)
+        assert_that(len(pellets.pellets), is_(12))
+        assert_that(len([pellet for pellet in pellets.pellets if pellet.is_power_pellet]), is_(3))
 
+        nodes.render(screen)
         assert_that(len(self._screen_observer.messages), is_(23))
 

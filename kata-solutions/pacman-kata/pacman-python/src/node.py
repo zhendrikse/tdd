@@ -28,34 +28,34 @@ DIRECTION_TO_NEIGHBOR_MAP = {
 
 @dataclass(frozen=True)
 class Node:
-    _position: Coordinates
-    _neighbors: dict[NeighborType | Any] = field(default_factory=dict)
+    position: Coordinates
+    neighbors: dict[NeighborType | Any] = field(default_factory=dict)
 
     @property
     def coordinates(self):
-        return self._position
+        return self.position
 
     def has_neighbor_in(self, direction: Direction) -> bool:
         if direction in DIRECTION_TO_NEIGHBOR_MAP.keys():
             neighbor_type = DIRECTION_TO_NEIGHBOR_MAP[direction]
-            return neighbor_type in self._neighbors.keys()
+            return neighbor_type in self.neighbors.keys()
         else:
             return False
 
     def is_portal(self) -> bool:
-        return NeighborType.PORTAL in self._neighbors.keys()
+        return NeighborType.PORTAL in self.neighbors.keys()
 
     def portal_neighbor(self):
-        return self._neighbors[NeighborType.PORTAL]
+        return self.neighbors[NeighborType.PORTAL]
 
     def render(self, screen: Screen) -> None:
-        screen.render_circle(RED, self._position, 12)
-        _ = [screen.render_line(WHITE, self._position, node.coordinates, 4)
-             for node in self._neighbors.values()]
+        screen.render_circle(RED, self.position, 12)
+        _ = [screen.render_line(WHITE, self.position, node.coordinates, 4)
+             for node in self.neighbors.values()]
 
     def set_neighbor(self, new_neighbor: Any, type: NeighborType) -> None:
-        self._neighbors[type] = new_neighbor
+        self.neighbors[type] = new_neighbor
 
     def neighbor_at(self, direction: Direction) -> Any:
         neighbor_type = DIRECTION_TO_NEIGHBOR_MAP[direction]
-        return self._neighbors[neighbor_type]
+        return self.neighbors[neighbor_type]

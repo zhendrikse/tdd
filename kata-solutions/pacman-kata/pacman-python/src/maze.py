@@ -126,9 +126,9 @@ class Maze:
 
         return NodeGroup(nodes)
 
-    @staticmethod
-    def _create_pellet(coordinate: Coordinates) -> Pellet:
-        return Pellet(coordinate)
+    def _create_pellet(self, coordinate: Coordinates) -> Pellet:
+        pellet_symbol = self._maze_lines[coordinate.y][coordinate.x]
+        return Pellet(coordinate, self._is_power_pellet_symbol(pellet_symbol))
 
     def _determine_coordinates(self, symbol_selector) -> List[Coordinates]:
         node_coordinates = [
