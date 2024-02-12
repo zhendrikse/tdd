@@ -1,10 +1,11 @@
+from abc import abstractmethod
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Protocol
 
 from .coordinates import Coordinates
-from src.sprites.node import Node, NeighborType
+from .sprites.node import Node, NeighborType
 from .node_group import NodeGroup
-from src.sprites.pellet import Pellet
+from .sprites.pellet import Pellet
 from .pellet_group import PelletGroup
 from .ports.screen import TILEHEIGHT, TILEWIDTH
 
@@ -53,8 +54,18 @@ X X X X X X X X X X X X X X X X X X X X X X X X X X X X
 '''
 
 
+class Maze(Protocol):
+    @abstractmethod
+    def as_pellet_group(self) -> PelletGroup:
+        ...
+
+    @abstractmethod
+    def as_node_group(self) -> NodeGroup:
+        ...
+
+
 @dataclass(frozen=True)
-class Maze:
+class GameMaze(Maze):
     _maze_as_string: str
     _nodes: List[Node] = field(default_factory=list)
 
@@ -119,7 +130,7 @@ class Maze:
             return NodeGroup([])
 
         nodes = [self._create_node_with_neighbors(node_coordinate)
-             for node_coordinate in self._determine_coordinates(self._is_node_symbol)]
+                 for node_coordinate in self._determine_coordinates(self._is_node_symbol)]
 
         return NodeGroup(nodes)
 

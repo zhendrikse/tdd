@@ -1,7 +1,7 @@
 from .coordinates import Coordinates
 from .direction import Direction
 from src.sprites.node import Node
-from .maze import Maze, PACMAN_MAZE
+from .maze import Maze, PACMAN_MAZE, GameMaze
 from .node_group import NodeGroup
 from .pellet_group import PelletGroup
 from .ports.eventbus import EventBus
@@ -13,7 +13,7 @@ from .sprites.movable import Movable
 
 class Game:
 
-    def __init__(self, eventbus: EventBus, clock: Clock, screen: Screen, maze: Maze = Maze(PACMAN_MAZE)) -> None:
+    def __init__(self, eventbus: EventBus, clock: Clock, screen: Screen, maze: Maze = GameMaze(PACMAN_MAZE)) -> None:
         self._eventbus: EventBus = eventbus
         self._clock: Clock = clock
         self._screen: Screen = screen

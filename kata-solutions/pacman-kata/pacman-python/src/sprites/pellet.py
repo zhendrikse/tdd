@@ -11,7 +11,8 @@ class Pellet(Sprite):
     is_power_pellet: bool = False
 
     def render(self, screen: Screen) -> None:
-        screen.render_circle(WHITE, self.position, int(4 * TILEWIDTH / 16))
+        radius = int(8 * TILEWIDTH / 16) if self.is_power_pellet else int(4 * TILEWIDTH / 16)
+        screen.render_circle(WHITE, self.position, radius)
 
 
 

@@ -5,6 +5,8 @@ from typing import List
 from src.coordinates import Coordinates
 from src.game import Game
 from src.game_event import KeyPress, GameEvent
+from src.maze import Maze
+from src.pellet_group import PelletGroup
 from src.sprites.node import Node, NeighborType
 from src.node_group import NodeGroup
 
@@ -16,16 +18,9 @@ from .screen_observer import FakeScreenObserver
 QUIT_EVENT = GameEvent(do_quit=True)
 
 
-class TestGame:
-    _screen_observer = None
+class ThreeNodesMaze(Maze):
 
-    @pytest.fixture(autouse=True)
-    def screen_observer(self):
-        self._screen_observer = FakeScreenObserver()
-
-    def _given_a_game_with_events(self, events: List[List[GameEvent]]) -> Game:
-        screen = FakeScreen(self._screen_observer)
-        event_bus = FakeEventBus(events)
+    def as_node_group(self) -> NodeGroup:
         a_node = Node(Coordinates(80, 80))
 
         right_neighbor = Node(Coordinates(100, 80))
@@ -40,7 +35,23 @@ class TestGame:
 
         non_rendered_node_group = NodeGroup(
             [a_node, right_neighbor, left_neighbor, up_neighbor, down_neighbor], render_group=False)
-        return Game(event_bus, FakeClock(), screen, non_rendered_node_group)
+        return non_rendered_node_group
+
+    def as_pellet_group(self) -> PelletGroup:
+        return PelletGroup([])
+
+
+class TestGame:
+    _screen_observer = None
+
+    @pytest.fixture(autouse=True)
+    def screen_observer(self):
+        self._screen_observer = FakeScreenObserver()
+
+    def _given_a_game_with_events(self, events: List[List[GameEvent]]) -> Game:
+        screen = FakeScreen(self._screen_observer)
+        event_bus = FakeEventBus(events)
+        return Game(event_bus, FakeClock(), screen, ThreeNodesMaze())
 
     @staticmethod
     def _assert_observed_screen_updates(expected_updates: List[str], updates: List[str]) -> None:
