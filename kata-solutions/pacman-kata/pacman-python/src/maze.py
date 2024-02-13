@@ -112,9 +112,9 @@ class GameMaze(Maze):
                         POWER_PELLET_SYMBOL]
 
     def as_pellet_group(self) -> PelletGroup:
-        if (NODE_WITH_PELLET_SYMBOL not in self._maze_as_string or
-                PELLET_SYMBOL not in self._maze_as_string or
-                POWER_PELLET_SYMBOL not in self._maze_as_string or
+        if (NODE_WITH_PELLET_SYMBOL not in self._maze_as_string and
+                PELLET_SYMBOL not in self._maze_as_string and
+                POWER_PELLET_SYMBOL not in self._maze_as_string and
                 NODE_WITH_POWER_PELLET_SYMBOL not in self._maze_as_string):
             return PelletGroup([])
 
