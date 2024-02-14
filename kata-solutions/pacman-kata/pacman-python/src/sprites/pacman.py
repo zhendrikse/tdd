@@ -6,6 +6,7 @@ from ..direction import Direction
 from ..sprites.node import Node
 from ..ports.screen import Screen
 
+COLLISION_RADIUS = 5
 PACMAN_RADIUS = 10
 SPEED = 100 * TILEWIDTH / 16
 INCREMENTS = {
@@ -24,6 +25,10 @@ class Pacman(Movable):
         self._target_node = None
         self._position = initial_node.coordinates
         self._direction = Direction.NONE
+
+    @property
+    def position(self):
+        return self._position
 
     def _pacman_near_target(self) -> bool:
         return self._position.manhattan_distance_to(self._target_node.coordinates) < PROXIMITY_TOLERANCE

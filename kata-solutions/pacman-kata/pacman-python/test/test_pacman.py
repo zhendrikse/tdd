@@ -3,9 +3,11 @@ from hamcrest import assert_that, is_
 
 from src.coordinates import Coordinates
 from src.direction import Direction
+from src.pellet_group import PelletGroup
 from src.sprites.node import Node, NeighborType
-from src.sprites.pacman import Pacman, PROXIMITY_TOLERANCE, PACMAN_RADIUS
+from src.sprites.pacman import Pacman, PROXIMITY_TOLERANCE, PACMAN_RADIUS, COLLISION_RADIUS
 from src.ports.screen import Screen
+from src.sprites.pellet import Pellet, PelletPoints
 from .adapters.fake_screen import FakeScreen
 from .screen_observer import FakeScreenObserver
 
@@ -159,3 +161,24 @@ class TestPacman:
         assert_that(len(self._screen_observer.messages), is_(1))
         assert_that(self._screen_observer.messages[0], is_(
             f'Circle with radius {PACMAN_RADIUS} rendered at {expected_coordinates}'))
+
+    def test_pacman_cannot_eat_pellet(self):
+        start_node = Node(Coordinates(80, 80))
+        pellet_coordinates = Coordinates(90, 80)
+        pellet_group = PelletGroup([Pellet(pellet_coordinates)])
+
+        pacman = Pacman(start_node)
+
+        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.ZERO))
+
+    def test_pacman_can_eat_pellet(self):
+        start_node = Node(Coordinates(80, 80))
+        pellet_coordinates = Coordinates(80 + COLLISION_RADIUS - 1, 80)
+        pellet_group = PelletGroup([Pellet(pellet_coordinates)])
+
+        pacman = Pacman(start_node)
+
+        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.PELLET))
+
+
+
