@@ -43,12 +43,9 @@ class Pacman(Movable):
         if direction in self._vertex.valid_directions_from(self._position):
             if self._position.is_close_to(self._vertex.start.coordinates):
                 self._vertex = self._vertex.vertex_from_start_in_direction(direction)
-                self._calculate_new_position(direction, dt)
             elif self._position.is_close_to(self._vertex.end.coordinates):
                 self._vertex = self._vertex.vertex_from_end_in_direction(direction)
-                self._calculate_new_position(direction, dt)
-            else:
-                self._calculate_new_position(direction, dt)
+            self._calculate_new_position(direction, dt)
 
     def _calculate_new_position(self, direction: Direction, dt: float) -> None:
         increment = INCREMENTS[direction.value]
