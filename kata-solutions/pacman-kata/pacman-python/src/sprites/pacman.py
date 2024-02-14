@@ -6,7 +6,7 @@ from ..direction import Direction
 from ..sprites.node import Node
 from ..ports.screen import Screen
 
-PACMAN = 0
+PACMAN_RADIUS = 10
 SPEED = 100 * TILEWIDTH / 16
 INCREMENTS = {
     Direction.NONE.value: Coordinates(0, 0),
@@ -20,7 +20,6 @@ PROXIMITY_TOLERANCE = 3
 
 class Pacman(Movable):
     def __init__(self, initial_node: Node):
-        self._name = PACMAN
         self._start_node = initial_node
         self._target_node = None
         self._position = initial_node.coordinates
