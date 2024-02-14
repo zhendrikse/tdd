@@ -57,9 +57,9 @@ class PositionOnVertex:
     def _calculate_new_position(self, direction: Direction, dt: float) -> None:
         increment = INCREMENTS[direction.value]
         self._position = Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
-        self._recalibrate_pacman_on_vertex()
+        self._recalibrate_position_on_vertex()
 
-    def _recalibrate_pacman_on_vertex(self):
+    def _recalibrate_position_on_vertex(self):
         if self._vertex.direction == Direction.UP or self._vertex.direction == Direction.DOWN:
             self._position = Coordinates(self._vertex.start.coordinates.x, self._position.y)
         else:

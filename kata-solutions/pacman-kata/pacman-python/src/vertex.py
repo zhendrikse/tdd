@@ -1,7 +1,5 @@
 from dataclasses import dataclass
-from typing import List
 
-from .coordinates import Coordinates
 from .direction import Direction
 from .sprites.node import Node
 
