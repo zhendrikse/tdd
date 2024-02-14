@@ -16,6 +16,7 @@ class PelletGroup:
     def remove_pellet_when_pacman_is_close(self, pacman_position: Coordinates) -> PelletPoints:
         eatable_pellets = [pellet for pellet in self.pellets if self._is_close(pellet, pacman_position)]
         if len(eatable_pellets) != 0:
+            self.pellets.remove(eatable_pellets[0])
             return PelletPoints.POWER_PELLET if eatable_pellets[0].is_power_pellet else PelletPoints.PELLET
         else:
             return PelletPoints.ZERO

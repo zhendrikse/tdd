@@ -170,6 +170,7 @@ class TestPacman:
         pacman = Pacman(start_node)
 
         assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.ZERO))
+        assert_that(len(pellet_group.pellets), is_(1))
 
     def test_pacman_can_eat_pellet(self):
         start_node = Node(Coordinates(80, 80))
@@ -179,6 +180,14 @@ class TestPacman:
         pacman = Pacman(start_node)
 
         assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.PELLET))
+        assert_that(len(pellet_group.pellets), is_(0))
 
+    def test_pacman_can_eat_power_pellet(self):
+        start_node = Node(Coordinates(80, 80))
+        pellet_coordinates = Coordinates(80 + COLLISION_RADIUS - 1, 80)
+        pellet_group = PelletGroup([Pellet(pellet_coordinates, is_power_pellet=True)])
 
+        pacman = Pacman(start_node)
 
+        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.POWER_PELLET))
+        assert_that(len(pellet_group.pellets), is_(0))
