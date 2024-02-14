@@ -20,23 +20,23 @@ INCREMENTS = {
 RADIUS = 10
 
 
-class Path:
+class Vertex:
     pass
 
 
 @dataclass
-class Path:
+class Vertex:
     start: Node
     end: Node
 
-    def path_from_start_in_direction(self, direction: Direction) -> Path:
-        return Path(self.start, self.start.neighbor_at(direction))
+    def vertex_from_start_in_direction(self, direction: Direction) -> Vertex:
+        return Vertex(self.start, self.start.neighbor_at(direction))
 
-    def path_from_end_in_direction(self, direction: Direction) -> Path:
-        return Path(self.end, self.end.neighbor_at(direction))
+    def vertex_from_end_in_direction(self, direction: Direction) -> Vertex:
+        return Vertex(self.end, self.end.neighbor_at(direction))
 
-    def switch_start_and_end(self) -> Path:
-        return Path(self.end, self.start)
+    def switch_start_and_end(self) -> Vertex:
+        return Vertex(self.end, self.start)
 
     @property
     def direction(self):
@@ -50,35 +50,34 @@ class Path:
         elif distance_y == 0:
             if distance_x > 0:
                 return Direction.RIGHT
-            if distance_y < 0:
+            if distance_x < 0:
                 return Direction.LEFT
         return Direction.NONE
 
 
 class Pacman(Movable):
     def __init__(self, initial_node: Node):
-        self._path = Path(initial_node, initial_node)
+        self._vertex = Vertex(initial_node, initial_node)
         self._position = initial_node.coordinates
-        self._direction = Direction.NONE
 
     @property
     def position(self):
         return self._position
 
     def move(self, direction: Direction, dt: float) -> None:
-        if self._position.is_close_to(self._path.start.coordinates) and self._path.start.has_neighbor_in(direction):
-            self._path = Path(self._path.start, self._path.start.neighbor_at(direction))
-        elif self._position.is_close_to(self._path.end.coordinates):
-            if self._path.end.is_portal():
-                self._path = Path(self._path.end.portal_neighbor(), self._path.end)
-                self._position = self._path.start.coordinates
-            elif self._path.end.has_neighbor_in(direction):
-                self._path = Path(self._path.end, self._path.end.neighbor_at(direction))
+        if self._position.is_close_to(self._vertex.start.coordinates) and self._vertex.start.has_neighbor_in(direction):
+            self._vertex = Vertex(self._vertex.start, self._vertex.start.neighbor_at(direction))
+        elif self._position.is_close_to(self._vertex.end.coordinates):
+            if self._vertex.end.is_portal():
+                self._vertex = Vertex(self._vertex.end.portal_neighbor(), self._vertex.end)
+                self._position = self._vertex.start.coordinates
+            elif self._vertex.end.has_neighbor_in(direction):
+                self._vertex = Vertex(self._vertex.end, self._vertex.end.neighbor_at(direction))
             else:
                 return  # pacman cannot move into this direction
-        elif direction.is_opposite_direction_of(self._path.direction):
-            self._path = self._path.switch_start_and_end()
-        elif direction != self._direction:
+        elif direction.is_opposite_direction_of(self._vertex.direction):
+            self._vertex = self._vertex.switch_start_and_end()
+        elif direction != self._vertex.direction:
             return  # pacman cannot depart from its vertex
 
         self._calculate_new_position(direction, dt)
@@ -86,14 +85,13 @@ class Pacman(Movable):
     def _calculate_new_position(self, direction: Direction, dt: float) -> None:
         increment = INCREMENTS[direction.value]
         self._position = Coordinates(self._position.x + increment.x * dt, self._position.y + increment.y * dt)
-        self._recalibrate_pacman_on_vertex(direction)
-        self._direction = direction
+        self._recalibrate_pacman_on_vertex()
 
-    def _recalibrate_pacman_on_vertex(self, direction: Direction):
-        if self._path.direction == Direction.UP or self._path.direction == Direction.DOWN:
-            self._position = Coordinates(self._path.start.coordinates.x, self._position.y)
+    def _recalibrate_pacman_on_vertex(self):
+        if self._vertex.direction == Direction.UP or self._vertex.direction == Direction.DOWN:
+            self._position = Coordinates(self._vertex.start.coordinates.x, self._position.y)
         else:
-            self._position = Coordinates(self._position.x, self._path.end.coordinates.y)
+            self._position = Coordinates(self._position.x, self._vertex.end.coordinates.y)
 
     def render(self, screen: Screen):
         screen.render_circle(YELLOW, self._position, RADIUS)
