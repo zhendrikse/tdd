@@ -4,6 +4,7 @@ from hamcrest import assert_that, is_
 from src.coordinates import Coordinates, PROXIMITY_TOLERANCE
 from src.direction import Direction
 from src.pellet_group import PelletGroup
+from src.position_on_vertex import PositionOnVertex
 from src.sprites.node import Node, NeighborType
 from src.sprites.pacman import Pacman, PACMAN_RADIUS, COLLISION_RADIUS
 from src.ports.screen import Screen
@@ -35,7 +36,7 @@ class TestPacman:
         return FakeScreen(self._screen_observer)
 
     def test_move_pacman_on_single_node_without_neighbors(self, screen, a_node):
-        pacman = Pacman(a_node)
+        pacman = Pacman(PositionOnVertex(a_node))
         pacman.move(Direction.UP, 0.01)
         pacman.render(screen)
         assert_that(len(self._screen_observer.messages), is_(1))
@@ -43,7 +44,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at <80, 80>'))
 
     def test_move_pacman_one_step_from_single_node_with_neighbor(self, screen, one_neighbor_node):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, 0.01)
         pacman.render(screen)
@@ -52,7 +53,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at <80, 79>'))
 
     def test_move_pacman_two_steps_from_node_with_neighbor(self, screen, one_neighbor_node):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, 0.01)
         pacman.move(Direction.UP, 0.03)
@@ -62,7 +63,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at <80, 76>'))
 
     def test_pacman_cannot_move_beyond_target(self, screen, one_neighbor_node):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, 0.09)
         pacman.move(Direction.UP, 0.08)
@@ -72,7 +73,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at <80, 71>'))
 
     def test_pacman_may_not_depart_from_road(self, screen, one_neighbor_node):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, 0.03)
         pacman.move(Direction.NONE, 0.02)
@@ -83,7 +84,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at <80, 77>'))
 
     def test_pacman_stops_when_key_released(self, screen, one_neighbor_node):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, 0.01)
         pacman.move(Direction.UP, 0.02)
@@ -94,7 +95,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at <80, 77>'))
 
     def test_pacman_may_reverse_direction(self, screen, one_neighbor_node):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, PROXIMITY_TOLERANCE * .01 + 0.03)
         pacman.move(Direction.DOWN, 0.02)
@@ -106,7 +107,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at {expected_coordinates}'))
 
     def test_switch_start_and_target_after_reverse_direction(self, screen, one_neighbor_node):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, PROXIMITY_TOLERANCE * .01 + 0.03)
         pacman.move(Direction.DOWN, 0.05)
@@ -118,7 +119,7 @@ class TestPacman:
 
     def test_arrived_at_target_pacman_changes_direction(self, one_neighbor_node, screen):
         one_neighbor_node.neighbor_at(Direction.UP).set_neighbor(Node(Coordinates(90, 70)), NeighborType.RIGHT)
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, 0.09)
         pacman.move(Direction.RIGHT, 0.05)
@@ -128,7 +129,7 @@ class TestPacman:
             f'Circle with radius {PACMAN_RADIUS} rendered at <85, 70>'))
 
     def test_pacman_continues_moving_in_same_direction(self, one_neighbor_node, screen):
-        pacman = Pacman(one_neighbor_node)
+        pacman = Pacman(PositionOnVertex(one_neighbor_node))
 
         pacman.move(Direction.UP, PROXIMITY_TOLERANCE * .01 + 0.01)
         pacman.move(Direction.UP, 0.02)
@@ -151,7 +152,7 @@ class TestPacman:
         portal_node_right.set_neighbor(portal_node_left, NeighborType.PORTAL)
         portal_node_right.set_neighbor(middle_node, NeighborType.LEFT)
 
-        pacman = Pacman(middle_node)
+        pacman = Pacman(PositionOnVertex(middle_node))
 
         pacman.move(Direction.RIGHT, 0.1)
         pacman.move(Direction.RIGHT, 0.05)
@@ -167,9 +168,9 @@ class TestPacman:
         pellet_coordinates = Coordinates(90, 80)
         pellet_group = PelletGroup([Pellet(pellet_coordinates)])
 
-        pacman = Pacman(start_node)
+        pacman = Pacman(PositionOnVertex(start_node))
 
-        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.ZERO))
+        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.coordinates), is_(PelletPoints.ZERO))
         assert_that(len(pellet_group.pellets), is_(1))
 
     def test_pacman_can_eat_pellet(self):
@@ -177,9 +178,9 @@ class TestPacman:
         pellet_coordinates = Coordinates(80 + COLLISION_RADIUS - 1, 80)
         pellet_group = PelletGroup([Pellet(pellet_coordinates)])
 
-        pacman = Pacman(start_node)
+        pacman = Pacman(PositionOnVertex(start_node))
 
-        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.PELLET))
+        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.coordinates), is_(PelletPoints.PELLET))
         assert_that(len(pellet_group.pellets), is_(0))
 
     def test_pacman_can_eat_power_pellet(self):
@@ -187,7 +188,7 @@ class TestPacman:
         pellet_coordinates = Coordinates(80 + COLLISION_RADIUS - 1, 80)
         pellet_group = PelletGroup([Pellet(pellet_coordinates, is_power_pellet=True)])
 
-        pacman = Pacman(start_node)
+        pacman = Pacman(PositionOnVertex(start_node))
 
-        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.position), is_(PelletPoints.POWER_PELLET))
+        assert_that(pellet_group.remove_pellet_when_pacman_is_close(pacman.coordinates), is_(PelletPoints.POWER_PELLET))
         assert_that(len(pellet_group.pellets), is_(0))

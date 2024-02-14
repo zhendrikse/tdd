@@ -10,7 +10,7 @@ class Vertex:
     pass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Vertex:
     start: Node
     end: Node

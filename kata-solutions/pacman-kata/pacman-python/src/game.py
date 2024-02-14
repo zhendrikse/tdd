@@ -8,7 +8,7 @@ from .ports.eventbus import EventBus
 from .ports.clock import Clock
 from .ports.screen import Screen
 from src.sprites.pacman import Pacman
-from .sprites.movable import Movable
+from .position_on_vertex import PositionOnVertex
 
 
 class Game:
@@ -20,7 +20,7 @@ class Game:
         self._nodes: NodeGroup = maze.as_node_group()
         self._pellets: PelletGroup = maze.as_pellet_group()
         start_node = Node(Coordinates(200, 400)) if self._nodes.is_empty() else self._nodes.first()
-        self._pacman: Pacman = Pacman(start_node)
+        self._pacman: Pacman = Pacman(PositionOnVertex(start_node))
 
     def run(self) -> None:
         keep_running = True
@@ -29,7 +29,7 @@ class Game:
         while keep_running:
             dt = self._clock.tick(30) / 1000.0
             self._pacman.move(command, dt)
-            pellet_points = self._pellets.remove_pellet_when_pacman_is_close(self._pacman.position).value
+            pellet_points = self._pellets.remove_pellet_when_pacman_is_close(self._pacman.coordinates).value
             self._render()
             for event in self._eventbus.get_events():
                 command = event.as_command()
