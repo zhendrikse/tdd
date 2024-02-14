@@ -1,18 +1,17 @@
 from dataclasses import dataclass
 
-from .sprite import YELLOW
+from .sprite import WHITE
 from ..coordinates import Coordinates
 from ..position_on_vertex import PositionOnVertex
 from ..sprites.movable import Movable
 from ..direction import Direction
 from ..ports.screen import Screen
 
-COLLISION_RADIUS = 5
-PACMAN_RADIUS = 10
+GHOST_RADIUS = 10
 
 
 @dataclass(frozen=True)
-class Pacman(Movable):
+class Ghost(Movable):
     position: PositionOnVertex
 
     @property
@@ -20,7 +19,14 @@ class Pacman(Movable):
         return self.position.position
 
     def move(self, direction: Direction, dt: float) -> None:
-        self.position.move(direction, dt)
+        # only change direction when close to target
+        new_direction = direction if self.position.is_close_to_end else self.position.direction
+
+        # but do not back track
+        if new_direction.is_opposite_direction_of(self.position.direction):
+            return
+
+        self.position.move(new_direction, dt)
 
     def render(self, screen: Screen):
-        screen.render_circle(YELLOW, self.coordinates, PACMAN_RADIUS)
+        screen.render_circle(WHITE, self.coordinates, GHOST_RADIUS)

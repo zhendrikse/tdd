@@ -24,13 +24,25 @@ class PositionOnVertex:
         self._position = initial_node.coordinates
 
     @property
+    def direction(self) -> Direction:
+        return self._vertex.direction
+
+    @property
     def position(self) -> Coordinates:
         return self._position
 
+    @property
+    def is_close_to_start(self) -> bool:
+        return self._position.is_close_to(self._vertex.start.coordinates)
+
+    @property
+    def is_close_to_end(self) -> bool:
+        return self._position.is_close_to(self._vertex.end.coordinates)
+
     def valid_directions(self) -> List[Direction]:
-        if self._position.is_close_to(self._vertex.start.coordinates):
+        if self.is_close_to_start:
             return self._vertex.start.valid_directions()
-        elif self._position.is_close_to(self._vertex.end.coordinates):
+        elif self.is_close_to_end:
             return self._vertex.end.valid_directions()
         else:
             return [self._vertex.direction]
