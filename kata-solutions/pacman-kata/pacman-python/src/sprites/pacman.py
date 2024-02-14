@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 from .sprite import YELLOW
 from ..coordinates import Coordinates
 from ..sprites.movable import Movable
@@ -7,6 +5,7 @@ from ..ports.screen import TILEWIDTH
 from ..direction import Direction
 from ..sprites.node import Node
 from ..ports.screen import Screen
+from ..vertex import Vertex
 
 COLLISION_RADIUS = 5
 PACMAN_RADIUS = 10
@@ -20,34 +19,6 @@ INCREMENTS = {
 RADIUS = 10
 
 
-class Vertex:
-    pass
-
-
-@dataclass
-class Vertex:
-    start: Node
-    end: Node
-
-    def vertex_from_start_in_direction(self, direction: Direction) -> Vertex:
-        return Vertex(self.start, self.start.neighbor_at(direction))
-
-    def vertex_from_end_in_direction(self, direction: Direction) -> Vertex:
-        return Vertex(self.end, self.end.neighbor_at(direction))
-
-    def switch_start_and_end(self) -> Vertex:
-        return Vertex(self.end, self.start)
-
-    @property
-    def direction(self):
-        distance_x = self.end.coordinates.x - self.start.coordinates.x
-        distance_y = self.end.coordinates.y - self.start.coordinates.y
-        if distance_x == 0:
-            return Direction.DOWN if distance_y > 0 else Direction.UP
-        else:
-            return Direction.RIGHT if distance_x > 0 else Direction.LEFT
-
-
 class Pacman(Movable):
     def __init__(self, initial_node: Node):
         self._vertex = Vertex(initial_node, initial_node)
@@ -58,22 +29,26 @@ class Pacman(Movable):
         return self._position
 
     def move(self, direction: Direction, dt: float) -> None:
-        if self._position.is_close_to(self._vertex.start.coordinates) and self._vertex.start.has_neighbor_in(direction):
-            self._vertex = self._vertex.vertex_from_start_in_direction(direction)
-        elif self._position.is_close_to(self._vertex.end.coordinates):
-            if self._vertex.end.is_portal():
-                self._vertex = Vertex(self._vertex.end.portal_neighbor(), self._vertex.end)
-                self._position = self._vertex.start.coordinates
-            elif self._vertex.end.has_neighbor_in(direction):
-                self._vertex = self._vertex.vertex_from_end_in_direction(direction)
-            else:
-                return  # pacman cannot move into this direction
-        elif direction.is_opposite_direction_of(self._vertex.direction):
+        if direction.is_opposite_direction_of(self._vertex.direction):
             self._vertex = self._vertex.switch_start_and_end()
-        elif direction != self._vertex.direction:
-            return  # pacman cannot depart from its vertex
+            self._calculate_new_position(direction, dt)
+            return
 
-        self._calculate_new_position(direction, dt)
+        if self._position.is_close_to(self._vertex.end.coordinates) and self._vertex.end.is_portal():
+            self._vertex = Vertex(self._vertex.end.portal_neighbor(), self._vertex.end)
+            self._position = self._vertex.start.coordinates
+            self._calculate_new_position(direction, dt)
+            return
+
+        if direction in self._vertex.valid_directions_from(self._position):
+            if self._position.is_close_to(self._vertex.start.coordinates):
+                self._vertex = self._vertex.vertex_from_start_in_direction(direction)
+                self._calculate_new_position(direction, dt)
+            elif self._position.is_close_to(self._vertex.end.coordinates):
+                self._vertex = self._vertex.vertex_from_end_in_direction(direction)
+                self._calculate_new_position(direction, dt)
+            else:
+                self._calculate_new_position(direction, dt)
 
     def _calculate_new_position(self, direction: Direction, dt: float) -> None:
         increment = INCREMENTS[direction.value]

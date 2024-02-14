@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any
+from typing import Any, List
 
 from ..coordinates import Coordinates
 from ..direction import Direction
@@ -23,6 +23,13 @@ DIRECTION_TO_NEIGHBOR_MAP = {
     Direction.DOWN: NeighborType.DOWN
 }
 
+NEIGHBOR_TO_DIRECTION_MAP = {
+    NeighborType.LEFT: Direction.LEFT,
+    NeighborType.RIGHT: Direction.RIGHT,
+    NeighborType.UP: Direction.UP,
+    NeighborType.DOWN: Direction.DOWN
+}
+
 
 @dataclass(frozen=True)
 class Node(Sprite):
@@ -32,13 +39,6 @@ class Node(Sprite):
     @property
     def coordinates(self):
         return self.position
-
-    def has_neighbor_in(self, direction: Direction) -> bool:
-        if direction in DIRECTION_TO_NEIGHBOR_MAP.keys():
-            neighbor_type = DIRECTION_TO_NEIGHBOR_MAP[direction]
-            return neighbor_type in self.neighbors.keys()
-        else:
-            return False
 
     def is_portal(self) -> bool:
         return NeighborType.PORTAL in self.neighbors.keys()
@@ -57,3 +57,7 @@ class Node(Sprite):
     def neighbor_at(self, direction: Direction) -> Any:
         neighbor_type = DIRECTION_TO_NEIGHBOR_MAP[direction]
         return self.neighbors[neighbor_type]
+
+    def valid_directions(self) -> List[Direction]:
+        return [NEIGHBOR_TO_DIRECTION_MAP[neighbor_type]
+                for neighbor_type in self.neighbors.keys() if neighbor_type != NeighborType.PORTAL]
