@@ -33,6 +33,5 @@ class PelletGroup:
     # See https://pacmancode.com/eating-pellets
     @staticmethod
     def _is_close(pellet: Pellet, pacman_position: Coordinates) -> bool:
-        distance_squared = (pellet.position.x - pacman_position.x) ** 2 + (pellet.position.y - pacman_position.y) ** 2
         radii_squared = (pellet.radius + COLLISION_RADIUS) ** 2
-        return distance_squared <= radii_squared
+        return pellet.position.distance_squared_to(pacman_position) <= radii_squared

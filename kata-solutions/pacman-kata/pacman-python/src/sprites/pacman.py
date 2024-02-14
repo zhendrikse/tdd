@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 from .sprite import YELLOW
 from ..coordinates import Coordinates
 from ..sprites.movable import Movable
@@ -16,13 +18,46 @@ INCREMENTS = {
     Direction.LEFT.value: Coordinates(-1 * SPEED, 0),
     Direction.RIGHT.value: Coordinates(1 * SPEED, 0)}
 RADIUS = 10
-PROXIMITY_TOLERANCE = 3
+
+
+class Path:
+    pass
+
+
+@dataclass
+class Path:
+    start: Node
+    end: Node
+
+    def path_from_start_in_direction(self, direction: Direction) -> Path:
+        return Path(self.start, self.start.neighbor_at(direction))
+
+    def path_from_end_in_direction(self, direction: Direction) -> Path:
+        return Path(self.end, self.end.neighbor_at(direction))
+
+    def switch_start_and_end(self) -> Path:
+        return Path(self.end, self.start)
+
+    @property
+    def direction(self):
+        distance_x = self.end.coordinates.x - self.start.coordinates.x
+        distance_y = self.end.coordinates.y - self.start.coordinates.y
+        if distance_x == 0:
+            if distance_y > 0:
+                return Direction.DOWN
+            if distance_y < 0:
+                return Direction.UP
+        elif distance_y == 0:
+            if distance_x > 0:
+                return Direction.RIGHT
+            if distance_y < 0:
+                return Direction.LEFT
+        return Direction.NONE
 
 
 class Pacman(Movable):
     def __init__(self, initial_node: Node):
-        self._start_node = initial_node
-        self._target_node = None
+        self._path = Path(initial_node, initial_node)
         self._position = initial_node.coordinates
         self._direction = Direction.NONE
 
@@ -30,42 +65,23 @@ class Pacman(Movable):
     def position(self):
         return self._position
 
-    def _pacman_near_target(self) -> bool:
-        return self._position.manhattan_distance_to(self._target_node.coordinates) < PROXIMITY_TOLERANCE
-
-    def _pacman_near_start(self) -> bool:
-        return self._position.manhattan_distance_to(self._start_node.coordinates) < PROXIMITY_TOLERANCE
-
     def move(self, direction: Direction, dt: float) -> None:
-        if self._pacman_near_start():
-            if self._start_node.has_neighbor_in(direction):
-                self._target_node = self._start_node.neighbor_at(direction)
-                self._calculate_new_position(direction, dt)
-        elif self._pacman_near_target():
-            self._set_new_target(direction, dt)
-        elif direction.value == self._direction.value:
-            self._calculate_new_position(direction, dt)
-        elif direction.is_opposite_direction_of(self._direction):
-            self._switch_start_and_target()
-            self._calculate_new_position(direction, dt)
-        else:
-            # User tries to make pacman leave the vertices between the nodes
-            pass
+        if self._position.is_close_to(self._path.start.coordinates) and self._path.start.has_neighbor_in(direction):
+            self._path = Path(self._path.start, self._path.start.neighbor_at(direction))
+        elif self._position.is_close_to(self._path.end.coordinates):
+            if self._path.end.is_portal():
+                self._path = Path(self._path.end.portal_neighbor(), self._path.end)
+                self._position = self._path.start.coordinates
+            elif self._path.end.has_neighbor_in(direction):
+                self._path = Path(self._path.end, self._path.end.neighbor_at(direction))
+            else:
+                return  # pacman cannot move into this direction
+        elif direction.is_opposite_direction_of(self._path.direction):
+            self._path = self._path.switch_start_and_end()
+        elif direction != self._direction:
+            return  # pacman cannot depart from its vertex
 
-    def _set_new_target(self, direction: Direction, dt):
-        if self._target_node.is_portal():
-            self._start_node = self._target_node.portal_neighbor()
-            self._position = self._start_node.coordinates
-            self._calculate_new_position(direction, dt)
-        if self._target_node.has_neighbor_in(direction):
-            self._start_node = self._target_node
-            self._target_node = self._start_node.neighbor_at(direction)
-            self._calculate_new_position(direction, dt)
-
-    def _switch_start_and_target(self):
-        node = self._target_node
-        self._target_node = self._start_node
-        self._start_node = node
+        self._calculate_new_position(direction, dt)
 
     def _calculate_new_position(self, direction: Direction, dt: float) -> None:
         increment = INCREMENTS[direction.value]
@@ -74,10 +90,10 @@ class Pacman(Movable):
         self._direction = direction
 
     def _recalibrate_pacman_on_vertex(self, direction: Direction):
-        if direction.value == Direction.UP.value or direction.value == Direction.DOWN.value:
-            self._position = Coordinates(self._start_node.coordinates.x, self._position.y)
+        if self._path.direction == Direction.UP or self._path.direction == Direction.DOWN:
+            self._position = Coordinates(self._path.start.coordinates.x, self._position.y)
         else:
-            self._position = Coordinates(self._position.x, self._start_node.coordinates.y)
+            self._position = Coordinates(self._position.x, self._path.end.coordinates.y)
 
     def render(self, screen: Screen):
         screen.render_circle(YELLOW, self._position, RADIUS)

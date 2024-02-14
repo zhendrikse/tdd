@@ -1,5 +1,5 @@
 from src.ports.clock import Clock
-from src.sprites.pacman import PROXIMITY_TOLERANCE
+from src.coordinates import PROXIMITY_TOLERANCE
 
 
 class FakeClock(Clock):

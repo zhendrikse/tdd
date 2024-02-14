@@ -1,11 +1,11 @@
 import pytest
 from hamcrest import assert_that, is_
 
-from src.coordinates import Coordinates
+from src.coordinates import Coordinates, PROXIMITY_TOLERANCE
 from src.direction import Direction
 from src.pellet_group import PelletGroup
 from src.sprites.node import Node, NeighborType
-from src.sprites.pacman import Pacman, PROXIMITY_TOLERANCE, PACMAN_RADIUS, COLLISION_RADIUS
+from src.sprites.pacman import Pacman, PACMAN_RADIUS, COLLISION_RADIUS
 from src.ports.screen import Screen
 from src.sprites.pellet import Pellet, PelletPoints
 from .adapters.fake_screen import FakeScreen
