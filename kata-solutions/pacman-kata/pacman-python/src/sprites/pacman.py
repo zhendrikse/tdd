@@ -43,16 +43,9 @@ class Vertex:
         distance_x = self.end.coordinates.x - self.start.coordinates.x
         distance_y = self.end.coordinates.y - self.start.coordinates.y
         if distance_x == 0:
-            if distance_y > 0:
-                return Direction.DOWN
-            if distance_y < 0:
-                return Direction.UP
-        elif distance_y == 0:
-            if distance_x > 0:
-                return Direction.RIGHT
-            if distance_x < 0:
-                return Direction.LEFT
-        return Direction.NONE
+            return Direction.DOWN if distance_y > 0 else Direction.UP
+        else:
+            return Direction.RIGHT if distance_x > 0 else Direction.LEFT
 
 
 class Pacman(Movable):
@@ -66,13 +59,13 @@ class Pacman(Movable):
 
     def move(self, direction: Direction, dt: float) -> None:
         if self._position.is_close_to(self._vertex.start.coordinates) and self._vertex.start.has_neighbor_in(direction):
-            self._vertex = Vertex(self._vertex.start, self._vertex.start.neighbor_at(direction))
+            self._vertex = self._vertex.vertex_from_start_in_direction(direction)
         elif self._position.is_close_to(self._vertex.end.coordinates):
             if self._vertex.end.is_portal():
                 self._vertex = Vertex(self._vertex.end.portal_neighbor(), self._vertex.end)
                 self._position = self._vertex.start.coordinates
             elif self._vertex.end.has_neighbor_in(direction):
-                self._vertex = Vertex(self._vertex.end, self._vertex.end.neighbor_at(direction))
+                self._vertex = self._vertex.vertex_from_end_in_direction(direction)
             else:
                 return  # pacman cannot move into this direction
         elif direction.is_opposite_direction_of(self._vertex.direction):
