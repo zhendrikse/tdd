@@ -15,14 +15,6 @@ class Vertex:
     start: Node
     end: Node
 
-    def valid_directions_from(self, position: Coordinates) -> List[Direction]:
-        if position.is_close_to(self.start.coordinates):
-            return self.start.valid_directions()
-        elif position.is_close_to(self.end.coordinates):
-            return self.end.valid_directions()
-        else:
-            return [self.direction]
-
     def vertex_from_start_in_direction(self, direction: Direction) -> Vertex:
         return Vertex(self.start, self.start.neighbor_at(direction))
 

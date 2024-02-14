@@ -1,3 +1,5 @@
+from typing import List
+
 from .coordinates import Coordinates
 from .ports.screen import TILEWIDTH
 from .direction import Direction
@@ -25,6 +27,14 @@ class PositionOnVertex:
     def position(self) -> Coordinates:
         return self._position
 
+    def valid_directions(self) -> List[Direction]:
+        if self._position.is_close_to(self._vertex.start.coordinates):
+            return self._vertex.start.valid_directions()
+        elif self._position.is_close_to(self._vertex.end.coordinates):
+            return self._vertex.end.valid_directions()
+        else:
+            return [self._vertex.direction]
+
     def move(self, direction: Direction, dt: float) -> None:
         if direction.is_opposite_direction_of(self._vertex.direction):
             self._vertex = self._vertex.switch_start_and_end()
@@ -37,7 +47,7 @@ class PositionOnVertex:
             self._calculate_new_position(direction, dt)
             return
 
-        if direction in self._vertex.valid_directions_from(self._position):
+        if direction in self.valid_directions():
             if self._position.is_close_to(self._vertex.start.coordinates):
                 self._vertex = self._vertex.vertex_from_start_in_direction(direction)
             elif self._position.is_close_to(self._vertex.end.coordinates):
