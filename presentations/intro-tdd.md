@@ -85,7 +85,7 @@ end
 
 ---
 
-### TDD &amp; BDD
+### [TDD &amp; BDD](https://github.com/zhendrikse/tdd/wiki/Telling-and-slicing-user-stories)
 
 <!-- .slide: data-background="./css/images/cardboard_flat.png" -->
 
@@ -95,7 +95,7 @@ end
 ---
 
 
-### Contra-variance and co-variance
+### [Contra-variance and co-variance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_of_vectors)
 
 
 <!-- .slide: data-background="./css/images/cardboard_flat.png" -->
@@ -104,6 +104,8 @@ end
 ![Contra- and co-variance](./images/contra_co_variant5.png)
 
 ---
+
+<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
 
 ### <a href="https://blog.cleancoder.com/uncle-bob/2017/10/03/TestContravariance.html">Test Contra-variance</a>
 
@@ -174,28 +176,29 @@ Why? ==> Because we specify! <!-- .element: class="fragment"-->
 ![Kent Beck](./images/kent_beck.png)
 
 ---
-### <a href="https://en.wikipedia.org/wiki/Kent_Beck">Kent Beck's</a> [design rules](https://martinfowler.com/bliki/BeckDesignRules.html)
+### <a href="https://en.wikipedia.org/wiki/Kent_Beck">Kent Beck's</a> [rules of simple design](https://martinfowler.com/bliki/BeckDesignRules.html)
 
 1. <!-- .element: class="fragment"-->
    Passes the tests
 2. <!-- .element: class="fragment"-->
    Reveals intention ([Clean code](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)) &rarr; [game of life](https://github.com/zhendrikse/tdd/blob/master/tdd-katas/game-of-life/README.md):
-   ```clojure
+```clojure
    (defn next-generation-of [game]
      (map #(to-living-cell 
             (which-both 
              is-dead? 
-             (has-exactly-three? (living-neighbours-in game))) %) 
+               (has-exactly-three? (living-neighbours-in game))) %) 
      (map #(to-dead-cell 
             (which-both 
              is-alive? 
              (which-either 
               (has-less-than-two? (living-neighbours-in game)) 
               (has-more-than-three? (living-neighbours-in game)))) %) game)))
-   ```
-4. <!-- .element: class="fragment"-->
+```
+
+3. <!-- .element: class="fragment"-->
    No duplication ([DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself))
-5. <!-- .element: class="fragment"-->
+4. <!-- .element: class="fragment"-->
    Fewest elements ([STTCPW](http://wiki.c2.com/?DoTheSimplestThingThatCouldPossiblyWork))
 
 ---
