@@ -11,7 +11,7 @@ describe("A new stack", function () {
   })
 
   it("should be empty", function () {
-    expect(myStack.isEmpty()).to.equal(true);
+    expect(myStack.isEmpty()).to.be.true;
   })
 
   it("should throw an exception on a pop operation", function () {
