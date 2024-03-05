@@ -1,6 +1,6 @@
 .reveal {
   font-family: "Helvetica Neue", sans-serif;
-  font-size: 1.75em;
+  font-size: 1.5em;
   background: url("images/cardboard_flat.png");
 }
 /* line 17, granite.scss */
@@ -35,10 +35,10 @@
   color: #000;
 }
 .reveal ul li, .reveal ol li, .reveal p {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 .reveal ul li ul li, .reveal ol li ol li {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 .reveal  a, .reveal  a:hover, .reveal  a:focus, .reveal  a:active, .reveal  a:visited {
   color: #c00;

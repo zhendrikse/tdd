@@ -2,11 +2,14 @@
 title: Introduction into test-driven development
 author: Zeger Hendrikse
 date: 2023-09-29
+css: css/custom.css
 ---
 
 <!-- .slide: data-background="./images/intricate-explorer-HZ7VEe7Ni1s-unsplash.jpg" -->
 
-#### Coders should test &mdash; testers should code
+## Coders should test &mdash; testers should code
+
+[Zeger Hendrikse](https://www.it-essence.nl/)
 
 &nbsp;
 
@@ -18,24 +21,17 @@ date: 2023-09-29
 
 &nbsp;
 
-&nbsp;
+# We all should do TDD!
 
-&nbsp;
-
-#### We all should do TDD!
-
-by [Zeger Hendrikse](https://www.it-essence.nl/)
 </section>
 
 ---
 
-##### eXtreme Programming
+## eXtreme Programming
 
 ![XP](./images/xp_circles.jpg)
 
 ---
-
-<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
 
 ![Feedback loops](./images/Extreme_Programming.svg.png) <!-- .element width="75%" height="75%" -->
 
@@ -47,7 +43,7 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
 
-##### Daniel North and Chris Matts
+### Daniel North and Chris Matts
 
 - Test Suite => specification
 - Test => scenario
@@ -55,7 +51,7 @@ by [Zeger Hendrikse](https://www.it-essence.nl/)
 
 ---
 
-##### rSPec
+### rSPec
 
 ```ruby
 # spec/string_calculator_spec.rb
@@ -73,13 +69,13 @@ end
 
 ---
 
-##### We test _behaviour_ with TDD
+### We test _behaviour_ with TDD
 
 <iframe width="100%" height="500" src="//jsfiddle.net/zhendrikse/bu7tv1kp/3/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></frame>
 
 ---
 
-##### Specifications drive design
+### Specifications drive design
 
 ![Design](./images/video-game.png)
 
@@ -87,25 +83,17 @@ end
 
 ### [TDD &amp; BDD](https://github.com/zhendrikse/tdd/wiki/Telling-and-slicing-user-stories)
 
-<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
-
 
 ![TDD &amp; BDD](./images/tdd-scope.png)
 
 ---
 
 
-### [Contra-variance and co-variance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_of_vectors)
-
-
-<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
-
+### Contra-variance and co-variance
 
 ![Contra- and co-variance](./images/contra_co_variant5.png)
 
 ---
-
-<!-- .slide: data-background="./css/images/cardboard_flat.png" -->
 
 ### <a href="https://blog.cleancoder.com/uncle-bob/2017/10/03/TestContravariance.html">Test Contra-variance</a>
 
@@ -119,7 +107,7 @@ end
 
 ---
 
-### Contra-variance can only be achieved using TDD
+## Contra-variance is only achieved using TDD
 
 Why? ==> Because we specify! <!-- .element: class="fragment"-->
 
@@ -160,7 +148,9 @@ Why? ==> Because we specify! <!-- .element: class="fragment"-->
 
 ### Rulez of the TDD game
 
-**Small increments**, so we are [not allowed to write](http://blog.cleancoder.com/uncle-bob/2014/12/17/TheCyclesOfTDD.html):
+**Small increments**
+
+We are [not allowed to write](http://blog.cleancoder.com/uncle-bob/2014/12/17/TheCyclesOfTDD.html):
 
 1. <!-- .element: class="fragment"-->
    any production code before you have a failing test
@@ -176,6 +166,7 @@ Why? ==> Because we specify! <!-- .element: class="fragment"-->
 ![Kent Beck](./images/kent_beck.png)
 
 ---
+
 ### <a href="https://en.wikipedia.org/wiki/Kent_Beck">Kent Beck's</a> [rules of simple design](https://martinfowler.com/bliki/BeckDesignRules.html)
 
 1. <!-- .element: class="fragment"-->
@@ -183,18 +174,18 @@ Why? ==> Because we specify! <!-- .element: class="fragment"-->
 2. <!-- .element: class="fragment"-->
    Reveals intention ([Clean code](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)) &rarr; [game of life](https://github.com/zhendrikse/tdd/blob/master/tdd-katas/game-of-life/README.md):
 ```clojure
-   (defn next-generation-of [game]
-     (map #(to-living-cell 
-            (which-both 
-             is-dead? 
-               (has-exactly-three? (living-neighbours-in game))) %) 
-     (map #(to-dead-cell 
-            (which-both 
-             is-alive? 
-             (which-either 
-              (has-less-than-two? (living-neighbours-in game)) 
-              (has-more-than-three? (living-neighbours-in game)))) %) game)))
-```
+(defn next-generation-of [game]
+  (map #(to-living-cell 
+         (which-both 
+          is-dead? 
+            (has-exactly-three? (living-neighbours-in game))) %) 
+  (map #(to-dead-cell 
+         (which-both 
+          is-alive? 
+          (which-either 
+           (has-less-than-two? (living-neighbours-in game)) 
+           (has-more-than-three? (living-neighbours-in game)))) %) game)))
+   ```
 
 3. <!-- .element: class="fragment"-->
    No duplication ([DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself))
@@ -203,15 +194,16 @@ Why? ==> Because we specify! <!-- .element: class="fragment"-->
 
 ---
 
-### TDD is not building a bridge nor house!
+## TDD is not building a bridge nor house!
 
 ![cartoon](./images/tdd_cartoon.png)
 
 ---
 
-### User story
+## User story
 
 <div style="text-align: left">
+
 <b>As</b> a worker in a restaurant 
 
 <b>I want</b> to place my clean plates on a stack 
