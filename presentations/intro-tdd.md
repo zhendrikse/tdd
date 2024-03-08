@@ -83,8 +83,9 @@ end
 
 ### [TDD &amp; BDD](https://github.com/zhendrikse/tdd/wiki/Telling-and-slicing-user-stories)
 
+![TDD &amp; BDD](./images/tdd-scope.png) <!-- .element width="85%" height="85%" -->
 
-![TDD &amp; BDD](./images/tdd-scope.png)
+(c) Lasse Koskela
 
 ---
 
