@@ -27,6 +27,12 @@ css: css/custom.css
 
 ---
 
+## Me, myself, and I
+
+![Zeger](./images/zeger-teaching-2.png) <!-- .element width="50%" height="50%" -->
+
+---
+
 ## eXtreme Programming
 
 ![XP](./images/xp_circles.jpg)
