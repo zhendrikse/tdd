@@ -5,8 +5,8 @@ on:
     branches: [ "master" ]
     paths:
       - '.github/workflows/node.js.yml'
-      - 'kata-solutions/vending-machine/vending-machine-type/**'
       - 'kata-solutions/vending-machine/vending-machine-javascript/**'
+      - 'kata-solutions/vending-machine/vending-machine-typescript/**'
       - 'kata-solutions/stack-kata/stack-kata-javascript/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional/**'
