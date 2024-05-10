@@ -1,13 +1,13 @@
 export enum Choice {
-  COLA = "Cola choice",
-  FIZZY_ORANGE = "Fizzy orange choice",
-  BEER = "BEER choice"
+  Cola = "Cola choice",
+  FizzyOrange = "Fizzy orange choice",
+  Beer = "BEER choice"
 }
 
 export enum Can {
-  NOTHING = "No can",
-  COKE = "Can of Coke",
-  FANTA = "Can of Fanta"
+  Nothinbg = "No can",
+  Coke = "Can of Coke",
+  Fanta = "Can of Fanta"
 }
 
 class Cashier {
@@ -31,7 +31,7 @@ class Drawer {
 
   deliver(cashier: Cashier) {
     if (!cashier.doesBalanceAllow(this.priceInCents))
-      return Can.NOTHING
+      return Can.Nothinbg
     
     cashier.buy(this.priceInCents)
     return this.can    
@@ -52,7 +52,7 @@ export class VendingMachine {
   
     public deliver(choice: Choice): Can {
       if (!this.choiceDrawerMap.has(choice))
-          return Can.NOTHING
+          return Can.Nothinbg
 
       let drawer = this.choiceDrawerMap.get(choice) as Drawer
       return drawer.deliver(this.cashier)
