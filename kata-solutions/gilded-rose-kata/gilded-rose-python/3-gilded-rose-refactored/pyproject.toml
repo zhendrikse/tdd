@@ -6,9 +6,9 @@ authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.12"
+approvaltests = "^10.4.0"
+pytest-cov = "^5.0.0"
 pytest-watch = "^4.2.0"
-approvaltests = "^10.0.2"
-pytest-cov = "4.1.0"
 
 [tool.poetry.dev-dependencies]
 
