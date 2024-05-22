@@ -8,10 +8,10 @@ authors = ["Zeger Hendrikse  <zegerh@yahoo.co.uk>"]
 python = ">=3.10.0,<3.13"
 
 pytest-watch = "^4.2.0"
-pytest = "^8.0.0"
+pytest = "^8.2.1"
 pyhamcrest = "^2.1.0"
 pytest-cov = "^4.1.0"
-approvaltests = "^10.2.0"
+approvaltests = "^10.4.0"
 
 [tool.poetry.dev-dependencies]
 
