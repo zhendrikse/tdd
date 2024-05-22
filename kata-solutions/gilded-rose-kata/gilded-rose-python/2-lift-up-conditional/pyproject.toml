@@ -5,7 +5,7 @@ description = "Gilded rose kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0,<3.12"
+python = ">=3.10.0,<3.13"
 approvaltests = "^10.4.0"
 pytest-cov = "^5.0.0"
 pytest-watch = "^4.2.0"
