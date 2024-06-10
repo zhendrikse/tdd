@@ -12,7 +12,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.0.17",
     "@fontsource/jetbrains-mono": "^5.0.19",
-    "npm-check-updates": "^16.14.15",
-    "reveal-md": "^6.1.1"
+    "npm-check-updates": "^16.14.20",
+    "reveal-md": "^6.1.2"
   }
 }
