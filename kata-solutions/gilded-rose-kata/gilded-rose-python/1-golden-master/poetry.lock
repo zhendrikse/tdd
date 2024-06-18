@@ -16,29 +16,29 @@ test = ["pytest (>=6.0.1)", "pytest-md-report (>=0.3)"]
 
 [[package]]
 name = "approval-utilities"
-version = "10.4.0"
+version = "12.2.1"
 description = "Utilities for your production code that work well with approvaltests"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "approval_utilities-10.4.0-py3-none-any.whl", hash = "sha256:27385fa64ad1de00375e19b02fa7ed367959bf0dd3050c2191fd847c7cb3e96b"},
-    {file = "approval_utilities-10.4.0.tar.gz", hash = "sha256:ee533ca2117e2ee77f557937c14105c1040bcc1b0e3a3c01d3f108a50f4aaa77"},
+    {file = "approval_utilities-12.2.1-py3-none-any.whl", hash = "sha256:9543f98a978f70e9250aae2373df420178375bc4735f3bb92e747eda12e846c4"},
+    {file = "approval_utilities-12.2.1.tar.gz", hash = "sha256:b69772f813f892cee0cf8652df8e0f24faa2adbf5ce493c1adbccafe2464650b"},
 ]
 
 [[package]]
 name = "approvaltests"
-version = "10.4.0"
+version = "12.2.1"
 description = "Assertion/verification library to aid testing"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "approvaltests-10.4.0-py3-none-any.whl", hash = "sha256:88c3854ec2d6d3e03fe0af62adefd367dd75d3b55234649dbf36f70aede28854"},
-    {file = "approvaltests-10.4.0.tar.gz", hash = "sha256:27c95ef910b07bfc2e5db8e48d5c3bbe9c64c9aaf2dfe3379c8bc4f32f9ccb6d"},
+    {file = "approvaltests-12.2.1-py3-none-any.whl", hash = "sha256:a284561de839daff34ed329a42e26f118bd3441991eaf5786fff4c350a9f1558"},
+    {file = "approvaltests-12.2.1.tar.gz", hash = "sha256:3648a7cec689fbd59bb290ad6a963498ecc8fe02f33de7435aae4b537cac5c98"},
 ]
 
 [package.dependencies]
 allpairspy = ">=2.1.0"
-approval-utilities = "10.4.0"
+approval-utilities = "12.2.1"
 beautifulsoup4 = ">=4.4.0"
 empty-files = ">=0.0.3"
 mock = ">=5.1.0"
@@ -636,4 +636,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10.0,<3.13"
-content-hash = "8f0e34060f488e0648f2cc37fd177e0ef69a97f0af5c9165cd7e216bebc8482d"
+content-hash = "33b0533785dc0765a0d46e29fc484513a8c85e350be00f09119d8cb31f9d2cb1"

@@ -6,10 +6,9 @@ authors = ["Zeger Hendrikse  <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.13"
-requests = "^2.32.2"
 pyhamcrest = "^2.1.0"
-pytest = "^8.2.1"
 pytest-watch = "^4.2.0"
+requests = "^2.32.3"
 
 
 
