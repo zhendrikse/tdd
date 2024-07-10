@@ -16,18 +16,16 @@
       "nodemon",
       "test",
       "unittest"
-  ],
-   "author": "Your name",  
+   ],
+   "author": "Your name",
    "license": "ISC",
    "devDependencies": {
-      "expect.js": "^0.3.1",
       "@types/chai": "^4.3.16",
-      "@types/mocha": "^10.0.1",
-      "chai": "^4.3.7",
-      "mocha": "^10.4.0",
-      "typescript": "^5.4.5",
-      "ts-node": "^10.9.2"
-   },
-   "dependencies": {
+      "@types/mocha": "^10.0.7",
+      "chai": "^4.4.1",
+      "expect.js": "^0.3.1",
+      "mocha": "^10.6.0",
+      "ts-node": "^10.9.2",
+      "typescript": "^5.5.3"
    }
 }

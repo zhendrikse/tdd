@@ -3,12 +3,12 @@
   "description": "Martin Fowler's original version",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Zeger Hendrikse",  
+  "author": "Zeger Hendrikse",
   "dependencies": {
     "express": "^4.19.2",
     "http-server": "^14.1.1",
-    "jasmine": "^5.0.1",
-    "nodemon": "^3.0.1",
+    "jasmine": "^5.1.0",
+    "nodemon": "^3.1.4",
     "nyc": "^15.1.0"
   },
   "scripts": {

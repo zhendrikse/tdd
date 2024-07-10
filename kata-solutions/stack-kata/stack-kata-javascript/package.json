@@ -6,8 +6,8 @@
   },
   "devDependencies": {
     "jasmine": "^5.1.0",
-    "jasmine-browser-runner": "^2.3.0",
-    "jasmine-core": "^5.1.1",
-    "nodemon": "^3.0.2"
+    "jasmine-browser-runner": "^2.5.0",
+    "jasmine-core": "^5.1.2",
+    "nodemon": "^3.1.4"
   }
 }

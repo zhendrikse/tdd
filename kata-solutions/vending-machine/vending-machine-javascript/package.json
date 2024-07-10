@@ -2,14 +2,14 @@
   "name": "VendingMachine",
   "version": "1.0.0",
   "description": "Vending machine kata in Javascript",
-  "scripts": { 
+  "scripts": {
     "watch": "nodemon --exec \"nyc --reporter=text --reporter=lcov mocha spec/*_spec.js\"",
     "test": "nyc --reporter=text --reporter=lcov mocha spec/*_spec.js",
     "report": "npx http-server coverage/lcov-report/"
   },
   "nyc": {
     "exclude": "spec/*_spec.js"
-  }, 
+  },
   "keywords": [
     "tdd",
     "node",
@@ -19,13 +19,12 @@
     "test",
     "unittest"
   ],
-  "author": "Zeger Hendrikse",  
+  "author": "Zeger Hendrikse",
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "mocha": "^10.2.0",
     "http-server": "^14.1.1",
-    "nyc": "^15.1.0",   
-    "nodemon": "^2.0.22"
+    "mocha": "^10.6.0",
+    "nodemon": "^2.0.22",
+    "nyc": "^15.1.0"
   }
 }
-

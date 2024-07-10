@@ -16,18 +16,16 @@
       "nodemon",
       "test",
       "unittest"
-  ],
-   "author": "Zeger Hendrikse",  
+   ],
+   "author": "Zeger Hendrikse",
    "license": "ISC",
    "devDependencies": {
+      "@types/chai": "^4.3.16",
+      "@types/mocha": "^10.0.7",
+      "chai": "^4.4.1",
       "expect.js": "^0.3.1",
-      "@types/chai": "^4.3.5",
-      "@types/mocha": "^10.0.1",
-      "chai": "^4.3.7",
-      "mocha": "^10.2.0",
-      "typescript": "^5.1.3",
-      "ts-node": "^10.9.1"
-   },
-   "dependencies": {
+      "mocha": "^10.6.0",
+      "ts-node": "^10.9.2",
+      "typescript": "^5.5.3"
    }
 }
