@@ -7,6 +7,7 @@ on:
       - '.github/workflows/node.js.yml'
       - 'kata-solutions/vending-machine/vending-machine-javascript/**'
       - 'kata-solutions/vending-machine/vending-machine-typescript/**'
+      - 'kata-solutions/mars-rover/mars-rover-typescript/**'
       - 'kata-solutions/stack-kata/stack-kata-javascript/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional/**'
@@ -77,6 +78,15 @@ jobs:
         npm ci
         npm test
       working-directory: kata-solutions/vending-machine/vending-machine-typescript
+
+    - name: Mars rover typescript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/mars-rover/mars-rover-typescript
 
     - name: Babysteps timer kata typescript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
