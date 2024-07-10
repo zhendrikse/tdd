@@ -9,6 +9,7 @@ on:
       - 'kata-solutions/vending-machine/vending-machine-typescript/**'
       - 'kata-solutions/mars-rover/mars-rover-typescript/**'
       - 'kata-solutions/stack-kata/stack-kata-javascript/**'
+      - 'kata-solutions/stack-kata/stack-kata-typescript/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/1-golden-master/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/2-lift-up-conditional/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored/**'
@@ -124,7 +125,7 @@ jobs:
         npm test
       working-directory: kata-solutions/vending-machine/vending-machine-javascript
 
-    - name: Stack kata with ${{ matrix.node-version }}
+    - name: Stack kata Javascript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
@@ -132,6 +133,15 @@ jobs:
         npm ci
         npm test
       working-directory: kata-solutions/stack-kata/stack-kata-javascript
+
+    - name: Stack kata Typescript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/stack-kata/stack-kata-typescript
 
     - name: Audio player kata with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
