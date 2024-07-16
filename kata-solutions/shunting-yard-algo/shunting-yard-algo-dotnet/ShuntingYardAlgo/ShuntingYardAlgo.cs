@@ -7,7 +7,7 @@ public class ShuntingYardAlgo
 {
     private string _result = "";
     private string _previousToken = "";
-    private string[] _tokens;
+    private string[] _tokens = new String[] { ""};
 
     public string Transform(string expression)
     {
