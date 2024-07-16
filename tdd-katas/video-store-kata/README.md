@@ -31,3 +31,6 @@ to
 <p>You earned <em>2</em> frequent renter points</p>
 ```
 
+# Instruction video by Emily Bache
+
+There is an instruction (spoiler 😏) video available by Emily Bache that is called [What Would Martin Fowler Do? Javascript Code Refactoring Demo](https://www.youtube.com/watch?v=cZJ36B3iXok).
