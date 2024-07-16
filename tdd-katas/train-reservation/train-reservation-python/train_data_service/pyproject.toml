@@ -6,9 +6,9 @@ authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
+pyhamcrest = "^2.1.0"
 pytest-watch = "^4.2.0"
-PyHamcrest = "^2.0.4"
-cherrypy = "^18.8.0"
+cherrypy = "^18.10.0"
 
 [tool.poetry.dev-dependencies]
 

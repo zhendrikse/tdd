@@ -5,11 +5,11 @@ description = "Ticket office service"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0,<3.11"
+python = ">=3.10.0,<3.13"
+pyhamcrest = "^2.1.0"
 pytest-watch = "^4.2.0"
-PyHamcrest = "^2.0.4"
-cherrypy = "^18.8.0"
-behave = "^1.2.6" 
+cherrypy = "^18.10.0"
+behave = "^1.2.6"
 
 [tool.poetry.dev-dependencies]
 
