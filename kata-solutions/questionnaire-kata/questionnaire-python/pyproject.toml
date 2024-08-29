@@ -9,10 +9,10 @@ python = ">=3.10.0,<3.12"
 
 pyhamcrest = "^2.1.0"
 pytest-watch = "^4.2.0"
-plotly-express = "^0.4.1"
-openpyxl = "^3.1.5"
+streamlit = "^1.38.0"
 pandas = "^2.2.2"
-streamlit = "^1.37.0"
+openpyxl = "^3.1.5"
+plotly-express = "^0.4.1"
 
 
 
