@@ -36,7 +36,6 @@
 {% if cookiecutter.jest_tests == "y" %}
       "@types/jest": "^29.5.12",
       "jest": "^29.7",
-      "js-big-decimal": "^2.1.0",
       "ts-jest": "^29.2.5",
 {% endif %}
       "typescript": "^5.5.3",
