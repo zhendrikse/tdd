@@ -5,9 +5,9 @@
     "watch": "npx nodemon --exec npm test"
   },
   "devDependencies": {
-    "jasmine": "^5.1.0",
+    "jasmine": "^5.3.1",
     "jasmine-browser-runner": "^2.5.0",
-    "jasmine-core": "^5.1.2",
-    "nodemon": "^3.1.4"
+    "jasmine-core": "^5.3.0",
+    "nodemon": "^3.1.7"
   }
 }
