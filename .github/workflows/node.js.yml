@@ -22,6 +22,7 @@ on:
       - 'tdd-katas/video-store-kata/video-store-javascript/**'
       - 'tdd-katas/video-store-kata/video-store-typescript/**'
       - 'tdd-katas/tell-dont-ask/tell-dont-ask-typescript/**'
+      - 'tdd-katas/gilded-rose-kata/gilded-rose-typescript/**'
   pull_request:
     branches: [ "master" ]
 
@@ -62,6 +63,15 @@ jobs:
         npm ci
         npm test
       working-directory: tdd-katas/tell-dont-ask/tell-dont-ask-typescript
+
+    - name: Gilded Rose kata Typescript with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: tdd-katas/gilded-rose-kata/gilded-rose-typescript
 
     - name: Babysteps timer kata typescript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3

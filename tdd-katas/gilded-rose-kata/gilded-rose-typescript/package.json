@@ -1,0 +1,32 @@
+{
+   "name": "gilded-rose-typescript",
+   "version": "1.0.0",
+   "description": "Gilded Rose refactoring kata in Typescript",
+   "main": "index.js",
+   "scripts": {
+      "build": "tsc",
+      "test": "jest",
+      "watch": "jest --watchAll"
+   },
+   "keywords": [
+      "tdd",
+      "node",
+      "mocha",
+      "watch",
+      "nodemon",
+      "test",
+      "unittest"
+   ],
+   "author": "Zeger Hendrikse",
+   "license": "ISC",
+   "devDependencies": {
+      "@types/jest": "^29.5.12",
+      "jest": "^29.7",
+      "ts-jest": "^29.2.5",
+      "ts-node": "^10.9.2",
+      "typescript": "^5.5.3"
+   },
+   "dependencies": {
+      "approvals": "^7.1.3"
+   }
+}
