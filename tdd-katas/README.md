@@ -25,7 +25,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [elephant-carpaccio](./elephant-carpaccio)      | M       | Slicing user stories                                  | ✗  | ✔   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [fibonacci-kata](./db-adapter-kata)             | M       | Pipelines / Automated deployments / IaC               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
 | [game-of-life](./game-of-life)                  | M       | **Generic TDD** / **Small steps**                     | ✔  | ✔   | ✗  | ✔   | ✗  | ✗ | ✗ |
-| [gilded-rose-kata](./gilded-rose-kata)          | M / H   | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✔  | ✗   | ✗  | ✗ | ✗ |
+| [gilded-rose-kata](./gilded-rose-kata)          | M / H   | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗   | ✔  | ✗   | ✗  | ✔ | ✗ |
 | [greed-kata](./greed-kata)                      | M       | Implement complex rules in **small steps**            | ✗  | ✗   | ✗  | ✔   | ✗  | ✗ | ✗ |
 | [locker-room-kata](./locker-room-kata)          | M       | Stateless / Functional programming                    | ✗  | ✗   | ✗  | ✔   | ✔  | ✗ | ✗ |
 | [manhattan-distance](./manhattan-distance)      | L       | 1, 2, N / Encapsulation                               | ✔  | ✗   | ✗  | ✗   | ✗  | ✗ | ✗ |
