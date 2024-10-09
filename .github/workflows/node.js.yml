@@ -15,6 +15,7 @@ on:
       - 'kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-typescript/1-golden-master/**'
       - 'kata-solutions/gilded-rose-kata/gilded-rose-typescript/2-lift-up-conditional/**'
+      - 'kata-solutions/gilded-rose-kata/gilded-rose-typescript/3-gilded-rose-refactored/**'
       - 'kata-solutions/registration-form/registration-form-javascript/**'
       - 'kata-solutions/babysteps-timer/babysteps-typescript/**'
       - 'kata-solutions/countries-kata/countries-kata-javascript/**'
@@ -220,7 +221,7 @@ jobs:
         npm test
       working-directory: kata-solutions/gilded-rose-kata/gilded-rose-typescript/2-lift-up-conditional
 
-    - name: Gilded rose kata part three with ${{ matrix.node-version }}
+    - name: Gilded rose kata Javascript three with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
@@ -228,6 +229,15 @@ jobs:
         npm ci
         npm test
       working-directory: kata-solutions/gilded-rose-kata/gilded-rose-javascript/3-gilded-rose-refactored
+
+    - name: Gilded rose Typescript part three with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm test
+      working-directory: kata-solutions/gilded-rose-kata/gilded-rose-typescript/3-gilded-rose-refactored
 
     - name: Registration form with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
