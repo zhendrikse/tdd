@@ -34,6 +34,7 @@ This is exactly what we will do in this exercise using [approval testing](https:
 
 ## References
 
+- **The** [Gilded Rose Refactoring Kata](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/main/TypeScript) GitHub repository
 - Refactoring the Gilded Rose [manually versus using Sourcery](https://sourcery.ai/blog/refactoring-gilded-rose/)
 - [Gilding the rose](https://www.youtube.com/watch?v=kTcDBYCpj7Q) by Kevlin Henney
 - Emily Bache
