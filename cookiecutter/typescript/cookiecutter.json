@@ -3,6 +3,6 @@
     "project_slug": "{{ cookiecutter.kata.lower().replace(' ', '_').replace('-', '_') }}",
     "project_short_description": "This kata practices TDD", 
     "author": "Your name",
-    "jest_tests": ["n", "y"], 
+    "jest_tests": ["y", "n"], 
     "license": ["GNU General Public License v3", "MIT license", "Apache Software License 2.0"]
 }

@@ -1,5 +1,4 @@
 module.exports = {
-    preset: 'ts-jest',
     testEnvironment: 'node',
 
     // Automatically clear mock calls, instances and results before every test
