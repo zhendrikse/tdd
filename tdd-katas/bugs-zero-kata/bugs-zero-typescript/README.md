@@ -273,7 +273,7 @@ $ npx ts-node src/GameRunner
 ``` 
 -->
 
-## Capturing the console output
+### Capturing the console output
 
 We are going to capture the console output of the Trivia game to establish
 a golden master. We do this using the `capture-console` library:
@@ -286,13 +286,16 @@ With this library we can capture the console output in our test
 and use the `verify()` function from the approval testing library
 to assert that the output has not changed.
 
-## Installation of the approval tests library
+### Installation of the approval tests library
 
 Add the most recent version of the `approvaltests` poetry package by invoking
 
 ```bash
 $ npm i --save-dev approvals
 ```
+
+Next we replace the content of the test file in the `spec` directory
+by the following contents:
 
 <details>
     <summary>Capturing the output from the console</summary>
@@ -321,25 +324,78 @@ describe("A new Trivia", function () {
 
 </details>
 
+Now we can run the test by invoking
+
+```bash
+$ npm run test
+```
+
 This should give our first snapshot! 
+
+### !Caveat when working with Jest!
+
+As of this writing, Jest 'decorates' the console output in such a way,
+that it makes it unsuitable for creating our golden master.
+
+In order to remove the 'decorations' that are added by Jest, modify
+the tests so that they use the standard console instead of the Jest
+console, like so:
+
+```typescript
+'use strict';
+
+import { GameRunner } from "../src/GameRunner"
+import { verify, verifyAsJson } from "approvals/lib/Providers/Jest/JestApprovals";
+
+const jestConsole = console;
+
+
+describe("A new Trivia", function () {
+  beforeEach(() => {
+    global.console = require('console');
+  });
+
+  afterEach(() => {
+    global.console = jestConsole;
+  });
+
+  it("is successfully created", function () {
+    var gameRunner = new GameRunner()
+
+    const capcon = require('capture-console');
+
+    let stdout = "";
+    stdout = capcon.captureStdout(() => {
+      gameRunner.playGame(gameRunner.doRoll());
+    });
+
+    verify(stdout);
+  })
+})
+```
 
 ## Always at least two players
 
 Note that the method `is_playable()` is never used!
 
-### Statically
+### Statically enforcing at least two players
 
 <details>
 <summary>Enforce two players by modifying the constructor</summary>
 
-```python
-  def __init__(self, player1: str, player2: str, others:[str] = []):
-    ...
-            
-    self.add(player1)
-    self.add(player2)
-    for player in others:
-      self.add(player)
+```typescript
+  public constructor(player1: string, player2: string, players: string[] = []) {
+    for (var i = 0; i < 50; i++) {
+      this.popQuestions.push("Pop Question " + i);
+      this.scienceQuestions.push("Science Question " + i);
+      this.sportsQuestions.push("Sports Question " + i);
+      this.rockQuestions.push(this.createRockQuestion(i));
+    };
+
+    this.add(player1);
+    this.add(player2);
+    players.forEach(player => this.add(player));
+  }
 ```
 </details>
 
@@ -349,23 +405,28 @@ Note that the method `is_playable()` is never used!
 <summary>Introduction of a <code>Player</code> class</summary>
 
 First step, introduce a `Player` class like so:
-```python
-class Player:
-  def __init__(self, name: str):
-    self.name = name
+```typescript
+export class Player {
+  private name: string;
 
-  def __repr__(self):
-    return self.name
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  public toString(): string {
+    return this.name;
+  }
+}
 ```
 
 Make the changes in the code accordingly. It is necessary to wrap all print statements like so:
-```python 
-print(repr(player) + " was added")
+```typescript 
+print(player.toString() + " was added")
 ```
 
 Next, give each player his/her own purse:
 
-```python
+```typescript
 class Player:
   def __init__(self, name: str):
     self.name = name
@@ -382,7 +443,7 @@ class Player:
     return self.name
 ```
 
-Finally, the `self.purses` can be removed.
+Finally, the `this.purses` can be removed.
 </details>
 
 ## Each player his own rank
