@@ -185,7 +185,7 @@ Quite some versions of this kata come with a `GameRunner` class included.
 The suggested version of such a game runner 
 below fixes the seed of the random generator that 
 is used to simulate the roll of a die. This becomes necessary once
-we wil be using the output for our snapshots.
+we will be using the output for our snapshots.
 
 <details>
     <summary>Definition of the <code>GameRunner</code> class</summary>
