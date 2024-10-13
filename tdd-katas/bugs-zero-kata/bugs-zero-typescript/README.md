@@ -541,7 +541,8 @@ export class Player {
 
 ## Make questions it's own class
 
-<details>Introduction of a <code>Questions</code> class</details>
+<details>
+<summary>Introduction of a <code>Questions</code> class</summary>
 
 ```typescript
 export class Questions {

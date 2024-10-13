@@ -68,15 +68,6 @@ jobs:
         npm test
       working-directory: tdd-katas/tell-dont-ask/tell-dont-ask-typescript
 
-    - name: Gilded Rose kata Typescript with ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: | 
-        npm ci
-        npm test
-      working-directory: tdd-katas/gilded-rose-kata/gilded-rose-typescript
-
     - name: Babysteps timer kata typescript with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:

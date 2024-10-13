@@ -1,6 +1,6 @@
 'use strict';
 
-import { Item, GildedRose } from '../src/gilded-rose';
+import { Item, GildedRose } from '../src/GildedRose';
 
 describe('Gilded Rose', () => {
   it('updates a foo item', () => {

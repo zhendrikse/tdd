@@ -32,7 +32,7 @@ on line three should match the file name that is in the ``src``
 directory. Make  sure this file name and the import/require 
 statement are properly aligned!
 
-Next, enter your generated kata directory and the approvals test 
+Next, enter your generated kata directory and install the approvals test 
 library
 
 ```shell
