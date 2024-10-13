@@ -427,20 +427,28 @@ print(player.toString() + " was added")
 Next, give each player his/her own purse:
 
 ```typescript
-class Player:
-  def __init__(self, name: str):
-    self.name = name
-    self.purse = 0
+export class Player {
+  private name: string;
+  private purse: number;
 
-  def add_coin(self) -> None:
-    self.purse += 1
-    print(repr(self) + " now has " + str(self.purse) + " Gold Coins.")
+  constructor(name: string) {
+    this.name = name;
+    this.purse = 0;
+  }
 
-  def has_won(self) -> bool:
-    return self.purse == 6
+  public addCoin() {
+    this.purse += 1
+    console.log(this.name + " now has " + this.purse + " Gold Coins.");
+  }
 
-  def __repr__(self):
-    return self.name
+  public hasWon(): boolean {
+    return this.purse == 6
+  }
+
+  public toString(): string {
+    return this.name;
+  }
+}
 ```
 
 Finally, the `this.purses` can be removed.
@@ -453,29 +461,48 @@ Finally, the `this.purses` can be removed.
 
 Move rank (`places`) out of the `Game` class into the `Player` class:
 
-```python
-class Player:
-  def __init__(self, name: str):
-    self.name = name
-    self.purse = 0
-    self.rank = 0
+```typescript
+export class Player {
+  private name: string;
+  private purse: number;
+  private rank: number;
 
-  def add_coin(self) -> None:
-    self.purse += 1
-    print(repr(self) + " now has " + str(self.purse) + " Gold Coins.")
+  constructor(name: string) {
+    this.name = name;
+    this.purse = 0;
+    this.rank = 0;
+  }
 
-  def has_won(self) -> bool:
-    return self.purse == 6
+  public addCoin() {
+    this.purse += 1
+    console.log(this.name + " now has " + this.purse + " Gold Coins.");
+  }
 
-  def add_to_rank(self, amount:int) -> None:
-    self.rank += amount
-    if self.rank > 11:
-        self.rank -= 12
-    print(repr(self) + "'s new location is " + str(self.rank))
+  public hasWon(): boolean {
+    return this.purse == 6
+  }
 
-  def __repr__(self):
-    return self.name
-  ```
+  public addToRank(amount: number) {
+    this.rank += amount
+    if (this.rank > 11)
+        this.rank -= 12
+    console.log(this.name + "'s new location is " + this.rank);
+  }
+
+  public currentCategory(): string {
+    const rank_category_map = ["Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports"]
+    if (this.rank <= 10)
+      return rank_category_map[this.rank]
+    else
+      return "Rock"
+  }
+
+  public toString(): string {
+    return this.name;
+  }
+}
+```
+
 </details>
 
 ## Each player its own penalty box status
@@ -485,54 +512,89 @@ class Player:
 
 Move `inPenaltyBox` out of the `Game` class into the `Player` class. Next, note that there is no `isGettingOutOfPenaltyBox` variable for each player individually, which probably leads to the bug that once in, you'll never get out!
 
-## Simplify `currentCategory()`
+```typescript
+export class Player {
+  private name: string;
+  private purse: number;
+  private rank: number;
+  private inPenaltyBox: boolean;
 
-```python
-def currentCategory(self) -> str:
-    rank_category_map = ["Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports"]
-    current_player = self.players[self.currentPlayer]
-    if current_player.rank <= 10:
-      return rank_category_map[current_player.rank]
-    else:
-      return "Rock"
+  constructor(name: string) {
+    this.name = name;
+    this.purse = 0;
+    this.rank = 0;
+    this.inPenaltyBox = false;
+  }
+
+  // ...
+
+  public goToInPenaltyBox() {
+    this.inPenaltyBox = true;
+  }
+
+  public isInPenaltyBox(): boolean {
+    return this.inPenaltyBox;
+  }
 ```
+
 </details>
 
 ## Make questions it's own class
 
 <details>Introduction of a <code>Questions</code> class</details>
 
-```python
-class Questions:
-  def __init__(self):        
-    # https://realpython.com/linked-lists-python/
-    self.popQuestions = deque()
-    self.scienceQuestions = deque()
-    self.sportsQuestions = deque()
-    self.rockQuestions = deque()
-    for i in range(50):
-      self.popQuestions.append("Pop Question " + str(i))
-      self.scienceQuestions.append("Science Question " + str(i))
-      self.sportsQuestions.append("Sports Question " + str(i))
-      self.rockQuestions.append("Rock Question " + str(i))
+```typescript
+export class Questions {
+  private popQuestions = new Array<string>();
+  private scienceQuestions = new Array<string>();
+  private sportsQuestions = new Array<string>();
+  private rockQuestions = new Array<string>();
 
-  def currentCategory(self, index:int) -> str:
-    rank_category_map = ["Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports"]
-    if index <= 10:
-      return rank_category_map[index]
-    else:
-      return "Rock"
-  
-  def ask_question(self, index:int) -> str:
-    if self.currentCategory(index) == "Pop":
-        print(self.popQuestions.popleft())
-    if self.currentCategory(index) == "Science":
-        print(self.scienceQuestions.popleft())
-    if self.currentCategory(index) == "Sports":
-        print(self.sportsQuestions.popleft())
-    if self.currentCategory(index) == "Rock":
-        print(self.rockQuestions.popleft())
+  public constructor() {
+    for (var i = 0; i < 50; i++) {
+      this.popQuestions.push("Pop Question " + i);
+      this.scienceQuestions.push("Science Question " + i);
+      this.sportsQuestions.push("Sports Question " + i);
+      this.rockQuestions.push("Rock Question " + i);
+    }
+  }
+
+  public getPopQuestion(): string {
+    return this.popQuestions.shift()!;
+  }
+
+  public getRockQuestion(): string {
+    return this.rockQuestions.shift()!;
+  }
+
+  public getScienceQuestion(): string {
+    return this.scienceQuestions.shift()!;
+  }
+
+  public getSportsQuestion(): string {
+    return this.sportsQuestions.shift()!;
+  }
+}
 ```
+</details>
+
+Next, the `askQuestion()` method could and should be moved into the `Player` class:
+
+<details>Moving the `askQuestion()` method into the Player class<details>
+
+```typescript
+  public askQuestion(questions: Questions) {
+    if (this.currentCategory() == 'Pop')
+      console.log(questions.getPopQuestion());
+    if (this.currentCategory() == 'Science')
+      console.log(questions.getScienceQuestion());
+    if (this.currentCategory() == 'Sports')
+      console.log(questions.getSportsQuestion());
+    if (this.currentCategory() == 'Rock')
+      console.log(questions.getRockQuestion());
+  }
+```
+
 </details>
   
 ## Fix bug coins credited to wrong player
@@ -557,39 +619,34 @@ Now you see that in `was_correctly_answered(self)` coins can be credited to a wr
 <details>
 <summary>Introduction of a class with a list of players</summary>
 
-```python
+```typescript
+class Players {
+  private players = new Array<Player>();
 
-class Players:
-  def __init__(self, player1: Player, player2: Player, others:[Player] = []):
-    self.players: List[Player] = []
-    self.add(player1)
-    self.add(player2)
-    for player in others:
-      self.add(player)
-      
-    self.currentPlayer = 0
-    self.current_player = self.players[self.currentPlayer]
+  private current = 0;
 
-  def add(self, player: Player) -> bool:
-    self.players.append(player)
-    print(repr(player) + " was added")
-    print("They are player number " + str(len(self.players)))
-    return True
+  public constructor(player1: Player, player2: Player, players: Player[] = []) {
+    this.add(player1);
+    this.add(player2);
+    players.forEach(player => this.add(player));
+  }
 
-  def next_player(self) -> None:
-    self.currentPlayer += 1
-    if self.currentPlayer == len(self.players):
-        self.currentPlayer = 0
-    self.current_player = self.players[self.currentPlayer]
+  public nextPlayersTurn() {
+    this.current += 1;
+    if (this.current == this.players.length)
+      this.current = 0;
+  }
+
+  private add(player: Player) {
+    this.players.push(player);
+    console.log(player.toString() + " was added");
+    console.log("They are player number " + this.players.length);
+  };
+
+  public currentPlayer(): Player {
+    return this.players[this.current];
+  }
+}
 ```
 
-which simplifies the `Game` class constructor like this:
-
-```python
-class Game:
-  def __init__(self, player1: Player, player2: Player, others:[Player] = []):
-      self.participants: List[Players] = Players(player1, player2, others)
-      self.questions = Questions()
-      self.isGettingOutOfPenaltyBox: bool = False
-```
 </details>
