@@ -1,97 +1,91 @@
 'use strict';
 
+import internal from "stream";
+
 export class Item {
   name: string = "";
   sellIn: number = 0;
   quality: number = 0;
 
-  constructor(name:string , sellIn: number, quality: number) {
+  constructor(name: string, sellIn: number, quality: number) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
   }
 
-  updateQualityAfterSellIn() {
-    if (this.quality > 0)
-      this.quality = this.quality - 1;
-  }
-
-  updateQualityBeforeSellIn() {
-    if (this.quality > 0)
-      this.quality = this.quality - 1;
-  }
-
-  incrementQuality() {
+  public incrementQuality() {
     if (this.quality < 50)
       this.quality = this.quality + 1;
   }
 
-  updateProduct() {
-    this.updateQualityBeforeSellIn();
+  public decrementQuality() {
+    if (this.quality > 0)
+      this.quality = this.quality - 1;
+  }
+
+  public update() {
+    this.decrementQuality();
     this.sellIn = this.sellIn - 1;
-    this.updateQualityAfterSellIn();
+    this.decrementQuality();
   }
 
-  toString() {
+  public toString(): string {
     return "name: " + this.name + ", sellIn: " + this.sellIn + ", quality: " + this.quality
-  }
-}
-
-export class BackstagePass extends Item {
-  constructor(sellIn: number, quality: number) {
-    super('Backstage passes to a TAFKAL80ETC concert', sellIn, quality);
-  }
-
-  updateQualityBeforeSellIn() {
-    if (this.quality < 50) {
-      this.quality = this.quality + 1;
-      if (this.sellIn < 11)
-        super.incrementQuality();
-      if (this.sellIn < 6)
-        super.incrementQuality();
-    }
-  }
-
-  updateQualityAfterSellIn() {
-    if (this.sellIn < 0)
-      this.quality = 0;
   }
 }
 
 export class AgedBrie extends Item {
   constructor(sellIn: number, quality: number) {
-    super('Aged Brie', sellIn, quality);
+    super("Aged Brie", sellIn, quality);
   }
 
-  updateQualityBeforeSellIn() {
-    super.incrementQuality();
-  }
-
-  updateQualityAfterSellIn() {
-    super.incrementQuality();
+  public update() {
+    this.incrementQuality();
+    this.sellIn = this.sellIn - 1;
+    this.incrementQuality();
   }
 }
 
 export class Sulfuras extends Item {
   constructor(sellIn: number, quality: number) {
-    super('Sulfuras, Hand of Ragnaros', sellIn, quality);
+    super("Sulfuras, Hand of Ragnaros", sellIn, quality);
   }
 
-  updateProduct() {
+  public update() {
   }
 }
 
-export class Shop {
+export class BackstagePass extends Item {
+  constructor(sellIn: number, quality: number) {
+    super("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+  }
+
+  public update() {
+    if (this.quality < 50)
+      this.quality = this.quality + 1;
+    if (this.sellIn < 11)
+      if (this.quality < 50)
+        this.quality = this.quality + 1;
+    if (this.sellIn < 6)
+      if (this.quality < 50)
+        this.quality = this.quality + 1;
+    
+    this.sellIn = this.sellIn - 1;
+    
+    if (this.sellIn < 0)
+      this.quality = 0;
+  }
+}
+
+export class GildedRose {
   items: Array<Item>;
 
   constructor(items = [] as Array<Item>) {
     this.items = items;
   }
 
-  updateQuality() {
-    for (var i = 0; i < this.items.length; i++)
-      this.items[i].updateProduct();
-
+  public updateQuality(): Array<Item> {
+    this.items.forEach(item => item.update());
     return this.items;
   }
 }

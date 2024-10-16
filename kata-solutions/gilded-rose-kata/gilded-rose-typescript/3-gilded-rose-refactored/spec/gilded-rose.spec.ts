@@ -1,6 +1,6 @@
 'use strict';
 
-import { Item, Shop, Sulfuras, AgedBrie, BackstagePass } from '../src/gilded-rose';
+import { Item, GildedRose, Sulfuras, BackstagePass, AgedBrie } from '../src/gilded-rose';
 import {verify, verifyAsJson} from "approvals/lib/Providers/Jest/JestApprovals";
 
 function convert_items_to_string(items = [] as Array<Item>) {
@@ -34,9 +34,9 @@ describe('Gilded Rose', () => {
       new BackstagePass(5, 48),
       new BackstagePass(5, 49),
       new BackstagePass(6, 47),
-      new BackstagePass(0, 50),
+      new BackstagePass(0, 50),    
     ];
-    const gildedRose = new Shop(items);
+    const gildedRose = new GildedRose(items);
     const updated_items = gildedRose.updateQuality();
     verify(convert_items_to_string(updated_items));
   });
