@@ -1,6 +1,6 @@
 'use strict';
 
-import { Item, GildedRose } from '../src/gilded-rose';
+import { Item, GildedRose, Sulfuras, BackstagePass, AgedBrie } from '../src/gilded-rose';
 import {verify, verifyAsJson} from "approvals/lib/Providers/Jest/JestApprovals";
 
 function convert_items_to_string(items = [] as Array<Item>) {
@@ -19,22 +19,22 @@ describe('Gilded Rose', () => {
       new Item("Foo", -1, 0),
       new Item("Foo", -10, 2),
       new Item("Foo", -10, 51),
-      new Item("Sulfuras, Hand of Ragnaros", -1, 1),
-      new Item("Sulfuras, Hand of Ragnaros", 0, 10),
-      new Item("Aged Brie", -1, 0),
-      new Item("Aged Brie", 0, 50),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 1, 0),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 11, 48),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 11, 49),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 48),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 50),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 47),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 48),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 6, 47),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50),    
+      new Sulfuras(-1, 1),
+      new Sulfuras(0, 10),
+      new AgedBrie(-1, 0),
+      new AgedBrie(0, 50),
+      new BackstagePass(1, 0),
+      new BackstagePass(0, 0),
+      new BackstagePass(11, 48),
+      new BackstagePass(11, 49),
+      new BackstagePass(10, 48),
+      new BackstagePass(10, 49),
+      new BackstagePass(10, 50),
+      new BackstagePass(5, 47),
+      new BackstagePass(5, 48),
+      new BackstagePass(5, 49),
+      new BackstagePass(6, 47),
+      new BackstagePass(0, 50),    
     ];
     const gildedRose = new GildedRose(items);
     const updated_items = gildedRose.updateQuality();
