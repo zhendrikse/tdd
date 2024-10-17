@@ -30,10 +30,20 @@ highlightTheme: github-dark
 
 - <!-- .element: class="fragment" --> 
   Explain various refactoring techniques
+  - <!-- .element: class="fragment" --> 
+    [Creating a golden master / baseline](./approval-testing.md)
+  - <!-- .element: class="fragment" --> 
+    Getting acquainted with mutation testing
+  - <!-- .element: class="fragment" --> 
+    [Replace conditional with polymorphism](https://refactoring.guru/replace-conditional-with-polymorphism)
+  - <!-- .element: class="fragment" --> 
+    [Refactor Negate If](https://wiki.c2.com/?RefactorNegateIf)
+  - <!-- .element: class="fragment" --> 
+    [Extract method](https://wiki.c2.com/?ExtractMethod)
 - <!-- .element: class="fragment" --> 
   Learn to refactor in _small_ steps
 - <!-- .element: class="fragment" --> 
-  The one and only useful use of code coverage
+  The one and only useful use of code coverage &#128521;
 
 &nbsp;
 
@@ -54,13 +64,7 @@ highlightTheme: github-dark
 
 ## [Gilded Rose kata](https://github.com/emilybache/GildedRose-Refactoring-Kata)
 
-Store where goods degrade in quality as they approach their sell date
-
-(Prerequisite: [approval testing](../approval-testing/slides.md))
-
----
-
-## System updates items daily
+### System updates items daily
 
 * `SellIn` = number of days left to sell the item
 * `Quality` = how valuable the item is
@@ -70,7 +74,7 @@ Store where goods degrade in quality as they approach their sell date
 
 ### Task: add a new category of items
 
-* "Conjured" items degrade in `Quality` twice as fast as normal items
+* "Conjured" items degrade in `quality` twice as fast as normal items
 
 ---
 

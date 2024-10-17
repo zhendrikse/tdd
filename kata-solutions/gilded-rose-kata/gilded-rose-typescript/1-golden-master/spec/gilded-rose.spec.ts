@@ -1,7 +1,7 @@
 'use strict';
 
 import { Item, GildedRose } from '../src/gilded-rose';
-import {verify, verifyAsJson} from "approvals/lib/Providers/Jest/JestApprovals";
+import { verify } from "approvals/lib/Providers/Jest/JestApprovals";
 
 function convert_items_to_string(items = [] as Array<Item>) {
   let items_as_string = items.map((item) => item.toString() + "\n")
@@ -34,7 +34,7 @@ describe('Gilded Rose', () => {
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 48),
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
       new Item("Backstage passes to a TAFKAL80ETC concert", 6, 47),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50),    
+      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50)
     ];
     const gildedRose = new GildedRose(items);
     const updated_items = gildedRose.updateQuality();
