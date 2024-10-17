@@ -1,7 +1,7 @@
 'use strict';
 
 import { Item, GildedRose, Sulfuras, BackstagePass, AgedBrie } from '../src/gilded-rose';
-import {verify, verifyAsJson} from "approvals/lib/Providers/Jest/JestApprovals";
+import { verify } from "approvals/lib/Providers/Jest/JestApprovals";
 
 function convert_items_to_string(items = [] as Array<Item>) {
   let items_as_string = items.map((item) => item.toString() + "\n")
