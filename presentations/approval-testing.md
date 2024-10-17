@@ -119,11 +119,25 @@ Also known as
 
 ## What we are going to test
 
+### Python version
+
 ```python
 class Calculator():
   @staticmethod
   def addNumbers(x: int, y: int) -> int:
     return x + y
+```
+
+----
+
+### Typescript version
+
+```typescript
+export class Calculator {
+  public add(x: number, y: number): number {
+    return x + y
+  }
+}
 ```
 
 ---
@@ -147,6 +161,24 @@ class CalculatorTest(unittest.TestCase):
     verify(result)
 ```
 
+----
+
+### Verification in Typescript
+
+```typescript
+import { Calculator } from "../src/Calculator"
+import { verify } from "approvals/lib/Providers/Jest/JestApprovals";
+
+describe("A new Calculator", function() {
+    it("adds two numbers", function () {
+        const myCalculator  = new Calculator()
+        const result = myCalculator.add(3, 4)
+        // expect(result).toEqual(7)
+        verify(result)
+    })
+})
+```
+
 ---
 
 ## Even with combinatoric tests 🤩
@@ -161,9 +193,18 @@ class CalculatorTest(unittest.TestCase):
     verify_all_combinations( Calculator.addNumbers, [[1,2], [4,3]])
 ```
 
+## Caveat
+
+Not available in Typescript library 😱
+
 ---
 
-<iframe frameborder="0" width="100%" height="500px" src="https://replit.com/@zwh/ApprovalTestDemoPython?lite=false"></iframe>
+## One-click demo
+
+[![Open in Gitpod](https://img.shields.io/badge/Open_in-gitpod-yellow?logo=gitpod)](https://gitpod.io/#https://github.com/zhendrikse/tdd)
+
+- Navigate to the `tools/approval-tests` directory
+- Go to the language of choice
 
 ---
 
