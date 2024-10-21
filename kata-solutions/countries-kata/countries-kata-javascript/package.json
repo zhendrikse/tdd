@@ -1,20 +1,22 @@
 {
-  "name": "CountryList",
+  "name": "GameOfLife",
   "description": "This kata practices TDD",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Zeger Hendrikse",
+  "author": "Your name",  
   "dependencies": {
-    "express": "^4.21.0",
-    "http-server": "^14.1.1",
-    "jasmine": "^5.3.1",
-    "nodemon": "^3.1.7",
-    "nyc": "^17.1.0"
+
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7",
+
+
+    "http-server": "^14.1.1"
   },
   "scripts": {
-    "test": "jasmine",
-    "watch": "nodemon --exec jasmine",
-    "report": "npx http-server -c-1 coverage/lcov-report",
-    "coverage": "nodemon --exec \"nyc --exclude=**/spec/** --reporter=text --reporter=html --reporter=lcov jasmine spec/*_spec.js\""
+
+
+      "test": "jest",
+      "watch": "jest --watchAll"
+
   }
 }
