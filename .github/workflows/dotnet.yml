@@ -9,6 +9,7 @@ on:
     paths:
       - '.github/workflows/dotnet.yml'
       - 'kata-solutions/shunting-yard-algo/shunting-yard-algo-dotnet/**'
+      - 'kata-solutions/lcd-digits-kata/lcd-digits-dotnet/**'
   pull_request:
     branches: [ "master" ]
 
@@ -25,6 +26,18 @@ jobs:
         dotnet-version: 7.0.x
     - name: Shunting yard algorithm kata
       working-directory: kata-solutions/shunting-yard-algo/shunting-yard-algo-dotnet
+      run: | 
+        dotnet restore
+        dotnet build --no-restore
+        dotnet test --no-build --verbosity normal
+
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: LCD Digits kata
+      working-directory: kata-solutions/lcd-digits-kata/lcd-digits-dotnet
       run: | 
         dotnet restore
         dotnet build --no-restore
