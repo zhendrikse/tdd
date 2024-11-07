@@ -28,8 +28,8 @@ public class LcdDigits
         for (int i = 1; i < size; i++)
             power *= 10;
 
-        if (number < 10)
-            return ConvertToSingleDigitStringArray(number / power);
+        if (power == 1)
+            return ConvertToSingleDigitStringArray(number);
         else 
             return AddDigits(ConvertToSingleDigitStringArray(number / power), NumberAsString(number % power));
     }
