@@ -27,7 +27,7 @@ Difficulties range from low (**L**) &rarr; medium (**M**) &rarr; high (**H**).
 | [game-of-life](./game-of-life)                  | M       | **Generic TDD** / **Small steps**                     | ✔  | ✔    | ✗  | ✔   | ✗  | ✗  | ✗  |
 | [gilded-rose-kata](./gilded-rose-kata)          | M / H   | **Legacy code** / **Refactoring** / Approval tests    | ✔  | ✗    | ✔  | ✗   | ✗  | ✔  | ✗  |
 | [greed-kata](./greed-kata)                      | M       | Implement complex rules in **small steps**            | ✗  | ✗    | ✗  | ✔   | ✗  | ✗  | ✗  |
-| [locker-room-kata](./lcd-digits-kata)           | L       | Getting started with TDD / Recursion                  | ✗  | ✗    | ✗  | ✗   | ✗  | ✗  | ✔  |
+| [lcd-digits-kata](./lcd-digits-kata)            | L       | Getting started with TDD / Recursion                  | ✗  | ✗    | ✗  | ✗   | ✗  | ✗  | ✔  |
 | [locker-room-kata](./locker-room-kata)          | M       | Stateless / Functional programming                    | ✗  | ✗    | ✗  | ✔   | ✔  | ✗  | ✗  |
 | [manhattan-distance](./manhattan-distance)      | L       | 1, 2, N / Encapsulation                               | ✔  | ✗    | ✗  | ✗   | ✗  | ✗  | ✗  |
 | [mars-rover](./mars-rover)                      | M       | **Generic TDD** / Design decisions                    | ✔  | ✗    | ✗  | ✗   | ✗  | ✗  | ✔  |
