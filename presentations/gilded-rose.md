@@ -26,8 +26,7 @@ highlightTheme: github-dark
 
 ---
 
-![Goals](./images/goals.png)
-
+![Goals](./images/goals.png) <!-- .element width="25%" height="25%" -->
 - <!-- .element: class="fragment" --> 
   Explain various refactoring techniques
   - <!-- .element: class="fragment" --> 
@@ -45,17 +44,11 @@ highlightTheme: github-dark
 - <!-- .element: class="fragment" --> 
   The one and only useful use of code coverage &#128521;
 
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
 ---
 
-## [Martin Fowler](https://martinfowler.com/): good programmers
+### [Martin Fowler](https://martinfowler.com/): good programmers
 
-![Martin Fowler](./images/fowler.jpg)
+![Martin Fowler](./images/fowler.jpg) <!-- .element width="25%" height="25%" --> 
 
 > A fool can write code that a computer can understand.
   Good programmers write code that humans can understand.
