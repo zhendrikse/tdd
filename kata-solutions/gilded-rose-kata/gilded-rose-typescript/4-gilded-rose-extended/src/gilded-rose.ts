@@ -23,10 +23,18 @@ export class Item {
       this.quality = this.quality - 1;
   }
 
+  public updateToday() {
+    this.decrementQuality();
+  }
+
+  public updateTomorrow() {
+    this.decrementQuality();
+  }
+
   public update() {
-    this.decrementQuality();
+    this.updateToday();
     this.sellIn = this.sellIn - 1;
-    this.decrementQuality();
+    this.updateTomorrow();
   }
 }
 
@@ -35,9 +43,11 @@ export class AgedBrie extends Item {
     super("Aged Brie", sellIn, quality);
   }
 
-  public update() {
+  public updateToday() {
     this.incrementQuality();
-    this.sellIn = this.sellIn - 1;
+  }
+
+  public updateTomorrow() {
     this.incrementQuality();
   }
 }
@@ -52,21 +62,23 @@ export class Sulfuras extends Item {
 }
 
 export class ConjuredItem extends Item {
-  constructor(sellIn: number, quality: number) {
-    super("Conjured", sellIn, quality);
+  constructor(name: string, sellIn: number, quality: number) {
+    super(name, sellIn, quality);
   }
 
-  public update() {
+  public updateToday() {
     if (this.sellIn == 0) {
       this.decrementQuality();
       this.decrementQuality();
     }
 
-    if (this.sellIn == 5) 
+    if (this.sellIn == 5)
       this.decrementQuality();
-    
+
     this.decrementQuality();
-    this.sellIn = this.sellIn - 1;
+  }
+
+  public updateTomorrow(): void {
     this.decrementQuality();
   }
 }
@@ -76,18 +88,15 @@ export class BackstagePass extends Item {
     super("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
   }
 
-  public update() {
-    if (this.quality < 50)
-      this.quality = this.quality + 1;
+  public updateToday() {
+    this.incrementQuality()
     if (this.sellIn < 11)
-      if (this.quality < 50)
-        this.quality = this.quality + 1;
+      this.incrementQuality()
     if (this.sellIn < 6)
-      if (this.quality < 50)
-        this.quality = this.quality + 1;
-    
-    this.sellIn = this.sellIn - 1;
-    
+      this.incrementQuality()
+  }
+
+  public updateTomorrow() {
     if (this.sellIn < 0)
       this.quality = 0;
   }

@@ -105,30 +105,30 @@ describe('backstage pass quality rules', () => {
 
 describe('conjured items', () => {
   it('should update quality for conjured sellin 1 day', () => {
-    const item = new ConjuredItem(1, 2);
+    const item = new ConjuredItem("Conjured foo", 1, 2);
     const gildedRose = new GildedRose([item]);
     gildedRose.updateQuality();
-    verifyItem(item, 'Conjured', 0, 0);
+    verifyItem(item, 'Conjured foo', 0, 0);
   });
 
   it('should update conjured quality 4x as fast for sellin 0 days', () => {
-    const item = new ConjuredItem(0, 4);
+    const item = new ConjuredItem("Conjured foo", 0, 4);
     const gildedRose = new GildedRose([item]);
     gildedRose.updateQuality();
-    verifyItem(item, 'Conjured', 0, -1);
+    verifyItem(item, 'Conjured foo', 0, -1);
   });
 
   it('conjured item quality should never go below 0', () => {
-    const item = new ConjuredItem(0, 1);
+    const item = new ConjuredItem("Conjured foo", 0, 1);
     const gildedRose = new GildedRose([item]);
     gildedRose.updateQuality();
-    verifyItem(item, 'Conjured', 0, -1);
+    verifyItem(item, 'Conjured foo', 0, -1);
   });
 
   it('should lower quality by 3 if exactly 5 days left', () => {
-    const item = new ConjuredItem(5, 6);
+    const item = new ConjuredItem("Conjured foo", 5, 6);
     const gildedRose = new GildedRose([item]);
     gildedRose.updateQuality();
-    verifyItem(item, 'Conjured', 3, 4);
+    verifyItem(item, 'Conjured foo', 3, 4);
   })
 })
