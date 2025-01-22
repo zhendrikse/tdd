@@ -57,7 +57,7 @@ class Game:
         self._nodes.render(self._screen)
         self._pellets.render(self._screen)
         self._pacman.render(self._screen)
-        # self._ghost.render(self._screen)
+        self._ghost.render(self._screen)
         self._screen.update()
 
 
