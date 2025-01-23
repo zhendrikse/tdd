@@ -33,7 +33,11 @@ that are constantly applied. This is done very consciously at first but
 gradually becomes more ingrained in your way of working as you become more 
 fluent in practicing TDD.
 
-![Heuristics](https://github.com/zhendrikse/tdd/raw/master/assets/heuristics.png)
+![Heuristics]()
+<figure style="float: center; text-align: center;">
+  <img alt="Heuristics" src="https://github.com/zhendrikse/tdd/raw/master/assets/heuristics.png?raw=true"/>
+  <figcaption>Heuristics that are typically observed when practicing TDD.</figcaption>
+</figure>
 
 It is exactly this combination of countless skills and heuristics that increases the 
 quality of your code so significantly (as we are effectively building quality in) 
@@ -48,8 +52,11 @@ in the wink of an eye!
 
 ## Kent Beck's four rules of simple design
 
-![Kent Beck](https://github.com/zhendrikse/tdd/blob/master/assets/kent_beck.png?raw=true)
-_One of the founding fathers of test-driven development: [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)._
+<figure style="float: center; text-align: center;">
+  <img alt="Kent Beck" src="https://github.com/zhendrikse/tdd/blob/master/assets/kent_beck.png?raw=true"/>
+  <figcaption>One of the founding fathers of test-driven development: <a href-"https://en.wikipedia.org/wiki/Kent_Beck">[Kent Beck]</a>.
+  </figcaption>
+</figure>
 
 Kent Beck introduced the [four rules of simple design](https://martinfowler.com/bliki/BeckDesignRules.html).
 After making a test pass, he (strictly) applies the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) 
@@ -85,7 +92,11 @@ generally speaking redundant.
 
 ## Uncle Bob's cycles of TDD
 
-![Uncle Bob](https://github.com/zhendrikse/tdd/blob/master/assets/uncle-bob.png?raw=true)
+<figure style="float: center; text-align: center;">
+  <img alt="Uncle Bob" src="https://github.com/zhendrikse/tdd/blob/master/assets/uncle-bob.png?raw=true"/>
+  <figcaption>Another advocate of TDD: <a href-"https://en.wikipedia.org/wiki/Robert_C._Martin">Uncle Bob</a>.
+  </figcaption>
+</figure>
 
 Doing TDD means you iteratively repeat the following three steps in _extremely small_ increments.
 This has been captured in what has become best known as
