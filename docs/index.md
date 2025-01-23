@@ -48,7 +48,7 @@ in the wink of an eye!
 
 ## Kent Beck's four rules of simple design
 
-![Kent Beck](https://www.hendrikse.name/tdd/assets/kent_beck.png)
+![Kent Beck](https://github.com/zhendrikse/tdd/blob/master/assets/kent_beck.png)
 _One of the founding fathers of test-driven development: [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)._
 
 Kent Beck introduced the [four design rules](https://martinfowler.com/bliki/BeckDesignRules.html).
