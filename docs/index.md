@@ -37,6 +37,7 @@ fluent in practicing TDD.
   <img alt="Heuristics" src="https://github.com/zhendrikse/tdd/raw/master/assets/heuristics.png?raw=true"/>
   <figcaption>Heuristics that are typically observed when practicing TDD.</figcaption>
 </figure>
+<p style="clear: both;"></p>
 
 It is exactly this combination of countless skills and heuristics that increases the 
 quality of your code so significantly (as we are effectively building quality in) 
