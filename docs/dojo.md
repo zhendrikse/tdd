@@ -24,7 +24,7 @@ This concept is elaborated in the pictures below. The original version was creat
 [Rob Westgeest](https://www.qwan.eu/#team) and has been redrawn in 
 [Excalidraw](https://excalidraw.com/). 
 
-![Roadmap](https://github.com/zhendrikse/tdd/blob/master/assets/dojo-roadmap.png)
+![Roadmap](https://github.com/zhendrikse/tdd/blob/master/assets/dojo-roadmap.png?raw=true)
 
 # Expected background
 
