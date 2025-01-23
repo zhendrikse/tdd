@@ -9,7 +9,7 @@
 With the materials in this repository, you'll learn TDD by practicing 
 so-called [coding katas](https://apiumhub.com/tech-blog-barcelona/code-kata/):
 
-![Kata](https://github.com/zhendrikse/tdd/blob/master/assets/kata.png)
+![Kata](https://github.com/zhendrikse/tdd/blob/master/assets/kata.png?raw=true)
 
 > A kata is an exercise in karate where you repeat a form many, many times, making little improvements in each. 
 > The intent behind code kata is similar &#8212; [codekata.com](http://codekata.com/) 
