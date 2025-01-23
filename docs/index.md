@@ -40,7 +40,7 @@ quality of your code so significantly (as we are effectively building quality in
 and hence boosts your confidence to such an extent that you are able to 
 promote your changes to production whenever needed.
 Perhaps the best and most fun way to practice all of these skills is by 
-participating in so-called [coding katas](https://github.com/zhendrikse/tdd/wiki/Coding-Katas).
+participating in so-called [coding katas](https://www.hendrikse.name/tdd/Coding-Katas).
 
 Last but not least, TDD is a lot of fun. This repository contains more than enough
 materials to learn everything about TDD and get up and running
@@ -48,10 +48,10 @@ in the wink of an eye!
 
 ## Kent Beck's four rules of simple design
 
-![Kent Beck](https://github.com/zhendrikse/tdd/blob/master/assets/kent_beck.png)
+![Kent Beck](https://github.com/zhendrikse/tdd/blob/master/assets/kent_beck.png?raw=true)
 _One of the founding fathers of test-driven development: [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)._
 
-Kent Beck introduced the [four design rules](https://martinfowler.com/bliki/BeckDesignRules.html).
+Kent Beck introduced the [four rules of simple design](https://martinfowler.com/bliki/BeckDesignRules.html).
 After making a test pass, he (strictly) applies the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) 
 and the [reveal intent, hide implementation](https://dev.to/codingunicorn/reveal-intent-hide-implementation-42lc) 
 principles.
@@ -60,7 +60,7 @@ Last but not least, he also (again strictly) applies the simplest thing that cou
 which is also often referred to as the "fewest elements". 
 This may actually be one of the trickiest practices to apply properly, as you will see.
 
-![Design rules](https://github.com/zhendrikse/tdd/blob/master/assets/design_rules.png)
+![Design rules](https://github.com/zhendrikse/tdd/blob/master/assets/design_rules.png?raw=true)
 
 _Kent Beck's four design rules are in ascending order of priority: make the test pass, make the code so readable that it immediately reveals its intention, do not allow any code duplication, and always code the simplest thing that could possibly work &mdash; [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)_
 
@@ -85,7 +85,7 @@ generally speaking redundant.
 
 ## Uncle Bob's cycles of TDD
 
-![Uncle Bob](https://github.com/zhendrikse/tdd/blob/master/assets/uncle-bob.png)
+![Uncle Bob](https://github.com/zhendrikse/tdd/blob/master/assets/uncle-bob.png?raw=true)
 
 Doing TDD means you iteratively repeat the following three steps in _extremely small_ increments.
 This has been captured in what has become best known as
