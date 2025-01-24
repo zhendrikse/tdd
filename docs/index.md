@@ -1,6 +1,4 @@
-## Contents
-
-[Coding dojos](dojo.md) &mdash; [Coding katas](katas.md) &mdash; [Katas &amp; the 24 DevOps capabilities](katas_capabilities.md)
+{% include_relative header.md %}
 
 # There is more to TDD than “red, green, refactor”
 <div style="border-top: 2px solid #cccccc"><br/></div>
