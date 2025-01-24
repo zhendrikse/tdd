@@ -1,3 +1,5 @@
+{% include_relative header.md %}
+
 # Coding dojo
 
 A dojo is a place for immersive learning. Needless to say, coding dojos are meant to 
