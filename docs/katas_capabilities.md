@@ -1,3 +1,5 @@
+{% include_relative header.md %}
+
 # Relation of the katas with the 24 Key Capabilities
 
 This page elaborates on the relationship between 
