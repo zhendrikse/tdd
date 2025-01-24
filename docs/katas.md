@@ -1,3 +1,4 @@
+{% include_relative header.md %}
 
 # What coding katas are about
 
