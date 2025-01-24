@@ -1,4 +1,9 @@
+## Contents
+
+[Coding dojos](dojo.md) &mdash; [Coding katas](katas.md) &mdash; [Katas &amp; the 24 DevOps capabilities](katas_capabilities.md)
+
 # There is more to TDD than “red, green, refactor”
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 Although most people have heard of the slogan "red, green, refactor", 
 this is only a small part of what defines TDD. From its inception, 
@@ -51,6 +56,7 @@ materials to learn everything about TDD and get up and running
 in the wink of an eye!
 
 ## Kent Beck's four rules of simple design
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 <figure style="float: center; text-align: center;">
   <img alt="Kent Beck" src="https://github.com/zhendrikse/tdd/blob/master/assets/kent_beck.png?raw=true"/>
@@ -92,6 +98,7 @@ at the same time, it explains why comments in code are
 generally speaking redundant.
 
 ## Uncle Bob's cycles of TDD
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 <figure style="float: center; text-align: center;">
   <img alt="Uncle Bob" src="https://github.com/zhendrikse/tdd/blob/master/assets/uncle-bob.png?raw=true"/>
@@ -129,6 +136,7 @@ code coverage at all times. If we get below 100%, apparently we "managed" to wri
 before we had a test for it. Remember that this spoils the whole idea of TDD!
 
 # References
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 ## TDD Heuristics
 - [What is a heuristic](https://www.qwan.eu/2021/10/13/what-is-a-heuristic.html) 
