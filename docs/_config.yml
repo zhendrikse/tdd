@@ -5,5 +5,8 @@ title: Test-driven development
 description: A site dedicated to the noble art of TDD
 show_downloads: false
 
+url: "https://www.hendrikse.name/" # the base hostname & protocol for your site
 plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-sitemap
