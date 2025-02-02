@@ -47,7 +47,7 @@ quality of your code so significantly (as we are effectively building quality in
 and hence boosts your confidence to such an extent that you are able to 
 promote your changes to production whenever needed.
 Perhaps the best and most fun way to practice all of these skills is by 
-participating in so-called [coding katas](https://www.hendrikse.name/tdd/Coding-Katas).
+participating in so-called [coding katas](https://www.hendrikse.name/tdd/katas.html).
 
 Last but not least, TDD is a lot of fun. This repository contains more than enough
 materials to learn everything about TDD and get up and running
