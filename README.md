@@ -23,7 +23,10 @@ the [wiki pages that are part of this repository](https://github.com/zhendrikse/
 [![Open in GitHub](https://img.shields.io/badge/Open_in-github_codespace-yellow?logo=github)](https://codespaces.new/zhendrikse/tdd)
 [![Open in CodeSandbox](https://img.shields.io/badge/Open_in-CodeSandbox-yellow?logo=codesandbox)](https://githubbox.com/zhendrikse/tdd)
 [![View slides in browser](https://img.shields.io/badge/View-slides-yellow?logo=reveal.js)](https://replit.com/@zwh/tdd/)
-
+[![Open in VS Code](https://img.shields.io/badge/Open%20in-VS%20Code-blue?logo=visualstudiocode)](https://vscode.dev/github/zhendrikse/tdd)
+[![Open in Glitch](https://img.shields.io/badge/Open%20in-Glitch-blue?logo=glitch)](https://glitch.com/edit/#!/import/github/zhendrikse/tdd)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/zhendrikse/tdd)
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/zhendrikse/tdd)
 
 The TDD materials found here can be seamlessly integrated into 
 [the Samman coaching method](https://www.sammancoaching.org/) 
