@@ -153,3 +153,5 @@ before we had a test for it. Remember that this spoils the whole idea of TDD!
 - [Catalog of refactorings](https://refactoring.com/catalog/) by Martin Fowler
 - [Refactoring Guru](https://refactoring.guru/) makes it easy for you to discover everything you need to know about refactoring, design patterns, SOLID principles, and other smart programming topics
 - [Branching by abstraction](https://www.martinfowler.com/bliki/BranchByAbstraction.html)
+
+{% include share_buttons.html %}

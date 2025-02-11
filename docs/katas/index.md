@@ -151,3 +151,5 @@ the way Clojure chunks lazy sequences).
 - [A curated list of programming katas](https://hackmd.io/@pierodibello/A-curated-list-of-programming-kata#A-curated-list-of-programming-kata)
 - [Awesome katas](https://github.com/gamontal/awesome-katas#readme)
 - [Kata-Log](https://kata-log.rocks/)
+
+{% include share_buttons.html %}

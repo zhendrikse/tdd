@@ -42,3 +42,5 @@ as you may sometimes encounter code without (sufficient) tests, but the code [re
 - [Refactoring... but at scale!](https://understandlegacycode.com/blog/key-points-of-refactoring-at-scale/)
 - [When should you stop refactoring Legacy Code?](https://understandlegacycode.com/blog/when-should-you-stop-refactoring-legacy-code/)
 
+
+{% include share_buttons.html %}

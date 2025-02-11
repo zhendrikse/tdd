@@ -65,3 +65,6 @@ e.g. Python for the first time, and they managed pretty soon pretty well.
 
 - [Tuple's pair-programming guide](https://tuple.app/pair-programming-guide/scientific-research-into-pair-programming)
 - [The many sides of pair programming and the importance of deliberate practice of it](https://www.linkedin.com/pulse/many-sides-pair-programming-importance-deliberate-practice-paul-cox/)
+
+
+{% include share_buttons.html %}
