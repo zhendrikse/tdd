@@ -1,6 +1,7 @@
-{% include_relative header.md %}
+{% include breadcrumbs.html %}
 
 # What coding katas are about
+<div class="header_line"><br/></div>
 
 > Japanese culture influenced a lot of software and project management fields. 
 > Concepts like [Lean](https://apiumhub.com/?p=55302), [Kata](https://apiumhub.com/?p=4044), etc 

@@ -1,6 +1,7 @@
-{% include_relative header.md %}
+{% include breadcrumbs.html %}
 
 # Coding dojo
+<div class="header_line"><br/></div>
 
 A dojo is a place for immersive learning. Needless to say, coding dojos are meant to 
 eventually thoroughly master TDD using coding katas as a means. During the coding dojos, 
