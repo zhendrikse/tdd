@@ -14,7 +14,7 @@ Kent Beck . &mdash;
     <h2><a href="introduction/index.html">General introduction</a></h2>
    <figure>
      <a href="introduction/index.html">
-       <img alt="Kent Beck" src="../assets/kent_beck.png"/>
+       <img alt="Kent Beck" src="https://github.com/zhendrikse/tdd/blob/master/assets/kent_beck.png"/>
      </a>&nbsp;&nbsp;&nbsp;
    </figure>
   </div>
@@ -22,7 +22,7 @@ Kent Beck . &mdash;
     <h2><a href="legacy/index.html">TDD &amp; legacy code</a></h2>
     <figure>
       <a href="legacy/index.html">
-        <img alt="Nicolas Carlo" src="../presentations/images/legacy_code.png"/>
+        <img alt="Nicolas Carlo" src="https://github.com/zhendrikse/tdd/blob/master/presentations/images/legacy_code.png"/>
       </a>&nbsp;&nbsp;&nbsp;
     </figure>
   </div>
@@ -36,7 +36,7 @@ Kent Beck . &mdash;
     <h2><a href="dojo/index.html">Coding dojos</a></h2>
    <figure>
      <a href="dojo/index.html">
-       <img alt="Dojo" src="../assets/skillz.png"/>
+       <img alt="Dojo" src="https://github.com/zhendrikse/tdd/blob/master/assets/skillz.png"/>
      </a>&nbsp;&nbsp;&nbsp;
    </figure>
   </div>
@@ -44,7 +44,7 @@ Kent Beck . &mdash;
     <h2><a href="katas/index.html">Coding katas</a></h2>
     <figure>
       <a href="katas/index.html">
-        <img alt="Dojo" src="../assets/kata.png"/>
+        <img alt="Dojo" src="https://github.com/zhendrikse/tdd/blob/master/assets/kata.png"/>
       </a>&nbsp;&nbsp;&nbsp;
     </figure>
   </div>
