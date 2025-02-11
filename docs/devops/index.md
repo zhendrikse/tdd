@@ -1,6 +1,7 @@
-{% include_relative header.md %}
+{% include breadcrumbs.html %}
 
 # Relation of the katas with the 24 Key Capabilities
+<div class="header_line"><br/></div>
 
 This page elaborates on the relationship between 
 [the topics that are practiced in the katas](https://github.com/zhendrikse/tdd/tree/master/tdd-katas#readme)
