@@ -36,7 +36,7 @@ depending on whether lives are at stake. &mdash;
 <div class="header_line"><br/></div>
 
 <div class="row">
-  <div class="column" style="background-color:#4c3340;">
+  <div class="column" style="background-color:#444400;">
     <h2><a href="dojo/index.html">Coding dojos</a></h2>
    <figure>
      <a href="dojo/index.html">
@@ -61,7 +61,7 @@ depending on whether lives are at stake. &mdash;
 <div class="header_line"><br/></div>
 
 <div class="row">
-  <div class="column" style="background-color:#004444;">
+  <div class="column" style="background-color:#4c3340;">
     <h2><a href="portsadapters/index.html">Ports &amp; adapters</a></h2>
    <figure>
      <a href="portsadapters/index.html">
@@ -69,7 +69,7 @@ depending on whether lives are at stake. &mdash;
      </a>&nbsp;&nbsp;&nbsp;
    </figure>
   </div>
-  <div class="column" style="background-color:#004444;">
+  <div class="column" style="background-color:#4c3340;">
     <h2><a href="legacy/index.html">Legacy code</a></h2>
     <figure>
       <a href="legacy/index.html">
