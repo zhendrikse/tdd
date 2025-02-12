@@ -36,7 +36,7 @@ depending on whether lives are at stake. &mdash;
 <div class="header_line"><br/></div>
 
 <div class="row">
-  <div class="column" style="background-color:#444400;">
+  <div class="column" style="background-color:#4c3340;">
     <h2><a href="dojo/index.html">Coding dojos</a></h2>
    <figure>
      <a href="dojo/index.html">
