@@ -1,0 +1,12 @@
+markdown: kramdown
+
+remote_theme: pages-themes/midnight@v0.2.0
+title: Test-driven development
+description: A site dedicated to the noble art of TDD
+show_downloads: false
+
+url: "https://www.hendrikse.name/" # the base hostname & protocol for your site
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-sitemap

@@ -1,0 +1,59 @@
+figure {
+  border: none;
+  padding: 4px;
+  margin: auto;
+}
+
+figcaption {
+  color: white;
+  font-style: italic;
+  padding: 2px;
+  text-align: center;
+}
+
+.header_line {
+  border-top: 2px solid
+}
+
+.double_image {
+    display: flex;
+    align-items: flex-end;
+}
+
+.left_image {
+    float: left;
+    width: 50%;
+    text-align: center
+}
+
+.right_image {
+    float: right;
+    width: 50%;
+    text-align: center
+}
+
+.subsection_header_line {
+    border-top: 1px solid #999999;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 48%;
+  padding: 10px;
+  margin: 1%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
