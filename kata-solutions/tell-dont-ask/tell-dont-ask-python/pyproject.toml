@@ -3,6 +3,7 @@ name = "Tell dont ask kata"
 version = "0.1.0"
 description = "Tell dont ask kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.13"

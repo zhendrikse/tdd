@@ -3,6 +3,7 @@ name = "Game of Life kata"
 version = "0.1.0"
 description = "Game of life"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.13"
