@@ -3,6 +3,7 @@ name = "TirePressure"
 version = "0.1.0"
 description = "This kata practices TDD"
 authors = ["Your name  <your@email.com>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
