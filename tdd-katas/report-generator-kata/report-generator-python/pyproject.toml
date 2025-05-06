@@ -3,7 +3,6 @@ name = "reportgeneration"
 version = "0.1.0"
 description = "Report generation kata"
 authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
-readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.13"
