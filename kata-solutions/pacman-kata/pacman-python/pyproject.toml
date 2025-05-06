@@ -6,10 +6,10 @@ authors = ["Zeger Hendrikse <zegerh@yahoo.co.uk>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
-pygame = "^2.6.1"
-pytest = "^8.3.3"
-pytest-cov = "^6.0.0"
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
 pytest-watch = "^4.2.0"
+pygame = "^2.6.1"
 pyhamcrest = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
@@ -40,3 +40,4 @@ exclude_also = [
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+package-mode = false
