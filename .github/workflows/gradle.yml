@@ -7,6 +7,9 @@
 
 name: Java/Kotlin CI
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [ "master" ]
