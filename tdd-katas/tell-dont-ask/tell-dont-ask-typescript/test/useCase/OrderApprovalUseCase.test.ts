@@ -58,7 +58,7 @@ describe('OrderApprovalUseCase should', () => {
         request.orderId = 1;
         request.approved = true;
 
-        expect(() => {useCase.run(request)}).toThrowError(RejectedOrderCannotBeApprovedException);
+        expect(() => {useCase.run(request)}).toThrow(RejectedOrderCannotBeApprovedException);
         expect(orderRepository.getSavedOrder()).toBeUndefined();
     });
 
@@ -72,7 +72,7 @@ describe('OrderApprovalUseCase should', () => {
         request.orderId = 1;
         request.approved = false;
 
-        expect(() => {useCase.run(request)}).toThrowError(ApprovedOrderCannotBeRejectedException);
+        expect(() => {useCase.run(request)}).toThrow(ApprovedOrderCannotBeRejectedException);
         expect(orderRepository.getSavedOrder()).toBeUndefined();
     });
 
@@ -86,7 +86,7 @@ describe('OrderApprovalUseCase should', () => {
         request.orderId = 1;
         request.approved = true;
 
-        expect(() => {useCase.run(request)}).toThrowError(ShippedOrdersCannotBeChangedException);
+        expect(() => {useCase.run(request)}).toThrow(ShippedOrdersCannotBeChangedException);
         expect(orderRepository.getSavedOrder()).toBeUndefined();
     });
 
@@ -100,7 +100,7 @@ describe('OrderApprovalUseCase should', () => {
         request.orderId = 1;
         request.approved = false;
 
-        expect(() => {useCase.run(request)}).toThrowError(ShippedOrdersCannotBeChangedException);
+        expect(() => {useCase.run(request)}).toThrow(ShippedOrdersCannotBeChangedException);
         expect(orderRepository.getSavedOrder()).toBeUndefined();
     });
 

@@ -72,6 +72,6 @@ describe('OrderCreationUseCase should', () => {
         unknownProductRequest.productName = "unknown product";
         request.requests.push(unknownProductRequest);
 
-        expect(() => {useCase.run(request)}).toThrowError(UnknownProductException);
+        expect(() => {useCase.run(request)}).toThrow(UnknownProductException);
     });
 });

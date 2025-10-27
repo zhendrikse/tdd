@@ -44,7 +44,7 @@ describe('OrderShipmentUseCase should', () => {
 
         expect(() => {
             useCase.run(request)
-        }).toThrowError(OrderCannotBeShippedException);
+        }).toThrow(OrderCannotBeShippedException);
         expect(orderRepository.getSavedOrder()).toBeUndefined();
         expect(shipmentService.getShippedOrder()).toBeUndefined();
     });
@@ -60,7 +60,7 @@ describe('OrderShipmentUseCase should', () => {
 
         expect(() => {
             useCase.run(request)
-        }).toThrowError(OrderCannotBeShippedException);
+        }).toThrow(OrderCannotBeShippedException);
         expect(orderRepository.getSavedOrder()).toBeUndefined();
         expect(shipmentService.getShippedOrder()).toBeUndefined();
     });
@@ -76,7 +76,7 @@ describe('OrderShipmentUseCase should', () => {
 
         expect(() => {
             useCase.run(request)
-        }).toThrowError(OrderCannotBeShippedTwiceException);
+        }).toThrow(OrderCannotBeShippedTwiceException);
         expect(orderRepository.getSavedOrder()).toBeUndefined();
         expect(shipmentService.getShippedOrder()).toBeUndefined();
     });
