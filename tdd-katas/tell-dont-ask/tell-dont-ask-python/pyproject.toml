@@ -13,7 +13,7 @@ pytest-cov = "^4.1.0"
 pytest-watch = "^4.2.0"
 pyhamcrest = "^2.1.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 
 [tool.coverage.run]
 branch = true

@@ -10,9 +10,8 @@
     "build": "reveal-md ./ --static"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.0.17",
-    "@fontsource/jetbrains-mono": "^5.0.19",
-    "npm-check-updates": "^16.14.20",
-    "reveal-md": "^6.1.4"
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "reveal-md": "^6.1.2"
   }
 }
