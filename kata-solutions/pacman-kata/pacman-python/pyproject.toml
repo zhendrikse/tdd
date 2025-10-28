@@ -13,7 +13,7 @@ pytest-watch = "^4.2.0"
 pygame = "^2.6.1"
 pyhamcrest = "^2.1.0"
 
-[tool.poetry.dev-dependencies]
+[tool.group.poetry.dev.dependencies]
 
 [tool.coverage.run]
 branch = true
