@@ -2,5 +2,5 @@ falcon==3.0.0
 gunicorn==23.0.0
 pytest==6.2.4
 flake8==3.9.1
-pylint==2.8.2
+pylint==4.0.9
 mypy==0.812
